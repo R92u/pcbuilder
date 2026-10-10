@@ -4,6 +4,10 @@ export const CPU_CENTER={x:-.694,y:3.44,z:-.55};
 export const GPU_TOP=2.43;
 export const PSU_REAR=-2.12;
 export function caseLayout(p={},gpu){
+ if(p.concept){
+  const [front,side,back,size]={panorama:[2.90,2.45,-1.19,1.20],dual:[2.65,2.85,-1.75,1.20],compact:[2.20,2.17,-1.19,.92]}[p.concept];
+  return {front,side,back,rear:-2.1,centerZ:(front-2.1)/2,depth:front+2.1,fanZ:front-.15,fanYs:[1.38,2.65,3.92],fanSize:size,ioZ:front-.38};
+ }
  // Compact exhibition cutaway: leave clearance for the installed card instead
  // of an empty drive cage. The catalog's physical compatibility stays separate.
  const capacity=-1.86+(p.gpuLimit||350)/100+.42;

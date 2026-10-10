@@ -5574,6 +5574,93 @@ export const catalog = {
     }
   ]
 };
+// Author-designed exhibition cases, not retail products.
+catalog.case.push(...[
+  {
+    "id": "pcmaker-panorama",
+    "name": "PCmaker Panorama",
+    "short": "Panorama",
+    "brand": "PCmaker",
+    "concept": "panorama",
+    "color": "white",
+    "forms": [
+      "ATX",
+      "Micro-ATX",
+      "Mini-ITX"
+    ],
+    "gpuLimit": 420,
+    "coolerLimit": 190,
+    "psuLimit": 200,
+    "frontFanCount": 0,
+    "rearFanCount": 0,
+    "topFanCount": 3,
+    "sideFanCount": 3,
+    "fanSizeMm": 120,
+    "frontRGB": true,
+    "usbA": 1,
+    "usb2": 0,
+    "usbC": 1,
+    "audio": "Комбинированный 3,5 мм",
+    "detail": "Панорамные панели · боковой вдув и верхний выдув · учебный корпус",
+    "notes": "Авторский учебный корпус PCmaker. Не серийный товар; размеры, крепления и вентиляторы условные. 18 точек на шести стенках; соседние крепления могут конфликтовать.",
+    "sources": []
+  },
+  {
+    "id": "pcmaker-dual",
+    "name": "PCmaker Duo Chamber",
+    "short": "Duo Chamber",
+    "brand": "PCmaker",
+    "concept": "dual",
+    "color": "black",
+    "forms": [
+      "ATX",
+      "Micro-ATX",
+      "Mini-ITX"
+    ],
+    "gpuLimit": 400,
+    "coolerLimit": 190,
+    "psuLimit": 200,
+    "frontFanCount": 3,
+    "rearFanCount": 3,
+    "fanSizeMm": 120,
+    "frontRGB": true,
+    "usbA": 1,
+    "usb2": 0,
+    "usbC": 1,
+    "audio": "Комбинированный 3,5 мм",
+    "detail": "Широкое шасси · отдельный отсек для кабелей · 3 спереди + 3 сзади · учебный корпус",
+    "notes": "Авторский учебный корпус PCmaker. Не серийный товар; размеры, крепления и вентиляторы условные. 18 точек на шести стенках; соседние крепления могут конфликтовать.",
+    "sources": []
+  },
+  {
+    "id": "pcmaker-compact",
+    "name": "PCmaker Compact Lab",
+    "short": "Compact Lab",
+    "brand": "PCmaker",
+    "concept": "compact",
+    "color": "black",
+    "forms": [
+      "ATX",
+      "Micro-ATX",
+      "Mini-ITX"
+    ],
+    "gpuLimit": 350,
+    "coolerLimit": 190,
+    "psuLimit": 200,
+    "frontFanCount": 3,
+    "rearFanCount": 0,
+    "topFanCount": 3,
+    "fanSizeMm": 92,
+    "frontRGB": true,
+    "usbA": 1,
+    "usb2": 0,
+    "usbC": 1,
+    "audio": "Комбинированный 3,5 мм",
+    "detail": "Короткое шасси · компактные вентиляторы · верхняя вентиляция · учебный корпус",
+    "notes": "Авторский учебный корпус PCmaker. Не серийный товар; размеры, крепления и вентиляторы условные. 18 точек на шести стенках; соседние крепления могут конфликтовать.",
+    "sources": []
+  }
+]);
 export const byId = Object.fromEntries(Object.values(catalog).flat().map(p=>[p.id,p]));
 export const emptyBuild = ()=>Object.fromEntries(categories.map(([key])=>[key,key==='case'?'cc560':null]));
 export const demoBuild = {cpu:'r5-7600',motherboard:'b650',gpu:'rtx4060',ram:'ddr5-32',storage:'nv2',cooler:'ak400',psu:'a850',case:'cc560'};

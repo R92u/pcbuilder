@@ -1,3 +1,4 @@
+import {fanStats} from './fan-layout.js';
 import {categories,resolve} from './catalog.js';
 export function compatibility(build) {
  const p=resolve(build), errors=[],warnings=[];
@@ -36,8 +37,12 @@ export function thermalTargets(build,settings) {
  const requestedCPU=(p.cpu?.peakPower||0)*w.cpu,requestedGPU=(p.gpu?.power||0)*w.gpu;
  // Lumped thermal network. Conductance & resistance are illustrative coefficients.
  // A passive-cooling term remains at 0 RPM; filtered inlet/outlet limit total flow.
- const frontCount=p.case?.frontFanCount??3,rearCount=p.case?.rearFanCount??1;
- const conductance=8+15*(.45*front*frontCount/3+.55*rear*rearCount);
+ const stats=fanStats(build,settings.fanLayout),frontCount=stats.intake,rearCount=stats.exhaust;
+ const inlet=front*frontCount,outlet=rear*rearCount;
+ // Educational airflow proxy: balanced paths exchange more air; one-sided
+ // layouts still exchange through passive vents, with diminishing returns.
+ const effective=.35*(inlet+outlet)+.65*2*Math.min(inlet,outlet);
+ const conductance=8+9*Math.sqrt(effective);
  const cpuR=(.20+.42*(1-fan)**1.4)/(p.cooler?.efficiency||.45);
  const gpuR=.10+.06*(1-(.3+.7*w.gpu)); // simplified automatic GPU fan curve
  const cpuMax=p.cpu?.tmax||95,gpuMax=p.gpu?.tmax||90;
@@ -50,12 +55,12 @@ export function thermalTargets(build,settings) {
   caseTemp=.5*caseTemp+.5*(ambient+(cpuPower+gpuPower+25)/conductance);
  }
  const cpuThrottle=cpuPower<requestedCPU-.01,gpuThrottle=gpuPower<requestedGPU-.01;
- return {ambient,case:caseTemp,cpu:Math.min(caseTemp+cpuPower*cpuR,cpuMax),gpu:Math.min(caseTemp+gpuPower*gpuR,gpuMax),ram:caseTemp+5+4*w.cpu,storage:caseTemp+3+(p.storage?.power||5)*1.5*(settings.load==='video'?1:w.cpu),motherboard:caseTemp+4+cpuPower*.045,cooler:caseTemp+cpuPower*cpuR*.35,psu:ambient+6+(cpuPower+gpuPower+45)*.035,cpuThrottle,gpuThrottle,cpuPower,gpuPower,power:Math.round(cpuPower+gpuPower+45),cpuLoad:Math.round(w.cpu*100),gpuLoad:Math.round(w.gpu*100),flow:Math.round(120.2*(front*frontCount+rear*rearCount)*.38),rpm:{front:Math.round(front*1700),rear:Math.round(rear*1700),cpu:Math.round(fan*(p.cooler?.maxRpm||1850))}};
+ return {ambient,case:caseTemp,cpu:Math.min(caseTemp+cpuPower*cpuR,cpuMax),gpu:Math.min(caseTemp+gpuPower*gpuR,gpuMax),ram:caseTemp+5+4*w.cpu,storage:caseTemp+3+(p.storage?.power||5)*1.5*(settings.load==='video'?1:w.cpu),motherboard:caseTemp+4+cpuPower*.045,cooler:caseTemp+cpuPower*cpuR*.35,psu:ambient+6+(cpuPower+gpuPower+45)*.035,cpuThrottle,gpuThrottle,cpuPower,gpuPower,power:Math.round(cpuPower+gpuPower+45),cpuLoad:Math.round(w.cpu*100),gpuLoad:Math.round(w.gpu*100),flow:Math.round(120.2*effective*.38),rpm:{front:Math.round(front*1700),rear:Math.round(rear*1700),cpu:Math.round(fan*(p.cooler?.maxRpm||1850))}};
 }
 export function advanceThermals(current,target,dt) {
  const out={...current}; for(const [key,tau] of [['cpu',8],['gpu',12],['case',20],['ram',24],['storage',22],['motherboard',28],['cooler',14],['psu',25]])if(current[key]!==undefined)out[key]=current[key]+(target[key]-current[key])*(1-Math.exp(-clamp(dt,0,1)/tau));return out;
 }
 export function summarizePrices(build,prices) {
- const chosen=Object.values(resolve(build)).filter(Boolean),known=chosen.filter(p=>Number.isFinite(prices[p.id]?.price)&&prices[p.id].price>0);
- return {total:known.reduce((s,p)=>s+prices[p.id].price,0),known:known.length,count:chosen.length,complete:known.length===chosen.length};
+ const all=Object.values(resolve(build)).filter(Boolean),chosen=all.filter(p=>!p.concept),known=chosen.filter(p=>Number.isFinite(prices[p.id]?.price)&&prices[p.id].price>0);
+ return {total:known.reduce((s,p)=>s+prices[p.id].price,0),known:known.length,count:chosen.length,complete:known.length===chosen.length,concepts:all.length-chosen.length};
 }

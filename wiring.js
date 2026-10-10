@@ -1,5 +1,6 @@
+import {fanHub,sanitizeFanLayout} from './fan-layout.js';
 import {resolve} from './catalog.js';
-import {caseLayout,gpuLayout,psuFront,boardBottom,GPU_TOP,coolerLayout,CPU_CENTER,CABLE_CHANNEL_X,psuCableSource,frontIOPosition,frontFanSource} from './layout.js';
+import {caseLayout,gpuLayout,psuFront,boardBottom,GPU_TOP,coolerLayout,CPU_CENTER,CABLE_CHANNEL_X,psuCableSource,frontIOPosition} from './layout.js';
 
 // Coordinates are schematic assembly locations, not a manufacturing drawing.
 export const ports = {
@@ -11,8 +12,8 @@ export const ports = {
   gpu2: {name:'GPU · 8 pin №2', position:[.48,GPU_TOP+.06,.18],axis:'y'},
   gpu3: {name:'GPU · 8 pin №3', position:[.48,GPU_TOP+.06,.48],axis:'y'},
   cpuFan: {name:'CPU_FAN · 4 pin', position:[-.64,4.12,.35]},
-  frontFan: {name:'SYS_FAN · передние', position:[-.65,2.75,.64]},
-  rearFan: {name:'SYS_FAN · задний', position:[-.65,3.85,-1.58]},
+  frontFan: {name:'SYS_FAN · вдув', position:[-.65,2.75,.64]},
+  rearFan: {name:'SYS_FAN · выдув', position:[-.65,3.85,-1.58]},
   usb3: {name:'JUSB3 · 19 pin', position:[-.65,2.35,.65]},
   usbC: {name:'USB-C · Type-E', position:[-.65,2.12,.65]},
   usb2: {name:'JUSB · 9 pin', position:[-.65,1.44,-.10]},
@@ -28,7 +29,7 @@ export function portsFor(build={}){
 }
 // Every route begins at a rendered socket / strain relief and enters the tray
 // only through its apertures. Behind the tray all bends stay in one safe plane.
-export function cablesFor(build){
+export function cablesFor(build,fanLayout){
  const p=resolve(build),list=[],targets=portsFor(build),frame=caseLayout(p.case||{},p.gpu),cx=CABLE_CHANNEL_X;
  const add=(id,name,from,required,points,strands=4,radius=.012,extra={})=>{
   const item={id,name,from,to:targets[id].name,required,points:[...points,targets[id].position],strands,radius,...extra};
@@ -58,9 +59,9 @@ export function cablesFor(build){
   add('cpuFan','Вентилятор кулера · PWM','Кулер процессора',true,[start,[start[0],4.39,start[2]],[start[0],4.39,.53],[-.44,4.39,.53],[-.44,4.12,.35]],4,.007);
  }
  if(p.motherboard){
-  const source=frontFanSource(frame);
-  add('frontFan','Передние вентиляторы · разветвитель','Разветвитель передних вентиляторов',true,[source,[-.80,2.75,1.10],[-.80,2.75,.89],[-.44,2.75,.89]],4,.007);
-  add('rearFan','Задний вентилятор','Вентилятор на выдув',true,[[.31+1.03*.46,3.93+1.03*.35,-2.085],[.80,4.42,-1.89],[-.44,4.42,-1.89],[-.44,4.25,-1.58],[-.44,3.85,-1.58]],4,.007);
+  const fans=sanitizeFanLayout(build,fanLayout),intake=fanHub(build,'in'),exhaust=fanHub(build,'out');
+  if(fans.some(f=>f.direction==='in'))add('frontFan','Вдув · разветвитель PWM','Разветвитель вентиляторов на вдув',true,[intake,[-.80,2.75,frame.front-.29],[-.80,2.75,.89],[-.44,2.75,.89]],4,.007);
+  if(fans.some(f=>f.direction==='out'))add('rearFan','Выдув · разветвитель PWM','Разветвитель вентиляторов на выдув',true,[exhaust,[-.44,4.34,-1.77],[-.44,4.25,-1.58],[-.44,3.85,-1.58]],4,.007);
   const io=(id,y,z)=>{
    const start=frontIOPosition(p.case,frame,id),topZ=frame.ioZ;
    return [start,[start[0],4.44,topZ],[cx,4.44,topZ],[cx,y,topZ],[cx,y,z],[-.45,y,z]];
@@ -92,11 +93,11 @@ export function cablesFor(build){
  }
  return list;
 }
-export function cleanConnections(build,connections){const available=new Set(cablesFor(build).map(c=>c.id));return [...new Set(Array.isArray(connections)?connections:[])].filter(id=>available.has(id));}
-export function wiringMissing(build,mode,connections){return mode==='manual'?cablesFor(build).filter(c=>c.required&&!connections.includes(c.id)):[];}
+export function cleanConnections(build,connections,fanLayout){const available=new Set(cablesFor(build,fanLayout).map(c=>c.id));return [...new Set(Array.isArray(connections)?connections:[])].filter(id=>available.has(id));}
+export function wiringMissing(build,mode,connections,fanLayout){return mode==='manual'?cablesFor(build,fanLayout).filter(c=>c.required&&!connections.includes(c.id)):[];}
 export function canConnect(cableId,portId){return cableId===portId&&Object.hasOwn(ports,portId);}
-export function reconcileConnections(before,after,connections){
- return cleanConnections(after,connections).filter(id=>{
+export function reconcileConnections(before,after,connections,fanLayout){
+ return cleanConnections(after,connections,fanLayout).filter(id=>{
   const keys=id.startsWith('gpu')?['gpu','psu']:id==='atx'||id.startsWith('eps')?['motherboard','psu']:id==='cpuFan'?['motherboard','cooler']:['motherboard','case'];
   return keys.every(key=>before[key]===after[key]);
  });
