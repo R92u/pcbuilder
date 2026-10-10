@@ -1,0 +1,235 @@
+import * as THREE from 'three';
+import {ports} from './wiring.js';
+
+const black=0x131619,steel=0x353b40,silver=0x899296,pcb=0x151b19;
+const material=(color,metalness=.3,roughness=.5)=>new THREE.MeshStandardMaterial({color,metalness,roughness});
+
+// Small repeated solids use instances so close-up detail stays practical on a school PC.
+export function batchSolids(group){
+ group.updateMatrixWorld(true);const groups=new Map(),inverse=group.matrixWorld.clone().invert();
+ group.traverse(mesh=>{
+  if(!mesh.isMesh||mesh.isInstancedMesh||mesh.material.map||!['BoxGeometry','CylinderGeometry'].includes(mesh.geometry.type))return;
+  for(let p=mesh;p&&p!==group;p=p.parent)if(p.userData.animated)return;
+  const m=mesh.material,p=mesh.geometry.parameters,type=mesh.geometry.type;
+  if(type==='CylinderGeometry'&&p.radiusTop!==p.radiusBottom)return;
+  const key=[type,m.color.getHex(),m.metalness,m.roughness,m.emissive.getHex(),m.emissiveIntensity].join(':');
+  if(!groups.has(key))groups.set(key,{material:m,items:[],type});
+  const transform=inverse.clone().multiply(mesh.matrixWorld);
+  transform.multiply(new THREE.Matrix4().makeScale(...(type==='BoxGeometry'?[p.width,p.height,p.depth]:[p.radiusTop,p.height,p.radiusTop])));
+  groups.get(key).items.push({mesh,transform});
+ });
+ for(const {material:source,items,type} of groups.values()){
+  if(items.length<3)continue;
+  const geo=type==='BoxGeometry'?new THREE.BoxGeometry(1,1,1):new THREE.CylinderGeometry(1,1,1,16);
+  const instance=new THREE.InstancedMesh(geo,source.clone(),items.length);
+  items.forEach(({mesh,transform},i)=>{instance.setMatrixAt(i,transform);mesh.removeFromParent();mesh.geometry.dispose();mesh.material.dispose();});
+  instance.castShadow=true;instance.receiveShadow=true;instance.computeBoundingSphere();group.add(instance);
+ }
+}
+
+function boardTexture(name){
+ const canvas=document.createElement('canvas');canvas.width=1536;canvas.height=1800;const c=canvas.getContext('2d');
+ c.fillStyle='#151b19';c.fillRect(0,0,1536,1800);
+ let seed=913;const rand=()=>{seed=(seed*1664525+1013904223)>>>0;return seed/4294967296;};
+ // Deterministic etched traces, solder-mask weave, silkscreen and test pads.
+ for(let i=0;i<2200;i++){c.fillStyle=rand()>.5?'#1b211f':'#121714';c.fillRect(rand()*1536,rand()*1800,1,rand()*18+2);}
+ for(let i=0;i<230;i++){
+  const x=Math.round(rand()*150)*10,y=Math.round(rand()*160)*10,d=rand()>.5?1:-1,len=40+rand()*200;
+  c.strokeStyle=i%5===0?'#52604a':'#303c31';c.lineWidth=i%3===0?2:1;c.beginPath();c.moveTo(x,y);c.lineTo(x+len,y);c.lineTo(x+len+24*d,y+24);c.lineTo(x+len+24*d,y+70+rand()*130);c.stroke();
+  c.fillStyle='#8b9272';c.beginPath();c.arc(x,y,2.7,0,Math.PI*2);c.fill();
+ }
+ c.strokeStyle='#818780';c.lineWidth=2;
+ for(let i=0;i<90;i++){const x=35+rand()*1460,y=35+rand()*1730;c.strokeRect(x,y,14+rand()*24,7+rand()*17);c.fillStyle='#b2b6a9';c.font='10px monospace';c.fillText((i%2?'R':'C')+(100+i),x,y-4);}
+ c.fillStyle='#b9bdb6';c.font='bold 30px Arial';c.fillText('MSI  /  '+name,90,1010);c.font='17px monospace';
+ for(const [label,x,y] of [['PCI_E1',110,1260],['M2_1 · PCIe',175,840],['HD AUDIO',70,1755],['JUSB1',780,1755],['JFP1',1280,1755],['DDR / DUAL CHANNEL',1210,300],['ATX_PWR1',1390,780],['CORE BOOST',360,380],['CPU_PWR1',270,75],['SYS_FAN',1320,1130]])c.fillText(label,x,y);
+ const tex=new THREE.CanvasTexture(canvas);tex.colorSpace=THREE.SRGBColorSpace;tex.anisotropy=8;return tex;
+}
+
+export const modelMethods={
+ rod(g,a,b,r,color=steel){const start=new THREE.Vector3(...a),end=new THREE.Vector3(...b),delta=end.clone().sub(start);const mesh=new THREE.Mesh(new THREE.CylinderGeometry(r,r,delta.length(),12),material(color,.65,.35));mesh.position.copy(start.add(end).multiplyScalar(.5));mesh.quaternion.setFromUnitVectors(new THREE.Vector3(0,1,0),delta.normalize());g.add(mesh);return mesh;},
+ screw(g,x,y,z,axis='x',radius=.033){
+  const head=this.cylinder(g,radius,.018,x,y,z,0x798287);if(axis==='x')head.rotation.z=Math.PI/2;if(axis==='z')head.rotation.x=Math.PI/2;
+  if(axis==='x'){this.box(g,.005,.008,radius*1.2,x+.012,y,z,0x181b1d);this.box(g,.005,radius*1.2,.008,x+.013,y,z,0x181b1d);}
+  else if(axis==='y'){this.box(g,radius*1.2,.005,.008,x,y+.012,z,0x181b1d);this.box(g,.008,.005,radius*1.2,x,y+.013,z,0x181b1d);}
+  else{this.box(g,radius*1.2,.008,.005,x,y,z-.013,0x181b1d);this.box(g,.008,radius*1.2,.005,x,y,z-.012,0x181b1d);}
+ },
+ headerSocket(g,id,rows,cols,spacing=.049){
+  const [x,y,z]=ports[id].position,w=cols*spacing+.045,h=rows*spacing+.035;
+  this.box(g,.13,w,h,x-.04,y,z,black);
+  for(let row=0;row<rows;row++)for(let col=0;col<cols;col++){
+   if(['usb3','usb2','audio','panel'].includes(id)&&row===rows-1&&col===cols-1)continue;
+   const py=y+(col-(cols-1)/2)*spacing,pz=z+(row-(rows-1)/2)*spacing;
+   this.box(g,.008,.035,.035,x+.031,py,pz,0x020404);
+   this.box(g,.012,.010,.010,x+.038,py,pz,0x8d8660);
+  }
+  this.box(g,.035,.07,.025,x+.035,y,z+h/2,steel);
+ },
+ rearPort(g,type,x,y,width=.20,height=.12,color=0x19252d,label=''){
+  const z=-2.145;
+  if(type==='round'){
+   const ring=new THREE.Mesh(new THREE.TorusGeometry(width/2,.014,8,20),material(color,.65,.32));ring.position.set(x,y,z-.022);g.add(ring);
+   const hole=new THREE.Mesh(new THREE.CircleGeometry(width/2-.014,20),material(0x030506));hole.position.set(x,y,z-.023);hole.rotation.y=Math.PI;g.add(hole);
+  }else{
+   this.box(g,width+.03,height+.03,.045,x,y,z,0x878e8e);this.box(g,width,height,.05,x,y,z-.015,0x030505);
+   if(type==='usb'){this.box(g,width*.76,height*.27,.012,x,y-.02,z-.045,color);for(let n=0;n<4;n++)this.box(g,.012,.014,.01,x-width*.30+n*width*.2,y+.008,z-.048,0xb3a777);}
+   if(type==='lan'){this.box(g,width*.42,height*.18,.008,x,y-height*.36,z-.045,0x303735);for(let n=0;n<8;n++)this.box(g,.009,.03,.009,x-width*.32+n*width*.09,y+.012,z-.045,0xbaae79);this.box(g,.025,.015,.01,x-width*.40,y+height*.37,z-.05,0x8cb55a);}
+   if(type==='video'){this.box(g,width*.77,height*.24,.009,x,y,z-.045,0x262e31);for(let n=0;n<10;n++)this.box(g,.007,.015,.008,x-width*.33+n*width*.073,y-.012,z-.047,0xb8aa78);}
+  }
+  if(label)this.text(g,label,.34,.055,x,y-height/2-.05,z-.06,[0,Math.PI,0],'#a2adae');
+ },
+ makeCase(){
+  const g=new THREE.Group();this.root.add(g);this.caseGroup=g;
+  this.box(g,2.2,.10,4.3,0,.31,0,black);this.box(g,2.2,.10,.24,0,4.63,1.99,steel);this.box(g,2.2,.10,.24,0,4.63,-2.0,steel);
+  for(const x of [-1.02,1.02])this.box(g,.16,.10,4.14,x,4.63,0,steel);
+  // Perforated roof: open spaces between fine bars, not a solid painted rectangle.
+  for(let i=0;i<34;i++)this.box(g,1.90,.027,.018,0,4.63,-1.77+i*.106,0x252b2f);
+  for(let i=0;i<14;i++)this.box(g,.018,.019,3.61,-.88+i*.135,4.645,0,0x252b2f);
+  this.rearPanel=this.box(g,.045,4.20,4.20,-1.104,2.48,0,0x23292d);
+  // Tray with genuine openings for cables and the CPU backplate.
+  this.box(g,.045,3.04,.14,-.977,2.83,-1.81,black);this.box(g,.045,3.04,.15,-.977,2.83,.80,black);
+  this.box(g,.045,.9,2.50,-.977,1.81,-.50,black);this.box(g,.045,.28,2.50,-.977,4.20,-.50,black);
+  this.box(g,.045,1.6,.55,-.977,3.15,.48,black);
+  // PSU tunnel with mesh, cable pass-through and open side label window.
+  this.box(g,1.88,.065,4.00,-.1,1.13,0,steel);this.box(g,2.10,.80,.06,0,.73,2.10,black);
+  for(const z of [-1.83,1.83])this.box(g,.035,.78,.42,1.025,.73,z,black);
+  this.box(g,.035,.14,3.48,1.025,.42,0,black);this.box(g,.035,.13,3.48,1.025,1.075,0,black);
+  for(let i=0;i<18;i++)this.box(g,.67,.009,.018,-.20,1.167,-1.7+i*.12,0x080b0d);
+  for(const z of [.82,1.23]){this.box(g,.32,.017,.24,.40,1.17,z,0x06090a);for(const x of [.25,.55])this.box(g,.025,.02,.25,x,1.18,z,0x3c4445);}
+  for(const x of [-1.03,1.03])for(const z of [-2.1,2.1]){this.box(g,.11,4.25,.11,x,2.48,z,steel);for(const y of [.48,1.28,4.48])this.screw(g,x+.064,y,z,'x');}
+  for(const z of [-1.78,1.78])for(const x of [-.83,.83]){this.box(g,.32,.19,.48,x,.16,z,black);this.box(g,.29,.04,.44,x,.065,z,0x090b0c);}
+  // Rear frame leaves separate openings for the motherboard, GPU, fan and PSU.
+  this.box(g,.19,3.35,.06,-.98,2.85,-2.11,steel);this.box(g,.19,3.35,.06,1.0,2.85,-2.11,steel);
+  this.box(g,2.10,.10,.06,0,1.14,-2.11,steel);this.box(g,2.1,.11,.06,0,4.47,-2.11,steel);
+  this.box(g,1.1,1.10,.055,.41,2.82,-2.11,steel);
+  for(let i=0;i<7;i++){const y=1.37+i*.135;this.box(g,1.35,.10,.04,.10,y,-2.12,0x41494b);for(let j=0;j<10;j++)this.box(g,.047,.042,.007,-.46+j*.11,y,-2.146,0x090c0e);this.screw(g,.84,y,-2.15,'z',.022);}
+  for(const y of [1.7,2.83,3.96])this.fan(g,1.04,0,y,1.93,[0,0,0],'front');
+  for(const x of [-.75,.75])this.box(g,.08,3.56,.12,x,2.79,2.105,steel);
+  for(let i=0;i<27;i++)this.box(g,.012,3.45,.012,-.75+i*.057,2.80,2.16,0x343b3b);
+  for(let i=0;i<39;i++)this.box(g,1.50,.007,.01,0,1.09+i*.089,2.166,0x2c3334);
+  this.fan(g,1.03,.31,3.93,-1.99,[0,Math.PI,0],'rear');
+  // Concentric protective rear grille, visible from outside.
+  for(const r of [.16,.24,.32,.40,.48]){const ring=new THREE.Mesh(new THREE.TorusGeometry(r,.010,6,40),material(steel));ring.position.set(.31,3.93,-2.16);g.add(ring);}
+  for(const x of [-.05,.66])this.rod(g,[x,3.49,-2.165],[x,4.37,-2.165],.012,steel);
+  // CC560 V2 top I/O: USB-A 3.0, USB-A 2.0, combined audio, reset, power.
+  this.box(g,1.69,.031,.31,0,4.697,1.72,black);
+  for(const [x,col,label] of [[-.60,0x2b73ae,'USB 3.0'],[-.29,0x222a2d,'USB 2.0']]){this.box(g,.19,.018,.105,x,4.72,1.72,silver);this.box(g,.153,.021,.076,x,4.73,1.72,0x050608);this.box(g,.128,.026,.02,x,4.742,1.739,col);this.text(g,label,.27,.054,x,4.756,1.50,[-Math.PI/2,0,0],'#aab0b2');}
+  this.cylinder(g,.045,.015,.04,4.73,1.72,silver);this.cylinder(g,.030,.018,.04,4.742,1.72,0x030507);
+  this.cylinder(g,.036,.018,.29,4.73,1.72,0x40474b);this.text(g,'RESET',.23,.05,.29,4.75,1.50,[-Math.PI/2,0,0],'#aab0b2');
+  this.cylinder(g,.092,.028,.63,4.733,1.72,0x50585b);const ring=new THREE.Mesh(new THREE.TorusGeometry(.075,.004,6,32),new THREE.MeshBasicMaterial({color:0xbda6fc}));ring.rotation.x=-Math.PI/2;ring.position.set(.63,4.75,1.72);g.add(ring);this.text(g,'⏻',.10,.10,.63,4.752,1.72,[-Math.PI/2,0,0],'#dedfe0');
+  this.text(g,'CC560 V2',.60,.10,1.049,.44,.10,[0,Math.PI/2,0],'#9aa3a6');
+  this.glass=new THREE.Mesh(new THREE.PlaneGeometry(4.06,4.12),new THREE.MeshPhysicalMaterial({color:0xa3b4bd,roughness:.13,transparent:true,opacity:.18,side:THREE.DoubleSide,depthWrite:false}));this.glass.rotation.y=Math.PI/2;this.glass.position.set(1.12,2.5,0);this.glass.visible=false;g.add(this.glass);
+  // Cable combs and tie points behind the tray.
+  for(const y of [1.45,2.4,3.4,4.20])for(const z of [.94,-.84])this.box(g,.022,.068,.18,-1.04,y,z,0x4d5657);
+  batchSolids(g);
+ },
+ makeMotherboard(p){
+  const g=new THREE.Group();this.box(g,.055,2.93,2.42,-.94,2.75,-.62,pcb);
+  const surface=new THREE.Mesh(new THREE.PlaneGeometry(2.42,2.93),new THREE.MeshStandardMaterial({map:boardTexture(p.short),roughness:.63,metalness:.20}));surface.rotation.y=Math.PI/2;surface.position.set(-.909,2.75,-.62);g.add(surface);
+  this.box(g,.12,.60,.68,-.845,3.44,-.55,0x242b2c);this.box(g,.02,.50,.58,-.774,3.44,-.55,0x7d8586);
+  this.box(g,.01,.425,.475,-.76,3.44,-.55,0x1b2421);this.rod(g,[-.724,3.14,-.88],[-.724,3.69,-.88],.016,0xaab0b1);
+  for(const z of [-1.40,-.05])for(const y of [3.10,3.78])this.screw(g,-.73,y,z);
+  // VRM MOSFETs, chokes and solid capacitors surrounding the socket.
+  for(let i=0;i<10;i++){const y=2.76+i*.135;this.box(g,.10,.084,.13,-.824,y,-1.16,0x363e3f);this.box(g,.022,.065,.085,-.902,y,-.98,0x111416);this.text(g,'R22',.07,.04,-.763,y,-1.16,[0,Math.PI/2,Math.PI/2],'#9ca3a0');}
+  for(let i=0;i<15;i++){const cap=this.cylinder(g,.033,.10,-.829,2.72+i*.095,-1.31,0x929a96);cap.rotation.z=Math.PI/2;this.box(g,.006,.004,.044,-.773,2.72+i*.095,-1.31,0x343a36);}
+  // Sculpted VRM heatsink fins and I/O cover.
+  this.box(g,.23,1.52,.32,-.78,3.38,-1.59,0x2d3438);for(let i=0;i<21;i++)this.box(g,.025,.022,.35,-.655,2.70+i*.066,-1.59,0x646f73);
+  this.text(g,'PRO SERIES',1.00,.11,-.634,3.43,-1.59,[0,Math.PI/2,Math.PI/2],'#b1b8b8');
+  for(let i=0;i<10;i++)this.box(g,.15,.038,.66,-.80,4.0+i*.013,-.61,0x4c585d);
+  for(let i=0;i<4;i++){const z=.03+i*.15;this.box(g,.15,1.34,.073,-.826,3.43,z,0x0a0d0e);this.box(g,.008,1.23,.022,-.744,3.43,z,0x736e42);for(const y of [2.76,4.10])this.box(g,.13,.08,.084,-.82,y,z,0x434d4d);}
+  for(let i=0;i<3;i++){const y=2.18-i*.31;this.box(g,.11,.079,1.30,-.83,y,-.72,i===0?0x919c9f:0x242b2a);this.box(g,.016,.029,1.20,-.764,y,-.72,0x060a08);this.box(g,.09,.13,.08,-.80,y,-.03,0x7c8787);}
+  for(let i=0;i<5;i++){this.box(g,.012,.16,.20,-.90,1.55+(i%2)*.8,-1.4+i*.43,0x080d0d);for(let k=0;k<6;k++)this.box(g,.01,.011,.027,-.896,1.49+(i%2)*.8+k*.027,-1.53+i*.43,0x979e8c);}
+  for(let i=0;i<75;i++){const y=1.40+(i%11)*.15,z=-1.71+Math.floor(i/11)*.28;this.box(g,.013,.026,.048,-.897,y,z,0x655f43);this.box(g,.016,.018,.016,-.893,y,z+.031,0xa6aaa0);}
+  for(const y of [1.42,2.6,4.12])for(const z of [-1.72,.55])this.screw(g,-.878,y,z,'x',.038);
+  this.box(g,.18,.41,.64,-.80,1.98,.25,0x31393c);for(let i=0;i<7;i++)this.box(g,.023,.020,.54,-.695,1.82+i*.049,.25,0x627078);
+  this.text(g,'MSI',.27,.09,-.677,2.0,.25,[0,Math.PI/2,0],'#c0c5c3');
+  const battery=this.cylinder(g,.095,.024,-.864,1.75,-1.35,0xc4c6c2);battery.rotation.z=Math.PI/2;this.text(g,'CR2032',.14,.035,-.842,1.75,-1.35,[0,Math.PI/2,0],'#444b4c');
+  for(let i=0;i<(p.id==='b650'?4:6);i++){const y=1.80+(i%3)*.12,z=.52+Math.floor(i/3)*.13;this.box(g,.13,.08,.10,-.83,y,z,0x181f1f);this.box(g,.008,.043,.063,-.76,y,z,0x050706);}
+  for(const [id,rows,cols] of [['atx',2,12],['eps',2,4],['cpuFan',1,4],['frontFan',1,4],['rearFan',1,4],['usb3',2,10],['usb2',2,5],['audio',2,5],['panel',2,5]])this.headerSocket(g,id,rows,cols,id==='atx'?.038:.042);
+  if(p.id==='b650')this.headerSocket(g,'eps2',2,4,.042);
+  this.makeRearIO(g,p);batchSolids(g);return g;
+ },
+ makeRearIO(g,p){
+  // Port counts follow the catalog motherboard; placement remains a schematic.
+  this.box(g,.52,2.06,.038,-.64,3.39,-2.12,0x3a4246);
+  const x=-.64;
+  if(p.id==='b550')this.rearPort(g,'round',x,4.21,.13,.13,0x75638f,'PS/2');
+  else this.text(g,'PRO B650-S WIFI',.40,.06,x,4.29,-2.18,[0,Math.PI,0],'#b3bfc0');
+  for(const [i,label] of ['DP','HDMI'].entries())this.rearPort(g,'video',x,4.03-i*.17,.25,.075,0,label);
+  for(let i=0;i<7;i++){const column=i%2,row=Math.floor(i/2),color=p.id==='b650'?(i<4?0x39799c:0xa6403b):(i<4?0x212726:i<6?0x39799c:0xa6403b);this.rearPort(g,'usb',x+(column-.5)*.25,3.62-row*.16,.16,.08,color);}
+  this.rearPort(g,'usb',x+.12,3.14,.115,.052,0x181d21,'USB-C');
+  this.rearPort(g,'lan',x,2.95,.17,.16,0,'LAN');
+  for(let i=0;i<6;i++)this.rearPort(g,'round',x-.11+(i%2)*.22,2.75-Math.floor(i/2)*.12,.074,.074,[0x577ab5,0x353a3d,0x7aad72,0xc9bd97,0xc26d76,0xa58854][i]);
+  if(p.id==='b650')for(const xx of [x-.11,x+.11]){this.rearPort(g,'round',xx,2.36,.060,.06,0xa6965a);this.text(g,'Wi-Fi',.16,.047,xx,2.29,-2.19,[0,Math.PI,0],'#b9b4a1');}
+  this.box(g,.05,.035,.025,-.44,4.24,-2.17,0x929a9c);this.text(g,'FLASH BIOS',.25,.045,-.61,4.4,-2.17,[0,Math.PI,0],'#b1babb');
+ },
+ makeCPU(p){
+  const g=new THREE.Group();this.box(g,.045,.49,.49,-.747,3.44,-.55,0x294234);this.box(g,.04,.405,.405,-.716,3.44,-.55,0xb9bebe,.27);
+  for(const y of [3.20,3.68])for(let i=0;i<9;i++)this.box(g,.009,.018,.014,-.721,y,-.74+i*.047,0x9b8c50);
+  this.text(g,'AMD',.20,.07,-.691,3.56,-.55,[0,Math.PI/2,0],'#303838');this.text(g,p.short,.36,.105,-.691,3.44,-.55,[0,Math.PI/2,0],'#283031');this.text(g,p.socket+' · RYZEN',.30,.033,-.690,3.34,-.55,[0,Math.PI/2,0],'#535c5c');batchSolids(g);return g;
+ },
+ makeRAM(p){
+  const g=new THREE.Group();for(let i=0;i<p.modules;i++){const z=.18+i*.30;
+   this.box(g,.31,1.29,.045,-.693,3.43,z,0x17231c);this.box(g,.27,1.19,.069,-.662,3.46,z,0x22292c);
+   for(let j=0;j<8;j++){this.box(g,.12,.095,.020,-.68,2.96+j*.14,z+.044,0x0b1010);this.box(g,.02,.044,.076,-.512,2.94+j*.147,z,0x424d52);}
+   for(let j=0;j<30;j++)this.box(g,.059,.018,.048,-.83,2.84+j*.038,z,0xb5a661);
+   this.text(g,'FURY',.54,.13,-.509,3.56,z,[0,Math.PI/2,Math.PI/2],'#d6dbd9');this.text(g,p.memory+' / 16 GB',.45,.052,-.508,3.00,z,[0,Math.PI/2,Math.PI/2],'#969f9f');
+  }batchSolids(g);return g;
+ },
+ makeGPU(p){
+  const g=new THREE.Group(),len=p.length/100,center=-1.86+len/2;
+  this.box(g,1.48,.035,len,.015,2.20,center,0x151e1a);this.box(g,1.49,.035,len,.025,2.25,center,0x2f363b);
+  for(let i=0;i<65;i++)this.box(g,1.33,.25,.012,.03,2.06,-1.78+i*(len-.14)/65,0x7a8488);
+  for(const x of [-.52,-.20,.12,.44])this.rod(g,[x,2.16,-1.65],[x,2.16,len-1.95],.026,0xaca28c);
+  this.box(g,.09,.30,len,.785,2.04,center,0x262e32);this.box(g,.08,.30,len,-.74,2.04,center,0x1d2427);
+  this.box(g,1.52,.068,len,.025,1.868,center,0x141b1f);
+  for(let i=0;i<p.fans;i++)this.fan(g,Math.min(1.0,len/p.fans-.08),.03,1.817,-1.86+(i+.5)*len/p.fans,[Math.PI/2,0,0],'gpu',false);
+  for(const x of [-.58,.58])for(const z of [-1.70,len-2.02])this.screw(g,x,2.28,z,'y',.028);
+  for(let i=0;i<8;i++){const strip=this.box(g,.54,.006,.02,.08,2.274,-1.45+i*.14,0x667074);strip.rotation.y=.5;}
+  this.text(g,p.short.toUpperCase(),Math.min(len-.12,2.7),.16,.837,2.055,center,[0,Math.PI/2,0],'#d5dbdd');this.text(g,p.brand==='NVIDIA'?'GEFORCE RTX':'GRAPHICS',1.16,.10,.15,2.275,center,[-Math.PI/2,0,Math.PI/2],'#8c989c');
+  this.text(g,p.id==='rtx3090'?'ZOTAC GAMING':'MSI  /  VENTUS',1.10,.075,.837,1.928,center,[0,Math.PI/2,0],'#a0a9ac');
+  // Rear bracket with three DisplayPort and one HDMI connector.
+  this.box(g,1.60,.46,.035,.07,2.0,-2.12,0x8a9292);
+  for(let i=0;i<4;i++)this.rearPort(g,'video',-.49+i*.34,2.045,.22,.083,0,i===3?'HDMI':'DP');
+  for(let i=0;i<10;i++)this.box(g,.07,.055,.008,-.52+i*.12,1.878,-2.147,0x111718);
+  for(let i=0;i<p.connectors;i++)this.headerSocket(g,'gpu'+(i+1),2,4,.041);
+  batchSolids(g);return g;
+ },
+ makeCooler(p){
+  const g=new THREE.Group();this.box(g,.16,.43,.45,-.60,3.44,-.55,0xb1b7b7,.22);
+  for(let tower=0;tower<p.towers;tower++){
+   const z=-.71+tower*.55;
+   for(let i=0;i<41;i++){this.box(g,.97,.012,.44,-.18,2.87+i*.0285,z,0x929b9f,.32);this.box(g,.03,.012,.05,.31,2.87+i*.0285,z-.20,0x535e62);}
+   this.box(g,1.04,.046,.47,-.18,4.053,z,0x262e31);
+   for(let i=0;i<(p.towers>1?6:4);i++){const x=-.51+i*.135;this.rod(g,[x,2.88,z],[x,4.095,z],.022,0xaaa594);this.cylinder(g,.033,.017,x,4.103,z,0x626d70);}
+   this.text(g,'DEEPCOOL',.65,.082,-.18,4.08,z,[-Math.PI/2,0,Math.PI/2],'#bbc5c8');
+   for(const x of [-.61,.25])this.screw(g,x,4.089,z-.12,'y',.020);
+  }
+  this.fan(g,1.14,-.15,3.45,p.towers>1?.20:-.43,[0,0,0],'cpu',false);
+  if(p.towers>1)this.fan(g,1.14,-.15,3.45,.76,[0,0,0],'cpu',false);
+  for(const x of [-.67,.38])this.rod(g,[x,3.01,-.17],[x,3.92,-.17],.008,0xacb4b6);
+  batchSolids(g);return g;
+ },
+ makeStorage(p){
+  const g=new THREE.Group();this.box(g,.029,.22,.80,-.797,2.62,-.90,0x1d3026);
+  for(let i=0;i<3;i++)this.box(g,.022,.16,.17,-.771,2.62,-1.15+i*.23,0x121819);
+  this.text(g,p.short,.65,.14,-.755,2.62,-.92,[0,Math.PI/2,0],'#dadecb',p.id==='980'?'#232b30':'#233e59');this.text(g,'NVMe / 1 TB',.49,.036,-.75,2.57,-.91,[0,Math.PI/2,0],'#c1cdc9');
+  for(let i=0;i<9;i++)this.box(g,.035,.012,.035,-.787,2.536+i*.020,-1.301,0xb4a168);
+  this.screw(g,-.762,2.62,-.50,'x',.027);batchSolids(g);return g;
+ },
+ makePSU(p){
+  const g=new THREE.Group();this.box(g,1.46,.68,1.61,.10,.72,-1.20,0x151c20);
+  this.text(g,p.short,1.26,.18,.839,.81,-1.20,[0,Math.PI/2,0],'#d3d9d9','#1c2529');this.text(g,p.id==='a850'?'80 PLUS GOLD  ·  MODULAR':'80 PLUS BRONZE',1.03,.072,.84,.62,-1.20,[0,Math.PI/2,0],'#b3a86f');
+  // IEC C14 inlet, rocker switch and rear exhaust grille.
+  this.box(g,.36,.24,.055,.48,.72,-2.12,0x343d41);this.box(g,.29,.18,.062,.48,.72,-2.135,0x060a0b);
+  for(const [x,y] of [[.40,.68],[.56,.68],[.48,.77]])this.box(g,.018,.051,.072,x,y,-2.154,0xa6aa9d);
+  this.box(g,.11,.15,.042,.18,.73,-2.146,0x080c0e);this.text(g,'I  O',.10,.047,.18,.74,-2.174,[0,Math.PI,0],'#d1d6d2');
+  for(let i=0;i<11;i++)for(let j=0;j<5;j++)this.box(g,.029,.028,.007,-.57+i*.046,.52+j*.083,-2.01,0x020708);
+  for(const x of [-.58,.76])for(const y of [.44,.99])this.screw(g,x,y,-2.10,'z',.026);
+  if(p.id==='a850'){
+   for(let i=0;i<7;i++){const x=-.42+(i%4)*.30,y=.61+Math.floor(i/4)*.22;this.box(g,.22,.13,.055,x,y,-.377,0x303a3d);this.box(g,.17,.08,.012,x,y,-.343,0x020606);for(let j=0;j<4;j++)this.box(g,.017,.012,.015,x-.058+j*.04,y,-.332,0x998d61);}
+   this.text(g,'MB / CPU / PCIe',1.18,.08,.08,.97,-.343,[0,0,0],'#9caaaa');
+   this.box(g,.18,.073,.036,.50,.84,-.357,0x080d0e);for(let i=0;i<6;i++)this.box(g,.010,.011,.013,.443+i*.023,.84,-.331,0xa59966);this.text(g,'16 PIN',.22,.037,.50,.905,-.332,[0,0,0],'#a8b1aa');
+  }else{this.box(g,.22,.20,.06,.31,.72,-.372,0x070b0b);}
+  batchSolids(g);return g;
+ }
+};

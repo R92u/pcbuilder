@@ -1,0 +1,567 @@
+{
+  "researchDate": "2026-10-10",
+  "scope": "Визуальные разъёмы и схема подключений для учебной 3D модели PCmaker. Точные наборы проверены по официальным спецификациям и изображениям; положение каждого контакта не моделируется.",
+  "case": {
+    "productId": "cc560-v2",
+    "name": "DeepCool CC560 V2",
+    "partNumber": "R-CC560-BKGAA4-G-2",
+    "portLocation": "Верхняя панель корпуса, рядом с длинной стороной верхней сетки",
+    "externalPorts": [
+      {
+        "type": "USB-A",
+        "version": "USB 3.0 / USB 3.2 Gen 1",
+        "speedGbps": 5,
+        "count": 1,
+        "insertColor": "бирюзовый/синий"
+      },
+      {
+        "type": "USB-A",
+        "version": "USB 2.0",
+        "speedGbps": 0.48,
+        "count": 1,
+        "insertColor": "чёрный"
+      },
+      {
+        "type": "3.5 mm combined microphone/headphone",
+        "label": "MIC/AUDIO",
+        "count": 1
+      }
+    ],
+    "buttons": [
+      "POWER",
+      "RESET"
+    ],
+    "visualOrderInOfficialImage": "POWER → USB 3.0 → MIC/AUDIO → USB 2.0 → RESET вдоль полосы панели; порядок описан от стороны кнопки POWER, без предположения о координатах 3D.",
+    "sources": [
+      "https://www.deepcool.com/products/Cases/fulltowercases/CC560-V2-Mid-Tower-Airflow-Case/2023/17782.shtml"
+    ],
+    "imageSource": "https://cdn.deepcool.com/public/ProductFile/DEEPCOOL/Cases/CC560_V2/Overview/07_01.jpg?auto=format%2Ccompress&q=90",
+    "notes": [
+      "USB-C отсутствует.",
+      "Один комбинированный аудиоразъём; не рисовать два отдельных MIC/HEADPHONE.",
+      "Задние HDMI/DP/USB принадлежат плате или видеокарте, а не самому корпусу."
+    ]
+  },
+  "motherboards": [
+    {
+      "productId": "b650-s-wifi",
+      "name": "MSI PRO B650-S WIFI",
+      "rearPorts": [
+        {
+          "type": "DisplayPort",
+          "version": "1.4",
+          "count": 1
+        },
+        {
+          "type": "HDMI",
+          "version": "2.1",
+          "count": 1
+        },
+        {
+          "type": "RJ45 Ethernet",
+          "speedGbps": 2.5,
+          "count": 1
+        },
+        {
+          "type": "USB-A",
+          "version": "USB 3.2 Gen 1",
+          "speedGbps": 5,
+          "count": 4,
+          "color": "blue"
+        },
+        {
+          "type": "USB-A",
+          "version": "USB 3.2 Gen 2",
+          "speedGbps": 10,
+          "count": 3,
+          "color": "red"
+        },
+        {
+          "type": "USB-C",
+          "version": "USB 3.2 Gen 2x2",
+          "speedGbps": 20,
+          "count": 1
+        },
+        {
+          "type": "Wi-Fi/Bluetooth antenna threaded socket",
+          "count": 2
+        },
+        {
+          "type": "3.5 mm analog audio",
+          "count": 6,
+          "layout": "2 columns × 3 rows"
+        }
+      ],
+      "rearButtons": [
+        "Flash BIOS"
+      ],
+      "rearOrderAsShownInOfficialImageLeftToRight": [
+        "Flash BIOS small button",
+        "DisplayPort over HDMI",
+        "RJ45 above two red USB-A",
+        "one red USB-A over USB-C",
+        "four blue USB-A stacked",
+        "two gold Wi-Fi antenna sockets stacked",
+        "six analog audio jacks in 2×3 grid"
+      ],
+      "powerInputs": [
+        {
+          "type": "ATX",
+          "pins": 24,
+          "count": 1,
+          "label": "ATX_PWR1",
+          "location": "правый край возле DIMM"
+        },
+        {
+          "type": "EPS CPU 12V",
+          "pins": 8,
+          "count": 2,
+          "label": "CPU_PWR1 / CPU_PWR2",
+          "location": "верхний левый край"
+        }
+      ],
+      "relevantInternalHeaders": [
+        {
+          "type": "USB 2.0",
+          "count": 2,
+          "portsSupported": 4
+        },
+        {
+          "type": "USB 5 Gbps front",
+          "count": 1,
+          "portsSupported": 2
+        },
+        {
+          "type": "USB-C 10 Gbps front",
+          "count": 1,
+          "portsSupported": 1
+        },
+        {
+          "type": "Front audio",
+          "label": "JAUD1",
+          "count": 1
+        },
+        {
+          "type": "CPU_FAN",
+          "pins": 4,
+          "count": 1
+        },
+        {
+          "type": "PUMP_FAN",
+          "pins": 4,
+          "count": 1
+        },
+        {
+          "type": "SYS_FAN",
+          "pins": 4,
+          "count": 4
+        },
+        {
+          "type": "Front panel",
+          "label": "JFP1/JFP2",
+          "count": 2
+        }
+      ],
+      "sources": [
+        "https://uk.msi.com/Motherboard/PRO-B650-S-WIFI/Specification",
+        "https://download.msi.com/archive/mnu_exe/mb/PROB650-SWIFI.pdf"
+      ],
+      "imageSource": "https://storage-asset.msi.com/global/picture/image/feature/mb/B650/PRO-B650-P-WIFI/io.png",
+      "notes": [
+        "Официальная страница B650-S использует изображение с именем каталога B650-P; набор и порядок сверены со спецификацией B650-S.",
+        "Видеовыходы платы работают только с процессором со встроенной графикой.",
+        "USB-C внутренний разъём остаётся свободным в CC560 V2: корпус не имеет внешнего USB-C."
+      ]
+    },
+    {
+      "productId": "b550-a-pro",
+      "name": "MSI B550-A PRO",
+      "rearPorts": [
+        {
+          "type": "PS/2 combined keyboard/mouse",
+          "count": 1
+        },
+        {
+          "type": "DisplayPort",
+          "count": 1
+        },
+        {
+          "type": "HDMI",
+          "version": "2.1",
+          "count": 1
+        },
+        {
+          "type": "RJ45 Ethernet",
+          "speedGbps": 1,
+          "count": 1
+        },
+        {
+          "type": "USB-A",
+          "version": "USB 2.0",
+          "speedGbps": 0.48,
+          "count": 4,
+          "color": "black"
+        },
+        {
+          "type": "USB-A",
+          "version": "USB 3.2 Gen 1",
+          "speedGbps": 5,
+          "count": 2,
+          "color": "blue"
+        },
+        {
+          "type": "USB-A",
+          "version": "USB 3.2 Gen 2",
+          "speedGbps": 10,
+          "count": 1,
+          "color": "red"
+        },
+        {
+          "type": "USB-C",
+          "version": "USB 3.2 Gen 2",
+          "speedGbps": 10,
+          "count": 1
+        },
+        {
+          "type": "3.5 mm analog audio",
+          "count": 6,
+          "layout": "2 columns × 3 rows"
+        }
+      ],
+      "rearButtons": [
+        "Flash BIOS"
+      ],
+      "rearOrderAsShownInOfficialImageLeftToRight": [
+        "Flash BIOS small button",
+        "round PS/2 above two black USB-A",
+        "DisplayPort over HDMI",
+        "two black USB-A stacked",
+        "RJ45 over two blue USB-A",
+        "red USB-A over USB-C",
+        "six analog audio jacks in 2×3 grid"
+      ],
+      "powerInputs": [
+        {
+          "type": "ATX",
+          "pins": 24,
+          "count": 1,
+          "label": "ATX_PWR1",
+          "location": "правый край возле DIMM"
+        },
+        {
+          "type": "EPS CPU 12V",
+          "pins": 8,
+          "count": 1,
+          "label": "CPU_PWR1",
+          "location": "верхний левый край"
+        }
+      ],
+      "relevantInternalHeaders": [
+        {
+          "type": "USB 2.0",
+          "count": 2,
+          "portsSupported": 4
+        },
+        {
+          "type": "USB 5 Gbps front",
+          "count": 1,
+          "portsSupported": 2
+        },
+        {
+          "type": "USB-C 5 Gbps front",
+          "count": 1,
+          "portsSupported": 1
+        },
+        {
+          "type": "Front audio",
+          "count": 1
+        },
+        {
+          "type": "CPU_FAN",
+          "pins": 4,
+          "count": 1
+        },
+        {
+          "type": "PUMP_FAN",
+          "pins": 4,
+          "count": 1
+        },
+        {
+          "type": "SYS_FAN",
+          "pins": 4,
+          "count": 6
+        },
+        {
+          "type": "Front panel",
+          "count": 2
+        }
+      ],
+      "sources": [
+        "https://www.msi.com/Motherboard/B550-A-PRO/Specification"
+      ],
+      "imageSource": "https://storage-asset.msi.com/global/picture/images/mb/IO/msi-b550-a_pro-io.png",
+      "notes": [
+        "Антенных гнёзд Wi-Fi нет.",
+        "У Ryzen 5 5600 нет встроенной графики: монитор подключается к дискретной видеокарте; гнёзда HDMI/DP платы физически есть, но для 5600 не дают видеосигнал."
+      ]
+    }
+  ],
+  "gpus": [
+    {
+      "productId": "rtx-3060-ventus",
+      "name": "MSI GeForce RTX 3060 VENTUS 2X 12G OC",
+      "externalPorts": [
+        {
+          "type": "DisplayPort",
+          "version": "1.4",
+          "count": 3
+        },
+        {
+          "type": "HDMI",
+          "version": "2.1",
+          "count": 1
+        }
+      ],
+      "powerInputs": [
+        {
+          "type": "PCIe GPU",
+          "pins": 8,
+          "count": 1
+        }
+      ],
+      "boardConnector": "PCIe edge connector into primary full-length PCIe slot",
+      "source": "https://my.msi.com/Graphics-Card/GeForce-RTX-3060-VENTUS-2X-12G-OC/Specification",
+      "notes": [
+        "Точный порядок DP/HDMI на планке не проверялся; набор подтверждён.",
+        "Это модель 12G OC, не 8G и не V1."
+      ]
+    },
+    {
+      "productId": "rtx-4060-ventus",
+      "name": "MSI GeForce RTX 4060 VENTUS 2X BLACK 8G",
+      "externalPorts": [
+        {
+          "type": "DisplayPort",
+          "version": "1.4a",
+          "count": 3
+        },
+        {
+          "type": "HDMI",
+          "version": "2.1a",
+          "count": 1
+        }
+      ],
+      "powerInputs": [
+        {
+          "type": "PCIe GPU",
+          "pins": 8,
+          "count": 1
+        }
+      ],
+      "boardConnector": "PCIe x8 electrical in primary full-length PCIe x16 slot",
+      "source": "https://uk.msi.com/Graphics-Card/GeForce-RTX-4060-VENTUS-2X-BLACK-8G/Specification",
+      "notes": [
+        "Эта RTX 4060 использует обычный PCIe 8-pin, НЕ 16-pin 12VHPWR/12V-2x6.",
+        "Точный порядок DP/HDMI на планке не проверялся; набор подтверждён."
+      ]
+    },
+    {
+      "productId": "rtx-3090-trinity",
+      "name": "ZOTAC GAMING GeForce RTX 3090 Trinity",
+      "partNumber": "ZT-A30900D-10P",
+      "externalPorts": [
+        {
+          "type": "DisplayPort",
+          "version": "1.4a",
+          "count": 3
+        },
+        {
+          "type": "HDMI",
+          "version": "2.1",
+          "count": 1
+        }
+      ],
+      "powerInputs": [
+        {
+          "type": "PCIe GPU",
+          "pins": 8,
+          "count": 2
+        }
+      ],
+      "boardConnector": "PCIe 4.0 x16 edge connector",
+      "source": "https://www.zotac.com/us/product/graphics_card/zotac-gaming-geforce-rtx-3090-trinity",
+      "notes": [
+        "ZOTAC Trinity имеет 2×8-pin, а не 12-pin как некоторые Founders Edition.",
+        "Прямой запрос официальной страницы сейчас возвращает 468, спецификация прочитана в индексе официальной страницы; те же данные были найдены ранее.",
+        "Набор видеопортов подтверждён, порядок на планке не проверялся."
+      ]
+    }
+  ],
+  "psus": [
+    {
+      "productId": "mag-a850gl",
+      "name": "MSI MAG A850GL PCIE5",
+      "modular": "full",
+      "deviceSideConnectors": [
+        {
+          "type": "ATX",
+          "pins": "20+4",
+          "count": 1
+        },
+        {
+          "type": "EPS CPU",
+          "pins": "4+4",
+          "count": 2
+        },
+        {
+          "type": "PCIe GPU",
+          "pins": "6+2",
+          "count": 4,
+          "cableCount": 2
+        },
+        {
+          "type": "PCIe GPU native 16-pin",
+          "pins": 16,
+          "count": 1,
+          "maxW": 600
+        },
+        {
+          "type": "SATA power",
+          "pins": 15,
+          "count": 8,
+          "cableCount": 2
+        },
+        {
+          "type": "Peripheral Molex",
+          "pins": 4,
+          "count": 4
+        },
+        {
+          "type": "FDD",
+          "pins": 4,
+          "count": 1
+        }
+      ],
+      "visualPsuInnerFace": "Панель отдельных модульных гнёзд; подключаются только нужные кабели. На официальном изображении видны группы ATX24P, CPU&PCI-E, SATA&MOLEX и отдельный 16-pin.",
+      "sources": [
+        "https://us.msi.com/Power-Supply/MAG-A850GL-PCIE5/Specification",
+        "https://www.msi.com/Power-Supply/MAG-A850GL-PCIE5"
+      ],
+      "imageSource": "https://storage-asset.msi.com/global/picture/image/feature/power/MAG/A850GL-PCIE5/msi-mag-850gl-power-kv.png",
+      "notes": [
+        "Цифры в deviceSideConnectors — концы кабелей для компонентов, не количество гнёзд на БП.",
+        "PSU-side ATX показан раздельной парой 18+10, motherboard-side единый 20+4; для учебной геометрии достаточно подписанной группы ATX.",
+        "Официальная страница обновлена до ATX3.1/PCIe5.1; старые ревизии той же модели могут описываться ATX3.0/PCIe5.0. Для выбранных GPU используется 6+2, нативный 16-pin остаётся свободным."
+      ]
+    },
+    {
+      "productId": "pk550d",
+      "name": "DeepCool PK550D",
+      "modular": "none",
+      "deviceSideConnectors": [
+        {
+          "type": "ATX",
+          "pins": "20+4",
+          "count": 1,
+          "cableCount": 1
+        },
+        {
+          "type": "EPS CPU",
+          "pins": "4+4",
+          "count": 2,
+          "cableCount": 1
+        },
+        {
+          "type": "PCIe GPU",
+          "pins": "6+2",
+          "count": 2,
+          "cableCount": 1
+        },
+        {
+          "type": "SATA power",
+          "pins": 15,
+          "count": 6,
+          "cableCount": 2
+        },
+        {
+          "type": "Peripheral Molex",
+          "pins": 4,
+          "count": 3,
+          "cableCount": 1
+        }
+      ],
+      "visualPsuInnerFace": "Закрытая стенка с одним круглым выходом общего несъёмного жгута; модульных разъёмов на этой стенке нет.",
+      "sources": [
+        "https://www.deepcool.com/products/PowerSupplyUnits/powersupplyunits/PK550D-80-PLUS-Bronze-Power-Supply/2022/15621.shtml"
+      ],
+      "imageSource": "https://cdn.deepcool.com/public/ProductFile/DEEPCOOL/PowerSupplyUnits/PK800D/Overview/07_01.jpg?auto=format%2Ccompress&q=90",
+      "notes": [
+        "Иллюстрация несъёмного жгута размещена на официальной странице PK550D, но папка общего изображения названа PK800D; количество кабелей взято из текста именно PK550D.",
+        "Два 6+2 коннектора на одном PCIe кабеле; не рисовать два независимых съёмных кабеля.",
+        "PCIe16-pin отсутствует."
+      ]
+    }
+  ],
+  "connectionGraph": [
+    {
+      "from": "PSU ATX cable 20+4",
+      "to": "motherboard ATX_PWR1 24-pin",
+      "visual": "Толстый жгут к правому краю платы"
+    },
+    {
+      "from": "PSU EPS CPU cable 4+4",
+      "to": "motherboard CPU_PWR1 (and CPU_PWR2 on B650)",
+      "visual": "Отдельная линия к верхнему левому краю платы"
+    },
+    {
+      "from": "PSU PCIe GPU cable 6+2",
+      "to": "GPU 8-pin ×1 or ×2",
+      "visual": "Линия к верхнему/боковому ребру видеокарты"
+    },
+    {
+      "from": "GPU edge contacts",
+      "to": "motherboard primary PCIe x16-length slot",
+      "visual": "Без отдельного кабеля данных"
+    },
+    {
+      "from": "Case top USB3",
+      "to": "motherboard front USB 5Gbps header",
+      "visual": "Внутренний USB3 кабель; второй поддерживаемый порт не используется"
+    },
+    {
+      "from": "Case top USB2",
+      "to": "motherboard USB2 header",
+      "visual": "Внутренний USB2 кабель"
+    },
+    {
+      "from": "Case combo audio",
+      "to": "motherboard HD_AUDIO / JAUD1",
+      "visual": "Тонкий кабель к нижней левой части платы"
+    },
+    {
+      "from": "Case POWER/RESET",
+      "to": "motherboard front panel / JFP1",
+      "visual": "Тонкие провода к нижнему правому краю платы"
+    },
+    {
+      "from": "CPU cooler fan",
+      "to": "motherboard CPU_FAN",
+      "visual": "Один 4-pin PWM провод; AK620 два вентилятора могут идти через разветвитель"
+    },
+    {
+      "from": "M.2 NVMe SSD",
+      "to": "motherboard M.2 socket",
+      "visual": "Нет SATA-кабеля данных и отдельного питания"
+    }
+  ],
+  "implementationCaveats": [
+    "EPS CPU 4+4 и PCIe GPU 6+2 — разные кабели; не обозначать их одним универсальным 8-pin.",
+    "Корпусные вентиляторы: точные штатные разъёмы CC560 V2 не удалось подтвердить по открытому тексту; не утверждать 4-pin PWM. В учебной схеме можно обозначить абстрактный контроллер/питание вентиляторов, пометив условность.",
+    "Модульные кабели разных БП не считать взаимозаменяемыми: рисунок разъёмов не гарантирует совпадения распиновки.",
+    "Задние панели обеих материнских плат содержат 6 аналоговых аудио-разъёмов; оптический S/PDIF не подтверждён и не должен добавляться.",
+    "Для монитора в демонстрационной сборке использовать HDMI/DP видеокарты.",
+    "Положение каждой ножки и реальная электросхема не входят в исследование; маркировка и наборы портов достаточны для 3D объяснения."
+  ],
+  "localReferenceImagesDir": "C:\\Users\\aqr1337\\Documents\\ChatGPT\\школьный проект\\work\\ports",
+  "downloadedAssetsNote": "Только официальные растровые справочные изображения портов/БП для проверки; сторонние 3D-модели не скачивались."
+}
