@@ -24,3 +24,9 @@ test('Shop filters physical manufacturer and searches exact SKU',()=>{
  const sku=shopProducts.find(p=>p.id==='ddr4-32-3600').sku;
  assert.deepEqual(filtered({query:sku}).map(p=>p.id),['ddr4-32-3600']);
 });
+
+test('DDR memory filter includes Intel CPUs supporting both generations',()=>{
+ const base={category:'cpu',query:'12400F',brand:'',memory:'DDR4',socket:'',min:'',max:'',compatible:false,priced:false,sort:'default'};
+ const found=filterProducts(shopProducts,base,demoBuild,{});assert.ok(found.some(p=>p.id==='i5-12400f'));
+ assert.ok(filterProducts(shopProducts,{...base,memory:'DDR5'},demoBuild,{}).some(p=>p.id==='i5-12400f'));
+});
