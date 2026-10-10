@@ -6,9 +6,9 @@ import {cablesFor,reconcileConnections} from '../dist/wiring.js';
 import {componentSpecs} from '../dist/inspector.js';
 const settings={load:'stress',ambient:22,front:60,rear:60,cpuFan:60};
 
-test('Expanded catalog has 150 distinct sourced models and six cases',()=>{
- const entries=Object.values(catalog).flat();assert.equal(entries.length,150);assert.equal(new Set(entries.map(p=>p.id)).size,150);assert.equal(catalog.case.length,6);
- for(const [key,parts] of Object.entries(catalog))for(const p of parts){assert.ok(p.sources.some(u=>u.startsWith('https://')),p.id);assert.ok(componentSpecs(p,key).length>3,p.id);}
+test('Expanded catalog has 150 sourced models plus three educational cases',()=>{
+ const entries=Object.values(catalog).flat();assert.equal(entries.length,153);assert.equal(new Set(entries.map(p=>p.id)).size,153);assert.equal(catalog.case.length,9);
+ for(const [key,parts] of Object.entries(catalog))for(const p of parts){if(!p.concept)assert.ok(p.sources.some(u=>u.startsWith('https://')),p.id);assert.ok(componentSpecs(p,key).length>3,p.id);}
 });
 test('Intel supports either memory generation, but the motherboard determines which',()=>{
  for(const [motherboard,ram] of [['b760m-p-ddr4','ddr4-32'],['b760-p-wifi','ddr5-32']])assert.equal(compatibility({...demoBuild,cpu:'i5-12400f',motherboard,ram}).ready,true);

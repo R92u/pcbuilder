@@ -22,9 +22,17 @@ export const interactionMethods={
     if(visible&&key){this.onInspect?.(key);break;}
    }
   });
-  canvas.addEventListener('contextmenu',ev=>ev.preventDefault());
+  canvas.addEventListener('pointerdown',ev=>{
+   if(!this.fanEditing||ev.button!==0||!this.caseFans)return;
+   const r=canvas.getBoundingClientRect();this.raycaster.setFromCamera(new THREE.Vector2((ev.clientX-r.left)/r.width*2-1,-(ev.clientY-r.top)/r.height*2+1),this.camera);
+   for(const hit of this.raycaster.intersectObject(this.caseFans,true)){
+    let node=hit.object;while(node&&!node.userData.fanId)node=node.parent;
+    if(node){const marker=this.fanMarkers.find(m=>m.spec?.id===node.userData.fanId);if(marker){marker.button.onpointerdown(ev);ev.stopImmediatePropagation();}break;}
+   }
+  },true);
+  canvas.addEventListener('contextmenu' ,ev=>ev.preventDefault());
   canvas.addEventListener('pointercancel',()=>{this.pickStart=null;});
-  this.cancelHeldPlug=()=>this.endCableDrag(null,true);
+  this.cancelHeldPlug=()=>{this.endCableDrag(null,true);this.endFanDrag(null,true);};
   window.addEventListener('blur',this.cancelHeldPlug);
  },
  clearLooseCable(){
@@ -35,7 +43,7 @@ export const interactionMethods={
  prepareLooseCable(mode,active){
   this.clearLooseCable();
   if(!this.showPorts||!this.selectedCable)return;
-  const cable=cablesFor(this.currentBuild).find(c=>c.id===this.selectedCable);if(!cable)return;
+  const cable=cablesFor(this.currentBuild,this.fanLayout).find(c=>c.id===this.selectedCable);if(!cable)return;
   const source=document.createElement('div');source.className='cable-source';source.textContent='Источник · '+cable.from;source.setAttribute('aria-label','Источник кабеля: '+cable.from);this.markerLayer.append(source);this.sourceMarker=source;this.sourcePosition=new THREE.Vector3(...cable.points[0]);
   if(mode!=='manual'||active.includes(this.selectedCable))return;
   this.looseSpec=cable;this.looseEnd=new THREE.Vector3(...cable.looseRest);

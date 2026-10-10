@@ -4,8 +4,9 @@ import {resolve} from './catalog.js';
 import {modelMethods} from './model.js';
 import {portsFor,cablesFor} from './wiring.js';
 import {hardwareFinish} from './surfaces.js';
-import {gpuLayout,caseLayout,gpuSlots,frontFanSource,coolerLayout,CPU_CENTER} from './layout.js';
+import {gpuSlots,coolerLayout,CPU_CENTER} from './layout.js';
 import {cableCurve,strandPoints} from './cable-geometry.js';
+import {fanSceneMethods} from './fan-scene.js';
 import {interactionMethods} from './interaction.js';
 
 const C={metal:0x222a2f,edge:0x485257,black:0x101618,silver:0x879398,pcb:0x17211c,purple:0xbfa5ff};
@@ -98,13 +99,14 @@ export class PCScene {
    const factories={motherboard:'makeMotherboard',cpu:'makeCPU',ram:'makeRAM',gpu:'makeGPU',cooler:'makeCooler',storage:'makeStorage',psu:'makePSU'};
    const group=this[factories[key]](p[key]);group.userData.id=p[key].id;group.userData.signature=signature;group.userData.componentKey=key;this.root.add(group);this.parts[key]=group;// Install directly at shared anchors, including during the first rendered frame.
   }
+  this.setFanLayout(this.fanLayout);
   for(const [i,cover] of (this.slotCovers||[]).entries())cover.visible=!p.gpu||i>=gpuSlots(p.gpu);
   if(this.parts.cooler)this.parts.cooler.visible=!this.hideCooler;
  }
  setWiring(mode,connected,selected=null,showPorts=false){
   this.clearLooseCable();this.selectedCable=selected;this.showPorts=showPorts;
-  const targets=portsFor(this.currentBuild||{}),available=cablesFor(this.currentBuild||{}),active=mode==='auto'?available.map(c=>c.id):connected;
-  const key=JSON.stringify([this.currentBuild,active,selected,showPorts]);
+  const targets=portsFor(this.currentBuild||{}),available=cablesFor(this.currentBuild||{},this.fanLayout),active=mode==='auto'?available.map(c=>c.id):connected;
+  const key=JSON.stringify([this.currentBuild,this.fanLayout,active,selected,showPorts]);
   if(this.wireKey!==key){
    this.wireKey=key;
    if(this.wires){this.wires.removeFromParent();this.wires.traverse(o=>{o.geometry?.dispose();o.material?.dispose();});}
@@ -123,21 +125,14 @@ export class PCScene {
     }
    }
    if(active.includes('cpuFan')||selected==='cpuFan'){
-    const p=resolve(this.currentBuild),c=cablesFor(this.currentBuild).find(c=>c.id==='cpuFan');
+    const p=resolve(this.currentBuild),c=cablesFor(this.currentBuild,this.fanLayout).find(c=>c.id==='cpuFan');
     if(c&&(p.cooler?.fans||1)>1){
      const l=coolerLayout(p.cooler,p.ram,p.cpu?.socket),size=l.sizes[0]||l.size,start=[l.top-size*.04-.01,CPU_CENTER.y+size*.40,l.fanZ[0]-.10];
      const curve=cableCurve([start,[start[0]+.06,4.42,start[2]],[start[0]+.06,4.42,c.points[0][2]],c.points[0]]);
      this.wires.add(new THREE.Mesh(new THREE.TubeGeometry(curve,56,.012,6,false),mat(0x151d20,.8,.1)));
     }
    }
-   if(active.includes('frontFan')||selected==='frontFan'){
-    const p=resolve(this.currentBuild),frame=caseLayout(p.case||{},p.gpu),hub=frontFanSource(frame);
-    for(const y of frame.fanYs){
-     const source=[-frame.fanSize*.46,y+frame.fanSize*.35,frame.fanZ-.10];
-     const curve=cableCurve([source,[-.80,source[1],frame.fanZ-.14],[-.80,hub[1],frame.fanZ-.14],hub]);
-     this.wires.add(new THREE.Mesh(new THREE.TubeGeometry(curve,48,.010,6,false),mat(0x151d20,.8,.1)));
-    }
-   }
+   this.addFanBranches(active,selected);
   }
   if(!this.markerLayer){this.markerLayer=document.createElement('div');this.markerLayer.className='port-markers';this.container.append(this.markerLayer);}
   this.markerLayer.replaceChildren();this.markers=[];
@@ -154,29 +149,21 @@ export class PCScene {
   this.camera.position.set(...(views[name]||views.assembly));this.controls.target.set(0,2.35,0);this.controls.update();this.endCableDrag(null,true);this.rearPanel.visible=name!=='cables';if(this.markerLayer)this.markerLayer.hidden=['rear','cables'].includes(name);
  }
  makeCaseFlows(p){if(this.flowGroup){this.flowGroup.removeFromParent();this.flowGroup.traverse(o=>{o.geometry?.dispose();o.material?.dispose();});}this.flowParticles=[];this.makeFlows(p.frontFanCount??3);this.flowGroup.visible=this.airflow;}
- makeFlows(frontCount=3){
-  this.flowGroup=new THREE.Group();this.flowGroup.visible=false;this.root.add(this.flowGroup);
-  const frame=caseLayout(resolve(this.currentBuild||{}).case||{},resolve(this.currentBuild||{}).gpu),paths=[];for(let band=0;band<frontCount;band++)for(let lane=0;lane<4;lane++){
-   const y=frame.fanYs[band], x=-.38+lane*.24;
-   const curve=new THREE.CatmullRomCurve3([new THREE.Vector3(x,y,frame.front+.55),new THREE.Vector3(x,y,frame.fanZ-.20),new THREE.Vector3(x+.30,y+.05,.9),new THREE.Vector3(x+.52,y+.24,-.35),new THREE.Vector3(x*.7+.20,3.94,-1.65),new THREE.Vector3(x*.7+.20,4.02,-2.80)]);
-   paths.push(curve);
-   const lineGeo=new THREE.BufferGeometry().setFromPoints(curve.getPoints(40));const line=new THREE.Line(lineGeo,new THREE.LineBasicMaterial({color:0x91b9ed,transparent:true,opacity:.17,depthTest:false}));line.renderOrder=3;this.flowGroup.add(line);
-   for(let n=0;n<5;n++){const mesh=new THREE.Mesh(new THREE.SphereGeometry(.027,6,5),new THREE.MeshBasicMaterial({color:0x99d8ef,transparent:true,opacity:.8,depthTest:false}));mesh.renderOrder=4;this.flowGroup.add(mesh);this.flowParticles.push({mesh,curve,t:n/5,band});}
-  }
- }
- setOptions(options){Object.assign(this,options);this.glass.visible=!this.hideGlass;if(this.parts.cooler)this.parts.cooler.visible=!this.hideCooler;this.flowGroup.visible=this.airflow;this.markerLayer?.classList.toggle('visible',!!this.showPorts);}
+ makeFlows(){this.makeFanFlows();}
+ setOptions(options){Object.assign(this,options);this.updateSideGuards();this.glass.visible=!this.hideGlass;if(this.parts.cooler)this.parts.cooler.visible=!this.hideCooler;this.flowGroup.visible=this.airflow;this.markerLayer?.classList.toggle('visible',!!this.showPorts);}
  reset(){this.view('assembly');}
  zoom(factor){const offset=this.camera.position.clone().sub(this.controls.target);offset.multiplyScalar(factor);offset.setLength(THREE.MathUtils.clamp(offset.length(),4.2,19));this.camera.position.copy(this.controls.target).add(offset);this.controls.update();}
  resize(){const {width,height}=this.container.getBoundingClientRect();if(!width||!height)return;this.camera.aspect=width/height;this.camera.updateProjectionMatrix();this.renderer.setSize(width,height,false);}
  frame(time){
   if(time-this.last<1000/45){this.raf=requestAnimationFrame(this.frame);return;}
   const dt=Math.min((time-this.last)/1000||0,.05);this.last=time;this.controls.update();
-  for(const f of this.fans){const fraction=f.kind==='front'?this.settings.front/100:f.kind==='rear'?this.settings.rear/100:f.kind==='cpu'?this.settings.cpuFan/100:(this.settings.gpuFan??60)/100;f.rotor.rotation.z-=dt*(this.running?fraction*12:0);}
+  for(const f of this.fans){const fraction=f.mountId?(f.direction==='in'?this.settings.front:this.settings.rear)/100:f.kind==='front'?this.settings.front/100:f.kind==='rear'?this.settings.rear/100:f.kind==='cpu'?this.settings.cpuFan/100:(this.settings.gpuFan??60)/100;f.rotor.rotation.z-=dt*(this.running?fraction*12:0);}
   this.transitions=this.transitions.filter(t=>{const p=Math.min((time-t.start)/650,1);t.group.position.x=.65*(1-p)**3;return p<1;});
-  if(this.airflow){const speed=this.running?(this.settings.front*.45+this.settings.rear*.55)/100:0;for(const f of this.flowParticles){f.t=(f.t+dt*.2*speed)%1;f.mesh.position.copy(f.curve.getPoint(f.t));f.mesh.material.color.set(f.t<.43?0x8edaf2:0xf1ad8c);f.mesh.visible=speed>0;}}
+  if(this.airflow)this.updateFanFlows(dt);
+  this.updateFanMarkers();
   this.updateMarkers();this.renderer.render(this.scene,this.camera);this.raf=requestAnimationFrame(this.frame);
  }
- dispose(){cancelAnimationFrame(this.raf);this.resizeObserver.disconnect();this.controls.dispose();this.environment?.dispose();this.clearLooseCable();window.removeEventListener('blur',this.cancelHeldPlug);this.renderer.dispose();}
+ dispose(){cancelAnimationFrame(this.raf);this.resizeObserver.disconnect();this.controls.dispose();this.environment?.dispose();this.clearLooseCable();this.endFanDrag(null,true);window.removeEventListener('blur',this.cancelHeldPlug);this.renderer.dispose();}
 }
 
-Object.assign(PCScene.prototype,modelMethods,interactionMethods);
+Object.assign(PCScene.prototype,modelMethods,interactionMethods,fanSceneMethods);

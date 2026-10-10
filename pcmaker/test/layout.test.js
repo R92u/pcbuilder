@@ -10,9 +10,9 @@ import {componentSpecs} from '../dist/inspector.js';
 import {productImages} from '../dist/product-images.js';
 const curve=cableCurve;
 
-test('Every model has an attributed photograph; expansion includes two white cases',()=>{
- for(const p of Object.values(catalog).flat())assert.ok(productImages[p.id]?.image&&productImages[p.id]?.sourcePage,p.id);
- assert.equal(catalog.case.filter(p=>p.color==='white').length,2);
+test('Every retail model has an attributed photo; concepts are separate',()=>{
+ for(const p of Object.values(catalog).flat().filter(p=>!p.concept))assert.ok(productImages[p.id]?.image&&productImages[p.id]?.sourcePage,p.id);
+ assert.equal(catalog.case.filter(p=>!p.concept&&p.color==='white').length,2);
 });
 test('Installed intake fans clear each other, floor and roof in all six cases',()=>{
  for(const p of catalog.case){const l=caseLayout(p);for(const y of l.fanYs){assert.ok(y-l.fanSize/2>.34,p.id);assert.ok(y+l.fanSize/2<4.58,p.id);}for(let i=1;i<l.fanYs.length;i++)assert.ok(l.fanYs[i]-l.fanYs[i-1]>=l.fanSize-.001,p.id);}

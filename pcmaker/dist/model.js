@@ -70,6 +70,20 @@ function frontFilter(kind,white=false){
 }
 
 export const modelMethods={
+ makeConceptFront(g,p){
+  const color=p.color==='white'?0xbec6cf:0x313940;
+  for(const x of [-1.02,1.02])this.box(g,.12,4.24,.15,x,2.48,2.18,color);
+  for(const y of [.43,4.52])this.box(g,2.10,.12,.16,0,y,2.18,color);
+  if(p.concept==='compact'){
+   for(let i=0;i<17;i++){const bar=this.box(g,1.89,.026,.04,0,.66+i*.217,2.23,0x657071);bar.rotation.z=.06;}
+   for(const x of [-.98,.98])this.lightStrip(g,.02,3.65,.02,x,2.58,2.27,0xf0a66b);
+  }else{
+   if(p.concept!=='panorama'){const panel=new THREE.Mesh(new THREE.PlaneGeometry(1.92,3.94),new THREE.MeshStandardMaterial({map:frontFilter('mesh',p.color==='white'),transparent:true,opacity:.8,side:THREE.DoubleSide,depthWrite:false}));panel.position.set(0,2.48,2.24);g.add(panel);}
+   if(p.concept==='panorama')this.lightStrip(g,1.92,.025,.015,0,.58,2.27);
+   if(p.concept==='dual')for(const x of [-.85,.85])this.box(g,.055,3.75,.09,x,2.49,2.29,color);
+  }
+  this.text(g,'PCmaker / '+p.short,.96,.07,0,.47,2.27);
+ },
  makeCaseFront(g,p){
   if(p.id==='cc560'){
    this.box(g,1.35,4.19,.09,0,2.49,2.24,0x24292d);
