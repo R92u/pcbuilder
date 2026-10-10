@@ -23,5 +23,5 @@ test('Removing PSU removes its cables; RAM and NVMe have no fictional separate w
 });
 test('B550 and the single-EPS PSU do not offer a nonexistent second CPU cable',()=>{
  assert.ok(!cablesFor({...demoBuild,motherboard:'b550'}).some(c=>c.id==='eps2'));
- assert.ok(!cablesFor({...demoBuild,psu:'pk550'}).some(c=>c.id==='eps2'));
+ assert.ok(!cablesFor({...demoBuild,psu:'a650bn'}).some(c=>c.id==='eps2'));
 });
