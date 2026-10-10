@@ -7,13 +7,14 @@ import {hardwareFinish} from './surfaces.js';
 import {caseLayout,gpuSlots,coolerLayout,CPU_CENTER} from './layout.js';
 import {cableCurve,strandPoints} from './cable-geometry.js';
 import {fanSceneMethods} from './fan-scene.js';
+import {lightingSceneMethods} from './lighting-scene.js';
 import {interactionMethods} from './interaction.js';
 
 const C={metal:0x222a2f,edge:0x485257,black:0x101618,silver:0x879398,pcb:0x17211c,purple:0xbfa5ff};
 const mat=(color,roughness=.5,metalness=.25)=>hardwareFinish(new THREE.MeshStandardMaterial({color,roughness,metalness}));
 export class PCScene {
  constructor(container){
-  this.container=container;this.parts={};this.fans=[];this.flowParticles=[];this.transitions=[];this.hideGlass=true;this.hideCooler=false;this.airflow=false;this.running=false;this.settings={front:60,rear:60,cpuFan:60};this.last=0;
+  this.container=container;this.parts={};this.fans=[];this.flowParticles=[];this.transitions=[];this.hideGlass=false;this.hideRearPanel=false;this.hideCooler=false;this.airflow=false;this.running=false;this.settings={front:60,rear:60,cpuFan:60};this.last=0;
   this.renderer=new THREE.WebGLRenderer({antialias:true,alpha:true,powerPreference:'high-performance'});
   this.renderer.setPixelRatio(Math.min(devicePixelRatio,1.35));this.renderer.setClearColor(0,0);this.renderer.outputColorSpace=THREE.SRGBColorSpace;this.renderer.toneMapping=THREE.ACESFilmicToneMapping;this.renderer.toneMappingExposure=1.08;
   this.renderer.shadowMap.enabled=true;this.renderer.shadowMap.type=THREE.PCFShadowMap;
@@ -40,11 +41,11 @@ export class PCScene {
  }
  box(g,w,h,d,x,y,z,color=C.metal,rough=.5){const mesh=new THREE.Mesh(new THREE.BoxGeometry(w,h,d),mat(color,rough,.4));mesh.position.set(x,y,z);mesh.castShadow=true;mesh.receiveShadow=true;g.add(mesh);return mesh;}
  cylinder(g,r,h,x,y,z,color=C.edge){const m=new THREE.Mesh(new THREE.CylinderGeometry(r,r,h,24),mat(color,.38,.4));m.position.set(x,y,z);m.castShadow=true;g.add(m);return m;}
- text(g,text,w,h,x,y,z,rotation=[0,0,0],color='#87908f',bg=null){
+ text(g,text,w,h,x,y,z,rotation=[0,0,0],color='#87908f',bg=null,lit=false){
   // Flush, light-reactive silkscreen / laser etching, never a luminous billboard.
   const canvas=document.createElement('canvas');canvas.width=512;canvas.height=Math.max(32,Math.min(512,Math.round(512*h/w)));const c=canvas.getContext('2d');
   if(bg){c.fillStyle=bg;c.fillRect(0,0,512,canvas.height);}
-  const tint=new THREE.Color(color);if(tint.getHSL({}).l>.53)tint.multiplyScalar(.63);
+  const tint=new THREE.Color(color);if(!lit&&tint.getHSL({}).l>.53)tint.multiplyScalar(.63);
   c.textAlign='center';c.textBaseline='middle';c.fillStyle='#'+tint.getHexString();c.font=`600 ${Math.min(canvas.height*.55,512/(String(text).length*.61))}px Arial`;c.fillText(text,256,canvas.height/2);
   const texture=new THREE.CanvasTexture(canvas);texture.colorSpace=THREE.SRGBColorSpace;texture.anisotropy=2;
   const mesh=new THREE.Mesh(new THREE.PlaneGeometry(w,h),new THREE.MeshStandardMaterial({map:texture,transparent:true,roughness:.64,metalness:.2,depthWrite:false,polygonOffset:true,polygonOffsetFactor:-1,side:THREE.DoubleSide}));mesh.position.set(x,y,z);mesh.rotation.set(...rotation);g.add(mesh);return mesh;
@@ -62,8 +63,9 @@ export class PCScene {
   const texture=new THREE.CanvasTexture(canvas);texture.colorSpace=THREE.SRGBColorSpace;texture.anisotropy=2;
   const mesh=new THREE.Mesh(new THREE.PlaneGeometry(w,h),new THREE.MeshStandardMaterial({map:texture,roughness:.73,metalness:light?.35:.08,polygonOffset:true,polygonOffsetFactor:-1}));mesh.position.set(x,y,z);mesh.rotation.set(...rotation);g.add(mesh);return mesh;
  }
- lightStrip(g,w,h,d,x,y,z,color=C.purple){const mesh=new THREE.Mesh(new THREE.BoxGeometry(w,h,d),new THREE.MeshStandardMaterial({color,emissive:color,emissiveIntensity:1.5,roughness:.35}));mesh.position.set(x,y,z);g.add(mesh);return mesh;}
- fan(parent,size,x,y,z,rotation,kind,rgb=true){
+ lightStrip(g,w,h,d,x,y,z,color=C.purple){const mesh=new THREE.Mesh(new THREE.BoxGeometry(w,h,d),new THREE.MeshStandardMaterial({color,emissive:color,emissiveIntensity:1.5,roughness:.35}));mesh.position.set(x,y,z);g.add(mesh);this.tagLight(mesh,{type:'rgb'});return mesh;}
+ fan(parent,size,x,y,z,rotation,kind,lighting=null){
+  const rgb=!!lighting;
   const fan=new THREE.Group();fan.position.set(x,y,z);fan.rotation.set(...rotation);parent.add(fan);
   const depth=kind==='gpu'?.17:.23;
   // A continuous square housing, rotor between its faces, and motor braces on
@@ -72,12 +74,14 @@ export class PCScene {
   const ductShape=new THREE.Shape();ductShape.absarc(0,0,size*.455,0,Math.PI*2,false);const opening=new THREE.Path();opening.absarc(0,0,size*.408,0,Math.PI*2,true);ductShape.holes.push(opening);
   const duct=new THREE.Mesh(new THREE.ExtrudeGeometry(ductShape,{depth,bevelEnabled:false,curveSegments:24}),mat(C.black,.7,.1));duct.position.z=-depth/2;fan.add(duct);
   const ring=new THREE.Mesh(new THREE.TorusGeometry(size*.425,size*.015,6,40),new THREE.MeshStandardMaterial({color:rgb?C.purple:0x454e52,emissive:rgb?0x7e57cc:0,emissiveIntensity:rgb?.9:0,metalness:.25,roughness:.5}));ring.position.z=depth/2+.003;fan.add(ring);
+  if(lighting?.zones==='ring'){this.tagLight(ring,lighting);const backRing=ring.clone();backRing.position.z=-depth/2-.003;fan.add(backRing);}
+  else {ring.material.emissiveIntensity=0;ring.material.color.set(0x454e52);}
   const rotor=new THREE.Group();rotor.userData.animated=true;rotor.position.z=.025;fan.add(rotor);
   const bladeShape=new THREE.Shape();bladeShape.moveTo(.09,-.025);bladeShape.quadraticCurveTo(.24,-.14,.38,-.08);bladeShape.quadraticCurveTo(.415,-.02,.365,.042);bladeShape.quadraticCurveTo(.23,.025,.10,.065);bladeShape.closePath();
   const bladeGeometry=new THREE.ExtrudeGeometry(bladeShape,{depth:.018,bevelEnabled:false,curveSegments:6});
   const blades=new THREE.InstancedMesh(bladeGeometry,mat(rgb?0x657178:0x303a3e,.65,.15),7),transform=new THREE.Object3D();
-  for(let i=0;i<7;i++){transform.scale.setScalar(size);transform.rotation.z=i/7*Math.PI*2;transform.rotation.x=.16;transform.updateMatrix();blades.setMatrixAt(i,transform.matrix);}rotor.add(blades);
-  const hub=this.cylinder(rotor,size*.115,.085,0,0,.015,0x252d32);hub.rotation.x=Math.PI/2;
+  for(let i=0;i<7;i++){transform.scale.setScalar(size);transform.rotation.z=i/7*Math.PI*2;transform.rotation.x=.16;transform.updateMatrix();blades.setMatrixAt(i,transform.matrix);}rotor.add(blades);if(lighting?.zones==='blades')this.tagLight(blades,{...lighting,intensity:.65});
+  const hub=this.cylinder(rotor,size*.115,.085,0,0,.015,0x252d32);hub.rotation.x=Math.PI/2;if(lighting?.zones==='blades')this.tagLight(hub,{...lighting,intensity:.5});
   const rearHub=this.cylinder(fan,size*.13,.10,0,0,-depth/2+.05,0x414c52);rearHub.rotation.x=Math.PI/2;
   for(const angle of [Math.PI/4,-Math.PI/4]){const support=this.box(fan,size*1.22,size*.040,.035,0,0,-depth/2+.018,0x343f45);support.rotation.z=angle;}
   const sticker=new THREE.Mesh(new THREE.CircleGeometry(size*.108,24),mat(0x6c7679,.85,.05));sticker.position.z=-depth/2-.004;sticker.rotation.y=Math.PI;fan.add(sticker);
@@ -102,6 +106,7 @@ export class PCScene {
   this.setFanLayout(this.fanLayout);
   for(const [i,cover] of (this.slotCovers||[]).entries())cover.visible=!p.gpu||i>=gpuSlots(p.gpu);
   if(this.parts.cooler)this.parts.cooler.visible=!this.hideCooler;
+  this.collectLights();this.rearPanel.visible=!this.hideRearPanel;
   if(changedCase)this.fitCaseView();
  }
  setWiring(mode,connected,selected=null,showPorts=false){
@@ -147,7 +152,7 @@ export class PCScene {
  }
  view(name){
   const views={assembly:[10.4,5.0,3.8],rear:[3.4,4.1,-9.4],top:[4.8,10,5.8],cables:[-8.3,4.6,5.4]};
-  this.camera.position.set(...(views[name]||views.assembly));this.controls.target.set(0,2.35,0);this.fitCaseView();this.controls.update();this.endCableDrag(null,true);this.rearPanel.visible=name!=='cables';if(this.markerLayer)this.markerLayer.hidden=['rear','cables'].includes(name);
+  this.camera.position.set(...(views[name]||views.assembly));this.controls.target.set(0,2.35,0);this.fitCaseView();this.controls.update();this.endCableDrag(null,true);this.rearPanel.visible=!this.hideRearPanel;if(this.markerLayer)this.markerLayer.hidden=['rear','cables'].includes(name);
  }
  fitCaseView(){
   const p=resolve(this.currentBuild||{}),f=caseLayout(p.case||{},p.gpu),center=new THREE.Vector3((f.side+f.back)/2,2.38,f.centerZ),offset=this.camera.position.clone().sub(this.controls.target),back=offset.clone().normalize();
@@ -161,7 +166,7 @@ export class PCScene {
  }
  makeCaseFlows(p){if(this.flowGroup){this.flowGroup.removeFromParent();this.flowGroup.traverse(o=>{o.geometry?.dispose();o.material?.dispose();});}this.flowParticles=[];this.makeFlows(p.frontFanCount??3);this.flowGroup.visible=this.airflow;}
  makeFlows(){this.makeFanFlows();}
- setOptions(options){Object.assign(this,options);this.updateSideGuards();this.glass.visible=!this.hideGlass;if(this.parts.cooler)this.parts.cooler.visible=!this.hideCooler;this.flowGroup.visible=this.airflow;this.markerLayer?.classList.toggle('visible',!!this.showPorts);}
+ setOptions(options){Object.assign(this,options);this.updateSideGuards();this.glass.visible=!this.hideGlass;this.rearPanel.visible=!this.hideRearPanel;if(this.parts.cooler)this.parts.cooler.visible=!this.hideCooler;this.flowGroup.visible=this.airflow;this.markerLayer?.classList.toggle('visible',!!this.showPorts);}
  reset(){this.view('assembly');}
  zoom(factor){const offset=this.camera.position.clone().sub(this.controls.target);offset.multiplyScalar(factor);offset.setLength(THREE.MathUtils.clamp(offset.length(),4.2,19));this.camera.position.copy(this.controls.target).add(offset);this.controls.update();}
  resize(){const {width,height}=this.container.getBoundingClientRect();if(!width||!height)return;this.camera.aspect=width/height;this.camera.updateProjectionMatrix();this.renderer.setSize(width,height,false);this.fitCaseView();}
@@ -171,10 +176,10 @@ export class PCScene {
   for(const f of this.fans){const fraction=f.mountId?(f.direction==='in'?this.settings.front:this.settings.rear)/100:f.kind==='front'?this.settings.front/100:f.kind==='rear'?this.settings.rear/100:f.kind==='cpu'?this.settings.cpuFan/100:(this.settings.gpuFan??60)/100;f.rotor.rotation.z-=dt*(this.running?fraction*12:0);}
   this.transitions=this.transitions.filter(t=>{const p=Math.min((time-t.start)/650,1);t.group.position.x=.65*(1-p)**3;return p<1;});
   if(this.airflow)this.updateFanFlows(dt);
-  this.updateFanMarkers();
+  this.updateFanMarkers();if(this.lighting?.mode==='rainbow')this.updateLighting(time);
   this.updateMarkers();this.renderer.render(this.scene,this.camera);this.raf=requestAnimationFrame(this.frame);
  }
  dispose(){cancelAnimationFrame(this.raf);this.resizeObserver.disconnect();this.controls.dispose();this.environment?.dispose();this.clearLooseCable();this.endFanDrag(null,true);window.removeEventListener('blur',this.cancelHeldPlug);this.renderer.dispose();}
 }
 
-Object.assign(PCScene.prototype,modelMethods,interactionMethods,fanSceneMethods);
+Object.assign(PCScene.prototype,modelMethods,interactionMethods,fanSceneMethods,lightingSceneMethods);

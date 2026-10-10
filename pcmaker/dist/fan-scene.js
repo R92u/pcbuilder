@@ -1,5 +1,6 @@
 import * as THREE from 'three';
 import {resolve} from './catalog.js';
+import {caseLighting} from './lighting.js';
 import {caseLayout} from './layout.js';
 import {fanMounts,sanitizeFanLayout,fanBasis,fanHub,placementError,fanBranchRoute} from './fan-layout.js';
 import {cableCurve} from './cable-geometry.js';
@@ -17,7 +18,8 @@ export const fanSceneMethods={
    const mounts=fanMounts(this.currentBuild||{}),p=resolve(this.currentBuild||{});
    for(const spec of this.fanLayout){
     const slot=mounts.find(s=>s.id===spec.slot),{u,v,n}=fanBasis(slot,spec.direction);
-    const group=this.fan(this.caseFans,slot.size,...slot.position,[0,0,0],'case',p.case?.frontRGB??true);
+    const group=this.fan(this.caseFans,slot.size,...slot.position,[0,0,0],'case',caseLighting(p.case));
+    group.traverse(o=>{if(o.material?.userData?.lighting)o.material.userData.lighting.phase=this.caseFanMeshes.size*.13;});
     group.quaternion.setFromRotationMatrix(new THREE.Matrix4().makeBasis(new THREE.Vector3(...u),new THREE.Vector3(...v),new THREE.Vector3(...n)));
     batchSolids(group);group.userData.fanId=spec.id;group.userData.componentKey='case';group.userData.animated=true;
     Object.assign(this.fans.at(-1),{mountId:slot.id,direction:spec.direction});this.caseFanMeshes.set(spec.id,group);
@@ -30,7 +32,7 @@ export const fanSceneMethods={
    }
    this.makeCaseFlows(p.case||{});this.wireKey=null;
   }
-  this.updateSideGuards();this.renderFanMarkers();
+  this.collectLights();this.updateSideGuards();this.renderFanMarkers();
  },
  updateSideGuards(){for(const guard of this.sideFanGuards||[])guard.visible=!this.hideGlass||this.fanLayout?.some(f=>f.slot.startsWith('right-'));},
  setFanEditor(enabled,wall='front',selected=null){
@@ -41,7 +43,7 @@ export const fanSceneMethods={
  },
  viewFanWall(wall){
   const f=caseLayout(resolve(this.currentBuild).case,resolve(this.currentBuild).gpu),views={front:[4.5,4.4,11.7],rear:[5,4.5,-11],top:[4.5,12,3],bottom:[5,-5,4],left:[-11,4.8,5],right:[12,4.8,1]};
-  this.camera.position.set(...views[wall]);this.controls.target.set((f.side+f.back)/2,2.35,f.centerZ);this.fitCaseView();this.controls.update();this.rearPanel.visible=true;
+  this.camera.position.set(...views[wall]);this.controls.target.set((f.side+f.back)/2,2.35,f.centerZ);this.fitCaseView();this.controls.update();this.rearPanel.visible=!this.hideRearPanel;
  },
  renderFanMarkers(){
   if(!this.fanMarkerLayer){this.fanMarkerLayer=document.createElement('div');this.fanMarkerLayer.className='fan-markers';this.container.append(this.fanMarkerLayer);}
