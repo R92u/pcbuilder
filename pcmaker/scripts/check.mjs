@@ -4,7 +4,7 @@ import {spawnSync} from 'node:child_process';
 import {byId} from '../dist/catalog.js';
 import {productImages} from '../dist/product-images.js';
 const root=path.resolve(import.meta.dirname,'..');
-for(const name of ['index.html','style.css','workbench.css','app.js','catalog.js','product-images.js','engine.js','scene.js','model.js','wiring.js','interaction.js','inspector.js','surfaces.js','ports.json','prices.json','sources.json','vendor/three.module.js','vendor/three.core.js','vendor/OrbitControls.js']){
+for(const name of ['index.html','style.css','workbench.css','shop.css','shop.js','gpu-model.js','app.js','catalog.js','product-images.js','engine.js','scene.js','model.js','wiring.js','interaction.js','inspector.js','surfaces.js','ports.json','prices.json','sources.json','vendor/three.module.js','vendor/three.core.js','vendor/OrbitControls.js']){
  const file=path.join(root,'dist',name);if(!fs.existsSync(file))throw Error('Missing '+name);
  if(name.endsWith('.js')){const result=spawnSync(process.execPath,['--check',file],{encoding:'utf8'});if(result.status!==0)throw Error(result.stderr);}
  if(name.endsWith('.json'))JSON.parse(fs.readFileSync(file,'utf8'));

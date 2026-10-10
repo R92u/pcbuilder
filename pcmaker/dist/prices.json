@@ -2,23 +2,32 @@
   "city": "Москва",
   "checkedAt": "2026-10-10",
   "items": {
+    "980": {
+      "price": 27990,
+      "date": "2026-10-10",
+      "store": "Регард",
+      "url": "https://www.regard.ru/product/384716/nakopitel-ssd-1tb-samsung-980-mz-v8v1t0bw"
+    },
     "r5-5600": {
       "price": 11999,
       "date": "2026-10-10",
       "store": "DNS",
-      "url": "https://www.dns-shop.ru/product/6d7a8c58afebed20/processor-amd-ryzen-5-5600-oem/"
+      "url": "https://www.dns-shop.ru/product/6d7a8c58afebed20/processor-amd-ryzen-5-5600-oem/",
+      "note": "Комплектация OEM."
     },
     "r5-7600": {
       "price": 16399,
       "date": "2026-10-10",
       "store": "DNS",
-      "url": "https://www.dns-shop.ru/product/93478ee7e957ed20/processor-amd-ryzen-5-7600-oem/"
+      "url": "https://www.dns-shop.ru/product/93478ee7e957ed20/processor-amd-ryzen-5-7600-oem/",
+      "note": "Комплектация OEM."
     },
     "r9-7900x": {
       "price": 35999,
       "date": "2026-10-10",
       "store": "DNS",
-      "url": "https://www.dns-shop.ru/product/7a2387593941ed20/processor-amd-ryzen-9-7900x-oem/"
+      "url": "https://www.dns-shop.ru/product/7a2387593941ed20/processor-amd-ryzen-9-7900x-oem/",
+      "note": "Комплектация OEM."
     },
     "b550": {
       "price": 11699,
@@ -61,6 +70,194 @@
       "date": "2026-10-10",
       "store": "DNS",
       "url": "https://www.dns-shop.ru/product/0d7e80408f5fed20/korpus-deepcool-cc560-v2-r-cc560-bkgaa4-g-2-cernyj/"
+    },
+    "r5-5600x": {
+      "price": 12450,
+      "date": "2026-10-10",
+      "store": "Регард",
+      "url": "https://www.regard.ru/product/370871/processor-amd-ryzen-5-5600x-oem",
+      "note": "Комплектация OEM."
+    },
+    "r7-7700x": {
+      "price": 21730,
+      "date": "2026-10-10",
+      "store": "Регард",
+      "url": "https://www.regard.ru/product/419168/processor-amd-ryzen-7-7700x-oem",
+      "note": "Комплектация OEM."
+    },
+    "i5-12400f": {
+      "price": 13070,
+      "date": "2026-10-10",
+      "store": "Регард",
+      "url": "https://www.regard.ru/product/421881/processor-intel-core-i5-12400f-oem",
+      "note": "Комплектация OEM."
+    },
+    "i5-12600k": {
+      "price": 23580,
+      "date": "2026-10-10",
+      "store": "Регард",
+      "url": "https://www.regard.ru/product/411820/processor-intel-core-i5-12600k-oem",
+      "note": "Комплектация OEM."
+    },
+    "i5-13400f": {
+      "price": 15740,
+      "date": "2026-10-10",
+      "store": "Регард",
+      "url": "https://www.regard.ru/product/468799/processor-intel-core-i5-13400f-oem",
+      "note": "Комплектация OEM."
+    },
+    "ddr4-16-3200": {
+      "price": 23190,
+      "date": "2026-10-10",
+      "store": "Регард",
+      "url": "https://www.regard.ru/product/395207/operativnaia-pamiat-16gb-ddr4-3200mhz-kingston-fury-beast-black-kf432c16bbk2-16-2x8gb-kit"
+    },
+    "r7-5700x": {
+      "price": 15370,
+      "date": "2026-10-10",
+      "store": "Регард",
+      "url": "https://www.regard.ru/product/418534/processor-amd-ryzen-7-5700x-oem",
+      "note": "Комплектация OEM."
+    },
+    "r7-7800x3d": {
+      "price": 28970,
+      "date": "2026-10-10",
+      "store": "Регард",
+      "url": "https://www.regard.ru/product/73872/processor-amd-ryzen-7-7800x3d-oem",
+      "note": "Комплектация OEM."
+    },
+    "i5-14600k": {
+      "price": 26740,
+      "date": "2026-10-10",
+      "store": "Регард",
+      "url": "https://www.regard.ru/product/83907/processor-intel-core-i5-14600k-oem",
+      "note": "Комплектация OEM."
+    },
+    "r7-5800x": {
+      "price": 24390,
+      "date": "2026-10-10",
+      "store": "Регард",
+      "url": "https://www.regard.ru/product/370866/processor-amd-ryzen-7-5800x-oem/description",
+      "note": "Комплектация OEM."
+    },
+    "i3-12100f": {
+      "price": 10290,
+      "date": "2026-10-10",
+      "store": "Регард",
+      "url": "https://www.regard.ru/product/422920/processor-intel-core-i3-12100f-oem/description",
+      "note": "Комплектация OEM."
+    },
+    "ddr4-32-3600": {
+      "price": 9389.73,
+      "date": "2026-10-10",
+      "store": "Onecom",
+      "url": "https://onecom.ru/catalog/?ELEMENT_ID=347328&SECTION_ID=64359",
+      "note": "При оплате наличными; безналично 9 812,27 ₽."
+    },
+    "b650": {
+      "price": 14340,
+      "date": "2026-10-10",
+      "store": "Регард",
+      "url": "https://www.regard.ru/product/82130/materinskaia-plata-msi-pro-b650-s-wifi"
+    },
+    "b760m-p-ddr4": {
+      "price": 8890,
+      "date": "2026-10-10",
+      "store": "Регард",
+      "url": "https://www.regard.ru/product/475658/materinskaia-plata-msi-pro-b760m-p-ddr4"
+    },
+    "rx7600": {
+      "price": 40990,
+      "date": "2026-10-10",
+      "store": "Регард",
+      "url": "https://www.regard.ru/product/49311/videokarta-amd-radeon-rx-7600-sapphire-pulse-8gb-11324-01-20g"
+    },
+    "rtx4070super": {
+      "price": 82167,
+      "date": "2026-10-10",
+      "store": "Onecom",
+      "url": "https://www.onecom.ru/catalog/?ELEMENT_ID=353273&SECTION_ID=64211",
+      "note": "Наличными; безналичный расчёт — 85 864,52 ₽. В наличии, без доставки."
+    },
+    "b550m-pro-vdh-wifi": {
+      "price": 13221.75,
+      "date": "2026-10-10",
+      "store": "Onecom",
+      "url": "https://www.onecom.ru/catalog/detail.php?SECTION_ID=64660&ELEMENT_ID=351405",
+      "note": "Наличными; безналичный расчёт — 13 816,73 ₽. В наличии, без доставки."
+    },
+    "b650-tomahawk-wifi": {
+      "price": 27383,
+      "date": "2026-10-10",
+      "store": "Apltech",
+      "url": "https://www.apltech.ru/tovar/438085/msi-mag-b650-tomahawk-wifi-mag-b650-tomahawk-wifi",
+      "note": "Товар в другом регионе; самовывоз в Москве через 25–30 дней бесплатно. Цена с НДС 22%."
+    },
+    "kc3000-1tb": {
+      "price": 25490,
+      "date": "2026-10-10",
+      "store": "Регард",
+      "url": "https://www.regard.ru/product/413495/nakopitel-ssd-1tb-kingston-kc3000-skc3000s-1024g"
+    },
+    "990-pro-1tb": {
+      "price": 24990,
+      "date": "2026-10-10",
+      "store": "Регард",
+      "url": "https://www.regard.ru/product/459278/nakopitel-ssd-1tb-samsung-990-pro-mz-v9p1t0bw"
+    },
+    "nh-u12s-redux": {
+      "price": 6490,
+      "date": "2026-10-10",
+      "store": "Регард",
+      "url": "https://www.regard.ru/product/417024/kuler-noctua-nh-u12s-redux"
+    },
+    "ag400": {
+      "price": 1850,
+      "date": "2026-10-10",
+      "store": "Регард",
+      "url": "https://www.regard.ru/product/418597/kuler-deepcool-ag400"
+    },
+    "sn850x-2tb": {
+      "price": 36090,
+      "date": "2026-10-10",
+      "store": "Регард",
+      "url": "https://www.regard.ru/product/455574/nakopitel-ssd-2tb-wd-black-sn850x-wds200t2x0e"
+    },
+    "nh-d15": {
+      "price": 12490,
+      "date": "2026-10-10",
+      "store": "Регард",
+      "url": "https://www.regard.ru/product/160748/kuler-noctua-nh-d15"
+    },
+    "a650bn": {
+      "price": 5370,
+      "date": "2026-10-10",
+      "store": "Регард",
+      "url": "https://www.regard.ru/product/425117/blok-pitaniia-650w-msi-mag-a650bn"
+    },
+    "a750gl": {
+      "price": 8920,
+      "date": "2026-10-10",
+      "store": "Регард",
+      "url": "https://www.regard.ru/product/723349/blok-pitaniia-750w-msi-mag-a750gl-pcie5"
+    },
+    "a1000g": {
+      "price": 15610,
+      "date": "2026-10-10",
+      "store": "Регард",
+      "url": "https://www.regard.ru/product/479628/blok-pitaniia-1000w-msi-mpg-a1000g-pcie5"
+    },
+    "pk550": {
+      "price": 4270,
+      "date": "2026-10-10",
+      "store": "R-SEVEN",
+      "url": "https://r-seven.ru/catalog/power/blok_pitaniya_deepcool_550w_pk550d_r_pk550d_fa0b_eu/"
+    },
+    "pop-air": {
+      "price": 13990,
+      "date": "2026-10-10",
+      "store": "BATYA STORE",
+      "url": "https://batyastore.ru/catalog/kompyuternaya-i-ofisnaya-tekhnika/komplektuyushchie/kompyuternye-korpusa/korpus_fractal_design_pop_air_black_tg_clear_tint_fd_c_poa1a_02/"
     }
   },
   "availability": {
@@ -106,5 +303,59 @@
       "store": "DNS",
       "url": "https://www.dns-shop.ru/product/7cbe7b3e83c12334/blok-pitania-deepcool-pk550d-r-pk550d-fa0b-eu-cernyj/"
     }
+  },
+  "dnsLinks": {
+    "980": "https://www.dns-shop.ru/product/8a6cde0a85f7d760/m2-nvme-nakopitel-samsung-980-mz-v8v1t0bw/",
+    "b650": "https://www.dns-shop.ru/product/963ee0f69765d0a4/materinskaa-plata-msi-pro-b650-s-wifi/",
+    "rtx4060": "https://www.dns-shop.ru/product/fa6fb9521e4bed20/videokarta-msi-geforce-rtx-4060-ventus-2x-black-geforce-rtx-4060-ventus-2x-black-8g/",
+    "rtx3090": "https://www.dns-shop.ru/product/db1437a6f7143332/videokarta-pci-e-zotac-geforce-rtx-3090-trinity-24576mb-384bit-gddr6x-zt-a30900d-10p-hdmi-dp/",
+    "ddr5-32": "https://www.dns-shop.ru/product/9855ff3b3957ed20/operativnaa-pamat-kingston-fury-beast-black-kf560c36bbek2-32-32-gb/",
+    "nv2": "https://www.dns-shop.ru/product/1815ac731eaa42ae/1000-gb-m2-nvme-nakopitel-kingston-nv2-snv2s1000g/",
+    "pk550": "https://www.dns-shop.ru/product/7cbe7b3e83c12334/blok-pitania-deepcool-pk550d-r-pk550d-fa0b-eu-cernyj/",
+    "r5-5600": "https://www.dns-shop.ru/product/6d7a8c58afebed20/processor-amd-ryzen-5-5600-oem/",
+    "r5-7600": "https://www.dns-shop.ru/product/93478ee7e957ed20/processor-amd-ryzen-5-7600-oem/",
+    "r9-7900x": "https://www.dns-shop.ru/product/7a2387593941ed20/processor-amd-ryzen-9-7900x-oem/",
+    "ddr4-32": "https://www.dns-shop.ru/product/9ed60ce7fae5ed20/operativnaa-pamat-kingston-fury-beast-black-kf432c16bbk232-32-gb/",
+    "ddr4-16-3200": "https://www.dns-shop.ru/product/bb6fb3a7fad5ed20/operativnaa-pamat-kingston-fury-beast-black-kf432c16bbk216-16-gb/",
+    "ddr4-32-3600": "https://www.dns-shop.ru/product/4c3d4bf7fae6ed20/operativnaa-pamat-kingston-fury-beast-black-kf436c18bbk232-32-gb/",
+    "ddr5-16-5200": "https://www.dns-shop.ru/product/ad9e70f7fb37ed20/operativnaa-pamat-kingston-fury-beast-black-kf552c40bbk2-16-16-gb/?from=gmc",
+    "ddr5-64-6000": "https://www.dns-shop.ru/product/4c3176d787eded20/operativnaa-pamat-kingston-fury-beast-black-amd-kf560c36bbek2-64-64-gb/",
+    "r5-5600x": "https://www.dns-shop.ru/product/af47cb6a0967ed20/processor-amd-ryzen-5-5600x-box/",
+    "r7-5700x": "https://www.dns-shop.ru/product/96054164afeaed20/processor-amd-ryzen-7-5700x-oem/",
+    "r7-5800x": "https://www.dns-shop.ru/product/4e48fbd4fb77ed20/processor-amd-ryzen-7-5800x-oem/",
+    "r7-5800x3d": "https://www.dns-shop.ru/product/7b0f8dd8aa4fed20/processor-amd-ryzen-7-5800x3d-oem/",
+    "r7-7800x3d": "https://www.dns-shop.ru/product/84046f37e49fed20/processor-amd-ryzen-7-7800x3d-box/?from=gmc",
+    "i3-12100f": "https://www.dns-shop.ru/product/c02704274e6fed20/processor-intel-core-i3-12100f-oem/",
+    "i5-12400f": "https://www.dns-shop.ru/product/9ccc15c74e6eed20/processor-intel-core-i5-12400f-oem/",
+    "rtx3060": "https://www.dns-shop.ru/product/55cc9b9165b71b80/videokarta-msi-geforce-rtx-3060-ventus-2x-oc-lhr-rtx-3060-ventus-2x-12g-oc/",
+    "rtx3050": "https://www.dns-shop.ru/product/b3f658c78b04ed20/videokarta-msi-geforce-rtx-3050-ventus-2x-oc-rtx-3050-ventus-2x-8g-oc/",
+    "rtx4060ti": "https://www.dns-shop.ru/product/5b2f3ca6ef0eed20/videokarta-msi-geforce-rtx-4060-ti-ventus-2x-black-oc-geforce-rtx-4060-ti-ventus-2x-black-8g-oc/",
+    "rtx4070super": "https://www.dns-shop.ru/product/6ef390abe748ed20/videokarta-msi-geforce-rtx-4070-super-ventus-3x-oc-geforce-rtx-4070-super-12g-ventus-3x-oc/",
+    "rx6600": "https://www.dns-shop.ru/product/0f5a9f8b1520ed20/videokarta-sapphire-amd-radeon-rx-6600-pulse-11310-01-20g/",
+    "rx6650xt": "https://www.dns-shop.ru/product/128563c7d57ded20/videokarta-sapphire-amd-radeon-rx-6650-xt-pulse-11319-03-20g/",
+    "rx7600": "https://www.dns-shop.ru/product/a8002d751e3aed20/videokarta-sapphire-amd-radeon-rx-7600-pulse-gaming-oc-11324-01-20g/",
+    "rx7700xt": "https://www.dns-shop.ru/product/900ee1b95795ed20/videokarta-sapphire-amd-radeon-rx-7700-xt-pulse-11335-04/",
+    "rx7800xt": "https://www.dns-shop.ru/product/db46ca9a55f1ed20/videokarta-sapphire-amd-radeon-rx-7800-xt-pulse-11330-02-20g/",
+    "b550": "https://www.dns-shop.ru/product/232aa9fbb9a11b80/materinskaa-plata-msi-b550-a-pro/",
+    "b760m-p-ddr4": "https://www.dns-shop.ru/product/f56fc70e81d0ed20/materinskaa-plata-msi-pro-b760m-p-ddr4/",
+    "b760-p-wifi": "https://www.dns-shop.ru/product/41eb95b3a8e0ed20/materinskaa-plata-msi-pro-b760-p-wifi/",
+    "b550-tomahawk": "https://www.dns-shop.ru/product/b9a4575dafa61b80/materinskaa-plata-msi-mag-b550-tomahawk/",
+    "b550m-pro-vdh-wifi": "https://www.dns-shop.ru/product/232aa9fcb9a11b80/materinskaa-plata-msi-b550m-pro-vdh-wifi/",
+    "b650-tomahawk-wifi": "https://www.dns-shop.ru/product/69e396144e03ed20/materinskaa-plata-msi-mag-b650-tomahawk-wifi/",
+    "b650m-a-wifi": "https://www.dns-shop.ru/product/69e3961a4e03ed20/materinskaa-plata-msi-pro-b650m-a-wifi/",
+    "p3-plus-1tb": "https://www.dns-shop.ru/product/37167e56e563ed20/1000-gb-m2-nvme-nakopitel-crucial-p3-plus-ct1000p3pssd8/",
+    "4000d-airflow": "https://www.dns-shop.ru/product/f42eb03bbce33332/korpus-corsair-4000d-airflow-cc-9011200-ww-cernyj/",
+    "kc3000-1tb": "https://www.dns-shop.ru/product/d843b8c700d5ed20/1024-gb-m2-nvme-nakopitel-kingston-kc3000-skc3000s1024g/",
+    "sn850x-2tb": "https://www.dns-shop.ru/product/ee3302993b3fb063/2000-gb-m2-nvme-nakopitel-wd-black-sn850x-wds200t2x0e/",
+    "990-pro-1tb": "https://www.dns-shop.ru/product/39779619c38e0fd2/1000-gb-m2-nvme-nakopitel-samsung-990-pro-mz-v9p1t0bw/",
+    "a650bn": "https://www.dns-shop.ru/product/c26031ca4baad913/blok-pitania-msi-mag-a650bn-mag-a650bn-cernyj/",
+    "a750gl": "https://www.dns-shop.ru/product/18d4de49d482ed20/blok-pitania-msi-mag-a750gl-pcie5-cernyj/",
+    "nh-d15": "https://www.dns-shop.ru/product/b084284c484aed20/kuler-dla-processora-noctua-nh-d15/",
+    "a1000g": "https://www.dns-shop.ru/product/191e391c8feaed20/blok-pitania-msi-mpg-a1000g-pcie5-306-7zp7c11-ce0-cernyj/",
+    "ag400": "https://www.dns-shop.ru/product/3f6f629ce633ed20/kuler-dla-processora-deepcool-ag400-r-ag400-bknnmn-g-1-cernyj/",
+    "ak400": "https://www.dns-shop.ru/product/ef120e526912ed20/kuler-dla-processora-deepcool-ak400-r-ak400-bknnmn-g-1-cernyj/",
+    "ak620": "https://www.dns-shop.ru/product/f65523875885ed20/kuler-dla-processora-deepcool-ak620-lga1700-r-ak620-bknnmt-g-cernyj/",
+    "a850": "https://www.dns-shop.ru/product/15ef9f9ed482ed20/blok-pitania-msi-mag-a850gl-pcie5-cernyj/",
+    "cc560": "https://www.dns-shop.ru/product/0d7e80408f5fed20/korpus-deepcool-cc560-v2-r-cc560-bkgaa4-g-2-cernyj/"
   }
 }

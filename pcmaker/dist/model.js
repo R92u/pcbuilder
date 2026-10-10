@@ -1,6 +1,7 @@
 import * as THREE from 'three';
 import {hardwareFinish} from './surfaces.js';
 import {ports} from './wiring.js';
+import {makeDetailedGPU} from './gpu-model.js';
 
 const black=0x131619,steel=0x353b40,silver=0x899296,pcb=0x151b19;
 const material=(color,metalness=.3,roughness=.5)=>hardwareFinish(new THREE.MeshStandardMaterial({color,metalness,roughness}));
@@ -234,25 +235,7 @@ export const modelMethods={
    this.label(g,p,.74,.16,-.505,3.47,z,[0,Math.PI/2,Math.PI/2]);this.text(g,p.memory+' / '+(p.capacity/p.modules)+' GB',.39,.036,-.506,2.98,z,[0,Math.PI/2,Math.PI/2],'#89928f');
   }batchSolids(g);return g;
  },
- makeGPU(p){
-  const g=new THREE.Group(),len=p.length/100,center=-1.86+len/2;
-  this.box(g,1.48,.035,len,.015,2.20,center,0x151e1a);this.box(g,1.49,.035,len,.025,2.25,center,0x2f363b);
-  for(let i=0;i<65;i++)this.box(g,1.33,.25,.012,.03,2.06,-1.78+i*(len-.14)/65,0x7a8488);
-  for(const x of [-.52,-.20,.12,.44])this.rod(g,[x,2.16,-1.65],[x,2.16,len-1.95],.026,0xaca28c);
-  this.box(g,.09,.30,len,.785,2.04,center,0x262e32);if(p.brand==='AMD')for(const z of [-1.66,center+len/2-.15])this.box(g,.008,.027,.20,.833,1.95,z,0x843d39); this.box(g,.08,.30,len,-.74,2.04,center,0x1d2427);
-  this.box(g,1.52,.068,len,.025,1.868,center,0x141b1f);
-  for(let i=0;i<p.fans;i++)this.fan(g,Math.min(1.0,len/p.fans-.08),.03,1.817,-1.86+(i+.5)*len/p.fans,[Math.PI/2,0,0],'gpu',false);
-  for(const x of [-.58,.58])for(const z of [-1.70,len-2.02])this.screw(g,x,2.28,z,'y',.028);
-  for(let i=0;i<8;i++){const strip=this.box(g,.54,.006,.02,.08,2.274,-1.45+i*.14,0x667074);strip.rotation.y=.5;}
-  this.text(g,p.short.toUpperCase(),Math.min(len-.3,1.64),.098,.831,2.075,center,[0,Math.PI/2,0],'#929e9d');this.label(g,p,.73,.33,.36,2.273,center,[-Math.PI/2,0,Math.PI/2]);this.text(g,p.brand==='NVIDIA'?'GEFORCE RTX':'RADEON',1.16,.10,.15,2.275,center,[-Math.PI/2,0,Math.PI/2],'#8c989c');
-  this.text(g,p.manufacturer||(p.id==='rtx3090'?'ZOTAC GAMING':'MSI'),1.10,.075,.837,1.928,center,[0,Math.PI/2,0],'#a0a9ac');
-  // Rear bracket with three DisplayPort and one HDMI connector.
-  this.box(g,1.60,.46,.035,.07,2.0,-2.12,0x8a9292);
-  const gpuPorts=p.ports?.flatMap(port=>{const count=parseInt(port)||1;return Array.from({length:count},()=>/HDMI/i.test(port)?'HDMI':'DP');})||['DP','DP','DP','HDMI'];for(let i=0;i<gpuPorts.length;i++)this.rearPort(g,'video',-.49+i*.34,2.045,.22,.083,0,gpuPorts[i]);
-  for(let i=0;i<10;i++)this.box(g,.07,.055,.008,-.52+i*.12,1.878,-2.147,0x111718);
-  if(p.connectorType==='16pin'){this.headerSocket(g,'gpu16',2,6,.029);for(let i=0;i<4;i++)this.box(g,.012,.008,.008,.676,2.295+i*.019,-.062,0xa19a78);}else for(let i=0;i<p.connectors;i++)this.headerSocket(g,'gpu'+(i+1),2,4,.041);
-  batchSolids(g);return g;
- },
+ makeGPU(p){const g=makeDetailedGPU.call(this,p);batchSolids(g);return g;},
  makeCooler(p){
   const g=new THREE.Group();this.box(g,.16,.43,.45,-.60,3.44,-.55,0xb1b7b7,.22);
   for(let tower=0;tower<p.towers;tower++){
