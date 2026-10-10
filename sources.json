@@ -632,6 +632,600 @@
       "sourceCheckedDate": "2026-10-10",
       "priceNote": "Цена показана в карточке DNS для Москвы; проверена через браузер.",
       "appId": "cc560"
+    },
+    {
+      "id": "r5-5600x",
+      "appId": "r5-5600x",
+      "category": "cpu",
+      "name": "AMD Ryzen 5 5600X",
+      "sources": [
+        "https://www.amd.com/en/products/processors/desktops/ryzen/5000-series/amd-ryzen-5-5600x.html"
+      ],
+      "notes": [
+        "tdp — Default TDP AMD, тепловая проектная характеристика; это не фактическое электрическое потребление.",
+        "peakPower — условный предел учебной симуляции round(TDP × 1,35). Значение PPT для этого SKU в открытой карточке AMD не указано; peakPower не выдавать за подтверждённый PPT. powerAssumed=true.",
+        "cacheMB — только L3; L2 не включён.",
+        "Встроенной графики нет; AMD указывает необходимость дискретной видеокарты.",
+        "boostGHz — заявленная максимальная частота Boost, а не гарантированная частота всех ядер.",
+        "Совместимость зависит также от списка поддерживаемых CPU и версии BIOS конкретной материнской платы."
+      ]
+    },
+    {
+      "id": "r7-5700x",
+      "appId": "r7-5700x",
+      "category": "cpu",
+      "name": "AMD Ryzen 7 5700X",
+      "sources": [
+        "https://www.amd.com/en/support/downloads/drivers.html/processors/ryzen/ryzen-5000-series/amd-ryzen-7-5700x.html"
+      ],
+      "notes": [
+        "tdp — Default TDP AMD, тепловая проектная характеристика; это не фактическое электрическое потребление.",
+        "peakPower — условный предел учебной симуляции round(TDP × 1,35). Значение PPT для этого SKU в открытой карточке AMD не указано; peakPower не выдавать за подтверждённый PPT. powerAssumed=true.",
+        "cacheMB — только L3; L2 не включён.",
+        "Встроенной графики нет; AMD указывает необходимость дискретной видеокарты.",
+        "boostGHz — заявленная максимальная частота Boost, а не гарантированная частота всех ядер.",
+        "Совместимость зависит также от списка поддерживаемых CPU и версии BIOS конкретной материнской платы."
+      ]
+    },
+    {
+      "id": "r7-5800x",
+      "appId": "r7-5800x",
+      "category": "cpu",
+      "name": "AMD Ryzen 7 5800X",
+      "sources": [
+        "https://www.amd.com/en/products/processors/desktops/ryzen/5000-series/amd-ryzen-7-5800x.html"
+      ],
+      "notes": [
+        "tdp — Default TDP AMD, тепловая проектная характеристика; это не фактическое электрическое потребление.",
+        "peakPower — условный предел учебной симуляции round(TDP × 1,35). Значение PPT для этого SKU в открытой карточке AMD не указано; peakPower не выдавать за подтверждённый PPT. powerAssumed=true.",
+        "cacheMB — только L3; L2 не включён.",
+        "Встроенной графики нет; AMD указывает необходимость дискретной видеокарты.",
+        "boostGHz — заявленная максимальная частота Boost, а не гарантированная частота всех ядер.",
+        "Совместимость зависит также от списка поддерживаемых CPU и версии BIOS конкретной материнской платы."
+      ]
+    },
+    {
+      "id": "r7-5800x3d",
+      "appId": "r7-5800x3d",
+      "category": "cpu",
+      "name": "AMD Ryzen 7 5800X3D",
+      "sources": [
+        "https://www.amd.com/en/products/processors/desktops/ryzen/5000-series/amd-ryzen-7-5800x3d.html"
+      ],
+      "notes": [
+        "tdp — Default TDP AMD, тепловая проектная характеристика; это не фактическое электрическое потребление.",
+        "peakPower — условный предел учебной симуляции round(TDP × 1,35). Значение PPT для этого SKU в открытой карточке AMD не указано; peakPower не выдавать за подтверждённый PPT. powerAssumed=true.",
+        "cacheMB — только L3; L2 не включён.",
+        "Встроенной графики нет; AMD указывает необходимость дискретной видеокарты.",
+        "boostGHz — заявленная максимальная частота Boost, а не гарантированная частота всех ядер.",
+        "Совместимость зависит также от списка поддерживаемых CPU и версии BIOS конкретной материнской платы."
+      ]
+    },
+    {
+      "id": "r7-7700x",
+      "appId": "r7-7700x",
+      "category": "cpu",
+      "name": "AMD Ryzen 7 7700X",
+      "sources": [
+        "https://www.amd.com/en/products/processors/desktops/ryzen/7000-series/amd-ryzen-7-7700x.html"
+      ],
+      "notes": [
+        "tdp — Default TDP AMD, тепловая проектная характеристика; это не фактическое электрическое потребление.",
+        "peakPower — условный предел учебной симуляции round(TDP × 1,35). Значение PPT для этого SKU в открытой карточке AMD не указано; peakPower не выдавать за подтверждённый PPT. powerAssumed=true.",
+        "cacheMB — только L3; L2 не включён.",
+        "Встроенная AMD Radeon Graphics: 2 графических ядра, 2200 МГц.",
+        "boostGHz — заявленная максимальная частота Boost, а не гарантированная частота всех ядер.",
+        "Совместимость зависит также от списка поддерживаемых CPU и версии BIOS конкретной материнской платы."
+      ]
+    },
+    {
+      "id": "r7-7800x3d",
+      "appId": "r7-7800x3d",
+      "category": "cpu",
+      "name": "AMD Ryzen 7 7800X3D",
+      "sources": [
+        "https://www.amd.com/en/products/processors/desktops/ryzen/7000-series/amd-ryzen-7-7800X3d.html"
+      ],
+      "notes": [
+        "tdp — Default TDP AMD, тепловая проектная характеристика; это не фактическое электрическое потребление.",
+        "peakPower — условный предел учебной симуляции round(TDP × 1,35). Значение PPT для этого SKU в открытой карточке AMD не указано; peakPower не выдавать за подтверждённый PPT. powerAssumed=true.",
+        "cacheMB — только L3; L2 не включён.",
+        "Встроенная AMD Radeon Graphics: 2 графических ядра, 2200 МГц.",
+        "boostGHz — заявленная максимальная частота Boost, а не гарантированная частота всех ядер.",
+        "Совместимость зависит также от списка поддерживаемых CPU и версии BIOS конкретной материнской платы."
+      ]
+    },
+    {
+      "id": "i3-12100f",
+      "appId": "i3-12100f",
+      "category": "cpu",
+      "name": "Intel Core i3-12100F",
+      "sources": [
+        "https://www.intel.com/content/www/us/en/products/sku/132223/intel-core-i312100f-processor-12m-cache-up-to-4-30-ghz/specifications.html"
+      ],
+      "notes": [
+        "tdp — Processor Base Power (PBP), не классический TDP; peakPower — Maximum Turbo Power (MTP) из Intel ARK. Фактическая мощность зависит от нагрузки и настроек питания платы.",
+        "cacheMB — Intel Smart Cache (L3); Total L2 Cache не включён.",
+        "Все ядра — P-ядра; E-ядер нет.",
+        "Контроллер поддерживает DDR4-3200 или DDR5-4800. Тип установленной памяти выбирается по материнской плате; обе генерации нельзя считать взаимозаменяемыми или одновременно поддерживаемыми её слотами.",
+        "Модель с суффиксом F: встроенная графика отсутствует, требуется дискретная видеокарта.",
+        "Сокет в Intel ARK называется FCLGA1700; в каталоге нормализован до LGA1700.",
+        "Максимальная Turbo-частота не означает постоянную частоту всех ядер. Перед подбором платы проверить её список CPU и требуемую версию BIOS."
+      ]
+    },
+    {
+      "id": "i5-12400f",
+      "appId": "i5-12400f",
+      "category": "cpu",
+      "name": "Intel Core i5-12400F",
+      "sources": [
+        "https://www.intel.com/content/www/us/en/products/sku/134587/intel-core-i512400f-processor-18m-cache-up-to-4-40-ghz/specifications.html"
+      ],
+      "notes": [
+        "tdp — Processor Base Power (PBP), не классический TDP; peakPower — Maximum Turbo Power (MTP) из Intel ARK. Фактическая мощность зависит от нагрузки и настроек питания платы.",
+        "cacheMB — Intel Smart Cache (L3); Total L2 Cache не включён.",
+        "Все ядра — P-ядра; E-ядер нет.",
+        "Контроллер поддерживает DDR4-3200 или DDR5-4800. Тип установленной памяти выбирается по материнской плате; обе генерации нельзя считать взаимозаменяемыми или одновременно поддерживаемыми её слотами.",
+        "Модель с суффиксом F: встроенная графика отсутствует, требуется дискретная видеокарта.",
+        "Сокет в Intel ARK называется FCLGA1700; в каталоге нормализован до LGA1700.",
+        "Максимальная Turbo-частота не означает постоянную частоту всех ядер. Перед подбором платы проверить её список CPU и требуемую версию BIOS."
+      ]
+    },
+    {
+      "id": "i5-12600k",
+      "appId": "i5-12600k",
+      "category": "cpu",
+      "name": "Intel Core i5-12600K",
+      "sources": [
+        "https://www.intel.com/content/www/us/en/products/sku/134589/intel-core-i512600k-processor-20m-cache-up-to-4-90-ghz/specifications.html"
+      ],
+      "notes": [
+        "tdp — Processor Base Power (PBP), не классический TDP; peakPower — Maximum Turbo Power (MTP) из Intel ARK. Фактическая мощность зависит от нагрузки и настроек питания платы.",
+        "cacheMB — Intel Smart Cache (L3); Total L2 Cache не включён.",
+        "baseGHz и boostGHz относятся к P-ядрам. E-ядра: база 2.8 ГГц, максимум 3.6 ГГц.",
+        "Контроллер поддерживает DDR4-3200 или DDR5-4800. Тип установленной памяти выбирается по материнской плате; обе генерации нельзя считать взаимозаменяемыми или одновременно поддерживаемыми её слотами.",
+        "Встроенная графика — Intel UHD Graphics 770.",
+        "Сокет в Intel ARK называется FCLGA1700; в каталоге нормализован до LGA1700.",
+        "Максимальная Turbo-частота не означает постоянную частоту всех ядер. Перед подбором платы проверить её список CPU и требуемую версию BIOS."
+      ]
+    },
+    {
+      "id": "i5-13400f",
+      "appId": "i5-13400f",
+      "category": "cpu",
+      "name": "Intel Core i5-13400F",
+      "sources": [
+        "https://www.intel.com/content/www/us/en/products/sku/230501/intel-core-i513400f-processor-20m-cache-up-to-4-60-ghz/specifications.html"
+      ],
+      "notes": [
+        "tdp — Processor Base Power (PBP), не классический TDP; peakPower — Maximum Turbo Power (MTP) из Intel ARK. Фактическая мощность зависит от нагрузки и настроек питания платы.",
+        "cacheMB — Intel Smart Cache (L3); Total L2 Cache не включён.",
+        "baseGHz и boostGHz относятся к P-ядрам. E-ядра: база 1.8 ГГц, максимум 3.3 ГГц.",
+        "Контроллер поддерживает DDR4-3200 или DDR5-4800. Тип установленной памяти выбирается по материнской плате; обе генерации нельзя считать взаимозаменяемыми или одновременно поддерживаемыми её слотами.",
+        "Модель с суффиксом F: встроенная графика отсутствует, требуется дискретная видеокарта.",
+        "Сокет в Intel ARK называется FCLGA1700; в каталоге нормализован до LGA1700.",
+        "Максимальная Turbo-частота не означает постоянную частоту всех ядер. Перед подбором платы проверить её список CPU и требуемую версию BIOS."
+      ]
+    },
+    {
+      "id": "i5-13600k",
+      "appId": "i5-13600k",
+      "category": "cpu",
+      "name": "Intel Core i5-13600K",
+      "sources": [
+        "https://www.intel.com/content/www/us/en/products/sku/230493/intel-core-i513600k-processor-24m-cache-up-to-5-10-ghz/specifications.html"
+      ],
+      "notes": [
+        "tdp — Processor Base Power (PBP), не классический TDP; peakPower — Maximum Turbo Power (MTP) из Intel ARK. Фактическая мощность зависит от нагрузки и настроек питания платы.",
+        "cacheMB — Intel Smart Cache (L3); Total L2 Cache не включён.",
+        "baseGHz и boostGHz относятся к P-ядрам. E-ядра: база 2.6 ГГц, максимум 3.9 ГГц.",
+        "Контроллер поддерживает DDR4-3200 или DDR5-5600. Тип установленной памяти выбирается по материнской плате; обе генерации нельзя считать взаимозаменяемыми или одновременно поддерживаемыми её слотами.",
+        "Встроенная графика — Intel UHD Graphics 770.",
+        "Сокет в Intel ARK называется FCLGA1700; в каталоге нормализован до LGA1700.",
+        "Максимальная Turbo-частота не означает постоянную частоту всех ядер. Перед подбором платы проверить её список CPU и требуемую версию BIOS."
+      ]
+    },
+    {
+      "id": "i5-14600k",
+      "appId": "i5-14600k",
+      "category": "cpu",
+      "name": "Intel Core i5-14600K",
+      "sources": [
+        "https://www.intel.com/content/www/us/en/products/sku/236799/intel-core-i5-processor-14600k-24m-cache-up-to-5-30-ghz/specifications.html"
+      ],
+      "notes": [
+        "tdp — Processor Base Power (PBP), не классический TDP; peakPower — Maximum Turbo Power (MTP) из Intel ARK. Фактическая мощность зависит от нагрузки и настроек питания платы.",
+        "cacheMB — Intel Smart Cache (L3); Total L2 Cache не включён.",
+        "baseGHz и boostGHz относятся к P-ядрам. E-ядра: база 2.6 ГГц, максимум 4 ГГц.",
+        "Контроллер поддерживает DDR4-3200 или DDR5-5600. Тип установленной памяти выбирается по материнской плате; обе генерации нельзя считать взаимозаменяемыми или одновременно поддерживаемыми её слотами.",
+        "Встроенная графика — Intel UHD Graphics 770.",
+        "Сокет в Intel ARK называется FCLGA1700; в каталоге нормализован до LGA1700.",
+        "Максимальная Turbo-частота не означает постоянную частоту всех ядер. Перед подбором платы проверить её список CPU и требуемую версию BIOS."
+      ]
+    },
+    {
+      "id": "rtx3050",
+      "appId": "rtx3050",
+      "category": "gpu",
+      "name": "MSI GeForce RTX 3050 VENTUS 2X 8G OC",
+      "sources": [
+        "https://www.msi.com/Graphics-Card/GeForce-RTX-3050-VENTUS-2X-8G-OC/Specification",
+        "https://www.msi.com/Graphics-Card/GeForce-RTX-3050-VENTUS-2X-8G-OC/Overview",
+        "https://www.nvidia.com/en-sg/geforce/graphics-cards/30-series/rtx-3050/"
+      ],
+      "notes": [
+        "Выбрано исходное исполнение OC: 130 Вт и 8-pin; не смешивать с OCV1 115 Вт / 6-pin.",
+        "Размеры производителя: 235 × 124 × 42 мм.",
+        "Для учебной модели tmax взят из официального максимума NVIDIA для референсного RTX 3050 (93 °C); MSI не публикует отдельный предел этой платы. Это не гарантированный порог её BIOS."
+      ]
+    },
+    {
+      "id": "rtx3060ti",
+      "appId": "rtx3060ti",
+      "category": "gpu",
+      "name": "MSI GeForce RTX 3060 Ti VENTUS 2X 8G OCV1 LHR",
+      "sources": [
+        "https://www.msi.com/Graphics-Card/GeForce-RTX-3060-Ti-VENTUS-2X-8G-OCV1-LHR/Specification",
+        "https://storage-asset.msi.com/datasheet/vga/us/GeForce-RTX-3060-Ti-VENTUS-2X-8G-OCV1-LHR.pdf",
+        "https://www.nvidia.com/en-us/geforce/graphics-cards/30-series/rtx-3060-3060ti/"
+      ],
+      "notes": [
+        "Точное исполнение OCV1 LHR с GDDR6; характеристики иных VENTUS 2X и GDDR6X не переносить.",
+        "Размеры производителя: 235 × 124 × 42 мм.",
+        "Для учебной модели tmax взят из официального максимума NVIDIA для референсного RTX 3060 Ti (93 °C); MSI не публикует отдельный предел этой платы. Это не гарантированный порог её BIOS."
+      ]
+    },
+    {
+      "id": "rtx4060ti",
+      "appId": "rtx4060ti",
+      "category": "gpu",
+      "name": "MSI GeForce RTX 4060 Ti VENTUS 2X BLACK 8G OC",
+      "sources": [
+        "https://www.msi.com/Graphics-Card/GeForce-RTX-4060-Ti-VENTUS-2X-BLACK-8G-OC/Specification",
+        "https://www.msi.com/Graphics-Card/GeForce-RTX-4060-Ti-VENTUS-2X-BLACK-8G-OC/Overview",
+        "https://www.nvidia.com/en-us/geforce/graphics-cards/40-series/rtx-4060-4060ti/"
+      ],
+      "notes": [
+        "Указан штатный Boost 2565 МГц; режим Extreme Performance 2580 МГц требует MSI Center.",
+        "Размеры производителя: 199 × 120 × 42 мм.",
+        "Для учебной модели tmax взят из официального максимума NVIDIA для референсного RTX 4060 Ti (90 °C); MSI не публикует отдельный предел этой платы. Это не гарантированный порог её BIOS."
+      ]
+    },
+    {
+      "id": "rtx4070",
+      "appId": "rtx4070",
+      "category": "gpu",
+      "name": "MSI GeForce RTX 4070 VENTUS 3X 12G OC",
+      "sources": [
+        "https://www.msi.com/Graphics-Card/GeForce-RTX-4070-VENTUS-3X-12G-OC/Specification",
+        "https://www.msi.com/Graphics-Card/GeForce-RTX-4070-VENTUS-3X-12G-OC/Overview",
+        "https://www.nvidia.com/en-gb/geforce/graphics-cards/40-series/rtx-4070-family/"
+      ],
+      "notes": [
+        "Исходное исполнение VENTUS 3X 12G OC с GDDR6X и одним 8-pin; не версия E/E1.",
+        "Указан штатный Boost 2505 МГц; 2520 МГц — режим MSI Center.",
+        "Размеры производителя: 308 × 120 × 43 мм.",
+        "Для учебной модели tmax взят из официального максимума NVIDIA для референсного RTX 4070 (90 °C); MSI не публикует отдельный предел этой платы. Это не гарантированный порог её BIOS."
+      ]
+    },
+    {
+      "id": "rtx4070super",
+      "appId": "rtx4070super",
+      "category": "gpu",
+      "name": "MSI GeForce RTX 4070 SUPER 12G VENTUS 3X OC",
+      "sources": [
+        "https://www.msi.com/Graphics-Card/GeForce-RTX-4070-SUPER-12G-VENTUS-3X-OC/Specification",
+        "https://www.msi.com/Graphics-Card/GeForce-RTX-4070-SUPER-12G-VENTUS-3X-OC/Overview",
+        "https://www.nvidia.com/en-gb/geforce/graphics-cards/40-series/rtx-4070-family/"
+      ],
+      "notes": [
+        "На плате один 16-pin, а connectors=2 обозначает два PCIe 8-pin кабеля при подключении через соответствующий адаптер по схеме NVIDIA; это не два разъёма на карте. Альтернатива — подходящий штатный PCIe Gen 5 кабель БП ≥300 Вт.",
+        "Комплектность адаптера именно MSI не подтверждена открытой таблицей спецификаций; для покупки сверять комплект и руководство.",
+        "Указан штатный Boost 2505 МГц; 2520 МГц — режим MSI Center.",
+        "Размеры производителя: 308 × 120 × 43 мм.",
+        "Для учебной модели tmax взят из официального максимума NVIDIA для референсного RTX 4070 SUPER (90 °C); MSI не публикует отдельный предел этой платы. Это не гарантированный порог её BIOS."
+      ]
+    },
+    {
+      "id": "rx6600",
+      "appId": "rx6600",
+      "category": "gpu",
+      "name": "SAPPHIRE PULSE AMD Radeon RX 6600 8GB",
+      "sources": [
+        "https://www.sapphiretech.com/en/consumer/pulse-radeon-rx-6600-8g-gddr6",
+        "https://www.sapphiretech.com/en/news/sapphire-pulse-rx-6600"
+      ],
+      "notes": [
+        "Обычный SKU 11310-01-20G с четырьмя выходами; не Lite Edition 11310-04-20G с двумя выходами.",
+        "Размеры производителя: 193 × 120,05 × 40,05 мм; 2 слота.",
+        "power=140 Вт — Board Power именно SAPPHIRE PULSE.",
+        "90 °C — условный порог только учебной модели температуры GPU: максимальная температура этой платы на странице SAPPHIRE не указана. Не трактовать как официальный предел или температуру hotspot."
+      ]
+    },
+    {
+      "id": "rx6650xt",
+      "appId": "rx6650xt",
+      "category": "gpu",
+      "name": "SAPPHIRE PULSE AMD Radeon RX 6650 XT 8GB",
+      "sources": [
+        "https://www.sapphiretech.com/en/consumer/pulse-radeon-rx-6650-xt-8g-gddr6"
+      ],
+      "notes": [
+        "Выбрано исполнение SKU 11319-03-20G.",
+        "Размеры производителя: 240 × 119,85 × 44,75 мм; 2 слота.",
+        "power=176 Вт — Total Board Power именно SAPPHIRE PULSE.",
+        "90 °C — условный порог только учебной модели температуры GPU: максимальная температура этой платы на странице SAPPHIRE не указана. Не трактовать как официальный предел или температуру hotspot."
+      ]
+    },
+    {
+      "id": "rx7600",
+      "appId": "rx7600",
+      "category": "gpu",
+      "name": "SAPPHIRE PULSE AMD Radeon RX 7600 8GB",
+      "sources": [
+        "https://www.sapphiretech.com/en/consumer/pulse-radeon-rx-7600-8g-gddr6",
+        "https://www.sapphiretech.com/en/news/pulse-rx-7600"
+      ],
+      "notes": [
+        "Размеры производителя: 240 × 107,1 × 44,07 мм; 2 слота.",
+        "power=185 Вт — Total Board Power именно SAPPHIRE PULSE.",
+        "90 °C — условный порог только учебной модели температуры GPU: максимальная температура этой платы на странице SAPPHIRE не указана. Не трактовать как официальный предел или температуру hotspot."
+      ]
+    },
+    {
+      "id": "rx7700xt",
+      "appId": "rx7700xt",
+      "category": "gpu",
+      "name": "SAPPHIRE PULSE AMD Radeon RX 7700 XT 12GB",
+      "sources": [
+        "https://www.sapphiretech.com/en/consumer/pulse-radeon-rx-7700-xt-12g-gddr6"
+      ],
+      "notes": [
+        "Размеры производителя: 280 × 128,75 × 52,57 мм; 2,5 слота.",
+        "power=230 Вт — Total Board Power именно SAPPHIRE PULSE.",
+        "90 °C — условный порог только учебной модели температуры GPU: максимальная температура этой платы на странице SAPPHIRE не указана. Не трактовать как официальный предел или температуру hotspot."
+      ]
+    },
+    {
+      "id": "rx7800xt",
+      "appId": "rx7800xt",
+      "category": "gpu",
+      "name": "SAPPHIRE PULSE AMD Radeon RX 7800 XT 16GB",
+      "sources": [
+        "https://www.sapphiretech.com/en/consumer/pulse-radeon-rx-7800-xt-16g-gddr6"
+      ],
+      "notes": [
+        "Размеры производителя: 280 × 128,75 × 52,57 мм; 2,5 слота.",
+        "power=266 Вт — Total Board Power именно SAPPHIRE PULSE.",
+        "90 °C — условный порог только учебной модели температуры GPU: максимальная температура этой платы на странице SAPPHIRE не указана. Не трактовать как официальный предел или температуру hotspot."
+      ]
+    },
+    {
+      "id": "b760m-p-ddr4",
+      "appId": "b760m-p-ddr4",
+      "category": "motherboard",
+      "name": "MSI PRO B760M-P DDR4",
+      "sources": [
+        "https://www.msi.com/Motherboard/PRO-B760M-P-DDR4/Specification"
+      ],
+      "notes": "Порт USB-C сзади есть, внутреннего разъёма USB-C для передней панели нет. Видеовыходы платы работают только с процессором со встроенной графикой."
+    },
+    {
+      "id": "b760-p-wifi",
+      "appId": "b760-p-wifi",
+      "category": "motherboard",
+      "name": "MSI PRO B760-P WIFI",
+      "sources": [
+        "https://www.msi.com/Motherboard/PRO-B760-P-WIFI/Specification"
+      ],
+      "notes": "Видеовыходы платы работают только с процессором со встроенной графикой. Указано число физических разъёмов CPU_PWR; необходимость второго зависит от руководства и нагрузки."
+    },
+    {
+      "id": "b550-tomahawk",
+      "appId": "b550-tomahawk",
+      "category": "motherboard",
+      "name": "MSI MAG B550 TOMAHAWK",
+      "sources": [
+        "https://www.msi.com/Motherboard/MAG-B550-TOMAHAWK/Specification"
+      ],
+      "notes": "Видеовыходы работают с процессором со встроенной графикой. Основной M.2 поддерживает PCIe 4.0/3.0 в зависимости от CPU, второй — PCIe 3.0."
+    },
+    {
+      "id": "b550m-pro-vdh-wifi",
+      "appId": "b550m-pro-vdh-wifi",
+      "category": "motherboard",
+      "name": "MSI B550M PRO-VDH WIFI",
+      "sources": [
+        "https://www.msi.com/Motherboard/B550M-PRO-VDH-WIFI/Specification"
+      ],
+      "notes": "Видеовыходы работают с процессором со встроенной графикой. Есть внутренний USB-C 5 Гбит/с, но USB-C на задней панели нет."
+    },
+    {
+      "id": "b650-tomahawk-wifi",
+      "appId": "b650-tomahawk-wifi",
+      "category": "motherboard",
+      "name": "MSI MAG B650 TOMAHAWK WIFI",
+      "sources": [
+        "https://www.msi.com/Motherboard/MAG-B650-TOMAHAWK-WIFI/Specification"
+      ],
+      "notes": "Доступность линий PCIe и M.2 зависит от процессора. Указано число физических разъёмов CPU_PWR; это не означает, что второй обязателен при любой нагрузке."
+    },
+    {
+      "id": "b650m-a-wifi",
+      "appId": "b650m-a-wifi",
+      "category": "motherboard",
+      "name": "MSI PRO B650M-A WIFI",
+      "sources": [
+        "https://www.msi.com/Motherboard/PRO-B650M-A-WIFI/Specification"
+      ],
+      "notes": "Внутренний USB-C 10 Гбит/с присутствует; сзади USB-C нет. Доступность M.2 зависит от модели CPU. Число CPU_PWR отражает физические разъёмы."
+    },
+    {
+      "id": "ddr4-16-3200",
+      "appId": "ddr4-16-3200",
+      "category": "ram",
+      "name": "Kingston FURY Beast 16 ГБ DDR4-3200",
+      "sources": [
+        "https://www.kingston.com/dataSheets/KF432C16BBK2_16.pdf"
+      ],
+      "notes": "3200 МТ/с — профиль XMP; штатный JEDEC в даташите — 2400 МТ/с. Для заявленной скорости нужны поддержка платы/CPU и включение профиля."
+    },
+    {
+      "id": "ddr4-32-3600",
+      "appId": "ddr4-32-3600",
+      "category": "ram",
+      "name": "Kingston FURY Beast 32 ГБ DDR4-3600",
+      "sources": [
+        "https://www.kingston.com/datasheets/KF436C18BBK2_32.pdf"
+      ],
+      "notes": "3600 МТ/с — профиль XMP; штатный JEDEC в даташите — 2400 МТ/с. Разгон памяти зависит от CPU, BIOS и конфигурации DIMM."
+    },
+    {
+      "id": "ddr5-16-5200",
+      "appId": "ddr5-16-5200",
+      "category": "ram",
+      "name": "Kingston FURY Beast 16 ГБ DDR5-5200",
+      "sources": [
+        "https://www.kingston.com/datasheets/KF552C40BBK2-16.pdf"
+      ],
+      "notes": "5200 МТ/с — профиль XMP; штатный JEDEC — 4800 МТ/с. Фактическая скорость зависит от поддержки профиля платой и процессором."
+    },
+    {
+      "id": "ddr5-64-6000",
+      "appId": "ddr5-64-6000",
+      "category": "ram",
+      "name": "Kingston FURY Beast 64 ГБ DDR5-6000",
+      "sources": [
+        "https://www.kingston.com/datasheets/KF560C36BBEK2-64.pdf"
+      ],
+      "notes": "6000 МТ/с — профиль EXPO/XMP; штатный JEDEC — 4800 МТ/с. Заявленная скорость не гарантирована для любой платы и процессора."
+    },
+    {
+      "id": "990-pro-1tb",
+      "appId": "990-pro-1tb",
+      "category": "storage",
+      "name": "Samsung 990 PRO 1 ТБ",
+      "sources": [
+        "https://www.samsung.com/uk/business/memory-storage/nvme-ssd/990-pro-1tb-nvme-pcie-gen-4-mz-v9p1t0bw/",
+        "https://www.samsung.com/be_fr/memory-storage/nvme-ssd/990-pro-1tb-nvme-pcie-gen-4-mz-v9p1t0bw/"
+      ],
+      "notes": "Мощность 7,8 Вт — опубликованный максимум в burst-режиме, не постоянное потребление. Скорости — максимальные последовательные значения производителя."
+    },
+    {
+      "id": "kc3000-1tb",
+      "appId": "kc3000-1tb",
+      "category": "storage",
+      "name": "Kingston KC3000 1024 ГБ",
+      "sources": [
+        "https://www.kingston.com/unitedkingdom/en/ssd/kc3000-nvme-m2-solid-state-drive?capacity=1024gb",
+        "https://www.kingston.com/datasheets/KC3000_us.pdf?_=v1"
+      ],
+      "notes": "6,3 Вт — максимальная мощность при записи из даташита; среднее потребление там указано 0,33 Вт. Скорости — до 7000/6000 МБ/с."
+    },
+    {
+      "id": "p3-plus-1tb",
+      "appId": "p3-plus-1tb",
+      "category": "storage",
+      "name": "Crucial P3 Plus 1 ТБ",
+      "sources": [
+        "https://eu.crucial.com/ssd/p3-plus/ct1000p3pssd8/ct21662099",
+        "https://it.crucial.com/content/dam/crucial/ssd-products/p3-plus/flyers/b2c/crucial-p3plus-productflyer-consumer_itIT.pdf"
+      ],
+      "notes": "5 Вт — допущение учебной модели энергопотребления, не спецификация производителя. Скорости до 5000/3600 МБ/с и 220 TBW относятся к версии 1 ТБ."
+    },
+    {
+      "id": "sn850x-2tb",
+      "appId": "sn850x-2tb",
+      "category": "storage",
+      "name": "WD_BLACK SN850X 2 ТБ",
+      "sources": [
+        "https://www.sandisk.com/products/ssd/internal-ssd/wd-black-sn850x-nvme-ssd",
+        "https://documents.westerndigital.com/content/dam/doc-library/en_us/assets/public/western-digital/product/internal-drives/wd-black-ssd/data-sheet-wd-black-sn850x-nvme-ssd.pdf"
+      ],
+      "notes": "Версия без радиатора. 7 Вт — допущение учебной модели, не паспортная мощность. Скорости производителя до 7300/6600 МБ/с."
+    },
+    {
+      "id": "ag400",
+      "appId": "ag400",
+      "category": "cooler",
+      "name": "DeepCool AG400",
+      "sources": [
+        "https://uk.deepcool.com/products/Cooling/cpuaircoolers/GAMMAXX-AG400-Single-Tower-CPU-Cooler/2022/15908.shtml"
+      ],
+      "notes": "Коэффициент efficiency 0,95 — допущение учебной тепловой модели, не измерение. Производитель заявляет полную совместимость с RAM; число 99 в ramClearance — технический маркер отсутствия перекрытия, не измеренный зазор."
+    },
+    {
+      "id": "nh-u12s-redux",
+      "appId": "nh-u12s-redux",
+      "category": "cooler",
+      "name": "Noctua NH-U12S redux",
+      "sources": [
+        "https://noctua.at/en/nh-u12s-redux?tab=comp",
+        "https://cdn.noctua.at/media/noctua_nh_u12s_redux_infosheet_en_web.pdf"
+      ],
+      "notes": "efficiency 1,1 — допущение учебной модели. 99 — технический маркер отсутствия перекрытия RAM. Для старых комплектов до Q4 2021 может понадобиться отдельное крепление LGA1700."
+    },
+    {
+      "id": "nh-d15",
+      "appId": "nh-d15",
+      "category": "cooler",
+      "name": "Noctua NH-D15",
+      "sources": [
+        "https://cdn.noctua.at/media/noctua_nh_d15_infosheet_en_web.pdf?download=true"
+      ],
+      "notes": "efficiency 1,55 — допущение учебной модели. С двумя вентиляторами штатный зазор RAM 32 мм; передний вентилятор можно поднять, увеличив общую высоту. С одним вентилятором зазор 64 мм. Для старых комплектов сверь наличие крепления LGA1700."
+    },
+    {
+      "id": "a650bn",
+      "appId": "a650bn",
+      "category": "psu",
+      "name": "MSI MAG A650BN",
+      "sources": [
+        "https://www.msi.com/Power-Supply/MAG-A650BN/Specification"
+      ],
+      "notes": "connectors — количество разъёмов PCIe 6+2-pin, не число отдельных кабелей. EPS 4+4-pin предназначен для процессора."
+    },
+    {
+      "id": "a750gl",
+      "appId": "a750gl",
+      "category": "psu",
+      "name": "MSI MAG A750GL PCIE5",
+      "sources": [
+        "https://www.msi.com/Power-Supply/MAG-A750GL-PCIE5/Specification"
+      ],
+      "notes": "3 разъёма PCIe 6+2-pin и один штатный 16-pin с паспортной мощностью 450 Вт. Число разъёмов не равно числу отдельных кабелей."
+    },
+    {
+      "id": "a1000g",
+      "appId": "a1000g",
+      "category": "psu",
+      "name": "MSI MPG A1000G PCIE5",
+      "sources": [
+        "https://www.msi.com/Power-Supply/MPG-A1000G-PCIE5/Specification"
+      ],
+      "notes": "6 разъёмов PCIe 6+2-pin и один штатный 16-pin 600 Вт. Число разъёмов не равно числу отдельных кабелей."
+    },
+    {
+      "id": "4000d-airflow",
+      "appId": "4000d-airflow",
+      "category": "case",
+      "name": "Corsair 4000D AIRFLOW Black",
+      "sources": [
+        "https://www.corsair.com/ww/en/p/pc-cases/cc-9011200-ww/40",
+        "https://assets.corsair.com/image/upload/v1684779868/corsairmedia/sys_master/productcontent/WW_4000D_4000D_Airflow_QSG_AB.pdf"
+      ],
+      "notes": "Указана обычная 4000D AIRFLOW, не RGB и не FRAME 4000D. Штатно два вентилятора 120 мм: один спереди, один сзади. E-ATX ограничен 305×277 мм. Предел 360 мм для GPU приведён без переднего радиатора; кабелям БП нужно дополнительное место."
+    },
+    {
+      "id": "pop-air",
+      "appId": "pop-air",
+      "category": "case",
+      "name": "Fractal Design Pop Air Black TG Clear Tint",
+      "sources": [
+        "https://www.fractal-design.com/products/cases/pop-series/pop-air/pop-air-black-tg-clear-tint/",
+        "https://www.fractal-design.com/app/uploads/2022/06/Pop-Air-RGB-Pop-Air_Product-Sheet_EN.pdf"
+      ],
+      "notes": "Штатно 2× Aspect 12 спереди и 1× Aspect 12 сзади. USB-C — отдельный опциональный комплект, поэтому в базовом корпусе его нет. GPU до 405 мм с установленным передним вентилятором. Размеры производителя 473,5×215×454 мм; руководство округляет длину до 474 мм."
     }
   ],
   "priceResearch": {
