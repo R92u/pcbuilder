@@ -1,5 +1,12 @@
-// Official product photography; source links and limitations are retained for attribution.
+// Manufacturer and retailer photography, with source attribution and series captions.
 export const productImages={
+  "980": {
+    "id": "980",
+    "sourcePage": "https://www.samsung.com/de/memory-storage/nvme-ssd/980-1tb-nvme-pcie-gen-3-mz-v8v1t0bw/",
+    "sourceImage": "https://images.samsung.com/is/image/samsung/p6pim/de/mz-v8v1t0bw/gallery/de-980-nvme-m2-ssd-mz-v8v1t0bw-501928756?%241164_776_PNG%24=",
+    "credit": "manufacturer",
+    "image": "assets/catalog/980.webp"
+  },
   "i3-12100f": {
     "id": "i3-12100f",
     "sourcePage": "https://www.intel.com/content/www/us/en/newsroom/resources/press-kit-12th-gen-core-procesors.html",
@@ -117,13 +124,6 @@ export const productImages={
     "image": "assets/catalog/nv2.webp",
     "caption": "Официальное изображение SNV2S/1000G."
   },
-  "980": {
-    "id": "980",
-    "sourcePage": "https://www.samsung.com/de/memory-storage/nvme-ssd/980-1tb-nvme-pcie-gen-3-mz-v8v1t0bw/",
-    "sourceImage": "https://images.samsung.com/is/image/samsung/p6pim/de/mz-v8v1t0bw/gallery/de-980-nvme-m2-ssd-mz-v8v1t0bw-501928756?%241164_776_PNG%24=",
-    "credit": "manufacturer",
-    "image": "assets/catalog/980.webp"
-  },
   "990-pro-1tb": {
     "id": "990-pro-1tb",
     "sourcePage": "https://www.samsung.com/be_fr/memory-storage/nvme-ssd/990-pro-1tb-nvme-pcie-gen-4-mz-v9p1t0bw/",
@@ -151,83 +151,92 @@ export const productImages={
   },
   "r5-5600": {
     "id": "r5-5600",
-    "image": null,
-    "sourcePage": "https://www.amd.com/en/support/downloads/drivers.html/processors/ryzen/ryzen-5000-series/amd-ryzen-5-5600.html",
-    "sourceImage": null,
-    "credit": "manufacturer",
-    "note": "Фото недоступно: ссылки изображений на официальных страницах AMD найдены, но CDN/PDF не загрузились (сетевой таймаут), изображение из рассылки вернуло HTTP 403. Подмена другой моделью не использована."
+    "sourcePage": "https://www.regard.ru/product/418665/processor-amd-ryzen-5-5600-oem",
+    "sourceImage": "https://www.regard.ru/api/site/cacheimg/goods/1005147/1000",
+    "note": "Фото серии AMD Ryzen AM4 из карточки магазина; маркировка модели может отличаться.",
+    "image": "assets/catalog/r5-5600.webp",
+    "credit": "retailer",
+    "caption": "Фото серии AMD Ryzen AM4 из карточки магазина; маркировка модели может отличаться."
   },
   "r5-7600": {
     "id": "r5-7600",
-    "image": null,
-    "sourcePage": "https://www.amd.com/en/products/processors/desktops/ryzen/7000-series/amd-ryzen-5-7600.html",
-    "sourceImage": null,
-    "credit": "manufacturer",
-    "note": "Фото недоступно: ссылки изображений на официальных страницах AMD найдены, но CDN/PDF не загрузились (сетевой таймаут), изображение из рассылки вернуло HTTP 403. Подмена другой моделью не использована."
+    "sourcePage": "https://www.regard.ru/product/73869/processor-amd-ryzen-5-7600-oem",
+    "sourceImage": "https://www.regard.ru/api/site/cacheimg/goods/5967308/1200",
+    "note": "Фото серии AMD Ryzen AM5 из карточки магазина; маркировка модели может отличаться.",
+    "image": "assets/catalog/r5-7600.webp",
+    "credit": "retailer",
+    "caption": "Фото серии AMD Ryzen AM5 из карточки магазина; маркировка модели может отличаться."
   },
   "r9-7900x": {
     "id": "r9-7900x",
-    "image": null,
-    "sourcePage": "https://www.amd.com/en/products/processors/desktops/ryzen/7000-series/amd-ryzen-9-7900x.html",
-    "sourceImage": null,
-    "credit": "manufacturer",
-    "note": "Фото недоступно: ссылки изображений на официальных страницах AMD найдены, но CDN/PDF не загрузились (сетевой таймаут), изображение из рассылки вернуло HTTP 403. Подмена другой моделью не использована."
+    "sourcePage": "https://www.regard.ru/product/419169/processor-amd-ryzen-9-7900x-oem",
+    "sourceImage": "https://www.regard.ru/api/site/cacheimg/goods/1014800/1200",
+    "note": "Фото серии AMD Ryzen AM5 из карточки магазина; маркировка модели может отличаться.",
+    "image": "assets/catalog/r9-7900x.webp",
+    "credit": "retailer",
+    "caption": "Фото серии AMD Ryzen AM5 из карточки магазина; маркировка модели может отличаться."
   },
   "r5-5600x": {
     "id": "r5-5600x",
-    "image": null,
-    "sourcePage": "https://www.amd.com/en/products/processors/desktops/ryzen/5000-series/amd-ryzen-5-5600x.html",
-    "sourceImage": null,
-    "credit": "manufacturer",
-    "note": "Фото недоступно: ссылки изображений на официальных страницах AMD найдены, но CDN/PDF не загрузились (сетевой таймаут), изображение из рассылки вернуло HTTP 403. Подмена другой моделью не использована."
+    "sourcePage": "https://www.regard.ru/product/370871/processor-amd-ryzen-5-5600x-oem",
+    "sourceImage": "https://www.regard.ru/api/site/cacheimg/goods/310960/1200",
+    "note": "Фото серии AMD Ryzen AM4 из карточки магазина; маркировка модели может отличаться.",
+    "image": "assets/catalog/r5-5600x.webp",
+    "credit": "retailer",
+    "caption": "Фото серии AMD Ryzen AM4 из карточки магазина; маркировка модели может отличаться."
   },
   "r7-5700x": {
     "id": "r7-5700x",
-    "image": null,
-    "sourcePage": "https://www.amd.com/en/support/downloads/drivers.html/processors/ryzen/ryzen-5000-series/amd-ryzen-7-5700x.html",
-    "sourceImage": null,
-    "credit": "manufacturer",
-    "note": "Фото недоступно: ссылки изображений на официальных страницах AMD найдены, но CDN/PDF не загрузились (сетевой таймаут), изображение из рассылки вернуло HTTP 403. Подмена другой моделью не использована."
+    "sourcePage": "https://www.regard.ru/product/418534/processor-amd-ryzen-7-5700x-oem",
+    "sourceImage": "https://www.regard.ru/api/site/cacheimg/goods/988480/1200",
+    "note": "Фото серии AMD Ryzen AM4 из карточки магазина; маркировка модели может отличаться.",
+    "image": "assets/catalog/r7-5700x.webp",
+    "credit": "retailer",
+    "caption": "Фото серии AMD Ryzen AM4 из карточки магазина; маркировка модели может отличаться."
   },
   "r7-5800x": {
     "id": "r7-5800x",
-    "image": null,
-    "sourcePage": "https://www.amd.com/en/products/processors/desktops/ryzen/5000-series/amd-ryzen-7-5800x.html",
-    "sourceImage": null,
-    "credit": "manufacturer",
-    "note": "Фото недоступно: ссылки изображений на официальных страницах AMD найдены, но CDN/PDF не загрузились (сетевой таймаут), изображение из рассылки вернуло HTTP 403. Подмена другой моделью не использована."
+    "sourcePage": "https://www.regard.ru/product/370866/processor-amd-ryzen-7-5800x-oem/description",
+    "sourceImage": "https://www.regard.ru/api/photo/goods/363952.png",
+    "note": "Фото серии AMD Ryzen AM4 из карточки магазина; маркировка модели может отличаться.",
+    "image": "assets/catalog/r7-5800x.webp",
+    "credit": "retailer",
+    "caption": "Фото серии AMD Ryzen AM4 из карточки магазина; маркировка модели может отличаться."
   },
   "r7-5800x3d": {
     "id": "r7-5800x3d",
-    "image": null,
-    "sourcePage": "https://www.amd.com/en/products/processors/desktops/ryzen/5000-series/amd-ryzen-7-5800x3d.html",
-    "sourceImage": null,
-    "credit": "manufacturer",
-    "note": "Фото недоступно: ссылки изображений на официальных страницах AMD найдены, но CDN/PDF не загрузились (сетевой таймаут), изображение из рассылки вернуло HTTP 403. Подмена другой моделью не использована."
+    "sourcePage": "https://artline.ua/uk/product/protsessor-amd-ryzen-7-5800x3d-8c16t-34-45ghz-96mb105wam4-box",
+    "sourceImage": "https://artline.ua/storage/images/products/10982/gallery/135790/gallery_1674741350935878_0.webp",
+    "note": "На фото процессор и коробка; цена в каталоге может относиться к комплектации OEM.",
+    "image": "assets/catalog/r7-5800x3d.webp",
+    "credit": "retailer",
+    "caption": "На фото процессор и коробка; цена в каталоге может относиться к комплектации OEM."
   },
   "r7-7700x": {
     "id": "r7-7700x",
-    "image": null,
-    "sourcePage": "https://www.amd.com/en/products/processors/desktops/ryzen/7000-series/amd-ryzen-7-7700x.html",
-    "sourceImage": null,
-    "credit": "manufacturer",
-    "note": "Фото недоступно: ссылки изображений на официальных страницах AMD найдены, но CDN/PDF не загрузились (сетевой таймаут), изображение из рассылки вернуло HTTP 403. Подмена другой моделью не использована."
+    "sourcePage": "https://www.regard.ru/product/419168/processor-amd-ryzen-7-7700x-oem",
+    "sourceImage": "https://www.regard.ru/api/site/cacheimg/goods/1014798/1200",
+    "note": "Фото серии AMD Ryzen AM5 из карточки магазина; маркировка модели может отличаться.",
+    "image": "assets/catalog/r7-7700x.webp",
+    "credit": "retailer",
+    "caption": "Фото серии AMD Ryzen AM5 из карточки магазина; маркировка модели может отличаться."
   },
   "r7-7800x3d": {
     "id": "r7-7800x3d",
-    "image": null,
-    "sourcePage": "https://www.amd.com/en/products/processors/desktops/ryzen/7000-series/amd-ryzen-7-7800X3d.html",
-    "sourceImage": null,
-    "credit": "manufacturer",
-    "note": "Фото недоступно: ссылки изображений на официальных страницах AMD найдены, но CDN/PDF не загрузились (сетевой таймаут), изображение из рассылки вернуло HTTP 403. Подмена другой моделью не использована."
+    "sourcePage": "https://www.regard.ru/product/73872/processor-amd-ryzen-7-7800x3d-oem",
+    "sourceImage": "https://www.regard.ru/api/site/cacheimg/goods/5967916/1000",
+    "note": "Фото серии AMD Ryzen AM5 из карточки магазина; маркировка модели может отличаться.",
+    "image": "assets/catalog/r7-7800x3d.webp",
+    "credit": "retailer",
+    "caption": "Фото серии AMD Ryzen AM5 из карточки магазина; маркировка модели может отличаться."
   },
   "p3-plus-1tb": {
     "id": "p3-plus-1tb",
-    "image": null,
-    "sourcePage": "https://eu.crucial.com/ssd/p3-plus/ct1000p3pssd8/ct21662099",
-    "sourceImage": null,
-    "credit": "manufacturer",
-    "note": "Фото недоступно: публичное официальное изображение модели не найдено; чужие модели и логотипы не подставлены. Публичные страницы и PDF Crucial вернули Request Rejected вместо материала."
+    "image": "assets/catalog/crucial-p3-plus-1tb.webp",
+    "sourcePage": "https://www.newegg.com/crucial-1tb-p3-plus-nvme/p/N82E16820156300",
+    "sourceImage": "https://c1.neweggimages.com/ProductImage/20-156-299-01.jpg",
+    "credit": "retailer",
+    "note": "Фото из карточки Newegg CT1000P3PSSD8 1 TB; лицевая наклейка P3 Plus без видимой маркировки ёмкости. Визуально проверено."
   },
   "rtx3060": {
     "id": "rtx3060",
@@ -464,10 +473,10 @@ export const productImages={
   },
   "rtx3090": {
     "id": "rtx3090",
-    "image": null,
-    "sourcePage": "https://www.zotac.com/us/product/graphics_card/zotac-gaming-geforce-rtx-3090-trinity",
-    "sourceImage": null,
-    "credit": "manufacturer",
-    "note": "Официальный сайт и фотография Zotac недоступны для загрузки (HTTP 403/468). Изображение другой модели не подставлено."
+    "image": "assets/catalog/rtx3090.webp",
+    "sourcePage": "https://computechstore.in/product/zotac-rtx-3090-trinity/",
+    "sourceImage": "https://computechstore.in/media/uploads/wp/2022/10/Zotac-RTX-3090-Trinity-24GB-Graphics-Card-1.png",
+    "credit": "retailer",
+    "note": "Computech Store. На странице указан точный SKU ZT-A30900D-10P (Trinity без OC). Визуально проверено: коробка RTX 3090 Trinity и видеокарта с тремя вентиляторами. WebP 512×512, 29006 байт."
   }
 };

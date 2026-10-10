@@ -648,7 +648,8 @@
         "Встроенной графики нет; AMD указывает необходимость дискретной видеокарты.",
         "boostGHz — заявленная максимальная частота Boost, а не гарантированная частота всех ядер.",
         "Совместимость зависит также от списка поддерживаемых CPU и версии BIOS конкретной материнской платы."
-      ]
+      ],
+      "storeUrl": "https://www.dns-shop.ru/product/af47cb6a0967ed20/processor-amd-ryzen-5-5600x-box/"
     },
     {
       "id": "r7-5700x",
@@ -665,7 +666,8 @@
         "Встроенной графики нет; AMD указывает необходимость дискретной видеокарты.",
         "boostGHz — заявленная максимальная частота Boost, а не гарантированная частота всех ядер.",
         "Совместимость зависит также от списка поддерживаемых CPU и версии BIOS конкретной материнской платы."
-      ]
+      ],
+      "storeUrl": "https://www.dns-shop.ru/product/96054164afeaed20/processor-amd-ryzen-7-5700x-oem/"
     },
     {
       "id": "r7-5800x",
@@ -682,7 +684,8 @@
         "Встроенной графики нет; AMD указывает необходимость дискретной видеокарты.",
         "boostGHz — заявленная максимальная частота Boost, а не гарантированная частота всех ядер.",
         "Совместимость зависит также от списка поддерживаемых CPU и версии BIOS конкретной материнской платы."
-      ]
+      ],
+      "storeUrl": "https://www.dns-shop.ru/product/4e48fbd4fb77ed20/processor-amd-ryzen-7-5800x-oem/"
     },
     {
       "id": "r7-5800x3d",
@@ -699,7 +702,8 @@
         "Встроенной графики нет; AMD указывает необходимость дискретной видеокарты.",
         "boostGHz — заявленная максимальная частота Boost, а не гарантированная частота всех ядер.",
         "Совместимость зависит также от списка поддерживаемых CPU и версии BIOS конкретной материнской платы."
-      ]
+      ],
+      "storeUrl": "https://www.dns-shop.ru/product/7b0f8dd8aa4fed20/processor-amd-ryzen-7-5800x3d-oem/"
     },
     {
       "id": "r7-7700x",
@@ -733,7 +737,8 @@
         "Встроенная AMD Radeon Graphics: 2 графических ядра, 2200 МГц.",
         "boostGHz — заявленная максимальная частота Boost, а не гарантированная частота всех ядер.",
         "Совместимость зависит также от списка поддерживаемых CPU и версии BIOS конкретной материнской платы."
-      ]
+      ],
+      "storeUrl": "https://www.dns-shop.ru/product/84046f37e49fed20/processor-amd-ryzen-7-7800x3d-box/?from=gmc"
     },
     {
       "id": "i3-12100f",
@@ -751,7 +756,8 @@
         "Модель с суффиксом F: встроенная графика отсутствует, требуется дискретная видеокарта.",
         "Сокет в Intel ARK называется FCLGA1700; в каталоге нормализован до LGA1700.",
         "Максимальная Turbo-частота не означает постоянную частоту всех ядер. Перед подбором платы проверить её список CPU и требуемую версию BIOS."
-      ]
+      ],
+      "storeUrl": "https://www.dns-shop.ru/product/c02704274e6fed20/processor-intel-core-i3-12100f-oem/"
     },
     {
       "id": "i5-12400f",
@@ -769,7 +775,8 @@
         "Модель с суффиксом F: встроенная графика отсутствует, требуется дискретная видеокарта.",
         "Сокет в Intel ARK называется FCLGA1700; в каталоге нормализован до LGA1700.",
         "Максимальная Turbo-частота не означает постоянную частоту всех ядер. Перед подбором платы проверить её список CPU и требуемую версию BIOS."
-      ]
+      ],
+      "storeUrl": "https://www.dns-shop.ru/product/9ccc15c74e6eed20/processor-intel-core-i5-12400f-oem/"
     },
     {
       "id": "i5-12600k",
@@ -857,7 +864,8 @@
         "Выбрано исходное исполнение OC: 130 Вт и 8-pin; не смешивать с OCV1 115 Вт / 6-pin.",
         "Размеры производителя: 235 × 124 × 42 мм.",
         "Для учебной модели tmax взят из официального максимума NVIDIA для референсного RTX 3050 (93 °C); MSI не публикует отдельный предел этой платы. Это не гарантированный порог её BIOS."
-      ]
+      ],
+      "storeUrl": "https://www.dns-shop.ru/product/b3f658c78b04ed20/videokarta-msi-geforce-rtx-3050-ventus-2x-oc-rtx-3050-ventus-2x-8g-oc/"
     },
     {
       "id": "rtx3060ti",
@@ -889,7 +897,8 @@
         "Указан штатный Boost 2565 МГц; режим Extreme Performance 2580 МГц требует MSI Center.",
         "Размеры производителя: 199 × 120 × 42 мм.",
         "Для учебной модели tmax взят из официального максимума NVIDIA для референсного RTX 4060 Ti (90 °C); MSI не публикует отдельный предел этой платы. Это не гарантированный порог её BIOS."
-      ]
+      ],
+      "storeUrl": "https://www.dns-shop.ru/product/5b2f3ca6ef0eed20/videokarta-msi-geforce-rtx-4060-ti-ventus-2x-black-oc-geforce-rtx-4060-ti-ventus-2x-black-8g-oc/"
     },
     {
       "id": "rtx4070",
@@ -924,7 +933,8 @@
         "Указан штатный Boost 2505 МГц; 2520 МГц — режим MSI Center.",
         "Размеры производителя: 308 × 120 × 43 мм.",
         "Для учебной модели tmax взят из официального максимума NVIDIA для референсного RTX 4070 SUPER (90 °C); MSI не публикует отдельный предел этой платы. Это не гарантированный порог её BIOS."
-      ]
+      ],
+      "storeUrl": "https://www.dns-shop.ru/product/6ef390abe748ed20/videokarta-msi-geforce-rtx-4070-super-ventus-3x-oc-geforce-rtx-4070-super-12g-ventus-3x-oc/"
     },
     {
       "id": "rx6600",
@@ -940,7 +950,8 @@
         "Размеры производителя: 193 × 120,05 × 40,05 мм; 2 слота.",
         "power=140 Вт — Board Power именно SAPPHIRE PULSE.",
         "90 °C — условный порог только учебной модели температуры GPU: максимальная температура этой платы на странице SAPPHIRE не указана. Не трактовать как официальный предел или температуру hotspot."
-      ]
+      ],
+      "storeUrl": "https://www.dns-shop.ru/product/0f5a9f8b1520ed20/videokarta-sapphire-amd-radeon-rx-6600-pulse-11310-01-20g/"
     },
     {
       "id": "rx6650xt",
@@ -955,7 +966,8 @@
         "Размеры производителя: 240 × 119,85 × 44,75 мм; 2 слота.",
         "power=176 Вт — Total Board Power именно SAPPHIRE PULSE.",
         "90 °C — условный порог только учебной модели температуры GPU: максимальная температура этой платы на странице SAPPHIRE не указана. Не трактовать как официальный предел или температуру hotspot."
-      ]
+      ],
+      "storeUrl": "https://www.dns-shop.ru/product/128563c7d57ded20/videokarta-sapphire-amd-radeon-rx-6650-xt-pulse-11319-03-20g/"
     },
     {
       "id": "rx7600",
@@ -970,7 +982,8 @@
         "Размеры производителя: 240 × 107,1 × 44,07 мм; 2 слота.",
         "power=185 Вт — Total Board Power именно SAPPHIRE PULSE.",
         "90 °C — условный порог только учебной модели температуры GPU: максимальная температура этой платы на странице SAPPHIRE не указана. Не трактовать как официальный предел или температуру hotspot."
-      ]
+      ],
+      "storeUrl": "https://www.dns-shop.ru/product/a8002d751e3aed20/videokarta-sapphire-amd-radeon-rx-7600-pulse-gaming-oc-11324-01-20g/"
     },
     {
       "id": "rx7700xt",
@@ -984,7 +997,8 @@
         "Размеры производителя: 280 × 128,75 × 52,57 мм; 2,5 слота.",
         "power=230 Вт — Total Board Power именно SAPPHIRE PULSE.",
         "90 °C — условный порог только учебной модели температуры GPU: максимальная температура этой платы на странице SAPPHIRE не указана. Не трактовать как официальный предел или температуру hotspot."
-      ]
+      ],
+      "storeUrl": "https://www.dns-shop.ru/product/900ee1b95795ed20/videokarta-sapphire-amd-radeon-rx-7700-xt-pulse-11335-04/"
     },
     {
       "id": "rx7800xt",
@@ -998,7 +1012,8 @@
         "Размеры производителя: 280 × 128,75 × 52,57 мм; 2,5 слота.",
         "power=266 Вт — Total Board Power именно SAPPHIRE PULSE.",
         "90 °C — условный порог только учебной модели температуры GPU: максимальная температура этой платы на странице SAPPHIRE не указана. Не трактовать как официальный предел или температуру hotspot."
-      ]
+      ],
+      "storeUrl": "https://www.dns-shop.ru/product/db46ca9a55f1ed20/videokarta-sapphire-amd-radeon-rx-7800-xt-pulse-11330-02-20g/"
     },
     {
       "id": "b760m-p-ddr4",
@@ -1008,7 +1023,8 @@
       "sources": [
         "https://www.msi.com/Motherboard/PRO-B760M-P-DDR4/Specification"
       ],
-      "notes": "Порт USB-C сзади есть, внутреннего разъёма USB-C для передней панели нет. Видеовыходы платы работают только с процессором со встроенной графикой."
+      "notes": "Порт USB-C сзади есть, внутреннего разъёма USB-C для передней панели нет. Видеовыходы платы работают только с процессором со встроенной графикой.",
+      "storeUrl": "https://www.dns-shop.ru/product/f56fc70e81d0ed20/materinskaa-plata-msi-pro-b760m-p-ddr4/"
     },
     {
       "id": "b760-p-wifi",
@@ -1018,7 +1034,8 @@
       "sources": [
         "https://www.msi.com/Motherboard/PRO-B760-P-WIFI/Specification"
       ],
-      "notes": "Видеовыходы платы работают только с процессором со встроенной графикой. Указано число физических разъёмов CPU_PWR; необходимость второго зависит от руководства и нагрузки."
+      "notes": "Видеовыходы платы работают только с процессором со встроенной графикой. Указано число физических разъёмов CPU_PWR; необходимость второго зависит от руководства и нагрузки.",
+      "storeUrl": "https://www.dns-shop.ru/product/41eb95b3a8e0ed20/materinskaa-plata-msi-pro-b760-p-wifi/"
     },
     {
       "id": "b550-tomahawk",
@@ -1028,7 +1045,8 @@
       "sources": [
         "https://www.msi.com/Motherboard/MAG-B550-TOMAHAWK/Specification"
       ],
-      "notes": "Видеовыходы работают с процессором со встроенной графикой. Основной M.2 поддерживает PCIe 4.0/3.0 в зависимости от CPU, второй — PCIe 3.0."
+      "notes": "Видеовыходы работают с процессором со встроенной графикой. Основной M.2 поддерживает PCIe 4.0/3.0 в зависимости от CPU, второй — PCIe 3.0.",
+      "storeUrl": "https://www.dns-shop.ru/product/b9a4575dafa61b80/materinskaa-plata-msi-mag-b550-tomahawk/"
     },
     {
       "id": "b550m-pro-vdh-wifi",
@@ -1038,7 +1056,8 @@
       "sources": [
         "https://www.msi.com/Motherboard/B550M-PRO-VDH-WIFI/Specification"
       ],
-      "notes": "Видеовыходы работают с процессором со встроенной графикой. Есть внутренний USB-C 5 Гбит/с, но USB-C на задней панели нет."
+      "notes": "Видеовыходы работают с процессором со встроенной графикой. Есть внутренний USB-C 5 Гбит/с, но USB-C на задней панели нет.",
+      "storeUrl": "https://www.dns-shop.ru/product/232aa9fcb9a11b80/materinskaa-plata-msi-b550m-pro-vdh-wifi/"
     },
     {
       "id": "b650-tomahawk-wifi",
@@ -1048,7 +1067,8 @@
       "sources": [
         "https://www.msi.com/Motherboard/MAG-B650-TOMAHAWK-WIFI/Specification"
       ],
-      "notes": "Доступность линий PCIe и M.2 зависит от процессора. Указано число физических разъёмов CPU_PWR; это не означает, что второй обязателен при любой нагрузке."
+      "notes": "Доступность линий PCIe и M.2 зависит от процессора. Указано число физических разъёмов CPU_PWR; это не означает, что второй обязателен при любой нагрузке.",
+      "storeUrl": "https://www.dns-shop.ru/product/69e396144e03ed20/materinskaa-plata-msi-mag-b650-tomahawk-wifi/"
     },
     {
       "id": "b650m-a-wifi",
@@ -1058,7 +1078,8 @@
       "sources": [
         "https://www.msi.com/Motherboard/PRO-B650M-A-WIFI/Specification"
       ],
-      "notes": "Внутренний USB-C 10 Гбит/с присутствует; сзади USB-C нет. Доступность M.2 зависит от модели CPU. Число CPU_PWR отражает физические разъёмы."
+      "notes": "Внутренний USB-C 10 Гбит/с присутствует; сзади USB-C нет. Доступность M.2 зависит от модели CPU. Число CPU_PWR отражает физические разъёмы.",
+      "storeUrl": "https://www.dns-shop.ru/product/69e3961a4e03ed20/materinskaa-plata-msi-pro-b650m-a-wifi/"
     },
     {
       "id": "ddr4-16-3200",
@@ -1068,7 +1089,8 @@
       "sources": [
         "https://www.kingston.com/dataSheets/KF432C16BBK2_16.pdf"
       ],
-      "notes": "3200 МТ/с — профиль XMP; штатный JEDEC в даташите — 2400 МТ/с. Для заявленной скорости нужны поддержка платы/CPU и включение профиля."
+      "notes": "3200 МТ/с — профиль XMP; штатный JEDEC в даташите — 2400 МТ/с. Для заявленной скорости нужны поддержка платы/CPU и включение профиля.",
+      "storeUrl": "https://www.dns-shop.ru/product/bb6fb3a7fad5ed20/operativnaa-pamat-kingston-fury-beast-black-kf432c16bbk216-16-gb/"
     },
     {
       "id": "ddr4-32-3600",
@@ -1078,7 +1100,8 @@
       "sources": [
         "https://www.kingston.com/datasheets/KF436C18BBK2_32.pdf"
       ],
-      "notes": "3600 МТ/с — профиль XMP; штатный JEDEC в даташите — 2400 МТ/с. Разгон памяти зависит от CPU, BIOS и конфигурации DIMM."
+      "notes": "3600 МТ/с — профиль XMP; штатный JEDEC в даташите — 2400 МТ/с. Разгон памяти зависит от CPU, BIOS и конфигурации DIMM.",
+      "storeUrl": "https://www.dns-shop.ru/product/4c3d4bf7fae6ed20/operativnaa-pamat-kingston-fury-beast-black-kf436c18bbk232-32-gb/"
     },
     {
       "id": "ddr5-16-5200",
@@ -1088,7 +1111,8 @@
       "sources": [
         "https://www.kingston.com/datasheets/KF552C40BBK2-16.pdf"
       ],
-      "notes": "5200 МТ/с — профиль XMP; штатный JEDEC — 4800 МТ/с. Фактическая скорость зависит от поддержки профиля платой и процессором."
+      "notes": "5200 МТ/с — профиль XMP; штатный JEDEC — 4800 МТ/с. Фактическая скорость зависит от поддержки профиля платой и процессором.",
+      "storeUrl": "https://www.dns-shop.ru/product/ad9e70f7fb37ed20/operativnaa-pamat-kingston-fury-beast-black-kf552c40bbk2-16-16-gb/?from=gmc"
     },
     {
       "id": "ddr5-64-6000",
@@ -1098,7 +1122,8 @@
       "sources": [
         "https://www.kingston.com/datasheets/KF560C36BBEK2-64.pdf"
       ],
-      "notes": "6000 МТ/с — профиль EXPO/XMP; штатный JEDEC — 4800 МТ/с. Заявленная скорость не гарантирована для любой платы и процессора."
+      "notes": "6000 МТ/с — профиль EXPO/XMP; штатный JEDEC — 4800 МТ/с. Заявленная скорость не гарантирована для любой платы и процессора.",
+      "storeUrl": "https://www.dns-shop.ru/product/4c3176d787eded20/operativnaa-pamat-kingston-fury-beast-black-amd-kf560c36bbek2-64-64-gb/"
     },
     {
       "id": "990-pro-1tb",
@@ -1109,7 +1134,8 @@
         "https://www.samsung.com/uk/business/memory-storage/nvme-ssd/990-pro-1tb-nvme-pcie-gen-4-mz-v9p1t0bw/",
         "https://www.samsung.com/be_fr/memory-storage/nvme-ssd/990-pro-1tb-nvme-pcie-gen-4-mz-v9p1t0bw/"
       ],
-      "notes": "Мощность 7,8 Вт — опубликованный максимум в burst-режиме, не постоянное потребление. Скорости — максимальные последовательные значения производителя."
+      "notes": "Мощность 7,8 Вт — опубликованный максимум в burst-режиме, не постоянное потребление. Скорости — максимальные последовательные значения производителя.",
+      "storeUrl": "https://www.dns-shop.ru/product/39779619c38e0fd2/1000-gb-m2-nvme-nakopitel-samsung-990-pro-mz-v9p1t0bw/"
     },
     {
       "id": "kc3000-1tb",
@@ -1120,7 +1146,8 @@
         "https://www.kingston.com/unitedkingdom/en/ssd/kc3000-nvme-m2-solid-state-drive?capacity=1024gb",
         "https://www.kingston.com/datasheets/KC3000_us.pdf?_=v1"
       ],
-      "notes": "6,3 Вт — максимальная мощность при записи из даташита; среднее потребление там указано 0,33 Вт. Скорости — до 7000/6000 МБ/с."
+      "notes": "6,3 Вт — максимальная мощность при записи из даташита; среднее потребление там указано 0,33 Вт. Скорости — до 7000/6000 МБ/с.",
+      "storeUrl": "https://www.dns-shop.ru/product/d843b8c700d5ed20/1024-gb-m2-nvme-nakopitel-kingston-kc3000-skc3000s1024g/"
     },
     {
       "id": "p3-plus-1tb",
@@ -1131,7 +1158,8 @@
         "https://eu.crucial.com/ssd/p3-plus/ct1000p3pssd8/ct21662099",
         "https://it.crucial.com/content/dam/crucial/ssd-products/p3-plus/flyers/b2c/crucial-p3plus-productflyer-consumer_itIT.pdf"
       ],
-      "notes": "5 Вт — допущение учебной модели энергопотребления, не спецификация производителя. Скорости до 5000/3600 МБ/с и 220 TBW относятся к версии 1 ТБ."
+      "notes": "5 Вт — допущение учебной модели энергопотребления, не спецификация производителя. Скорости до 5000/3600 МБ/с и 220 TBW относятся к версии 1 ТБ.",
+      "storeUrl": "https://www.dns-shop.ru/product/37167e56e563ed20/1000-gb-m2-nvme-nakopitel-crucial-p3-plus-ct1000p3pssd8/"
     },
     {
       "id": "sn850x-2tb",
@@ -1142,7 +1170,8 @@
         "https://www.sandisk.com/products/ssd/internal-ssd/wd-black-sn850x-nvme-ssd",
         "https://documents.westerndigital.com/content/dam/doc-library/en_us/assets/public/western-digital/product/internal-drives/wd-black-ssd/data-sheet-wd-black-sn850x-nvme-ssd.pdf"
       ],
-      "notes": "Версия без радиатора. 7 Вт — допущение учебной модели, не паспортная мощность. Скорости производителя до 7300/6600 МБ/с."
+      "notes": "Версия без радиатора. 7 Вт — допущение учебной модели, не паспортная мощность. Скорости производителя до 7300/6600 МБ/с.",
+      "storeUrl": "https://www.dns-shop.ru/product/ee3302993b3fb063/2000-gb-m2-nvme-nakopitel-wd-black-sn850x-wds200t2x0e/"
     },
     {
       "id": "ag400",
@@ -1152,7 +1181,8 @@
       "sources": [
         "https://uk.deepcool.com/products/Cooling/cpuaircoolers/GAMMAXX-AG400-Single-Tower-CPU-Cooler/2022/15908.shtml"
       ],
-      "notes": "Коэффициент efficiency 0,95 — допущение учебной тепловой модели, не измерение. Производитель заявляет полную совместимость с RAM; число 99 в ramClearance — технический маркер отсутствия перекрытия, не измеренный зазор."
+      "notes": "Коэффициент efficiency 0,95 — допущение учебной тепловой модели, не измерение. Производитель заявляет полную совместимость с RAM; число 99 в ramClearance — технический маркер отсутствия перекрытия, не измеренный зазор.",
+      "storeUrl": "https://www.dns-shop.ru/product/3f6f629ce633ed20/kuler-dla-processora-deepcool-ag400-r-ag400-bknnmn-g-1-cernyj/"
     },
     {
       "id": "nh-u12s-redux",
@@ -1173,7 +1203,8 @@
       "sources": [
         "https://cdn.noctua.at/media/noctua_nh_d15_infosheet_en_web.pdf?download=true"
       ],
-      "notes": "efficiency 1,55 — допущение учебной модели. С двумя вентиляторами штатный зазор RAM 32 мм; передний вентилятор можно поднять, увеличив общую высоту. С одним вентилятором зазор 64 мм. Для старых комплектов сверь наличие крепления LGA1700."
+      "notes": "efficiency 1,55 — допущение учебной модели. С двумя вентиляторами штатный зазор RAM 32 мм; передний вентилятор можно поднять, увеличив общую высоту. С одним вентилятором зазор 64 мм. Для старых комплектов сверь наличие крепления LGA1700.",
+      "storeUrl": "https://www.dns-shop.ru/product/b084284c484aed20/kuler-dla-processora-noctua-nh-d15/"
     },
     {
       "id": "a650bn",
@@ -1183,7 +1214,8 @@
       "sources": [
         "https://www.msi.com/Power-Supply/MAG-A650BN/Specification"
       ],
-      "notes": "connectors — количество разъёмов PCIe 6+2-pin, не число отдельных кабелей. EPS 4+4-pin предназначен для процессора."
+      "notes": "connectors — количество разъёмов PCIe 6+2-pin, не число отдельных кабелей. EPS 4+4-pin предназначен для процессора.",
+      "storeUrl": "https://www.dns-shop.ru/product/c26031ca4baad913/blok-pitania-msi-mag-a650bn-mag-a650bn-cernyj/"
     },
     {
       "id": "a750gl",
@@ -1193,7 +1225,8 @@
       "sources": [
         "https://www.msi.com/Power-Supply/MAG-A750GL-PCIE5/Specification"
       ],
-      "notes": "3 разъёма PCIe 6+2-pin и один штатный 16-pin с паспортной мощностью 450 Вт. Число разъёмов не равно числу отдельных кабелей."
+      "notes": "3 разъёма PCIe 6+2-pin и один штатный 16-pin с паспортной мощностью 450 Вт. Число разъёмов не равно числу отдельных кабелей.",
+      "storeUrl": "https://www.dns-shop.ru/product/18d4de49d482ed20/blok-pitania-msi-mag-a750gl-pcie5-cernyj/"
     },
     {
       "id": "a1000g",
@@ -1203,7 +1236,8 @@
       "sources": [
         "https://www.msi.com/Power-Supply/MPG-A1000G-PCIE5/Specification"
       ],
-      "notes": "6 разъёмов PCIe 6+2-pin и один штатный 16-pin 600 Вт. Число разъёмов не равно числу отдельных кабелей."
+      "notes": "6 разъёмов PCIe 6+2-pin и один штатный 16-pin 600 Вт. Число разъёмов не равно числу отдельных кабелей.",
+      "storeUrl": "https://www.dns-shop.ru/product/191e391c8feaed20/blok-pitania-msi-mpg-a1000g-pcie5-306-7zp7c11-ce0-cernyj/"
     },
     {
       "id": "4000d-airflow",
@@ -1214,7 +1248,8 @@
         "https://www.corsair.com/ww/en/p/pc-cases/cc-9011200-ww/40",
         "https://assets.corsair.com/image/upload/v1684779868/corsairmedia/sys_master/productcontent/WW_4000D_4000D_Airflow_QSG_AB.pdf"
       ],
-      "notes": "Указана обычная 4000D AIRFLOW, не RGB и не FRAME 4000D. Штатно два вентилятора 120 мм: один спереди, один сзади. E-ATX ограничен 305×277 мм. Предел 360 мм для GPU приведён без переднего радиатора; кабелям БП нужно дополнительное место."
+      "notes": "Указана обычная 4000D AIRFLOW, не RGB и не FRAME 4000D. Штатно два вентилятора 120 мм: один спереди, один сзади. E-ATX ограничен 305×277 мм. Предел 360 мм для GPU приведён без переднего радиатора; кабелям БП нужно дополнительное место.",
+      "storeUrl": "https://www.dns-shop.ru/product/f42eb03bbce33332/korpus-corsair-4000d-airflow-cc-9011200-ww-cernyj/"
     },
     {
       "id": "pop-air",
