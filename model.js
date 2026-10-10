@@ -46,7 +46,56 @@ function boardTexture(name){
  const tex=new THREE.CanvasTexture(canvas);tex.colorSpace=THREE.SRGBColorSpace;tex.anisotropy=2;return tex;
 }
 
+// Cut-outs in a small alpha texture keep the front filters light to render.
+function frontFilter(kind){
+ const canvas=document.createElement('canvas');canvas.width=512;canvas.height=512;const c=canvas.getContext('2d');
+ c.fillStyle='#41484c';c.fillRect(0,0,512,512);
+ if(kind==='pop'){
+  for(let row=0;row<14;row++)for(let col=0;col<8;col++){
+   const x=col*64+(row%2?32:0),y=row*38;
+   c.fillStyle=['#343b3e','#42494c','#50565a'][(row+col)%3];c.beginPath();c.moveTo(x-32,y);c.lineTo(x+32,y);c.lineTo(x,y+38);c.closePath();c.fill();
+  }
+ }
+ c.globalCompositeOperation='destination-out';
+ if(kind==='triangle'){
+  for(let row=0;row<32;row++)for(let col=0;col<14;col++){
+   const x=col*36+4,y=row*16+2,flip=(row+col)%2;c.beginPath();c.moveTo(x,flip?y+12:y);c.lineTo(x+28,flip?y+12:y);c.lineTo(x+14,flip?y:y+12);c.closePath();c.fill();
+  }
+ }else for(let row=0;row<100;row++)for(let col=0;col<70;col++){c.beginPath();c.arc(col*7.5+(row%2?3.75:0),row*5.2,1.8,0,Math.PI*2);c.fill();}
+ const map=new THREE.CanvasTexture(canvas);map.colorSpace=THREE.SRGBColorSpace;map.anisotropy=2;return map;
+}
+
 export const modelMethods={
+ makeCaseFront(g,p){
+  if(p.id==='cc560'){
+   this.box(g,1.35,4.19,.09,0,2.49,2.24,0x24292d);
+   for(const side of [-1,1]){
+    const bevel=this.box(g,.16,4.19,.075,side*.74,2.49,2.205,0x343b40);bevel.rotation.y=side*.42;
+    this.box(g,.12,4.19,.14,side*1.02,2.49,2.18,0x242a2e);
+    for(let i=0;i<56;i++)this.box(g,.17,.012,.014,side*.90,.44+i*.073,2.19,0x505a5f);
+    for(let i=0;i<4;i++)this.box(g,.008,4.1,.016,side*(.835+i*.04),2.49,2.198,0x3c474c);
+   }
+   this.text(g,'DEEPCOOL',.37,.06,0,.67,2.292,[0,0,0],'#899390');
+  }else{
+   const pop=p.id==='pop-air',bottom=pop?1.36:.52,top=4.49,height=top-bottom;
+   for(const side of [-1,1])this.box(g,pop?.10:.17,4.20,.16,side*(pop?1.02:.99),2.49,2.20,0x252b2e);
+   this.box(g,2.05,pop?.09:.17,.16,0,4.55,2.20,0x282f33);
+   this.box(g,2.05,pop?1.00:.16,.16,0,pop?.86:.44,2.20,0x242a2e);
+   const filter=new THREE.Mesh(new THREE.PlaneGeometry(pop?1.94:1.77,height),new THREE.MeshStandardMaterial({map:frontFilter(pop?'pop':'triangle'),metalness:.55,roughness:.57,alphaTest:.4,side:THREE.DoubleSide}));
+   filter.position.set(0,(bottom+top)/2,2.293);g.add(filter);
+   if(pop){
+    this.box(g,1.97,.015,.015,0,1.365,2.292,0x06090a);
+    this.box(g,.23,.075,.045,.89,.41,2.294,0x111719);
+    this.text(g,'fractal',.31,.065,.65,.60,2.286,[0,0,0],'#abb3b2');
+    // Separate lower drive bay door and two mounting shelves behind it.
+    for(const y of [.65,1.00])this.box(g,1.70,.025,.74,0,y,1.62,0x353d41);
+   }else{
+    this.text(g,'CORSAIR',.31,.055,0,.63,2.30,[0,0,0],'#a7b0b3');
+    this.box(g,.04,.15,.01,-.98,4.31,2.288,0xb4b658);
+   }
+   this.box(g,.045,.70,3.90,1.023,.75,0,0x20272b);
+  }
+ },
  rod(g,a,b,r,color=steel){const start=new THREE.Vector3(...a),end=new THREE.Vector3(...b),delta=end.clone().sub(start);const mesh=new THREE.Mesh(new THREE.CylinderGeometry(r,r,delta.length(),12),material(color,.65,.35));mesh.position.copy(start.add(end).multiplyScalar(.5));mesh.quaternion.setFromUnitVectors(new THREE.Vector3(0,1,0),delta.normalize());g.add(mesh);return mesh;},
  screw(g,x,y,z,axis='x',radius=.033){
   const head=this.cylinder(g,radius,.018,x,y,z,0x798287);if(axis==='x')head.rotation.z=Math.PI/2;if(axis==='z')head.rotation.x=Math.PI/2;
@@ -105,9 +154,7 @@ export const modelMethods={
   for(let i=0;i<7;i++){const y=1.37+i*.135;this.box(g,1.35,.10,.04,.10,y,-2.12,0x41494b);for(let j=0;j<10;j++)this.box(g,.047,.042,.007,-.46+j*.11,y,-2.146,0x090c0e);this.screw(g,.84,y,-2.15,'z',.022);}
   const frontYs=(p.frontFanCount??3)===1?[2.83]:p.frontFanCount===2?[2.2,3.4]:[1.7,2.83,3.96];
   for(const y of frontYs)this.fan(g,1.04,0,y,1.93,[0,0,0],'front',p.id==='cc560');
-  for(const x of [-.75,.75])this.box(g,.08,3.56,.12,x,2.79,2.105,steel);
-  for(let i=0;i<27;i++){const rib=this.box(g,.012,3.45,.012,-.75+i*.057,2.80,2.16,0x343b3b);if(p.id!=='cc560')rib.rotation.z=(p.frontFanCount===1?.10:-.10);}
-  for(let i=0;i<39;i++)this.box(g,1.50,.007,.01,0,1.09+i*.089,2.166,0x2c3334);
+  this.makeCaseFront(g,p);
   this.fan(g,1.03,.31,3.93,-1.99,[0,Math.PI,0],'rear',p.id==='cc560');
   // Concentric protective rear grille, visible from outside.
   for(const r of [.16,.24,.32,.40,.48]){const ring=new THREE.Mesh(new THREE.TorusGeometry(r,.010,6,40),material(steel));ring.position.set(.31,3.93,-2.16);g.add(ring);}

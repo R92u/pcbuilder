@@ -7,9 +7,9 @@ export const interactionMethods={
  initInteraction(){
   const canvas=this.renderer.domElement;
   this.raycaster=new THREE.Raycaster();
-  canvas.addEventListener('pointerdown',ev=>{this.pickStart={x:ev.clientX,y:ev.clientY,id:ev.pointerId};});
+  canvas.addEventListener('pointerdown',ev=>{this.pickStart=ev.button===2?{x:ev.clientX,y:ev.clientY,id:ev.pointerId}:null;});
   canvas.addEventListener('pointerup',ev=>{
-   const start=this.pickStart;this.pickStart=null;
+   const start=this.pickStart;this.pickStart=null;if(ev.button!==2)return;
    if(!start||start.id!==ev.pointerId||Math.hypot(start.x-ev.clientX,start.y-ev.clientY)>5||this.dragging)return;
    const rect=canvas.getBoundingClientRect();
    this.raycaster.setFromCamera(new THREE.Vector2((ev.clientX-rect.left)/rect.width*2-1,-(ev.clientY-rect.top)/rect.height*2+1),this.camera);
@@ -19,6 +19,7 @@ export const interactionMethods={
     if(visible&&key){this.onInspect?.(key);break;}
    }
   });
+  canvas.addEventListener('contextmenu',ev=>ev.preventDefault());
   canvas.addEventListener('pointercancel',()=>{this.pickStart=null;});
   this.cancelHeldPlug=()=>this.endCableDrag(null,true);
   window.addEventListener('blur',this.cancelHeldPlug);
