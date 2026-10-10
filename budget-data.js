@@ -20,6 +20,7 @@ const estimates={...Object.fromEntries(cpuOrder.map((id,i)=>[id,cpuPrices[i]])),
 export function estimatePrice(part,category){
  if(!part||part.concept)return null;
  if(estimates[part.id])return estimates[part.id];
+ if(category==='cooler'&&part.type==='aio')return part.radiator===360?9500:7500;
  if(category==='ram')return Math.ceil(part.capacity*(part.memory==='DDR5'?460:300)*(part.id.includes('renegade')?1.15:1)/500)*500;
  if(category==='storage')return Math.ceil((3500+part.capacity*8)*(part.id.includes('990')||part.id.includes('kc3000')||part.id.includes('sn850')?1.4:1)/500)*500;
  return null;

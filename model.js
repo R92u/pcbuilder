@@ -1,3 +1,4 @@
+import {makeAIO} from './aio-model.js';
 import * as THREE from 'three';
 import {hardwareFinish} from './surfaces.js';
 import {portsFor} from './wiring.js';
@@ -170,7 +171,7 @@ export const modelMethods={
   this.text(g,p.brand||'MSI',.27,.09,-.677,2.0,.25,[0,Math.PI/2,0],'#c0c5c3');
   const battery=this.cylinder(g,.095,.024,-.864,Math.max(bottom+.15,1.75),-1.35,0xc4c6c2);battery.rotation.z=Math.PI/2;this.text(g,'CR2032',.14,.035,-.842,Math.max(bottom+.15,1.75),-1.35,[0,Math.PI/2,0],'#444b4c');
   for(let i=0;i<(p.id==='b650'?4:6);i++){const y=Math.max(bottom+.1,1.80)+(i%3)*.12,z=.52+Math.floor(i/3)*.13;this.box(g,.13,.08,.10,-.83,y,z,0x181f1f);this.box(g,.008,.043,.063,-.76,y,z,0x050706);}
-  for(const [id,rows,cols] of [['atx',2,12],['eps',2,4],['cpuFan',1,4],['frontFan',1,4],['rearFan',1,4],['usb3',2,10],['usb2',2,5],['audio',2,5],['panel',2,5]])this.headerSocket(g,id,rows,cols,id==='atx'?.038:.042);
+  for(const [id,rows,cols] of [['atx',2,12],['eps',2,4],['cpuFan',1,4],['pump',1,4],['frontFan',1,4],['rearFan',1,4],['usb3',2,10],['usb2',2,5],['audio',2,5],['panel',2,5]])this.headerSocket(g,id,rows,cols,id==='atx'?.038:.042);
   if((p.epsConnectors??(p.id==='b650'?2:1))>1)this.headerSocket(g,'eps2',2,(p.cpuPowerPinCounts?.[1]||8)/2,.042);if(p.usbCHeader)this.headerSocket(g,'usbC',2,10,.02);
   this.makeRearIO(g,p);batchSolids(g);return g;
  },
@@ -212,7 +213,7 @@ export const modelMethods={
   }batchSolids(g);return g;
  },
  makeGPU(p){const g=makeDetailedGPU.call(this,p);batchSolids(g);return g;},
- makeCooler(p){const g=makeTowerCooler.call(this,p);batchSolids(g);return g;},
+ makeCooler(p){const g=(p.type==='aio'?makeAIO:makeTowerCooler).call(this,p);batchSolids(g);return g;},
  makeStorage(p){
   const g=new THREE.Group();this.box(g,.029,.22,.80,-.797,2.62,-.90,0x1d3026);
   for(let i=0;i<3;i++)this.box(g,.022,.16,.17,-.771,2.62,-1.15+i*.23,0x121819);

@@ -28,7 +28,7 @@ export const fanSceneMethods={
     const hub=fanHub(this.currentBuild,direction);this.box(this.caseFans,.105,.19,.065,...hub,0x161e21);
    }
    if(p.case?.concept&&this.fanLayout.some(f=>f.slot.startsWith('right-'))){
-    const frame=caseLayout(p.case,p.gpu);for(const y of [2.65-frame.fanSize*.48,2.65+frame.fanSize*.48])this.box(this.caseFans,.05,.035,frame.depth-.08,frame.side-.015,y,frame.centerZ,p.case.color==='white'?0xb4bdc4:0x424953);
+    const frame=caseLayout(p.case,p.gpu,p.cooler);for(const y of [2.65-frame.fanSize*.48,2.65+frame.fanSize*.48])this.box(this.caseFans,.05,.035,frame.depth-.08,frame.side-.015,y,frame.centerZ,p.case.color==='white'?0xb4bdc4:0x424953);
    }
    this.makeCaseFlows(p.case||{});this.wireKey=null;
   }
@@ -42,7 +42,7 @@ export const fanSceneMethods={
   this.renderFanMarkers();
  },
  viewFanWall(wall){
-  const f=caseLayout(resolve(this.currentBuild).case,resolve(this.currentBuild).gpu),views={front:[4.5,4.4,11.7],rear:[5,4.5,-11],top:[4.5,12,3],bottom:[5,-5,4],left:[-11,4.8,5],right:[12,4.8,1]};
+  const f=caseLayout(resolve(this.currentBuild).case,resolve(this.currentBuild).gpu,resolve(this.currentBuild).cooler),views={front:[4.5,4.4,11.7],rear:[5,4.5,-11],top:[4.5,12,3],bottom:[5,-5,4],left:[-11,4.8,5],right:[12,4.8,1]};
   this.camera.position.set(...views[wall]);this.controls.target.set((f.side+f.back)/2,2.35,f.centerZ);this.fitCaseView();this.controls.update();this.rearPanel.visible=!this.hideRearPanel;
  },
  renderFanMarkers(){

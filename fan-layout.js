@@ -1,11 +1,13 @@
+import {aioPlacement,radiatorConflict} from './aio.js';
 import {resolve} from './catalog.js';
 import {caseLayout,frontFanSource} from './layout.js';
 
 export const fanWalls={front:'Спереди',rear:'Сзади',top:'Сверху',bottom:'Снизу',left:'За платой',right:'Со стороны стекла'};
 const normals={front:[0,0,1],rear:[0,0,-1],top:[0,1,0],bottom:[0,-1,0],left:[-1,0,0],right:[1,0,0]};
 export function fanMounts(build){
- const p=resolve(build),f=caseLayout(p.case||{},p.gpu),slots=[];
- const add=(wall,position,size,i)=>slots.push({id:wall+'-'+(i+1),wall,position,size,normal:normals[wall],label:fanWalls[wall]+' · '+(i+1)});
+ const p=resolve(build),f=caseLayout(p.case||{},p.gpu,p.cooler),slots=[];
+ const a=aioPlacement(p,f);
+ const add=(wall,position,size,i)=>{const slot={id:wall+'-'+(i+1),wall,position,size,normal:normals[wall],label:fanWalls[wall]+' · '+(i+1)};if(!radiatorConflict(slot,a))slots.push(slot);};
  if(!p.case?.concept){
   f.fanYs.forEach((y,i)=>add('front',[0,y,f.fanZ],f.fanSize,i));add('rear',[.31,3.93,-1.99],1.03,0);return slots;
  }
@@ -57,11 +59,11 @@ export function sanitizeFanLayout(build,input){
  return result;
 }
 export function fanHub(build,direction){
- const p=resolve(build),f=caseLayout(p.case||{},p.gpu);
+ const p=resolve(build),f=caseLayout(p.case||{},p.gpu,p.cooler);
  return direction==='in'?frontFanSource(f):[-.80,4.34,-1.77];
 }
 export function fanBranchRoute(build,fan){
- const p=resolve(build),frame=caseLayout(p.case||{},p.gpu),slot=fanMounts(build).find(s=>s.id===fan.slot);
+ const p=resolve(build),frame=caseLayout(p.case||{},p.gpu,p.cooler),slot=fanMounts(build).find(s=>s.id===fan.slot);
  const source=fanLead(slot,fan.direction),hub=fanHub(build,fan.direction),x=frame.side-.06,z=frame.front-.33;
  // Route on the service rail outside the side-wall rotor row. Left-wall
  // cables pass around the tray's open front edge, never through its metal.

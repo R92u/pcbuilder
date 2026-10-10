@@ -1,9 +1,10 @@
+import {aioMount} from './aio.js';
 // Shared assembly dimensions in scene units (100 mm per unit). Port, cable and
 // mesh placement use the same anchors so changing a part cannot leave loose I/O.
 export const CPU_CENTER={x:-.694,y:3.44,z:-.55};
 export const GPU_TOP=2.43;
 export const PSU_REAR=-2.12;
-export function caseLayout(p={},gpu){
+export function caseLayout(p={},gpu,cooler){
  if(p.concept){
   const [front,side,back,size]={panorama:[2.90,2.45,-1.19,1.20],dual:[2.65,2.85,-1.75,1.20],compact:[2.20,2.17,-1.19,.92]}[p.concept];
   return {front,side,back,rear:-2.1,centerZ:(front-2.1)/2,depth:front+2.1,fanZ:front-.15,fanYs:[1.38,2.65,3.92],fanSize:size,ioZ:front-.38};
@@ -11,7 +12,10 @@ export function caseLayout(p={},gpu){
  // Compact exhibition cutaway: leave clearance for the installed card instead
  // of an empty drive cage. The catalog's physical compatibility stays separate.
  const capacity=-1.86+(p.gpuLimit||350)/100+.42;
- const front=gpu?Math.min(capacity,Math.max(1.40,gpuLayout(gpu).end+.42)):capacity;
+ let front=gpu?Math.min(capacity,Math.max(1.40,gpuLayout(gpu).end+.42)):capacity;
+ const mount=aioMount({case:p,cooler});
+ if(mount?.wall==='top')front=Math.max(front,-2.1+mount.length+.90);
+ if(mount?.wall==='front')front=Math.max(front,gpuLayout(gpu||{}).end+.74);
  const side=Math.max(1.12,CPU_CENTER.x+(p.coolerLimit||165)/100+.13);
  const fanSize=(p.fanSizeMm||120)/100;
  const fanYs=(p.frontFanCount??3)===1?[2.83]:p.frontFanCount===2?[2.2,3.4]:fanSize>1.2?[1.05,2.45,3.85]:[1.4,2.65,3.9];
@@ -51,7 +55,7 @@ export function coolerLayout(p={},ram,socket){
  const top=CPU_CENTER.x+(p.height||155)/100,finStart=-.29,finEnd=top-.04;
  const towers=p.towers>1?[-.98,-.23]:[-.55];
  const fanZ=p.towers>1?[-.60,.16]:p.fans===2?[-.94,-.17]:[-.17];
- const lift=p.adjustableFrontFan&&ram&&!p.ramUnrestrictedSockets?.includes(socket)?Math.max(0,(ram.height-(p.ramClearance||99))/100):0;
+ const lift=p.adjustableFrontFan&&ram&&!p.ramUnrestrictedSockets?.includes(socket)?Math.max(0,((ram.height||40)-(p.ramClearance||99))/100):0;
  return {size,sizes,top,finStart,finEnd,towers,fanZ,fanX:top-size/2-.01,lift,finDepth:.40};
 }
 export const psuFront=p=>PSU_REAR+(p?.length||140)/100;

@@ -1,3 +1,5 @@
+import {aioPlacement} from './aio.js';
+import {caseLayout} from './layout.js';
 import {resolve} from './catalog.js';
 import {fanMounts,sanitizeFanLayout} from './fan-layout.js';
 import {CPU_CENTER,gpuLayout} from './layout.js';
@@ -16,10 +18,12 @@ function segmentDistance(point,a,b){
 export function coolingAnalysis(build,settings={}){
  const p=resolve(build),mounts=fanMounts(build),layout=sanitizeFanLayout(build,settings.fanLayout);
  const fans=layout.map(f=>{const mount=mounts.find(m=>m.id===f.slot);return {...f,...mount,weight:(mount.size/1.2)**2*speed(settings[f.direction==='in'?'front':'rear'])};});
+ const a=aioPlacement(p,caseLayout(p.case||{},p.gpu,p.cooler));
+ if(a)for(const position of a.fans)fans.push({wall:a.wall,position,direction:a.wall==='top'?'out':'in',weight:.7*speed(settings.cpuFan)});
  const intake=fans.filter(f=>f.direction==='in'&&f.weight>0),exhaust=fans.filter(f=>f.direction==='out'&&f.weight>0);
  const inlet=intake.reduce((s,f)=>s+f.weight,0),outlet=exhaust.reduce((s,f)=>s+f.weight,0),warnings=[];
  const warn=(code,text)=>warnings.push({code,text});
- if(!layout.length)warn('no-fans','В корпусе нет вентиляторов. Добавь приток и вытяжку воздуха.');
+ if(!fans.length)warn('no-fans','В корпусе нет вентиляторов. Добавь приток и вытяжку воздуха.');
  else if(!inlet&&!outlet)warn('stopped','Корпусные вентиляторы остановлены. Повышай обороты для отвода тепла.');
  else {
   if(!inlet)warn('no-intake','Нет активного вдува. Свежий воздух поступает только через свободные отверстия.');
@@ -41,7 +45,7 @@ export function coolingAnalysis(build,settings={}){
  if(pairs&&bypass/pairs>.45)warn('short-path','Вдув и выдув слишком близко или на одной стенке: часть воздуха сразу выходит наружу. Разнеси их по корпусу.');
  if(pairs&&coverage/pairs<.28)warn('poor-coverage','Основной путь воздуха проходит далеко от CPU и GPU. Перенеси часть вентиляторов ближе к комплектующим.');
  const opposing=intake.filter(f=>f.wall==='rear'&&f.position[1]>2.9).reduce((s,f)=>s+f.weight,0);
- const counterflow=p.cooler&&inlet?opposing/inlet:0;
+ const counterflow=p.cooler&&p.cooler.type!=='aio'&&inlet?opposing/inlet:0;
  if(counterflow>.25)warn('cooler-counterflow','Задний вентилятор на вдув направлен навстречу потоку башенного кулера. Разверни его на выдув.');
  if(p.cooler&&speed(settings.cpuFan)===0)warn('cpu-stopped','Вентилятор процессорного кулера остановлен. CPU будет нагреваться сильнее.');
  const balanced=.35*(inlet+outlet)+.65*2*Math.min(inlet,outlet);

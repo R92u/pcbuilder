@@ -1,3 +1,4 @@
+import {aioMount} from './aio.js';
 import {coolingAnalysis} from './cooling.js';
 import {categories,resolve} from './catalog.js';
 export function compatibility(build) {
@@ -11,6 +12,14 @@ export function compatibility(build) {
  if(p.gpu&&p.case&&p.gpu.length>p.case.gpuLimit)add('gpu-size',`Видеокарта длиной ${p.gpu.length} мм превышает лимит корпуса ${p.case.gpuLimit} мм.`,['gpu','case']);
  if(p.cooler&&p.cpu&&!p.cooler.sockets.includes(p.cpu.socket))add('cooler-socket','Крепление кулера не подходит к сокету процессора.',['cooler','cpu']);
  if(p.cooler&&p.case&&p.cooler.height>p.case.coolerLimit)add('cooler-height','Кулер слишком высокий для корпуса.',['cooler','case']);
+ const aio=aioMount(p);
+ if(p.cooler?.type==='aio'&&p.case){
+  if(!aio)add('radiator-size','В корпусе нет подтверждённого места под радиатор '+p.cooler.radiator+' мм.',['cooler','case']);
+  if(aio?.wall==='front'&&p.gpu&&p.gpu.length>p.case.gpuLimit-p.cooler.radiatorDimensions[2])add('radiator-gpu','Передний радиатор уменьшает место под видеокарту на '+p.cooler.radiatorDimensions[2]+' мм.',['cooler','case','gpu']);
+  if(aio?.wall==='top'&&p.case.id.startsWith('pop-air')&&p.ram?.height>46)add('radiator-ram','Для верхнего радиатора Pop Air высота памяти ограничена 46 мм.',['cooler','ram','case']);
+  warnings.push('СЖО: радиатор '+(aio?.wall==='front'?'спереди на вдув':'сверху на выдув')+'. Корпусные вентиляторы в занятой зоне сняты. Перед покупкой проверь толщину радиатора, RAM и VRM по руководству корпуса.');
+ }
+ if(p.ram?.heightUnknown&&p.cooler)warnings.push('Высота выбранной памяти не подтверждена: проверь зазор с кулером или радиатором.');
  if(p.cooler&&p.ram&&!p.cooler.ramUnrestricted&&!p.cooler.ramUnrestrictedSockets?.includes(p.cpu?.socket||p.motherboard?.socket)&&p.ram.height>p.cooler.ramClearance){if(p.cooler.adjustableFrontFan){const height=p.cooler.height+p.ram.height-p.cooler.ramClearance;if(p.case&&height>p.case.coolerLimit)add('ram-height','Поднятый над памятью вентилятор кулера не помещается в корпусе.',['cooler','ram','case']);else warnings.push(`Передний вентилятор кулера нужно поднять: общая высота около ${height.toFixed(1)} мм.`);}else add('ram-height','Модули памяти не помещаются под вентилятором кулера.',['cooler','ram']);}
  if(p.psu&&p.case&&Number.isFinite(p.case.psuLimit)&&p.psu.length>p.case.psuLimit)add('psu-size','Блок питания слишком длинный для корпуса.',['psu','case']);
  if(p.psu&&p.case?.psuLimitUnknown)warnings.push('Производитель корпуса не указал предел длины БП: проверь место для блока питания и его кабелей.');
@@ -42,7 +51,7 @@ export function thermalTargets(build,settings) {
  // layouts still exchange through passive vents, with diminishing returns.
  const effective=cooling.effective;
  const conductance=8+9*Math.sqrt(effective);
- const cpuR=(.20+.42*(1-fan)**1.4)/(p.cooler?.efficiency||.45)*(1+.18*cooling.counterflow);
+ const cpuR=((p.cooler?.type==='aio'?.18:.20)+.42*(1-fan)**1.4)/(p.cooler?.efficiency||.45)*(1+.18*cooling.counterflow);
  const gpuR=.10+.06*(1-(.3+.7*w.gpu)); // simplified automatic GPU fan curve
  const cpuMax=p.cpu?.tmax||95,gpuMax=p.gpu?.tmax||90;
  // Solve a stable energy balance with thermal limiting instead of simply clipping
