@@ -41,7 +41,7 @@ export const fanSceneMethods={
  },
  viewFanWall(wall){
   const f=caseLayout(resolve(this.currentBuild).case,resolve(this.currentBuild).gpu),views={front:[4.5,4.4,11.7],rear:[5,4.5,-11],top:[4.5,12,3],bottom:[5,-5,4],left:[-11,4.8,5],right:[12,4.8,1]};
-  this.camera.position.set(...views[wall]);this.controls.target.set((f.side+f.back)/2,2.35,f.centerZ);this.controls.update();this.rearPanel.visible=true;
+  this.camera.position.set(...views[wall]);this.controls.target.set((f.side+f.back)/2,2.35,f.centerZ);this.fitCaseView();this.controls.update();this.rearPanel.visible=true;
  },
  renderFanMarkers(){
   if(!this.fanMarkerLayer){this.fanMarkerLayer=document.createElement('div');this.fanMarkerLayer.className='fan-markers';this.container.append(this.fanMarkerLayer);}
