@@ -1,0 +1,32 @@
+<!doctype html>
+<html lang="ru">
+<head>
+ <meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+ <meta name="theme-color" content="#101014"><meta name="description" content="Маркет PCmaker: сборки сообщества, комплектующие и цены. Открой понравившийся компьютер в 3D-конструкторе.">
+ <title>Маркет сборок — PCmaker</title>
+ <link rel="icon" href="./favicon.svg" type="image/svg+xml">
+ <link rel="stylesheet" href="./style.css"><link rel="stylesheet" href="./navigation.css"><link rel="stylesheet" href="./gallery.css"><link rel="stylesheet" href="./market.css">
+</head>
+<body class="market-page">
+ <header class="header market-header"><div class="brand-navigation"><button class="brand" id="brand-toggle" aria-label="PCmaker — выбрать раздел" aria-expanded="false" aria-controls="brand-switcher"><span class="brand-mark">P<span>↗</span></span><span class="brand-name">PC<span class="brand-light">maker</span><i></i></span><span class="brand-chevron" aria-hidden="true">⌄</span></button><nav id="brand-switcher" class="brand-switcher" aria-label="Разделы PCmaker" hidden><a href="./" ><span class="brand-destination-icon" aria-hidden="true">▧</span><span><strong>PCmaker</strong><small>Конструктор компьютера</small></span></a><a href="./market.html" aria-current="page"><span class="brand-destination-icon" aria-hidden="true">▦</span><span><strong>Маркет</strong><small>Сборки сообщества</small></span></a></nav></div><span class="market-location"><span class="status-dot"></span> Сборки сообщества</span><div class="market-account-actions"><button class="button" data-g="account" id="market-account">Войти</button><button class="button primary" data-g="publish">＋ Опубликовать</button></div></header>
+ <main class="market-main">
+  <section class="market-heading"><div><span class="eyebrow">PCMAKER / СООБЩЕСТВО</span><h1>Маркет сборок</h1><p>Выбери идею. Открой в конструкторе. Сделай своей.</p></div><a class="market-builder-link" href="./">В конструктор <span aria-hidden="true">↗</span></a></section>
+  <div class="market-layout">
+   <aside class="market-sidebar" aria-label="Фильтры сборок">
+    <section class="market-draft"><span class="market-section-label">ТВОЯ СБОРКА</span><div><strong id="market-draft-count">0<span>/8</span></strong><span>компонентов<br>в конструкторе</span></div><p id="market-draft-name"></p><a href="./">Продолжить сборку ↗</a></section>
+    <nav class="market-collections" aria-label="Коллекция сборок"><button data-g="all" aria-pressed="true"><span aria-hidden="true">▦</span> Все сборки</button><button data-g="mine" aria-pressed="false"><span aria-hidden="true">◇</span> Мои сборки</button></nav>
+    <details class="market-filters" open><summary>Фильтры <span aria-hidden="true">⌄</span></summary><div class="market-filter-content"><label for="market-region">Регион цен</label><select id="market-region"><option value="all">Все регионы</option><option value="ru">Россия · RUB</option><option value="by">Беларусь · BYN</option></select><p>У каждой сборки свой регион. Цены в рублях и BYN не пересчитываются.</p><button class="market-reset" data-g="reset">Сбросить фильтры</button></div></details>
+    <p class="market-disclaimer">Маркет — галерея идей. Здесь нет оплаты и продажи готовых ПК. Цены комплектующих могут измениться.</p>
+   </aside>
+   <section class="market-catalog" aria-label="Каталог сборок">
+    <div class="market-tools"><div class="market-result-label"><strong id="market-count">Сборки сообщества</strong><span id="market-count-note">Совместимые комплектующие</span></div><label class="market-sort"><span class="sr-only">Сортировка сборок</span><select id="market-sort" aria-label="Сортировка сборок"><option value="newest">Сначала новые</option><option value="oldest">Сначала старые</option><option value="name">По названию</option></select></label><form id="market-search" class="market-search"><label class="sr-only" for="market-query">Начало названия сборки</label><input id="market-query" name="q" maxlength="80" placeholder="Начало названия…" autocomplete="off"><button aria-label="Найти сборку" type="submit"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="10" cy="10" r="6.5"></circle><path d="m15 15 6 6"></path></svg></button></form></div>
+    <div id="market-active-filters" class="market-active-filters" hidden></div>
+    <p id="market-status" class="market-status" role="status" aria-live="polite"></p>
+    <div id="market-results" aria-busy="true"><div id="market-grid" class="gallery-grid market-grid"></div><div id="market-empty" class="market-empty" hidden></div></div>
+    <button class="button market-more" data-g="more" id="market-more" hidden>Показать ещё сборки</button>
+   </section>
+  </div>
+ </main>
+ <script type="module" src="./market.js"></script>
+</body>
+</html>

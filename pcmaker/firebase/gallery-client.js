@@ -13,7 +13,7 @@ export async function createFirebaseGallery(config,{emulators=false,persistence=
  const app=initializeApp(config,'pcmaker-gallery'),auth=getAuth(app),db=getFirestore(app);auth.languageCode='ru';
  if(emulators){connectAuthEmulator(auth,'http://127.0.0.1:9099',{disableWarnings:true});connectFirestoreEmulator(db,'127.0.0.1',8080);}
  await setPersistence(auth,persistence);await auth.authStateReady();
- const snapshots=Object.fromEntries(await Promise.all(['ru','by'].map(async id=>[id,priceSnapshot(await fetch(id==='by'?'./prices-by.json':'./prices.json').then(r=>r.json()),id)])));let cursor=null,lastQuery='',admin=false;
+ const snapshots=Object.fromEntries(await Promise.all(['ru','by'].map(async id=>[id,priceSnapshot(await fetch(id==='by'?'./prices-by.json':'./prices.json').then(r=>r.json()),id)])));const cursors=new Map();let admin=false;
  const publicUser=async()=>{const u=auth.currentUser;if(!u)return null;admin=!!(await u.getIdTokenResult()).claims.admin;return {id:u.uid,displayName:u.displayName||'Автор',username:'Google',admin};};
  const ready=()=>{if(!auth.currentUser)throw Error('Войди через Google.');return auth.currentUser;};
  const dataCard=s=>{const d=s.data(),region=regionFor(d.region),build=sanitizeBuild(d.build);return {id:s.id,...d,build,fanLayout:Object.entries(d.fanLayout||{}).map(([slot,direction],i)=>({id:'fan'+(i+1),slot,direction})),author:{id:d.authorId,name:d.authorName,username:''},createdAt:d.createdAt?.toMillis()||Date.now(),updatedAt:d.updatedAt?.toMillis()||Date.now(),price:{...summarizePrices(build,snapshots[region.id].items),currency:region.currency,checkedAt:snapshots[region.id].checkedAt},compatible:compatibility(build).ready};};
@@ -23,11 +23,16 @@ export async function createFirebaseGallery(config,{emulators=false,persistence=
   if(path==='/auth/google'){const provider=new GoogleAuthProvider();provider.setCustomParameters({prompt:'select_account'});let timer;try{await Promise.race([signInWithPopup(auth,provider),new Promise((_,reject)=>{timer=setTimeout(()=>reject(Error('Заверши вход в окне Google. Если окно не появилось, открой PCmaker в Chrome или Edge и повтори вход.')),45000);})]);}finally{clearTimeout(timer);}return {user:await publicUser()};}
   if(path==='/auth/logout'){await signOut(auth);admin=false;return {ok:true};}
   if(url.pathname==='/builds'&&method==='GET'){
-   const mine=url.searchParams.get('mine')==='1',search=(url.searchParams.get('q')||'').trim().toLowerCase(),next=url.searchParams.get('offset')!=='0'&&url.searchParams.has('offset'),key=String(mine)+search;
-   const clauses=[where(mine?'authorId':'hidden','==',mine?ready().uid:false),orderBy(search?'titleKey':'createdAt',search?'asc':'desc')];
-   if(search)clauses.push(startAt(search),endAt(search+'\uf8ff'));
-   if(next&&key===lastQuery&&cursor)clauses.push(startAfter(cursor));else cursor=null;
-   const rows=await getDocs(query(collection(db,'builds'),...clauses,limit(25))),shown=rows.docs.slice(0,24);cursor=shown.at(-1)||null;lastQuery=key;
+   const mine=url.searchParams.get('mine')==='1',search=(url.searchParams.get('q')||'').trim().toLowerCase(),region=url.searchParams.get('region'),sort=url.searchParams.get('sort')||'newest',offset=Number(url.searchParams.get('offset')||0),owner=mine?ready().uid:false;
+   const key=JSON.stringify([owner,search,region,sort]),cursor=cursors.get(key+':'+offset);
+   if(!Number.isSafeInteger(offset)||offset<0||offset>0&&!cursor)throw Error('Обнови список сборок и повтори загрузку.');
+   const clauses=[where(mine?'authorId':'hidden','==',owner)];
+   if(['ru','by'].includes(region))clauses.push(where('region','==',region));
+   clauses.push(orderBy(search||sort==='name'?'titleKey':'createdAt',search||['name','oldest'].includes(sort)?'asc':'desc'));
+   if(search){if(!cursor)clauses.push(startAt(search));clauses.push(endAt(search+'\uf8ff'));}
+   if(cursor)clauses.push(startAfter(cursor));
+   const rows=await getDocs(query(collection(db,'builds'),...clauses,limit(25))),shown=rows.docs.slice(0,24);
+   if(cursors.size>200)cursors.clear();if(shown.length)cursors.set(key+':'+(offset+shown.length),shown.at(-1));
    return {items:shown.map(dataCard),hasMore:rows.size>24};
   }
   if(path==='/builds'&&method==='POST'){

@@ -2,6 +2,10 @@ PCmaker / Firebase
 
 Production project: pcmaker-school-r92u. Frontend: https://pcmaker-olnw.onrender.com/
 Google sign-in and Firestore are enabled. Billing is not enabled (Spark).
+The community market is /market.html; the builder is /. Both share the logo
+navigation menu. Draft parts, fans, lighting and region persist between pages.
+Market filtering and pagination run in Firestore, including region and author.
+Title search uses a case-insensitive prefix and alphabetical order.
 The browser configuration in dist/firebase-config.json is public SDK configuration,
 not a service-account credential. Never commit CLI tokens or private keys.
 
