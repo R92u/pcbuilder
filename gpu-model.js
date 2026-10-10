@@ -1,6 +1,6 @@
 import * as THREE from 'three';
 import {hardwareFinish} from './surfaces.js';
-import {gpuLayout} from './layout.js';
+import {gpuLayout,gpuSlots} from './layout.js';
 
 const finish=(color,metalness=.6,roughness=.4)=>hardwareFinish(new THREE.MeshStandardMaterial({color,metalness,roughness}));
 function polygon(points){const s=new THREE.Shape();points.forEach(([x,y],i)=>i?s.lineTo(x,y):s.moveTo(x,y));s.closePath();return s;}
@@ -80,12 +80,14 @@ export function makeDetailedGPU(p){
  this.text(g,p.brand==='AMD'?'RADEON':'GEFORCE RTX',.83,.10,-.14,top+.045,center,[-Math.PI/2,0,Math.PI/2],'#596363');
  for(let i=0;i<3;i++){const groove=this.box(g,.65,.006,.008,-.10,top+.047,rear+.27+i*.055,0x394346);groove.rotation.y=-.24;}
  // Bracket, port interiors, mounting screws and power sockets keep their wiring anchors.
- this.box(g,1.58,thickness+.12,.026,.045,top-thickness/2,-2.12,0x606a6b);
- const gpuPorts=p.ports?.flatMap(port=>Array.from({length:parseInt(port)||1},()=>/HDMI/i.test(port)?'HDMI':'DP'))||['DP','DP','DP','HDMI'];
- for(let i=0;i<gpuPorts.length;i++)this.rearPort(g,'video',-.49+i*.34,top-.205,.22,.083,0,gpuPorts[i]);
- for(let i=0;i<11;i++)for(let row=0;row<(large?2:1);row++)this.box(g,.065,.045,.008,-.53+i*.115,bottom+.08+row*.085,-2.139,0x0a1013);
- for(const x of [-.64,.70])this.screw(g,x,top+.017,-2.14,'z',.024);
  const root=new THREE.Group();g.scale.x=layout.width/1.60;g.position.x=-.84*(1-g.scale.x);root.add(g);
+ // Standard rear PCI bracket width must not scale with the cooler width.
+ const bracketHeight=gpuSlots(p)*.18;
+ this.box(root,1.64,bracketHeight,.035,.07,2.47-bracketHeight/2,-2.145,0x606a6b);
+ const gpuPorts=p.ports?.flatMap(port=>Array.from({length:parseInt(port)||1},()=>/HDMI/i.test(port)?'HDMI':'DP'))||['DP','DP','DP','HDMI'];
+ for(let i=0;i<gpuPorts.length;i++)this.rearPort(root,'video',-.49+i*.34,top-.205,.22,.083,0,gpuPorts[i]);
+ for(let i=0;i<11;i++)this.box(root,.065,.045,.008,-.53+i*.115,2.47-bracketHeight+.085,-2.168,0x0a1013);
+ for(const x of [-.64,.70])this.screw(root,x,top+.017,-2.17,'z',.024);
  if(p.connectorType==='16pin')this.headerSocket(root,'gpu16',2,6,.029);
  else for(let i=0;i<p.connectors;i++)this.headerSocket(root,'gpu'+(i+1),2,4,.041);
  return root;

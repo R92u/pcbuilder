@@ -92,7 +92,7 @@ export const modelMethods={
     this.box(g,.23,.075,.045,.89,.41,2.294,0x111719);
     this.text(g,'fractal',.31,.065,.65,.60,2.286,[0,0,0],'#abb3b2');
     // Separate lower drive bay door and two mounting shelves behind it.
-    for(const y of [.65,1.00])this.box(g,1.70,.025,.74,0,y,1.62,0x353d41);
+    for(const y of [.65,1.00])this.box(g,1.70,.025,.28,0,y,2.00,0x353d41);
    }else{
     this.text(g,(p.brand||'CORSAIR').toUpperCase(),.31,.055,0,.63,2.30,[0,0,0],'#a7b0b3');
     if(!mesh)this.box(g,.04,.15,.01,-.98,4.31,2.288,0xb4b658);
@@ -108,7 +108,9 @@ export const modelMethods={
   else{this.box(g,radius*1.2,.008,.005,x,y,z-.013,0x181b1d);this.box(g,.008,radius*1.2,.005,x,y,z-.012,0x181b1d);}
  },
  headerSocket(g,id,rows,cols,spacing=.049){
-  const port=portsFor(this.currentBuild||{})[id],socket=new THREE.Group();g.add(socket);g=socket;socket.position.set(...port.position);if(port.axis==='y')socket.rotation.z=Math.PI/2;const [x,y,z]=[0,0,0],w=cols*spacing+.045,h=rows*spacing+.035;
+  const port=portsFor(this.currentBuild||{})[id],socket=new THREE.Group();g.add(socket);g=socket;socket.position.set(...port.position);if(port.axis==='y'||port.axis==='-y')socket.rotation.z=port.axis==='y'?Math.PI/2:-Math.PI/2;const [x,y,z]=[0,0,0],w=cols*spacing+.045,h=rows*spacing+.035;
+  // Soldered header pedestal reaches the PCB; the housing cannot float above it.
+  if(!port.axis){const back=-.909-port.position[0],front=-.105;this.box(g,front-back,w,h+.055,(back+front)/2,y,z-.025,black);}
   this.box(g,.13,w,h,x-.04,y,z,black);
   for(let row=0;row<rows;row++)for(let col=0;col<cols;col++){
    if(['usb3','usb2','audio','panel'].includes(id)&&row===rows-1&&col===cols-1)continue;
