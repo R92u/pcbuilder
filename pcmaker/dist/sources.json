@@ -1,0 +1,694 @@
+{
+  "schemaVersion": 1,
+  "researchDate": "2026-10-10",
+  "timezone": "Europe/Moscow",
+  "requestedPriceRegion": "Москва",
+  "catalog": [
+    {
+      "id": "ryzen-5600",
+      "category": "cpu",
+      "name": "AMD Ryzen 5 5600",
+      "specs": {
+        "socket": "AM4",
+        "memoryType": "DDR4",
+        "cores": 6,
+        "threads": 12,
+        "baseGHz": 3.5,
+        "boostGHz": 4.4,
+        "tdpW": 65,
+        "pptW": null,
+        "tjMaxC": 90,
+        "integratedGraphics": false,
+        "officialMemoryMaxMTs": 3200
+      },
+      "sources": [
+        "https://www.amd.com/en/support/downloads/drivers.html/processors/ryzen/ryzen-5000-series/amd-ryzen-5-5600.html"
+      ],
+      "notes": [
+        "PPT for this exact SKU not confirmed by an accessible primary source; do not silently label 65 W TDP as electrical draw or 88 W as verified PPT."
+      ],
+      "priceRub": 11999,
+      "priceStatus": "verified",
+      "priceCheckedDate": "2026-10-10",
+      "sourceCheckedDate": "2026-10-10",
+      "priceNote": "Цена показана в карточке DNS для Москвы; проверена через браузер.",
+      "appId": "r5-5600",
+      "storeUrl": "https://www.dns-shop.ru/product/6d7a8c58afebed20/processor-amd-ryzen-5-5600-oem/"
+    },
+    {
+      "id": "ryzen-7600",
+      "category": "cpu",
+      "name": "AMD Ryzen 5 7600",
+      "specs": {
+        "socket": "AM5",
+        "memoryType": "DDR5",
+        "cores": 6,
+        "threads": 12,
+        "baseGHz": 3.8,
+        "boostGHz": 5.1,
+        "tdpW": 65,
+        "pptW": 88,
+        "tjMaxC": 95,
+        "integratedGraphics": true,
+        "officialMemoryMaxMTs": 5200
+      },
+      "sources": [
+        "https://www.amd.com/en/products/processors/desktops/ryzen/7000-series/amd-ryzen-5-7600.html",
+        "https://community.amd.com/t5/gaming/ryzen-7000-series-processors-let-s-talk-about-power-temperature/ba-p/554629"
+      ],
+      "storeUrl": "https://www.dns-shop.ru/product/93478ee7e957ed20/processor-amd-ryzen-5-7600-oem/",
+      "notes": [
+        "PPT derived from AMD staff Ryzen 7000 65 W category table; staff article remains search-index readable but direct URL now redirects to community-updates."
+      ],
+      "priceRub": 16399,
+      "priceStatus": "verified",
+      "priceCheckedDate": "2026-10-10",
+      "sourceCheckedDate": "2026-10-10",
+      "priceNote": "Цена показана в карточке DNS для Москвы; проверена через браузер.",
+      "appId": "r5-7600"
+    },
+    {
+      "id": "ryzen-7900x",
+      "category": "cpu",
+      "name": "AMD Ryzen 9 7900X",
+      "specs": {
+        "socket": "AM5",
+        "memoryType": "DDR5",
+        "cores": 12,
+        "threads": 24,
+        "baseGHz": 4.7,
+        "boostGHz": 5.6,
+        "tdpW": 170,
+        "pptW": 230,
+        "tjMaxC": 95,
+        "integratedGraphics": true,
+        "officialMemoryMaxMTs": 5200
+      },
+      "sources": [
+        "https://www.amd.com/en/products/processors/desktops/ryzen/7000-series/amd-ryzen-9-7900x.html",
+        "https://community.amd.com/t5/gaming/ryzen-7000-series-processors-let-s-talk-about-power-temperature/ba-p/554629"
+      ],
+      "notes": [
+        "AMD recommends liquid cooler for optimal performance. Air coolers can fit the socket; this is a performance/cooling caution rather than mechanical incompatibility.",
+        "95 C under heavy Ryzen 7000 workloads is the documented operating limit/boost target, not proof that a CPU has been damaged."
+      ],
+      "priceRub": 35999,
+      "priceStatus": "verified",
+      "priceCheckedDate": "2026-10-10",
+      "sourceCheckedDate": "2026-10-10",
+      "priceNote": "Цена показана в карточке DNS для Москвы; проверена через браузер.",
+      "appId": "r9-7900x",
+      "storeUrl": "https://www.dns-shop.ru/product/7a2387593941ed20/processor-amd-ryzen-9-7900x-oem/"
+    },
+    {
+      "id": "b550-a-pro",
+      "category": "motherboard",
+      "name": "MSI B550-A PRO",
+      "specs": {
+        "socket": "AM4",
+        "memoryType": "DDR4",
+        "memorySlots": 4,
+        "maxMemoryGB": 128,
+        "formFactor": "ATX",
+        "dimensionsMm": [
+          305,
+          244
+        ],
+        "pcieMainGeneration": 4,
+        "pcieMainLanes": 16,
+        "m2Slots": 2,
+        "m2MainFormFactors": [
+          "2242",
+          "2260",
+          "2280",
+          "22110"
+        ],
+        "m2MainInterface": "PCIe 4.0/3.0 x4 NVMe or SATA",
+        "cpuPower8Pin": 1,
+        "supportedCpuSeries": [
+          "Ryzen 5000",
+          "Ryzen 3000 except 3400G/3200G",
+          "Ryzen 4000 G"
+        ]
+      },
+      "sources": [
+        "https://www.msi.com/Motherboard/B550-A-PRO/Specification",
+        "https://www.msi.com/Motherboard/B550-A-PRO/support#cpu"
+      ],
+      "notes": [
+        "Ryzen 5600 matches platform and supported family. Exact minimum BIOS could not be confirmed: support CPU table is JS-rendered and not present in tool output. Display BIOS verification warning rather than invented minimum.",
+        "M2_2 populated with PCIe SSD disables PCI_E3. Single GPU on PCI_E1 and SSD on M2_1 avoids this."
+      ],
+      "priceRub": 11699,
+      "priceStatus": "verified",
+      "priceCheckedDate": "2026-10-10",
+      "sourceCheckedDate": "2026-10-10",
+      "priceNote": "Цена показана в карточке DNS для Москвы; проверена через браузер.",
+      "appId": "b550",
+      "storeUrl": "https://www.dns-shop.ru/product/232aa9fbb9a11b80/materinskaa-plata-msi-b550-a-pro/"
+    },
+    {
+      "id": "b650-s-wifi",
+      "category": "motherboard",
+      "name": "MSI PRO B650-S WIFI",
+      "specs": {
+        "socket": "AM5",
+        "memoryType": "DDR5",
+        "memorySlots": 4,
+        "maxMemoryGB": 256,
+        "formFactor": "ATX",
+        "dimensionsMm": [
+          304.8,
+          243.84
+        ],
+        "pcieMainGeneration": 4,
+        "pcieMainLanes": 16,
+        "m2Slots": 2,
+        "m2MainFormFactors": [
+          "2280",
+          "22110"
+        ],
+        "m2MainInterface": "PCIe 4.0 x4 NVMe",
+        "cpuPower8Pin": 2,
+        "supportedCpuSeries": [
+          "Ryzen 7000",
+          "Ryzen 8000",
+          "Ryzen 9000"
+        ],
+        "supportsExpo": true
+      },
+      "sources": [
+        "https://uk.msi.com/Motherboard/PRO-B650-S-WIFI/Specification",
+        "https://download.msi.com/archive/mnu_exe/mb/PROB650-SWIFI.pdf",
+        "https://www.msi.com/Motherboard/PRO-B650-S-WIFI/support#cpu"
+      ],
+      "storeUrl": "https://www.dns-shop.ru/product/963ee0f69765d0a4/materinskaa-plata-msi-pro-b650-s-wifi/",
+      "notes": [
+        "Ryzen 7600/7900X match AM5 and original supported 7000 family. Exact minimum BIOS not verified.",
+        "6000 MT/s is an overclocked EXPO profile; standard JEDEC starts at 4800 on this RAM. Do not flag DDR5-6000 kit as incompatible just because CPU standard limit is 5200."
+      ],
+      "priceRub": null,
+      "priceStatus": "unverified",
+      "priceCheckedDate": null,
+      "sourceCheckedDate": "2026-10-10",
+      "priceNote": "Актуальная цена для Москвы не подтверждена. Не включать неизвестную цену в итог как 0.",
+      "appId": "b650"
+    },
+    {
+      "id": "rtx-3060-ventus",
+      "category": "gpu",
+      "name": "MSI GeForce RTX 3060 VENTUS 2X 12G OC",
+      "specs": {
+        "gpu": "GeForce RTX 3060",
+        "vramGB": 12,
+        "memoryType": "GDDR6",
+        "dimensionsMm": [
+          235,
+          124,
+          42
+        ],
+        "lengthMm": 235,
+        "powerW": 170,
+        "recommendedPsuW": 550,
+        "power8Pin": 1,
+        "pcieGeneration": 4,
+        "pcieLanes": 16
+      },
+      "sources": [
+        "https://my.msi.com/Graphics-Card/GeForce-RTX-3060-VENTUS-2X-12G-OC/Specification",
+        "https://storage-asset.msi.com/datasheet/vga/us/GeForce-RTX-3060-VENTUS-2X-12G-OC.pdf"
+      ],
+      "notes": [
+        "Dimensions apply to non-V1 model named here; do not mix with V1."
+      ],
+      "priceRub": 45999,
+      "priceStatus": "verified",
+      "priceCheckedDate": "2026-10-10",
+      "sourceCheckedDate": "2026-10-10",
+      "priceNote": "Цена показана в карточке DNS для Москвы; проверена через браузер.",
+      "appId": "rtx3060",
+      "storeUrl": "https://www.dns-shop.ru/product/55cc9b9165b71b80/videokarta-msi-geforce-rtx-3060-ventus-2x-oc-lhr-rtx-3060-ventus-2x-12g-oc/"
+    },
+    {
+      "id": "rtx-4060-ventus",
+      "category": "gpu",
+      "name": "MSI GeForce RTX 4060 VENTUS 2X BLACK 8G",
+      "specs": {
+        "gpu": "GeForce RTX 4060",
+        "vramGB": 8,
+        "memoryType": "GDDR6",
+        "dimensionsMm": [
+          199,
+          120,
+          41
+        ],
+        "lengthMm": 199,
+        "powerW": 120,
+        "powerVariantsW": [
+          115,
+          120
+        ],
+        "recommendedPsuW": 550,
+        "power8Pin": 1,
+        "pcieGeneration": 4,
+        "pcieLanes": 8
+      },
+      "sources": [
+        "https://uk.msi.com/Graphics-Card/GeForce-RTX-4060-VENTUS-2X-BLACK-8G/Specification"
+      ],
+      "storeUrl": "https://www.dns-shop.ru/product/fa6fb9521e4bed20/videokarta-msi-geforce-rtx-4060-ventus-2x-black-geforce-rtx-4060-ventus-2x-black-8g/",
+      "notes": [
+        "MSI currently lists '115 W or 120 W'; use conservative 120 W for PSU budgeting, 115-120 range in informational card."
+      ],
+      "priceRub": null,
+      "priceStatus": "unverified",
+      "priceCheckedDate": null,
+      "sourceCheckedDate": "2026-10-10",
+      "priceNote": "Актуальная цена для Москвы не подтверждена. Не включать неизвестную цену в итог как 0.",
+      "appId": "rtx4060"
+    },
+    {
+      "id": "rtx-3090-trinity",
+      "category": "gpu",
+      "name": "ZOTAC GAMING GeForce RTX 3090 Trinity",
+      "specs": {
+        "gpu": "GeForce RTX 3090",
+        "vramGB": 24,
+        "memoryType": "GDDR6X",
+        "dimensionsMm": [
+          317.8,
+          120.7,
+          58
+        ],
+        "lengthMm": 317.8,
+        "powerW": 350,
+        "recommendedPsuW": 750,
+        "power8Pin": 2,
+        "pcieGeneration": 4,
+        "pcieLanes": 16,
+        "slotSize": 2.5
+      },
+      "sources": [
+        "https://www.zotac.com/us/product/graphics_card/zotac-gaming-geforce-rtx-3090-trinity"
+      ],
+      "notes": [
+        "Fits conservative 320 mm case limit with only 2.2 mm nominal margin; show physical clearance verification note, especially if front radiator installed."
+      ],
+      "priceRub": null,
+      "priceStatus": "unverified",
+      "priceCheckedDate": null,
+      "sourceCheckedDate": "2026-10-10",
+      "priceNote": "Актуальная цена для Москвы не подтверждена. Не включать неизвестную цену в итог как 0.",
+      "appId": "rtx3090",
+      "storeUrl": "https://www.dns-shop.ru/product/db1437a6f7143332/videokarta-pci-e-zotac-geforce-rtx-3090-trinity-24576mb-384bit-gddr6x-zt-a30900d-10p-hdmi-dp/"
+    },
+    {
+      "id": "fury-ddr4-32",
+      "category": "memory",
+      "name": "Kingston FURY Beast DDR4 32 GB (2 × 16 GB) 3200",
+      "partNumber": "KF432C16BBK2/32",
+      "specs": {
+        "memoryType": "DDR4",
+        "capacityGB": 32,
+        "moduleCount": 2,
+        "moduleGB": 16,
+        "speedMTs": 3200,
+        "jedecMTs": 2400,
+        "latencyCL": 16,
+        "voltageV": 1.35,
+        "heightMm": 34,
+        "lengthMm": 133.35,
+        "profile": "XMP 2.0"
+      },
+      "sources": [
+        "https://www.kingston.com/dataSheets/KF432C16BBK2_32.pdf"
+      ],
+      "notes": [
+        "XMP-3200 must be enabled to run the rated profile; default JEDEC is 2400."
+      ],
+      "priceRub": 35999,
+      "priceStatus": "verified",
+      "priceCheckedDate": "2026-10-10",
+      "sourceCheckedDate": "2026-10-10",
+      "priceNote": "Цена показана в карточке DNS для Москвы; проверена через браузер.",
+      "appId": "ddr4-32",
+      "storeUrl": "https://www.dns-shop.ru/product/9ed60ce7fae5ed20/operativnaa-pamat-kingston-fury-beast-black-kf432c16bbk232-32-gb/"
+    },
+    {
+      "id": "fury-ddr5-32",
+      "category": "memory",
+      "name": "Kingston FURY Beast DDR5 32 GB (2 × 16 GB) 6000",
+      "partNumber": "KF560C36BBEK2-32",
+      "specs": {
+        "memoryType": "DDR5",
+        "capacityGB": 32,
+        "moduleCount": 2,
+        "moduleGB": 16,
+        "speedMTs": 6000,
+        "jedecMTs": 4800,
+        "latencyCL": 36,
+        "voltageV": 1.35,
+        "heightMm": 34.9,
+        "lengthMm": 133.35,
+        "profile": "AMD EXPO 1.0 / Intel XMP 3.0"
+      },
+      "sources": [
+        "https://www.kingston.com/datasheets/KF560C36BBEK2-32.pdf"
+      ],
+      "storeUrl": "https://www.dns-shop.ru/product/9855ff3b3957ed20/operativnaa-pamat-kingston-fury-beast-black-kf560c36bbek2-32-32-gb/",
+      "notes": [
+        "6000 is EXPO/XMP overclock profile; exact achievable rate depends on CPU/BIOS/QVL. Physical DDR5 compatibility remains valid."
+      ],
+      "priceRub": null,
+      "priceStatus": "unverified",
+      "priceCheckedDate": null,
+      "sourceCheckedDate": "2026-10-10",
+      "priceNote": "Актуальная цена для Москвы не подтверждена. Не включать неизвестную цену в итог как 0.",
+      "appId": "ddr5-32"
+    },
+    {
+      "id": "kingston-nv2",
+      "category": "storage",
+      "name": "Kingston NV2 1 TB",
+      "partNumber": "SNV2S/1000G",
+      "specs": {
+        "capacityGB": 1000,
+        "formFactor": "M.2 2280",
+        "interface": "NVMe",
+        "pcieGeneration": 4,
+        "pcieLanes": 4,
+        "readMBs": 3500,
+        "writeMBs": 2100,
+        "dimensionsMm": [
+          80,
+          22,
+          2.2
+        ],
+        "operatingMaxC": 70,
+        "tbw": 320
+      },
+      "sources": [
+        "https://www.kingston.com/datasheets/snv2s_en.pdf"
+      ],
+      "storeUrl": "https://www.dns-shop.ru/product/1815ac731eaa42ae/1000-gb-m2-nvme-nakopitel-kingston-nv2-snv2s1000g/",
+      "priceRub": null,
+      "priceStatus": "unverified",
+      "priceCheckedDate": null,
+      "sourceCheckedDate": "2026-10-10",
+      "priceNote": "Актуальная цена для Москвы не подтверждена. Не включать неизвестную цену в итог как 0.",
+      "appId": "nv2"
+    },
+    {
+      "id": "samsung-980",
+      "category": "storage",
+      "name": "Samsung 980 1 TB",
+      "partNumber": "MZ-V8V1T0BW",
+      "specs": {
+        "capacityGB": 1000,
+        "formFactor": "M.2 2280",
+        "interface": "NVMe",
+        "pcieGeneration": 3,
+        "pcieLanes": 4,
+        "operatingMaxC": 70,
+        "averagePowerW": 4.6,
+        "burstPowerW": 5.3,
+        "tbw": 600
+      },
+      "sources": [
+        "https://semiconductor.samsung.com/emea/consumer-storage/internal-ssd/980/"
+      ],
+      "notes": [
+        "Samsung 980, not 980 PRO; PCIe generation differs."
+      ],
+      "priceRub": null,
+      "priceStatus": "unverified",
+      "priceCheckedDate": null,
+      "sourceCheckedDate": "2026-10-10",
+      "priceNote": "Актуальная цена для Москвы не подтверждена. Не включать неизвестную цену в итог как 0.",
+      "appId": "980",
+      "storeUrl": "https://www.dns-shop.ru/product/8a6cde0a85f7d760/m2-nvme-nakopitel-samsung-980-mz-v8v1t0bw/"
+    },
+    {
+      "id": "ak400",
+      "category": "cooler",
+      "name": "DeepCool AK400",
+      "partNumber": "R-AK400-BKNNMN-G-1",
+      "specs": {
+        "sockets": [
+          "AM4",
+          "AM5",
+          "LGA1851",
+          "LGA1700",
+          "LGA1200",
+          "LGA1151",
+          "LGA1150",
+          "LGA1155"
+        ],
+        "dimensionsMm": [
+          127,
+          97,
+          155
+        ],
+        "heightMm": 155,
+        "heatpipes": 4,
+        "fanCount": 1,
+        "fanSizeMm": 120,
+        "fanRpmMin": 500,
+        "fanRpmMax": 1850,
+        "fanAirflowCFM": 66.47,
+        "pwm": true
+      },
+      "sources": [
+        "https://jp.deepcool.com/products/Cooling/cpuaircoolers/AK400-Performance-CPU-Cooler-1851-1700-AM5/2024/15349.shtml",
+        "https://www.deepcool.com/download/pdf/AK400.pdf"
+      ],
+      "storeUrl": "https://www.dns-shop.ru/product/ef120e526912ed20/kuler-dla-processora-deepcool-ak400-r-ak400-bknnmn-g-1-cernyj/",
+      "notes": [
+        "Fan RPM published with ±10% tolerance. Vendor heat-dissipation wattage is not a validated thermal resistance nor direct CPU TDP compatibility test."
+      ],
+      "priceRub": 2050,
+      "priceStatus": "verified",
+      "priceCheckedDate": "2026-10-10",
+      "sourceCheckedDate": "2026-10-10",
+      "priceNote": "Цена показана в карточке DNS для Москвы; проверена через браузер.",
+      "appId": "ak400"
+    },
+    {
+      "id": "ak620",
+      "category": "cooler",
+      "name": "DeepCool AK620",
+      "partNumber": "R-AK620-BKNNMT-G",
+      "specs": {
+        "sockets": [
+          "AM4",
+          "AM5",
+          "LGA1851",
+          "LGA1700",
+          "LGA1200",
+          "LGA1151",
+          "LGA1150",
+          "LGA1155",
+          "LGA2066",
+          "LGA2011"
+        ],
+        "dimensionsMm": [
+          129,
+          138,
+          160
+        ],
+        "heightMm": 160,
+        "ramClearanceMm": 43,
+        "heatpipes": 6,
+        "fanCount": 2,
+        "fanSizeMm": 120,
+        "fanRpmMin": 500,
+        "fanRpmMax": 1850,
+        "fanAirflowCFM": 68.99,
+        "pwm": true
+      },
+      "sources": [
+        "https://global.deepcool.com/products/Cooling/cpuaircoolers/AK620-High-Performance-CPU-Cooler-1851-1700-AM5/2024/13067.shtml"
+      ],
+      "notes": [
+        "RAM clearance 43 mm with both fans; 59 mm with a single fan. Both selected FURY kits fit at 34/34.9 mm."
+      ],
+      "priceRub": 4899,
+      "priceStatus": "verified",
+      "priceCheckedDate": "2026-10-10",
+      "sourceCheckedDate": "2026-10-10",
+      "priceNote": "Цена показана в карточке DNS для Москвы; проверена через браузер.",
+      "appId": "ak620",
+      "storeUrl": "https://www.dns-shop.ru/product/f65523875885ed20/kuler-dla-processora-deepcool-ak620-lga1700-r-ak620-bknnmt-g-cernyj/"
+    },
+    {
+      "id": "pk550d",
+      "category": "psu",
+      "name": "DeepCool PK550D",
+      "partNumber": "R-PK550D-FA0B-EU",
+      "specs": {
+        "capacityW": 550,
+        "efficiency": "80 PLUS Bronze",
+        "formFactor": "ATX",
+        "dimensionsMm": [
+          140,
+          150,
+          86
+        ],
+        "lengthMm": 140,
+        "power8PinPcie": 2,
+        "power8PinCpu": 2,
+        "power24Pin": 1,
+        "modular": false
+      },
+      "sources": [
+        "https://www.deepcool.com/products/PowerSupplyUnits/powersupplyunits/PK550D-80-PLUS-Bronze-Power-Supply/2022/15621.shtml",
+        "https://www.dns-shop.ru/product/characteristics/7cbe7b3e83c12334/blok-pitania-deepcool-pk550d-r-pk550d-fa0b-eu-cernyj/"
+      ],
+      "storeUrl": "https://www.dns-shop.ru/product/7cbe7b3e83c12334/blok-pitania-deepcool-pk550d-r-pk550d-fa0b-eu-cernyj/",
+      "notes": [
+        "PCIe 6+2 connectors: two connectors on one cable according to cable diagram. RTX 3090 fails manufacturer 750 W PSU recommendation despite matching connector count."
+      ],
+      "priceRub": null,
+      "priceStatus": "unverified",
+      "priceCheckedDate": null,
+      "sourceCheckedDate": "2026-10-10",
+      "priceNote": "Актуальная цена для Москвы не подтверждена. Не включать неизвестную цену в итог как 0.",
+      "appId": "pk550"
+    },
+    {
+      "id": "mag-a850gl",
+      "category": "psu",
+      "name": "MSI MAG A850GL PCIE5",
+      "specs": {
+        "capacityW": 850,
+        "efficiency": "80 PLUS Gold",
+        "formFactor": "ATX",
+        "dimensionsMm": [
+          140,
+          150,
+          86
+        ],
+        "lengthMm": 140,
+        "power8PinPcie": 4,
+        "power8PinCpu": 2,
+        "power24Pin": 1,
+        "power16PinPcie": 1,
+        "power16PinMaxW": 600,
+        "modular": true
+      },
+      "sources": [
+        "https://us.msi.com/Power-Supply/MAG-A850GL-PCIE5/Specification"
+      ],
+      "notes": [
+        "Separate EPS CPU and PCIe GPU connectors in logic: mechanically/electrically not interchangeable."
+      ],
+      "priceRub": 10399,
+      "priceStatus": "verified",
+      "priceCheckedDate": "2026-10-10",
+      "sourceCheckedDate": "2026-10-10",
+      "priceNote": "Цена показана в карточке DNS для Москвы; проверена через браузер.",
+      "appId": "a850",
+      "storeUrl": "https://www.dns-shop.ru/product/15ef9f9ed482ed20/blok-pitania-msi-mag-a850gl-pcie5-cernyj/"
+    },
+    {
+      "id": "cc560-v2",
+      "category": "case",
+      "name": "DeepCool CC560 V2",
+      "partNumber": "R-CC560-BKGAA4-G-2",
+      "specs": {
+        "color": "black",
+        "dimensionsMm": [
+          432,
+          215,
+          483
+        ],
+        "motherboardForms": [
+          "Mini-ITX",
+          "Micro-ATX",
+          "ATX"
+        ],
+        "gpuMaxLengthMm": 320,
+        "coolerMaxHeightMm": 165,
+        "psuMaxLengthMm": 170,
+        "psuForm": "ATX",
+        "expansionSlots": 7,
+        "frontFanCount": 3,
+        "rearFanCount": 1,
+        "caseFanSizeMm": 120
+      },
+      "sources": [
+        "https://www.deepcool.com/products/Cases/fulltowercases/CC560-V2-Mid-Tower-Airflow-Case/2023/17782.shtml",
+        "https://de.deepcool.com/products/Cases/CC560-V2-Mid-Tower-Airflow-Case/2023/17809.shtml"
+      ],
+      "storeUrl": "https://www.dns-shop.ru/product/0d7e80408f5fed20/korpus-deepcool-cc560-v2-r-cc560-bkgaa4-g-2-cernyj/",
+      "notes": [
+        "Official global site says 320 mm GPU max; DE/JP/TR localized versions say 370 mm for the same part number. Store conservative 320 mm and disclose conflict. Manual URL timed out.",
+        "Motherboard technical spec says ATX maximum while marketing paragraph says E-ATX; use ATX.",
+        "Preinstalled case fan RPM/PWM control not specified in retrieved manufacturer spec. Front/rear speed in app should be explicitly a virtual fan control, not a promise of real stock-fan PWM support."
+      ],
+      "priceRub": 5299,
+      "priceStatus": "verified",
+      "priceCheckedDate": "2026-10-10",
+      "sourceCheckedDate": "2026-10-10",
+      "priceNote": "Цена показана в карточке DNS для Москвы; проверена через браузер.",
+      "appId": "cc560"
+    }
+  ],
+  "priceResearch": {
+    "verifiedPricesCount": 10,
+    "method": "Visible DNS product cards, Moscow region, browser check on 2026-10-10. No access-control bypass. Missing prices not invented.",
+    "displayGuidance": "Show source date. Unknown prices excluded from partial total; unavailable products remain available for educational assembly."
+  },
+  "thermal": {
+    "classification": "Учебная приблизительная модель; не измерения и не прогноз реальной сборки.",
+    "verifiedFacts": [
+      "AMD CPU TDP is a thermal specification, not exact electrical draw at a selected workload.",
+      "Ryzen 7000 stock package-power limits are 88 W for 65 W TDP and 230 W for 170 W TDP in AMD staff article; temperature/voltage/current can limit boost before power cap.",
+      "Ryzen 5600 Tjmax 90 C; Ryzen 7600 and 7900X Tjmax 95 C.",
+      "Fan throughput and case flow are not determined by RPM alone; resistance, filters and obstructions matter."
+    ],
+    "sourceUrls": [
+      "https://community.amd.com/t5/gaming/ryzen-7000-series-processors-let-s-talk-about-power-temperature/ba-p/554629",
+      "https://www.amd.com/en/products/processors/desktops/ryzen/7000-series/amd-ryzen-9-7900x.html",
+      "https://www.amd.com/en/products/processors/desktops/ryzen/7000-series/amd-ryzen-5-7600.html"
+    ],
+    "sourceAccessNote": "AMD staff article table visible in search-index result; its original URL redirects now. Treat this as archived manufacturer guidance, not a new current benchmark.",
+    "modelGuidance": [
+      "Use explicit designer-selected workload power estimates, thermal resistance and time constants; label them assumptions, not Internet measurements.",
+      "Use first-order approach to equilibrium, T += (T_equilibrium - T)*(1-exp(-dt/tau)); ambient+power*effectiveResistance is an educational simplification.",
+      "Higher load increases generated heat; higher fan speed decreases effective thermal resistance with diminishing returns.",
+      "Show limiting/throttling near CPU Tjmax instead of claiming certain damage. GPU simulation thermal limit should be clearly an assumed control target unless exact manufacturer maximum is separately verified.",
+      "Airflow particles illustrate direction and relative flow, not CFD or actual measured velocity.",
+      "Cooling visibility is visual only: hide CPU cooler without removing its cooling effect; physical removal would be a separate configuration action."
+    ]
+  },
+  "compatibilityImplementationGuidance": {
+    "hardErrors": [
+      "CPU socket differs from motherboard socket.",
+      "RAM DDR generation differs from board and CPU generation.",
+      "No compatible CPU cooler selected.",
+      "Motherboard form factor not supported by case.",
+      "GPU length/cooler height/PSU length exceeds case limits.",
+      "GPU PCIe power connector count exceeds PSU PCIe connector count.",
+      "PSU capacity below chosen conservative policy based on manufacturer GPU PSU recommendation and estimated whole-system peak."
+    ],
+    "warnings": [
+      "Minimum motherboard BIOS/QVL exact version is not verified; require checking official support list before real purchase.",
+      "EXPO/XMP frequency is not guaranteed; a supported memory generation can run at lower JEDEC speed.",
+      "Physical fit near size limits needs verification of cables/fans/radiators.",
+      "Air cooling Ryzen 7900X is mechanically supported but optimal all-core performance is not guaranteed."
+    ],
+    "psuNote": "Vendor recommended PSU is a system recommendation rather than GPU consumption; clearly label any blocking threshold as project validation policy. Distinguish installed power capacity, estimated DC load and wall power."
+  },
+  "recommendedCompleteDemonstration": {
+    "cpu": "ryzen-7600",
+    "motherboard": "b650-s-wifi",
+    "gpu": "rtx-4060-ventus",
+    "memory": "fury-ddr5-32",
+    "storage": "kingston-nv2",
+    "cooler": "ak400",
+    "psu": "pk550d",
+    "case": "cc560-v2",
+    "priceCompleteness": "0/8 verified prices; do not claim a current ruble total."
+  }
+}

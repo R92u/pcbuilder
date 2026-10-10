@@ -1,0 +1,56 @@
+import {categories,resolve} from './catalog.js';
+export function compatibility(build) {
+ const p=resolve(build), errors=[],warnings=[];
+ const add=(code,text,parts)=>errors.push({code,text,parts});
+ if(p.cpu&&p.motherboard&&p.cpu.socket!==p.motherboard.socket)add('socket',`Процессору нужен сокет ${p.cpu.socket}, а у платы — ${p.motherboard.socket}.`,['cpu','motherboard']);
+ if(p.ram&&p.motherboard&&p.ram.memory!==p.motherboard.memory)add('memory',`Память ${p.ram.memory} не подходит к слотам ${p.motherboard.memory} на этой плате.`,['ram','motherboard']);
+ if(p.ram&&p.cpu&&p.ram.memory!==p.cpu.memory)add('cpu-memory',`Контроллер памяти ${p.cpu.short} рассчитан на ${p.cpu.memory}.`,['ram','cpu']);
+ if(p.ram&&p.motherboard&&(p.ram.capacity>p.motherboard.maxRam||p.ram.modules>p.motherboard.slots))add('ram-capacity','Превышено число слотов или поддерживаемый объём памяти.',['ram','motherboard']);
+ if(p.motherboard&&p.case&&!p.case.forms.includes(p.motherboard.form))add('board-size','Формат платы не поддерживается корпусом.',['motherboard','case']);
+ if(p.gpu&&p.case&&p.gpu.length>p.case.gpuLimit)add('gpu-size',`Видеокарта длиной ${p.gpu.length} мм превышает лимит корпуса ${p.case.gpuLimit} мм.`,['gpu','case']);
+ if(p.cooler&&p.cpu&&!p.cooler.sockets.includes(p.cpu.socket))add('cooler-socket','Крепление кулера не подходит к сокету процессора.',['cooler','cpu']);
+ if(p.cooler&&p.case&&p.cooler.height>p.case.coolerLimit)add('cooler-height','Кулер слишком высокий для корпуса.',['cooler','case']);
+ if(p.cooler&&p.ram&&p.ram.height>p.cooler.ramClearance)add('ram-height','Модули памяти не помещаются под вентилятором кулера.',['cooler','ram']);
+ if(p.psu&&p.case&&p.psu.length>p.case.psuLimit)add('psu-size','Блок питания слишком длинный для корпуса.',['psu','case']);
+ if(p.gpu&&p.psu&&p.gpu.connectors>p.psu.connectors)add('connectors','У блока питания недостаточно разъёмов PCIe для видеокарты.',['gpu','psu']);
+ const peak=(p.cpu?.peakPower||0)+(p.gpu?.power||0)+65;
+ const recommended=Math.ceil(Math.max(peak*1.2,p.gpu?.recommendedPsu||0)/50)*50;
+ if(p.psu&&p.cpu&&p.gpu&&p.psu.watts<peak)add('power',`Оценка пиковой мощности ${peak} Вт превышает мощность БП ${p.psu.watts} Вт.`,['psu','cpu','gpu']);
+ else if(p.psu&&p.cpu&&p.gpu&&p.psu.watts<recommended)add('power-reserve',`Недостаточный запас питания: для этой сборки рекомендуем от ${recommended} Вт.`,['psu']);
+ if(p.motherboard?.biosNote&&p.cpu&&p.cpu.socket===p.motherboard.socket)warnings.push(p.motherboard.biosNote);
+ if(p.ram?.memory==='DDR5'&&p.cpu?.socket==='AM5')warnings.push('6000 МТ/с — профиль EXPO. Достижимая скорость зависит от процессора, платы и BIOS.');
+ if(p.gpu&&p.case&&p.case.gpuLimit-p.gpu.length<10)warnings.push('Очень маленький запас по длине видеокарты. Проверь фактическую посадку и свободное место под кабели.');
+ const missing=categories.filter(([key])=>!p[key]).map(([key,name])=>({key,name}));
+ return {errors,warnings,missing,ready:!errors.length&&!missing.length,peak,recommended};
+}
+export const workloads={idle:{name:'Простой',cpu:.08,gpu:.04},game:{name:'Игра',cpu:.48,gpu:.92},video:{name:'Работа с видео',cpu:.86,gpu:.5},stress:{name:'Стресс-тест',cpu:1,gpu:1}};
+export const clamp=(n,a,b)=>Math.min(b,Math.max(a,n));
+export function thermalTargets(build,settings) {
+ const p=resolve(build),w=workloads[settings.load]||workloads.idle;
+ const ambient=clamp(Number(settings.ambient)||22,10,35);
+ const front=clamp(settings.front/100,0,1),rear=clamp(settings.rear/100,0,1),fan=clamp(settings.cpuFan/100,0,1);
+ const requestedCPU=(p.cpu?.peakPower||0)*w.cpu,requestedGPU=(p.gpu?.power||0)*w.gpu;
+ // Lumped thermal network. Conductance & resistance are illustrative coefficients.
+ // A passive-cooling term remains at 0 RPM; filtered inlet/outlet limit total flow.
+ const conductance=8+15*(.45*front+.55*rear);
+ const cpuR=(.20+.42*(1-fan)**1.4)/(p.cooler?.efficiency||.45);
+ const gpuR=.10+.06*(1-(.3+.7*w.gpu)); // simplified automatic GPU fan curve
+ const cpuMax=p.cpu?.tmax||95,gpuMax=p.gpu?.tmax||90;
+ // Solve a stable energy balance with thermal limiting instead of simply clipping
+ // temperature while continuing to inject the full electrical power as heat.
+ let caseTemp=ambient,cpuPower=requestedCPU,gpuPower=requestedGPU;
+ for(let i=0;i<70;i++){
+  cpuPower=Math.min(requestedCPU,Math.max(0,(cpuMax-caseTemp)/cpuR));
+  gpuPower=Math.min(requestedGPU,Math.max(0,(gpuMax-caseTemp)/gpuR));
+  caseTemp=.5*caseTemp+.5*(ambient+(cpuPower+gpuPower+25)/conductance);
+ }
+ const cpuThrottle=cpuPower<requestedCPU-.01,gpuThrottle=gpuPower<requestedGPU-.01;
+ return {ambient,case:caseTemp,cpu:Math.min(caseTemp+cpuPower*cpuR,cpuMax),gpu:Math.min(caseTemp+gpuPower*gpuR,gpuMax),ram:caseTemp+5+4*w.cpu,storage:caseTemp+4+8*(settings.load==='video'?1:w.cpu),cpuThrottle,gpuThrottle,cpuPower,gpuPower,power:Math.round(cpuPower+gpuPower+45),cpuLoad:Math.round(w.cpu*100),gpuLoad:Math.round(w.gpu*100),flow:Math.round(120.2*(front*3+rear)*.38),rpm:{front:Math.round(front*1700),rear:Math.round(rear*1700),cpu:Math.round(fan*(p.cooler?.maxRpm||1850))}};
+}
+export function advanceThermals(current,target,dt) {
+ const out={...current}; for(const [key,tau] of [['cpu',8],['gpu',12],['case',20],['ram',24],['storage',22]])out[key]=current[key]+(target[key]-current[key])*(1-Math.exp(-clamp(dt,0,1)/tau));return out;
+}
+export function summarizePrices(build,prices) {
+ const chosen=Object.values(resolve(build)).filter(Boolean),known=chosen.filter(p=>Number.isFinite(prices[p.id]?.price)&&prices[p.id].price>0);
+ return {total:known.reduce((s,p)=>s+prices[p.id].price,0),known:known.length,count:chosen.length,complete:known.length===chosen.length};
+}

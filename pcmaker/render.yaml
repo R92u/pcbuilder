@@ -1,0 +1,13 @@
+services:
+  - type: web
+    runtime: static
+    name: pcmaker
+    buildCommand: node pcmaker/scripts/check.mjs
+    staticPublishPath: pcmaker/dist
+    headers:
+      - path: /*
+        name: X-Content-Type-Options
+        value: nosniff
+      - path: /*
+        name: Referrer-Policy
+        value: strict-origin-when-cross-origin

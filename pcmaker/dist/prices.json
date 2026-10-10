@@ -1,0 +1,110 @@
+{
+  "city": "Москва",
+  "checkedAt": "2026-10-10",
+  "items": {
+    "r5-5600": {
+      "price": 11999,
+      "date": "2026-10-10",
+      "store": "DNS",
+      "url": "https://www.dns-shop.ru/product/6d7a8c58afebed20/processor-amd-ryzen-5-5600-oem/"
+    },
+    "r5-7600": {
+      "price": 16399,
+      "date": "2026-10-10",
+      "store": "DNS",
+      "url": "https://www.dns-shop.ru/product/93478ee7e957ed20/processor-amd-ryzen-5-7600-oem/"
+    },
+    "r9-7900x": {
+      "price": 35999,
+      "date": "2026-10-10",
+      "store": "DNS",
+      "url": "https://www.dns-shop.ru/product/7a2387593941ed20/processor-amd-ryzen-9-7900x-oem/"
+    },
+    "b550": {
+      "price": 11699,
+      "date": "2026-10-10",
+      "store": "DNS",
+      "url": "https://www.dns-shop.ru/product/232aa9fbb9a11b80/materinskaa-plata-msi-b550-a-pro/"
+    },
+    "rtx3060": {
+      "price": 45999,
+      "date": "2026-10-10",
+      "store": "DNS",
+      "url": "https://www.dns-shop.ru/product/55cc9b9165b71b80/videokarta-msi-geforce-rtx-3060-ventus-2x-oc-lhr-rtx-3060-ventus-2x-12g-oc/"
+    },
+    "ddr4-32": {
+      "price": 35999,
+      "date": "2026-10-10",
+      "store": "DNS",
+      "url": "https://www.dns-shop.ru/product/9ed60ce7fae5ed20/operativnaa-pamat-kingston-fury-beast-black-kf432c16bbk232-32-gb/"
+    },
+    "ak400": {
+      "price": 2050,
+      "date": "2026-10-10",
+      "store": "DNS",
+      "url": "https://www.dns-shop.ru/product/ef120e526912ed20/kuler-dla-processora-deepcool-ak400-r-ak400-bknnmn-g-1-cernyj/"
+    },
+    "ak620": {
+      "price": 4899,
+      "date": "2026-10-10",
+      "store": "DNS",
+      "url": "https://www.dns-shop.ru/product/f65523875885ed20/kuler-dla-processora-deepcool-ak620-lga1700-r-ak620-bknnmt-g-cernyj/"
+    },
+    "a850": {
+      "price": 10399,
+      "date": "2026-10-10",
+      "store": "DNS",
+      "url": "https://www.dns-shop.ru/product/15ef9f9ed482ed20/blok-pitania-msi-mag-a850gl-pcie5-cernyj/"
+    },
+    "cc560": {
+      "price": 5299,
+      "date": "2026-10-10",
+      "store": "DNS",
+      "url": "https://www.dns-shop.ru/product/0d7e80408f5fed20/korpus-deepcool-cc560-v2-r-cc560-bkgaa4-g-2-cernyj/"
+    }
+  },
+  "availability": {
+    "980": {
+      "status": "Продажи прекращены",
+      "date": "2026-10-10",
+      "store": "DNS",
+      "url": "https://www.dns-shop.ru/product/8a6cde0a85f7d760/m2-nvme-nakopitel-samsung-980-mz-v8v1t0bw/"
+    },
+    "b650": {
+      "status": "Нет в наличии",
+      "date": "2026-10-10",
+      "store": "DNS",
+      "url": "https://www.dns-shop.ru/product/963ee0f69765d0a4/materinskaa-plata-msi-pro-b650-s-wifi/"
+    },
+    "rtx4060": {
+      "status": "Продажи прекращены",
+      "date": "2026-10-10",
+      "store": "DNS",
+      "url": "https://www.dns-shop.ru/product/fa6fb9521e4bed20/videokarta-msi-geforce-rtx-4060-ventus-2x-black-geforce-rtx-4060-ventus-2x-black-8g/"
+    },
+    "rtx3090": {
+      "status": "Продажи прекращены",
+      "date": "2026-10-10",
+      "store": "DNS",
+      "url": "https://www.dns-shop.ru/product/db1437a6f7143332/videokarta-pci-e-zotac-geforce-rtx-3090-trinity-24576mb-384bit-gddr6x-zt-a30900d-10p-hdmi-dp/"
+    },
+    "ddr5-32": {
+      "status": "Продажи прекращены",
+      "date": "2026-10-10",
+      "store": "DNS",
+      "url": "https://www.dns-shop.ru/product/9855ff3b3957ed20/operativnaa-pamat-kingston-fury-beast-black-kf560c36bbek2-32-32-gb/"
+    },
+    "nv2": {
+      "status": "Продажи прекращены",
+      "date": "2026-10-10",
+      "store": "DNS",
+      "url": "https://www.dns-shop.ru/product/1815ac731eaa42ae/1000-gb-m2-nvme-nakopitel-kingston-nv2-snv2s1000g/"
+    },
+    "pk550": {
+      "status": "Продажи прекращены",
+      "date": "2026-10-10",
+      "store": "DNS",
+      "url": "https://www.dns-shop.ru/product/7cbe7b3e83c12334/blok-pitania-deepcool-pk550d-r-pk550d-fa0b-eu-cernyj/"
+    }
+  }
+}
