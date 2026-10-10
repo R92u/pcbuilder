@@ -1,0 +1,1959 @@
+{
+  "980": {
+    "category": "storage"
+  },
+  "r5-5600": {
+    "category": "cpu",
+    "socket": "AM4",
+    "memory": [
+      "DDR4"
+    ],
+    "power": 88
+  },
+  "r5-7600": {
+    "category": "cpu",
+    "socket": "AM5",
+    "memory": [
+      "DDR5"
+    ],
+    "power": 88
+  },
+  "r9-7900x": {
+    "category": "cpu",
+    "socket": "AM5",
+    "memory": [
+      "DDR5"
+    ],
+    "power": 230
+  },
+  "r5-5600x": {
+    "category": "cpu",
+    "socket": "AM4",
+    "memory": [
+      "DDR4"
+    ],
+    "power": 88
+  },
+  "r7-5700x": {
+    "category": "cpu",
+    "socket": "AM4",
+    "memory": [
+      "DDR4"
+    ],
+    "power": 88
+  },
+  "r7-5800x": {
+    "category": "cpu",
+    "socket": "AM4",
+    "memory": [
+      "DDR4"
+    ],
+    "power": 142
+  },
+  "r7-5800x3d": {
+    "category": "cpu",
+    "socket": "AM4",
+    "memory": [
+      "DDR4"
+    ],
+    "power": 142
+  },
+  "r7-7700x": {
+    "category": "cpu",
+    "socket": "AM5",
+    "memory": [
+      "DDR5"
+    ],
+    "power": 142
+  },
+  "r7-7800x3d": {
+    "category": "cpu",
+    "socket": "AM5",
+    "memory": [
+      "DDR5"
+    ],
+    "power": 162
+  },
+  "i3-12100f": {
+    "category": "cpu",
+    "socket": "LGA1700",
+    "memory": [
+      "DDR4",
+      "DDR5"
+    ],
+    "power": 89
+  },
+  "i5-12400f": {
+    "category": "cpu",
+    "socket": "LGA1700",
+    "memory": [
+      "DDR4",
+      "DDR5"
+    ],
+    "power": 117
+  },
+  "i5-12600k": {
+    "category": "cpu",
+    "socket": "LGA1700",
+    "memory": [
+      "DDR4",
+      "DDR5"
+    ],
+    "power": 150
+  },
+  "i5-13400f": {
+    "category": "cpu",
+    "socket": "LGA1700",
+    "memory": [
+      "DDR4",
+      "DDR5"
+    ],
+    "power": 148
+  },
+  "i5-13600k": {
+    "category": "cpu",
+    "socket": "LGA1700",
+    "memory": [
+      "DDR4",
+      "DDR5"
+    ],
+    "power": 181
+  },
+  "i5-14600k": {
+    "category": "cpu",
+    "socket": "LGA1700",
+    "memory": [
+      "DDR4",
+      "DDR5"
+    ],
+    "power": 181
+  },
+  "r5-5500": {
+    "category": "cpu",
+    "socket": "AM4",
+    "memory": [
+      "DDR4"
+    ],
+    "power": 88
+  },
+  "r5-5600g": {
+    "category": "cpu",
+    "socket": "AM4",
+    "memory": [
+      "DDR4"
+    ],
+    "power": 88
+  },
+  "r7-5700g": {
+    "category": "cpu",
+    "socket": "AM4",
+    "memory": [
+      "DDR4"
+    ],
+    "power": 88
+  },
+  "r9-5900x": {
+    "category": "cpu",
+    "socket": "AM4",
+    "memory": [
+      "DDR4"
+    ],
+    "power": 142
+  },
+  "r9-5950x": {
+    "category": "cpu",
+    "socket": "AM4",
+    "memory": [
+      "DDR4"
+    ],
+    "power": 142
+  },
+  "r5-7600x": {
+    "category": "cpu",
+    "socket": "AM5",
+    "memory": [
+      "DDR5"
+    ],
+    "power": 142
+  },
+  "r7-7700": {
+    "category": "cpu",
+    "socket": "AM5",
+    "memory": [
+      "DDR5"
+    ],
+    "power": 88
+  },
+  "r9-7900": {
+    "category": "cpu",
+    "socket": "AM5",
+    "memory": [
+      "DDR5"
+    ],
+    "power": 88
+  },
+  "r9-7950x": {
+    "category": "cpu",
+    "socket": "AM5",
+    "memory": [
+      "DDR5"
+    ],
+    "power": 230
+  },
+  "r5-9600x": {
+    "category": "cpu",
+    "socket": "AM5",
+    "memory": [
+      "DDR5"
+    ],
+    "power": 88
+  },
+  "r7-9700x": {
+    "category": "cpu",
+    "socket": "AM5",
+    "memory": [
+      "DDR5"
+    ],
+    "power": 88
+  },
+  "r9-9900x": {
+    "category": "cpu",
+    "socket": "AM5",
+    "memory": [
+      "DDR5"
+    ],
+    "power": 162
+  },
+  "r9-9950x": {
+    "category": "cpu",
+    "socket": "AM5",
+    "memory": [
+      "DDR5"
+    ],
+    "power": 230
+  },
+  "i7-12700k": {
+    "category": "cpu",
+    "socket": "LGA1700",
+    "memory": [
+      "DDR4",
+      "DDR5"
+    ],
+    "power": 190
+  },
+  "i7-14700k": {
+    "category": "cpu",
+    "socket": "LGA1700",
+    "memory": [
+      "DDR4",
+      "DDR5"
+    ],
+    "power": 253
+  },
+  "b550": {
+    "category": "motherboard",
+    "socket": "AM4",
+    "memory": "DDR4",
+    "maxRam": 128,
+    "slots": 4,
+    "form": "ATX"
+  },
+  "b650": {
+    "category": "motherboard",
+    "socket": "AM5",
+    "memory": "DDR5",
+    "maxRam": 256,
+    "slots": 4,
+    "form": "ATX"
+  },
+  "b760m-p-ddr4": {
+    "category": "motherboard",
+    "socket": "LGA1700",
+    "memory": "DDR4",
+    "maxRam": 128,
+    "slots": 4,
+    "form": "Micro-ATX"
+  },
+  "b760-p-wifi": {
+    "category": "motherboard",
+    "socket": "LGA1700",
+    "memory": "DDR5",
+    "maxRam": 256,
+    "slots": 4,
+    "form": "ATX"
+  },
+  "b550-tomahawk": {
+    "category": "motherboard",
+    "socket": "AM4",
+    "memory": "DDR4",
+    "maxRam": 128,
+    "slots": 4,
+    "form": "ATX"
+  },
+  "b550m-pro-vdh-wifi": {
+    "category": "motherboard",
+    "socket": "AM4",
+    "memory": "DDR4",
+    "maxRam": 128,
+    "slots": 4,
+    "form": "Micro-ATX"
+  },
+  "b650-tomahawk-wifi": {
+    "category": "motherboard",
+    "socket": "AM5",
+    "memory": "DDR5",
+    "maxRam": 256,
+    "slots": 4,
+    "form": "ATX"
+  },
+  "b650m-a-wifi": {
+    "category": "motherboard",
+    "socket": "AM5",
+    "memory": "DDR5",
+    "maxRam": 256,
+    "slots": 4,
+    "form": "Micro-ATX"
+  },
+  "mpg-b550-gaming-plus": {
+    "category": "motherboard",
+    "socket": "AM4",
+    "memory": "DDR4",
+    "maxRam": 128,
+    "slots": 4,
+    "form": "ATX"
+  },
+  "b550m-pro-vdh": {
+    "category": "motherboard",
+    "socket": "AM4",
+    "memory": "DDR4",
+    "maxRam": 128,
+    "slots": 4,
+    "form": "Micro-ATX"
+  },
+  "mpg-b550-gaming-edge-wifi": {
+    "category": "motherboard",
+    "socket": "AM4",
+    "memory": "DDR4",
+    "maxRam": 128,
+    "slots": 4,
+    "form": "ATX"
+  },
+  "pro-b650-p-wifi": {
+    "category": "motherboard",
+    "socket": "AM5",
+    "memory": "DDR5",
+    "maxRam": 256,
+    "slots": 4,
+    "form": "ATX"
+  },
+  "b650-gaming-plus-wifi": {
+    "category": "motherboard",
+    "socket": "AM5",
+    "memory": "DDR5",
+    "maxRam": 256,
+    "slots": 4,
+    "form": "ATX"
+  },
+  "mag-b760-tomahawk-wifi-ddr4": {
+    "category": "motherboard",
+    "socket": "LGA1700",
+    "memory": "DDR4",
+    "maxRam": 128,
+    "slots": 4,
+    "form": "ATX"
+  },
+  "mag-z790-tomahawk-wifi": {
+    "category": "motherboard",
+    "socket": "LGA1700",
+    "memory": "DDR5",
+    "maxRam": 256,
+    "slots": 4,
+    "form": "ATX"
+  },
+  "prime-b550m-a": {
+    "category": "motherboard",
+    "socket": "AM4",
+    "memory": "DDR4",
+    "maxRam": 128,
+    "slots": 4,
+    "form": "Micro-ATX"
+  },
+  "tuf-b650-plus-wifi": {
+    "category": "motherboard",
+    "socket": "AM5",
+    "memory": "DDR5",
+    "maxRam": 256,
+    "slots": 4,
+    "form": "ATX"
+  },
+  "b650-eagle-ax": {
+    "category": "motherboard",
+    "socket": "AM5",
+    "memory": "DDR5",
+    "maxRam": 256,
+    "slots": 4,
+    "form": "ATX"
+  },
+  "rtx3060": {
+    "category": "gpu",
+    "length": 235,
+    "power": 170,
+    "psu": 550,
+    "pins": false,
+    "connectors": 1
+  },
+  "rtx4060": {
+    "category": "gpu",
+    "length": 199,
+    "power": 115,
+    "psu": 550,
+    "pins": false,
+    "connectors": 1
+  },
+  "rtx3090": {
+    "category": "gpu",
+    "length": 317.8,
+    "power": 350,
+    "psu": 750,
+    "pins": false,
+    "connectors": 2
+  },
+  "rtx3050": {
+    "category": "gpu",
+    "length": 235,
+    "power": 130,
+    "psu": 550,
+    "pins": false,
+    "connectors": 1
+  },
+  "rtx3060ti": {
+    "category": "gpu",
+    "length": 235,
+    "power": 200,
+    "psu": 600,
+    "pins": false,
+    "connectors": 1
+  },
+  "rtx4060ti": {
+    "category": "gpu",
+    "length": 199,
+    "power": 160,
+    "psu": 550,
+    "pins": false,
+    "connectors": 1
+  },
+  "rtx4070": {
+    "category": "gpu",
+    "length": 308,
+    "power": 200,
+    "psu": 650,
+    "pins": false,
+    "connectors": 1
+  },
+  "rtx4070super": {
+    "category": "gpu",
+    "length": 308,
+    "power": 220,
+    "psu": 650,
+    "pins": true,
+    "connectors": 2
+  },
+  "rx6600": {
+    "category": "gpu",
+    "length": 193,
+    "power": 140,
+    "psu": 500,
+    "pins": false,
+    "connectors": 1
+  },
+  "rx6650xt": {
+    "category": "gpu",
+    "length": 240,
+    "power": 176,
+    "psu": 500,
+    "pins": false,
+    "connectors": 1
+  },
+  "rx7600": {
+    "category": "gpu",
+    "length": 240,
+    "power": 185,
+    "psu": 550,
+    "pins": false,
+    "connectors": 1
+  },
+  "rx7700xt": {
+    "category": "gpu",
+    "length": 280,
+    "power": 230,
+    "psu": 700,
+    "pins": false,
+    "connectors": 2
+  },
+  "rx7800xt": {
+    "category": "gpu",
+    "length": 280,
+    "power": 266,
+    "psu": 700,
+    "pins": false,
+    "connectors": 2
+  },
+  "rtx3050-6-ventus2x-e-oc": {
+    "category": "gpu",
+    "length": 189,
+    "power": 70,
+    "psu": 300,
+    "pins": false,
+    "connectors": 0
+  },
+  "rtx4060ti-16-ventus2x-oc": {
+    "category": "gpu",
+    "length": 199,
+    "power": 165,
+    "psu": 550,
+    "pins": false,
+    "connectors": 1
+  },
+  "rtx4070tisuper-ventus3x-oc": {
+    "category": "gpu",
+    "length": 308,
+    "power": 285,
+    "psu": 700,
+    "pins": true,
+    "connectors": 0
+  },
+  "rtx4080super-ventus3x-oc": {
+    "category": "gpu",
+    "length": 322,
+    "power": 320,
+    "psu": 750,
+    "pins": true,
+    "connectors": 0
+  },
+  "rtx4090-ventus3x-oc": {
+    "category": "gpu",
+    "length": 322,
+    "power": 450,
+    "psu": 850,
+    "pins": true,
+    "connectors": 0
+  },
+  "rtx5050-ventus2x-oc": {
+    "category": "gpu",
+    "length": 197,
+    "power": 130,
+    "psu": 550,
+    "pins": false,
+    "connectors": 1
+  },
+  "rtx5060-ventus2x-oc": {
+    "category": "gpu",
+    "length": 197,
+    "power": 145,
+    "psu": 550,
+    "pins": false,
+    "connectors": 1
+  },
+  "rtx5060ti-16-ventus2x-oc-plus": {
+    "category": "gpu",
+    "length": 227,
+    "power": 180,
+    "psu": 600,
+    "pins": false,
+    "connectors": 1
+  },
+  "rtx5070-ventus2x-oc-white": {
+    "category": "gpu",
+    "length": 236,
+    "power": 250,
+    "psu": 650,
+    "pins": true,
+    "connectors": 0
+  },
+  "rtx5070ti-ventus3x-oc": {
+    "category": "gpu",
+    "length": 303,
+    "power": 300,
+    "psu": 750,
+    "pins": true,
+    "connectors": 0
+  },
+  "rtx5080-ventus3x-oc": {
+    "category": "gpu",
+    "length": 303,
+    "power": 360,
+    "psu": 850,
+    "pins": true,
+    "connectors": 0
+  },
+  "rtx5090-ventus3x-oc": {
+    "category": "gpu",
+    "length": 325,
+    "power": 575,
+    "psu": 1000,
+    "pins": true,
+    "connectors": 0
+  },
+  "rx7600xt-pulse": {
+    "category": "gpu",
+    "length": 250,
+    "power": 192,
+    "psu": 600,
+    "pins": false,
+    "connectors": 2
+  },
+  "rx7900gre-pulse": {
+    "category": "gpu",
+    "length": 320,
+    "power": 268,
+    "psu": 700,
+    "pins": false,
+    "connectors": 2
+  },
+  "rx7900xt-pulse": {
+    "category": "gpu",
+    "length": 313,
+    "power": 331,
+    "psu": 750,
+    "pins": false,
+    "connectors": 2
+  },
+  "rx7900xtx-pulse": {
+    "category": "gpu",
+    "length": 313,
+    "power": 370,
+    "psu": 800,
+    "pins": false,
+    "connectors": 3
+  },
+  "rx9060xt-8-pulse": {
+    "category": "gpu",
+    "length": 200,
+    "power": 150,
+    "psu": 450,
+    "pins": false,
+    "connectors": 1
+  },
+  "rx9060xt-16-pulse-oc": {
+    "category": "gpu",
+    "length": 240,
+    "power": 170,
+    "psu": 450,
+    "pins": false,
+    "connectors": 1
+  },
+  "rx9070-pulse": {
+    "category": "gpu",
+    "length": 280,
+    "power": 220,
+    "psu": 650,
+    "pins": false,
+    "connectors": 2
+  },
+  "rx9070xt-pulse": {
+    "category": "gpu",
+    "length": 320,
+    "power": 304,
+    "psu": 750,
+    "pins": false,
+    "connectors": 2
+  },
+  "ddr4-32": {
+    "category": "ram",
+    "memory": "DDR4",
+    "capacity": 32,
+    "modules": 2,
+    "height": 34.1
+  },
+  "ddr5-32": {
+    "category": "ram",
+    "memory": "DDR5",
+    "capacity": 32,
+    "modules": 2,
+    "height": 34.9
+  },
+  "ddr4-16-3200": {
+    "category": "ram",
+    "memory": "DDR4",
+    "capacity": 16,
+    "modules": 2,
+    "height": 34
+  },
+  "ddr4-32-3600": {
+    "category": "ram",
+    "memory": "DDR4",
+    "capacity": 32,
+    "modules": 2,
+    "height": 34
+  },
+  "ddr5-16-5200": {
+    "category": "ram",
+    "memory": "DDR5",
+    "capacity": 16,
+    "modules": 2,
+    "height": 34.9
+  },
+  "ddr5-64-6000": {
+    "category": "ram",
+    "memory": "DDR5",
+    "capacity": 64,
+    "modules": 2,
+    "height": 34.9
+  },
+  "ddr4-16-3600-cl17": {
+    "category": "ram",
+    "memory": "DDR4",
+    "capacity": 16,
+    "modules": 2,
+    "height": 34
+  },
+  "ddr4-64-3200": {
+    "category": "ram",
+    "memory": "DDR4",
+    "capacity": 64,
+    "modules": 2,
+    "height": 34
+  },
+  "ddr4-64-3600": {
+    "category": "ram",
+    "memory": "DDR4",
+    "capacity": 64,
+    "modules": 2,
+    "height": 34
+  },
+  "renegade-ddr4-32-3600": {
+    "category": "ram",
+    "memory": "DDR4",
+    "capacity": 32,
+    "modules": 2,
+    "height": 42.2
+  },
+  "ddr5-32-5200": {
+    "category": "ram",
+    "memory": "DDR5",
+    "capacity": 32,
+    "modules": 2,
+    "height": 34.9
+  },
+  "ddr5-32-5600": {
+    "category": "ram",
+    "memory": "DDR5",
+    "capacity": 32,
+    "modules": 2,
+    "height": 34.9
+  },
+  "ddr5-32-6000-cl30": {
+    "category": "ram",
+    "memory": "DDR5",
+    "capacity": 32,
+    "modules": 2,
+    "height": 34.9
+  },
+  "ddr5-64-5600": {
+    "category": "ram",
+    "memory": "DDR5",
+    "capacity": 64,
+    "modules": 2,
+    "height": 34.9
+  },
+  "renegade-ddr5-32-6400": {
+    "category": "ram",
+    "memory": "DDR5",
+    "capacity": 32,
+    "modules": 2,
+    "height": 39.2
+  },
+  "renegade-ddr5-32-7200": {
+    "category": "ram",
+    "memory": "DDR5",
+    "capacity": 32,
+    "modules": 2,
+    "height": 39.2
+  },
+  "mem-kf432c16bb1k2-32": {
+    "category": "ram",
+    "memory": "DDR4",
+    "capacity": 32,
+    "modules": 2,
+    "height": 0
+  },
+  "mem-ax4u32008g16a-dtwhd35g": {
+    "category": "ram",
+    "memory": "DDR4",
+    "capacity": 16,
+    "modules": 2,
+    "height": 0
+  },
+  "mem-pvs416g373c7k": {
+    "category": "ram",
+    "memory": "DDR4",
+    "capacity": 16,
+    "modules": 2,
+    "height": 0
+  },
+  "mem-kf568c34bbeak2-32": {
+    "category": "ram",
+    "memory": "DDR5",
+    "capacity": 32,
+    "modules": 2,
+    "height": 0
+  },
+  "mem-ntbsd4p32sp-16": {
+    "category": "ram",
+    "memory": "DDR4",
+    "capacity": 16,
+    "modules": 1,
+    "height": 0
+  },
+  "mem-kf432c16bb-16": {
+    "category": "ram",
+    "memory": "DDR4",
+    "capacity": 16,
+    "modules": 1,
+    "height": 0
+  },
+  "mem-kf432c16bb2a-8": {
+    "category": "ram",
+    "memory": "DDR4",
+    "capacity": 8,
+    "modules": 1,
+    "height": 0
+  },
+  "mem-kf556c36bbek2-16": {
+    "category": "ram",
+    "memory": "DDR5",
+    "capacity": 16,
+    "modules": 2,
+    "height": 0
+  },
+  "mem-psd44g266681": {
+    "category": "ram",
+    "memory": "DDR4",
+    "capacity": 4,
+    "modules": 1,
+    "height": 0
+  },
+  "mem-ks3200d4p13508g": {
+    "category": "ram",
+    "memory": "DDR4",
+    "capacity": 8,
+    "modules": 1,
+    "height": 0
+  },
+  "mem-kf556c36bbek2-32": {
+    "category": "ram",
+    "memory": "DDR5",
+    "capacity": 32,
+    "modules": 2,
+    "height": 0
+  },
+  "mem-kf556c36bbe-16": {
+    "category": "ram",
+    "memory": "DDR5",
+    "capacity": 16,
+    "modules": 1,
+    "height": 0
+  },
+  "mem-ntbsd4p26sp-08": {
+    "category": "ram",
+    "memory": "DDR4",
+    "capacity": 8,
+    "modules": 1,
+    "height": 0
+  },
+  "mem-kvr32n22s8-8wp": {
+    "category": "ram",
+    "memory": "DDR4",
+    "capacity": 8,
+    "modules": 1,
+    "height": 0
+  },
+  "mem-psd48g266681": {
+    "category": "ram",
+    "memory": "DDR4",
+    "capacity": 8,
+    "modules": 1,
+    "height": 0
+  },
+  "mem-kf560c30bbek2-16": {
+    "category": "ram",
+    "memory": "DDR5",
+    "capacity": 16,
+    "modules": 2,
+    "height": 0
+  },
+  "mem-ax4u32008g16a-dtwhd35": {
+    "category": "ram",
+    "memory": "DDR4",
+    "capacity": 16,
+    "modules": 2,
+    "height": 0
+  },
+  "mem-kf436c18bb-16": {
+    "category": "ram",
+    "memory": "DDR4",
+    "capacity": 16,
+    "modules": 1,
+    "height": 0
+  },
+  "mem-kf564c32bbek2-32": {
+    "category": "ram",
+    "memory": "DDR5",
+    "capacity": 32,
+    "modules": 2,
+    "height": 0
+  },
+  "mem-ntbsd4p26sp-16": {
+    "category": "ram",
+    "memory": "DDR4",
+    "capacity": 16,
+    "modules": 1,
+    "height": 0
+  },
+  "mem-pvv516g56c36": {
+    "category": "ram",
+    "memory": "DDR5",
+    "capacity": 16,
+    "modules": 1,
+    "height": 0
+  },
+  "mem-kvr32n22s8-16": {
+    "category": "ram",
+    "memory": "DDR4",
+    "capacity": 16,
+    "modules": 1,
+    "height": 0
+  },
+  "mem-ks3200d4p13516g": {
+    "category": "ram",
+    "memory": "DDR4",
+    "capacity": 16,
+    "modules": 1,
+    "height": 0
+  },
+  "mem-kf560c30bbek2-64": {
+    "category": "ram",
+    "memory": "DDR5",
+    "capacity": 64,
+    "modules": 2,
+    "height": 0
+  },
+  "mem-psp48g3200h1": {
+    "category": "ram",
+    "memory": "DDR4",
+    "capacity": 8,
+    "modules": 1,
+    "height": 0
+  },
+  "mem-ks2666d4p12016g": {
+    "category": "ram",
+    "memory": "DDR4",
+    "capacity": 16,
+    "modules": 1,
+    "height": 0
+  },
+  "mem-ax5u6000c3016g-dtlabbk": {
+    "category": "ram",
+    "memory": "DDR5",
+    "capacity": 32,
+    "modules": 2,
+    "height": 0
+  },
+  "mem-au08ggb32csybgh": {
+    "category": "ram",
+    "memory": "DDR4",
+    "capacity": 8,
+    "modules": 1,
+    "height": 0
+  },
+  "mem-ax5u6000c3016g-dtlabrbk": {
+    "category": "ram",
+    "memory": "DDR5",
+    "capacity": 32,
+    "modules": 2,
+    "height": 0
+  },
+  "mem-ax5u6400c3216g-dclarwh": {
+    "category": "ram",
+    "memory": "DDR5",
+    "capacity": 32,
+    "modules": 2,
+    "height": 0
+  },
+  "mem-ax5u5600c468g-dtlabbk": {
+    "category": "ram",
+    "memory": "DDR5",
+    "capacity": 16,
+    "modules": 2,
+    "height": 0
+  },
+  "mem-ntbsd5p48sp-16": {
+    "category": "ram",
+    "memory": "DDR4",
+    "capacity": 16,
+    "modules": 1,
+    "height": 0
+  },
+  "mem-kf552c40bba-8": {
+    "category": "ram",
+    "memory": "DDR5",
+    "capacity": 8,
+    "modules": 1,
+    "height": 0
+  },
+  "mem-kf560c30bbe-32": {
+    "category": "ram",
+    "memory": "DDR5",
+    "capacity": 32,
+    "modules": 1,
+    "height": 0
+  },
+  "mem-dgmad43200016d": {
+    "category": "ram",
+    "memory": "DDR4",
+    "capacity": 16,
+    "modules": 1,
+    "height": 0
+  },
+  "mem-ax5u6000c3016g-dclabk": {
+    "category": "ram",
+    "memory": "DDR5",
+    "capacity": 32,
+    "modules": 2,
+    "height": 0
+  },
+  "mem-ks3200d4p12008g": {
+    "category": "ram",
+    "memory": "DDR4",
+    "capacity": 8,
+    "modules": 1,
+    "height": 0
+  },
+  "mem-dgmad42666004s": {
+    "category": "ram",
+    "memory": "DDR4",
+    "capacity": 4,
+    "modules": 1,
+    "height": 0
+  },
+  "mem-psp516g560081h1": {
+    "category": "ram",
+    "memory": "DDR5",
+    "capacity": 16,
+    "modules": 1,
+    "height": 0
+  },
+  "mem-au08ggb26cqybgh": {
+    "category": "ram",
+    "memory": "DDR4",
+    "capacity": 8,
+    "modules": 1,
+    "height": 0
+  },
+  "mem-ax5u5600c4616g-dtlabwh": {
+    "category": "ram",
+    "memory": "DDR5",
+    "capacity": 32,
+    "modules": 2,
+    "height": 0
+  },
+  "mem-kf432c16rb12-16": {
+    "category": "ram",
+    "memory": "DDR4",
+    "capacity": 16,
+    "modules": 1,
+    "height": 0
+  },
+  "mem-ax5u6400c3216g-dtlabbk": {
+    "category": "ram",
+    "memory": "DDR5",
+    "capacity": 32,
+    "modules": 2,
+    "height": 0
+  },
+  "mem-psp416g3200h1": {
+    "category": "ram",
+    "memory": "DDR4",
+    "capacity": 16,
+    "modules": 1,
+    "height": 0
+  },
+  "mem-ax5u6000c3616g-dtlabrbk": {
+    "category": "ram",
+    "memory": "DDR5",
+    "capacity": 32,
+    "modules": 2,
+    "height": 0
+  },
+  "mem-ax4u32008g16a-sbkd35": {
+    "category": "ram",
+    "memory": "DDR4",
+    "capacity": 8,
+    "modules": 1,
+    "height": 0
+  },
+  "mem-psd432g32002": {
+    "category": "ram",
+    "memory": "DDR5",
+    "capacity": 32,
+    "modules": 1,
+    "height": 0
+  },
+  "mem-psd416g26662": {
+    "category": "ram",
+    "memory": "DDR4",
+    "capacity": 16,
+    "modules": 1,
+    "height": 0
+  },
+  "mem-ks2666d4p12008g": {
+    "category": "ram",
+    "memory": "DDR4",
+    "capacity": 8,
+    "modules": 1,
+    "height": 0
+  },
+  "mem-ax5u6400c3216g-dtlabrwh": {
+    "category": "ram",
+    "memory": "DDR5",
+    "capacity": 32,
+    "modules": 2,
+    "height": 0
+  },
+  "nv2": {
+    "category": "storage"
+  },
+  "990-pro-1tb": {
+    "category": "storage"
+  },
+  "kc3000-1tb": {
+    "category": "storage"
+  },
+  "p3-plus-1tb": {
+    "category": "storage"
+  },
+  "sn850x-2tb": {
+    "category": "storage"
+  },
+  "nv2-500gb": {
+    "category": "storage"
+  },
+  "nv2-2tb": {
+    "category": "storage"
+  },
+  "kc3000-512gb": {
+    "category": "storage"
+  },
+  "kc3000-2tb": {
+    "category": "storage"
+  },
+  "kc3000-4tb": {
+    "category": "storage"
+  },
+  "nv3-1tb": {
+    "category": "storage"
+  },
+  "nv3-2tb": {
+    "category": "storage"
+  },
+  "990-pro-2tb": {
+    "category": "storage"
+  },
+  "990-pro-4tb": {
+    "category": "storage"
+  },
+  "980-500gb": {
+    "category": "storage"
+  },
+  "ssd-ap256gas2280p4x-1": {
+    "category": "storage"
+  },
+  "ssd-nt01nv2000-256-e4x": {
+    "category": "storage"
+  },
+  "ssd-nx-1tb": {
+    "category": "storage"
+  },
+  "ssd-p400lp2kgm28h": {
+    "category": "storage"
+  },
+  "ssd-agammixs60-1t-cs": {
+    "category": "storage"
+  },
+  "ssd-snv3s-500g": {
+    "category": "storage"
+  },
+  "ssd-aleg-710-256gcs": {
+    "category": "storage"
+  },
+  "ssd-p320p512gm28": {
+    "category": "storage"
+  },
+  "ssd-nt01nv3000-1t0-e4x": {
+    "category": "storage"
+  },
+  "ssd-p320p1tbm28": {
+    "category": "storage"
+  },
+  "ssd-sleg-860-1000gcs": {
+    "category": "storage"
+  },
+  "ssd-sp512gbp34a60m28": {
+    "category": "storage"
+  },
+  "ssd-nt01nv3000-500-e4x": {
+    "category": "storage"
+  },
+  "ssd-p400lp1kgm28h": {
+    "category": "storage"
+  },
+  "ssd-agammixs60-512g-cs": {
+    "category": "storage"
+  },
+  "ssd-sfyr2s-2t0": {
+    "category": "storage"
+  },
+  "ssd-aleg-960m-1tcs": {
+    "category": "storage"
+  },
+  "ssd-p320p2tbm28": {
+    "category": "storage"
+  },
+  "ssd-sleg-900p-2tcs": {
+    "category": "storage"
+  },
+  "ssd-mz-v9s1t0bw": {
+    "category": "storage"
+  },
+  "ssd-snv3s-4000g": {
+    "category": "storage"
+  },
+  "ssd-p400vp1tbm28h": {
+    "category": "storage"
+  },
+  "ssd-vp4300l1tbm28h": {
+    "category": "storage"
+  },
+  "ssd-agammixs70b-1t-cs": {
+    "category": "storage"
+  },
+  "ssd-p400vp500gm28h": {
+    "category": "storage"
+  },
+  "ssd-hsa4300-1024g": {
+    "category": "storage"
+  },
+  "ssd-smar-980b-1tcs": {
+    "category": "storage"
+  },
+  "ssd-ap512gas2280p4x-1": {
+    "category": "storage"
+  },
+  "ssd-nt01nv3000-250-e4x": {
+    "category": "storage"
+  },
+  "ssd-nt01nv2000-1t0-e4x": {
+    "category": "storage"
+  },
+  "ssd-sfyr2s-1t0": {
+    "category": "storage"
+  },
+  "ssd-nt01nv7000q-1t0-e4x": {
+    "category": "storage"
+  },
+  "ssd-ct500t500ssd8": {
+    "category": "storage"
+  },
+  "ssd-aleg-960m-2tcs": {
+    "category": "storage"
+  },
+  "ssd-smar-980b-2tcs": {
+    "category": "storage"
+  },
+  "ssd-hsa4300-512g": {
+    "category": "storage"
+  },
+  "ssd-hsa4300-256g": {
+    "category": "storage"
+  },
+  "ssd-sleg-900p-1tcs": {
+    "category": "storage"
+  },
+  "ssd-sleg-860-500gcs": {
+    "category": "storage"
+  },
+  "ssd-aleg-710-2tcs": {
+    "category": "storage"
+  },
+  "ssd-sleg-900-512gcs": {
+    "category": "storage"
+  },
+  "ssd-agi1t0gimai298-cb": {
+    "category": "storage"
+  },
+  "ssd-r3mp30128g8": {
+    "category": "storage"
+  },
+  "ak400": {
+    "category": "cooler",
+    "socket": [
+      "AM4",
+      "AM5",
+      "LGA1851",
+      "LGA1700",
+      "LGA1200",
+      "LGA1151",
+      "LGA1150",
+      "LGA1155"
+    ],
+    "height": 155,
+    "clearance": 99,
+    "adjust": false,
+    "unlimited": false,
+    "sockets": [],
+    "aio": false,
+    "radiator": 0,
+    "thickness": 0
+  },
+  "ak620": {
+    "category": "cooler",
+    "socket": [
+      "AM4",
+      "AM5",
+      "LGA1851",
+      "LGA1700",
+      "LGA1200",
+      "LGA1151",
+      "LGA1150",
+      "LGA1155",
+      "LGA2066",
+      "LGA2011"
+    ],
+    "height": 160,
+    "clearance": 43,
+    "adjust": false,
+    "unlimited": false,
+    "sockets": [],
+    "aio": false,
+    "radiator": 0,
+    "thickness": 0
+  },
+  "ag400": {
+    "category": "cooler",
+    "socket": [
+      "AM4",
+      "AM5",
+      "LGA1700"
+    ],
+    "height": 150,
+    "clearance": 99,
+    "adjust": false,
+    "unlimited": true,
+    "sockets": [],
+    "aio": false,
+    "radiator": 0,
+    "thickness": 0
+  },
+  "nh-u12s-redux": {
+    "category": "cooler",
+    "socket": [
+      "AM4",
+      "AM5",
+      "LGA1700"
+    ],
+    "height": 158,
+    "clearance": 99,
+    "adjust": false,
+    "unlimited": true,
+    "sockets": [],
+    "aio": false,
+    "radiator": 0,
+    "thickness": 0
+  },
+  "nh-d15": {
+    "category": "cooler",
+    "socket": [
+      "AM4",
+      "AM5",
+      "LGA1700"
+    ],
+    "height": 165,
+    "clearance": 32,
+    "adjust": true,
+    "unlimited": false,
+    "sockets": [],
+    "aio": false,
+    "radiator": 0,
+    "thickness": 0
+  },
+  "ak500": {
+    "category": "cooler",
+    "socket": [
+      "AM4",
+      "AM5",
+      "LGA1700"
+    ],
+    "height": 158,
+    "clearance": 99,
+    "adjust": false,
+    "unlimited": true,
+    "sockets": [],
+    "aio": false,
+    "radiator": 0,
+    "thickness": 0
+  },
+  "ag500": {
+    "category": "cooler",
+    "socket": [
+      "AM4",
+      "AM5",
+      "LGA1700"
+    ],
+    "height": 155,
+    "clearance": 99,
+    "adjust": false,
+    "unlimited": true,
+    "sockets": [],
+    "aio": false,
+    "radiator": 0,
+    "thickness": 0
+  },
+  "assassin-iv": {
+    "category": "cooler",
+    "socket": [
+      "AM4",
+      "AM5",
+      "LGA1700"
+    ],
+    "height": 164,
+    "clearance": 99,
+    "adjust": false,
+    "unlimited": true,
+    "sockets": [],
+    "aio": false,
+    "radiator": 0,
+    "thickness": 0
+  },
+  "nh-u12a": {
+    "category": "cooler",
+    "socket": [
+      "AM4",
+      "AM5",
+      "LGA1700"
+    ],
+    "height": 158,
+    "clearance": 99,
+    "adjust": false,
+    "unlimited": true,
+    "sockets": [],
+    "aio": false,
+    "radiator": 0,
+    "thickness": 0
+  },
+  "nh-u14s": {
+    "category": "cooler",
+    "socket": [
+      "AM4",
+      "AM5",
+      "LGA1700"
+    ],
+    "height": 165,
+    "clearance": 32,
+    "adjust": true,
+    "unlimited": false,
+    "sockets": [
+      "AM4",
+      "AM5"
+    ],
+    "aio": false,
+    "radiator": 0,
+    "thickness": 0
+  },
+  "nh-d15s-chromax": {
+    "category": "cooler",
+    "socket": [
+      "AM4",
+      "AM5",
+      "LGA1700"
+    ],
+    "height": 160,
+    "clearance": 66,
+    "adjust": false,
+    "unlimited": false,
+    "sockets": [],
+    "aio": false,
+    "radiator": 0,
+    "thickness": 0
+  },
+  "nh-d12l": {
+    "category": "cooler",
+    "socket": [
+      "AM4",
+      "AM5",
+      "LGA1700"
+    ],
+    "height": 145,
+    "clearance": 99,
+    "adjust": false,
+    "unlimited": true,
+    "sockets": [],
+    "aio": false,
+    "radiator": 0,
+    "thickness": 0
+  },
+  "nh-u9s": {
+    "category": "cooler",
+    "socket": [
+      "AM4",
+      "AM5",
+      "LGA1700"
+    ],
+    "height": 125,
+    "clearance": 99,
+    "adjust": false,
+    "unlimited": true,
+    "sockets": [],
+    "aio": false,
+    "radiator": 0,
+    "thickness": 0
+  },
+  "nh-d15-g2": {
+    "category": "cooler",
+    "socket": [
+      "AM4",
+      "AM5",
+      "LGA1700"
+    ],
+    "height": 168,
+    "clearance": 32,
+    "adjust": true,
+    "unlimited": false,
+    "sockets": [],
+    "aio": false,
+    "radiator": 0,
+    "thickness": 0
+  },
+  "nh-u12s": {
+    "category": "cooler",
+    "socket": [
+      "AM4",
+      "AM5",
+      "LGA1700"
+    ],
+    "height": 158,
+    "clearance": 99,
+    "adjust": false,
+    "unlimited": true,
+    "sockets": [],
+    "aio": false,
+    "radiator": 0,
+    "thickness": 0
+  },
+  "aio-le360-v2": {
+    "category": "cooler",
+    "socket": [
+      "AM4",
+      "AM5",
+      "LGA1700"
+    ],
+    "height": 65,
+    "clearance": 999,
+    "adjust": false,
+    "unlimited": true,
+    "sockets": [],
+    "aio": true,
+    "radiator": 360,
+    "thickness": 27
+  },
+  "aio-le240-v2": {
+    "category": "cooler",
+    "socket": [
+      "AM4",
+      "AM5",
+      "LGA1700"
+    ],
+    "height": 65,
+    "clearance": 999,
+    "adjust": false,
+    "unlimited": true,
+    "sockets": [],
+    "aio": true,
+    "radiator": 240,
+    "thickness": 27
+  },
+  "aio-ls520-wh": {
+    "category": "cooler",
+    "socket": [
+      "AM4",
+      "AM5",
+      "LGA1700"
+    ],
+    "height": 57,
+    "clearance": 999,
+    "adjust": false,
+    "unlimited": true,
+    "sockets": [],
+    "aio": true,
+    "radiator": 240,
+    "thickness": 27
+  },
+  "aio-lt520-wh": {
+    "category": "cooler",
+    "socket": [
+      "AM4",
+      "AM5",
+      "LGA1700"
+    ],
+    "height": 68,
+    "clearance": 999,
+    "adjust": false,
+    "unlimited": true,
+    "sockets": [],
+    "aio": true,
+    "radiator": 240,
+    "thickness": 27
+  },
+  "aio-lt240-bk-argb": {
+    "category": "cooler",
+    "socket": [
+      "AM4",
+      "AM5",
+      "LGA1700"
+    ],
+    "height": 68,
+    "clearance": 999,
+    "adjust": false,
+    "unlimited": true,
+    "sockets": [],
+    "aio": true,
+    "radiator": 240,
+    "thickness": 27
+  },
+  "aio-lt240-wh-argb": {
+    "category": "cooler",
+    "socket": [
+      "AM4",
+      "AM5",
+      "LGA1700"
+    ],
+    "height": 68,
+    "clearance": 999,
+    "adjust": false,
+    "unlimited": true,
+    "sockets": [],
+    "aio": true,
+    "radiator": 240,
+    "thickness": 27
+  },
+  "aio-le240-wh-v2": {
+    "category": "cooler",
+    "socket": [
+      "AM4",
+      "AM5",
+      "LGA1700"
+    ],
+    "height": 65,
+    "clearance": 999,
+    "adjust": false,
+    "unlimited": true,
+    "sockets": [],
+    "aio": true,
+    "radiator": 240,
+    "thickness": 27
+  },
+  "pk550": {
+    "category": "psu",
+    "watts": 550,
+    "length": 140,
+    "pins": false,
+    "pinWatts": 9999,
+    "connectors": 2
+  },
+  "a850": {
+    "category": "psu",
+    "watts": 850,
+    "length": 140,
+    "pins": true,
+    "pinWatts": 9999,
+    "connectors": 4
+  },
+  "a650bn": {
+    "category": "psu",
+    "watts": 650,
+    "length": 140,
+    "pins": false,
+    "pinWatts": 9999,
+    "connectors": 2
+  },
+  "a750gl": {
+    "category": "psu",
+    "watts": 750,
+    "length": 140,
+    "pins": true,
+    "pinWatts": 450,
+    "connectors": 3
+  },
+  "a1000g": {
+    "category": "psu",
+    "watts": 1000,
+    "length": 150,
+    "pins": true,
+    "pinWatts": 600,
+    "connectors": 6
+  },
+  "a550bn": {
+    "category": "psu",
+    "watts": 550,
+    "length": 140,
+    "pins": false,
+    "pinWatts": 9999,
+    "connectors": 2
+  },
+  "a650gl": {
+    "category": "psu",
+    "watts": 650,
+    "length": 140,
+    "pins": false,
+    "pinWatts": 9999,
+    "connectors": 4
+  },
+  "a1000gl": {
+    "category": "psu",
+    "watts": 1000,
+    "length": 150,
+    "pins": true,
+    "pinWatts": 600,
+    "connectors": 4
+  },
+  "a1250gl": {
+    "category": "psu",
+    "watts": 1250,
+    "length": 150,
+    "pins": true,
+    "pinWatts": 600,
+    "connectors": 4
+  },
+  "a750g": {
+    "category": "psu",
+    "watts": 750,
+    "length": 150,
+    "pins": true,
+    "pinWatts": 450,
+    "connectors": 6
+  },
+  "a850g": {
+    "category": "psu",
+    "watts": 850,
+    "length": 150,
+    "pins": true,
+    "pinWatts": 600,
+    "connectors": 6
+  },
+  "ai1300p": {
+    "category": "psu",
+    "watts": 1300,
+    "length": 160,
+    "pins": true,
+    "pinWatts": 600,
+    "connectors": 8
+  },
+  "pk650d": {
+    "category": "psu",
+    "watts": 650,
+    "length": 140,
+    "pins": false,
+    "pinWatts": 9999,
+    "connectors": 4
+  },
+  "pq650m": {
+    "category": "psu",
+    "watts": 650,
+    "length": 140,
+    "pins": false,
+    "pinWatts": 9999,
+    "connectors": 3
+  },
+  "pq750m": {
+    "category": "psu",
+    "watts": 750,
+    "length": 140,
+    "pins": false,
+    "pinWatts": 9999,
+    "connectors": 3
+  },
+  "pq850m": {
+    "category": "psu",
+    "watts": 850,
+    "length": 140,
+    "pins": false,
+    "pinWatts": 9999,
+    "connectors": 3
+  },
+  "cc560": {
+    "category": "case",
+    "forms": [
+      "ATX",
+      "Micro-ATX",
+      "Mini-ITX"
+    ],
+    "gpu": 320,
+    "cooler": 165,
+    "psu": 170,
+    "top": [
+      240
+    ],
+    "front": [
+      240,
+      360
+    ],
+    "ram": 9999
+  },
+  "4000d-airflow": {
+    "category": "case",
+    "forms": [
+      "ATX",
+      "Micro-ATX",
+      "Mini-ITX",
+      "E-ATX"
+    ],
+    "gpu": 360,
+    "cooler": 170,
+    "psu": 220,
+    "top": [
+      240
+    ],
+    "front": [
+      240,
+      360
+    ],
+    "ram": 9999
+  },
+  "pop-air": {
+    "category": "case",
+    "forms": [
+      "ATX",
+      "Micro-ATX",
+      "Mini-ITX"
+    ],
+    "gpu": 405,
+    "cooler": 170,
+    "psu": 170,
+    "top": [
+      240
+    ],
+    "front": [
+      240
+    ],
+    "ram": 46
+  },
+  "pop-air-white": {
+    "category": "case",
+    "forms": [
+      "ATX",
+      "Micro-ATX",
+      "Mini-ITX"
+    ],
+    "gpu": 405,
+    "cooler": 170,
+    "psu": 170,
+    "top": [
+      240
+    ],
+    "front": [
+      240
+    ],
+    "ram": 46
+  },
+  "h7-flow": {
+    "category": "case",
+    "forms": [
+      "ATX",
+      "Micro-ATX",
+      "Mini-ITX",
+      "E-ATX"
+    ],
+    "gpu": 400,
+    "cooler": 185,
+    "psu": 9999,
+    "top": [
+      240,
+      360
+    ],
+    "front": [
+      240,
+      360
+    ],
+    "ram": 9999
+  },
+  "ch560-white": {
+    "category": "case",
+    "forms": [
+      "ATX",
+      "Micro-ATX",
+      "Mini-ITX",
+      "E-ATX"
+    ],
+    "gpu": 380,
+    "cooler": 175,
+    "psu": 170,
+    "top": [
+      240,
+      360
+    ],
+    "front": [
+      240,
+      360
+    ],
+    "ram": 9999
+  },
+  "pcmaker-panorama": {
+    "category": "case",
+    "forms": [
+      "ATX",
+      "Micro-ATX",
+      "Mini-ITX"
+    ],
+    "gpu": 420,
+    "cooler": 190,
+    "psu": 200,
+    "top": [
+      240,
+      360
+    ],
+    "front": [],
+    "ram": 9999
+  },
+  "pcmaker-dual": {
+    "category": "case",
+    "forms": [
+      "ATX",
+      "Micro-ATX",
+      "Mini-ITX"
+    ],
+    "gpu": 400,
+    "cooler": 190,
+    "psu": 200,
+    "top": [
+      240,
+      360
+    ],
+    "front": [],
+    "ram": 9999
+  },
+  "pcmaker-compact": {
+    "category": "case",
+    "forms": [
+      "ATX",
+      "Micro-ATX",
+      "Mini-ITX"
+    ],
+    "gpu": 350,
+    "cooler": 190,
+    "psu": 200,
+    "top": [
+      240
+    ],
+    "front": [],
+    "ram": 9999
+  }
+}

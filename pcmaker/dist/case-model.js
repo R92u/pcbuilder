@@ -1,3 +1,4 @@
+import {aioMount} from './aio.js';
 import * as THREE from 'three';
 import {caseLayout,TRAY_X,TRAY_HOLES,REAR_OPENINGS,frontIOPosition} from './layout.js';
 import {fanMounts} from './fan-layout.js';
@@ -8,7 +9,7 @@ function circle(shape,x,y,r){const hole=new THREE.Path();hole.absarc(x,y,r,0,Mat
 function sheet(shape,color){return new THREE.Mesh(new THREE.ExtrudeGeometry(shape,{depth:.035,bevelEnabled:false}),new THREE.MeshStandardMaterial({color,metalness:.5,roughness:.55}));}
 
 export function makeChassis(p={id:'cc560',short:'CC560 V2',frontFanCount:3,usbA:1,usb2:1}){
- const g=new THREE.Group(),frame=caseLayout(p,resolve(this.currentBuild||{}).gpu),{front,rear,depth,centerZ,side,back}=frame;
+ const g=new THREE.Group(),frame=caseLayout(p,resolve(this.currentBuild||{}).gpu,resolve(this.currentBuild||{}).cooler),{front,rear,depth,centerZ,side,back}=frame;
  const white=p.color==='white',steel=white?0xc4c9cb:0x353e44,black=white?0xb8bec1:0x151b1e;
  this.root.add(g);this.caseGroup=g;g.userData.id=p.id;g.userData.componentKey='case';
  const centerX=(side+back)/2,width=side-back,mounts=fanMounts({...this.currentBuild,case:p.id});
@@ -32,8 +33,9 @@ export function makeChassis(p={id:'cc560',short:'CC560 V2',frontFanCount:3,usbA:
  }
  for(const y of [1.42,2.60,4.12])for(const z of [-1.72,.55])this.rod(g,[-1.01,y,z],[-.972,y,z],.035,0x938768);
  // An actual cutout, not a dark decal: GPU cables pass through the tunnel.
- const shape=new THREE.Shape();shape.moveTo(-.91,rear+.04);shape.lineTo(side-.05,rear+.04);shape.lineTo(side-.05,front-.35);shape.lineTo(-.91,front-.35);shape.closePath();
- for(const [x,z,w,d] of [[.62,.55,.61,.70],[-.15,front-.55,.62,.30]]){
+ const shroudFront=front-(aioMount(resolve(this.currentBuild||{}))?.wall==='front'?.74:.35);
+ const shape=new THREE.Shape();shape.moveTo(-.91,rear+.04);shape.lineTo(side-.05,rear+.04);shape.lineTo(side-.05,shroudFront);shape.lineTo(-.91,shroudFront);shape.closePath();
+ for(const [x,z,w,d] of [[.62,.55,.61,.70],[-.15,shroudFront-.20,.62,.30]]){
   const hole=new THREE.Path();hole.moveTo(x-w/2,z-d/2);hole.lineTo(x-w/2,z+d/2);hole.lineTo(x+w/2,z+d/2);hole.lineTo(x+w/2,z-d/2);hole.closePath();shape.holes.push(hole);
  }
  if(p.concept)holes(shape,'bottom',[0,2]);

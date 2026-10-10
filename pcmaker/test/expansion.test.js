@@ -6,8 +6,8 @@ import {cablesFor,reconcileConnections} from '../dist/wiring.js';
 import {componentSpecs} from '../dist/inspector.js';
 const settings={load:'stress',ambient:22,front:60,rear:60,cpuFan:60};
 
-test('Expanded catalog has 150 sourced models plus three educational cases',()=>{
- const entries=Object.values(catalog).flat();assert.equal(entries.length,153);assert.equal(new Set(entries.map(p=>p.id)).size,153);assert.equal(catalog.case.length,9);
+test('Expanded catalog has 250 sourced models plus three educational cases',()=>{
+ const entries=Object.values(catalog).flat();assert.equal(entries.length,253);assert.equal(new Set(entries.map(p=>p.id)).size,253);assert.equal(catalog.case.length,9);
  for(const [key,parts] of Object.entries(catalog))for(const p of parts){if(!p.concept)assert.ok(p.sources.some(u=>u.startsWith('https://')),p.id);assert.ok(componentSpecs(p,key).length>3,p.id);}
 });
 test('Intel supports either memory generation, but the motherboard determines which',()=>{

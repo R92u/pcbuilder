@@ -3,5 +3,19 @@
   "version": "1.0.0",
   "private": true,
   "type": "module",
-  "scripts": {"start": "node scripts/serve.mjs", "test": "node --test", "build": "node scripts/check.mjs"}
+  "scripts": {
+    "start": "node scripts/serve.mjs",
+    "test": "node --test test/*.test.js",
+    "build": "node scripts/check.mjs",
+    "build:firebase": "node scripts/build-firebase.mjs",
+    "test:rules": "firebase emulators:exec --only auth,firestore --project demo-pcmaker \"node --test firebase/*.test.js\""
+  },
+  "dependencies": {
+    "firebase": "^13.0.0"
+  },
+  "devDependencies": {
+    "@firebase/rules-unit-testing": "^6.0.0",
+    "esbuild": "^0.28.2",
+    "firebase-tools": "^15.33.0"
+  }
 }

@@ -1,3 +1,4 @@
+import {catalogExtra} from './catalog-extra.js';
 export const categories = [
   ['cpu','Процессор','CPU'], ['motherboard','Материнская плата','MB'],
   ['gpu','Видеокарта','GPU'], ['ram','Оперативная память','RAM'],
@@ -5661,6 +5662,8 @@ catalog.case.push(...[
     "sources": []
   }
 ]);
+const existingBrands=new Map(Object.values(catalog).flat().filter(p=>p.brand).map(p=>[p.brand.toLowerCase(),p.brand]));
+for(const [category,parts] of Object.entries(catalogExtra))catalog[category].push(...parts.map(p=>({...p,brand:existingBrands.get(p.brand.toLowerCase())||p.brand})));
 export const byId = Object.fromEntries(Object.values(catalog).flat().map(p=>[p.id,p]));
 export const emptyBuild = ()=>Object.fromEntries(categories.map(([key])=>[key,key==='case'?'cc560':null]));
 export const demoBuild = {cpu:'r5-7600',motherboard:'b650',gpu:'rtx4060',ram:'ddr5-32',storage:'nv2',cooler:'ak400',psu:'a850',case:'cc560'};

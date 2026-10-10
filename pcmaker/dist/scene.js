@@ -94,10 +94,10 @@ export class PCScene {
  }
  setBuild(build){
   const changedCase=this.currentBuild?.case!==build.case;this.currentBuild={...build};const p=resolve(build);
-  const caseSignature=(p.case?.id||'cc560')+':'+(p.gpu?.length||'empty');
+  const caseSignature=(p.case?.id||'cc560')+':'+(p.gpu?.length||'empty')+':'+(p.cooler?.type==='aio'?p.cooler.id:'air');
   if(p.case&&this.caseGroup.userData.signature!==caseSignature){this.caseGroup.removeFromParent();this.fans=this.fans.filter(f=>f.parent!==this.caseGroup);this.caseGroup.traverse(o=>{o.geometry?.dispose();o.material?.map?.dispose();o.material?.dispose();});this.makeCase(p.case);this.caseGroup.userData.signature=caseSignature;this.glass.visible=!this.hideGlass;this.makeCaseFlows(p.case);}
   for(const key of ['motherboard','cpu','ram','gpu','cooler','storage','psu']){
-   const signature=p[key]?.id+(key==='cooler'?':'+p.ram?.id+':'+p.cpu?.socket:'');if(this.parts[key]?.userData.signature===signature)continue;
+   const signature=p[key]?.id+(key==='cooler'?':'+p.ram?.id+':'+p.cpu?.socket+':'+caseSignature:'');if(this.parts[key]?.userData.signature===signature)continue;
    if(this.parts[key]){const old=this.parts[key];this.root.remove(old);this.fans=this.fans.filter(f=>f.parent!==old&&!old.getObjectById(f.parent.id));this.transitions=this.transitions.filter(t=>t.group!==old);old.traverse(o=>{o.geometry?.dispose();if(o.material){const mats=Array.isArray(o.material)?o.material:[o.material];for(const m of mats){m.map?.dispose();m.dispose();}}});delete this.parts[key];}
    if(!p[key])continue;
    const factories={motherboard:'makeMotherboard',cpu:'makeCPU',ram:'makeRAM',gpu:'makeGPU',cooler:'makeCooler',storage:'makeStorage',psu:'makePSU'};
@@ -132,7 +132,7 @@ export class PCScene {
    }
    if(active.includes('cpuFan')||selected==='cpuFan'){
     const p=resolve(this.currentBuild),c=cablesFor(this.currentBuild,this.fanLayout).find(c=>c.id==='cpuFan');
-    if(c&&(p.cooler?.fans||1)>1){
+    if(c&&p.cooler?.type!=='aio'&&(p.cooler?.fans||1)>1){
      const l=coolerLayout(p.cooler,p.ram,p.cpu?.socket),size=l.sizes[0]||l.size,start=[l.top-size*.04-.01,CPU_CENTER.y+size*.40,l.fanZ[0]-.10];
      const curve=cableCurve([start,[start[0]+.06,4.42,start[2]],[start[0]+.06,4.42,c.points[0][2]],c.points[0]]);
      this.wires.add(new THREE.Mesh(new THREE.TubeGeometry(curve,56,.012,6,false),mat(0x151d20,.8,.1)));
@@ -155,7 +155,7 @@ export class PCScene {
   this.camera.position.set(...(views[name]||views.assembly));this.controls.target.set(0,2.35,0);this.fitCaseView();this.controls.update();this.endCableDrag(null,true);this.rearPanel.visible=!this.hideRearPanel;if(this.markerLayer)this.markerLayer.hidden=['rear','cables'].includes(name);
  }
  fitCaseView(){
-  const p=resolve(this.currentBuild||{}),f=caseLayout(p.case||{},p.gpu),center=new THREE.Vector3((f.side+f.back)/2,2.38,f.centerZ),offset=this.camera.position.clone().sub(this.controls.target),back=offset.clone().normalize();
+  const p=resolve(this.currentBuild||{}),f=caseLayout(p.case||{},p.gpu,p.cooler),center=new THREE.Vector3((f.side+f.back)/2,2.38,f.centerZ),offset=this.camera.position.clone().sub(this.controls.target),back=offset.clone().normalize();
   const right=new THREE.Vector3().crossVectors(this.camera.up,back).normalize(),up=new THREE.Vector3().crossVectors(back,right),tanV=Math.tan(THREE.MathUtils.degToRad(this.camera.fov/2)),tanH=tanV*this.camera.aspect;
   let distance=0;
   for(const x of [f.back-.12,f.side+.12])for(const y of [0,4.8])for(const z of [f.rear-.16,f.front+.25]){

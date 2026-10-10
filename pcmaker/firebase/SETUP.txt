@@ -1,0 +1,44 @@
+PCmaker / Firebase
+
+Production project: pcmaker-school-r92u. Frontend: https://pcmaker-olnw.onrender.com/
+Google sign-in and Firestore are enabled. Billing is not enabled (Spark).
+The browser configuration in dist/firebase-config.json is public SDK configuration,
+not a service-account credential. Never commit CLI tokens or private keys.
+
+Local development (Node 24, pnpm, Java 21 for emulators):
+  pnpm install --frozen-lockfile
+  pnpm start
+  pnpm exec firebase emulators:start --only auth,firestore --project demo-pcmaker
+  node firebase/publish-catalog.mjs demo-pcmaker
+The localhost frontend uses emulators only; it never writes to production.
+
+Checks:
+  pnpm test
+  pnpm run test:rules
+  pnpm run build
+
+After changing catalog facts or Firebase client:
+  node firebase/generate-rules.mjs
+  pnpm run build:firebase
+  pnpm run test:rules
+  node firebase/publish-catalog.mjs pcmaker-school-r92u
+  pnpm exec firebase deploy --only firestore:rules,firestore:indexes --project pcmaker-school-r92u
+Commit the generated browser bundle, rules and catalog facts. Render's static
+build checks the committed files and does not need Firebase admin credentials.
+
+Collections:
+  builds: public visible publications; only the author may edit/delete theirs.
+  publishLimits: atomic publication quota (50 per account, 10-second interval).
+  reports: one report per publication/account, visible only to moderators.
+  catalog: trusted compatibility facts; client writes and reads are denied.
+Project owners can moderate in the Firebase console. The optional in-app
+moderation screen requires the Firebase Auth custom claim admin=true, assigned
+through a trusted administrator tool to the intended user's UID.
+
+Prices are dated snapshots, not live offers. Belarus has independent BYN prices
+from 5element.by. Missing prices stay missing; Russia prices are never converted.
+Belarus budget auto-build requires prices in every category and currently cannot
+complete a build because CPU quotes from 5element are unavailable.
+AIO geometry and thermal coefficients are educational approximations. Retail
+radiator support is checked against case manuals; validate exact RAM/VRM clearance
+and mounting hardware before purchase.

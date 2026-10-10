@@ -1,17 +1,18 @@
+import {regionFromCurrency} from './regions.js';
 import {catalog,categories,resolve} from './catalog.js';
 import {compatibility} from './engine.js';
 import {estimatePrice,estimateDate,gpuRanks} from './budget-data.js';
 
 export const purposes={game:{name:'Игры',description:'Приоритет видеокарте и сбалансированному процессору.',ram:16,storage:1000},study:{name:'Учёба',description:'Процессор, память и SSD. Без переплаты за мощную видеокарту.',ram:16,storage:500},video:{name:'Монтаж',description:'Больше ресурсов процессору, от 32 ГБ памяти и 1 ТБ SSD.',ram:32,storage:1000}};
 const kopecks=n=>Math.round(n*100);
-export function budgetPrice(part,category,prices={},allowEstimates=true){
+export function budgetPrice(part,category,prices={},allowEstimates=true,currency='RUB'){
  const offer=prices[part.id];
- if(Number.isFinite(offer?.price)&&offer.price>0&&offer.date&&offer.store&&/^https:\/\//.test(offer.url||''))return {price:offer.price,planned:kopecks(offer.price),reserve:0,estimated:false,date:offer.date,store:offer.store,url:offer.url};
- const value=allowEstimates&&estimatePrice(part,category);
+ if((offer?.currency||'RUB')===currency&&Number.isFinite(offer?.price)&&offer.price>0&&offer.date&&offer.store&&/^https:\/\//.test(offer.url||''))return {price:offer.price,planned:kopecks(offer.price),reserve:0,estimated:false,date:offer.date,store:offer.store,url:offer.url};
+ const value=currency==='RUB'&&allowEstimates&&estimatePrice(part,category);
  return value?{price:value,planned:kopecks(value)+Math.ceil(kopecks(value)*.10),reserve:Math.ceil(kopecks(value)*.10)/100,estimated:true,date:estimateDate}:null;
 }
-export function quoteBuild(build,prices,allowEstimates=true){
- const parts=resolve(build),rows=categories.map(([key,label])=>({key,label,part:parts[key],quote:parts[key]&&budgetPrice(parts[key],key,prices,allowEstimates)}));
+export function quoteBuild(build,prices,allowEstimates=true,currency='RUB'){
+ const parts=resolve(build),rows=categories.map(([key,label])=>({key,label,part:parts[key],quote:parts[key]&&budgetPrice(parts[key],key,prices,allowEstimates,currency)}));
  if(rows.some(r=>!r.quote))return null;
  const total=rows.reduce((s,r)=>s+kopecks(r.quote.price),0)/100,reserve=rows.reduce((s,r)=>s+kopecks(r.quote.reserve),0)/100;
  return {rows,total,reserve,planned:rows.reduce((s,r)=>s+r.quote.planned,0)/100,estimatedCount:rows.filter(r=>r.quote.estimated).length};
@@ -27,13 +28,13 @@ export function buildScore(parts,purpose){
  return [cpu,purpose==='study'?Math.min(gpu,1):gpu,ram,ssd].reduce((s,n,i)=>s+weights[i]*Math.log(n),0);
 }
 
-export function autoBuild({budget,purpose='game',allowEstimates=true,prices={}}){
- if(!Number.isFinite(budget)||budget<1000||budget>2000000)return {status:'invalid',message:'Укажи бюджет от 1 000 до 2 000 000 ₽.'};
+export function autoBuild({budget,purpose='game',allowEstimates=true,prices={},currency='RUB'}){
+ const region=regionFromCurrency(currency);if(!['RUB','BYN'].includes(currency)||!Number.isFinite(budget)||budget<region.minBudget||budget>region.maxBudget)return {status:'invalid',message:'Укажи бюджет от '+region.minBudget+' до '+region.maxBudget+' '+region.symbol+'.'};
  if(!purposes[purpose])return {status:'invalid',message:'Выбери назначение компьютера.'};
  const cost=new Map(),lists={};
- for(const [key] of categories){lists[key]=catalog[key].filter(p=>{if(p.concept)return false;const q=budgetPrice(p,key,prices,allowEstimates);if(q)cost.set(p.id,q.planned);return !!q;}).sort((a,b)=>cost.get(a.id)-cost.get(b.id));}
+ for(const [key] of categories){lists[key]=catalog[key].filter(p=>{if(p.concept)return false;const q=budgetPrice(p,key,prices,allowEstimates,currency);if(q)cost.set(p.id,q.planned);return !!q;}).sort((a,b)=>cost.get(a.id)-cost.get(b.id));}
  const absent=categories.filter(([key])=>!lists[key].length).map(([,name])=>name);
- if(absent.length)return {status:'no-data',message:'Нет подходящих цен для категорий: '+absent.join(', ')+'. Разреши ориентировочные цены или обнови каталог.'};
+ if(absent.length)return {status:'no-data',message:'Нет подходящих цен для категорий: '+absent.join(', ')+(currency==='BYN'?'. Для Беларуси нужны цены 5element.by; российские цены и пересчёт валют не используются.':'. Разреши ориентировочные цены или обнови каталог.')};
  const profile=purposes[purpose],rams=lists.ram.filter(p=>p.capacity>=profile.ram),storages=lists.storage.filter(p=>p.capacity>=profile.storage);
  // More expensive items of equal usable capacity cannot improve this score.
  const storageOptions=storages.filter((p,i)=>!storages.slice(0,i).some(q=>Math.min(q.capacity,purpose==='video'?4000:purpose==='game'?2000:1000)>=Math.min(p.capacity,purpose==='video'?4000:purpose==='game'?2000:1000)));
@@ -65,5 +66,5 @@ export function autoBuild({budget,purpose='game',allowEstimates=true,prices={}})
  if(!best)return {status:'over-budget',minimum:minimum.total/100,shortfall:(minimum.total-limit)/100,message:'Для полной сборки в этом режиме бюджета пока не хватает.'};
  const check=compatibility(best.build);
  if(!check.ready)return {status:'no-build',message:'Не удалось подобрать совместимую сборку.'};
- return {status:'ok',build:best.build,budget,purpose,allowEstimates,quote:quoteBuild(best.build,prices,allowEstimates),warnings:check.warnings,recommendedPsu:check.recommended,checked};
+ return {status:'ok',build:best.build,budget,purpose,allowEstimates,currency,quote:quoteBuild(best.build,prices,allowEstimates,currency),warnings:check.warnings,recommendedPsu:check.recommended,checked};
 }
