@@ -1,5 +1,6 @@
 import * as THREE from 'three';
 import {hardwareFinish} from './surfaces.js';
+import {gpuLayout} from './layout.js';
 
 const finish=(color,metalness=.6,roughness=.4)=>hardwareFinish(new THREE.MeshStandardMaterial({color,metalness,roughness}));
 function polygon(points){const s=new THREE.Shape();points.forEach(([x,y],i)=>i?s.lineTo(x,y):s.moveTo(x,y));s.closePath();return s;}
@@ -16,7 +17,7 @@ function pipe(group,points,radius=.027){
 // backplate and sculpted rails. This is a visual approximation, not a CAD model.
 export function makeDetailedGPU(p){
  const g=new THREE.Group(),len=p.length/100,rear=-1.86,end=rear+len,center=(rear+end)/2;
- const large=p.fans>=3,thickness=large?.52:.37,top=2.25,bottom=top-thickness;
+ const large=p.fans>=3,layout=gpuLayout(p),{thickness,top,bottom}=layout;
  const sapphire=p.manufacturer==='SAPPHIRE',zotac=p.id==='rtx3090';
  const shell=zotac?0x2b3034:0x171c20,trim=sapphire?0x71322f:0x41474b;
  // PCB, visible in the gap below the backplate, with small board components.
@@ -81,11 +82,11 @@ export function makeDetailedGPU(p){
  // Bracket, port interiors, mounting screws and power sockets keep their wiring anchors.
  this.box(g,1.58,thickness+.12,.026,.045,top-thickness/2,-2.12,0x606a6b);
  const gpuPorts=p.ports?.flatMap(port=>Array.from({length:parseInt(port)||1},()=>/HDMI/i.test(port)?'HDMI':'DP'))||['DP','DP','DP','HDMI'];
- for(let i=0;i<gpuPorts.length;i++)this.rearPort(g,'video',-.49+i*.34,2.045,.22,.083,0,gpuPorts[i]);
+ for(let i=0;i<gpuPorts.length;i++)this.rearPort(g,'video',-.49+i*.34,top-.205,.22,.083,0,gpuPorts[i]);
  for(let i=0;i<11;i++)for(let row=0;row<(large?2:1);row++)this.box(g,.065,.045,.008,-.53+i*.115,bottom+.08+row*.085,-2.139,0x0a1013);
  for(const x of [-.64,.70])this.screw(g,x,top+.017,-2.14,'z',.024);
- if(p.connectorType==='16pin'){
-  this.headerSocket(g,'gpu16',2,6,.029);for(let i=0;i<4;i++)this.box(g,.012,.008,.008,.676,2.295+i*.019,-.062,0xa19a78);
- }else for(let i=0;i<p.connectors;i++)this.headerSocket(g,'gpu'+(i+1),2,4,.041);
- return g;
+ const root=new THREE.Group();g.scale.x=layout.width/1.60;g.position.x=-.84*(1-g.scale.x);root.add(g);
+ if(p.connectorType==='16pin')this.headerSocket(root,'gpu16',2,6,.029);
+ else for(let i=0;i<p.connectors;i++)this.headerSocket(root,'gpu'+(i+1),2,4,.041);
+ return root;
 }

@@ -2,8 +2,9 @@ import * as THREE from 'three';
 import {OrbitControls} from './vendor/OrbitControls.js';
 import {resolve} from './catalog.js';
 import {modelMethods} from './model.js';
-import {ports,cablesFor} from './wiring.js';
+import {portsFor,cablesFor} from './wiring.js';
 import {hardwareFinish} from './surfaces.js';
+import {gpuLayout,caseLayout} from './layout.js';
 import {interactionMethods} from './interaction.js';
 
 const C={metal:0x222a2f,edge:0x485257,black:0x101618,silver:0x879398,pcb:0x17211c,purple:0xbfa5ff};
@@ -65,7 +66,7 @@ export class PCScene {
   for(const sign of [-1,1]){this.box(fan,size,size*.065,.11,0,sign*size*.465,0,C.black);this.box(fan,size*.065,size,.11,sign*size*.465,0,0,C.black);}
   // Open ring rather than an opaque front: rotor is genuinely three-dimensional.
   const ring=new THREE.Mesh(new THREE.TorusGeometry(size*.405,size*.038,10,48),new THREE.MeshStandardMaterial({color:rgb?C.purple:0x4c4e57,emissive:rgb?0x7e57cc:0,emissiveIntensity:rgb?.9:0,metalness:.35,roughness:.4}));ring.position.z=.081;fan.add(ring);
-  const inner=new THREE.Mesh(new THREE.CircleGeometry(size*.37,40),new THREE.MeshStandardMaterial({color:0x0a0b0e,roughness:.8,side:THREE.DoubleSide}));inner.position.z=.066;fan.add(inner);
+
   const rotor=new THREE.Group();rotor.userData.animated=true;rotor.position.z=.11;fan.add(rotor);
   const bladeShape=new THREE.Shape();bladeShape.moveTo(.10,-.02);bladeShape.quadraticCurveTo(.24,-.19,.39,-.14);bladeShape.quadraticCurveTo(.45,-.05,.32,.07);bladeShape.lineTo(.1,.06);bladeShape.closePath();
   const bladeGeometry=new THREE.ExtrudeGeometry(bladeShape,{depth:.009,bevelEnabled:true,bevelSegments:1,steps:1,bevelSize:.008,bevelThickness:.006,curveSegments:5});
@@ -80,17 +81,18 @@ export class PCScene {
   this.currentBuild=build;const p=resolve(build);
   if(p.case&&this.caseGroup.userData.id!==p.case.id){this.caseGroup.removeFromParent();this.fans=this.fans.filter(f=>f.parent!==this.caseGroup);this.caseGroup.traverse(o=>{o.geometry?.dispose();o.material?.map?.dispose();o.material?.dispose();});this.makeCase(p.case);this.glass.visible=!this.hideGlass;this.makeCaseFlows(p.case);}
   for(const key of ['motherboard','cpu','ram','gpu','cooler','storage','psu']){
-   if(this.parts[key]?.userData.id===p[key]?.id)continue;
-   if(this.parts[key]){const old=this.parts[key];this.root.remove(old);this.fans=this.fans.filter(f=>f.parent!==old);this.transitions=this.transitions.filter(t=>t.group!==old);old.traverse(o=>{o.geometry?.dispose();if(o.material){const mats=Array.isArray(o.material)?o.material:[o.material];for(const m of mats){m.map?.dispose();m.dispose();}}});delete this.parts[key];}
+   const signature=p[key]?.id+(key==='cooler'?':'+p.ram?.id+':'+p.cpu?.socket:'');if(this.parts[key]?.userData.signature===signature)continue;
+   if(this.parts[key]){const old=this.parts[key];this.root.remove(old);this.fans=this.fans.filter(f=>f.parent!==old&&!old.getObjectById(f.parent.id));this.transitions=this.transitions.filter(t=>t.group!==old);old.traverse(o=>{o.geometry?.dispose();if(o.material){const mats=Array.isArray(o.material)?o.material:[o.material];for(const m of mats){m.map?.dispose();m.dispose();}}});delete this.parts[key];}
    if(!p[key])continue;
    const factories={motherboard:'makeMotherboard',cpu:'makeCPU',ram:'makeRAM',gpu:'makeGPU',cooler:'makeCooler',storage:'makeStorage',psu:'makePSU'};
-   const group=this[factories[key]](p[key]);group.userData.id=p[key].id;group.userData.componentKey=key;this.root.add(group);this.parts[key]=group;group.position.x=.65;this.transitions.push({group,start:performance.now()});
+   const group=this[factories[key]](p[key]);group.userData.id=p[key].id;group.userData.signature=signature;group.userData.componentKey=key;this.root.add(group);this.parts[key]=group;// Install directly at shared anchors, including during the first rendered frame.
   }
+  for(const cover of this.slotCovers||[])cover.visible=!p.gpu||cover.userData.slotCenter<gpuLayout(p.gpu).bottom-.14;
   if(this.parts.cooler)this.parts.cooler.visible=!this.hideCooler;
  }
  setWiring(mode,connected,selected=null,showPorts=false){
   this.clearLooseCable();this.selectedCable=selected;this.showPorts=showPorts;
-  const available=cablesFor(this.currentBuild||{}),active=mode==='auto'?available.map(c=>c.id):connected;
+  const targets=portsFor(this.currentBuild||{}),available=cablesFor(this.currentBuild||{}),active=mode==='auto'?available.map(c=>c.id):connected;
   const key=JSON.stringify([this.currentBuild,active]);
   if(this.wireKey!==key){
    this.wireKey=key;
@@ -99,26 +101,28 @@ export class PCScene {
    for(const cable of available.filter(c=>active.includes(c.id))){
     for(let i=0;i<cable.strands;i++){
      const offset=(i-(cable.strands-1)/2)*cable.radius*2.15;
-     const points=cable.points.map((p,n)=>new THREE.Vector3(p[0],p[1]+offset,p[2]+(n>0&&n<cable.points.length-1?offset*.30:0)));
+     const points=cable.points.map((p,n)=>new THREE.Vector3(p[0]+(cable.spreadAxis==='x'?offset:0),p[1]+(cable.spreadAxis==='x'?0:offset),p[2]));
      const curve=new THREE.CatmullRomCurve3(points,false,'centripetal');
      const mesh=new THREE.Mesh(new THREE.TubeGeometry(curve,28,cable.radius,5,false),mat(i%4===0?0x363e43:0x171d20,.76,.1));mesh.castShadow=true;this.wires.add(mesh);
     }
-    const [x,y,z]=ports[cable.id].position;
-    this.box(this.wires,.09,cable.id==='atx'?.46:.17,cable.id==='atx'?.13:.11,x+.075,y,z,0x242c30);
-    if(['atx','eps','eps2','gpu1','gpu2'].includes(cable.id))for(const t of [.44,.65]){
+    const [x,y,z]=targets[cable.id].position;
+    const plug=this.box(this.wires,.09,cable.id==='atx'?.46:.17,cable.id==='atx'?.13:.11,x+(targets[cable.id].axis==='y'?0:.075),y+(targets[cable.id].axis==='y'?.075:0),z,0x242c30);if(targets[cable.id].axis==='y')plug.rotation.z=Math.PI/2;
+    if(['atx','eps','eps2'].includes(cable.id)||cable.id.startsWith('gpu'))for(const t of [.44,.65]){
      const curve=new THREE.CatmullRomCurve3(cable.points.map(p=>new THREE.Vector3(...p))),point=curve.getPoint(t);
-     this.box(this.wires,.05,cable.strands*cable.radius*2.3,.055,...point.toArray(),0x424e53);
+     const comb=this.box(this.wires,.05,cable.strands*cable.radius*2.3,.055,...point.toArray(),0x424e53);if(cable.spreadAxis==='x')comb.rotation.z=Math.PI/2;
     }
    }
-   // Short leads join the three front fans to the illustrative splitter.
-   if(active.includes('frontFan'))for(const y of (resolve(this.currentBuild).case?.frontFanCount===1?[]:resolve(this.currentBuild).case?.frontFanCount===2?[2.2,3.4]:[1.7,3.96])){
-    const curve=new THREE.CatmullRomCurve3([new THREE.Vector3(-.4,y,1.96),new THREE.Vector3(-.75,y,1.72),new THREE.Vector3(-.75,2.84,1.72),new THREE.Vector3(-.4,2.84,1.96)]);
-    this.wires.add(new THREE.Mesh(new THREE.TubeGeometry(curve,26,.014,6,false),mat(0x151d20,.8,.1)));
+   if(active.includes('frontFan')){
+    const frame=caseLayout(resolve(this.currentBuild).case||{}),hubY=frame.fanYs[Math.floor(frame.fanYs.length/2)];
+    for(const y of frame.fanYs.filter(y=>y!==hubY)){
+     const curve=new THREE.CatmullRomCurve3([new THREE.Vector3(-.43,y,frame.fanZ-.04),new THREE.Vector3(-.72,y,frame.fanZ-.20),new THREE.Vector3(-.72,hubY,frame.fanZ-.20),new THREE.Vector3(-.43,hubY,frame.fanZ-.04)]);
+     this.wires.add(new THREE.Mesh(new THREE.TubeGeometry(curve,20,.012,6,false),mat(0x151d20,.8,.1)));
+    }
    }
   }
   if(!this.markerLayer){this.markerLayer=document.createElement('div');this.markerLayer.className='port-markers';this.container.append(this.markerLayer);}
   this.markerLayer.replaceChildren();this.markers=[];
-  available.forEach((c,i)=>{const button=document.createElement('button');button.type='button';button.className='port-marker'+(c.id===selected?' target':'')+(active.includes(c.id)?' connected':'');button.dataset.port=c.id;button.setAttribute('aria-label','Разъём '+c.to);button.title=c.to;button.textContent=String(i+1);const label=document.createElement('span');label.textContent=c.to;button.append(label);this.markerLayer.append(button);this.markers.push({button,position:new THREE.Vector3(...ports[c.id].position)});});
+  available.forEach((c,i)=>{const button=document.createElement('button');button.type='button';button.className='port-marker'+(c.id===selected?' target':'')+(active.includes(c.id)?' connected':'');button.dataset.port=c.id;button.setAttribute('aria-label','Разъём '+c.to);button.title=c.to;button.textContent=String(i+1);const label=document.createElement('span');label.textContent=c.to;button.append(label);this.markerLayer.append(button);this.markers.push({button,position:new THREE.Vector3(...targets[c.id].position)});});
   this.markerLayer.classList.toggle('visible',showPorts);this.prepareLooseCable(mode,active);this.updateMarkers();
  }
  updateMarkers(){
@@ -133,9 +137,9 @@ export class PCScene {
  makeCaseFlows(p){if(this.flowGroup){this.flowGroup.removeFromParent();this.flowGroup.traverse(o=>{o.geometry?.dispose();o.material?.dispose();});}this.flowParticles=[];this.makeFlows(p.frontFanCount??3);this.flowGroup.visible=this.airflow;}
  makeFlows(frontCount=3){
   this.flowGroup=new THREE.Group();this.flowGroup.visible=false;this.root.add(this.flowGroup);
-  const paths=[];for(let band=0;band<frontCount;band++)for(let lane=0;lane<4;lane++){
-   const y=frontCount===1?2.83:frontCount===2?2.1+band*1.25:1.65+band*1.12, x=-.38+lane*.24;
-   const curve=new THREE.CatmullRomCurve3([new THREE.Vector3(x,y,2.75),new THREE.Vector3(x,y,1.70),new THREE.Vector3(x+.30,y+.05,.9),new THREE.Vector3(x+.52,y+.24,-.35),new THREE.Vector3(x*.7+.20,3.94,-1.65),new THREE.Vector3(x*.7+.20,4.02,-2.80)]);
+  const frame=caseLayout(resolve(this.currentBuild||{}).case||{}),paths=[];for(let band=0;band<frontCount;band++)for(let lane=0;lane<4;lane++){
+   const y=frame.fanYs[band], x=-.38+lane*.24;
+   const curve=new THREE.CatmullRomCurve3([new THREE.Vector3(x,y,frame.front+.55),new THREE.Vector3(x,y,frame.fanZ-.20),new THREE.Vector3(x+.30,y+.05,.9),new THREE.Vector3(x+.52,y+.24,-.35),new THREE.Vector3(x*.7+.20,3.94,-1.65),new THREE.Vector3(x*.7+.20,4.02,-2.80)]);
    paths.push(curve);
    const lineGeo=new THREE.BufferGeometry().setFromPoints(curve.getPoints(40));const line=new THREE.Line(lineGeo,new THREE.LineBasicMaterial({color:0x91b9ed,transparent:true,opacity:.17,depthTest:false}));line.renderOrder=3;this.flowGroup.add(line);
    for(let n=0;n<5;n++){const mesh=new THREE.Mesh(new THREE.SphereGeometry(.027,6,5),new THREE.MeshBasicMaterial({color:0x99d8ef,transparent:true,opacity:.8,depthTest:false}));mesh.renderOrder=4;this.flowGroup.add(mesh);this.flowParticles.push({mesh,curve,t:n/5,band});}

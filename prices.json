@@ -258,6 +258,13 @@
       "date": "2026-10-10",
       "store": "BATYA STORE",
       "url": "https://batyastore.ru/catalog/kompyuternaya-i-ofisnaya-tekhnika/komplektuyushchie/kompyuternye-korpusa/korpus_fractal_design_pop_air_black_tg_clear_tint_fd_c_poa1a_02/"
+    },
+    "rx9060xt-16-pulse-oc": {
+      "price": 71226,
+      "date": "2026-10-10",
+      "store": "KNS",
+      "url": "https://www.kns.ru/product/videokarta-sapphire-amd-radeon-rx-9060-xt-pulse-gaming-oc-16gb-11350-03-20g/",
+      "note": "Обычная цена без клубной скидки. В наличии на складе; самовывоз 13.10.2026 бесплатно, доставка 13.10.2026 от 450 ₽. Точный SKU 11350-03-20G."
     }
   },
   "availability": {
@@ -356,6 +363,26 @@
     "ak400": "https://www.dns-shop.ru/product/ef120e526912ed20/kuler-dla-processora-deepcool-ak400-r-ak400-bknnmn-g-1-cernyj/",
     "ak620": "https://www.dns-shop.ru/product/f65523875885ed20/kuler-dla-processora-deepcool-ak620-lga1700-r-ak620-bknnmt-g-cernyj/",
     "a850": "https://www.dns-shop.ru/product/15ef9f9ed482ed20/blok-pitania-msi-mag-a850gl-pcie5-cernyj/",
-    "cc560": "https://www.dns-shop.ru/product/0d7e80408f5fed20/korpus-deepcool-cc560-v2-r-cc560-bkgaa4-g-2-cernyj/"
+    "cc560": "https://www.dns-shop.ru/product/0d7e80408f5fed20/korpus-deepcool-cc560-v2-r-cc560-bkgaa4-g-2-cernyj/",
+    "rtx3050-6-ventus2x-e-oc": "https://www.dns-shop.ru/product/508738a9bc02d9cb/videokarta-msi-geforce-rtx-3050-ventus-2x-e-oc-rtx-3050-ventus-2x-e-6g-oc/",
+    "rtx4060ti-16-ventus2x-oc": "https://www.dns-shop.ru/product/bcef83cb1e36ed20/videokarta-msi-geforce-rtx-4060-ti-ventus-2x-black-oc-geforce-rtx-4060-ti-ventus-2x-black-16g-oc/",
+    "rtx4070tisuper-ventus3x-oc": "https://www.dns-shop.ru/product/16dedefbb8e8ed20/videokarta-msi-geforce-rtx-4070-ti-super-ventus-3x-oc-geforce-rtx-4070-ti-super-16g-ventus-3x-oc/",
+    "rtx4080super-ventus3x-oc": "https://www.dns-shop.ru/product/bbb88421c0efed20/videokarta-msi-geforce-rtx-4080-super-ventus-3x-oc-912-v511-233/",
+    "rtx4090-ventus3x-oc": "https://www.dns-shop.ru/product/fafa52015e5bed20/videokarta-msi-geforce-rtx-4090-ventus-3x-oc-rtx-4090-ventus-3x-24g-oc/",
+    "rtx5050-ventus2x-oc": "https://www.dns-shop.ru/product/d8f5e41b52f5d582/videokarta-msi-geforce-rtx-5050-ventus-2x-oc-rtx-5050-8g-ventus-2x-oc/",
+    "rtx5060-ventus2x-oc": "https://www.dns-shop.ru/product/bec466762af2d582/videokarta-msi-geforce-rtx-5060-ventus-2x-oc-rtx-5060-8g-ventus-2x-oc/",
+    "rtx5060ti-16-ventus2x-oc-plus": "https://www.dns-shop.ru/product/2a180a821699d9cb/videokarta-msi-geforce-rtx-5060-ti-ventus-2x-oc-plus-rtx-5060-ti-16g-ventus-2x-oc-plus/",
+    "rtx5070-ventus2x-oc-white": "https://www.dns-shop.ru/product/3a152bf6eaa9d582/videokarta-msi-geforce-rtx-5070-ventus-2x-white-oc-rtx-5070-12g-ventus-2x-oc-white/",
+    "rtx5070ti-ventus3x-oc": "https://www.dns-shop.ru/product/86357c17e448d582/videokarta-msi-geforce-rtx-5070-ti-ventus-3x-oc-rtx-5070-ti-16g-ventus-3x-oc/",
+    "rtx5080-ventus3x-oc": "https://www.dns-shop.ru/product/9fdccd56d49cd9cb/videokarta-msi-geforce-rtx-5080-ventus-3x-oc-rtx-5080-16g-ventus-3x-oc/",
+    "rtx5090-ventus3x-oc": "https://www.dns-shop.ru/product/625457072969d9cb/videokarta-msi-geforce-rtx-5090-ventus-3x-oc-rtx-5090-32g-ventus-3x-oc/",
+    "rx7600xt-pulse": "https://www.dns-shop.ru/product/7de11280c0ebed20/videokarta-sapphire-amd-radeon-rx-7600-xt-pulse-gaming-oc-11339-04-20g/",
+    "rx7900gre-pulse": "https://www.dns-shop.ru/product/034313e2e103ed20/videokarta-sapphire-amd-radeon-rx-7900-gre-pulse-gaming-oc-11325-04-20g/",
+    "rx7900xt-pulse": "https://www.dns-shop.ru/product/72288ee5eadeed20/videokarta-sapphire-amd-radeon-rx-7900-xt-pulse-oc-11323-02-20g/",
+    "rx7900xtx-pulse": "https://www.dns-shop.ru/product/db50ccefc301ed20/videokarta-sapphire-amd-radeon-rx-7900-xtx-pulse-oc-11322-02-20g/",
+    "rx9060xt-8-pulse": "https://www.dns-shop.ru/product/characteristics/e60bc41daa98d582/videokarta-sapphire-amd-radeon-rx-9060-xt-pulse-gaming-11350-05-20g/",
+    "rx9060xt-16-pulse-oc": "https://www.dns-shop.ru/product/cd4286b841ccd582/videokarta-sapphire-amd-radeon-9060-xt-pulse-oc-11350-03-20g/",
+    "rx9070-pulse": "https://www.dns-shop.ru/product/3479a48941cdd582/videokarta-sapphire-amd-radeon-rx-9070-pulse-11349-03-20g/",
+    "rx9070xt-pulse": "https://www.dns-shop.ru/product/d55ccb8a060fd582/videokarta-sapphire-amd-radeon-rx-9070-xt-pulse-gaming-11348-03-20g/"
   }
 }

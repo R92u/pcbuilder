@@ -16,7 +16,7 @@ export function filterProducts(products,filters,build,prices){
   return (filters.category==='all'||p.category===filters.category)&&
    (!query||`${p.name} ${p.detail} ${p.sku||''}`.toLocaleLowerCase('ru').includes(query))&&
    (!filters.brand||manufacturer(p)===filters.brand)&&
-   (!filters.memory||p.memory===filters.memory)&&(!filters.socket||p.socket===filters.socket)&&
+   (!filters.memory||[p.memory].flat().includes(filters.memory))&&(!filters.socket||p.socket===filters.socket)&&
    (!filters.priced||Number.isFinite(price))&&
    (filters.min===''||(Number.isFinite(price)&&price>=Number(filters.min)))&&
    (filters.max===''||(Number.isFinite(price)&&price<=Number(filters.max)))&&
@@ -64,7 +64,7 @@ export function createShop({getBuild,getPrices,getSource,onChoose,beforeOpen,ico
  function populateFilters(){
   const base=category==='all'?shopProducts:catalog[category];
   for(const [id,key,label] of [['shop-brand',manufacturer,'Все производители'],['shop-socket',p=>p.socket,'Все сокеты'],['shop-memory',p=>p.memory,'Все типы памяти']]){
-   const values=[...new Set(base.map(key).filter(Boolean))].sort();
+   const values=[...new Set(base.flatMap(key).filter(Boolean))].sort();
    $(id).innerHTML=`<option value="">${label}</option>`+values.map(v=>`<option value="${escape(v)}">${escape(v)}</option>`).join('');
    if(id!=='shop-brand')$(id).closest('label').hidden=values.length<2;
   }
