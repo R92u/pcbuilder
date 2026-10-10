@@ -1,4 +1,5 @@
 import * as THREE from 'three';
+import {gpuLighting} from './lighting.js';
 import {hardwareFinish} from './surfaces.js';
 import {gpuLayout,gpuSlots} from './layout.js';
 
@@ -75,7 +76,14 @@ export function makeDetailedGPU(p){
  this.text(g,p.short.toUpperCase(),Math.min(len-.35,1.55),.075,.797,top-.020,center,[0,Math.PI/2,0],'#858d8a');
  const brand=sapphire?'SAPPHIRE':zotac?'ZOTAC GAMING':'MSI';
  this.box(g,.035,.105,.68,.818,bottom+.042,center,0x12171a);
- this.text(g,brand,.61,.090,.839,bottom+.045,center,[0,Math.PI/2,0],sapphire?'#beb5b0':'#acb5b3');
+ const brandLabel=this.text(g,brand,zotac?1.10:.61,zotac?.11:.090,.850,bottom+.065,center,[0,Math.PI/2,0],zotac?'#ffffff':sapphire?'#beb5b0':'#acb5b3',null,zotac);
+ const lighting=gpuLighting(p);
+ if(lighting){
+  this.tagLight(brandLabel,{...lighting,intensity:2});
+  // Small luminous ZOTAC mark on the backplate; the fan blades stay unlit.
+  const emblem=this.text(g,'Z',.30,.28,-.12,top+.049,end-.86,[-Math.PI/2,0,Math.PI/2],'#ffffff',null,true);
+  this.tagLight(emblem,{...lighting,intensity:2},.28);
+ }
  this.label(g,p,.52,.24,.24,top+.043,rear+.65,[-Math.PI/2,0,Math.PI/2]);
  this.text(g,p.brand==='AMD'?'RADEON':'GEFORCE RTX',.83,.10,-.14,top+.045,center,[-Math.PI/2,0,Math.PI/2],'#596363');
  for(let i=0;i<3;i++){const groove=this.box(g,.65,.006,.008,-.10,top+.047,rear+.27+i*.055,0x394346);groove.rotation.y=-.24;}
