@@ -1,8 +1,11 @@
 import * as THREE from 'three';
-import {cablesFor,ports} from './wiring.js';
+import {cablesFor} from './wiring.js';
+import {cableCurve} from './cable-geometry.js';
+import {caseLayout} from './layout.js';
+import {resolve} from './catalog.js';
 
 // Pointer Events work with a mouse, pen or touch. Orbiting is suspended only
-// while a plug is held; the cable end follows a plane facing the camera.
+// while a plug is held; its free end moves outside the open service side.
 export const interactionMethods={
  initInteraction(){
   const canvas=this.renderer.domElement;
@@ -27,13 +30,15 @@ export const interactionMethods={
  clearLooseCable(){
   this.endCableDrag(null,true);
   if(this.looseCable){this.looseCable.removeFromParent();this.looseCable.traverse(o=>{o.geometry?.dispose();o.material?.dispose();});this.looseCable=null;}
-  this.plugHandle?.remove();this.plugHandle=null;
+  this.plugHandle?.remove();this.plugHandle=null;this.sourceMarker?.remove();this.sourceMarker=null;this.looseSpec=null;
  },
  prepareLooseCable(mode,active){
   this.clearLooseCable();
-  if(mode!=='manual'||!this.showPorts||!this.selectedCable||active.includes(this.selectedCable))return;
+  if(!this.showPorts||!this.selectedCable)return;
   const cable=cablesFor(this.currentBuild).find(c=>c.id===this.selectedCable);if(!cable)return;
-  this.looseSpec=cable;this.looseEnd=new THREE.Vector3(1.72,1.55,1.55);
+  const source=document.createElement('div');source.className='cable-source';source.textContent='Источник · '+cable.from;source.setAttribute('aria-label','Источник кабеля: '+cable.from);this.markerLayer.append(source);this.sourceMarker=source;this.sourcePosition=new THREE.Vector3(...cable.points[0]);
+  if(mode!=='manual'||active.includes(this.selectedCable))return;
+  this.looseSpec=cable;this.looseEnd=new THREE.Vector3(...cable.looseRest);
   this.looseCable=new THREE.Group();this.root.add(this.looseCable);
   this.plug=this.box(this.looseCable,.24,.16,.21,0,0,0,0x242a2c);
   this.plug.userData.ignoreInspect=true;
@@ -43,7 +48,8 @@ export const interactionMethods={
   this.markerLayer.append(handle);this.plugHandle=handle;
   handle.addEventListener('pointerdown',ev=>{
    if(ev.button!==0)return;ev.preventDefault();ev.stopPropagation();
-   this.dragging={id:ev.pointerId,cableId:cable.id,plane:new THREE.Plane().setFromNormalAndCoplanarPoint(this.camera.getWorldDirection(new THREE.Vector3()),this.looseEnd)};
+   const p=resolve(this.currentBuild),frame=caseLayout(p.case,p.gpu);
+   this.dragging={id:ev.pointerId,cableId:cable.id,exteriorX:frame.side+.16,plane:new THREE.Plane(new THREE.Vector3(1,0,0),-frame.side-.16)};
    handle.setPointerCapture(ev.pointerId);this.controls.enabled=false;handle.classList.add('held');
   });
   handle.addEventListener('pointermove',ev=>{
@@ -61,13 +67,17 @@ export const interactionMethods={
  },
  drawLooseCable(){
   if(!this.looseSpec||!this.looseCable)return;
-  const start=new THREE.Vector3(...this.looseSpec.points[0]);
-  const middle=start.clone().lerp(this.looseEnd,.45);middle.y=Math.max(.4,middle.y-.42);middle.x=Math.max(middle.x,.8);
-  const curve=new THREE.CatmullRomCurve3([start,start.clone().add(new THREE.Vector3(.35,.1,.28)),middle,this.looseEnd.clone()]);
-  this.looseTube.geometry.dispose();this.looseTube.geometry=new THREE.TubeGeometry(curve,28,Math.max(.018,this.looseSpec.radius*Math.sqrt(this.looseSpec.strands)),6,false);
+  const prefix=this.looseSpec.loosePrefix.map(p=>new THREE.Vector3(...p));
+  const end=this.looseEnd.clone(),last=prefix.at(-1);
+  if(this.dragging)prefix.push(new THREE.Vector3(this.dragging.exteriorX,last.y,last.z),new THREE.Vector3(this.dragging.exteriorX,end.y,end.z));
+  else prefix.push(last.clone().lerp(end,.5).add(new THREE.Vector3(0,-.04,0)));
+  prefix.push(end);
+  const curve=cableCurve(prefix,.09);
+  this.looseTube.geometry.dispose();this.looseTube.geometry=new THREE.TubeGeometry(curve,96,Math.max(.018,this.looseSpec.radius*Math.sqrt(this.looseSpec.strands)),6,false);
   this.plug.position.copy(this.looseEnd);this.plug.lookAt(curve.getPoint(.94));this.updatePlugHandle();
  },
  updatePlugHandle(){
+  if(this.sourceMarker){const source=this.sourcePosition.clone().project(this.camera);this.sourceMarker.style.left=(source.x*.5+.5)*this.container.clientWidth+'px';this.sourceMarker.style.top=(-source.y*.5+.5)*this.container.clientHeight+'px';this.sourceMarker.hidden=source.z>1||Math.abs(source.x)>1||Math.abs(source.y)>1;}
   if(!this.plugHandle||!this.looseEnd)return;
   const p=this.looseEnd.clone().project(this.camera);
   this.plugHandle.style.left=(p.x*.5+.5)*this.container.clientWidth+'px';this.plugHandle.style.top=(-p.y*.5+.5)*this.container.clientHeight+'px';
@@ -84,7 +94,7 @@ export const interactionMethods={
   if(this.plugHandle?.hasPointerCapture(id))this.plugHandle.releasePointerCapture(id);
   this.plugHandle?.classList.remove('held');for(const m of this.markers||[])m.button.classList.remove('drop-ready');
   const target=ev&&!cancelled?this.dropPortAt(ev.clientX,ev.clientY):null;
-  this.looseEnd?.set(1.72,1.55,1.55);this.drawLooseCable();
+  if(this.looseSpec)this.looseEnd?.set(...this.looseSpec.looseRest);this.drawLooseCable();
   if(!cancelled)this.onCableDrop?.(cableId,target);
  }
 };

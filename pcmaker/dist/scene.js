@@ -4,7 +4,8 @@ import {resolve} from './catalog.js';
 import {modelMethods} from './model.js';
 import {portsFor,cablesFor} from './wiring.js';
 import {hardwareFinish} from './surfaces.js';
-import {gpuLayout,caseLayout} from './layout.js';
+import {gpuLayout,caseLayout,gpuSlots,frontFanSource,coolerLayout,CPU_CENTER} from './layout.js';
+import {cableCurve,strandPoints} from './cable-geometry.js';
 import {interactionMethods} from './interaction.js';
 
 const C={metal:0x222a2f,edge:0x485257,black:0x101618,silver:0x879398,pcb:0x17211c,purple:0xbfa5ff};
@@ -63,23 +64,33 @@ export class PCScene {
  lightStrip(g,w,h,d,x,y,z,color=C.purple){const mesh=new THREE.Mesh(new THREE.BoxGeometry(w,h,d),new THREE.MeshStandardMaterial({color,emissive:color,emissiveIntensity:1.5,roughness:.35}));mesh.position.set(x,y,z);g.add(mesh);return mesh;}
  fan(parent,size,x,y,z,rotation,kind,rgb=true){
   const fan=new THREE.Group();fan.position.set(x,y,z);fan.rotation.set(...rotation);parent.add(fan);
-  for(const sign of [-1,1]){this.box(fan,size,size*.065,.11,0,sign*size*.465,0,C.black);this.box(fan,size*.065,size,.11,sign*size*.465,0,0,C.black);}
-  // Open ring rather than an opaque front: rotor is genuinely three-dimensional.
-  const ring=new THREE.Mesh(new THREE.TorusGeometry(size*.405,size*.038,10,48),new THREE.MeshStandardMaterial({color:rgb?C.purple:0x4c4e57,emissive:rgb?0x7e57cc:0,emissiveIntensity:rgb?.9:0,metalness:.35,roughness:.4}));ring.position.z=.081;fan.add(ring);
-
-  const rotor=new THREE.Group();rotor.userData.animated=true;rotor.position.z=.11;fan.add(rotor);
-  const bladeShape=new THREE.Shape();bladeShape.moveTo(.10,-.02);bladeShape.quadraticCurveTo(.24,-.19,.39,-.14);bladeShape.quadraticCurveTo(.45,-.05,.32,.07);bladeShape.lineTo(.1,.06);bladeShape.closePath();
-  const bladeGeometry=new THREE.ExtrudeGeometry(bladeShape,{depth:.009,bevelEnabled:true,bevelSegments:1,steps:1,bevelSize:.008,bevelThickness:.006,curveSegments:5});
-  const blades=new THREE.InstancedMesh(bladeGeometry,mat(rgb?0x727b80:0x303a3e,.6,.35),9),transform=new THREE.Object3D();
-  for(let i=0;i<9;i++){transform.scale.setScalar(size);transform.rotation.z=i/9*Math.PI*2;transform.updateMatrix();blades.setMatrixAt(i,transform.matrix);}rotor.add(blades);
-  const hub=new THREE.Mesh(new THREE.CircleGeometry(size*.115,24),mat(0x272832,.4,.35));hub.position.z=.005;rotor.add(hub);
-  const rearHub=new THREE.Mesh(new THREE.CircleGeometry(size*.13,24),mat(0x4d595f));rearHub.position.z=-.08;rearHub.rotation.y=Math.PI;fan.add(rearHub);for(const angle of [0,Math.PI/2]){const support=this.box(fan,size*.76,size*.045,.035,0,0,-.095,0x485358);support.rotation.z=angle;}
-  for(const sx of [-1,1])for(const sy of [-1,1]){const screw=new THREE.Mesh(new THREE.CircleGeometry(size*.026,8),mat(0x888491));screw.position.set(sx*size*.425,sy*size*.425,.063);fan.add(screw);}
+  const depth=kind==='gpu'?.17:.23;
+  // A continuous square housing, rotor between its faces, and motor braces on
+  // the exhaust side (-Z). The intake is +Z for case and CPU fans.
+  for(const sign of [-1,1]){this.box(fan,size,size*.075,depth,0,sign*size*.4625,0,C.black);this.box(fan,size*.075,size,depth,sign*size*.4625,0,0,C.black);}
+  const ductShape=new THREE.Shape();ductShape.absarc(0,0,size*.455,0,Math.PI*2,false);const opening=new THREE.Path();opening.absarc(0,0,size*.408,0,Math.PI*2,true);ductShape.holes.push(opening);
+  const duct=new THREE.Mesh(new THREE.ExtrudeGeometry(ductShape,{depth,bevelEnabled:false,curveSegments:24}),mat(C.black,.7,.1));duct.position.z=-depth/2;fan.add(duct);
+  const ring=new THREE.Mesh(new THREE.TorusGeometry(size*.425,size*.015,6,40),new THREE.MeshStandardMaterial({color:rgb?C.purple:0x454e52,emissive:rgb?0x7e57cc:0,emissiveIntensity:rgb?.9:0,metalness:.25,roughness:.5}));ring.position.z=depth/2+.003;fan.add(ring);
+  const rotor=new THREE.Group();rotor.userData.animated=true;rotor.position.z=.025;fan.add(rotor);
+  const bladeShape=new THREE.Shape();bladeShape.moveTo(.09,-.025);bladeShape.quadraticCurveTo(.24,-.14,.38,-.08);bladeShape.quadraticCurveTo(.415,-.02,.365,.042);bladeShape.quadraticCurveTo(.23,.025,.10,.065);bladeShape.closePath();
+  const bladeGeometry=new THREE.ExtrudeGeometry(bladeShape,{depth:.018,bevelEnabled:false,curveSegments:6});
+  const blades=new THREE.InstancedMesh(bladeGeometry,mat(rgb?0x657178:0x303a3e,.65,.15),7),transform=new THREE.Object3D();
+  for(let i=0;i<7;i++){transform.scale.setScalar(size);transform.rotation.z=i/7*Math.PI*2;transform.rotation.x=.16;transform.updateMatrix();blades.setMatrixAt(i,transform.matrix);}rotor.add(blades);
+  const hub=this.cylinder(rotor,size*.115,.085,0,0,.015,0x252d32);hub.rotation.x=Math.PI/2;
+  const rearHub=this.cylinder(fan,size*.13,.10,0,0,-depth/2+.05,0x414c52);rearHub.rotation.x=Math.PI/2;
+  for(const angle of [Math.PI/4,-Math.PI/4]){const support=this.box(fan,size*1.22,size*.040,.035,0,0,-depth/2+.018,0x343f45);support.rotation.z=angle;}
+  const sticker=new THREE.Mesh(new THREE.CircleGeometry(size*.108,24),mat(0x6c7679,.85,.05));sticker.position.z=-depth/2-.004;sticker.rotation.y=Math.PI;fan.add(sticker);
+  for(const sx of [-1,1])for(const sy of [-1,1])for(const face of [-1,1]){const screw=new THREE.Mesh(new THREE.CircleGeometry(size*.026,8),mat(0x788387));screw.position.set(sx*size*.447,sy*size*.447,face*(depth/2+.004));if(face<0)screw.rotation.y=Math.PI;fan.add(screw);}
+  // Moulded airflow arrow on the top edge, visibly pointing through the struts.
+  this.box(fan,.015,.008,.11,0,size/2+.005,0,0x8c999e);
+  for(const sign of [-1,1]){const arrow=this.box(fan,.055,.008,.012,sign*.018,size/2+.005,-.043,0x8c999e);arrow.rotation.y=sign*Math.PI/4;}
+  if(kind!=='gpu')this.box(fan,.075,.070,.060,(kind==='front'?-1:1)*size*.46,size*(kind==='cpu'?.40:.35),-depth/2+.015,0x11191c);
   this.fans.push({rotor,kind,parent});return fan;
  }
  setBuild(build){
   this.currentBuild=build;const p=resolve(build);
-  if(p.case&&this.caseGroup.userData.id!==p.case.id){this.caseGroup.removeFromParent();this.fans=this.fans.filter(f=>f.parent!==this.caseGroup);this.caseGroup.traverse(o=>{o.geometry?.dispose();o.material?.map?.dispose();o.material?.dispose();});this.makeCase(p.case);this.glass.visible=!this.hideGlass;this.makeCaseFlows(p.case);}
+  const caseSignature=(p.case?.id||'cc560')+':'+(p.gpu?.length||'empty');
+  if(p.case&&this.caseGroup.userData.signature!==caseSignature){this.caseGroup.removeFromParent();this.fans=this.fans.filter(f=>f.parent!==this.caseGroup);this.caseGroup.traverse(o=>{o.geometry?.dispose();o.material?.map?.dispose();o.material?.dispose();});this.makeCase(p.case);this.caseGroup.userData.signature=caseSignature;this.glass.visible=!this.hideGlass;this.makeCaseFlows(p.case);}
   for(const key of ['motherboard','cpu','ram','gpu','cooler','storage','psu']){
    const signature=p[key]?.id+(key==='cooler'?':'+p.ram?.id+':'+p.cpu?.socket:'');if(this.parts[key]?.userData.signature===signature)continue;
    if(this.parts[key]){const old=this.parts[key];this.root.remove(old);this.fans=this.fans.filter(f=>f.parent!==old&&!old.getObjectById(f.parent.id));this.transitions=this.transitions.filter(t=>t.group!==old);old.traverse(o=>{o.geometry?.dispose();if(o.material){const mats=Array.isArray(o.material)?o.material:[o.material];for(const m of mats){m.map?.dispose();m.dispose();}}});delete this.parts[key];}
@@ -87,36 +98,44 @@ export class PCScene {
    const factories={motherboard:'makeMotherboard',cpu:'makeCPU',ram:'makeRAM',gpu:'makeGPU',cooler:'makeCooler',storage:'makeStorage',psu:'makePSU'};
    const group=this[factories[key]](p[key]);group.userData.id=p[key].id;group.userData.signature=signature;group.userData.componentKey=key;this.root.add(group);this.parts[key]=group;// Install directly at shared anchors, including during the first rendered frame.
   }
-  for(const cover of this.slotCovers||[])cover.visible=!p.gpu||cover.userData.slotCenter<gpuLayout(p.gpu).bottom-.14;
+  for(const [i,cover] of (this.slotCovers||[]).entries())cover.visible=!p.gpu||i>=gpuSlots(p.gpu);
   if(this.parts.cooler)this.parts.cooler.visible=!this.hideCooler;
  }
  setWiring(mode,connected,selected=null,showPorts=false){
   this.clearLooseCable();this.selectedCable=selected;this.showPorts=showPorts;
   const targets=portsFor(this.currentBuild||{}),available=cablesFor(this.currentBuild||{}),active=mode==='auto'?available.map(c=>c.id):connected;
-  const key=JSON.stringify([this.currentBuild,active]);
+  const key=JSON.stringify([this.currentBuild,active,selected,showPorts]);
   if(this.wireKey!==key){
    this.wireKey=key;
    if(this.wires){this.wires.removeFromParent();this.wires.traverse(o=>{o.geometry?.dispose();o.material?.dispose();});}
    this.wires=new THREE.Group();this.root.add(this.wires);
    for(const cable of available.filter(c=>active.includes(c.id))){
     for(let i=0;i<cable.strands;i++){
-     const offset=(i-(cable.strands-1)/2)*cable.radius*2.15;
-     const points=cable.points.map((p,n)=>new THREE.Vector3(p[0]+(cable.spreadAxis==='x'?offset:0),p[1]+(cable.spreadAxis==='x'?0:offset),p[2]));
-     const curve=new THREE.CatmullRomCurve3(points,false,'centripetal');
-     const mesh=new THREE.Mesh(new THREE.TubeGeometry(curve,28,cable.radius,5,false),mat(i%4===0?0x363e43:0x171d20,.76,.1));mesh.castShadow=true;this.wires.add(mesh);
+     const curve=cableCurve(strandPoints(cable,i));
+     const mesh=new THREE.Mesh(new THREE.TubeGeometry(curve,Math.max(72,cable.points.length*14),cable.radius,5,false),mat(showPorts&&cable.id===selected?0x9788b1:i%4===0?0x363e43:0x171d20,.76,.1));mesh.castShadow=true;this.wires.add(mesh);
     }
     const [x,y,z]=targets[cable.id].position;
-    const plug=this.box(this.wires,.09,cable.id==='atx'?.46:.17,cable.id==='atx'?.13:.11,x+(targets[cable.id].axis==='y'?0:.075),y+(targets[cable.id].axis==='y'?.075:0),z,0x242c30);if(targets[cable.id].axis==='y')plug.rotation.z=Math.PI/2;
+    const axis=targets[cable.id].axis,vertical=axis==='y'||axis==='-y',direction=axis==='-y'?-1:1;
+    const plug=this.box(this.wires,.09,cable.id==='atx'?.46:.17,cable.id==='atx'?.13:.11,x+(vertical?0:.075),y+(vertical?.075*direction:0),z,0x242c30);if(vertical)plug.rotation.z=direction*Math.PI/2;
     if(['atx','eps','eps2'].includes(cable.id)||cable.id.startsWith('gpu'))for(const t of [.44,.65]){
-     const curve=new THREE.CatmullRomCurve3(cable.points.map(p=>new THREE.Vector3(...p))),point=curve.getPoint(t);
+     const curve=cableCurve(cable.points),point=curve.getPoint(t);
      const comb=this.box(this.wires,.05,cable.strands*cable.radius*2.3,.055,...point.toArray(),0x424e53);if(cable.spreadAxis==='x')comb.rotation.z=Math.PI/2;
     }
    }
-   if(active.includes('frontFan')){
-    const frame=caseLayout(resolve(this.currentBuild).case||{}),hubY=frame.fanYs[Math.floor(frame.fanYs.length/2)];
-    for(const y of frame.fanYs.filter(y=>y!==hubY)){
-     const curve=new THREE.CatmullRomCurve3([new THREE.Vector3(-.43,y,frame.fanZ-.04),new THREE.Vector3(-.72,y,frame.fanZ-.20),new THREE.Vector3(-.72,hubY,frame.fanZ-.20),new THREE.Vector3(-.43,hubY,frame.fanZ-.04)]);
-     this.wires.add(new THREE.Mesh(new THREE.TubeGeometry(curve,20,.012,6,false),mat(0x151d20,.8,.1)));
+   if(active.includes('cpuFan')||selected==='cpuFan'){
+    const p=resolve(this.currentBuild),c=cablesFor(this.currentBuild).find(c=>c.id==='cpuFan');
+    if(c&&(p.cooler?.fans||1)>1){
+     const l=coolerLayout(p.cooler,p.ram,p.cpu?.socket),size=l.sizes[0]||l.size,start=[l.top-size*.04-.01,CPU_CENTER.y+size*.40,l.fanZ[0]-.10];
+     const curve=cableCurve([start,[start[0]+.06,4.42,start[2]],[start[0]+.06,4.42,c.points[0][2]],c.points[0]]);
+     this.wires.add(new THREE.Mesh(new THREE.TubeGeometry(curve,56,.012,6,false),mat(0x151d20,.8,.1)));
+    }
+   }
+   if(active.includes('frontFan')||selected==='frontFan'){
+    const p=resolve(this.currentBuild),frame=caseLayout(p.case||{},p.gpu),hub=frontFanSource(frame);
+    for(const y of frame.fanYs){
+     const source=[-frame.fanSize*.46,y+frame.fanSize*.35,frame.fanZ-.10];
+     const curve=cableCurve([source,[-.80,source[1],frame.fanZ-.14],[-.80,hub[1],frame.fanZ-.14],hub]);
+     this.wires.add(new THREE.Mesh(new THREE.TubeGeometry(curve,48,.010,6,false),mat(0x151d20,.8,.1)));
     }
    }
   }
@@ -131,13 +150,13 @@ export class PCScene {
   for(const {button,position} of this.markers){const projected=position.clone().project(this.camera);button.style.left=(projected.x*.5+.5)*width+'px';button.style.top=(-projected.y*.5+.5)*height+'px';button.hidden=projected.z>1||Math.abs(projected.x)>1||Math.abs(projected.y)>1;}
  }
  view(name){
-  const views={assembly:[8.3,5.4,7.4],rear:[3.4,4.1,-9.4],top:[4.8,10,5.8],cables:[-8.3,4.6,5.4]};
+  const views={assembly:[10.4,5.0,3.8],rear:[3.4,4.1,-9.4],top:[4.8,10,5.8],cables:[-8.3,4.6,5.4]};
   this.camera.position.set(...(views[name]||views.assembly));this.controls.target.set(0,2.35,0);this.controls.update();this.endCableDrag(null,true);this.rearPanel.visible=name!=='cables';if(this.markerLayer)this.markerLayer.hidden=['rear','cables'].includes(name);
  }
  makeCaseFlows(p){if(this.flowGroup){this.flowGroup.removeFromParent();this.flowGroup.traverse(o=>{o.geometry?.dispose();o.material?.dispose();});}this.flowParticles=[];this.makeFlows(p.frontFanCount??3);this.flowGroup.visible=this.airflow;}
  makeFlows(frontCount=3){
   this.flowGroup=new THREE.Group();this.flowGroup.visible=false;this.root.add(this.flowGroup);
-  const frame=caseLayout(resolve(this.currentBuild||{}).case||{}),paths=[];for(let band=0;band<frontCount;band++)for(let lane=0;lane<4;lane++){
+  const frame=caseLayout(resolve(this.currentBuild||{}).case||{},resolve(this.currentBuild||{}).gpu),paths=[];for(let band=0;band<frontCount;band++)for(let lane=0;lane<4;lane++){
    const y=frame.fanYs[band], x=-.38+lane*.24;
    const curve=new THREE.CatmullRomCurve3([new THREE.Vector3(x,y,frame.front+.55),new THREE.Vector3(x,y,frame.fanZ-.20),new THREE.Vector3(x+.30,y+.05,.9),new THREE.Vector3(x+.52,y+.24,-.35),new THREE.Vector3(x*.7+.20,3.94,-1.65),new THREE.Vector3(x*.7+.20,4.02,-2.80)]);
    paths.push(curve);
