@@ -15,7 +15,7 @@ test('BY prices are positive direct 5element offers; RUB never enters BY and is 
  for(const [id,p] of Object.entries(by.items)){assert.ok(byId[id]);assert.equal(p.currency,'BYN');assert.equal(new URL(p.url).hostname,'5element.by');assert.ok(p.price>0&&p.date&&p.store);}
  const mixed=priceSnapshot({items:{rub:{price:500,url:'https://dns-shop.ru/'},wrong:{price:10,currency:'BYN',url:'https://wrong.com/'},okay:{price:10,currency:'BYN',url:'https://5element.by/products/test'}}},'by');assert.deepEqual(Object.keys(mixed.items),['okay']);
  assert.equal(budgetPrice(byId['r5-7600'],'cpu',{},true,'BYN'),null);assert.equal(autoBuild({currency:'BYN',budget:5000,prices:by.items}).status,'no-data');
- assert.equal(new URL(storeLink(byId['aio-le240-v2'],'cooler',by).url).hostname,'5element.by');assert.equal(storeLink(byId['r5-7600'],'cpu',by).label,'Каталог 5element ↗');
+ assert.equal(new URL(storeLink(byId['aio-le240-v2'],'cooler',by).url).hostname,'5element.by');assert.equal(storeLink(byId['r5-7600'],'cpu',by).label,'Найти в 5 элементе ↗');
 });
 test('240/360 AIO radiator mounts follow case manuals, block occupied fans and check front GPU clearance',()=>{
  const top={...demoBuild,cooler:'aio-le240-v2'},front={...demoBuild,cooler:'aio-le360-v2'},bad={...front,case:'pop-air'},long={...front,gpu:'rtx3090'};
