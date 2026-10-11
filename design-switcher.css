@@ -1,0 +1,11 @@
+.design-picker{display:flex;align-items:center;gap:8px;flex-shrink:0;font-size:10px;color:var(--muted);white-space:nowrap}
+.design-picker select{height:35px;max-width:130px;padding:0 10px;border:1px solid var(--line);border-radius:18px;background:var(--panel);color:var(--text);font:11px PCsans,Arial,sans-serif;cursor:pointer}
+.design-picker select:focus-visible{outline:2px solid var(--accent);outline-offset:3px}.design-picker option{background:var(--panel);color:var(--text)}
+.workshop-header{gap:20px}.workshop-header .design-picker{margin-left:-8px}.market-header{gap:22px}.market-header .market-account-actions{gap:8px}
+:root[data-design=glass] .design-picker select{background:linear-gradient(145deg,#ffffff26,#ffffff0a);border-color:#ffffff45;box-shadow:inset 0 1px 1px #ffffff50;color:#eef3f7}
+@media(max-width:1180px){.design-picker>span{position:absolute;width:1px;height:1px;overflow:hidden;clip-path:inset(50%)}.market-header .market-location{display:none}}
+@media(max-width:840px){.workshop-header{gap:12px}.design-picker select{width:103px;font-size:10px;padding:0 7px;height:33px}.workshop-header .design-picker{margin-left:0}.market-header{gap:12px}}
+@media(max-width:640px){.market-header .brand-name{display:none}.market-header .brand-chevron{font-size:12px}.market-header .brand{gap:5px}.market-header .market-account-actions{gap:5px}.market-header{gap:10px}.market-header .design-picker select{width:97px}.workshop-header nav.workshop-toolbar{flex:1}}
+@media(max-width:360px){.market-header{padding:0 10px;gap:7px}.market-header .market-account-actions .button{padding:0 7px}.market-header .design-picker select{width:90px}}
+@media(max-width:650px){.header.workshop-header{height:auto;min-height:58px;padding:10px 13px;flex-wrap:wrap;column-gap:12px;row-gap:8px}.header.workshop-header nav.workshop-toolbar{order:4;flex:1 0 100%;width:100%;padding:2px 0}.header.workshop-header .region{margin-left:auto}.header.workshop-header .region select{max-width:126px}.header.workshop-header .design-picker{margin-left:0}body .workshop-menu{top:112px;max-height:calc(100dvh - 124px)}}
+@media(max-width:360px){.header.workshop-header .region select{max-width:102px}.header.workshop-header .design-picker select{width:95px}}
