@@ -34,6 +34,15 @@ export class PCScene {
   this.root=new THREE.Group();this.scene.add(this.root);
   const floor=new THREE.Mesh(new THREE.PlaneGeometry(200,200),new THREE.ShadowMaterial({opacity:.3}));floor.rotation.x=-Math.PI/2;floor.receiveShadow=true;floor.position.y=.04;this.scene.add(floor);
   const grid=new THREE.GridHelper(16,32,0x5b496f,0x4a395c);grid.material.transparent=true;grid.material.opacity=.17;grid.position.y=.02;this.scene.add(grid);
+  // Theme changes affect studio decoration, never the user's hardware RGB.
+  const applyStudioTheme=()=>{
+   const neutral=document.documentElement.dataset.design==='terminal';
+   interior.color.set(neutral?0xe0e0e0:0xac8ef0);
+   grid.material.vertexColors=!neutral;
+   grid.material.color.set(neutral?0x777777:0xffffff);
+   grid.material.needsUpdate=true;
+  };
+  applyStudioTheme();window.addEventListener('pcmaker:design-change',applyStudioTheme);
   this.makeCase();this.makeFlows();this.initInteraction();
   this.resizeObserver=new ResizeObserver(()=>this.resize());this.resizeObserver.observe(container);this.resize();this.reset();
   this.renderer.domElement.addEventListener('webglcontextlost',e=>{e.preventDefault();this.onContextLost?.();});
