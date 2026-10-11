@@ -1,0 +1,213 @@
+/* Silver console: the terminal concept on the original edge-to-edge workbench.
+   Loaded only for this theme. Layout, photographs and hardware RGB stay native. */
+:root{color-scheme:dark;--bg:#0b0b0b;--panel:#141414;--line:#343434;--text:#ededed;--muted:#a0a0a0;--accent:#e2e2e2;--accent-dark:#333;--green:#aed6bc;--orange:#e2bc89;--red:#f4a3ac}
+body{font-family:"Cascadia Code",Consolas,"Liberation Mono",monospace;background:var(--bg);color:var(--text)}
+button,input,select,textarea{font-family:inherit}
+::selection{background:#ddd;color:#111}
+:focus-visible{outline-color:var(--accent)}
+button:focus-visible,a:focus-visible,input:focus-visible,select:focus-visible{outline:2px solid var(--accent);outline-offset:3px}
+input[type=checkbox]{accent-color:#ddd}
+.header.workshop-header,.header.market-header{background:#101010;border-bottom-color:#343434;box-shadow:inset 0 -1px 0 #ffffff05}
+.brand-mark{background:linear-gradient(135deg,#fafafa,#acacac);color:#161616;border-radius:4px;box-shadow:inset 0 1px 0 #fff}
+.brand-mark>span{background:#101010;border-color:#101010;color:#ededed}
+.brand i,.status-dot,.scene-label .status-dot{background:#d6d6d6;box-shadow:none}
+.brand-chevron{color:#a0a0a0}
+.brand-navigation .brand{letter-spacing:-1px}
+.brand-light{font-weight:400}
+.region select,.design-picker select,.market-page .design-picker select{border-color:#414141;border-radius:4px;background:#191919;color:#d5d5d5;font-family:inherit}
+.round-button,.market-page .round-button{background:#1b1b1b;border-color:#404040;color:#bcbcbc;box-shadow:inset 0 1px 0 #ffffff09}
+.round-button:hover,.market-page .round-button:hover{background:#303030;border-color:#999;color:#fff}
+.round-button[aria-expanded=true],.round-button[aria-pressed=true],.shop-launch{background:linear-gradient(145deg,#f5f5f5,#bcbcbc);border-color:#e1e1e1;color:#161616;box-shadow:inset 0 1px 0 #fff}
+.toolbar-separator{background:#414141}
+.rgb-icon{background:conic-gradient(#fafafa,#858585,#dfdfdf,#555,#fafafa);box-shadow:inset 0 0 0 5px #242424}
+
+/* The scene reaches every available edge, with the tools kept in the header. */
+.workbench .studio{background:radial-gradient(ellipse at 48% 48%,#252525 0%,#141414 62%,#0c0c0c 100%);box-shadow:none}
+.workbench .studio:before{background-image:linear-gradient(#ffffff04 1px,transparent 1px),linear-gradient(90deg,#ffffff04 1px,transparent 1px);background-size:48px 48px;mask-image:linear-gradient(#0008,transparent 65%);opacity:1}
+.scene-label{color:#c4c4c4;letter-spacing:1.4px}
+.scene-label .status-dot{border-radius:0;width:5px;height:5px}
+.model-tag,.model-tag>span,.scene-bottom,.scene-bottom .mouse-hint{color:#9c9c9c}
+.scene-hint,.workbench .airflow-legend{background:#171717ed;border:1px solid #505050;border-radius:3px;color:#ccc;box-shadow:0 6px 22px #0003}
+.airflow-legend small{color:#aaa}
+.workbench .build-panel{background:#111;border-color:#3e3e3e;box-shadow:none}
+.workbench .panel-tabs{padding:0;gap:0;background:#191919;border-bottom:1px solid #3b3b3b}
+.workbench .panel-tabs button{flex:1;justify-content:center;padding:0 7px;font-size:10px;border-right:1px solid #303030;color:#a1a1a1;gap:5px}
+.workbench .panel-tabs button[aria-selected=true]{background:#2d2d2d;color:#fff}
+.panel-tabs button[aria-selected=true]:after{background:#e5e5e5;height:2px}
+#parts-count{background:#ffffff12;border-radius:2px;color:#eee}
+.workbench .build-panel>[role=tabpanel],.workshop-menu,#inspector-content,.shop-sidebar,.shop-results,.budget-result{scrollbar-color:#555 transparent}
+.panel-heading h2{font-family:inherit;font-size:17px;letter-spacing:-.5px}
+#parts-panel .panel-heading h2:before{content:'02 / ';color:#8e8e8e;font-size:12px;font-weight:400}
+.panel-heading>div>span,.eyebrow,.eyebrow.small{color:#9e9e9e}
+#parts-list{counter-reset:component}
+.workbench .part-row{counter-increment:component;border:0;border-bottom:1px solid #303030;border-radius:0;background:transparent;margin:0;padding:12px 2px;gap:9px;box-shadow:none;min-height:68px}
+.workbench .part-row:before{content:counter(component,decimal-leading-zero);font-size:9px;color:#858585;align-self:flex-start;margin-top:3px}
+.workbench .part-row.empty{border:0;border-bottom:1px solid #303030;background:transparent}
+.workbench .part-row:hover{background:#202020;border-color:#777}
+.part-icon,.part-row.empty .part-icon{background:transparent;border:1px solid #444;color:#c3c3c3;border-radius:3px;width:31px;height:33px}
+.part-row.empty .part-icon{color:#909090;border-style:dashed}
+.workbench .part-category{font-size:8px;text-transform:uppercase;letter-spacing:.6px;color:#a0a0a0}
+.workbench .part-name{font-size:12px;color:#ededed;font-weight:400}
+.part-row.empty .part-name{color:#aaa}
+.part-price,.part-action{color:#d0d0d0}
+.workbench .part-row.conflict{background:#351d20;border-bottom-color:#b56a73}
+.compat-box,.compat-box.neutral{border:1px solid #414141;border-left:2px solid #c9c9c9;background:#1a1a1a;color:#c5c5c5;border-radius:3px}
+.compat-box.error{background:#2d1b1e;border-color:#b56a73;color:#f4b9be}
+.cooling-alert{border-radius:3px}
+.price-summary{border-top-color:#444}
+.price-summary>div>span,.price-summary strong>small{color:#b8b8b8}
+.price-summary strong{font-family:inherit;color:#f3f3f3;font-size:24px}
+.price-summary p,.price-region{color:#a0a0a0}
+.button{border-radius:3px;background:#242424;border-color:#4d4d4d;color:#e0e0e0;font-family:inherit;box-shadow:inset 0 1px 0 #ffffff08}
+.button:hover{background:#383838;border-color:#999;color:#fff}
+.button.primary{background:linear-gradient(145deg,#f4f4f4,#bcbcbc);border-color:#dedede;color:#161616;box-shadow:inset 0 1px 0 #fff;font-weight:600}
+.button.primary:hover{background:linear-gradient(145deg,#fff,#d7d7d7);color:#111;border-color:#fff}
+.icon-button{color:#bcbcbc}
+.icon-button:hover{background:#303030;color:#fff}
+
+/* Popovers, simulation, cable and fan controls share the console finish. */
+.workshop-menu,.workbench .component-inspector,.header nav.brand-switcher,dialog,dialog.shop-dialog,dialog.autobuild-dialog{background:#151515f7;border:1px solid #5c5c5c;border-radius:4px;box-shadow:0 12px 50px #0008;backdrop-filter:blur(18px);color:var(--text)}
+dialog::backdrop{background:#0009}
+.menu-heading{border-bottom:1px solid #353535;padding-bottom:13px}
+.menu-heading h2,dialog h2{font-family:inherit}
+.workshop-menu h3,.field-label,.field-label svg,.slider-field>span,.control-guide dt{color:#d0d0d0}
+.menu-note,.panel-intro,.small-note,.wiring-help,.wiring-note,.control-guide dd,.controls-end{color:#aaa}
+.chip,.workshop-menu .inspect-shortcuts button,.camera-views button,.workloads button,.rgb-modes button,.wiring-modes,.metrics article{border-radius:3px;border-color:#424242;background:#202020;color:#bfbfbf}
+.chip.active,.camera-views button.active,.workloads button.active,.workshop-menu .inspect-shortcuts button:hover{background:#363636;border-color:#aaa;color:#fff}
+.wiring-modes button{color:#bcbcbc;border-radius:2px}
+.wiring-modes [aria-pressed=true],.rgb-modes button[aria-pressed=true],#fan-flow-toggle[aria-pressed=true]{background:#d6d6d6;border-color:#e7e7e7;color:#151515}
+.slider-field input{background:linear-gradient(to right,#dedede var(--fill,60%),#414141 var(--fill,60%))}
+.slider-field input::-webkit-slider-thumb{background:#e8e8e8;box-shadow:0 0 0 3px #ffffff15}
+.slider-field input::-moz-range-thumb{background:#e8e8e8}
+.slider-field output,.load-summary b{color:#e2e2e2}
+.slider-field small,.load-summary,.sim-status{color:#aaa}
+.status-dot.muted{background:#777}
+.section-divider,.metric-track{background:#393939}
+.beta-pill{background:#262626;border:1px solid #555;border-radius:2px;color:#ccc}
+.metric-label,.metric-foot,.metric-state,.unit,.metric-label svg{color:#b1b1b1}
+.other-temps,.workshop-menu .simulation-note,.workshop-menu footer{border-color:#393939}
+.other-temps>span,.simulation-note p,.workshop-menu footer,.footer-brand,.footer-caption{color:#aaa}
+.other-temps b,.text-action,.wiring-progress,.simulation-note button,footer button{color:#ddd}
+.cable-row{border-radius:3px;border-bottom-color:#373737}
+.cable-row:hover,.cable-row.selected{background:#303030;border-color:#777}
+.cable-number{border-color:#555;color:#ccc}
+.cable-row small{color:#aaa}
+.port-marker.target{background:#ddd;border-color:#fff;color:#111;box-shadow:0 0 0 5px #ffffff25}
+.plug-handle{border-color:#c4c4c4;color:#eee;background:#282828;box-shadow:0 0 0 7px #ffffff15}
+.plug-handle small{color:#ddd;background:#191919}
+.plug-handle.held{background:#666}
+.port-marker.drop-ready{box-shadow:0 0 0 11px #d9ffe338}
+.header nav.brand-switcher{border-radius:4px}
+.brand-switcher a{border-radius:3px;color:#ddd}
+.brand-switcher a:hover,.brand-switcher a[aria-current=page]{background:#333;color:#fff}
+.brand-switcher small{color:#aaa}
+.brand-destination-icon{border-radius:3px;background:#202020;color:#ddd;border-color:#555}
+.component-inspector header,.component-inspector dl>div{border-color:#3d3d3d}
+.component-inspector header>div>span,.component-inspector h3,.component-inspector dd,.inspector-connections b{color:#d0d0d0}
+.inspector-temperature strong{color:#eee}
+.component-inspector>.button{background:#333}
+.rgb-color-label input{background:#222;border-color:#666}
+.rgb-swatches button{border-color:#555}
+.rgb-devices{border-color:#393939}.rgb-devices span{color:#aaa}
+.fan-concepts button,.fan-walls button,.fan-list button,.fan-selection{background:#1d1d1d;color:#ccc;border-color:#424242;border-radius:3px}
+.fan-concepts [aria-pressed=true],.fan-walls [aria-pressed=true],.fan-list [aria-pressed=true]{background:#383838;color:#fff;border-color:#aaa}
+.fan-walls button small,.fan-help,.fan-feedback,.fan-target-label,.fan-list button small{color:#aaa}
+.fan-target-label select{background:#262626;color:#ddd;border-color:#666;border-radius:3px}
+.fan-list button>b{background:#444;color:#eee}
+.fan-marker{border-color:#bdbdbd;background:#242424e8;color:#eee}
+.fan-marker.selected,.fan-marker.held{border-color:#fff;background:#d2d2d2;color:#141414}
+.fan-marker.eligible{box-shadow:0 0 0 5px #ffffff20}
+.fan-marker.blocked{border-color:#777;color:#aaa}
+
+/* Catalog and automatic build preview. */
+.shop-header,.budget-header,.dialog-top{background:#1b1b1b;border-color:#414141}
+.shop-header h2{font-family:inherit}
+.shop-sidebar,.budget-form,.shop-filter-group,.shop-tools{border-color:#373737}
+.shop-build-summary,.catalog-item,.shop-card,.budget-result{border-radius:3px;background:#1b1b1b;border-color:#3d3d3d}
+.shop-categories button{border-radius:3px;color:#bbb}
+.shop-categories button:hover{background:#303030}
+.shop-categories [aria-pressed=true]{background:#363636;color:#fff;border-color:#9e9e9e}
+.shop-categories small,.shop-categories [aria-pressed=true] small{color:#aaa}
+.shop-field input,.shop-field select,.shop-sort select,.search-field,.shop-tools .search-field{background:#111;border-radius:3px;border-color:#555;color:#d2d2d2}
+.search-field input{color:#eee}.search-field input::placeholder{color:#aaa}
+.shop-eyebrow,.shop-region,.shop-field,.shop-check,.shop-filter-group summary,.shop-reset,.shop-market,.shop-disclaimer{color:#aaa}
+.shop-build-summary>div>span,.shop-photo figcaption,.shop-card-kind,.shop-specs,.shop-sku,.shop-offer a,.shop-offer>span,.shop-source-links,.shop-empty{color:#aaa}
+.shop-build-summary b,.catalog-price,.shop-build-summary #shop-build-price{color:#ddd}
+.shop-card:hover,.shop-card.is-selected,.catalog-item.is-selected{border-color:#aaa}
+.shop-3d{background:#454545;color:#fff}
+.shop-dns,.shop-remove{color:#ddd;border-color:#555;border-radius:3px}
+.shop-dns:hover{background:#363636}
+.catalog-item p,.info-dialog p,.info-dialog ul,.catalog-help,.catalog-filters{color:#bbb}
+.info-dialog h3,.info-dialog a,.shop-link{color:#eee}
+.info-dialog code,.info-dialog .share-input{background:#292929;color:#eee;border-color:#666}
+.toast{border-radius:3px;background:#242424ef;border-color:#999;color:#eee}
+.budget-header span,.budget-form label,.budget-purpose-note,.budget-empty,.budget-empty>span,.budget-result-heading span,.budget-total span,.budget-total p{color:#bbb}
+.budget-input,.budget-presets button,.budget-purpose button,.budget-total{border-radius:3px;border-color:#555;background:#222;color:#d2d2d2}
+.budget-input input,.budget-empty h3{color:#eee}
+.budget-input:focus-within{outline-color:#ddd}
+.budget-purpose button[aria-pressed=true]{background:#3b3b3b;border-color:#aaa;color:#fff}
+.budget-checks,.budget-footer,#autobuild-status{color:#bbb;border-color:#444}
+.budget-product{border-radius:3px;background:#202020;border-color:#444}
+.budget-category,.budget-product p,.budget-product small,.budget-product a{color:#aaa}
+.budget-checks b{color:#ddd}
+.budget-footer{background:#1b1b1b}
+.budget-footer p{color:#bbb}
+.shop-check input,.budget-check input,.catalog-filters input{accent-color:#ddd}
+.shop-photo-placeholder,.catalog-photo-fallback,.catalog-photo figcaption{color:#909090}
+.shop-field select:focus-visible,.shop-field input:focus-visible,.shop-sort select:focus-visible,.fan-marker:focus-visible{outline-color:#ddd}
+
+/* The separate community market uses the same silver console theme. */
+.market-page{background:#0b0b0b}
+.market-header .market-location,.market-heading p,.market-section-label,.market-draft>div>span,.market-disclaimer{color:#aaa}
+.market-location .status-dot{background:#ddd}
+.market-heading h1{letter-spacing:-1.4px;font-weight:500}
+.market-heading .eyebrow{color:#bbb;letter-spacing:1.5px}
+.market-builder-link,.market-draft p,.market-draft a{color:#c9c9c9}
+.market-builder-link:hover{color:#fff}
+.market-sidebar,.market-draft{border-color:#414141;background:#161616;border-radius:3px}
+.market-draft{background:linear-gradient(135deg,#262626,#161616)}
+.market-draft strong{color:#eee}.market-draft strong span{color:#aaa}
+.market-draft a,.market-filters,.market-disclaimer,.market-tools{border-color:#3c3c3c}
+.market-collections button{border-radius:3px;color:#bbb}
+.market-collections button>span{color:#ccc}
+.market-collections button[aria-pressed=true]{background:#353535;color:#fff;border-color:#999}
+.market-collections button:hover{background:#292929}
+.market-filters summary,.market-filters summary span,.market-filter-content>label{color:#ccc}
+.market-page select{background:#202020;border-color:#555;color:#ddd;border-radius:3px}
+.market-filter-content p{color:#aaa}
+.market-reset{color:#ddd;border-color:#555;border-radius:3px}
+.market-reset:hover{background:#333}
+.market-result-label strong{color:#e1e1e1}.market-result-label>span{color:#aaa}
+.market-search{border-color:#555;border-radius:3px;background:#1b1b1b}
+.market-search:focus-within{border-color:#ddd;box-shadow:0 0 0 2px #ffffff18}
+.market-search input{color:#eee}.market-search button{color:#ccc}
+.market-active-filters,.market-status{color:#bbb}
+.market-active-filters span{border-color:#555;background:#292929;border-radius:3px}
+.market-grid .gallery-card{border-radius:3px;border-color:#414141;background:#171717}
+.market-grid .gallery-card:hover{border-color:#aaa}
+.gallery-card-picture{background:radial-gradient(ellipse at 50% 100%,#e5e5e5,#fff)}
+.gallery-region{color:#444;border-color:#ccc;background:#fffd;border-radius:3px}
+.gallery-cube{color:#888}
+.gallery-title-link{color:#eee}
+.gallery-card-copy small,.market-card-specs dt,.market-price-note{color:#aaa}
+.market-card-specs dd{color:#d5d5d5}
+.market-grid .gallery-card-copy strong{color:#eee}
+.market-grid .button.wide{border-radius:3px;background:#333;border-color:#666;color:#e3e3e3}
+.market-grid .button.wide:hover{background:#4a4a4a;border-color:#aaa}
+.market-compatible{background:#222e;color:#ccc;border-radius:3px}
+.market-empty{border-color:#555;border-radius:3px;background:radial-gradient(ellipse at 50% 15%,#25252570,transparent 75%)}
+.market-empty>span{border-color:#777;background:#292929;color:#ddd;border-radius:3px}
+.market-empty p{color:#aaa}
+.market-loading-card{border-color:#414141;border-radius:3px;background-image:linear-gradient(105deg,#191919 20%,#303030 40%,#191919 60%)}
+.market-page .gallery-dialog{border-radius:4px;background:#151515f7;border-color:#5c5c5c;color:var(--text)}
+.gallery-header,.gallery-status,.gallery-parts>div{border-color:#3d3d3d}
+.gallery-header span,.gallery-kicker,.gallery-intro,.gallery-dialog p,.gallery-form-wrap label,.market-modal-form-hint{color:#bbb}
+.gallery-dialog input:not([type=checkbox]),.gallery-dialog textarea{border-color:#666;border-radius:3px;background:#222;color:#eee}
+.gallery-text-actions button,.gallery-detail-price{color:#ddd}
+.gallery-parts,.gallery-report{border-radius:3px;border-color:#555}
+.gallery-parts span{color:#aaa}
+.market-page select:focus-visible{outline-color:#ddd}
+
+/* Keep compact controls legible on narrow screens; the base responsive layout stays. */
+@media(max-width:1180px){.workshop-header nav.workshop-toolbar{gap:6px}.workshop-header .round-button{width:36px;height:36px}}
+@media(max-width:650px){.workshop-header .round-button{width:32px;height:32px}.region select,.design-picker select{font-size:9px}.workbench .part-name{font-size:12px}.market-heading h1{font-size:26px}}
