@@ -118,16 +118,17 @@ export class PCScene {
    if(this.wires){this.wires.removeFromParent();this.wires.traverse(o=>{o.geometry?.dispose();o.material?.dispose();});}
    this.wires=new THREE.Group();this.root.add(this.wires);
    for(const cable of available.filter(c=>active.includes(c.id))){
+    const cableGroup=new THREE.Group();cableGroup.userData.cableId=cable.id;this.wires.add(cableGroup);
     for(let i=0;i<cable.strands;i++){
      const curve=cableCurve(strandPoints(cable,i));
-     const mesh=new THREE.Mesh(new THREE.TubeGeometry(curve,Math.max(72,cable.points.length*14),cable.radius,5,false),mat(showPorts&&cable.id===selected?0x9788b1:i%4===0?0x363e43:0x171d20,.76,.1));mesh.castShadow=true;this.wires.add(mesh);
+     const mesh=new THREE.Mesh(new THREE.TubeGeometry(curve,Math.max(72,cable.points.length*14),cable.radius,5,false),mat(showPorts&&cable.id===selected?0x9788b1:i%4===0?0x363e43:0x171d20,.76,.1));mesh.castShadow=true;cableGroup.add(mesh);
     }
     const [x,y,z]=targets[cable.id].position;
     const axis=targets[cable.id].axis,vertical=axis==='y'||axis==='-y',direction=axis==='-y'?-1:1;
-    const plug=this.box(this.wires,.09,cable.id==='atx'?.46:.17,cable.id==='atx'?.13:.11,x+(vertical?0:.075),y+(vertical?.075*direction:0),z,0x242c30);if(vertical)plug.rotation.z=direction*Math.PI/2;
+    const plug=this.box(cableGroup,.09,cable.id==='atx'?.46:.17,cable.id==='atx'?.13:.11,x+(vertical?0:.075),y+(vertical?.075*direction:0),z,0x242c30);if(vertical)plug.rotation.z=direction*Math.PI/2;
     if(['atx','eps','eps2'].includes(cable.id)||cable.id.startsWith('gpu'))for(const t of [.44,.65]){
      const curve=cableCurve(cable.points),point=curve.getPoint(t);
-     const comb=this.box(this.wires,.05,cable.strands*cable.radius*2.3,.055,...point.toArray(),0x424e53);if(cable.spreadAxis==='x')comb.rotation.z=Math.PI/2;
+     const comb=this.box(cableGroup,.05,cable.strands*cable.radius*2.3,.055,...point.toArray(),0x424e53);if(cable.spreadAxis==='x')comb.rotation.z=Math.PI/2;
     }
    }
    if(active.includes('cpuFan')||selected==='cpuFan'){
@@ -143,16 +144,27 @@ export class PCScene {
   if(!this.markerLayer){this.markerLayer=document.createElement('div');this.markerLayer.className='port-markers';this.container.append(this.markerLayer);}
   this.markerLayer.replaceChildren();this.markers=[];
   available.forEach((c,i)=>{const button=document.createElement('button');button.type='button';button.className='port-marker'+(c.id===selected?' target':'')+(active.includes(c.id)?' connected':'');button.dataset.port=c.id;button.setAttribute('aria-label','Разъём '+c.to);button.title=c.to;button.textContent=String(i+1);const label=document.createElement('span');label.textContent=c.to;button.append(label);this.markerLayer.append(button);this.markers.push({button,position:new THREE.Vector3(...targets[c.id].position)});});
-  this.markerLayer.classList.toggle('visible',showPorts);this.prepareLooseCable(mode,active);this.updateMarkers();
+  this.markerLayer.classList.add('visible');this.createCableSources(available,active);this.updateMarkers();
  }
  updateMarkers(){
-  if(!this.showPorts||!this.markers)return;this.updatePlugHandle();
+  if(!this.markers)return;
+  this.markerLayer.hidden=!!this.fanEditing;this.updatePlugHandle();
   const width=this.container.clientWidth,height=this.container.clientHeight;
-  for(const {button,position} of this.markers){const projected=position.clone().project(this.camera);button.style.left=(projected.x*.5+.5)*width+'px';button.style.top=(-projected.y*.5+.5)*height+'px';button.hidden=projected.z>1||Math.abs(projected.x)>1||Math.abs(projected.y)>1;}
+  const targetIds=this.dragging?.source.ids||(this.hoverCableIds?.length?this.hoverCableIds:this.showPorts&&this.selectedCable?[this.selectedCable]:[]);
+  const project=(button,position,show)=>{
+   const p=this.root.localToWorld(position.clone()).project(this.camera);
+   button.style.left=(p.x*.5+.5)*width+'px';button.style.top=(-p.y*.5+.5)*height+'px';
+   button.hidden=!show||p.z>1||p.z< -1||Math.abs(p.x)>1||Math.abs(p.y)>1;
+  };
+  for(const marker of this.markers){const target=targetIds.includes(marker.button.dataset.port);marker.button.classList.toggle('target',target);project(marker.button,marker.position,this.showPorts||target);}
+  for(const source of this.sourceMarkers||[]){
+   source.button.classList.toggle('selected',source.ids.includes(this.selectedCable));
+   project(source.button,source.position,!this.dragging||this.dragging.handle===source.button);
+  }
  }
  view(name){
   const views={assembly:[10.4,5.0,3.8],rear:[3.4,4.1,-9.4],top:[4.8,10,5.8],cables:[-8.3,4.6,5.4]};
-  this.camera.position.set(...(views[name]||views.assembly));this.controls.target.set(0,2.35,0);this.fitCaseView();this.controls.update();this.endCableDrag(null,true);this.rearPanel.visible=!this.hideRearPanel;if(this.markerLayer)this.markerLayer.hidden=['rear','cables'].includes(name);
+  this.camera.position.set(...(views[name]||views.assembly));this.controls.target.set(0,2.35,0);this.fitCaseView();this.controls.update();this.endCableDrag(null,true);this.rearPanel.visible=!this.hideRearPanel;this.updateMarkers();
  }
  fitCaseView(){
   const p=resolve(this.currentBuild||{}),f=caseLayout(p.case||{},p.gpu,p.cooler),center=new THREE.Vector3((f.side+f.back)/2,2.38,f.centerZ),offset=this.camera.position.clone().sub(this.controls.target),back=offset.clone().normalize();
@@ -166,7 +178,7 @@ export class PCScene {
  }
  makeCaseFlows(p){if(this.flowGroup){this.flowGroup.removeFromParent();this.flowGroup.traverse(o=>{o.geometry?.dispose();o.material?.dispose();});}this.flowParticles=[];this.makeFlows(p.frontFanCount??3);this.flowGroup.visible=this.airflow;}
  makeFlows(){this.makeFanFlows();}
- setOptions(options){Object.assign(this,options);this.updateSideGuards();this.glass.visible=!this.hideGlass;this.rearPanel.visible=!this.hideRearPanel;if(this.parts.cooler)this.parts.cooler.visible=!this.hideCooler;this.flowGroup.visible=this.airflow;this.markerLayer?.classList.toggle('visible',!!this.showPorts);}
+ setOptions(options){Object.assign(this,options);this.updateSideGuards();this.glass.visible=!this.hideGlass;this.rearPanel.visible=!this.hideRearPanel;if(this.parts.cooler)this.parts.cooler.visible=!this.hideCooler;this.flowGroup.visible=this.airflow;this.updateMarkers();}
  reset(){this.view('assembly');}
  zoom(factor){const offset=this.camera.position.clone().sub(this.controls.target);offset.multiplyScalar(factor);offset.setLength(THREE.MathUtils.clamp(offset.length(),4.2,19));this.camera.position.copy(this.controls.target).add(offset);this.controls.update();}
  resize(){const {width,height}=this.container.getBoundingClientRect();if(!width||!height)return;this.camera.aspect=width/height;this.camera.updateProjectionMatrix();this.renderer.setSize(width,height,false);this.fitCaseView();}
