@@ -8,7 +8,7 @@ import {createFanEditor} from './fan-ui.js';
 import {sanitizeFanLayout,defaultFanLayout,fanStats,encodeFans,decodeFans} from './fan-layout.js';
 import {componentSpecs,heatLabels} from './inspector.js';
 import {createShop} from './shop.js';
-import {cablesFor,ports,cleanConnections,wiringMissing,canConnect,reconcileConnections} from './wiring.js';
+import {cablesFor,ports,cleanConnections,wiringMissing,canConnect,reconcileConnections,connectionAfterDrop} from './wiring.js';
 import {catalog,categories,byId,emptyBuild,demoBuild,resolve,sanitizeBuild} from './catalog.js';
 import {compatibility,thermalTargets,advanceThermals,summarizePrices,workloads} from './engine.js';
 const $=id=>document.getElementById(id);
@@ -110,7 +110,7 @@ const fanUI=createFanEditor({getBuild:()=>build,getLayout:()=>fanLayout,getScene
 }});
 const autoBuilder=createAutoBuilder({initialPlan:autoPlan,getPrices:()=>priceData,beforeOpen:()=>{closeWorkshopMenu(false);closeInspector(false);},onApply:result=>{
  build=sanitizeBuild(result.build);autoPlan={region:regionId,build:{...build},budget:result.budget,purpose:result.purpose,allowEstimates:result.allowEstimates};try{localStorage.setItem('pcmaker-autobuild',JSON.stringify(autoPlan));}catch{}
- savedFans[build.case]=defaultFanLayout(build);connections=[];selectedCable=null;resetSimulation();renderBuild();setTab('parts');scene?.reset();toast(wireMode==='manual'?'Сборка применена. Подключи кабели во вкладке «Кабели».':'Сборка применена. Можно запускать симуляцию.');
+ savedFans[build.case]=defaultFanLayout(build);connections=[];selectedCable=null;resetSimulation();renderBuild();setTab('parts');scene?.reset();toast(wireMode==='manual'?'Сборка применена. Тяни кабели от точек разъёмов прямо в 3D.':'Сборка применена. Можно запускать симуляцию.');
 }});
 $('autobuild-button').onclick=()=>autoBuilder.open();
 document.addEventListener('pcmaker:navigation-open',()=>{closeWorkshopMenu(false);closeInspector(false);});
@@ -130,12 +130,12 @@ function renderMetrics(){
  $('power-value').textContent=hasRun?target.power:'—';$('power-note').textContent=hasRun?`${workloads[lastLoad].name} · приблизительно`:'Запусти симуляцию';$('fan-value').textContent=hasRun?money(target.rpm.front):'—';$('sim-time').textContent=`${String(Math.floor(elapsed/60)).padStart(2,'0')}:${String(Math.floor(elapsed%60)).padStart(2,'0')}`;
  if($('other-temps'))$('other-temps').innerHTML=[['case','Воздух в корпусе'],['ram','Память'],['storage','SSD'],['motherboard','Плата / VRM'],['cooler','Радиатор кулера'],['psu','Выход БП']].map(([key,name])=>`<span>${name}<b>${hasRun?Math.round(thermals[key])+' °C':'—'}</b></span>`).join('');
  if(running&&(target.cpuThrottle||target.gpuThrottle))$('simulation-warning').innerHTML='<div class="compat-box error">Расчёт достигает температурного предела. Модель снижает мощность, имитируя троттлинг. Увеличь обороты или уменьши нагрузку.</div>';
- else if(compatibility(build).ready)$('simulation-warning').innerHTML=missingWires().length?'<div class="compat-box neutral">В ручном режиме сначала подключи обязательные кабели во вкладке «Кабели».</div>':'';
+ else if(compatibility(build).ready)$('simulation-warning').innerHTML=missingWires().length?'<div class="compat-box neutral">Сначала подключи обязательные кабели: тяни их от точек разъёмов прямо в 3D.</div>':'';
 }
 function renderWiring(){
  const available=cablesFor(build,fanLayout),active=wireMode==='auto'?available.map(c=>c.id):connections;
  if(!available.some(c=>c.id===selectedCable))selectedCable=null;
- $('wiring-help').textContent=wireMode==='auto'?'Кабели появляются после добавления соответствующих деталей. Выбери кабель в списке, чтобы найти его разъём.':'Выбери кабель. Зажми отмеченный разъём источника в 3D и тяни провод к подсвеченному разъёму назначения. Чужой разъём не примет кабель. Для клавиатуры доступно подключение ниже.';
+ $('wiring-help').textContent=wireMode==='auto'?'Кабели подключены автоматически. Потяни за точку разъёма прямо в 3D: подходящее гнездо подсветится. Успешное подключение включит ручной режим, сохранив остальные провода.':'Потяни за точку разъёма прямо в 3D — без выбора в списке. Подходящее гнездо подсветится. Для клавиатуры также доступно подключение ниже.';
  $('wiring-progress').textContent=available.length?active.length+' / '+available.length+' подключено'+(missingWires().length?' · обязательных осталось: '+missingWires().length:''):'Добавь материнскую плату, блок питания и остальные детали.';
  $('cable-list').innerHTML=available.map((c,i)=>'<button class="cable-row '+(selectedCable===c.id?'selected':'')+'" data-cable="'+c.id+'" aria-pressed="'+(selectedCable===c.id)+'"><span class="cable-number">'+(i+1)+'</span><span><b>'+e(c.name)+'</b><small>'+e(c.from)+' → '+e(c.to)+'</small></span><span class="wire-state '+(active.includes(c.id)?'done':'')+'">'+(active.includes(c.id)?'✓':c.required?'•':'○')+'</span></button>').join('');
  $('connection-action').hidden=wireMode!=='manual'||!selectedCable;
@@ -151,6 +151,16 @@ function attemptConnection(portId){
  if(!canConnect(selectedCable,portId)){$('wire-feedback').textContent='Этот разъём не подходит. Для выбранного кабеля нужен '+ports[selectedCable].name+'.';$('wire-feedback').classList.add('error');return;}
  resetSimulation();connections=connections.includes(selectedCable)?connections.filter(id=>id!==selectedCable):[...connections,selectedCable];
  $('wire-feedback').classList.remove('error');$('wire-feedback').textContent=ports[selectedCable].name+(connections.includes(selectedCable)?' подключён.':' отсоединён.');renderWiring();updateSimulationState();
+}
+function completeCableDrag(id,port){
+ const next=connectionAfterDrop(build,fanLayout,wireMode,connections,id,port);
+ if(!next){
+  const message=port?'Этот разъём не подходит. Нужен '+(ports[id]?.name||'подсвеченный разъём')+'.':'Подключение не изменено. Отпусти штекер над подсвеченным гнездом.';
+  $('wire-feedback').textContent=message;$('wire-feedback').classList.add('error');toast(message);return;
+ }
+ resetSimulation();wireMode=next.mode;connections=next.connections;selectedCable=id;
+ const message=ports[id].name+' подключён.';
+ $('wire-feedback').textContent=message;$('wire-feedback').classList.remove('error');renderWiring();updateSimulationState();toast(message);
 }
 document.addEventListener('click',event=>{
  const mode=event.target.closest('[data-wiring-mode]');if(mode&&mode.dataset.wiringMode!==wireMode){wireMode=mode.dataset.wiringMode;connections=[];selectedCable=null;resetSimulation();renderWiring();updateSimulationState();$('wire-feedback').textContent='';}
@@ -217,5 +227,5 @@ let last=performance.now(),paint=0;function tick(now){const dt=Math.min((now-las
 renderBuild();
 $('region-select').onchange=()=>{regionId=regionFor($('region-select').value).id;region=regionFor(regionId);priceData=snapshots[regionId];try{localStorage.setItem('pcmaker-region',regionId);}catch{}renderBuild();shop.refresh();autoBuilder.refresh();toast('Регион цен: '+region.city+' / '+region.currency);};
 Promise.allSettled([fetch('./prices.json').then(r=>{if(!r.ok)throw Error('prices');return r.json();}),fetch('./prices-by.json').then(r=>{if(!r.ok)throw Error('prices-by');return r.json();}),fetch('./sources.json').then(r=>r.json())]).then(results=>{for(const [i,id] of ['ru','by'].entries())if(results[i].status==='fulfilled')snapshots[id]=priceSnapshot(results[i].value,id);if(results[2].status==='fulfilled')sourceData=results[2].value;priceData=snapshots[regionId];renderBuild();shop.refresh();autoBuilder.refresh();});
-try{const {PCScene}=await import('./scene.js');scene=new PCScene($('viewport'));scene.onInspect=openInspector;scene.onCableDrop=(id,port)=>{selectedCable=id;if(!port){$('wire-feedback').textContent='Штекер не дошёл до разъёма. Попробуй ещё раз.';return;}if(!connections.includes(id))attemptConnection(port);};scene.fanLayout=fanLayout;scene.setBuild(build);scene.onFanSelect=fanUI.select;scene.onFanDrop=fanUI.move;fanUI.render();scene.setOptions({running,hideGlass:$('glass-toggle').getAttribute('aria-pressed')==='true',hideCooler:$('cooler-toggle').getAttribute('aria-pressed')==='true',airflow:$('airflow-toggle').getAttribute('aria-pressed')==='true'});renderLighting();renderWiring();scene.onContextLost=()=>toast('3D-контекст потерян. Сохрани сборку и обнови страницу.');updateSliders();}catch(error){console.error('3D initialization failed',error);$('viewport').innerHTML=`<div class="fallback">${icon('case')}<strong>3D не удалось запустить</strong><p>Попробуй современный браузер с аппаратным ускорением.<br>Каталог, совместимость и симуляция остаются доступны.</p></div>`;$('scene-hint').hidden=true;}
+try{const {PCScene}=await import('./scene.js');scene=new PCScene($('viewport'));scene.onInspect=openInspector;scene.onCableDrop=completeCableDrag;scene.onCablePick=id=>{selectedCable=id;setTab('wiring');};scene.fanLayout=fanLayout;scene.setBuild(build);scene.onFanSelect=fanUI.select;scene.onFanDrop=fanUI.move;fanUI.render();scene.setOptions({running,hideGlass:$('glass-toggle').getAttribute('aria-pressed')==='true',hideCooler:$('cooler-toggle').getAttribute('aria-pressed')==='true',airflow:$('airflow-toggle').getAttribute('aria-pressed')==='true'});renderLighting();renderWiring();scene.onContextLost=()=>toast('3D-контекст потерян. Сохрани сборку и обнови страницу.');updateSliders();}catch(error){console.error('3D initialization failed',error);$('viewport').innerHTML=`<div class="fallback">${icon('case')}<strong>3D не удалось запустить</strong><p>Попробуй современный браузер с аппаратным ускорением.<br>Каталог, совместимость и симуляция остаются доступны.</p></div>`;$('scene-hint').hidden=true;}
 

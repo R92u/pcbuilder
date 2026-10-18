@@ -85,6 +85,23 @@ export function cablesFor(build,fanLayout){
  return list;
 }
 export function cleanConnections(build,connections,fanLayout){const available=new Set(cablesFor(build,fanLayout).map(c=>c.id));return [...new Set(Array.isArray(connections)?connections:[])].filter(id=>available.has(id));}
+// A non-modular PSU has one shared cable exit. One marker at that real exit
+// offers each of its matching sockets instead of stacking indistinguishable dots.
+export function cableSources(cables){
+ const groups=new Map();
+ for(const cable of cables){
+  const key=cable.points[0].join(',');
+  if(!groups.has(key))groups.set(key,{position:[...cable.points[0]],from:cable.from,cables:[]});
+  groups.get(key).cables.push(cable);
+ }
+ return [...groups.values()];
+}
+export function connectionAfterDrop(build,fanLayout,mode,connections,cableId,portId){
+ const available=cablesFor(build,fanLayout);
+ if(!canConnect(cableId,portId)||!available.some(c=>c.id===cableId))return null;
+ const existing=mode==='auto'?available.map(c=>c.id):connections;
+ return {mode:'manual',connections:cleanConnections(build,[...existing,cableId],fanLayout)};
+}
 export function wiringMissing(build,mode,connections,fanLayout){return mode==='manual'?cablesFor(build,fanLayout).filter(c=>c.required&&!connections.includes(c.id)):[];}
 export function canConnect(cableId,portId){return cableId===portId&&Object.hasOwn(ports,portId);}
 export function reconcileConnections(before,after,connections,fanLayout){
