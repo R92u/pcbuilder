@@ -12,4 +12,4 @@ export function caseLighting(part){
  return null;
 }
 export function gpuLighting(part){return part?.id==='rtx3090'?{type:'rgb',zones:['side-logo','backplate-logo']}:null;}
-export function sanitizeLighting(value){return {mode:['color','rainbow','off'].includes(value?.mode)?value.mode:'color',color:/^#[0-9a-f]{6}$/i.test(value?.color)?value.color:'#bba1ff'};}
+export function sanitizeLighting(value){return {mode:['color','rainbow','off'].includes(value?.mode)?value.mode:'color',color:/^#[0-9a-f]{6}$/i.test(value?.color)?value.color:'#e4edff'};}
