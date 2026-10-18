@@ -82,22 +82,6 @@ export function cablesFor(build,fanLayout){
    add(id,name,id==='panel'?'Кнопки корпуса':'Верхняя панель корпуса',id==='panel',route.concat([[-.85,Math.max(1.23,target[1]-.14),target[2]]]),strands,radius,{endSpreadAxis:'x'});
   }
  }
- for(const c of list){
-  // The fixed prefix remains anchored while only the exposed end is dragged.
-  const start=c.points[0],id=c.id;
-  if(c.from==='Блок питания'){
-   const index=['atx','eps','eps2','gpu1','gpu2','gpu3','gpu16'].indexOf(id),z=.30+(index%4)*.15;
-   c.loosePrefix=[start,[start[0],start[1],psuFront(p.psu)+.23],[.62,.85,z],[.62,1.30,z]];
-   c.looseRest=[.94,1.52+(index%3)*.10,z];
-  }else if(['usb3','usb2','usbC','audio','panel'].includes(id)){
-   c.loosePrefix=[start,[start[0],4.43,start[2]]];c.looseRest=[start[0]+.15,4.13,start[2]-.12];
-  }else if(id==='frontFan'){
-   c.loosePrefix=[start,[start[0],start[1],frame.front-.36],[.95,start[1],frame.front-.36]];c.looseRest=[.95,start[1]-.22,frame.front-.40];
-  }else{
-   c.loosePrefix=[start,[start[0]+.09,start[1],start[2]+.12]];
-   c.looseRest=[Math.min(frame.side-.20,start[0]+.30),start[1]-.25,start[2]+.22];
-  }
- }
  return list;
 }
 export function cleanConnections(build,connections,fanLayout){const available=new Set(cablesFor(build,fanLayout).map(c=>c.id));return [...new Set(Array.isArray(connections)?connections:[])].filter(id=>available.has(id));}

@@ -69,10 +69,10 @@ test('Rear slot stack has continuous coverage for every GPU bracket thickness',(
  assert.equal(top,2.47);assert.ok(Math.abs(bottom-1.21)<1e-9);
  for(const gpu of catalog.gpu){const count=gpuSlots(gpu),bracketBottom=2.47-count*.18;assert.ok(count>=1&&count<=7);if(count<7)assert.ok(Math.abs((2.38-count*.18+.09)-bracketBottom)<1e-9,gpu.id);}
 });
-test('Loose cable starts at its own component and uses a per-source rest position',()=>{
+test('Each cable begins at its own physical component connector',()=>{
  const cables=cablesFor({...demoBuild,case:'ch560-white'});
- for(const cable of cables){assert.deepEqual(cable.loosePrefix[0],cable.points[0]);assert.ok(cable.looseRest.every(Number.isFinite));}
- const positions=['atx','cpuFan','frontFan','rearFan','usb3','panel'].map(id=>cables.find(c=>c.id===id).looseRest.join(','));
+ for(const cable of cables)assert.ok(cable.points[0].every(Number.isFinite));
+ const positions=['atx','cpuFan','frontFan','rearFan','usb3','panel'].map(id=>cables.find(c=>c.id===id).points[0].join(','));
  assert.equal(new Set(positions).size,positions.length);
  for(const psu of catalog.psu.filter(p=>!p.modular&&p.id!=='a850'))for(const c of cablesFor({...demoBuild,psu:psu.id}).filter(c=>c.from==='Блок питания'))assert.deepEqual(c.points[0].slice(0,2),[.31,.72]);
 });

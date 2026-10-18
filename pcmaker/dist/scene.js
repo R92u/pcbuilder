@@ -34,15 +34,6 @@ export class PCScene {
   this.root=new THREE.Group();this.scene.add(this.root);
   const floor=new THREE.Mesh(new THREE.PlaneGeometry(200,200),new THREE.ShadowMaterial({opacity:.3}));floor.rotation.x=-Math.PI/2;floor.receiveShadow=true;floor.position.y=.04;this.scene.add(floor);
   const grid=new THREE.GridHelper(16,32,0x5b496f,0x4a395c);grid.material.transparent=true;grid.material.opacity=.17;grid.position.y=.02;this.scene.add(grid);
-  // Theme changes affect studio decoration, never the user's hardware RGB.
-  const applyStudioTheme=()=>{
-   const neutral=document.documentElement.dataset.design==='terminal';
-   interior.color.set(neutral?0xe0e0e0:0xac8ef0);
-   grid.material.vertexColors=!neutral;
-   grid.material.color.set(neutral?0x777777:0xffffff);
-   grid.material.needsUpdate=true;
-  };
-  applyStudioTheme();window.addEventListener('pcmaker:design-change',applyStudioTheme);
   this.makeCase();this.makeFlows();this.initInteraction();
   this.resizeObserver=new ResizeObserver(()=>this.resize());this.resizeObserver.observe(container);this.resize();this.reset();
   this.renderer.domElement.addEventListener('webglcontextlost',e=>{e.preventDefault();this.onContextLost?.();});
@@ -181,14 +172,14 @@ export class PCScene {
  resize(){const {width,height}=this.container.getBoundingClientRect();if(!width||!height)return;this.camera.aspect=width/height;this.camera.updateProjectionMatrix();this.renderer.setSize(width,height,false);this.fitCaseView();}
  frame(time){
   if(time-this.last<1000/45){this.raf=requestAnimationFrame(this.frame);return;}
-  const dt=Math.min((time-this.last)/1000||0,.05);this.last=time;this.controls.update();
+  const dt=Math.min((time-this.last)/1000||0,.05);this.last=time;if(!this.dragging)this.controls.update();
   for(const f of this.fans){const fraction=f.mountId?(f.direction==='in'?this.settings.front:this.settings.rear)/100:f.kind==='front'?this.settings.front/100:f.kind==='rear'?this.settings.rear/100:f.kind==='cpu'?this.settings.cpuFan/100:(this.settings.gpuFan??60)/100;f.rotor.rotation.z-=dt*(this.running?fraction*12:0);}
   this.transitions=this.transitions.filter(t=>{const p=Math.min((time-t.start)/650,1);t.group.position.x=.65*(1-p)**3;return p<1;});
   if(this.airflow)this.updateFanFlows(dt);
   this.updateFanMarkers();if(this.lighting?.mode==='rainbow')this.updateLighting(time);
   this.updateMarkers();this.renderer.render(this.scene,this.camera);this.raf=requestAnimationFrame(this.frame);
  }
- dispose(){cancelAnimationFrame(this.raf);this.resizeObserver.disconnect();this.controls.dispose();this.environment?.dispose();this.clearLooseCable();this.endFanDrag(null,true);window.removeEventListener('blur',this.cancelHeldPlug);this.renderer.dispose();}
+ dispose(){cancelAnimationFrame(this.raf);this.resizeObserver.disconnect();this.controls.dispose();this.environment?.dispose();this.clearLooseCable();this.endFanDrag(null,true);window.removeEventListener('blur',this.cancelHeldPlug);window.removeEventListener('keydown',this.cancelOnEscape);this.renderer.dispose();}
 }
 
 Object.assign(PCScene.prototype,modelMethods,interactionMethods,fanSceneMethods,lightingSceneMethods);
