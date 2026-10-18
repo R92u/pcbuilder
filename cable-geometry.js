@@ -1,4 +1,24 @@
-import {CurvePath,LineCurve3,QuadraticBezierCurve3,Vector3} from './vendor/three.module.js';
+import {CurvePath,LineCurve3,QuadraticBezierCurve3,Vector3,Plane,Raycaster} from './vendor/three.module.js';
+
+// A camera-facing plane through the actual source keeps the plug under the
+// pointer at any viewing angle, without jumping to a shared plane in the case.
+export function beginCableDrag(camera,source,pointer){
+ const plane=new Plane().setFromNormalAndCoplanarPoint(camera.getWorldDirection(new Vector3()),source);
+ const ray=new Raycaster();ray.setFromCamera(pointer,camera);
+ const hit=ray.ray.intersectPlane(plane,new Vector3());
+ return {plane,offset:hit?source.clone().sub(hit):new Vector3()};
+}
+export function cableDragPoint(camera,pointer,drag){
+ const ray=new Raycaster();ray.setFromCamera(pointer,camera);
+ return ray.ray.intersectPlane(drag.plane,new Vector3())?.add(drag.offset)||null;
+}
+export function cablePreviewPoints(cable,end,snapped=false){
+ if(snapped)return cable.points.map(p=>new Vector3(...p));
+ const source=new Vector3(...cable.points[0]);
+ const exit=new Vector3(...cable.points[1]).sub(source).normalize();
+ const reach=Math.min(.18,source.distanceTo(end)*.3);
+ return [source,source.clone().addScaledVector(exit,reach),source.clone().lerp(end,.55),end.clone()];
+}
 
 // Corner fillets stay in the convex hull of their neighbouring waypoints.
 // An interpolating spline can overshoot a flat cable channel through the panel.

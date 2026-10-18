@@ -135,7 +135,7 @@ function renderMetrics(){
 function renderWiring(){
  const available=cablesFor(build,fanLayout),active=wireMode==='auto'?available.map(c=>c.id):connections;
  if(!available.some(c=>c.id===selectedCable))selectedCable=null;
- $('wiring-help').textContent=wireMode==='auto'?'Кабели появляются после добавления соответствующих деталей. Выбери кабель в списке, чтобы найти его разъём.':'Выбери кабель. Зажми штекер в 3D и перетащи его к сиреневому разъёму. Чужой разъём не примет кабель. Для клавиатуры доступно подключение ниже.';
+ $('wiring-help').textContent=wireMode==='auto'?'Кабели появляются после добавления соответствующих деталей. Выбери кабель в списке, чтобы найти его разъём.':'Выбери кабель. Зажми отмеченный разъём источника в 3D и тяни провод к подсвеченному разъёму назначения. Чужой разъём не примет кабель. Для клавиатуры доступно подключение ниже.';
  $('wiring-progress').textContent=available.length?active.length+' / '+available.length+' подключено'+(missingWires().length?' · обязательных осталось: '+missingWires().length:''):'Добавь материнскую плату, блок питания и остальные детали.';
  $('cable-list').innerHTML=available.map((c,i)=>'<button class="cable-row '+(selectedCable===c.id?'selected':'')+'" data-cable="'+c.id+'" aria-pressed="'+(selectedCable===c.id)+'"><span class="cable-number">'+(i+1)+'</span><span><b>'+e(c.name)+'</b><small>'+e(c.from)+' → '+e(c.to)+'</small></span><span class="wire-state '+(active.includes(c.id)?'done':'')+'">'+(active.includes(c.id)?'✓':c.required?'•':'○')+'</span></button>').join('');
  $('connection-action').hidden=wireMode!=='manual'||!selectedCable;
