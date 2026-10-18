@@ -1,4 +1,6 @@
 import './navigation.js';
+import {revealPanel,hidePanel} from './motion.js';
+import {createThermalPanel} from './thermal-panel.js';
 import {regions,regionFor,priceSnapshot} from './regions.js';
 import {createAutoBuilder} from './autobuild-ui.js';
 import {quoteBuild} from './autobuild.js';
@@ -15,7 +17,7 @@ const $=id=>document.getElementById(id);
 const e=s=>String(s??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
 const money=n=>new Intl.NumberFormat('ru-RU',{maximumFractionDigits:2}).format(n);
 const safeUrl=u=>{try{const url=new URL(u);return url.protocol==='https:'?url.href:'#';}catch{return '#';}};
-const paths={cpu:'M7 7h10v10H7z M9 1v3m6-3v3M9 20v3m6-3v3M1 9h3m-3 6h3m16-6h3m-3 6h3',motherboard:'M4 3h16v18H4z M8 7h5v5H8z M16 6v8M8 16h8m-8 3h5',gpu:'M3 6h18v12H3z M5 18v3m3-3v2 M8 9a3 3 0 1 0 0 6 3 3 0 0 0 0-6 M16 9a3 3 0 1 0 0 6 3 3 0 0 0 0-6',ram:'M2 7h20v10H2z M5 10h3v4H5zm6 0h3v4h-3zm6 0h2v4h-2 M5 17v3m4-3v3m4-3v3m4-3v3',storage:'M4 6h16v12H4z M8 10h5v4H8z M17 9v6',cooler:'M7 4h10v16H7z M4 7h16M4 11h16M4 15h16M4 19h16',psu:'M3 5h18v14H3z M8 8a4 4 0 1 0 0 8 4 4 0 0 0 0-8 M17 9v6',case:'M5 2h14v20H5z M9 6h6M9 17h6 M10 10h4v4h-4z',fan:'M12 12c-6-2-5-9 0-9 4 0 3 5 0 9zm0 0c5-4 10 0 8 4-2 4-7 1-8-4zm0 0c1 6-5 10-8 6-3-3 2-6 8-6z',plus:'M12 5v14M5 12h14',minus:'M5 12h14',close:'m6 6 12 12M6 18 18 6',share:'M12 15V3m-5 5 5-5 5 5M5 13v7h14v-7',spark:'m12 3 2.5 6.5L21 12l-6.5 2.5L12 21l-2.5-6.5L3 12l6.5-2.5z',rotate:'M3 10a9 9 0 1 1 1 7M3 4v6h6',zoom:'M10 4a6 6 0 1 0 0 12 6 6 0 0 0 0-12 M15 15l6 6 M7 10h6m-3-3v6',orbit:'M3 12a9 4 0 1 0 18 0 9 4 0 0 0-18 0 M12 3a4 9 0 1 0 0 18 4 9 0 0 0 0-18',layers:'m12 3 10 5-10 5L2 8z M2 12l10 5 10-5M2 16l10 5 10-5',eye:'M2 12s3-7 10-7 10 7 10 7-3 7-10 7S2 12 2 12z M12 9a3 3 0 1 0 0 6 3 3 0 0 0 0-6',wind:'M3 7h12c4 0 4-5 1-5M3 12h16c4 0 4 6 0 6M3 17h7c4 0 4 5 1 5',mouse:'M7 4c0-4 10-4 10 0v10c0 8-10 8-10 0z M12 3v5',bolt:'m13 2-9 12h7l-1 8 10-13h-7z',info:'M12 2a10 10 0 1 0 0 20 10 10 0 0 0 0-20 M12 11v6m0-10v.1',trash:'M3 6h18M9 6V3h6v3M6 6l1 15h10l1-15M10 10v7m4-7v7',play:'m7 3 14 9-14 9z',pause:'M7 4h3v16H7zm7 0h3v16h-3z',moon:'M20 14A9 9 0 0 1 10 3a9 9 0 1 0 10 11z',game:'M7 7h10c6 0 7 14 3 14l-5-5H9l-5 5C0 21 1 7 7 7z M6 10v5m-2-2h4m8-2v.1m3 3v.1',video:'M3 5h14v14H3z M17 10l5-3v10l-5-3',search:'M10 3a7 7 0 1 0 0 14 7 7 0 0 0 0-14 M16 16l5 5',check:'m5 12 4 4L19 6',alert:'m12 3 10 18H2z M12 9v5m0 3v.1'};
+const paths={cpu:'M7 7h10v10H7z M9 1v3m6-3v3M9 20v3m6-3v3M1 9h3m-3 6h3m16-6h3m-3 6h3',motherboard:'M4 3h16v18H4z M8 7h5v5H8z M16 6v8M8 16h8m-8 3h5',gpu:'M3 6h18v12H3z M5 18v3m3-3v2 M8 9a3 3 0 1 0 0 6 3 3 0 0 0 0-6 M16 9a3 3 0 1 0 0 6 3 3 0 0 0 0-6',ram:'M2 7h20v10H2z M5 10h3v4H5zm6 0h3v4h-3zm6 0h2v4h-2 M5 17v3m4-3v3m4-3v3m4-3v3',storage:'M4 6h16v12H4z M8 10h5v4H8z M17 9v6',cooler:'M7 4h10v16H7z M4 7h16M4 11h16M4 15h16M4 19h16',psu:'M3 5h18v14H3z M8 8a4 4 0 1 0 0 8 4 4 0 0 0 0-8 M17 9v6',case:'M5 2h14v20H5z M9 6h6M9 17h6 M10 10h4v4h-4z',fan:'M12 12c-6-2-5-9 0-9 4 0 3 5 0 9zm0 0c5-4 10 0 8 4-2 4-7 1-8-4zm0 0c1 6-5 10-8 6-3-3 2-6 8-6z',plus:'M12 5v14M5 12h14',minus:'M5 12h14',close:'m6 6 12 12M6 18 18 6',spark:'m12 3 2.5 6.5L21 12l-6.5 2.5L12 21l-2.5-6.5L3 12l6.5-2.5z',rotate:'M3 10a9 9 0 1 1 1 7M3 4v6h6',zoom:'M10 4a6 6 0 1 0 0 12 6 6 0 0 0 0-12 M15 15l6 6 M7 10h6m-3-3v6',orbit:'M3 12a9 4 0 1 0 18 0 9 4 0 0 0-18 0 M12 3a4 9 0 1 0 0 18 4 9 0 0 0 0-18',layers:'m12 3 10 5-10 5L2 8z M2 12l10 5 10-5M2 16l10 5 10-5',eye:'M2 12s3-7 10-7 10 7 10 7-3 7-10 7S2 12 2 12z M12 9a3 3 0 1 0 0 6 3 3 0 0 0 0-6',wind:'M3 7h12c4 0 4-5 1-5M3 12h16c4 0 4 6 0 6M3 17h7c4 0 4 5 1 5',mouse:'M7 4c0-4 10-4 10 0v10c0 8-10 8-10 0z M12 3v5',bolt:'m13 2-9 12h7l-1 8 10-13h-7z',info:'M12 2a10 10 0 1 0 0 20 10 10 0 0 0 0-20 M12 11v6m0-10v.1',trash:'M3 6h18M9 6V3h6v3M6 6l1 15h10l1-15M10 10v7m4-7v7',play:'m7 3 14 9-14 9z',pause:'M7 4h3v16H7zm7 0h3v16h-3z',moon:'M20 14A9 9 0 0 1 10 3a9 9 0 1 0 10 11z',game:'M7 7h10c6 0 7 14 3 14l-5-5H9l-5 5C0 21 1 7 7 7z M6 10v5m-2-2h4m8-2v.1m3 3v.1',video:'M3 5h14v14H3z M17 10l5-3v10l-5-3',search:'M10 3a7 7 0 1 0 0 14 7 7 0 0 0 0-14 M16 16l5 5',check:'m5 12 4 4L19 6',alert:'m12 3 10 18H2z M12 9v5m0 3v.1'};
 paths.wand='m4 20 12-12 4 4L8 24z M14 10l4 4 M6 3v4M4 5h4M17 1v4m-2-2h4M21 18v4m-2-2h4';
 paths.shop='M3 9h18l-2-6H5z M4 9v12h16V9 M8 21v-7h5v7 M3 9c0 4 5 4 5 0 0 4 4 4 4 0 0 4 4 4 4 0 0 4 5 4 5 0';
 const icon=n=>`<svg viewBox="0 0 24 24" aria-hidden="true"><path d="${paths[n]||paths.cpu}"/></svg>`;
@@ -30,6 +32,7 @@ let autoPlan=null;try{autoPlan=JSON.parse(localStorage.getItem('pcmaker-autobuil
 let lighting=sanitizeLighting();try{lighting=sanitizeLighting(JSON.parse(localStorage.getItem('pcmaker-lighting')));}catch{}
 const initialThermals=ambient=>Object.fromEntries(categories.map(([key])=>[key,ambient]));
 let running=false,hasRun=false,elapsed=0,thermals=initialThermals(22),inspectedKey=null,inspectOrigin=null;
+const thermalPanel=createThermalPanel($('studio'));
 let settings={load:'idle',ambient:22,front:60,rear:60,cpuFan:60};
 try{const hash=new URLSearchParams(location.hash.slice(1)).get('build');if(hash){const ids=hash.split(',');build=sanitizeBuild(Object.fromEntries(categories.map(([key],i)=>[key,ids[i]])));}}catch{}
 let savedFans={};try{savedFans=JSON.parse(localStorage.getItem('pcmaker-fans'))||{};}catch{}
@@ -96,7 +99,7 @@ function changeLighting(value){lighting=sanitizeLighting({...lighting,...value})
 document.querySelectorAll('[data-rgb-mode]').forEach(b=>b.onclick=()=>changeLighting({mode:b.dataset.rgbMode}));
 document.querySelectorAll('[data-rgb-color]').forEach(b=>b.onclick=()=>changeLighting({mode:'color',color:b.dataset.rgbColor}));
 $('rgb-color').oninput=()=>changeLighting({mode:'color',color:$('rgb-color').value});
-function resetSimulation(){lastTarget=null;running=false;hasRun=false;elapsed=0;thermals=initialThermals(settings.ambient);scene?.setOptions({running:false});}
+function resetSimulation(){thermalPanel.reset();lastTarget=null;running=false;hasRun=false;elapsed=0;thermals=initialThermals(settings.ambient);scene?.setOptions({running:false});}
 function choosePart(key,id,keepOpen=false){build[key]=id;resetSimulation();renderBuild();if(!keepOpen)$('catalog-dialog').close();toast(id?`${byId[id].short} добавлен в сборку`:'Компонент убран из сборки');}
 const shop=createShop({getBuild:()=>build,getPrices:()=>priceData,getSource:sourceFor,onChoose:(key,id)=>choosePart(key,id,true),beforeOpen:()=>{closeWorkshopMenu(false);closeInspector(false);},icon});
 function openCatalog(key){shop.open(key);}
@@ -126,7 +129,7 @@ function updateSimulationState(){
 }
 function renderMetrics(){
  updateInspectorHeat();$('metrics-note').textContent=hasRun?'Приблизительный учебный расчёт. Температуры меняются постепенно.':'Показатели появятся после запуска симуляции в правой панели.';
- const p=resolve(build),target=lastTarget||thermalTargets(build,settings);for(const key of ['cpu','gpu']){const value=hasRun?thermals[key]:null;$(key+'-temp').textContent=value===null?'—':Math.round(value);const limit=p[key]?.tmax||95,hot=value!==null&&value>=limit-1;$(key+'-state').textContent=!hasRun?'Нет данных':!running?'Пауза':hot?'Лимит нагрева':'Расчёт';$(key+'-state').style.color=hot?'var(--orange)':'';$(key+'-bar').style.width=value===null?'0':Math.min(100,value/limit*100)+'%';$(key+'-bar').style.background=hot?'var(--orange)':'var(--accent)';}
+ const p=resolve(build),target=lastTarget||thermalTargets(build,settings);thermalPanel.update({hasRun,running,temperatures:thermals,limits:{cpu:p.cpu?.tmax||95,gpu:p.gpu?.tmax||95},elapsed,load:workloads[lastLoad].name});for(const key of ['cpu','gpu']){const value=hasRun?thermals[key]:null;$(key+'-temp').textContent=value===null?'—':Math.round(value);const limit=p[key]?.tmax||95,hot=value!==null&&value>=limit-1;$(key+'-state').textContent=!hasRun?'Нет данных':!running?'Пауза':hot?'Лимит нагрева':'Расчёт';$(key+'-state').style.color=hot?'var(--orange)':'';$(key+'-bar').style.width=value===null?'0':Math.min(100,value/limit*100)+'%';$(key+'-bar').style.background=hot?'var(--orange)':'var(--accent)';}
  $('power-value').textContent=hasRun?target.power:'—';$('power-note').textContent=hasRun?`${workloads[lastLoad].name} · приблизительно`:'Запусти симуляцию';$('fan-value').textContent=hasRun?money(target.rpm.front):'—';$('sim-time').textContent=`${String(Math.floor(elapsed/60)).padStart(2,'0')}:${String(Math.floor(elapsed%60)).padStart(2,'0')}`;
  if($('other-temps'))$('other-temps').innerHTML=[['case','Воздух в корпусе'],['ram','Память'],['storage','SSD'],['motherboard','Плата / VRM'],['cooler','Радиатор кулера'],['psu','Выход БП']].map(([key,name])=>`<span>${name}<b>${hasRun?Math.round(thermals[key])+' °C':'—'}</b></span>`).join('');
  if(running&&(target.cpuThrottle||target.gpuThrottle))$('simulation-warning').innerHTML='<div class="compat-box error">Расчёт достигает температурного предела. Модель снижает мощность, имитируя троттлинг. Увеличь обороты или уменьши нагрузку.</div>';
@@ -173,7 +176,7 @@ $('disconnect-all').onclick=()=>{connections=[];resetSimulation();renderWiring()
 let activeWorkshopMenu=null;
 function closeWorkshopMenu(restore=false){
  if(!activeWorkshopMenu)return;
- const key=activeWorkshopMenu,button=document.querySelector(`[data-menu="${key}"]`);$('menu-'+key).hidden=true;button.setAttribute('aria-expanded','false');activeWorkshopMenu=null;if(restore)button.focus();
+ const key=activeWorkshopMenu,button=document.querySelector(`[data-menu="${key}"]`);hidePanel($('menu-'+key));button.setAttribute('aria-expanded','false');activeWorkshopMenu=null;if(restore)button.focus();
 }
 function positionWorkshopMenu(){
  if(!activeWorkshopMenu)return;
@@ -181,7 +184,7 @@ function positionWorkshopMenu(){
 }
 document.addEventListener('click',ev=>{
  const toggle=ev.target.closest('[data-menu]');
- if(toggle){const key=toggle.dataset.menu,wasOpen=key===activeWorkshopMenu;closeWorkshopMenu(false);if(!wasOpen){activeWorkshopMenu=key;$('menu-'+key).hidden=false;toggle.setAttribute('aria-expanded','true');positionWorkshopMenu();$('menu-'+key).querySelector('button')?.focus({preventScroll:true});}return;}
+ if(toggle){const key=toggle.dataset.menu,wasOpen=key===activeWorkshopMenu;closeWorkshopMenu(false);if(!wasOpen){activeWorkshopMenu=key;revealPanel($('menu-'+key));toggle.setAttribute('aria-expanded','true');positionWorkshopMenu();$('menu-'+key).querySelector('button')?.focus({preventScroll:true});}return;}
  if(ev.target.closest('[data-menu-close]')){closeWorkshopMenu(true);return;}
  if(!ev.target.closest('.workshop-menu'))closeWorkshopMenu(false);
 });
@@ -216,13 +219,12 @@ for(const dialog of document.querySelectorAll('dialog'))dialog.addEventListener(
 $('open-simulation').onclick=()=>{setTab('simulation');if(innerWidth<840)$('build-panel')?.scrollIntoView({behavior:'smooth'});};
 $('demo-button').onclick=()=>{build={...demoBuild};resetSimulation();renderBuild();toast('Пример загружен. Любую деталь можно заменить вручную.');};
 $('clear-button').onclick=()=>$('clear-dialog').showModal();$('confirm-clear').onclick=()=>{build={...emptyBuild(),case:build.case};resetSimulation();renderBuild();$('clear-dialog').close();toast('Начинаем новую сборку');};
-$('share-button').onclick=async()=>{const url=new URL(location.href);const shareParams=new URLSearchParams({build:categories.map(([key])=>build[key]||'').join(',')});if(wireMode==='manual'){shareParams.set('wire','manual');shareParams.set('connected',connections.join(','));}url.hash=(shareParams.set('fans',encodeFans(fanLayout)),shareParams.toString());try{await navigator.clipboard.writeText(url.href);toast('Ссылка на сборку скопирована');}catch{openInfo('Ссылка на твою сборку',`<p>Скопируй ссылку и открой её на другом компьютере.</p><input class="share-input" readonly value="${e(url.href)}" aria-label="Ссылка на сборку">`);$('info-content').querySelector('input').select();}};
 $('method-button').onclick=method;$('sources-button').onclick=sources;
 for(const [id,property,inverted] of [['glass-toggle','hideGlass',false],['rear-panel-toggle','hideRearPanel',false],['cooler-toggle','hideCooler',false],['airflow-toggle','airflow',false]])$(id).onclick=()=>{const active=$(id).getAttribute('aria-pressed')!=='true';$(id).setAttribute('aria-pressed',active);$(id).classList.toggle('active',active);scene?.setOptions({[property]:active});if(property==='hideGlass')$(id).innerHTML=icon('layers')+(active?' Вернуть стекло':' Снять стекло');if(property==='hideRearPanel')$(id).innerHTML=icon('layers')+(active?' Вернуть крышку за платой':' Снять крышку за платой');if(property==='airflow'){$('fan-flow-toggle').setAttribute('aria-pressed',String(active));$('fan-flow-toggle').textContent=active?'Скрыть потоки воздуха':'Показать потоки воздуха';$('airflow-legend').hidden=!active;if(active&&!running)toast('Запусти симуляцию, чтобы увидеть движение воздуха');}};
 $('reset-view').onclick=()=>{scene?.reset();for(const b of document.querySelectorAll('[data-view]'))b.classList.toggle('active',b.dataset.view==='assembly');};$('zoom-in').onclick=()=>scene?.zoom(.86);$('zoom-out').onclick=()=>scene?.zoom(1.16);$('auto-rotate').onclick=()=>{const on=$('auto-rotate').getAttribute('aria-pressed')!=='true';$('auto-rotate').setAttribute('aria-pressed',on);if(scene)scene.controls.autoRotate=on;};
 $('workloads').addEventListener('click',event=>{const button=event.target.closest('[data-load]');if(!button)return;settings.load=button.dataset.load;for(const b of $('workloads').querySelectorAll('button'))b.classList.toggle('active',b===button);updateSliders();});
 for(const key of ['ambient','front','rear','cpuFan'])$(key).oninput=()=>{settings[key]=Number($(key).value);updateSliders();};
-$('run-simulation').onclick=()=>{if(!compatibility(build).ready||missingWires().length)return;running=!running;if(running&&!hasRun){thermals=initialThermals(settings.ambient);}hasRun=true;scene?.setOptions({running});updateSimulationState();};
+$('run-simulation').onclick=()=>{if(!compatibility(build).ready||missingWires().length)return;running=!running;if(running&&!hasRun){thermals=initialThermals(settings.ambient);}hasRun=true;if(running)thermalPanel.show();scene?.setOptions({running});updateSimulationState();};
 let last=performance.now(),paint=0;function tick(now){const dt=Math.min((now-last)/1000,.25);last=now;if(running){elapsed+=dt;lastTarget=thermalTargets(build,settings);lastLoad=settings.load;thermals=advanceThermals(thermals,lastTarget,dt);}if(now-paint>350){renderMetrics();paint=now;}requestAnimationFrame(tick);}requestAnimationFrame(tick);
 renderBuild();
 $('region-select').onchange=()=>{regionId=regionFor($('region-select').value).id;region=regionFor(regionId);priceData=snapshots[regionId];try{localStorage.setItem('pcmaker-region',regionId);}catch{}renderBuild();shop.refresh();autoBuilder.refresh();toast('Регион цен: '+region.city+' / '+region.currency);};
