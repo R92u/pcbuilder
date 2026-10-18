@@ -1,12 +1,12 @@
 .brand-navigation{position:relative;flex:none;z-index:70}
 .brand-navigation .brand{padding:0;white-space:nowrap;color:var(--text);background:none}
-.brand-chevron{font-size:15px;font-weight:400;letter-spacing:0;color:#8f849e;margin-left:1px;transition:transform .18s}
+.brand-chevron{font-size:15px;font-weight:400;letter-spacing:0;color:#888888;margin-left:1px;transition:transform .18s}
 .brand[aria-expanded=true] .brand-chevron{transform:rotate(180deg);color:var(--accent)}
-.header nav.brand-switcher{position:absolute;top:calc(100% + 16px);left:0;width:285px;max-width:calc(100vw - 28px);height:auto;display:flex;flex-direction:column;gap:5px;padding:7px;border:1px solid #443951;border-radius:13px;background:#19171f;box-shadow:0 18px 65px #0008;z-index:80}
-.brand-switcher a{display:grid;grid-template-columns:35px 1fr;gap:12px;align-items:center;padding:13px 11px;border-radius:8px;color:#c7bbd5}
-.brand-switcher a:hover,.brand-switcher a:focus-visible{background:#30283f;color:#fff}
-.brand-switcher a[aria-current=page]{background:#282034;color:#dfd0ff}
-.brand-destination-icon{display:grid;place-items:center;width:33px;height:33px;border:1px solid #554366;border-radius:8px;color:#bca6ff}
-.brand-switcher strong{font-size:13px;font-weight:600;display:block;margin-bottom:4px}.brand-switcher small{font-size:11px;font-weight:400;color:#9e91ad;display:block}
+.header nav.brand-switcher{position:absolute;top:calc(100% + 16px);left:0;width:285px;max-width:calc(100vw - 28px);height:auto;display:flex;flex-direction:column;gap:5px;padding:7px;border:1px solid #3d3d3d;border-radius:13px;background:#181818;box-shadow:0 18px 65px #0008;z-index:80}
+.brand-switcher a{display:grid;grid-template-columns:35px 1fr;gap:12px;align-items:center;padding:13px 11px;border-radius:8px;color:#bfbfbf}
+.brand-switcher a:hover,.brand-switcher a:focus-visible{background:#2b2b2b;color:#fff}
+.brand-switcher a[aria-current=page]{background:#232323;color:#d7d7d7}
+.brand-destination-icon{display:grid;place-items:center;width:33px;height:33px;border:1px solid #494949;border-radius:8px;color:#b1b1b1}
+.brand-switcher strong{font-size:13px;font-weight:600;display:block;margin-bottom:4px}.brand-switcher small{font-size:11px;font-weight:400;color:#969696;display:block}
 .workshop-header nav.workshop-toolbar{min-width:0;overflow-x:auto;scrollbar-width:none}
 @media(max-width:540px){.workshop-header .brand-navigation .brand{gap:6px}.workshop-header .brand-navigation .brand-name{display:none}.workshop-header .brand-navigation .brand-chevron{display:block}.header nav.brand-switcher{top:calc(100% + 15px)}}

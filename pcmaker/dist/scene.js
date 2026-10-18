@@ -10,7 +10,7 @@ import {fanSceneMethods} from './fan-scene.js';
 import {lightingSceneMethods} from './lighting-scene.js';
 import {interactionMethods} from './interaction.js';
 
-const C={metal:0x222a2f,edge:0x485257,black:0x101618,silver:0x879398,pcb:0x17211c,purple:0xbfa5ff};
+const C={metal:0x222a2f,edge:0x485257,black:0x101618,silver:0x879398,pcb:0x17211c,light:0xe4edff};
 const mat=(color,roughness=.5,metalness=.25)=>hardwareFinish(new THREE.MeshStandardMaterial({color,roughness,metalness}));
 export class PCScene {
  constructor(container){
@@ -30,10 +30,10 @@ export class PCScene {
   const key=new THREE.DirectionalLight(0xf9fcff,3.6);key.position.set(4,7,5);key.castShadow=true;key.shadow.mapSize.set(1024,1024);Object.assign(key.shadow.camera,{left:-5,right:5,top:7,bottom:-5});key.shadow.bias=-.0005;this.scene.add(key);
   const fill=new THREE.DirectionalLight(0xa6b8c8,1.4);fill.position.set(-4,4,-3);this.scene.add(fill);
   const rim=new THREE.DirectionalLight(0xbad2df,2.0);rim.position.set(2,3,-5);this.scene.add(rim);
-  const interior=new THREE.PointLight(0xac8ef0,.65,7,1.5);interior.position.set(.9,3,1);this.scene.add(interior);
+  const interior=new THREE.PointLight(0xe4edf4,.65,7,1.5);interior.position.set(.9,3,1);this.scene.add(interior);
   this.root=new THREE.Group();this.scene.add(this.root);
   const floor=new THREE.Mesh(new THREE.PlaneGeometry(200,200),new THREE.ShadowMaterial({opacity:.3}));floor.rotation.x=-Math.PI/2;floor.receiveShadow=true;floor.position.y=.04;this.scene.add(floor);
-  const grid=new THREE.GridHelper(16,32,0x5b496f,0x4a395c);grid.material.transparent=true;grid.material.opacity=.17;grid.position.y=.02;this.scene.add(grid);
+  const grid=new THREE.GridHelper(16,32,0x626b73,0x495159);grid.material.transparent=true;grid.material.opacity=.17;grid.position.y=.02;this.scene.add(grid);
   this.makeCase();this.makeFlows();this.initInteraction();
   this.resizeObserver=new ResizeObserver(()=>this.resize());this.resizeObserver.observe(container);this.resize();this.reset();
   this.renderer.domElement.addEventListener('webglcontextlost',e=>{e.preventDefault();this.onContextLost?.();});
@@ -63,7 +63,7 @@ export class PCScene {
   const texture=new THREE.CanvasTexture(canvas);texture.colorSpace=THREE.SRGBColorSpace;texture.anisotropy=2;
   const mesh=new THREE.Mesh(new THREE.PlaneGeometry(w,h),new THREE.MeshStandardMaterial({map:texture,roughness:.73,metalness:light?.35:.08,polygonOffset:true,polygonOffsetFactor:-1}));mesh.position.set(x,y,z);mesh.rotation.set(...rotation);g.add(mesh);return mesh;
  }
- lightStrip(g,w,h,d,x,y,z,color=C.purple){const mesh=new THREE.Mesh(new THREE.BoxGeometry(w,h,d),new THREE.MeshStandardMaterial({color,emissive:color,emissiveIntensity:1.5,roughness:.35}));mesh.position.set(x,y,z);g.add(mesh);this.tagLight(mesh,{type:'rgb'});return mesh;}
+ lightStrip(g,w,h,d,x,y,z,color=C.light){const mesh=new THREE.Mesh(new THREE.BoxGeometry(w,h,d),new THREE.MeshStandardMaterial({color,emissive:color,emissiveIntensity:1.5,roughness:.35}));mesh.position.set(x,y,z);g.add(mesh);this.tagLight(mesh,{type:'rgb'});return mesh;}
  fan(parent,size,x,y,z,rotation,kind,lighting=null){
   const rgb=!!lighting;
   const fan=new THREE.Group();fan.position.set(x,y,z);fan.rotation.set(...rotation);parent.add(fan);
@@ -73,7 +73,7 @@ export class PCScene {
   for(const sign of [-1,1]){this.box(fan,size,size*.075,depth,0,sign*size*.4625,0,C.black);this.box(fan,size*.075,size,depth,sign*size*.4625,0,0,C.black);}
   const ductShape=new THREE.Shape();ductShape.absarc(0,0,size*.455,0,Math.PI*2,false);const opening=new THREE.Path();opening.absarc(0,0,size*.408,0,Math.PI*2,true);ductShape.holes.push(opening);
   const duct=new THREE.Mesh(new THREE.ExtrudeGeometry(ductShape,{depth,bevelEnabled:false,curveSegments:24}),mat(C.black,.7,.1));duct.position.z=-depth/2;fan.add(duct);
-  const ring=new THREE.Mesh(new THREE.TorusGeometry(size*.425,size*.015,6,40),new THREE.MeshStandardMaterial({color:rgb?C.purple:0x454e52,emissive:rgb?0x7e57cc:0,emissiveIntensity:rgb?.9:0,metalness:.25,roughness:.5}));ring.position.z=depth/2+.003;fan.add(ring);
+  const ring=new THREE.Mesh(new THREE.TorusGeometry(size*.425,size*.015,6,40),new THREE.MeshStandardMaterial({color:rgb?C.light:0x454e52,emissive:rgb?0xe4edff:0,emissiveIntensity:rgb?.9:0,metalness:.25,roughness:.5}));ring.position.z=depth/2+.003;fan.add(ring);
   if(lighting?.zones==='ring'){this.tagLight(ring,lighting);const backRing=ring.clone();backRing.position.z=-depth/2-.003;fan.add(backRing);}
   else {ring.material.emissiveIntensity=0;ring.material.color.set(0x454e52);}
   const rotor=new THREE.Group();rotor.userData.animated=true;rotor.position.z=.025;fan.add(rotor);
@@ -121,7 +121,7 @@ export class PCScene {
     const cableGroup=new THREE.Group();cableGroup.userData.cableId=cable.id;this.wires.add(cableGroup);
     for(let i=0;i<cable.strands;i++){
      const curve=cableCurve(strandPoints(cable,i));
-     const mesh=new THREE.Mesh(new THREE.TubeGeometry(curve,Math.max(72,cable.points.length*14),cable.radius,5,false),mat(showPorts&&cable.id===selected?0x9788b1:i%4===0?0x363e43:0x171d20,.76,.1));mesh.castShadow=true;cableGroup.add(mesh);
+     const mesh=new THREE.Mesh(new THREE.TubeGeometry(curve,Math.max(72,cable.points.length*14),cable.radius,5,false),mat(showPorts&&cable.id===selected?0xb6c3cd:i%4===0?0x363e43:0x171d20,.76,.1));mesh.castShadow=true;cableGroup.add(mesh);
     }
     const [x,y,z]=targets[cable.id].position;
     const axis=targets[cable.id].axis,vertical=axis==='y'||axis==='-y',direction=axis==='-y'?-1:1;

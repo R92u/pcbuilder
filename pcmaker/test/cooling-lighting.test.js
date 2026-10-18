@@ -39,7 +39,7 @@ test('Only exact lighted variants get RGB; fixed LEDs retain their actual color'
  for(const id of ['4000d-airflow','pop-air','pop-air-white','h7-flow'])assert.equal(caseLighting(byId[id]),null);
  for(const p of catalog.gpu){assert.equal(!!gpuLighting(p),p.id==='rtx3090');if(gpuLighting(p))assert.ok(lightingSources[p.id]);}
  for(const p of catalog.case.filter(p=>p.concept))assert.equal(caseLighting(p).type,'rgb');
- assert.deepEqual(sanitizeLighting({mode:'bad',color:'url(evil)'}),{mode:'color',color:'#bba1ff'});
+ assert.deepEqual(sanitizeLighting({mode:'bad',color:'url(evil)'}),{mode:'color',color:'#e4edff'});
  assert.deepEqual(sanitizeLighting({mode:'off',color:'#123456'}),{mode:'off',color:'#123456'});
 });
 test('Lighted surfaces switch off, animate, restore color and drop removed materials',()=>{
