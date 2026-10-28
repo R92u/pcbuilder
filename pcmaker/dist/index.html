@@ -7,6 +7,8 @@
  <link rel="icon" href="./favicon.svg" type="image/svg+xml"><link rel="stylesheet" href="./style.css"><link rel="stylesheet" href="./workbench.css"><link rel="stylesheet" href="./shop.css"><link rel="stylesheet" href="./fans.css"><link rel="stylesheet" href="./autobuild.css"><link rel="stylesheet" href="./navigation.css?v=github-20261028">
  <script type="importmap">{"imports":{"three":"./vendor/three.module.js"}}</script>
  <link rel="stylesheet" href="./design-studio.css" id="design-stylesheet">
+ <link rel="stylesheet" href="./build-panel.css">
+ <script>try{if(localStorage.getItem('pcmaker-panel-collapsed')==='true')document.documentElement.dataset.panelCollapsed='true';}catch{}</script>
 </head>
 <body>
 
@@ -29,7 +31,8 @@
 
 
    </div>
-   <aside class="build-panel" id="build-panel"><div class="panel-tabs" role="tablist" aria-label="Режим панели"><button role="tab" aria-selected="true" id="parts-tab" data-tab="parts" aria-controls="parts-panel">Комплектующие <span id="parts-count">1/8</span></button><button role="tab" aria-selected="false" id="simulation-tab" data-tab="simulation" aria-controls="simulation-panel">Симуляция</button><button role="tab" aria-selected="false" id="wiring-tab" data-tab="wiring" aria-controls="wiring-panel">Кабели</button></div>
+   <button class="round-button build-panel-toggle" id="build-panel-toggle" aria-controls="build-panel" aria-expanded="true" aria-label="Скрыть панель сборки" title="Скрыть панель сборки"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="m9 6 6 6-6 6"/></svg></button>
+   <div class="build-panel-slot"><aside class="build-panel" id="build-panel"><div class="panel-tabs" role="tablist" aria-label="Режим панели"><button role="tab" aria-selected="true" id="parts-tab" data-tab="parts" aria-controls="parts-panel">Комплектующие <span id="parts-count">1/8</span></button><button role="tab" aria-selected="false" id="simulation-tab" data-tab="simulation" aria-controls="simulation-panel">Симуляция</button><button role="tab" aria-selected="false" id="wiring-tab" data-tab="wiring" aria-controls="wiring-panel">Кабели</button></div>
     <section id="parts-panel" role="tabpanel" aria-labelledby="parts-tab"><div class="panel-heading"><div><h2>Моя сборка</h2><span id="build-subtitle">Каждая деталь на своём месте</span></div><button id="clear-button" class="icon-button" aria-label="Очистить сборку" title="Очистить сборку"><span data-icon="trash"></span></button></div><div id="parts-list"></div><div id="compatibility" aria-live="polite"></div><div id="cooling-parts" class="cooling-diagnostics" aria-live="polite"></div><div class="price-summary"><div><span id="price-caption">Стоимость сборки</span><strong id="price-total">— <small>₽</small></strong></div><span class="price-region">МОСКВА</span><p id="price-note">Цены добавляются после проверки предложений магазинов.</p><button class="button primary wide" id="open-simulation"><span data-icon="play"></span> Проверить в работе</button></div></section>
     <section id="simulation-panel" role="tabpanel" aria-labelledby="simulation-tab" hidden><div class="panel-heading"><div><div class="eyebrow small">ТВОЯ ЛАБОРАТОРИЯ</div><h2>Проверим в работе</h2></div><span class="beta-pill">≈ РАСЧЁТ</span></div><p class="panel-intro">Меняй нагрузку и охлаждение.<br>Наблюдай, как реагирует сборка.</p><div class="field-label">Сценарий нагрузки</div><div class="workloads" id="workloads"><button data-load="idle" class="active"><span data-icon="moon"></span>Простой</button><button data-load="game"><span data-icon="game"></span>Игра</button><button data-load="video"><span data-icon="video"></span>Работа с видео</button><button data-load="stress"><span data-icon="bolt"></span>Стресс-тест</button></div><div class="load-summary"><span>CPU <b id="cpu-load">8%</b></span><span>GPU <b id="gpu-load">4%</b></span></div><label class="slider-field"><span>Температура комнаты <output id="ambient-output">22 °C</output></span><input id="ambient" aria-label="Температура комнаты" type="range" min="10" max="35" value="22"><small><span>10 °C</span><span>35 °C</span></small></label><div class="section-divider"></div><div class="field-label">Управление охлаждением <span data-icon="fan"></span></div><label class="slider-field"><span>Вентиляторы · вдув <output id="front-output">60%</output></span><input id="front" aria-label="Скорость вентиляторов на вдув" type="range" min="0" max="100" step="5" value="60"><small><span id="front-count">3 вент. в комплекте</span><span id="front-rpm">1 020 об/мин</span></small></label><label class="slider-field"><span>Вентиляторы · выдув <output id="rear-output">60%</output></span><input id="rear" aria-label="Скорость вентиляторов на выдув" type="range" min="0" max="100" step="5" value="60"><small><span id="rear-count">1 вентилятор</span><span id="rear-rpm">1 020 об/мин</span></small></label><label class="slider-field"><span>Кулер процессора <output id="cpuFan-output">60%</output></span><input id="cpuFan" aria-label="Скорость кулера процессора" type="range" min="0" max="100" step="5" value="60"><small><span>Регулируемая модель</span><span id="cpuFan-rpm">1 110 об/мин</span></small></label><p class="small-note">Вентиляторы видеокарты регулируются автоматически. Управление оборотами корпуса здесь виртуальное.</p><div id="cooling-simulation" class="cooling-diagnostics" aria-live="polite"></div><div id="simulation-warning" aria-live="polite"></div><button id="run-simulation" class="button primary wide"><span data-icon="play"></span> Запустить симуляцию</button><div class="sim-status"><span id="sim-status-dot" class="status-dot muted"></span><span id="sim-status">Ожидание запуска</span><span id="sim-time">00:00</span></div></section>
     <section id="wiring-panel" role="tabpanel" aria-labelledby="wiring-tab" hidden>
@@ -58,7 +61,7 @@
      <button id="fan-flow-toggle" class="button wide" aria-pressed="false">Показать потоки воздуха</button>
      <p class="small-note">Обороты задаются отдельно для вдува и выдува во вкладке «Симуляция». Потоки и нагрев — учебная модель. Кабели следуют за вентиляторами; разветвители подключаются во вкладке «Кабели».</p>
     </section>
-   </aside>
+   </aside></div>
   </section>
 
  </main>
@@ -109,7 +112,7 @@
  <dialog id="clear-dialog" class="info-dialog small-dialog"><h2>Начать новую сборку?</h2><p>Выбранные детали будут убраны. Корпус останется.</p><div class="dialog-actions"><button class="button" data-close="clear-dialog">Оставить сборку</button><button class="button primary" id="confirm-clear">Начать заново</button></div></dialog>
  <div id="toast" role="status" class="toast" hidden></div>
  <noscript><div class="no-script">Для 3D-конструктора нужно включить JavaScript в браузере.</div></noscript>
- <script type="module" src="./app.js"></script>
+ <script type="module" src="./app.js?v=panel-20261028"></script>
 </body>
 </html>
 
