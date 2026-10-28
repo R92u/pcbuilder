@@ -9,4 +9,7 @@
 .brand-destination-icon{display:grid;place-items:center;width:33px;height:33px;border:1px solid #494949;border-radius:8px;color:#b1b1b1}
 .brand-switcher strong{font-size:13px;font-weight:600;display:block;margin-bottom:4px}.brand-switcher small{font-size:11px;font-weight:400;color:#969696;display:block}
 .workshop-header nav.workshop-toolbar{min-width:0;overflow-x:auto;scrollbar-width:none}
+.workshop-header-actions{margin-left:auto;display:flex;align-items:center;gap:12px;flex:none}
+.header .github-link{display:inline-flex;align-items:center;justify-content:center;width:40px;height:40px;flex:none;text-decoration:none}.header .github-link svg{width:19px;height:19px;fill:currentColor;stroke:none}
+@media(max-width:650px){.workshop-header-actions{gap:0}.header .github-link{width:36px;height:36px}}
 @media(max-width:540px){.workshop-header .brand-navigation .brand{gap:6px}.workshop-header .brand-navigation .brand-name{display:none}.workshop-header .brand-navigation .brand-chevron{display:block}.header nav.brand-switcher{top:calc(100% + 15px)}}
