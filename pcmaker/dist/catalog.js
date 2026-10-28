@@ -29,7 +29,9 @@ export const catalog = {
       "baseGHz": 3.5,
       "boostGHz": 4.4,
       "integratedGraphics": false,
-      "officialMemoryMaxMTs": 3200
+      "officialMemoryMaxMTs": 3200,
+      "cacheMB": 32,
+      "maxRam": 128
     },
     {
       "id": "r5-7600",
@@ -51,7 +53,10 @@ export const catalog = {
       "baseGHz": 3.8,
       "boostGHz": 5.1,
       "integratedGraphics": true,
-      "officialMemoryMaxMTs": 5200
+      "officialMemoryMaxMTs": 5200,
+      "cacheMB": 32,
+      "maxRam": 128,
+      "powerAssumed": true
     },
     {
       "id": "r9-7900x",
@@ -223,7 +228,9 @@ export const catalog = {
         "Встроенная AMD Radeon Graphics: 2 графических ядра, 2200 МГц.",
         "boostGHz — заявленная максимальная частота Boost, а не гарантированная частота всех ядер.",
         "Совместимость зависит также от списка поддерживаемых CPU и версии BIOS конкретной материнской платы."
-      ]
+      ],
+      "officialMemoryMaxMTs": 5200,
+      "maxRam": 128
     },
     {
       "id": "r7-7800x3d",
@@ -253,7 +260,9 @@ export const catalog = {
         "Встроенная AMD Radeon Graphics: 2 графических ядра, 2200 МГц.",
         "boostGHz — заявленная максимальная частота Boost, а не гарантированная частота всех ядер.",
         "Совместимость зависит также от списка поддерживаемых CPU и версии BIOS конкретной материнской платы."
-      ]
+      ],
+      "officialMemoryMaxMTs": 5200,
+      "maxRam": 128
     },
     {
       "id": "i3-12100f",
@@ -277,7 +286,8 @@ export const catalog = {
       "integratedGraphics": false,
       "detail": "4 ядер / 8 потоков · LGA1700 · DDR4 или DDR5",
       "sources": [
-        "https://www.intel.com/content/www/us/en/products/sku/132223/intel-core-i312100f-processor-12m-cache-up-to-4-30-ghz/specifications.html"
+        "https://www.intel.com/content/www/us/en/products/sku/132223/intel-core-i312100f-processor-12m-cache-up-to-4-30-ghz/specifications.html",
+        "https://www.intel.com/content/www/us/en/support/articles/000058487/processors.html"
       ],
       "notes": [
         "tdp — Processor Base Power (PBP), не классический TDP; peakPower — Maximum Turbo Power (MTP) из Intel ARK. Фактическая мощность зависит от нагрузки и настроек питания платы.",
@@ -287,7 +297,8 @@ export const catalog = {
         "Модель с суффиксом F: встроенная графика отсутствует, требуется дискретная видеокарта.",
         "Сокет в Intel ARK называется FCLGA1700; в каталоге нормализован до LGA1700.",
         "Максимальная Turbo-частота не означает постоянную частоту всех ядер. Перед подбором платы проверить её список CPU и требуемую версию BIOS."
-      ]
+      ],
+      "maxRam": 128
     },
     {
       "id": "i5-12400f",
@@ -311,7 +322,8 @@ export const catalog = {
       "integratedGraphics": false,
       "detail": "6 ядер / 12 потоков · LGA1700 · DDR4 или DDR5",
       "sources": [
-        "https://www.intel.com/content/www/us/en/products/sku/134587/intel-core-i512400f-processor-18m-cache-up-to-4-40-ghz/specifications.html"
+        "https://www.intel.com/content/www/us/en/products/sku/134587/intel-core-i512400f-processor-18m-cache-up-to-4-40-ghz/specifications.html",
+        "https://www.intel.com/content/www/us/en/support/articles/000058487/processors.html"
       ],
       "notes": [
         "tdp — Processor Base Power (PBP), не классический TDP; peakPower — Maximum Turbo Power (MTP) из Intel ARK. Фактическая мощность зависит от нагрузки и настроек питания платы.",
@@ -321,7 +333,8 @@ export const catalog = {
         "Модель с суффиксом F: встроенная графика отсутствует, требуется дискретная видеокарта.",
         "Сокет в Intel ARK называется FCLGA1700; в каталоге нормализован до LGA1700.",
         "Максимальная Turbo-частота не означает постоянную частоту всех ядер. Перед подбором платы проверить её список CPU и требуемую версию BIOS."
-      ]
+      ],
+      "maxRam": 128
     },
     {
       "id": "i5-12600k",
@@ -959,7 +972,12 @@ export const catalog = {
       "m2Slots": 2,
       "epsConnectors": 1,
       "brand": "MSI",
-      "usbCHeader": true
+      "usbCHeader": true,
+      "cpuPowerPinCounts": [
+        8
+      ],
+      "sataPorts": 6,
+      "chipset": "AMD B550"
     },
     {
       "id": "b650",
@@ -985,7 +1003,9 @@ export const catalog = {
       "m2Slots": 2,
       "epsConnectors": 2,
       "brand": "MSI",
-      "usbCHeader": true
+      "usbCHeader": true,
+      "sataPorts": 4,
+      "chipset": "AMD B650"
     },
     {
       "id": "b760m-p-ddr4",
@@ -1065,6 +1085,10 @@ export const catalog = {
       "notes": "Порт USB-C сзади есть, внутреннего разъёма USB-C для передней панели нет. Видеовыходы платы работают только с процессором со встроенной графикой.",
       "sources": [
         "https://www.msi.com/Motherboard/PRO-B760M-P-DDR4/Specification"
+      ],
+      "dimensions": [
+        243.84,
+        243.84
       ]
     },
     {
@@ -1151,6 +1175,10 @@ export const catalog = {
       "notes": "Видеовыходы платы работают только с процессором со встроенной графикой. Указано число физических разъёмов CPU_PWR; необходимость второго зависит от руководства и нагрузки.",
       "sources": [
         "https://www.msi.com/Motherboard/PRO-B760-P-WIFI/Specification"
+      ],
+      "dimensions": [
+        304.8,
+        243.84
       ]
     },
     {
@@ -2410,7 +2438,15 @@ export const catalog = {
       "vramType": "GDDR6",
       "manufacturer": "MSI",
       "connectorType": "8pin",
-      "tmaxAssumed": true
+      "tmaxAssumed": true,
+      "width": 124,
+      "thickness": 42,
+      "boostMHz": 1807,
+      "busBits": 192,
+      "ports": [
+        "3 × DisplayPort 1.4",
+        "1 × HDMI 2.1"
+      ]
     },
     {
       "id": "rtx4060",
@@ -2568,7 +2604,16 @@ export const catalog = {
         "Указан штатный Boost 2565 МГц; режим Extreme Performance 2580 МГц требует MSI Center.",
         "Размеры производителя: 199 × 120 × 42 мм.",
         "Для учебной модели tmax взят из официального максимума NVIDIA для референсного RTX 4060 Ti (90 °C); MSI не публикует отдельный предел этой платы. Это не гарантированный порог её BIOS."
-      ]
+      ],
+      "width": 120,
+      "thickness": 42,
+      "dimensions": [
+        199,
+        120,
+        42
+      ],
+      "pcieGeneration": 4,
+      "pcieLanes": 8
     },
     {
       "id": "rtx4070",
@@ -2674,7 +2719,16 @@ export const catalog = {
         "Размеры производителя: 193 × 120,05 × 40,05 мм; 2 слота.",
         "power=140 Вт — Board Power именно SAPPHIRE PULSE.",
         "90 °C — условный порог только учебной модели температуры GPU: максимальная температура этой платы на странице SAPPHIRE не указана. Не трактовать как официальный предел или температуру hotspot."
-      ]
+      ],
+      "width": 120.05,
+      "thickness": 40.05,
+      "dimensions": [
+        193,
+        120.05,
+        40.05
+      ],
+      "pcieGeneration": 4,
+      "pcieLanes": 8
     },
     {
       "id": "rx6650xt",
@@ -2742,7 +2796,16 @@ export const catalog = {
         "Размеры производителя: 240 × 107,1 × 44,07 мм; 2 слота.",
         "power=185 Вт — Total Board Power именно SAPPHIRE PULSE.",
         "90 °C — условный порог только учебной модели температуры GPU: максимальная температура этой платы на странице SAPPHIRE не указана. Не трактовать как официальный предел или температуру hotspot."
-      ]
+      ],
+      "width": 107.1,
+      "thickness": 44.07,
+      "dimensions": [
+        240,
+        107.1,
+        44.07
+      ],
+      "pcieGeneration": 4,
+      "pcieLanes": 8
     },
     {
       "id": "rx7700xt",
@@ -2808,7 +2871,16 @@ export const catalog = {
         "Размеры производителя: 280 × 128,75 × 52,57 мм; 2,5 слота.",
         "power=266 Вт — Total Board Power именно SAPPHIRE PULSE.",
         "90 °C — условный порог только учебной модели температуры GPU: максимальная температура этой платы на странице SAPPHIRE не указана. Не трактовать как официальный предел или температуру hotspot."
-      ]
+      ],
+      "width": 128.75,
+      "thickness": 52.57,
+      "dimensions": [
+        280,
+        128.75,
+        52.57
+      ],
+      "pcieGeneration": 4,
+      "pcieLanes": 16
     },
     {
       "id": "rtx3050-6-ventus2x-e-oc",
@@ -3790,7 +3862,7 @@ export const catalog = {
       "height": 34.9,
       "latency": 36,
       "voltage": 1.35,
-      "profile": "AMD EXPO / XMP 3.0",
+      "profile": "AMD EXPO 1.0 / Intel XMP 3.0",
       "detail": "2 × 32 ГБ · DDR5-6000 · CL36",
       "notes": "6000 МТ/с — профиль EXPO/XMP; штатный JEDEC — 4800 МТ/с. Заявленная скорость не гарантирована для любой платы и процессора.",
       "sources": [
@@ -4040,7 +4112,10 @@ export const catalog = {
       "readMBs": 3500,
       "writeMBs": 2100,
       "operatingMaxC": 70,
-      "tbw": 320
+      "tbw": 320,
+      "sku": "SNV2S/1000G",
+      "form": "M.2 2280",
+      "powerAssumed": true
     },
     {
       "id": "980",
@@ -4051,12 +4126,23 @@ export const catalog = {
       "power": 6,
       "detail": "1 ТБ · M.2 2280 · PCIe 3.0",
       "sources": [
+        "https://download.semiconductor.samsung.com/resources/data-sheet/Samsung_NVMe_SSD_980_Data_Sheet_Rev.1.1.pdf",
         "https://semiconductor.samsung.com/emea/consumer-storage/internal-ssd/980/"
       ],
       "pcieGeneration": 3,
       "pcieLanes": 4,
       "operatingMaxC": 70,
-      "tbw": 600
+      "tbw": 600,
+      "sku": "MZ-V8V1T0BW",
+      "form": "M.2 2280",
+      "dimensions": [
+        80.15,
+        22.15,
+        2.38
+      ],
+      "readMBs": 3500,
+      "writeMBs": 3000,
+      "powerAssumed": true
     },
     {
       "id": "990-pro-1tb",
@@ -4099,9 +4185,16 @@ export const catalog = {
       "detail": "1024 ГБ · M.2 2280 · PCIe 4.0 · TLC",
       "notes": "6,3 Вт — максимальная мощность при записи из даташита; среднее потребление там указано 0,33 Вт. Скорости — до 7000/6000 МБ/с.",
       "sources": [
+        "https://www.kingston.com/datasheets/KC3000_us.pdf",
         "https://www.kingston.com/unitedkingdom/en/ssd/kc3000-nvme-m2-solid-state-drive?capacity=1024gb",
         "https://www.kingston.com/datasheets/KC3000_us.pdf?_=v1"
-      ]
+      ],
+      "dimensions": [
+        80,
+        22,
+        2.21
+      ],
+      "operatingMaxC": 70
     },
     {
       "id": "p3-plus-1tb",
@@ -4485,7 +4578,9 @@ export const catalog = {
       "fanSizeMm": 120,
       "minRpm": 500,
       "fanAirflowCFM": 66.47,
-      "brand": "DeepCool"
+      "brand": "DeepCool",
+      "sku": "R-AK400-BKNNMN-G-1",
+      "thermalAssumed": true
     },
     {
       "id": "ak620",
@@ -4501,7 +4596,8 @@ export const catalog = {
         "LGA1150",
         "LGA1155",
         "LGA2066",
-        "LGA2011"
+        "LGA2011",
+        "LGA2011-v3"
       ],
       "height": 160,
       "ramClearance": 43,
@@ -4510,6 +4606,7 @@ export const catalog = {
       "towers": 2,
       "detail": "Две башни · 160 мм · до 1850 об/мин",
       "sources": [
+        "https://www.deepcool.com/products/Cooling/cpuaircoolers/AK620-High-Performance-CPU-Cooler-1851-1700-AM5/2024/13067.shtml",
         "https://global.deepcool.com/products/Cooling/cpuaircoolers/AK620-High-Performance-CPU-Cooler-1851-1700-AM5/2024/13067.shtml"
       ],
       "dimensions": [
@@ -4522,7 +4619,9 @@ export const catalog = {
       "fanSizeMm": 120,
       "minRpm": 500,
       "fanAirflowCFM": 68.99,
-      "brand": "DeepCool"
+      "brand": "DeepCool",
+      "sku": "R-AK620-BKNNMT-G",
+      "thermalAssumed": true
     },
     {
       "id": "ag400",
@@ -4533,7 +4632,11 @@ export const catalog = {
       "sockets": [
         "AM4",
         "AM5",
-        "LGA1700"
+        "LGA1700",
+        "LGA1200",
+        "LGA1151",
+        "LGA1150",
+        "LGA1155"
       ],
       "height": 150,
       "ramClearance": 99,
@@ -4548,7 +4651,16 @@ export const catalog = {
       "notes": "Коэффициент efficiency 0,95 — допущение учебной тепловой модели, не измерение. Производитель заявляет полную совместимость с RAM; число 99 в ramClearance — технический маркер отсутствия перекрытия, не измеренный зазор.",
       "sources": [
         "https://uk.deepcool.com/products/Cooling/cpuaircoolers/GAMMAXX-AG400-Single-Tower-CPU-Cooler/2022/15908.shtml"
-      ]
+      ],
+      "sku": "R-AG400-BKNNMN-G-1",
+      "dimensions": [
+        125,
+        92,
+        150
+      ],
+      "fanSizeMm": 120,
+      "minRpm": 500,
+      "fanAirflowCFM": 75.89
     },
     {
       "id": "nh-u12s-redux",
@@ -4958,6 +5070,7 @@ export const catalog = {
       "detail": "550 Вт · 80 PLUS Bronze · ATX",
       "sources": [
         "https://www.deepcool.com/products/PowerSupplyUnits/powersupplyunits/PK550D-80-PLUS-Bronze-Power-Supply/2022/15621.shtml",
+        "https://www.deepcool.com/download/pdf/PK_D.pdf",
         "https://www.dns-shop.ru/product/characteristics/7cbe7b3e83c12334/blok-pitania-deepcool-pk550d-r-pk550d-fa0b-eu-cernyj/"
       ],
       "dimensions": [
@@ -4968,7 +5081,8 @@ export const catalog = {
       "epsConnectors": 2,
       "modular": false,
       "certification": "80 PLUS Bronze",
-      "connector16pin": false
+      "connector16pin": false,
+      "sku": "R-PK550D-FA0B-EU"
     },
     {
       "id": "a850",
@@ -5011,6 +5125,11 @@ export const catalog = {
       "notes": "connectors — количество разъёмов PCIe 6+2-pin, не число отдельных кабелей. EPS 4+4-pin предназначен для процессора.",
       "sources": [
         "https://www.msi.com/Power-Supply/MAG-A650BN/Specification"
+      ],
+      "dimensions": [
+        140,
+        150,
+        86
       ]
     },
     {
@@ -5033,6 +5152,11 @@ export const catalog = {
       "notes": "3 разъёма PCIe 6+2-pin и один штатный 16-pin с паспортной мощностью 450 Вт. Число разъёмов не равно числу отдельных кабелей.",
       "sources": [
         "https://www.msi.com/Power-Supply/MAG-A750GL-PCIE5/Specification"
+      ],
+      "dimensions": [
+        140,
+        150,
+        86
       ]
     },
     {
@@ -5363,13 +5487,13 @@ export const catalog = {
         "Micro-ATX",
         "Mini-ITX"
       ],
-      "gpuLimit": 320,
+      "gpuLimit": 370,
       "coolerLimit": 165,
       "psuLimit": 170,
       "detail": "Mid-Tower · ATX · 3 вентилятора на вдув + 1 на выдув",
       "sources": [
-        "https://www.deepcool.com/products/Cases/fulltowercases/CC560-V2-Mid-Tower-Airflow-Case/2023/17782.shtml",
-        "https://de.deepcool.com/products/Cases/CC560-V2-Mid-Tower-Airflow-Case/2023/17809.shtml"
+        "https://de.deepcool.com/products/Cases/CC560-V2-Mid-Tower-Airflow-Case/2023/17809.shtml",
+        "https://www.deepcool.com/products/Cases/fulltowercases/CC560-V2-Mid-Tower-Airflow-Case/2023/17782.shtml"
       ],
       "dimensions": [
         432,
@@ -5382,7 +5506,8 @@ export const catalog = {
       "usbA": 1,
       "usb2": 1,
       "usbC": 0,
-      "audio": "1 × комбинированный 3,5 мм"
+      "audio": "1 × комбинированный 3,5 мм",
+      "sku": "R-CC560-BKGAA4-G-2"
     },
     {
       "id": "4000d-airflow",
@@ -5413,6 +5538,7 @@ export const catalog = {
       "detail": "Mid-Tower · ATX · 1 вентилятор спереди + 1 сзади · USB-C",
       "notes": "Указана обычная 4000D AIRFLOW, не RGB и не FRAME 4000D. Штатно два вентилятора 120 мм: один спереди, один сзади. E-ATX ограничен 305×277 мм. Предел 360 мм для GPU приведён без переднего радиатора; кабелям БП нужно дополнительное место.",
       "sources": [
+        "https://www.corsair.com/ww/en/p/pc-cases/cc-9011200-ww/4000d-airflow-tempered-glass-mid-tower-atx-case-black-cc-9011200-ww",
         "https://www.corsair.com/ww/en/p/pc-cases/cc-9011200-ww/40",
         "https://assets.corsair.com/image/upload/v1684779868/corsairmedia/sys_master/productcontent/WW_4000D_4000D_Airflow_QSG_AB.pdf"
       ],

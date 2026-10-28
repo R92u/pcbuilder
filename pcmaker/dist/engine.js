@@ -1,6 +1,7 @@
 import {aioMount} from './aio.js';
 import {coolingAnalysis} from './cooling.js';
 import {categories,resolve} from './catalog.js';
+import {priceQuality} from './price-quality.js';
 export function compatibility(build) {
  const p=resolve(build), errors=[],warnings=[];
  const add=(code,text,parts)=>errors.push({code,text,parts});
@@ -68,7 +69,8 @@ export function thermalTargets(build,settings) {
 export function advanceThermals(current,target,dt) {
  const out={...current}; for(const [key,tau] of [['cpu',8],['gpu',12],['case',20],['ram',24],['storage',22],['motherboard',28],['cooler',14],['psu',25]])if(current[key]!==undefined)out[key]=current[key]+(target[key]-current[key])*(1-Math.exp(-clamp(dt,0,1)/tau));return out;
 }
-export function summarizePrices(build,prices) {
+export function summarizePrices(build,prices,now=Date.now()) {
  const all=Object.values(resolve(build)).filter(Boolean),chosen=all.filter(p=>!p.concept),known=chosen.filter(p=>Number.isFinite(prices[p.id]?.price)&&prices[p.id].price>0);
- return {total:known.reduce((s,p)=>s+prices[p.id].price,0),known:known.length,count:chosen.length,complete:known.length===chosen.length,concepts:all.length-chosen.length};
+ const statuses=known.map(p=>priceQuality(prices[p.id],now).status),count=status=>statuses.filter(s=>s===status).length;
+ return {total:known.reduce((s,p)=>s+prices[p.id].price,0),known:known.length,count:chosen.length,complete:known.length===chosen.length,concepts:all.length-chosen.length,stale:count('stale'),unavailable:count('unavailable'),invalid:count('invalid'),fresh:count('fresh')};
 }

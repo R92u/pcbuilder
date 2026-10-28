@@ -2,6 +2,7 @@ import test from 'node:test';
 import assert from 'node:assert/strict';
 import {demoBuild} from '../dist/catalog.js';
 import {filterProducts,shopProducts} from '../dist/shop.js';
+import {isVerified} from '../dist/verification.js';
 const defaults={category:'all',query:'',brand:'',memory:'',socket:'',min:'',max:'',compatible:false,priced:false,sort:'default'};
 const offers={rtx4060:{price:35000},rtx3090:{price:89000}};
 const filtered=(filters,prices=offers)=>filterProducts(shopProducts,{...defaults,...filters},demoBuild,prices);
@@ -29,4 +30,15 @@ test('DDR memory filter includes Intel CPUs supporting both generations',()=>{
  const base={category:'cpu',query:'12400F',brand:'',memory:'DDR4',socket:'',min:'',max:'',compatible:false,priced:false,sort:'default'};
  const found=filterProducts(shopProducts,base,demoBuild,{});assert.ok(found.some(p=>p.id==='i5-12400f'));
  assert.ok(filterProducts(shopProducts,{...base,memory:'DDR5'},demoBuild,{}).some(p=>p.id==='i5-12400f'));
+});
+
+test('Verification filter is opt-in and pending models remain available for manual selection',()=>{
+ assert.ok(filtered({category:'gpu'}).some(p=>p.id==='rtx4060'));
+ const checked=filtered({category:'gpu',verified:true});assert.ok(checked.length>0);assert.ok(checked.every(isVerified));assert.ok(!checked.some(p=>p.id==='rtx4060'));
+});
+
+test('Fresh-price filter excludes stale, future, unavailable and undated snapshots',t=>{
+ t.mock.method(Date,'now',()=>Date.UTC(2026,9,28,12));
+ const prices={rtx4060:{price:100,date:'2026-10-21'},rtx3090:{price:100,date:'2026-10-20'},rx7600:{price:100,date:'2026-10-29'},rx6600:{price:100,date:'2026-10-28',availability:'out-of-stock'},rtx3060:{price:100}};
+ assert.deepEqual(filtered({category:'gpu',priced:true},prices).map(p=>p.id),['rtx4060']);
 });

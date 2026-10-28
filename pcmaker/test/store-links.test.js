@@ -2,7 +2,7 @@ import test from 'node:test';
 import assert from 'node:assert/strict';
 import fs from 'node:fs';
 import {byId} from '../dist/catalog.js';
-import {priceSnapshot,storeLink} from '../dist/regions.js';
+import {priceSnapshot,storeLink,byStoreProduct,belarusStores} from '../dist/regions.js';
 import {productLinksBy} from '../dist/store-links-by.js';
 
 test('verified BY product pages open directly even without a price',()=>{
@@ -30,13 +30,23 @@ test('missing BY product opens an explicitly labelled exact-model search, never 
  }
 });
 
-test('BY labels never call category, search, or other-store URLs product pages',()=>{
+test('BY labels never call category, search, or unsupported-store URLs product pages',()=>{
  const part={id:'unknown',name:'Example'};
  for(const url of ['https://5element.by/','https://5element.by/catalog/1675-videokarty','https://5element.by/products/','https://5element.by/products/test?digiSearch=true&term=Example','https://5element.by.evil.test/products/test','https://dns-shop.ru/product/test','http://5element.by/products/test']){
   assert.equal(storeLink(part,'gpu',{currency:'BYN',items:{unknown:{url}}}).label,'Найти в 5 элементе ↗',url);
  }
  const url='https://5element.by/products/exact-model';
  assert.deepEqual(storeLink(part,'gpu',{currency:'BYN'},{storeUrl:url}),{url,label:'Товар в 5 элементе ↗'});
+});
+
+test('Supported alternative BY stores retain direct product links and explicit store names',()=>{
+ const part={id:'not-in-five-element',name:'Exact model'};
+ for(const [host,store] of Object.entries(belarusStores).filter(([host])=>host!=='5element.by')){
+  const url='https://'+host+'/catalog/exact-model.html';
+  assert.deepEqual(byStoreProduct(url),{url,store});
+  assert.deepEqual(storeLink(part,'gpu',{currency:'BYN',items:{[part.id]:{url}}}),{url,label:'Товар в '+store+' ↗'});
+  for(const invalid of ['http://'+host+'/product/test','https://'+host+'.evil.test/product/test','https://user:password@'+host+'/product/test','https://'+host+':8080/product/test','https://'+host+'/','https://'+host+'/search/model','https://'+host+'/product/test?q=model'])assert.equal(byStoreProduct(invalid),null,invalid);
+ }
 });
 
 test('RU links stay on DNS, including models with a BY match',()=>{

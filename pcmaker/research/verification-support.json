@@ -1,0 +1,716 @@
+{
+  "items": {
+    "980": {
+      "checkedAt": "2026-10-28",
+      "sources": [
+        "https://download.semiconductor.samsung.com/resources/data-sheet/Samsung_NVMe_SSD_980_Data_Sheet_Rev.1.1.pdf"
+      ],
+      "values": {
+        "sku": "MZ-V8V1T0BW",
+        "interface": "M.2 NVMe",
+        "form": "M.2 2280",
+        "capacity": 1000,
+        "dimensions": [
+          80.15,
+          22.15,
+          2.38
+        ],
+        "pcieGeneration": 3,
+        "pcieLanes": 4,
+        "readMBs": 3500,
+        "writeMBs": 3000,
+        "operatingMaxC": 70,
+        "tbw": 600
+      },
+      "assumptions": [
+        "power=6 Вт в симуляции не подтверждено даташитом: для 1 ТБ средняя активная мощность до 4.5 Вт при чтении и 4.6 Вт при записи. Не смешивать это с максимальной мощностью и учебным коэффициентом."
+      ],
+      "limitations": [
+        "Скорости — паспортные максимумы, не гарантия скорости конкретной сборки. Рабочий температурный диапазон не является прогнозом нагрева.",
+        "BW — вариант модельного кода из официального перечня. Даташит также перечисляет региональный MZ-V8V1T0B/AM; предложение магазина должно совпадать с артикулом."
+      ],
+      "corrections": {
+        "sku": "MZ-V8V1T0BW",
+        "form": "M.2 2280",
+        "dimensions": [
+          80.15,
+          22.15,
+          2.38
+        ],
+        "readMBs": 3500,
+        "writeMBs": 3000,
+        "powerAssumed": true
+      }
+    },
+    "ddr4-16-3200": {
+      "checkedAt": "2026-10-28",
+      "sources": [
+        "https://www.kingston.com/dataSheets/KF432C16BBK2_16.pdf"
+      ],
+      "values": {
+        "sku": "KF432C16BBK2/16",
+        "memory": "DDR4",
+        "capacity": 16,
+        "modules": 2,
+        "speed": 3200,
+        "height": 34,
+        "latency": 16,
+        "voltage": 1.35,
+        "profile": "XMP 2.0"
+      },
+      "assumptions": [],
+      "limitations": [
+        "Скорость относится к профилю разгона; достижимость зависит от CPU, платы и BIOS. QVL конкретной платы в этой проверке не проверялся.",
+        "JEDEC: 2400 МТ/с, CL17, 1.2 В; XMP 3200 CL16-18-18."
+      ],
+      "corrections": {}
+    },
+    "ddr4-32": {
+      "checkedAt": "2026-10-28",
+      "sources": [
+        "https://www.kingston.com/dataSheets/KF432C16BBK2_32.pdf"
+      ],
+      "values": {
+        "sku": "KF432C16BBK2/32",
+        "memory": "DDR4",
+        "capacity": 32,
+        "modules": 2,
+        "speed": 3200,
+        "cl": 16,
+        "voltage": 1.35,
+        "profile": "XMP 2.0"
+      },
+      "assumptions": [],
+      "limitations": [
+        "Скорость относится к профилю разгона; достижимость зависит от CPU, платы и BIOS. QVL конкретной платы в этой проверке не проверялся.",
+        "JEDEC: 2400 МТ/с, CL17, 1.2 В; XMP 3200 CL16-20-20.",
+        "Описание даташита округляет высоту до 34 мм. Поле каталога 34.1 мм не исправляется без чтения размерного чертежа."
+      ],
+      "corrections": {}
+    },
+    "ddr5-32": {
+      "checkedAt": "2026-10-28",
+      "sources": [
+        "https://www.kingston.com/datasheets/KF560C36BBEK2-32.pdf"
+      ],
+      "values": {
+        "sku": "KF560C36BBEK2-32",
+        "memory": "DDR5",
+        "capacity": 32,
+        "modules": 2,
+        "speed": 6000,
+        "height": 34.9,
+        "cl": 36,
+        "voltage": 1.35,
+        "profile": "AMD EXPO 1.0 / Intel XMP 3.0"
+      },
+      "assumptions": [],
+      "limitations": [
+        "Скорость относится к профилю разгона; достижимость зависит от CPU, платы и BIOS. QVL конкретной платы в этой проверке не проверялся.",
+        "JEDEC: 4800 МТ/с, CL40, 1.1 В; EXPO/XMP 6000 CL36-38-38."
+      ],
+      "corrections": {}
+    },
+    "ddr5-64-6000": {
+      "checkedAt": "2026-10-28",
+      "sources": [
+        "https://www.kingston.com/datasheets/KF560C36BBEK2-64.pdf"
+      ],
+      "values": {
+        "sku": "KF560C36BBEK2-64",
+        "memory": "DDR5",
+        "capacity": 64,
+        "modules": 2,
+        "speed": 6000,
+        "height": 34.9,
+        "latency": 36,
+        "voltage": 1.35,
+        "profile": "AMD EXPO 1.0 / Intel XMP 3.0"
+      },
+      "assumptions": [],
+      "limitations": [
+        "Скорость относится к профилю разгона; достижимость зависит от CPU, платы и BIOS. QVL конкретной платы в этой проверке не проверялся.",
+        "Два двухранговых модуля по 32 ГБ. JEDEC 4800 МТ/с; EXPO/XMP 6000 CL36-38-38."
+      ],
+      "corrections": {
+        "profile": "AMD EXPO 1.0 / Intel XMP 3.0"
+      }
+    },
+    "nv2": {
+      "checkedAt": "2026-10-28",
+      "sources": [
+        "https://www.kingston.com/datasheets/snv2s_en.pdf"
+      ],
+      "values": {
+        "sku": "SNV2S/1000G",
+        "interface": "M.2 NVMe",
+        "form": "M.2 2280",
+        "capacity": 1000,
+        "dimensions": [
+          80,
+          22,
+          2.2
+        ],
+        "pcieGeneration": 4,
+        "pcieLanes": 4,
+        "readMBs": 3500,
+        "writeMBs": 2100,
+        "operatingMaxC": 70,
+        "tbw": 320
+      },
+      "assumptions": [
+        "power=5 Вт в текущей симуляции — допущение; в прочитанном даташите такая мощность не заявлена."
+      ],
+      "limitations": [
+        "Скорости — паспортные максимумы, не гарантия скорости конкретной сборки. Рабочий температурный диапазон не является прогнозом нагрева."
+      ],
+      "corrections": {
+        "sku": "SNV2S/1000G",
+        "form": "M.2 2280",
+        "powerAssumed": true
+      }
+    },
+    "kc3000-1tb": {
+      "checkedAt": "2026-10-28",
+      "sources": [
+        "https://www.kingston.com/datasheets/KC3000_us.pdf"
+      ],
+      "values": {
+        "sku": "SKC3000S/1024G",
+        "interface": "M.2 NVMe",
+        "form": "M.2 2280",
+        "pcie": "4.0 x4",
+        "capacity": 1024,
+        "readSpeed": 7000,
+        "writeSpeed": 6000,
+        "tbw": 800,
+        "dimensions": [
+          80,
+          22,
+          2.21
+        ],
+        "operatingMaxC": 70,
+        "power": 6.3,
+        "powerAssumed": false
+      },
+      "assumptions": [
+        "Использование паспортного максимума записи 6.3 Вт как коэффициента нагрева остаётся допущением симуляции."
+      ],
+      "limitations": [
+        "Скорости — паспортные максимумы, не гарантия скорости конкретной сборки. Рабочий температурный диапазон не является прогнозом нагрева.",
+        "Для 1024 ГБ: 0.33 Вт среднее, 2.8 Вт MAX Read, 6.3 Вт MAX Write. Не обозначать 6.3 Вт как обычное постоянное потребление."
+      ],
+      "corrections": {
+        "dimensions": [
+          80,
+          22,
+          2.21
+        ],
+        "operatingMaxC": 70
+      }
+    },
+    "ssd-sfyr2s-1t0": {
+      "checkedAt": "2026-10-28",
+      "sources": [
+        "https://www.kingston.com/datasheets/SFYR2S_en.pdf",
+        "https://www.kingston.com/en/ssd/gaming/kingston-fury-renegade-g5-nvme-m2-ssd",
+        "https://www.kingston.com/en/memory/search?partid=SFYR2S%2F1T0"
+      ],
+      "values": {
+        "sku": "SFYR2S/1T0",
+        "interface": "M.2 NVMe",
+        "form": "M.2 2280",
+        "capacity": 1024,
+        "pcie": "5.0 x4",
+        "readSpeed": 14200,
+        "writeSpeed": 11000,
+        "tbw": 1000,
+        "dimensions": [
+          80,
+          22,
+          2.3
+        ],
+        "operatingMaxC": 70
+      },
+      "assumptions": [
+        "Текущие power=5 Вт — допущение. Производитель указывает 0.27 Вт среднее и 6.6 Вт MAX; в values не подтверждается текущее поле power."
+      ],
+      "limitations": [
+        "Скорости — паспортные максимумы, не гарантия скорости конкретной сборки. Рабочий температурный диапазон не является прогнозом нагрева.",
+        "Паспортная ёмкость именно 1024 ГБ. Данные Gen4 Renegade (7300/6000) к G5 SFYR2S/1T0 не относятся."
+      ],
+      "corrections": {
+        "capacity": 1024,
+        "readSpeed": 14200,
+        "writeSpeed": 11000,
+        "pcie": "5.0 x4",
+        "dimensions": [
+          80,
+          22,
+          2.3
+        ],
+        "operatingMaxC": 70,
+        "short": "FURY Renegade G5 1024 ГБ",
+        "detail": "1024 ГБ · M.2 2280 · PCIe 5.0 x4"
+      }
+    },
+    "ssd-sfyr2s-2t0": {
+      "checkedAt": "2026-10-28",
+      "sources": [
+        "https://www.kingston.com/datasheets/SFYR2S_en.pdf",
+        "https://www.kingston.com/en/ssd/gaming/kingston-fury-renegade-g5-nvme-m2-ssd"
+      ],
+      "values": {
+        "sku": "SFYR2S/2T0",
+        "interface": "M.2 NVMe",
+        "form": "M.2 2280",
+        "capacity": 2048,
+        "pcie": "5.0 x4",
+        "readSpeed": 14700,
+        "writeSpeed": 14000,
+        "tbw": 2000,
+        "dimensions": [
+          80,
+          22,
+          2.3
+        ],
+        "operatingMaxC": 70
+      },
+      "assumptions": [
+        "Текущие power=5 Вт — допущение. Производитель указывает 0.27 Вт среднее и 7.0 Вт MAX; в values не подтверждается текущее поле power."
+      ],
+      "limitations": [
+        "Скорости — паспортные максимумы, не гарантия скорости конкретной сборки. Рабочий температурный диапазон не является прогнозом нагрева.",
+        "Паспортная ёмкость именно 2048 ГБ. Назначать этому G5 интерфейс PCIe 4.0 ошибочно; Gen4 может быть режимом работы совместимого слота, а не интерфейсом SSD."
+      ],
+      "corrections": {
+        "capacity": 2048,
+        "pcie": "5.0 x4",
+        "dimensions": [
+          80,
+          22,
+          2.3
+        ],
+        "operatingMaxC": 70,
+        "short": "FURY Renegade G5 2048 ГБ",
+        "detail": "2048 ГБ · M.2 2280 · PCIe 5.0 x4"
+      }
+    },
+    "ak400": {
+      "checkedAt": "2026-10-28",
+      "sources": [
+        "https://jp.deepcool.com/products/Cooling/cpuaircoolers/AK400-Performance-CPU-Cooler-1851-1700-AM5/2024/15349.shtml"
+      ],
+      "values": {
+        "sku": "R-AK400-BKNNMN-G-1",
+        "sockets": [
+          "AM4",
+          "AM5",
+          "LGA1851",
+          "LGA1700",
+          "LGA1200",
+          "LGA1151",
+          "LGA1150",
+          "LGA1155"
+        ],
+        "height": 155,
+        "dimensions": [
+          127,
+          97,
+          155
+        ],
+        "heatpipes": 4,
+        "fans": 1,
+        "fanSizeMm": 120,
+        "minRpm": 500,
+        "maxRpm": 1850,
+        "fanAirflowCFM": 66.47
+      },
+      "assumptions": [
+        "efficiency=1 — допущение тепловой модели.",
+        "ramClearance=99 не подтверждается как измеренный зазор; это нельзя показывать как паспортные 99 мм."
+      ],
+      "limitations": [
+        "Совместимость сокета предполагает наличие правильного монтажного комплекта; старую комплектацию перед покупкой нужно сверить.",
+        "CFM и RPM — паспортные характеристики вентилятора, не результаты температурных испытаний сборки."
+      ],
+      "corrections": {
+        "sku": "R-AK400-BKNNMN-G-1",
+        "thermalAssumed": true
+      }
+    },
+    "ak620": {
+      "checkedAt": "2026-10-28",
+      "sources": [
+        "https://www.deepcool.com/products/Cooling/cpuaircoolers/AK620-High-Performance-CPU-Cooler-1851-1700-AM5/2024/13067.shtml"
+      ],
+      "values": {
+        "sku": "R-AK620-BKNNMT-G",
+        "sockets": [
+          "AM4",
+          "AM5",
+          "LGA1851",
+          "LGA1700",
+          "LGA1200",
+          "LGA1151",
+          "LGA1150",
+          "LGA1155",
+          "LGA2066",
+          "LGA2011",
+          "LGA2011-v3"
+        ],
+        "height": 160,
+        "ramClearance": 43,
+        "dimensions": [
+          129,
+          138,
+          160
+        ],
+        "heatpipes": 6,
+        "fans": 2,
+        "fanSizeMm": 120,
+        "minRpm": 500,
+        "maxRpm": 1850,
+        "fanAirflowCFM": 68.99
+      },
+      "assumptions": [
+        "efficiency=1.45 — допущение тепловой модели."
+      ],
+      "limitations": [
+        "Совместимость сокета предполагает наличие правильного монтажного комплекта; старую комплектацию перед покупкой нужно сверить.",
+        "CFM и RPM — паспортные характеристики вентилятора, не результаты температурных испытаний сборки.",
+        "RAM clearance 43 мм относится к двум вентиляторам; производитель указывает 59 мм при одном. Удаление вентилятора — отдельная конфигурация, сейчас не моделируется."
+      ],
+      "corrections": {
+        "sku": "R-AK620-BKNNMT-G",
+        "thermalAssumed": true,
+        "sockets": [
+          "AM4",
+          "AM5",
+          "LGA1851",
+          "LGA1700",
+          "LGA1200",
+          "LGA1151",
+          "LGA1150",
+          "LGA1155",
+          "LGA2066",
+          "LGA2011",
+          "LGA2011-v3"
+        ]
+      }
+    },
+    "ag400": {
+      "checkedAt": "2026-10-28",
+      "sources": [
+        "https://uk.deepcool.com/products/Cooling/cpuaircoolers/GAMMAXX-AG400-Single-Tower-CPU-Cooler/2022/15908.shtml"
+      ],
+      "values": {
+        "sku": "R-AG400-BKNNMN-G-1",
+        "sockets": [
+          "AM4",
+          "AM5",
+          "LGA1700",
+          "LGA1200",
+          "LGA1151",
+          "LGA1150",
+          "LGA1155"
+        ],
+        "height": 150,
+        "dimensions": [
+          125,
+          92,
+          150
+        ],
+        "ramUnrestricted": true,
+        "heatpipes": 4,
+        "fans": 1,
+        "fanSizeMm": 120,
+        "minRpm": 500,
+        "maxRpm": 2000,
+        "fanAirflowCFM": 75.89
+      },
+      "assumptions": [
+        "efficiency=0.95 — допущение тепловой модели.",
+        "ramClearance=99 — технический маркер; заявлена свободная посадка RAM, а не зазор 99 мм."
+      ],
+      "limitations": [
+        "Совместимость сокета предполагает наличие правильного монтажного комплекта; старую комплектацию перед покупкой нужно сверить.",
+        "CFM и RPM — паспортные характеристики вентилятора, не результаты температурных испытаний сборки."
+      ],
+      "corrections": {
+        "sku": "R-AG400-BKNNMN-G-1",
+        "sockets": [
+          "AM4",
+          "AM5",
+          "LGA1700",
+          "LGA1200",
+          "LGA1151",
+          "LGA1150",
+          "LGA1155"
+        ],
+        "dimensions": [
+          125,
+          92,
+          150
+        ],
+        "fanSizeMm": 120,
+        "minRpm": 500,
+        "fanAirflowCFM": 75.89
+      }
+    },
+    "aio-le240-v2": {
+      "checkedAt": "2026-10-28",
+      "sources": [
+        "https://www.deepcool.com/products/Cooling/cpuliquidcoolers/LE240-V2-Liquid-CPU-Cooler-1851-1700-AM5/2025/20136.shtml"
+      ],
+      "values": {
+        "sku": "R-LE240-BKAMMC-G-2",
+        "type": "aio",
+        "radiator": 240,
+        "radiatorDimensions": [
+          282,
+          120,
+          27
+        ],
+        "height": 65,
+        "sockets": [
+          "AM4",
+          "AM5",
+          "LGA1851",
+          "LGA1700",
+          "LGA1200",
+          "LGA1151",
+          "LGA1150",
+          "LGA1155"
+        ],
+        "fans": 2,
+        "fanSizeMm": 120,
+        "fanThickness": 25,
+        "minRpm": 500,
+        "maxRpm": 2100,
+        "fanAirflowCFM": 75.89,
+        "pumpRpm": 3400,
+        "pumpRGB": true,
+        "fanRGB": true,
+        "color": "black"
+      },
+      "assumptions": [
+        "efficiency=1.6 — допущение тепловой модели."
+      ],
+      "limitations": [
+        "Совместимость сокета предполагает наличие правильного монтажного комплекта; старую комплектацию перед покупкой нужно сверить.",
+        "CFM и RPM — паспортные характеристики вентилятора, не результаты температурных испытаний сборки.",
+        "Насос: 2500–3400 RPM ±10%, разъём 4-pin PWM. Текущий wiring.js изображает трёхжильное питание помпы; это не совпадает с данной моделью.",
+        "height=65 — высота блока помпы, не толщина радиатора. Нужно учитывать радиатор 27 мм и вентиляторы 25 мм вместе.",
+        "LED-разъём: 3-pin 5V ARGB; его нельзя путать с питанием помпы 4-pin PWM."
+      ],
+      "corrections": {
+        "sockets": [
+          "AM4",
+          "AM5",
+          "LGA1851",
+          "LGA1700",
+          "LGA1200",
+          "LGA1151",
+          "LGA1150",
+          "LGA1155"
+        ]
+      }
+    },
+    "pk550": {
+      "checkedAt": "2026-10-28",
+      "sources": [
+        "https://www.deepcool.com/products/PowerSupplyUnits/powersupplyunits/PK550D-80-PLUS-Bronze-Power-Supply/2022/15621.shtml",
+        "https://www.deepcool.com/download/pdf/PK_D.pdf"
+      ],
+      "values": {
+        "sku": "R-PK550D-FA0B-EU",
+        "watts": 550,
+        "connectors": 2,
+        "epsConnectors": 2,
+        "modular": false,
+        "form": "ATX",
+        "length": 140,
+        "dimensions": [
+          140,
+          150,
+          86
+        ],
+        "certification": "80 PLUS Bronze",
+        "connector16pin": false
+      },
+      "assumptions": [],
+      "limitations": [
+        "Число PCIe-разъёмов не равно числу независимых кабелей. Запас мощности, температура БП и разрешённость переходников требуют отдельных проверок.",
+        "Выбран EU SKU из официальной таблицы региональных артикулов. В руководстве номинал PK550D-F20 — 550 Вт, мощность +12V — 546 Вт."
+      ],
+      "corrections": {
+        "sku": "R-PK550D-FA0B-EU"
+      }
+    },
+    "a650bn": {
+      "checkedAt": "2026-10-28",
+      "sources": [
+        "https://www.msi.com/Power-Supply/MAG-A650BN/Specification"
+      ],
+      "values": {
+        "watts": 650,
+        "connectors": 2,
+        "epsConnectors": 1,
+        "sataConnectors": 5,
+        "connector16pin": false,
+        "form": "ATX",
+        "length": 140,
+        "dimensions": [
+          140,
+          150,
+          86
+        ],
+        "modular": false,
+        "efficiency": "80 PLUS Bronze"
+      },
+      "assumptions": [],
+      "limitations": [
+        "Число PCIe-разъёмов не равно числу независимых кабелей. Запас мощности, температура БП и разрешённость переходников требуют отдельных проверок.",
+        "Проверена модель MAG A650BN, не A650BNL и не A650BN PCIE5. Региональный розничный part number на странице не указан."
+      ],
+      "corrections": {
+        "dimensions": [
+          140,
+          150,
+          86
+        ]
+      }
+    },
+    "a750gl": {
+      "checkedAt": "2026-10-28",
+      "sources": [
+        "https://www.msi.com/Power-Supply/MAG-A750GL-PCIE5/Specification"
+      ],
+      "values": {
+        "watts": 750,
+        "connectors": 3,
+        "connector16pin": true,
+        "connector16pinWatts": 450,
+        "epsConnectors": 2,
+        "sataConnectors": 8,
+        "form": "ATX",
+        "length": 140,
+        "dimensions": [
+          140,
+          150,
+          86
+        ],
+        "modular": true,
+        "efficiency": "80 PLUS Gold"
+      },
+      "assumptions": [],
+      "limitations": [
+        "Число PCIe-разъёмов не равно числу независимых кабелей. Запас мощности, температура БП и разрешённость переходников требуют отдельных проверок.",
+        "Проверена MAG A750GL PCIE5. Не переносить характеристики вариантов A750GLS/других ревизий. Нативный 16-pin паспортно 450 Вт."
+      ],
+      "corrections": {
+        "dimensions": [
+          140,
+          150,
+          86
+        ]
+      }
+    },
+    "cc560": {
+      "checkedAt": "2026-10-28",
+      "sources": [
+        "https://de.deepcool.com/products/Cases/CC560-V2-Mid-Tower-Airflow-Case/2023/17809.shtml"
+      ],
+      "values": {
+        "sku": "R-CC560-BKGAA4-G-2",
+        "forms": [
+          "ATX",
+          "Micro-ATX",
+          "Mini-ITX"
+        ],
+        "gpuLimit": 370,
+        "coolerLimit": 165,
+        "psuLimit": 170,
+        "dimensions": [
+          432,
+          215,
+          483
+        ],
+        "frontFanCount": 3,
+        "rearFanCount": 1,
+        "usbA": 1,
+        "usb2": 1,
+        "usbC": 0,
+        "audio": "1 × комбинированный 3,5 мм"
+      },
+      "assumptions": [
+        "Параметры воздушного сопротивления и температуры корпуса в симуляции — допущения."
+      ],
+      "limitations": [
+        "В рекламном абзаце DE страницы указан E-ATX, но таблица спецификаций перечисляет только Mini-ITX/Micro-ATX/ATX; в values использована техническая таблица.",
+        "Паспортный GPU limit 370 мм — без гарантии зазора при любой СЖО. Радиаторы: спереди до 360, сверху до 240, сзади 120 мм.",
+        "Проверена V2, не исходная CC560, не CC560 ARGB."
+      ],
+      "corrections": {
+        "sku": "R-CC560-BKGAA4-G-2",
+        "gpuLimit": 370
+      }
+    },
+    "4000d-airflow": {
+      "checkedAt": "2026-10-28",
+      "sources": [
+        "https://www.corsair.com/ww/en/p/pc-cases/cc-9011200-ww/4000d-airflow-tempered-glass-mid-tower-atx-case-black-cc-9011200-ww"
+      ],
+      "values": {
+        "sku": "CC-9011200-WW",
+        "forms": [
+          "ATX",
+          "Micro-ATX",
+          "Mini-ITX",
+          "E-ATX"
+        ],
+        "gpuLimit": 360,
+        "coolerLimit": 170,
+        "psuLimit": 220,
+        "dimensions": {
+          "length": 453,
+          "width": 230,
+          "height": 466
+        },
+        "usbA": 1,
+        "usb2": 0,
+        "usbC": 1,
+        "audio": "1 × комбинированный аудиоразъём 3,5 мм: наушники + микрофон"
+      },
+      "assumptions": [
+        "Параметры воздушного сопротивления и температуры корпуса в симуляции — допущения."
+      ],
+      "limitations": [
+        "Проверена обычная чёрная 4000D AIRFLOW CC-9011200-WW, не RGB и не FRAME.",
+        "E-ATX ограничен 305×277 мм. Текущая страница указывает GPU до 360 мм, а с передней СЖО — короче 340 мм; общая длина не заменяет проверку толщины радиатора/вентиляторов.",
+        "PSU limit 220 мм — максимум страницы, положение корзины HDD и место для кабелей отдельно не проверены.",
+        "Два штатных 120мм AirGuide подтверждены; расположение один спереди/один сзади по размерному руководству в этом проходе не проверено."
+      ],
+      "corrections": {}
+    }
+  },
+  "pending": [
+    {
+      "id": "ddr4-32",
+      "fields": [
+        "height"
+      ],
+      "reason": "Нужен размерный чертёж для точности 0.1 мм: текст даташита округляет высоту до 34 мм, каталог 34.1 мм. Остальные характеристики проверены."
+    },
+    {
+      "id": "4000d-airflow",
+      "fields": [
+        "frontFanCount",
+        "rearFanCount"
+      ],
+      "reason": "Подтверждены два штатных 120мм вентилятора; их распределение по стенкам не вошло в проверенные поля."
+    }
+  ]
+}
+

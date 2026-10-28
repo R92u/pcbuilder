@@ -1,0 +1,433 @@
+{
+  "city": "Минск",
+  "currency": "BYN",
+  "checkedAt": "2026-10-28",
+  "method": "Однократная ручная проверка конкретных карточек обычным HTTP GET. Поисковые сниппеты использованы только для нахождения URL. Это снимок, а не непрерывное обновление. Под заказ не трактуется как наличие.",
+  "items": {
+    "980": {
+      "price": 1170,
+      "currency": "BYN",
+      "date": "2026-10-28",
+      "store": "TEC.BY",
+      "url": "https://tec.by/komplektuyushchie/ssd/m-2/ssd-samsung-980-1tb-mz-v8v1t0bw-m-2-detail.html",
+      "availability": "unknown",
+      "note": "Под заказ (1–2 дня). Точная модель 980, не 980 PRO. Цена без доставки; перепроверь цену и наличие перед покупкой.",
+      "model": "Samsung 980 1 ТБ MZ-V8V1T0BW",
+      "evidence": {
+        "method": "direct-http-get",
+        "status": 200,
+        "checkedAt": "2026-10-28",
+        "modelMatch": "exact-model-or-listed-cpu-oem",
+        "excerpt": "Цена: 1.170 00 BYN; Под заказ (1-2 дня)"
+      }
+    },
+    "r5-5600": {
+      "price": 405,
+      "currency": "BYN",
+      "date": "2026-10-28",
+      "store": "TEC.BY",
+      "url": "https://tec.by/komplektuyushchie/protsessory/amd/s-am4/protsessor-amd-ryzen-5-5600-oem-am4-detail.html",
+      "availability": "unknown",
+      "note": "Под заказ (2–3 часа). Поставка OEM, без кулера. Цена без доставки; перепроверь цену и наличие перед покупкой.",
+      "model": "AMD Ryzen 5 5600 OEM",
+      "evidence": {
+        "method": "direct-http-get",
+        "status": 200,
+        "checkedAt": "2026-10-28",
+        "modelMatch": "exact-model-or-listed-cpu-oem",
+        "excerpt": "Цена: 405 00 BYN; Под заказ (2-3 часа)"
+      }
+    },
+    "r5-7600": {
+      "price": 549,
+      "currency": "BYN",
+      "date": "2026-10-28",
+      "store": "TEC.BY",
+      "url": "https://tec.by/komplektuyushchie/protsessory/amd/s-am5/protsessor-amd-ryzen-5-7600-oem-am5-detail.html",
+      "availability": "unknown",
+      "note": "Под заказ (2–3 часа). Поставка OEM, без кулера. Цена без доставки; перепроверь цену и наличие перед покупкой.",
+      "model": "AMD Ryzen 5 7600 OEM",
+      "evidence": {
+        "method": "direct-http-get",
+        "status": 200,
+        "checkedAt": "2026-10-28",
+        "modelMatch": "exact-model-or-listed-cpu-oem",
+        "excerpt": "Цена: 549 00 BYN; Под заказ (2-3 часа)"
+      }
+    },
+    "r7-7700x": {
+      "price": 825,
+      "currency": "BYN",
+      "date": "2026-10-28",
+      "store": "TEC.BY",
+      "url": "https://tec.by/komplektuyushchie/protsessory/amd/s-am5/protsessor-amd-ryzen-7-7700x-oem-am5-detail.html",
+      "availability": "unknown",
+      "note": "Под заказ (1–2 дня). Поставка OEM, без кулера. Цена без доставки; перепроверь цену и наличие перед покупкой.",
+      "model": "AMD Ryzen 7 7700X OEM",
+      "evidence": {
+        "method": "direct-http-get",
+        "status": 200,
+        "checkedAt": "2026-10-28",
+        "modelMatch": "exact-model-or-listed-cpu-oem",
+        "excerpt": "Цена: 825 00 BYN; Под заказ (1-2 дня)"
+      }
+    },
+    "r7-7800x3d": {
+      "price": 930,
+      "currency": "BYN",
+      "date": "2026-10-28",
+      "store": "TEC.BY",
+      "url": "https://tec.by/komplektuyushchie/protsessory/amd/s-am5/protsessor-amd-ryzen-7-7800x3d-oem-am5-detail.html",
+      "availability": "unknown",
+      "note": "Под заказ (2–3 часа). Поставка OEM, без кулера. Цена без доставки; перепроверь цену и наличие перед покупкой.",
+      "model": "AMD Ryzen 7 7800X3D OEM",
+      "evidence": {
+        "method": "direct-http-get",
+        "status": 200,
+        "checkedAt": "2026-10-28",
+        "modelMatch": "exact-model-or-listed-cpu-oem",
+        "excerpt": "Цена: 930 00 BYN; Под заказ (2-3 часа)"
+      }
+    },
+    "i3-12100f": {
+      "price": 377.63,
+      "currency": "BYN",
+      "date": "2026-10-28",
+      "store": "TECNO.BY",
+      "url": "https://www.tecno.by/cpu/intel/i312100f",
+      "availability": "in-stock",
+      "note": "На карточке указано наличие; сроки доставки и комплектность уточнить в магазине. Цена без доставки; перепроверь цену и наличие перед покупкой.",
+      "model": "Intel Core i3-12100F OEM",
+      "evidence": {
+        "method": "direct-http-get",
+        "status": 200,
+        "checkedAt": "2026-10-28",
+        "modelMatch": "exact-model-or-listed-cpu-oem",
+        "excerpt": "377,63 р.; В наличии"
+      }
+    },
+    "i5-12400f": {
+      "price": 432.6,
+      "currency": "BYN",
+      "date": "2026-10-28",
+      "store": "OnLife",
+      "url": "https://www.onlife.by/product/processor-intel-core-i5-12400f-oem-093394",
+      "availability": "unknown",
+      "note": "Розничная цена. На карточке: наличие уточнит менеджер. Цена без доставки; перепроверь цену и наличие перед покупкой.",
+      "model": "Intel Core i5-12400F OEM",
+      "evidence": {
+        "method": "direct-http-get",
+        "status": 200,
+        "checkedAt": "2026-10-28",
+        "modelMatch": "exact-model-or-listed-cpu-oem",
+        "excerpt": "432,60 BYN; Наличие уточнит менеджер"
+      }
+    },
+    "b550": {
+      "price": 458.32,
+      "currency": "BYN",
+      "date": "2026-10-28",
+      "store": "Time-Shop",
+      "url": "https://time-shop.by/motherboard/msi/b550apro",
+      "availability": "in-stock",
+      "note": "Магазин указывает наличие; для Ryzen 5 5600 отдельно проверить BIOS. Цена без доставки; перепроверь цену и наличие перед покупкой.",
+      "model": "MSI B550-A PRO",
+      "evidence": {
+        "method": "direct-http-get",
+        "status": 200,
+        "checkedAt": "2026-10-28",
+        "modelMatch": "exact-model-or-listed-cpu-oem",
+        "excerpt": "458,32 р.; В наличии"
+      }
+    },
+    "b760m-p-ddr4": {
+      "price": 373.07,
+      "currency": "BYN",
+      "date": "2026-10-28",
+      "store": "Cyber Market",
+      "url": "https://www.cybermarket.by/motherboard/msi/prob760mpddr4",
+      "availability": "in-stock",
+      "note": "В названии и основной спецификации явно DDR4; это не версия DDR5. Цена без доставки; перепроверь цену и наличие перед покупкой.",
+      "model": "MSI PRO B760M-P DDR4",
+      "evidence": {
+        "method": "direct-http-get",
+        "status": 200,
+        "checkedAt": "2026-10-28",
+        "modelMatch": "exact-model-or-listed-cpu-oem",
+        "excerpt": "373,07 р.; В наличии"
+      }
+    },
+    "rtx3060": {
+      "price": 1751.88,
+      "currency": "BYN",
+      "date": "2026-10-28",
+      "store": "Nexton",
+      "url": "https://nexton.by/videocard/msi/gf3060gam2x12",
+      "availability": "in-stock",
+      "note": "Совпадает точная модификация 12G OC; не обычная 12G без OC. Цена без доставки; перепроверь цену и наличие перед покупкой.",
+      "model": "MSI GeForce RTX 3060 VENTUS 2X 12G OC",
+      "evidence": {
+        "method": "direct-http-get",
+        "status": 200,
+        "checkedAt": "2026-10-28",
+        "modelMatch": "exact-model-or-listed-cpu-oem",
+        "excerpt": "1 751,88 р.; В наличии"
+      }
+    },
+    "ddr4-16-3200": {
+      "price": 681.89,
+      "currency": "BYN",
+      "date": "2026-10-28",
+      "store": "Unifox",
+      "url": "https://unifox.by/product/operativnaya-pamyat-kingston-kf432c16bbk2-16-cl-16/",
+      "availability": "in-stock",
+      "note": "Цена видна в карточке и совпадает с JSON-LD BYN; указана 1 единица в наличии. Цена без доставки; перепроверь цену и наличие перед покупкой.",
+      "model": "Kingston FURY Beast KF432C16BBK2/16, 2×8 ГБ",
+      "evidence": {
+        "method": "direct-http-get",
+        "status": 200,
+        "checkedAt": "2026-10-28",
+        "modelMatch": "exact-model-or-listed-cpu-oem",
+        "excerpt": "681,89 руб.; 1 в наличии"
+      }
+    },
+    "ddr4-32": {
+      "price": 1548.8,
+      "currency": "BYN",
+      "date": "2026-10-28",
+      "store": "Nexton",
+      "url": "https://nexton.by/dram/kingston/kf432c16bbk232",
+      "availability": "in-stock",
+      "note": "Точное совпадение артикула KF432C16BBK2/32. Цена без доставки; перепроверь цену и наличие перед покупкой.",
+      "model": "Kingston FURY Beast KF432C16BBK2/32, 2×16 ГБ",
+      "evidence": {
+        "method": "direct-http-get",
+        "status": 200,
+        "checkedAt": "2026-10-28",
+        "modelMatch": "exact-model-or-listed-cpu-oem",
+        "excerpt": "1 548,80 р.; В наличии"
+      }
+    },
+    "ak400": {
+      "price": 80.42,
+      "currency": "BYN",
+      "date": "2026-10-28",
+      "store": "Мастердом",
+      "url": "https://masterdom.by/sistemy-ohlazhdeniya/deepcool-ak400/",
+      "availability": "in-stock",
+      "note": "Цена при 100% оплате сразу одним чеком; рассрочка/кредит дороже. Обычный AK400, не Digital. Цена без доставки; перепроверь цену и наличие перед покупкой.",
+      "model": "DeepCool AK400",
+      "evidence": {
+        "method": "direct-http-get",
+        "status": 200,
+        "checkedAt": "2026-10-28",
+        "modelMatch": "exact-model-or-listed-cpu-oem",
+        "excerpt": "80,42 р.; В наличии на складе"
+      }
+    },
+    "a650bn": {
+      "price": 191.68,
+      "currency": "BYN",
+      "date": "2026-10-28",
+      "store": "Мастердом",
+      "url": "https://masterdom.by/bloki-pitaniya/msi-mag-a650bn/",
+      "availability": "in-stock",
+      "note": "Цена при 100% оплате сразу одним чеком; рассрочка/кредит дороже. Цена без доставки; перепроверь цену и наличие перед покупкой.",
+      "model": "MSI MAG A650BN",
+      "evidence": {
+        "method": "direct-http-get",
+        "status": 200,
+        "checkedAt": "2026-10-28",
+        "modelMatch": "exact-model-or-listed-cpu-oem",
+        "excerpt": "191,68 р.; В наличии на складе"
+      }
+    },
+    "cc560": {
+      "price": 266.4,
+      "currency": "BYN",
+      "date": "2026-10-28",
+      "store": "TECNO.BY",
+      "url": "https://www.tecno.by/chassis/deepcool/rcc560bkgaa4g2",
+      "availability": "unknown",
+      "note": "Под заказ. Обычный CC560 V2, не ARGB/Mesh/Limited. Цена без доставки; перепроверь цену и наличие перед покупкой.",
+      "model": "DeepCool CC560 V2 R-CC560-BKGAA4-G-2, чёрный",
+      "evidence": {
+        "method": "direct-http-get",
+        "status": 200,
+        "checkedAt": "2026-10-28",
+        "modelMatch": "exact-model-or-listed-cpu-oem",
+        "excerpt": "266,40 р.; Под заказ"
+      }
+    },
+    "a750gl": {
+      "price": 297.28,
+      "currency": "BYN",
+      "date": "2026-10-28",
+      "store": "Cyber Market",
+      "url": "https://www.cybermarket.by/powersupply/msi/3067zp8b11ce0",
+      "availability": "in-stock",
+      "note": "Обычный A750GL PCIE5, не модель PCIE5 II. Цена без доставки; перепроверь цену и наличие перед покупкой.",
+      "model": "MSI MAG A750GL PCIE5, 306-7ZP8B11-CE0",
+      "evidence": {
+        "method": "direct-http-get",
+        "status": 200,
+        "checkedAt": "2026-10-28",
+        "modelMatch": "exact-model",
+        "excerpt": "297,28 р.; В наличии"
+      }
+    },
+    "ddr5-32": {
+      "price": 2979.07,
+      "currency": "BYN",
+      "date": "2026-10-28",
+      "store": "ULTRAPRICE",
+      "url": "https://www.ultraprice.by/product/operativnaya-pamyat-kingston-fury-beast-2x16gb-ddr5-6000mgc-kf560c36bbek2-32",
+      "availability": "in-stock",
+      "note": "Точное совпадение артикула KF560C36BBEK2-32. Цена без доставки; перепроверь цену и наличие перед покупкой.",
+      "model": "Kingston FURY Beast KF560C36BBEK2-32, 2×16 ГБ",
+      "evidence": {
+        "method": "direct-http-get",
+        "status": 200,
+        "checkedAt": "2026-10-28",
+        "modelMatch": "exact-model",
+        "excerpt": "2 979.07 BYN; В наличии"
+      }
+    },
+    "aio-le240-v2": {
+      "price": 204.7,
+      "currency": "BYN",
+      "date": "2026-10-28",
+      "store": "Мастердом",
+      "url": "https://masterdom.by/sistemy-ohlazhdeniya/deepcool-le240-v2-r-le240-bkammc-g-2/",
+      "availability": "in-stock",
+      "note": "Цена при 100% оплате сразу одним чеком; рассрочка/кредит дороже. Цена без доставки; перепроверь цену и наличие перед покупкой.",
+      "model": "DeepCool LE240 V2 R-LE240-BKAMMC-G-2",
+      "evidence": {
+        "method": "direct-http-get",
+        "status": 200,
+        "checkedAt": "2026-10-28",
+        "modelMatch": "exact-model",
+        "excerpt": "204,70 р.; В наличии на складе"
+      }
+    },
+    "ak620": {
+      "price": 234.84,
+      "currency": "BYN",
+      "date": "2026-10-28",
+      "store": "Мастердом",
+      "url": "https://masterdom.by/sistemy-ohlazhdeniya/deepcool-ak620-r-ak620-bknnmt-g/",
+      "availability": "in-stock",
+      "note": "Обычный AK620, не Zero Dark, Digital или G2. Цена при 100% оплате сразу одним чеком. Цена без доставки; перепроверь цену и наличие перед покупкой.",
+      "model": "DeepCool AK620 R-AK620-BKNNMT-G",
+      "evidence": {
+        "method": "direct-http-get",
+        "status": 200,
+        "checkedAt": "2026-10-28",
+        "modelMatch": "exact-model",
+        "excerpt": "234,84 р.; В наличии на складе"
+      }
+    }
+  },
+  "unverified": [
+    {
+      "id": "b650",
+      "url": "https://masterdom.by/materinskie-platy/msi-pro-b650-s-wifi/",
+      "reason": "Прямой GET 2026-10-28: товар отсутствует, хотя поисковый сниппет обещал наличие. Цена не включена."
+    },
+    {
+      "id": "b650",
+      "url": "https://www.cybermarket.by/motherboard/msi/prob650swifi",
+      "reason": "Прямой GET 2026-10-28: HTTP 404, товар не найден."
+    },
+    {
+      "source": "5element.by",
+      "urls": [
+        "https://5element.by/products/704871-materinskaya-plata-msi-b550-a-pro",
+        "https://5element.by/products/776465-videokarta-msi-geforce-rtx-3060-ventus-2x-12g-oc"
+      ],
+      "reason": "Две карточки недоступны через инструмент чтения. Старые цены не перенесены, дальнейший обход не выполнялся."
+    },
+    {
+      "id": "rx7600",
+      "url": "https://tehnobars.by/catalog/kompyuternye-komplektuyushchie/videokarty/T0655368/",
+      "reason": "Свежая карточка не подтвердила цену главного товара; поисковая цена отклонена."
+    },
+    {
+      "id": "b650",
+      "url": "https://www.teono.by/motherboard/msi/prob650swifi",
+      "reason": "Прямой GET 2026-10-28: HTTP 404, товар не найден. Поисковая цена не использована."
+    },
+    {
+      "id": "b760-p-wifi",
+      "model": "MSI PRO B760-P WIFI",
+      "reason": "В этом исследовании не подтверждена доступная карточка точной модификации с читаемой текущей ценой BYN. Цена не добавлена; похожие модели и поисковые сниппеты не заменяют подтверждение."
+    },
+    {
+      "id": "rtx4060",
+      "model": "MSI GeForce RTX 4060 VENTUS 2X BLACK 8G",
+      "reason": "В этом исследовании не подтверждена доступная карточка точной модификации с читаемой текущей ценой BYN. Цена не добавлена; похожие модели и поисковые сниппеты не заменяют подтверждение."
+    },
+    {
+      "id": "rtx4060ti",
+      "model": "MSI GeForce RTX 4060 Ti VENTUS 2X BLACK 8G OC",
+      "reason": "В этом исследовании не подтверждена доступная карточка точной модификации с читаемой текущей ценой BYN. Цена не добавлена; похожие модели и поисковые сниппеты не заменяют подтверждение."
+    },
+    {
+      "id": "rx6600",
+      "model": "SAPPHIRE PULSE AMD Radeon RX 6600 8GB",
+      "reason": "В этом исследовании не подтверждена доступная карточка точной модификации с читаемой текущей ценой BYN. Цена не добавлена; похожие модели и поисковые сниппеты не заменяют подтверждение."
+    },
+    {
+      "id": "rx7800xt",
+      "model": "SAPPHIRE PULSE AMD Radeon RX 7800 XT 16GB",
+      "reason": "В этом исследовании не подтверждена доступная карточка точной модификации с читаемой текущей ценой BYN. Цена не добавлена; похожие модели и поисковые сниппеты не заменяют подтверждение."
+    },
+    {
+      "id": "ddr5-64-6000",
+      "model": "Kingston FURY Beast 64 ГБ DDR5-6000",
+      "reason": "В этом исследовании не подтверждена доступная карточка точной модификации с читаемой текущей ценой BYN. Цена не добавлена; похожие модели и поисковые сниппеты не заменяют подтверждение."
+    },
+    {
+      "id": "nv2",
+      "model": "Kingston NV2 1 ТБ",
+      "reason": "В этом исследовании не подтверждена доступная карточка точной модификации с читаемой текущей ценой BYN. Цена не добавлена; похожие модели и поисковые сниппеты не заменяют подтверждение."
+    },
+    {
+      "id": "kc3000-1tb",
+      "model": "Kingston KC3000 1024 ГБ",
+      "reason": "В этом исследовании не подтверждена доступная карточка точной модификации с читаемой текущей ценой BYN. Цена не добавлена; похожие модели и поисковые сниппеты не заменяют подтверждение."
+    },
+    {
+      "id": "ag400",
+      "model": "DeepCool AG400",
+      "reason": "В этом исследовании не подтверждена доступная карточка точной модификации с читаемой текущей ценой BYN. Цена не добавлена; похожие модели и поисковые сниппеты не заменяют подтверждение."
+    },
+    {
+      "id": "pk550",
+      "model": "DeepCool PK550D",
+      "reason": "В этом исследовании не подтверждена доступная карточка точной модификации с читаемой текущей ценой BYN. Цена не добавлена; похожие модели и поисковые сниппеты не заменяют подтверждение."
+    },
+    {
+      "id": "4000d-airflow",
+      "model": "Corsair 4000D AIRFLOW Black",
+      "reason": "В этом исследовании не подтверждена доступная карточка точной модификации с читаемой текущей ценой BYN. Цена не добавлена; похожие модели и поисковые сниппеты не заменяют подтверждение."
+    }
+  ],
+  "completeExample": {
+    "build": {
+      "cpu": "r5-5600",
+      "motherboard": "b550",
+      "gpu": "rtx3060",
+      "ram": "ddr4-16-3200",
+      "storage": "980",
+      "cooler": "ak400",
+      "psu": "a650bn",
+      "case": "cc560"
+    },
+    "total": 5005.59,
+    "currency": "BYN",
+    "allEightPricesObserved": true,
+    "containsOrderOrUnknownAvailability": true,
+    "note": "Полнота цен не означает наличие всех товаров на складе. CPU, SSD и корпус — под заказ; доставка не включена."
+  }
+}

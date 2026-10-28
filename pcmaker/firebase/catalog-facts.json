@@ -1327,7 +1327,8 @@
       "LGA1150",
       "LGA1155",
       "LGA2066",
-      "LGA2011"
+      "LGA2011",
+      "LGA2011-v3"
     ],
     "height": 160,
     "clearance": 43,
@@ -1343,7 +1344,11 @@
     "socket": [
       "AM4",
       "AM5",
-      "LGA1700"
+      "LGA1700",
+      "LGA1200",
+      "LGA1151",
+      "LGA1150",
+      "LGA1155"
     ],
     "height": 150,
     "clearance": 99,
@@ -1570,7 +1575,12 @@
     "socket": [
       "AM4",
       "AM5",
-      "LGA1700"
+      "LGA1851",
+      "LGA1700",
+      "LGA1200",
+      "LGA1151",
+      "LGA1150",
+      "LGA1155"
     ],
     "height": 65,
     "clearance": 999,
@@ -1796,7 +1806,7 @@
       "Micro-ATX",
       "Mini-ITX"
     ],
-    "gpu": 320,
+    "gpu": 370,
     "cooler": 165,
     "psu": 170,
     "top": [

@@ -1,0 +1,630 @@
+{
+  "scope": "Ручная сверка основных аппаратных характеристик по прочитанным страницам производителей; не подтверждение тепловой модели, BIOS для всех сочетаний, цен, фото или гарантии совместимости.",
+  "checkedAt": "2026-10-28",
+  "items": {
+    "r5-5600": {
+      "checkedAt": "2026-10-28",
+      "sources": [
+        "https://www.amd.com/en/support/downloads/drivers.html/processors/ryzen/ryzen-5000-series/amd-ryzen-5-5600.html"
+      ],
+      "values": {
+        "socket": "AM4",
+        "memory": "DDR4",
+        "cores": 6,
+        "threads": 12,
+        "tdp": 65,
+        "tmax": 90,
+        "baseGHz": 3.5,
+        "boostGHz": 4.4,
+        "cacheMB": 32,
+        "integratedGraphics": false,
+        "officialMemoryMaxMTs": 3200,
+        "maxRam": 128
+      },
+      "assumptions": [
+        "peakPower=88 Вт — сохранённый параметр учебной модели; PPT этого SKU на проверенной странице AMD не указан.",
+        "TDP — тепловая проектная характеристика AMD, не измеренное потребление в конкретной нагрузке."
+      ],
+      "limitations": [
+        "Проверка характеристик процессора не заменяет список CPU и требуемую версию BIOS конкретной платы; совместимость отдельных сочетаний BIOS здесь не подтверждалась.",
+        "Максимальная скорость памяти зависит от количества модулей и рангов. Профили XMP/EXPO не гарантируют заявленную скорость на каждом сочетании CPU и платы.",
+        "Поставка OEM/Tray и Box имеет разные артикулы и комплектность; проверена модель процессора, а не комплект поставки магазина."
+      ],
+      "corrections": {
+        "cacheMB": 32,
+        "maxRam": 128
+      }
+    },
+    "r5-7600": {
+      "checkedAt": "2026-10-28",
+      "sources": [
+        "https://www.amd.com/en/products/processors/desktops/ryzen/7000-series/amd-ryzen-5-7600.html"
+      ],
+      "values": {
+        "socket": "AM5",
+        "memory": "DDR5",
+        "cores": 6,
+        "threads": 12,
+        "tdp": 65,
+        "tmax": 95,
+        "baseGHz": 3.8,
+        "boostGHz": 5.1,
+        "cacheMB": 32,
+        "integratedGraphics": true,
+        "officialMemoryMaxMTs": 5200,
+        "maxRam": 128
+      },
+      "assumptions": [
+        "peakPower=88 Вт — сохранённый параметр учебной модели; PPT этого SKU на проверенной странице AMD не указан.",
+        "TDP — тепловая проектная характеристика AMD, не измеренное потребление в конкретной нагрузке."
+      ],
+      "limitations": [
+        "Проверка характеристик процессора не заменяет список CPU и требуемую версию BIOS конкретной платы; совместимость отдельных сочетаний BIOS здесь не подтверждалась.",
+        "Максимальная скорость памяти зависит от количества модулей и рангов. Профили XMP/EXPO не гарантируют заявленную скорость на каждом сочетании CPU и платы.",
+        "Поставка OEM/Tray и Box имеет разные артикулы и комплектность; проверена модель процессора, а не комплект поставки магазина."
+      ],
+      "corrections": {
+        "cacheMB": 32,
+        "maxRam": 128,
+        "powerAssumed": true
+      }
+    },
+    "r7-7700x": {
+      "checkedAt": "2026-10-28",
+      "sources": [
+        "https://www.amd.com/en/products/processors/desktops/ryzen/7000-series/amd-ryzen-7-7700x.html"
+      ],
+      "values": {
+        "socket": "AM5",
+        "memory": "DDR5",
+        "cores": 8,
+        "threads": 16,
+        "tdp": 105,
+        "tmax": 95,
+        "baseGHz": 4.5,
+        "boostGHz": 5.4,
+        "cacheMB": 32,
+        "integratedGraphics": true,
+        "officialMemoryMaxMTs": 5200,
+        "maxRam": 128
+      },
+      "assumptions": [
+        "peakPower=142 Вт — сохранённый параметр учебной модели; PPT этого SKU на проверенной странице AMD не указан.",
+        "TDP — тепловая проектная характеристика AMD, не измеренное потребление в конкретной нагрузке."
+      ],
+      "limitations": [
+        "Проверка характеристик процессора не заменяет список CPU и требуемую версию BIOS конкретной платы; совместимость отдельных сочетаний BIOS здесь не подтверждалась.",
+        "Максимальная скорость памяти зависит от количества модулей и рангов. Профили XMP/EXPO не гарантируют заявленную скорость на каждом сочетании CPU и платы.",
+        "Поставка OEM/Tray и Box имеет разные артикулы и комплектность; проверена модель процессора, а не комплект поставки магазина."
+      ],
+      "corrections": {
+        "officialMemoryMaxMTs": 5200,
+        "maxRam": 128
+      }
+    },
+    "r7-7800x3d": {
+      "checkedAt": "2026-10-28",
+      "sources": [
+        "https://www.amd.com/en/products/processors/desktops/ryzen/7000-series/amd-ryzen-7-7800X3d.html"
+      ],
+      "values": {
+        "socket": "AM5",
+        "memory": "DDR5",
+        "cores": 8,
+        "threads": 16,
+        "tdp": 120,
+        "tmax": 89,
+        "baseGHz": 4.2,
+        "boostGHz": 5,
+        "cacheMB": 96,
+        "integratedGraphics": true,
+        "officialMemoryMaxMTs": 5200,
+        "maxRam": 128
+      },
+      "assumptions": [
+        "peakPower=162 Вт — сохранённый параметр учебной модели; PPT этого SKU на проверенной странице AMD не указан.",
+        "TDP — тепловая проектная характеристика AMD, не измеренное потребление в конкретной нагрузке."
+      ],
+      "limitations": [
+        "Проверка характеристик процессора не заменяет список CPU и требуемую версию BIOS конкретной платы; совместимость отдельных сочетаний BIOS здесь не подтверждалась.",
+        "Максимальная скорость памяти зависит от количества модулей и рангов. Профили XMP/EXPO не гарантируют заявленную скорость на каждом сочетании CPU и платы.",
+        "Поставка OEM/Tray и Box имеет разные артикулы и комплектность; проверена модель процессора, а не комплект поставки магазина.",
+        "AMD рекомендует жидкостное охлаждение для оптимальной производительности; это рекомендация производителя, не доказательство несовместимости с любым воздушным кулером."
+      ],
+      "corrections": {
+        "officialMemoryMaxMTs": 5200,
+        "maxRam": 128
+      }
+    },
+    "i3-12100f": {
+      "checkedAt": "2026-10-28",
+      "sources": [
+        "https://www.intel.com/content/www/us/en/products/sku/132223/intel-core-i312100f-processor-12m-cache-up-to-4-30-ghz/specifications.html",
+        "https://www.intel.com/content/www/us/en/support/articles/000058487/processors.html"
+      ],
+      "values": {
+        "socket": "LGA1700",
+        "memory": [
+          "DDR4",
+          "DDR5"
+        ],
+        "cores": 4,
+        "threads": 8,
+        "tdp": 58,
+        "peakPower": 89,
+        "tmax": 100,
+        "baseGHz": 3.3,
+        "boostGHz": 4.3,
+        "cacheMB": 12,
+        "integratedGraphics": false,
+        "maxRam": 128
+      },
+      "assumptions": [],
+      "limitations": [
+        "Проверка характеристик процессора не заменяет список CPU и требуемую версию BIOS конкретной платы; совместимость отдельных сочетаний BIOS здесь не подтверждалась.",
+        "Максимальная скорость памяти зависит от количества модулей и рангов. Профили XMP/EXPO не гарантируют заявленную скорость на каждом сочетании CPU и платы.",
+        "tdp нормализует Intel Processor Base Power, peakPower — Maximum Turbo Power. Это паспортные значения; фактическое потребление и лимиты зависят от настроек платы.",
+        "FCLGA1700 нормализован до LGA1700. DDR4-3200 или DDR5-4800 выбираются по плате; поколения памяти не взаимозаменяемы."
+      ],
+      "corrections": {
+        "maxRam": 128
+      }
+    },
+    "i5-12400f": {
+      "checkedAt": "2026-10-28",
+      "sources": [
+        "https://www.intel.com/content/www/us/en/products/sku/134587/intel-core-i512400f-processor-18m-cache-up-to-4-40-ghz/specifications.html",
+        "https://www.intel.com/content/www/us/en/support/articles/000058487/processors.html"
+      ],
+      "values": {
+        "socket": "LGA1700",
+        "memory": [
+          "DDR4",
+          "DDR5"
+        ],
+        "cores": 6,
+        "threads": 12,
+        "tdp": 65,
+        "peakPower": 117,
+        "tmax": 100,
+        "baseGHz": 2.5,
+        "boostGHz": 4.4,
+        "cacheMB": 18,
+        "integratedGraphics": false,
+        "maxRam": 128
+      },
+      "assumptions": [],
+      "limitations": [
+        "Проверка характеристик процессора не заменяет список CPU и требуемую версию BIOS конкретной платы; совместимость отдельных сочетаний BIOS здесь не подтверждалась.",
+        "Максимальная скорость памяти зависит от количества модулей и рангов. Профили XMP/EXPO не гарантируют заявленную скорость на каждом сочетании CPU и платы.",
+        "tdp нормализует Intel Processor Base Power, peakPower — Maximum Turbo Power. Это паспортные значения; фактическое потребление и лимиты зависят от настроек платы.",
+        "FCLGA1700 нормализован до LGA1700. DDR4-3200 или DDR5-4800 выбираются по плате; поколения памяти не взаимозаменяемы."
+      ],
+      "corrections": {
+        "maxRam": 128
+      }
+    },
+    "b550": {
+      "checkedAt": "2026-10-28",
+      "sources": [
+        "https://www.msi.com/Motherboard/B550-A-PRO/Specification"
+      ],
+      "values": {
+        "socket": "AM4",
+        "memory": "DDR4",
+        "form": "ATX",
+        "slots": 4,
+        "maxRam": 128,
+        "m2": true,
+        "m2Slots": 2,
+        "dimensions": [
+          305,
+          244
+        ],
+        "epsConnectors": 1,
+        "cpuPowerPinCounts": [
+          8
+        ],
+        "usbCHeader": true,
+        "sataPorts": 6,
+        "chipset": "AMD B550"
+      },
+      "assumptions": [],
+      "limitations": [
+        "Проверены аппаратные характеристики модели. Нужная версия BIOS для каждой пары CPU–плата, QVL памяти и разделение линий при заполнении всех слотов отдельно не проверены.",
+        "Второй M.2 при установке PCIe SSD отключает слот PCI_E3. M2_1 зависит от процессора; M2_2 ограничен PCIe 3.0 x4."
+      ],
+      "corrections": {
+        "cpuPowerPinCounts": [
+          8
+        ],
+        "sataPorts": 6,
+        "chipset": "AMD B550"
+      }
+    },
+    "b650": {
+      "checkedAt": "2026-10-28",
+      "sources": [
+        "https://uk.msi.com/Motherboard/PRO-B650-S-WIFI/Specification"
+      ],
+      "values": {
+        "socket": "AM5",
+        "memory": "DDR5",
+        "form": "ATX",
+        "slots": 4,
+        "maxRam": 256,
+        "m2": true,
+        "m2Slots": 2,
+        "dimensions": [
+          304.8,
+          243.84
+        ],
+        "epsConnectors": 2,
+        "usbCHeader": true,
+        "sataPorts": 4,
+        "chipset": "AMD B650"
+      },
+      "assumptions": [],
+      "limitations": [
+        "Проверены аппаратные характеристики модели. Нужная версия BIOS для каждой пары CPU–плата, QVL памяти и разделение линий при заполнении всех слотов отдельно не проверены.",
+        "Максимум памяти платы 256 ГБ не отменяет меньший документированный предел выбранного CPU. M.2 этой платы по спецификации ограничен PCIe 4.0 x4."
+      ],
+      "corrections": {
+        "sataPorts": 4,
+        "chipset": "AMD B650"
+      }
+    },
+    "b760m-p-ddr4": {
+      "checkedAt": "2026-10-28",
+      "sources": [
+        "https://www.msi.com/Motherboard/PRO-B760M-P-DDR4/Specification"
+      ],
+      "values": {
+        "socket": "LGA1700",
+        "memory": "DDR4",
+        "form": "Micro-ATX",
+        "slots": 4,
+        "maxRam": 128,
+        "m2": true,
+        "m2Slots": 2,
+        "dimensions": [
+          243.84,
+          243.84
+        ],
+        "epsConnectors": 1,
+        "usbCHeader": false,
+        "sataPorts": 4,
+        "chipset": "Intel B760"
+      },
+      "assumptions": [],
+      "limitations": [
+        "Проверены аппаратные характеристики модели. Нужная версия BIOS для каждой пары CPU–плата, QVL памяти и разделение линий при заполнении всех слотов отдельно не проверены.",
+        "Наличие заднего USB-C не означает наличие внутреннего USB-C для корпуса: внутреннего USB-C здесь нет. Установка SATA M.2 в M2_2 отключает SATA5."
+      ],
+      "corrections": {
+        "dimensions": [
+          243.84,
+          243.84
+        ]
+      }
+    },
+    "b760-p-wifi": {
+      "checkedAt": "2026-10-28",
+      "sources": [
+        "https://www.msi.com/Motherboard/PRO-B760-P-WIFI/Specification"
+      ],
+      "values": {
+        "socket": "LGA1700",
+        "memory": "DDR5",
+        "form": "ATX",
+        "slots": 4,
+        "maxRam": 256,
+        "m2": true,
+        "m2Slots": 2,
+        "dimensions": [
+          304.8,
+          243.84
+        ],
+        "epsConnectors": 2,
+        "usbCHeader": true,
+        "sataPorts": 4,
+        "chipset": "Intel B760"
+      },
+      "assumptions": [],
+      "limitations": [
+        "Проверены аппаратные характеристики модели. Нужная версия BIOS для каждой пары CPU–плата, QVL памяти и разделение линий при заполнении всех слотов отдельно не проверены.",
+        "Проверена именно DDR5-модель PRO B760-P WIFI, не PRO B760-P WIFI DDR4. Максимум платы 256 ГБ не отменяет меньший предел CPU. SATA M.2 в M2_2 отключает SATA8."
+      ],
+      "corrections": {
+        "dimensions": [
+          304.8,
+          243.84
+        ]
+      }
+    },
+    "rtx3060": {
+      "checkedAt": "2026-10-28",
+      "sources": [
+        "https://my.msi.com/Graphics-Card/GeForce-RTX-3060-VENTUS-2X-12G-OC/Specification"
+      ],
+      "values": {
+        "vram": 12,
+        "vramType": "GDDR6",
+        "length": 235,
+        "width": 124,
+        "thickness": 42,
+        "dimensions": [
+          235,
+          124,
+          42
+        ],
+        "power": 170,
+        "recommendedPsu": 550,
+        "connectors": 1,
+        "connectorType": "8pin",
+        "boostMHz": 1807,
+        "busBits": 192,
+        "pcieGeneration": 4,
+        "ports": [
+          "3 × DisplayPort 1.4",
+          "1 × HDMI 2.1"
+        ]
+      },
+      "assumptions": [
+        "Температурный предел tmax и коэффициенты нагрева сохранены как параметры учебной симуляции. Производитель этой платы не подтвердил в прочитанной спецификации её порог BIOS/hotspot."
+      ],
+      "limitations": [
+        "Размеры относятся к самой видеокарте, без запаса под изгиб кабеля питания. Проверенная длина не гарантирует зазор по толщине, ширине, радиатору СЖО и соседним картам.",
+        "Проверена MSI VENTUS 2X 12G OC; данные не переносятся автоматически на 8G, V1 или другие исполнения RTX 3060. Число электрических линий PCIe на прочитанной карточке отдельно не указано."
+      ],
+      "corrections": {
+        "width": 124,
+        "thickness": 42,
+        "boostMHz": 1807,
+        "busBits": 192,
+        "ports": [
+          "3 × DisplayPort 1.4",
+          "1 × HDMI 2.1"
+        ]
+      }
+    },
+    "rtx4060ti": {
+      "checkedAt": "2026-10-28",
+      "sources": [
+        "https://www.msi.com/Graphics-Card/GeForce-RTX-4060-Ti-VENTUS-2X-BLACK-8G-OC/Specification"
+      ],
+      "values": {
+        "vram": 8,
+        "vramType": "GDDR6",
+        "length": 199,
+        "width": 120,
+        "thickness": 42,
+        "dimensions": [
+          199,
+          120,
+          42
+        ],
+        "power": 160,
+        "recommendedPsu": 550,
+        "connectors": 1,
+        "connectorType": "8pin",
+        "boostMHz": 2565,
+        "busBits": 128,
+        "pcieGeneration": 4,
+        "pcieLanes": 8,
+        "ports": [
+          "3 × DisplayPort 1.4a",
+          "1 × HDMI 2.1a"
+        ]
+      },
+      "assumptions": [
+        "Температурный предел tmax и коэффициенты нагрева сохранены как параметры учебной симуляции. Производитель этой платы не подтвердил в прочитанной спецификации её порог BIOS/hotspot."
+      ],
+      "limitations": [
+        "Размеры относятся к самой видеокарте, без запаса под изгиб кабеля питания. Проверенная длина не гарантирует зазор по толщине, ширине, радиатору СЖО и соседним картам.",
+        "Проверена 8G OC, не 16G. Штатный Boost 2565 МГц; 2580 МГц относится к режиму MSI Center. Физический разъём x16 использует 8 линий."
+      ],
+      "corrections": {
+        "width": 120,
+        "thickness": 42,
+        "dimensions": [
+          199,
+          120,
+          42
+        ],
+        "pcieGeneration": 4,
+        "pcieLanes": 8
+      }
+    },
+    "rx6600": {
+      "checkedAt": "2026-10-28",
+      "sources": [
+        "https://www.sapphiretech.com/en/consumer/pulse-radeon-rx-6600-8g-gddr6"
+      ],
+      "values": {
+        "sku": "11310-01-20G",
+        "vram": 8,
+        "vramType": "GDDR6",
+        "length": 193,
+        "width": 120.05,
+        "thickness": 40.05,
+        "dimensions": [
+          193,
+          120.05,
+          40.05
+        ],
+        "power": 140,
+        "recommendedPsu": 500,
+        "connectors": 1,
+        "connectorType": "8pin",
+        "fans": 2,
+        "boostMHz": 2491,
+        "pcieGeneration": 4,
+        "pcieLanes": 8,
+        "ports": [
+          "3 × DisplayPort 1.4",
+          "1 × HDMI"
+        ]
+      },
+      "assumptions": [
+        "Температурный предел tmax и коэффициенты нагрева сохранены как параметры учебной симуляции. Производитель этой платы не подтвердил в прочитанной спецификации её порог BIOS/hotspot."
+      ],
+      "limitations": [
+        "Размеры относятся к самой видеокарте, без запаса под изгиб кабеля питания. Проверенная длина не гарантирует зазор по толщине, ширине, радиатору СЖО и соседним картам.",
+        "Проверен обычный SKU 11310-01-20G с четырьмя выходами. Страница также содержит Lite Edition 11310-04-20G с двумя выходами; её данные нельзя смешивать."
+      ],
+      "corrections": {
+        "width": 120.05,
+        "thickness": 40.05,
+        "dimensions": [
+          193,
+          120.05,
+          40.05
+        ],
+        "pcieGeneration": 4,
+        "pcieLanes": 8
+      }
+    },
+    "rx7600": {
+      "checkedAt": "2026-10-28",
+      "sources": [
+        "https://www.sapphiretech.com/en/consumer/pulse-radeon-rx-7600-8g-gddr6"
+      ],
+      "values": {
+        "sku": "11324-01-20G",
+        "vram": 8,
+        "vramType": "GDDR6",
+        "length": 240,
+        "width": 107.1,
+        "thickness": 44.07,
+        "dimensions": [
+          240,
+          107.1,
+          44.07
+        ],
+        "power": 185,
+        "recommendedPsu": 550,
+        "connectors": 1,
+        "connectorType": "8pin",
+        "fans": 2,
+        "boostMHz": 2755,
+        "busBits": 128,
+        "pcieGeneration": 4,
+        "pcieLanes": 8,
+        "ports": [
+          "3 × DisplayPort 1.4",
+          "1 × HDMI"
+        ]
+      },
+      "assumptions": [
+        "Температурный предел tmax и коэффициенты нагрева сохранены как параметры учебной симуляции. Производитель этой платы не подтвердил в прочитанной спецификации её порог BIOS/hotspot."
+      ],
+      "limitations": [
+        "Размеры относятся к самой видеокарте, без запаса под изгиб кабеля питания. Проверенная длина не гарантирует зазор по толщине, ширине, радиатору СЖО и соседним картам.",
+        "185 Вт — Total Board Power конкретной SAPPHIRE PULSE, не типовое значение всех RX 7600."
+      ],
+      "corrections": {
+        "width": 107.1,
+        "thickness": 44.07,
+        "dimensions": [
+          240,
+          107.1,
+          44.07
+        ],
+        "pcieGeneration": 4,
+        "pcieLanes": 8
+      }
+    },
+    "rx7800xt": {
+      "checkedAt": "2026-10-28",
+      "sources": [
+        "https://www.sapphiretech.com/en/consumer/pulse-radeon-rx-7800-xt-16g-gddr6"
+      ],
+      "values": {
+        "sku": "11330-02-20G",
+        "vram": 16,
+        "vramType": "GDDR6",
+        "length": 280,
+        "width": 128.75,
+        "thickness": 52.57,
+        "dimensions": [
+          280,
+          128.75,
+          52.57
+        ],
+        "power": 266,
+        "recommendedPsu": 700,
+        "connectors": 2,
+        "connectorType": "8pin",
+        "fans": 2,
+        "boostMHz": 2430,
+        "busBits": 256,
+        "pcieGeneration": 4,
+        "pcieLanes": 16,
+        "ports": [
+          "2 × DisplayPort 2.1",
+          "2 × HDMI"
+        ]
+      },
+      "assumptions": [
+        "Температурный предел tmax и коэффициенты нагрева сохранены как параметры учебной симуляции. Производитель этой платы не подтвердил в прочитанной спецификации её порог BIOS/hotspot."
+      ],
+      "limitations": [
+        "Размеры относятся к самой видеокарте, без запаса под изгиб кабеля питания. Проверенная длина не гарантирует зазор по толщине, ширине, радиатору СЖО и соседним картам.",
+        "Толщина по паспорту 52,57 мм / 2,5 слота; одного сравнения длины с gpuLimit недостаточно для полной проверки посадки."
+      ],
+      "corrections": {
+        "width": 128.75,
+        "thickness": 52.57,
+        "dimensions": [
+          280,
+          128.75,
+          52.57
+        ],
+        "pcieGeneration": 4,
+        "pcieLanes": 16
+      }
+    }
+  },
+  "pending": [
+    {
+      "id": "rtx4060",
+      "checkedAt": "2026-10-28",
+      "sources": [
+        "https://uk.msi.com/Graphics-Card/GeForce-RTX-4060-VENTUS-2X-BLACK-8G/Specification"
+      ],
+      "reason": "MSI указывает 115 W or 120 W без однозначного соответствия аппаратной ревизии. Единственное power=115 в каталоге не подтверждено для любого экземпляра; до определения ревизии модель не включается в проверенный набор автосборки.",
+      "values": {
+        "vram": 8,
+        "vramType": "GDDR6",
+        "length": 199,
+        "width": 120,
+        "thickness": 41,
+        "dimensions": [
+          199,
+          120,
+          41
+        ],
+        "recommendedPsu": 550,
+        "connectors": 1,
+        "connectorType": "8pin",
+        "pcieGeneration": 4,
+        "pcieLanes": 8,
+        "boostMHz": 2460,
+        "busBits": 128,
+        "ports": [
+          "3 × DisplayPort 1.4a",
+          "1 × HDMI 2.1a"
+        ]
+      },
+      "assumptions": [
+        "Температурный предел tmax и коэффициенты нагрева сохранены как параметры учебной симуляции. Производитель этой платы не подтвердил в прочитанной спецификации её порог BIOS/hotspot."
+      ],
+      "limitations": [
+        "Размеры относятся к самой видеокарте, без запаса под изгиб кабеля питания. Проверенная длина не гарантирует зазор по толщине, ширине, радиатору СЖО и соседним картам.",
+        "Ни 115, ни 120 Вт не назначены автоматически единственным значением мощности."
+      ],
+      "corrections": {}
+    }
+  ]
+}

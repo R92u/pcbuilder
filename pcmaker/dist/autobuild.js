@@ -2,20 +2,29 @@ import {regionFromCurrency} from './regions.js';
 import {catalog,categories,resolve} from './catalog.js';
 import {compatibility} from './engine.js';
 import {estimatePrice,estimateDate,gpuRanks} from './budget-data.js';
+import {isVerified} from './verification.js';
+import {priceQuality} from './price-quality.js';
 
 export const purposes={game:{name:'Игры',description:'Приоритет видеокарте и сбалансированному процессору.',ram:16,storage:1000},study:{name:'Учёба',description:'Процессор, память и SSD. Без переплаты за мощную видеокарту.',ram:16,storage:500},video:{name:'Монтаж',description:'Больше ресурсов процессору, от 32 ГБ памяти и 1 ТБ SSD.',ram:32,storage:1000}};
 const kopecks=n=>Math.round(n*100);
-export function budgetPrice(part,category,prices={},allowEstimates=true,currency='RUB'){
+export function budgetPrice(part,category,prices={},allowEstimates=true,currency='RUB',now=Date.now()){
  const offer=prices[part.id];
- if((offer?.currency||'RUB')===currency&&Number.isFinite(offer?.price)&&offer.price>0&&offer.date&&offer.store&&/^https:\/\//.test(offer.url||''))return {price:offer.price,planned:kopecks(offer.price),reserve:0,estimated:false,date:offer.date,store:offer.store,url:offer.url};
+ if(offer?.availability==='out-of-stock')return null;
+ const quality=priceQuality(offer,now);
+ if((offer?.currency||'RUB')===currency&&offer?.store&&/^https:\/\//.test(offer.url||'')&&['fresh','stale'].includes(quality.status)){
+  if(quality.status==='stale'&&!allowEstimates)return null;
+  const stale=quality.status==='stale',reserve=stale?Math.ceil(kopecks(offer.price)*.10):0;
+  return {price:offer.price,planned:kopecks(offer.price)+reserve,reserve:reserve/100,estimated:stale,kind:stale?'stale':'offer',date:offer.date,store:offer.store,url:offer.url,availability:offer.availability||'unknown',note:offer.note||''};
+ }
+ if(quality.status==='unavailable')return null;
  const value=currency==='RUB'&&allowEstimates&&estimatePrice(part,category);
- return value?{price:value,planned:kopecks(value)+Math.ceil(kopecks(value)*.10),reserve:Math.ceil(kopecks(value)*.10)/100,estimated:true,date:estimateDate}:null;
+ return value?{price:value,planned:kopecks(value)+Math.ceil(kopecks(value)*.10),reserve:Math.ceil(kopecks(value)*.10)/100,estimated:true,kind:'estimate',date:estimateDate}:null;
 }
-export function quoteBuild(build,prices,allowEstimates=true,currency='RUB'){
- const parts=resolve(build),rows=categories.map(([key,label])=>({key,label,part:parts[key],quote:parts[key]&&budgetPrice(parts[key],key,prices,allowEstimates,currency)}));
+export function quoteBuild(build,prices,allowEstimates=true,currency='RUB',now=Date.now()){
+ const parts=resolve(build),rows=categories.map(([key,label])=>({key,label,part:parts[key],quote:parts[key]&&isVerified(parts[key])&&budgetPrice(parts[key],key,prices,allowEstimates,currency,now)}));
  if(rows.some(r=>!r.quote))return null;
  const total=rows.reduce((s,r)=>s+kopecks(r.quote.price),0)/100,reserve=rows.reduce((s,r)=>s+kopecks(r.quote.reserve),0)/100;
- return {rows,total,reserve,planned:rows.reduce((s,r)=>s+r.quote.planned,0)/100,estimatedCount:rows.filter(r=>r.quote.estimated).length};
+ return {rows,total,reserve,planned:rows.reduce((s,r)=>s+r.quote.planned,0)/100,estimatedCount:rows.filter(r=>r.quote.estimated).length,staleCount:rows.filter(r=>r.quote.kind==='stale').length,planningCount:rows.filter(r=>r.quote.kind==='estimate').length};
 }
 function cpuScore(p,purpose){
  const generation=p.socket==='AM5'?1.2:1,clock=(p.boostGHz||4)/4.4;
@@ -28,13 +37,13 @@ export function buildScore(parts,purpose){
  return [cpu,purpose==='study'?Math.min(gpu,1):gpu,ram,ssd].reduce((s,n,i)=>s+weights[i]*Math.log(n),0);
 }
 
-export function autoBuild({budget,purpose='game',allowEstimates=true,prices={},currency='RUB'}){
+export function autoBuild({budget,purpose='game',allowEstimates=true,prices={},currency='RUB',now=Date.now()}){
  const region=regionFromCurrency(currency);if(!['RUB','BYN'].includes(currency)||!Number.isFinite(budget)||budget<region.minBudget||budget>region.maxBudget)return {status:'invalid',message:'Укажи бюджет от '+region.minBudget+' до '+region.maxBudget+' '+region.symbol+'.'};
  if(!purposes[purpose])return {status:'invalid',message:'Выбери назначение компьютера.'};
  const cost=new Map(),lists={};
- for(const [key] of categories){lists[key]=catalog[key].filter(p=>{if(p.concept)return false;const q=budgetPrice(p,key,prices,allowEstimates,currency);if(q)cost.set(p.id,q.planned);return !!q;}).sort((a,b)=>cost.get(a.id)-cost.get(b.id));}
+ for(const [key] of categories){lists[key]=catalog[key].filter(p=>{if(!isVerified(p))return false;const q=budgetPrice(p,key,prices,allowEstimates,currency,now);if(q)cost.set(p.id,q.planned);return !!q;}).sort((a,b)=>cost.get(a.id)-cost.get(b.id));}
  const absent=categories.filter(([key])=>!lists[key].length).map(([,name])=>name);
- if(absent.length)return {status:'no-data',message:'Нет подходящих цен для категорий: '+absent.join(', ')+(currency==='BYN'?'. Для Беларуси нужны цены 5element.by; российские цены и пересчёт валют не используются.':'. Разреши ориентировочные цены или обнови каталог.')};
+ if(absent.length)return {status:'no-data',message:'Нет подходящих цен на проверенные модели: '+absent.join(', ')+(currency==='BYN'?'. Нужны предложения белорусских магазинов в BYN; RUB не пересчитываются.':'. Разреши оценки и устаревшие цены или обнови предложения.')};
  const profile=purposes[purpose],rams=lists.ram.filter(p=>p.capacity>=profile.ram),storages=lists.storage.filter(p=>p.capacity>=profile.storage);
  // More expensive items of equal usable capacity cannot improve this score.
  const storageOptions=storages.filter((p,i)=>!storages.slice(0,i).some(q=>Math.min(q.capacity,purpose==='video'?4000:purpose==='game'?2000:1000)>=Math.min(p.capacity,purpose==='video'?4000:purpose==='game'?2000:1000)));
@@ -66,5 +75,5 @@ export function autoBuild({budget,purpose='game',allowEstimates=true,prices={},c
  if(!best)return {status:'over-budget',minimum:minimum.total/100,shortfall:(minimum.total-limit)/100,message:'Для полной сборки в этом режиме бюджета пока не хватает.'};
  const check=compatibility(best.build);
  if(!check.ready)return {status:'no-build',message:'Не удалось подобрать совместимую сборку.'};
- return {status:'ok',build:best.build,budget,purpose,allowEstimates,currency,quote:quoteBuild(best.build,prices,allowEstimates,currency),warnings:check.warnings,recommendedPsu:check.recommended,checked};
+ return {status:'ok',build:best.build,budget,purpose,allowEstimates,currency,quote:quoteBuild(best.build,prices,allowEstimates,currency,now),warnings:check.warnings,recommendedPsu:check.recommended,checked};
 }
