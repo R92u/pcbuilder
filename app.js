@@ -4,6 +4,7 @@ import {verificationMarkup} from './data-quality-ui.js';
 import {priceQuality} from './price-quality.js';
 import {createBuildPanel} from './build-panel.js';
 const buildPanel=createBuildPanel();
+import {createFullscreen} from './fullscreen.js';
 import {revealPanel,hidePanel} from './motion.js';
 import {createThermalPanel} from './thermal-panel.js';
 import {regions,regionFor,priceSnapshot} from './regions.js';
@@ -197,6 +198,7 @@ document.addEventListener('click',ev=>{
 });
 document.addEventListener('keydown',ev=>{if(ev.key==='Escape')closeWorkshopMenu(true);});
 window.addEventListener('resize',positionWorkshopMenu);
+createFullscreen({beforeEnter:()=>{closeWorkshopMenu(false);closeInspector(false);},notify:toast});
 function closeInspector(restore=true){if(!$('component-inspector')||$('component-inspector').hidden)return;$('component-inspector').hidden=true;inspectedKey=null;if(restore)inspectOrigin?.focus();}
 function openInspector(key){
  closeWorkshopMenu(false);
