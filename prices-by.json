@@ -5,13 +5,21 @@
   "checkedAt": "2026-10-11",
   "items": {
     "980": {
-      "price": 1110,
+      "price": 1170,
       "currency": "BYN",
-      "store": "5element.by",
-      "date": "2026-10-11",
-      "url": "https://5element.by/products/714493-ssd-samsung-980-1tb-mz-v8v1t0bw",
-      "availability": "В наличии по снимку магазина",
-      "note": "Цена из карточки 5element.by; регион Минск. Перепроверь перед покупкой."
+      "date": "2026-10-28",
+      "store": "TEC.BY",
+      "url": "https://tec.by/komplektuyushchie/ssd/m-2/ssd-samsung-980-1tb-mz-v8v1t0bw-m-2-detail.html",
+      "availability": "unknown",
+      "note": "Под заказ (1–2 дня). Точная модель 980, не 980 PRO. Цена без доставки; перепроверь цену и наличие перед покупкой.",
+      "model": "Samsung 980 1 ТБ MZ-V8V1T0BW",
+      "evidence": {
+        "method": "direct-http-get",
+        "status": 200,
+        "checkedAt": "2026-10-28",
+        "modelMatch": "exact-model-or-listed-cpu-oem",
+        "excerpt": "Цена: 1.170 00 BYN; Под заказ (1-2 дня)"
+      }
     },
     "mem-kf432c16bb1k2-32": {
       "price": 1569,
@@ -19,7 +27,7 @@
       "store": "5element.by",
       "date": "2026-10-11",
       "url": "https://5element.by/products/719406-operativnaya-pamyat-kingston-fury-beast-kf432c16bb1k2-32",
-      "availability": "В наличии по снимку магазина",
+      "availability": "in-stock",
       "note": "Цена из карточки 5element.by; регион Минск. Перепроверь перед покупкой."
     },
     "mem-ax4u32008g16a-dtwhd35g": {
@@ -28,7 +36,7 @@
       "store": "5element.by",
       "date": "2026-10-11",
       "url": "https://5element.by/products/operativnaya-pamyat-adata-xpg-spectrix-d35g-rgb-2x8gb-ddr4-3200mgts-ax4u32008g16a-dtwhd35g",
-      "availability": "В наличии по снимку магазина",
+      "availability": "in-stock",
       "note": "Цена из карточки 5element.by; регион Минск. Перепроверь перед покупкой."
     },
     "mem-pvs416g373c7k": {
@@ -37,7 +45,7 @@
       "store": "5element.by",
       "date": "2026-10-11",
       "url": "https://5element.by/products/886715-operativnaya-pamyat-patriot-viper-steel-2x8gb-ddr4-pc4-29800-pvs416g373c7k",
-      "availability": "В наличии по снимку магазина",
+      "availability": "in-stock",
       "note": "Цена из карточки 5element.by; регион Минск. Перепроверь перед покупкой."
     },
     "mem-kf568c34bbeak2-32": {
@@ -46,7 +54,7 @@
       "store": "5element.by",
       "date": "2026-10-11",
       "url": "https://5element.by/products/808729-operativnaya-pamyat-kingston-fury-beast-rgb-2x16gb-ddr5-6800mgc-kf568c34bbeak2-32",
-      "availability": "В наличии по снимку магазина",
+      "availability": "in-stock",
       "note": "Цена из карточки 5element.by; регион Минск. Перепроверь перед покупкой."
     },
     "mem-ntbsd4p32sp-16": {
@@ -55,7 +63,7 @@
       "store": "5element.by",
       "date": "2026-10-11",
       "url": "https://5element.by/products/760553-operativnaya-pamyat-netac-basic-ddr4-3200-16gb-c16-ntbsd4p32sp-16",
-      "availability": "В наличии по снимку магазина",
+      "availability": "in-stock",
       "note": "Цена из карточки 5element.by; регион Минск. Перепроверь перед покупкой."
     },
     "mem-kf432c16bb-16": {
@@ -64,7 +72,7 @@
       "store": "5element.by",
       "date": "2026-10-11",
       "url": "https://5element.by/products/746189-operativnaya-pamyat-kingston-fury-beast-16gb-ddr4-pc4-25600-kf432c16bb-16",
-      "availability": "В наличии по снимку магазина",
+      "availability": "in-stock",
       "note": "Цена из карточки 5element.by; регион Минск. Перепроверь перед покупкой."
     },
     "mem-kf432c16bb2a-8": {
@@ -73,7 +81,7 @@
       "store": "5element.by",
       "date": "2026-10-11",
       "url": "https://5element.by/products/operativnaya-pamyat-kingston-fury-beast-rgb-8gb-ddr4-3200-mgts-kf432c16bb2a-8",
-      "availability": "В наличии по снимку магазина",
+      "availability": "in-stock",
       "note": "Цена из карточки 5element.by; регион Минск. Перепроверь перед покупкой."
     },
     "mem-kf556c36bbek2-16": {
@@ -82,7 +90,7 @@
       "store": "5element.by",
       "date": "2026-10-11",
       "url": "https://5element.by/products/860806-operativnaya-pamyat-kingston-fury-beast-2x8gb-ddr5-5600mgc-kf556c36bbek2-16",
-      "availability": "В наличии по снимку магазина",
+      "availability": "in-stock",
       "note": "Цена из карточки 5element.by; регион Минск. Перепроверь перед покупкой."
     },
     "mem-psd44g266681": {
@@ -91,7 +99,7 @@
       "store": "5element.by",
       "date": "2026-10-11",
       "url": "https://5element.by/products/837601-operativnaya-pamyat-patriot-psd44g266681",
-      "availability": "В наличии по снимку магазина",
+      "availability": "in-stock",
       "note": "Цена из карточки 5element.by; регион Минск. Перепроверь перед покупкой."
     },
     "mem-ks3200d4p13508g": {
@@ -100,7 +108,7 @@
       "store": "5element.by",
       "date": "2026-10-11",
       "url": "https://5element.by/products/816508-operativnaya-pamyat-kingspec-8gb-ddr4-3200-mgc-ks3200d4p13508g",
-      "availability": "В наличии по снимку магазина",
+      "availability": "in-stock",
       "note": "Цена из карточки 5element.by; регион Минск. Перепроверь перед покупкой."
     },
     "mem-kf556c36bbek2-32": {
@@ -109,7 +117,7 @@
       "store": "5element.by",
       "date": "2026-10-11",
       "url": "https://5element.by/products/831160-operativnaya-pamyat-kingston-kf556c36bbek2-32",
-      "availability": "В наличии по снимку магазина",
+      "availability": "in-stock",
       "note": "Цена из карточки 5element.by; регион Минск. Перепроверь перед покупкой."
     },
     "mem-kf556c36bbe-16": {
@@ -118,7 +126,7 @@
       "store": "5element.by",
       "date": "2026-10-11",
       "url": "https://5element.by/products/860808-operativnaya-pamyat-kingston-fury-beast-16gb-ddr5-5600-mgc-kf556c36bbe-16",
-      "availability": "В наличии по снимку магазина",
+      "availability": "in-stock",
       "note": "Цена из карточки 5element.by; регион Минск. Перепроверь перед покупкой."
     },
     "mem-ntbsd4p26sp-08": {
@@ -127,7 +135,7 @@
       "store": "5element.by",
       "date": "2026-10-11",
       "url": "https://5element.by/products/760558-operativnaya-pamyat-netac-basic-ddr4-2666-8gb-c19-ntbsd4p26sp-08",
-      "availability": "В наличии по снимку магазина",
+      "availability": "in-stock",
       "note": "Цена из карточки 5element.by; регион Минск. Перепроверь перед покупкой."
     },
     "mem-kvr32n22s8-8wp": {
@@ -136,7 +144,7 @@
       "store": "5element.by",
       "date": "2026-10-11",
       "url": "https://5element.by/products/operativnaya-pamyat-kingston-valueram-8gb-ddr4-3200-mgts-kvr32n22s8-8wp",
-      "availability": "В наличии по снимку магазина",
+      "availability": "in-stock",
       "note": "Цена из карточки 5element.by; регион Минск. Перепроверь перед покупкой."
     },
     "mem-psd48g266681": {
@@ -145,7 +153,7 @@
       "store": "5element.by",
       "date": "2026-10-11",
       "url": "https://5element.by/products/712309-operativnaya-pamyat-patriot-signature-line-8gb-ddr4-pc4-21300-psd48g266681",
-      "availability": "В наличии по снимку магазина",
+      "availability": "in-stock",
       "note": "Цена из карточки 5element.by; регион Минск. Перепроверь перед покупкой."
     },
     "mem-kf560c30bbek2-16": {
@@ -154,7 +162,7 @@
       "store": "5element.by",
       "date": "2026-10-11",
       "url": "https://5element.by/products/operativnaya-pamyat-kingston-fury-beast-2x8gb-ddr5-6000-mgts-kf560c30bbek2-16",
-      "availability": "В наличии по снимку магазина",
+      "availability": "in-stock",
       "note": "Цена из карточки 5element.by; регион Минск. Перепроверь перед покупкой."
     },
     "mem-ax4u32008g16a-dtwhd35": {
@@ -163,7 +171,7 @@
       "store": "5element.by",
       "date": "2026-10-11",
       "url": "https://5element.by/products/operativnaya-pamyat-a-data-ax4u32008g16a-dtwhd35",
-      "availability": "В наличии по снимку магазина",
+      "availability": "in-stock",
       "note": "Цена из карточки 5element.by; регион Минск. Перепроверь перед покупкой."
     },
     "mem-kf436c18bb-16": {
@@ -172,7 +180,7 @@
       "store": "5element.by",
       "date": "2026-10-11",
       "url": "https://5element.by/products/746211-operativnaya-pamyat-kingston-fury-beast-16gb-ddr4-pc4-28800-kf436c18bb-16",
-      "availability": "В наличии по снимку магазина",
+      "availability": "in-stock",
       "note": "Цена из карточки 5element.by; регион Минск. Перепроверь перед покупкой."
     },
     "mem-kf564c32bbek2-32": {
@@ -181,7 +189,7 @@
       "store": "5element.by",
       "date": "2026-10-11",
       "url": "https://5element.by/products/operativnaya-pamyat-kingston-fury-beast-2x16gb-ddr5-6400-mgts-kf564c32bbek2-32",
-      "availability": "В наличии по снимку магазина",
+      "availability": "in-stock",
       "note": "Цена из карточки 5element.by; регион Минск. Перепроверь перед покупкой."
     },
     "mem-ntbsd4p26sp-16": {
@@ -190,7 +198,7 @@
       "store": "5element.by",
       "date": "2026-10-11",
       "url": "https://5element.by/products/760554-operativnaya-pamyat-netac-basic-ddr4-2666-16gb-c19-ntbsd4p26sp-16",
-      "availability": "В наличии по снимку магазина",
+      "availability": "in-stock",
       "note": "Цена из карточки 5element.by; регион Минск. Перепроверь перед покупкой."
     },
     "mem-pvv516g56c36": {
@@ -199,7 +207,7 @@
       "store": "5element.by",
       "date": "2026-10-11",
       "url": "https://5element.by/products/operativnaya-pamyat-patriot-viper-venom-pvv516g56c36-ddr5-1x-16gb-5600mgts",
-      "availability": "В наличии по снимку магазина",
+      "availability": "in-stock",
       "note": "Цена из карточки 5element.by; регион Минск. Перепроверь перед покупкой."
     },
     "mem-kvr32n22s8-16": {
@@ -208,7 +216,7 @@
       "store": "5element.by",
       "date": "2026-10-11",
       "url": "https://5element.by/products/746181-operativnaya-pamyat-kingston-valueram-16gb-ddr4-pc4-25600-kvr32n22s8-16",
-      "availability": "В наличии по снимку магазина",
+      "availability": "in-stock",
       "note": "Цена из карточки 5element.by; регион Минск. Перепроверь перед покупкой."
     },
     "mem-ks3200d4p13516g": {
@@ -217,7 +225,7 @@
       "store": "5element.by",
       "date": "2026-10-11",
       "url": "https://5element.by/products/816507-operativnaya-pamyat-kingspec-16gb-ddr4-3200-mgc-ks3200d4p13516g",
-      "availability": "В наличии по снимку магазина",
+      "availability": "in-stock",
       "note": "Цена из карточки 5element.by; регион Минск. Перепроверь перед покупкой."
     },
     "mem-kf560c30bbek2-64": {
@@ -226,7 +234,7 @@
       "store": "5element.by",
       "date": "2026-10-11",
       "url": "https://5element.by/products/834051-modul-pamyati-kingston-kf560c30bbek2-64",
-      "availability": "В наличии по снимку магазина",
+      "availability": "in-stock",
       "note": "Цена из карточки 5element.by; регион Минск. Перепроверь перед покупкой."
     },
     "mem-psp48g3200h1": {
@@ -235,7 +243,7 @@
       "store": "5element.by",
       "date": "2026-10-11",
       "url": "https://5element.by/products/operativnaya-pamyat-patriot-signature-premium-line-8gb-ddr4-3200-mgts-psp48g3200h1",
-      "availability": "В наличии по снимку магазина",
+      "availability": "in-stock",
       "note": "Цена из карточки 5element.by; регион Минск. Перепроверь перед покупкой."
     },
     "mem-ks2666d4p12016g": {
@@ -244,7 +252,7 @@
       "store": "5element.by",
       "date": "2026-10-11",
       "url": "https://5element.by/products/793303-operativnaya-pamyat-kingspec-ks2666d4p12016g",
-      "availability": "В наличии по снимку магазина",
+      "availability": "in-stock",
       "note": "Цена из карточки 5element.by; регион Минск. Перепроверь перед покупкой."
     },
     "mem-ax5u6000c3016g-dtlabbk": {
@@ -253,7 +261,7 @@
       "store": "5element.by",
       "date": "2026-10-11",
       "url": "https://5element.by/products/874161-operativnaya-pamyat-a-data-ax5u6000c3016g-dtlabbk",
-      "availability": "В наличии по снимку магазина",
+      "availability": "in-stock",
       "note": "Цена из карточки 5element.by; регион Минск. Перепроверь перед покупкой."
     },
     "mem-au08ggb32csybgh": {
@@ -262,7 +270,7 @@
       "store": "5element.by",
       "date": "2026-10-11",
       "url": "https://5element.by/products/854271-operativnaya-pamyat-apacer-au08ggb32csybgh",
-      "availability": "В наличии по снимку магазина",
+      "availability": "in-stock",
       "note": "Цена из карточки 5element.by; регион Минск. Перепроверь перед покупкой."
     },
     "mem-ax5u6000c3016g-dtlabrbk": {
@@ -271,7 +279,7 @@
       "store": "5element.by",
       "date": "2026-10-11",
       "url": "https://5element.by/products/879118-operativnaya-pamyat-a-data-ax5u6000c3016g-dtlabrbk",
-      "availability": "В наличии по снимку магазина",
+      "availability": "in-stock",
       "note": "Цена из карточки 5element.by; регион Минск. Перепроверь перед покупкой."
     },
     "mem-ax5u6400c3216g-dclarwh": {
@@ -280,7 +288,7 @@
       "store": "5element.by",
       "date": "2026-10-11",
       "url": "https://5element.by/products/874158-operativnaya-pamyat-a-data-ax5u6400c3216g-dclarwh",
-      "availability": "В наличии по снимку магазина",
+      "availability": "in-stock",
       "note": "Цена из карточки 5element.by; регион Минск. Перепроверь перед покупкой."
     },
     "mem-ax5u5600c468g-dtlabbk": {
@@ -289,7 +297,7 @@
       "store": "5element.by",
       "date": "2026-10-11",
       "url": "https://5element.by/products/operativnaya-pamyat-a-data-ax5u5600c468g-dtlabbk",
-      "availability": "В наличии по снимку магазина",
+      "availability": "in-stock",
       "note": "Цена из карточки 5element.by; регион Минск. Перепроверь перед покупкой."
     },
     "mem-ntbsd5p48sp-16": {
@@ -298,7 +306,7 @@
       "store": "5element.by",
       "date": "2026-10-11",
       "url": "https://5element.by/products/760556-operativnaya-pamyat-netac-basic-ddr5-4800-16gb-c40-ntbsd5p48sp-16",
-      "availability": "В наличии по снимку магазина",
+      "availability": "in-stock",
       "note": "Цена из карточки 5element.by; регион Минск. Перепроверь перед покупкой."
     },
     "mem-kf552c40bba-8": {
@@ -307,7 +315,7 @@
       "store": "5element.by",
       "date": "2026-10-11",
       "url": "https://5element.by/products/800615-operativnaya-pamyat-kingston-fury-beast-rgb-8gb-ddr5-5200-mgc-kf552c40bba-8",
-      "availability": "В наличии по снимку магазина",
+      "availability": "in-stock",
       "note": "Цена из карточки 5element.by; регион Минск. Перепроверь перед покупкой."
     },
     "mem-kf560c30bbe-32": {
@@ -316,7 +324,7 @@
       "store": "5element.by",
       "date": "2026-10-11",
       "url": "https://5element.by/products/834049-modul-pamyati-kingston-kf560c30bbe-32",
-      "availability": "В наличии по снимку магазина",
+      "availability": "in-stock",
       "note": "Цена из карточки 5element.by; регион Минск. Перепроверь перед покупкой."
     },
     "mem-dgmad43200016d": {
@@ -325,7 +333,7 @@
       "store": "5element.by",
       "date": "2026-10-11",
       "url": "https://5element.by/products/867341-operativnaya-pamyat-digma-dgmad43200016d",
-      "availability": "В наличии по снимку магазина",
+      "availability": "in-stock",
       "note": "Цена из карточки 5element.by; регион Минск. Перепроверь перед покупкой."
     },
     "mem-ax5u6000c3016g-dclabk": {
@@ -334,7 +342,7 @@
       "store": "5element.by",
       "date": "2026-10-11",
       "url": "https://5element.by/products/879117-operativnaya-pamyat-a-data-ax5u6000c3016g-dclabk",
-      "availability": "В наличии по снимку магазина",
+      "availability": "in-stock",
       "note": "Цена из карточки 5element.by; регион Минск. Перепроверь перед покупкой."
     },
     "mem-ks3200d4p12008g": {
@@ -343,7 +351,7 @@
       "store": "5element.by",
       "date": "2026-10-11",
       "url": "https://5element.by/products/793308-operativnaya-pamyat-kingspec-ks3200d4p12008g",
-      "availability": "В наличии по снимку магазина",
+      "availability": "in-stock",
       "note": "Цена из карточки 5element.by; регион Минск. Перепроверь перед покупкой."
     },
     "mem-dgmad42666004s": {
@@ -352,7 +360,7 @@
       "store": "5element.by",
       "date": "2026-10-11",
       "url": "https://5element.by/products/804949-operativnaya-pamyat-digma-4gb-ddr4-2666-mgc-dgmad42666004s",
-      "availability": "В наличии по снимку магазина",
+      "availability": "in-stock",
       "note": "Цена из карточки 5element.by; регион Минск. Перепроверь перед покупкой."
     },
     "mem-psp516g560081h1": {
@@ -361,7 +369,7 @@
       "store": "5element.by",
       "date": "2026-10-11",
       "url": "https://5element.by/products/837609-operativnaya-pamyat-patriot-psp516g560081h1",
-      "availability": "В наличии по снимку магазина",
+      "availability": "in-stock",
       "note": "Цена из карточки 5element.by; регион Минск. Перепроверь перед покупкой."
     },
     "mem-au08ggb26cqybgh": {
@@ -370,7 +378,7 @@
       "store": "5element.by",
       "date": "2026-10-11",
       "url": "https://5element.by/products/840930-operativnaya-pamyat-apacer-8gb-ddr4-pc4-21300-au08ggb26cqybgh",
-      "availability": "В наличии по снимку магазина",
+      "availability": "in-stock",
       "note": "Цена из карточки 5element.by; регион Минск. Перепроверь перед покупкой."
     },
     "mem-ax5u5600c4616g-dtlabwh": {
@@ -379,7 +387,7 @@
       "store": "5element.by",
       "date": "2026-10-11",
       "url": "https://5element.by/products/879106-operativnaya-pamyat-a-data-ax5u5600c4616g-dtlabwh",
-      "availability": "В наличии по снимку магазина",
+      "availability": "in-stock",
       "note": "Цена из карточки 5element.by; регион Минск. Перепроверь перед покупкой."
     },
     "mem-kf432c16rb12-16": {
@@ -388,7 +396,7 @@
       "store": "5element.by",
       "date": "2026-10-11",
       "url": "https://5element.by/products/820027-operativnaya-pamyat-kingston-kf432c16rb12-16",
-      "availability": "В наличии по снимку магазина",
+      "availability": "in-stock",
       "note": "Цена из карточки 5element.by; регион Минск. Перепроверь перед покупкой."
     },
     "mem-ax5u6400c3216g-dtlabbk": {
@@ -397,7 +405,7 @@
       "store": "5element.by",
       "date": "2026-10-11",
       "url": "https://5element.by/products/874170-operativnaya-pamyat-a-data-ax5u6400c3216g-dtlabbk",
-      "availability": "В наличии по снимку магазина",
+      "availability": "in-stock",
       "note": "Цена из карточки 5element.by; регион Минск. Перепроверь перед покупкой."
     },
     "mem-psp416g3200h1": {
@@ -406,7 +414,7 @@
       "store": "5element.by",
       "date": "2026-10-11",
       "url": "https://5element.by/products/psp416g3200h1-operativnaya-pamyat-ddr4-16gb-3200mhz-patriot",
-      "availability": "В наличии по снимку магазина",
+      "availability": "in-stock",
       "note": "Цена из карточки 5element.by; регион Минск. Перепроверь перед покупкой."
     },
     "mem-ax5u6000c3616g-dtlabrbk": {
@@ -415,7 +423,7 @@
       "store": "5element.by",
       "date": "2026-10-11",
       "url": "https://5element.by/products/ax5u6000c3616g-dtlabrbk-pamyat-ddr5-2x16gb-6000mhz-a-data",
-      "availability": "В наличии по снимку магазина",
+      "availability": "in-stock",
       "note": "Цена из карточки 5element.by; регион Минск. Перепроверь перед покупкой."
     },
     "mem-ax4u32008g16a-sbkd35": {
@@ -424,7 +432,7 @@
       "store": "5element.by",
       "date": "2026-10-11",
       "url": "https://5element.by/products/886639-operativnaya-pamyat-adata-ax4u32008g16a-sbkd35",
-      "availability": "В наличии по снимку магазина",
+      "availability": "in-stock",
       "note": "Цена из карточки 5element.by; регион Минск. Перепроверь перед покупкой."
     },
     "mem-psd432g32002": {
@@ -433,7 +441,7 @@
       "store": "5element.by",
       "date": "2026-10-11",
       "url": "https://5element.by/products/831164-operativnaya-pamyat-patriot-psd432g32002",
-      "availability": "В наличии по снимку магазина",
+      "availability": "in-stock",
       "note": "Цена из карточки 5element.by; регион Минск. Перепроверь перед покупкой."
     },
     "mem-psd416g26662": {
@@ -442,7 +450,7 @@
       "store": "5element.by",
       "date": "2026-10-11",
       "url": "https://5element.by/products/782778-operativnaya-pamyat-patriot-signature-line-16gb-ddr4-pc4-21300-psd416g26662",
-      "availability": "В наличии по снимку магазина",
+      "availability": "in-stock",
       "note": "Цена из карточки 5element.by; регион Минск. Перепроверь перед покупкой."
     },
     "mem-ks2666d4p12008g": {
@@ -451,7 +459,7 @@
       "store": "5element.by",
       "date": "2026-10-11",
       "url": "https://5element.by/products/793316-operativnaya-pamyat-kingspec-ks2666d4p12008g",
-      "availability": "В наличии по снимку магазина",
+      "availability": "in-stock",
       "note": "Цена из карточки 5element.by; регион Минск. Перепроверь перед покупкой."
     },
     "mem-ax5u6400c3216g-dtlabrwh": {
@@ -460,7 +468,7 @@
       "store": "5element.by",
       "date": "2026-10-11",
       "url": "https://5element.by/products/879153-operativnaya-pamyat-a-data-ax5u6400c3216g-dtlabrwh",
-      "availability": "В наличии по снимку магазина",
+      "availability": "in-stock",
       "note": "Цена из карточки 5element.by; регион Минск. Перепроверь перед покупкой."
     },
     "ssd-ap256gas2280p4x-1": {
@@ -469,7 +477,7 @@
       "store": "5element.by",
       "date": "2026-10-11",
       "url": "https://5element.by/products/nakopitel-ssd-apacer-ap256gas2280p4x-1",
-      "availability": "В наличии по снимку магазина",
+      "availability": "in-stock",
       "note": "Цена из карточки 5element.by; регион Минск. Перепроверь перед покупкой."
     },
     "ssd-nt01nv2000-256-e4x": {
@@ -478,7 +486,7 @@
       "store": "5element.by",
       "date": "2026-10-11",
       "url": "https://5element.by/products/757972-ssd-netac-nv2000-256gb-nt01nv2000-256-e4x",
-      "availability": "В наличии по снимку магазина",
+      "availability": "in-stock",
       "note": "Цена из карточки 5element.by; регион Минск. Перепроверь перед покупкой."
     },
     "ssd-nx-1tb": {
@@ -487,7 +495,7 @@
       "store": "5element.by",
       "date": "2026-10-11",
       "url": "https://5element.by/products/793277-nakopitel-ssd-kingspec-nx-1tb",
-      "availability": "В наличии по снимку магазина",
+      "availability": "in-stock",
       "note": "Цена из карточки 5element.by; регион Минск. Перепроверь перед покупкой."
     },
     "ssd-p400lp2kgm28h": {
@@ -496,7 +504,7 @@
       "store": "5element.by",
       "date": "2026-10-11",
       "url": "https://5element.by/products/p400lp2kgm28h-nakopitel-ssd-patriot",
-      "availability": "В наличии по снимку магазина",
+      "availability": "in-stock",
       "note": "Цена из карточки 5element.by; регион Минск. Перепроверь перед покупкой."
     },
     "ssd-agammixs60-1t-cs": {
@@ -505,7 +513,7 @@
       "store": "5element.by",
       "date": "2026-10-11",
       "url": "https://5element.by/products/agammixs60-1t-cs-nakopitel-ssd-a-data",
-      "availability": "В наличии по снимку магазина",
+      "availability": "in-stock",
       "note": "Цена из карточки 5element.by; регион Минск. Перепроверь перед покупкой."
     },
     "ssd-snv3s-500g": {
@@ -514,7 +522,7 @@
       "store": "5element.by",
       "date": "2026-10-11",
       "url": "https://5element.by/products/834109-ssd-kingston-nv3-500gb-snv3s-500g",
-      "availability": "В наличии по снимку магазина",
+      "availability": "in-stock",
       "note": "Цена из карточки 5element.by; регион Минск. Перепроверь перед покупкой."
     },
     "ssd-aleg-710-256gcs": {
@@ -523,7 +531,7 @@
       "store": "5element.by",
       "date": "2026-10-11",
       "url": "https://5element.by/products/894512-nakopitel-ssd-a-data-aleg-710-256gcs",
-      "availability": "В наличии по снимку магазина",
+      "availability": "in-stock",
       "note": "Цена из карточки 5element.by; регион Минск. Перепроверь перед покупкой."
     },
     "ssd-p320p512gm28": {
@@ -532,7 +540,7 @@
       "store": "5element.by",
       "date": "2026-10-11",
       "url": "https://5element.by/products/p320p512gm28-nakopitel-ssd-patriot",
-      "availability": "В наличии по снимку магазина",
+      "availability": "in-stock",
       "note": "Цена из карточки 5element.by; регион Минск. Перепроверь перед покупкой."
     },
     "ssd-nt01nv3000-1t0-e4x": {
@@ -541,7 +549,7 @@
       "store": "5element.by",
       "date": "2026-10-11",
       "url": "https://5element.by/products/758021-ssd-netac-nv3000-1tb-nt01nv3000-1t0-e4x",
-      "availability": "В наличии по снимку магазина",
+      "availability": "in-stock",
       "note": "Цена из карточки 5element.by; регион Минск. Перепроверь перед покупкой."
     },
     "ssd-p320p1tbm28": {
@@ -550,7 +558,7 @@
       "store": "5element.by",
       "date": "2026-10-11",
       "url": "https://5element.by/products/p320p1tbm28-nakopitel-ssd-patriot",
-      "availability": "В наличии по снимку магазина",
+      "availability": "in-stock",
       "note": "Цена из карточки 5element.by; регион Минск. Перепроверь перед покупкой."
     },
     "ssd-sleg-860-1000gcs": {
@@ -559,7 +567,7 @@
       "store": "5element.by",
       "date": "2026-10-11",
       "url": "https://5element.by/products/894519-nakopitel-ssd-a-data-sleg-860-1000gcs",
-      "availability": "В наличии по снимку магазина",
+      "availability": "in-stock",
       "note": "Цена из карточки 5element.by; регион Минск. Перепроверь перед покупкой."
     },
     "ssd-sp512gbp34a60m28": {
@@ -568,7 +576,7 @@
       "store": "5element.by",
       "date": "2026-10-11",
       "url": "https://5element.by/products/782761-tverdotelnyy-nakopitel-ssd-silicon-power-sp512gbp34a60m28",
-      "availability": "В наличии по снимку магазина",
+      "availability": "in-stock",
       "note": "Цена из карточки 5element.by; регион Минск. Перепроверь перед покупкой."
     },
     "ssd-nt01nv3000-500-e4x": {
@@ -577,7 +585,7 @@
       "store": "5element.by",
       "date": "2026-10-11",
       "url": "https://5element.by/products/758027-ssd-netac-nv3000-500gb-nt01nv3000-500-e4x",
-      "availability": "В наличии по снимку магазина",
+      "availability": "in-stock",
       "note": "Цена из карточки 5element.by; регион Минск. Перепроверь перед покупкой."
     },
     "ssd-p400lp1kgm28h": {
@@ -586,7 +594,7 @@
       "store": "5element.by",
       "date": "2026-10-11",
       "url": "https://5element.by/products/p400lp1kgm28h-nakopitel-ssd-patriot",
-      "availability": "В наличии по снимку магазина",
+      "availability": "in-stock",
       "note": "Цена из карточки 5element.by; регион Минск. Перепроверь перед покупкой."
     },
     "ssd-agammixs60-512g-cs": {
@@ -595,7 +603,7 @@
       "store": "5element.by",
       "date": "2026-10-11",
       "url": "https://5element.by/products/831082-ssd-adata-xpg-gammix-s60-blade-512gb-agammixs60-512g-cs",
-      "availability": "В наличии по снимку магазина",
+      "availability": "in-stock",
       "note": "Цена из карточки 5element.by; регион Минск. Перепроверь перед покупкой."
     },
     "ssd-sfyr2s-2t0": {
@@ -604,7 +612,7 @@
       "store": "5element.by",
       "date": "2026-10-11",
       "url": "https://5element.by/products/894940-ssd-kingston-fury-renegade-g5-2tb-sfyr2s-2t0",
-      "availability": "В наличии по снимку магазина",
+      "availability": "in-stock",
       "note": "Цена из карточки 5element.by; регион Минск. Перепроверь перед покупкой."
     },
     "ssd-aleg-960m-1tcs": {
@@ -613,7 +621,7 @@
       "store": "5element.by",
       "date": "2026-10-11",
       "url": "https://5element.by/products/aleg-960m-1tcs-nakopitel-ssd-a-data",
-      "availability": "В наличии по снимку магазина",
+      "availability": "in-stock",
       "note": "Цена из карточки 5element.by; регион Минск. Перепроверь перед покупкой."
     },
     "ssd-p320p2tbm28": {
@@ -622,7 +630,7 @@
       "store": "5element.by",
       "date": "2026-10-11",
       "url": "https://5element.by/products/894334-ssd-patriot-p320-2tb-p320p2tbm28",
-      "availability": "В наличии по снимку магазина",
+      "availability": "in-stock",
       "note": "Цена из карточки 5element.by; регион Минск. Перепроверь перед покупкой."
     },
     "ssd-sleg-900p-2tcs": {
@@ -631,7 +639,7 @@
       "store": "5element.by",
       "date": "2026-10-11",
       "url": "https://5element.by/products/sleg-900p-2tcs-nakopitel-ssd-a-data",
-      "availability": "В наличии по снимку магазина",
+      "availability": "in-stock",
       "note": "Цена из карточки 5element.by; регион Минск. Перепроверь перед покупкой."
     },
     "ssd-mz-v9s1t0bw": {
@@ -640,7 +648,7 @@
       "store": "5element.by",
       "date": "2026-10-11",
       "url": "https://5element.by/products/mz-v9s1t0b-1tb-990-evo-plus-nvme-nakopitel-ssd-samsung",
-      "availability": "В наличии по снимку магазина",
+      "availability": "in-stock",
       "note": "Цена из карточки 5element.by; регион Минск. Перепроверь перед покупкой."
     },
     "ssd-snv3s-4000g": {
@@ -649,7 +657,7 @@
       "store": "5element.by",
       "date": "2026-10-11",
       "url": "https://5element.by/products/ssd-kingston-nv3-4tb-snv3s-4000g",
-      "availability": "В наличии по снимку магазина",
+      "availability": "in-stock",
       "note": "Цена из карточки 5element.by; регион Минск. Перепроверь перед покупкой."
     },
     "ssd-p400vp1tbm28h": {
@@ -658,7 +666,7 @@
       "store": "5element.by",
       "date": "2026-10-11",
       "url": "https://5element.by/products/894336-ssd-patriot-p400-v4-1tb-p400vp1tbm28h",
-      "availability": "В наличии по снимку магазина",
+      "availability": "in-stock",
       "note": "Цена из карточки 5element.by; регион Минск. Перепроверь перед покупкой."
     },
     "ssd-vp4300l1tbm28h": {
@@ -667,7 +675,7 @@
       "store": "5element.by",
       "date": "2026-10-11",
       "url": "https://5element.by/products/805381-ssd-patriot-viper-vp4300-lite-1tb-vp4300l1tbm28h",
-      "availability": "В наличии по снимку магазина",
+      "availability": "in-stock",
       "note": "Цена из карточки 5element.by; регион Минск. Перепроверь перед покупкой."
     },
     "ssd-agammixs70b-1t-cs": {
@@ -676,7 +684,7 @@
       "store": "5element.by",
       "date": "2026-10-11",
       "url": "https://5element.by/products/894510-nakopitel-ssd-a-data-agammixs70b-1t-cs",
-      "availability": "В наличии по снимку магазина",
+      "availability": "in-stock",
       "note": "Цена из карточки 5element.by; регион Минск. Перепроверь перед покупкой."
     },
     "ssd-p400vp500gm28h": {
@@ -685,7 +693,7 @@
       "store": "5element.by",
       "date": "2026-10-11",
       "url": "https://5element.by/products/894337-ssd-patriot-p400-v4-500gb-p400vp500gm28h",
-      "availability": "В наличии по снимку магазина",
+      "availability": "in-stock",
       "note": "Цена из карточки 5element.by; регион Минск. Перепроверь перед покупкой."
     },
     "ssd-hsa4300-1024g": {
@@ -694,7 +702,7 @@
       "store": "5element.by",
       "date": "2026-10-11",
       "url": "https://5element.by/products/hsa4300-1024g-tverdotelnyy-nakopitel-h-storage",
-      "availability": "В наличии по снимку магазина",
+      "availability": "in-stock",
       "note": "Цена из карточки 5element.by; регион Минск. Перепроверь перед покупкой."
     },
     "ssd-smar-980b-1tcs": {
@@ -703,7 +711,7 @@
       "store": "5element.by",
       "date": "2026-10-11",
       "url": "https://5element.by/products/894531-nakopitel-ssd-a-data-smar-980b-1tcs",
-      "availability": "В наличии по снимку магазина",
+      "availability": "in-stock",
       "note": "Цена из карточки 5element.by; регион Минск. Перепроверь перед покупкой."
     },
     "ssd-ap512gas2280p4x-1": {
@@ -712,7 +720,7 @@
       "store": "5element.by",
       "date": "2026-10-11",
       "url": "https://5element.by/products/ssd-apacer-as2280p4x-512gb-ap512gas2280p4x-1",
-      "availability": "В наличии по снимку магазина",
+      "availability": "in-stock",
       "note": "Цена из карточки 5element.by; регион Минск. Перепроверь перед покупкой."
     },
     "ssd-nt01nv3000-250-e4x": {
@@ -721,7 +729,7 @@
       "store": "5element.by",
       "date": "2026-10-11",
       "url": "https://5element.by/products/758020-ssd-netac-nv3000-250gb-nt01nv3000-250-e4x",
-      "availability": "В наличии по снимку магазина",
+      "availability": "in-stock",
       "note": "Цена из карточки 5element.by; регион Минск. Перепроверь перед покупкой."
     },
     "ssd-nt01nv2000-1t0-e4x": {
@@ -730,7 +738,7 @@
       "store": "5element.by",
       "date": "2026-10-11",
       "url": "https://5element.by/products/757973-ssd-netac-nv2000-1tb-nt01nv2000-1t0-e4x",
-      "availability": "В наличии по снимку магазина",
+      "availability": "in-stock",
       "note": "Цена из карточки 5element.by; регион Минск. Перепроверь перед покупкой."
     },
     "ssd-sfyr2s-1t0": {
@@ -739,7 +747,7 @@
       "store": "5element.by",
       "date": "2026-10-11",
       "url": "https://5element.by/products/894941-ssd-kingston-fury-renegade-g5-1tb-sfyr2s-1t0",
-      "availability": "В наличии по снимку магазина",
+      "availability": "in-stock",
       "note": "Цена из карточки 5element.by; регион Минск. Перепроверь перед покупкой."
     },
     "ssd-nt01nv7000q-1t0-e4x": {
@@ -748,7 +756,7 @@
       "store": "5element.by",
       "date": "2026-10-11",
       "url": "https://5element.by/products/894330-ssd-netac-nv7000-q-1tb-nt01nv7000q-1t0-e4x",
-      "availability": "В наличии по снимку магазина",
+      "availability": "in-stock",
       "note": "Цена из карточки 5element.by; регион Минск. Перепроверь перед покупкой."
     },
     "ssd-ct500t500ssd8": {
@@ -757,7 +765,7 @@
       "store": "5element.by",
       "date": "2026-10-11",
       "url": "https://5element.by/products/894835-ssd-crucial-t500-500gb-ct500t500ssd8",
-      "availability": "В наличии по снимку магазина",
+      "availability": "in-stock",
       "note": "Цена из карточки 5element.by; регион Минск. Перепроверь перед покупкой."
     },
     "ssd-aleg-960m-2tcs": {
@@ -766,7 +774,7 @@
       "store": "5element.by",
       "date": "2026-10-11",
       "url": "https://5element.by/products/894515-nakopitel-ssd-a-data-aleg-960m-2tcs",
-      "availability": "В наличии по снимку магазина",
+      "availability": "in-stock",
       "note": "Цена из карточки 5element.by; регион Минск. Перепроверь перед покупкой."
     },
     "ssd-smar-980b-2tcs": {
@@ -775,7 +783,7 @@
       "store": "5element.by",
       "date": "2026-10-11",
       "url": "https://5element.by/products/smar-980b-2tcs-nakopitel-ssd-a-data",
-      "availability": "В наличии по снимку магазина",
+      "availability": "in-stock",
       "note": "Цена из карточки 5element.by; регион Минск. Перепроверь перед покупкой."
     },
     "ssd-hsa4300-512g": {
@@ -784,7 +792,7 @@
       "store": "5element.by",
       "date": "2026-10-11",
       "url": "https://5element.by/products/hsa4300-512g-tverdotelnyy-nakopitel-h-storage",
-      "availability": "В наличии по снимку магазина",
+      "availability": "in-stock",
       "note": "Цена из карточки 5element.by; регион Минск. Перепроверь перед покупкой."
     },
     "ssd-hsa4300-256g": {
@@ -793,7 +801,7 @@
       "store": "5element.by",
       "date": "2026-10-11",
       "url": "https://5element.by/products/hsa4300-256g-tverdotelnyy-nakopitel-h-storage",
-      "availability": "В наличии по снимку магазина",
+      "availability": "in-stock",
       "note": "Цена из карточки 5element.by; регион Минск. Перепроверь перед покупкой."
     },
     "ssd-sleg-900p-1tcs": {
@@ -802,7 +810,7 @@
       "store": "5element.by",
       "date": "2026-10-11",
       "url": "https://5element.by/products/894529-nakopitel-ssd-a-data-sleg-900p-1tcs",
-      "availability": "В наличии по снимку магазина",
+      "availability": "in-stock",
       "note": "Цена из карточки 5element.by; регион Минск. Перепроверь перед покупкой."
     },
     "ssd-sleg-860-500gcs": {
@@ -811,7 +819,7 @@
       "store": "5element.by",
       "date": "2026-10-11",
       "url": "https://5element.by/products/894522-nakopitel-ssd-a-data-sleg-860-500gcs",
-      "availability": "В наличии по снимку магазина",
+      "availability": "in-stock",
       "note": "Цена из карточки 5element.by; регион Минск. Перепроверь перед покупкой."
     },
     "ssd-aleg-710-2tcs": {
@@ -820,7 +828,7 @@
       "store": "5element.by",
       "date": "2026-10-11",
       "url": "https://5element.by/products/894516-nakopitel-ssd-a-data-aleg-710-2tcs",
-      "availability": "В наличии по снимку магазина",
+      "availability": "in-stock",
       "note": "Цена из карточки 5element.by; регион Минск. Перепроверь перед покупкой."
     },
     "ssd-sleg-900-512gcs": {
@@ -829,7 +837,7 @@
       "store": "5element.by",
       "date": "2026-10-11",
       "url": "https://5element.by/products/874348-nakopitel-ssd-a-data-sleg-900-512gcs",
-      "availability": "В наличии по снимку магазина",
+      "availability": "in-stock",
       "note": "Цена из карточки 5element.by; регион Минск. Перепроверь перед покупкой."
     },
     "ssd-agi1t0gimai298-cb": {
@@ -838,7 +846,7 @@
       "store": "5element.by",
       "date": "2026-10-11",
       "url": "https://5element.by/products/ssd-agi-agi1t0gimai298-cb",
-      "availability": "В наличии по снимку магазина",
+      "availability": "in-stock",
       "note": "Цена из карточки 5element.by; регион Минск. Перепроверь перед покупкой."
     },
     "ssd-r3mp30128g8": {
@@ -847,7 +855,7 @@
       "store": "5element.by",
       "date": "2026-10-11",
       "url": "https://5element.by/products/ssd-amd-radeon-r3-128gb-r3mp30128g8",
-      "availability": "В наличии по снимку магазина",
+      "availability": "in-stock",
       "note": "Цена из карточки 5element.by; регион Минск. Перепроверь перед покупкой."
     },
     "aio-le360-v2": {
@@ -856,17 +864,25 @@
       "store": "5element.by",
       "date": "2026-10-11",
       "url": "https://5element.by/products/r-le360-bkammc-g-2-sistema-vodyanogo-okhlazhdeniya-deepcool",
-      "availability": "В наличии по снимку магазина",
+      "availability": "in-stock",
       "note": "Цена из карточки 5element.by; регион Минск. Перепроверь перед покупкой."
     },
     "aio-le240-v2": {
-      "price": 231,
+      "price": 204.7,
       "currency": "BYN",
-      "store": "5element.by",
-      "date": "2026-10-11",
-      "url": "https://5element.by/products/r-le240-bkammc-g-2-sistema-vodyanogo-okhlazhdeniya-deepcool",
-      "availability": "В наличии по снимку магазина",
-      "note": "Цена из карточки 5element.by; регион Минск. Перепроверь перед покупкой."
+      "date": "2026-10-28",
+      "store": "Мастердом",
+      "url": "https://masterdom.by/sistemy-ohlazhdeniya/deepcool-le240-v2-r-le240-bkammc-g-2/",
+      "availability": "in-stock",
+      "note": "Цена при 100% оплате сразу одним чеком; рассрочка/кредит дороже. Цена без доставки; перепроверь цену и наличие перед покупкой.",
+      "model": "DeepCool LE240 V2 R-LE240-BKAMMC-G-2",
+      "evidence": {
+        "method": "direct-http-get",
+        "status": 200,
+        "checkedAt": "2026-10-28",
+        "modelMatch": "exact-model",
+        "excerpt": "204,70 р.; В наличии на складе"
+      }
     },
     "aio-ls520-wh": {
       "price": 270,
@@ -874,7 +890,7 @@
       "store": "5element.by",
       "date": "2026-10-11",
       "url": "https://5element.by/products/797007-kuler-deepcool-ls520-wh-r-ls520-whamnt-g-1",
-      "availability": "В наличии по снимку магазина",
+      "availability": "in-stock",
       "note": "Цена из карточки 5element.by; регион Минск. Перепроверь перед покупкой."
     },
     "aio-lt520-wh": {
@@ -883,7 +899,7 @@
       "store": "5element.by",
       "date": "2026-10-11",
       "url": "https://5element.by/products/844779-zhidkostnoe-ohlazhdenie-dlya-processora-deepcool-lt520-wh-r-lt520-whamnf-g-1",
-      "availability": "В наличии по снимку магазина",
+      "availability": "in-stock",
       "note": "Цена из карточки 5element.by; регион Минск. Перепроверь перед покупкой."
     },
     "aio-lt240-bk-argb": {
@@ -892,7 +908,7 @@
       "store": "5element.by",
       "date": "2026-10-11",
       "url": "https://5element.by/products/841244-zhidkostnoe-ohlazhdenie-dlya-processora-deepcool-lt240-bk-argb-r-lt240-bkamnc-g-1",
-      "availability": "В наличии по снимку магазина",
+      "availability": "in-stock",
       "note": "Цена из карточки 5element.by; регион Минск. Перепроверь перед покупкой."
     },
     "aio-lt240-wh-argb": {
@@ -901,7 +917,7 @@
       "store": "5element.by",
       "date": "2026-10-11",
       "url": "https://5element.by/products/r-lt240-whamnc-g-1-kuler-dlya-protsessora-szho-deepcool",
-      "availability": "В наличии по снимку магазина",
+      "availability": "in-stock",
       "note": "Цена из карточки 5element.by; регион Минск. Перепроверь перед покупкой."
     },
     "aio-le240-wh-v2": {
@@ -910,7 +926,7 @@
       "store": "5element.by",
       "date": "2026-10-11",
       "url": "https://5element.by/products/r-le240-whammn-g-2-sistema-vodyanogo-okhlazhdeniya-deepcool",
-      "availability": "В наличии по снимку магазина",
+      "availability": "in-stock",
       "note": "Цена из карточки 5element.by; регион Минск. Перепроверь перед покупкой."
     },
     "ddr5-32-5600": {
@@ -919,7 +935,7 @@
       "store": "5element.by",
       "date": "2026-10-11",
       "url": "https://5element.by/products/746227-operativnaya-pamyat-kingston-fury-beast-2x16gb-ddr5-5600-mgc-kf556c40bbk2-32",
-      "availability": "В наличии по снимку магазина",
+      "availability": "in-stock",
       "note": "Цена из карточки 5element.by; регион Минск. Перепроверь перед покупкой."
     },
     "ddr5-32-6000-cl30": {
@@ -928,7 +944,7 @@
       "store": "5element.by",
       "date": "2026-10-11",
       "url": "https://5element.by/products/834050-modul-pamyati-kingston-kf560c30bbek2-32",
-      "availability": "В наличии по снимку магазина",
+      "availability": "in-stock",
       "note": "Цена из карточки 5element.by; регион Минск. Перепроверь перед покупкой."
     },
     "990-pro-1tb": {
@@ -937,7 +953,7 @@
       "store": "5element.by",
       "date": "2026-10-11",
       "url": "https://5element.by/products/mz-v9p1t0bw-nakopitel-ssd-samsung",
-      "availability": "В наличии по снимку магазина",
+      "availability": "in-stock",
       "note": "Цена из карточки 5element.by; регион Минск. Перепроверь перед покупкой."
     },
     "kc3000-1tb": {
@@ -946,7 +962,7 @@
       "store": "5element.by",
       "date": "2026-10-11",
       "url": "https://5element.by/products/740770-ssd-kingston-kc3000-1tb-skc3000s-1024g",
-      "availability": "В наличии по снимку магазина",
+      "availability": "in-stock",
       "note": "Цена из карточки 5element.by; регион Минск. Перепроверь перед покупкой."
     },
     "kc3000-512gb": {
@@ -955,7 +971,7 @@
       "store": "5element.by",
       "date": "2026-10-11",
       "url": "https://5element.by/products/740772-ssd-disk-kingston-kc3000-512gb-skc3000s-512g",
-      "availability": "В наличии по снимку магазина",
+      "availability": "in-stock",
       "note": "Цена из карточки 5element.by; регион Минск. Перепроверь перед покупкой."
     },
     "kc3000-2tb": {
@@ -964,7 +980,7 @@
       "store": "5element.by",
       "date": "2026-10-11",
       "url": "https://5element.by/products/779505-ssd-disk-kingston-skc3000d-2048g-2048gb-kc3000",
-      "availability": "В наличии по снимку магазина",
+      "availability": "in-stock",
       "note": "Цена из карточки 5element.by; регион Минск. Перепроверь перед покупкой."
     },
     "nv3-2tb": {
@@ -973,7 +989,7 @@
       "store": "5element.by",
       "date": "2026-10-11",
       "url": "https://5element.by/products/834114-ssd-kingston-nv3-2tb-snv3s-2000g",
-      "availability": "В наличии по снимку магазина",
+      "availability": "in-stock",
       "note": "Цена из карточки 5element.by; регион Минск. Перепроверь перед покупкой."
     },
     "980-500gb": {
@@ -982,7 +998,7 @@
       "store": "5element.by",
       "date": "2026-10-11",
       "url": "https://5element.by/products/714495-ssd-samsung-980-500gb-mz-v8v500bw",
-      "availability": "В наличии по снимку магазина",
+      "availability": "in-stock",
       "note": "Цена из карточки 5element.by; регион Минск. Перепроверь перед покупкой."
     },
     "assassin-iv": {
@@ -991,7 +1007,7 @@
       "store": "5element.by",
       "date": "2026-10-11",
       "url": "https://5element.by/products/829530-kuler-deepcool-assassin-iv-r-asn4-bknnmt-g",
-      "availability": "В наличии по снимку магазина",
+      "availability": "in-stock",
       "note": "Цена из карточки 5element.by; регион Минск. Перепроверь перед покупкой."
     },
     "ch560-white": {
@@ -1000,8 +1016,298 @@
       "store": "5element.by",
       "date": "2026-10-11",
       "url": "https://5element.by/products/819728-korpus-deepcool-ch560-r-ch560-whape4-g-1",
-      "availability": "В наличии по снимку магазина",
+      "availability": "in-stock",
       "note": "Цена из карточки 5element.by; регион Минск. Перепроверь перед покупкой."
+    },
+    "r5-5600": {
+      "price": 405,
+      "currency": "BYN",
+      "date": "2026-10-28",
+      "store": "TEC.BY",
+      "url": "https://tec.by/komplektuyushchie/protsessory/amd/s-am4/protsessor-amd-ryzen-5-5600-oem-am4-detail.html",
+      "availability": "unknown",
+      "note": "Под заказ (2–3 часа). Поставка OEM, без кулера. Цена без доставки; перепроверь цену и наличие перед покупкой.",
+      "model": "AMD Ryzen 5 5600 OEM",
+      "evidence": {
+        "method": "direct-http-get",
+        "status": 200,
+        "checkedAt": "2026-10-28",
+        "modelMatch": "exact-model-or-listed-cpu-oem",
+        "excerpt": "Цена: 405 00 BYN; Под заказ (2-3 часа)"
+      }
+    },
+    "r5-7600": {
+      "price": 549,
+      "currency": "BYN",
+      "date": "2026-10-28",
+      "store": "TEC.BY",
+      "url": "https://tec.by/komplektuyushchie/protsessory/amd/s-am5/protsessor-amd-ryzen-5-7600-oem-am5-detail.html",
+      "availability": "unknown",
+      "note": "Под заказ (2–3 часа). Поставка OEM, без кулера. Цена без доставки; перепроверь цену и наличие перед покупкой.",
+      "model": "AMD Ryzen 5 7600 OEM",
+      "evidence": {
+        "method": "direct-http-get",
+        "status": 200,
+        "checkedAt": "2026-10-28",
+        "modelMatch": "exact-model-or-listed-cpu-oem",
+        "excerpt": "Цена: 549 00 BYN; Под заказ (2-3 часа)"
+      }
+    },
+    "r7-7700x": {
+      "price": 825,
+      "currency": "BYN",
+      "date": "2026-10-28",
+      "store": "TEC.BY",
+      "url": "https://tec.by/komplektuyushchie/protsessory/amd/s-am5/protsessor-amd-ryzen-7-7700x-oem-am5-detail.html",
+      "availability": "unknown",
+      "note": "Под заказ (1–2 дня). Поставка OEM, без кулера. Цена без доставки; перепроверь цену и наличие перед покупкой.",
+      "model": "AMD Ryzen 7 7700X OEM",
+      "evidence": {
+        "method": "direct-http-get",
+        "status": 200,
+        "checkedAt": "2026-10-28",
+        "modelMatch": "exact-model-or-listed-cpu-oem",
+        "excerpt": "Цена: 825 00 BYN; Под заказ (1-2 дня)"
+      }
+    },
+    "r7-7800x3d": {
+      "price": 930,
+      "currency": "BYN",
+      "date": "2026-10-28",
+      "store": "TEC.BY",
+      "url": "https://tec.by/komplektuyushchie/protsessory/amd/s-am5/protsessor-amd-ryzen-7-7800x3d-oem-am5-detail.html",
+      "availability": "unknown",
+      "note": "Под заказ (2–3 часа). Поставка OEM, без кулера. Цена без доставки; перепроверь цену и наличие перед покупкой.",
+      "model": "AMD Ryzen 7 7800X3D OEM",
+      "evidence": {
+        "method": "direct-http-get",
+        "status": 200,
+        "checkedAt": "2026-10-28",
+        "modelMatch": "exact-model-or-listed-cpu-oem",
+        "excerpt": "Цена: 930 00 BYN; Под заказ (2-3 часа)"
+      }
+    },
+    "i3-12100f": {
+      "price": 377.63,
+      "currency": "BYN",
+      "date": "2026-10-28",
+      "store": "TECNO.BY",
+      "url": "https://www.tecno.by/cpu/intel/i312100f",
+      "availability": "in-stock",
+      "note": "На карточке указано наличие; сроки доставки и комплектность уточнить в магазине. Цена без доставки; перепроверь цену и наличие перед покупкой.",
+      "model": "Intel Core i3-12100F OEM",
+      "evidence": {
+        "method": "direct-http-get",
+        "status": 200,
+        "checkedAt": "2026-10-28",
+        "modelMatch": "exact-model-or-listed-cpu-oem",
+        "excerpt": "377,63 р.; В наличии"
+      }
+    },
+    "i5-12400f": {
+      "price": 432.6,
+      "currency": "BYN",
+      "date": "2026-10-28",
+      "store": "OnLife",
+      "url": "https://www.onlife.by/product/processor-intel-core-i5-12400f-oem-093394",
+      "availability": "unknown",
+      "note": "Розничная цена. На карточке: наличие уточнит менеджер. Цена без доставки; перепроверь цену и наличие перед покупкой.",
+      "model": "Intel Core i5-12400F OEM",
+      "evidence": {
+        "method": "direct-http-get",
+        "status": 200,
+        "checkedAt": "2026-10-28",
+        "modelMatch": "exact-model-or-listed-cpu-oem",
+        "excerpt": "432,60 BYN; Наличие уточнит менеджер"
+      }
+    },
+    "b550": {
+      "price": 458.32,
+      "currency": "BYN",
+      "date": "2026-10-28",
+      "store": "Time-Shop",
+      "url": "https://time-shop.by/motherboard/msi/b550apro",
+      "availability": "in-stock",
+      "note": "Магазин указывает наличие; для Ryzen 5 5600 отдельно проверить BIOS. Цена без доставки; перепроверь цену и наличие перед покупкой.",
+      "model": "MSI B550-A PRO",
+      "evidence": {
+        "method": "direct-http-get",
+        "status": 200,
+        "checkedAt": "2026-10-28",
+        "modelMatch": "exact-model-or-listed-cpu-oem",
+        "excerpt": "458,32 р.; В наличии"
+      }
+    },
+    "b760m-p-ddr4": {
+      "price": 373.07,
+      "currency": "BYN",
+      "date": "2026-10-28",
+      "store": "Cyber Market",
+      "url": "https://www.cybermarket.by/motherboard/msi/prob760mpddr4",
+      "availability": "in-stock",
+      "note": "В названии и основной спецификации явно DDR4; это не версия DDR5. Цена без доставки; перепроверь цену и наличие перед покупкой.",
+      "model": "MSI PRO B760M-P DDR4",
+      "evidence": {
+        "method": "direct-http-get",
+        "status": 200,
+        "checkedAt": "2026-10-28",
+        "modelMatch": "exact-model-or-listed-cpu-oem",
+        "excerpt": "373,07 р.; В наличии"
+      }
+    },
+    "rtx3060": {
+      "price": 1751.88,
+      "currency": "BYN",
+      "date": "2026-10-28",
+      "store": "Nexton",
+      "url": "https://nexton.by/videocard/msi/gf3060gam2x12",
+      "availability": "in-stock",
+      "note": "Совпадает точная модификация 12G OC; не обычная 12G без OC. Цена без доставки; перепроверь цену и наличие перед покупкой.",
+      "model": "MSI GeForce RTX 3060 VENTUS 2X 12G OC",
+      "evidence": {
+        "method": "direct-http-get",
+        "status": 200,
+        "checkedAt": "2026-10-28",
+        "modelMatch": "exact-model-or-listed-cpu-oem",
+        "excerpt": "1 751,88 р.; В наличии"
+      }
+    },
+    "ddr4-16-3200": {
+      "price": 681.89,
+      "currency": "BYN",
+      "date": "2026-10-28",
+      "store": "Unifox",
+      "url": "https://unifox.by/product/operativnaya-pamyat-kingston-kf432c16bbk2-16-cl-16/",
+      "availability": "in-stock",
+      "note": "Цена видна в карточке и совпадает с JSON-LD BYN; указана 1 единица в наличии. Цена без доставки; перепроверь цену и наличие перед покупкой.",
+      "model": "Kingston FURY Beast KF432C16BBK2/16, 2×8 ГБ",
+      "evidence": {
+        "method": "direct-http-get",
+        "status": 200,
+        "checkedAt": "2026-10-28",
+        "modelMatch": "exact-model-or-listed-cpu-oem",
+        "excerpt": "681,89 руб.; 1 в наличии"
+      }
+    },
+    "ddr4-32": {
+      "price": 1548.8,
+      "currency": "BYN",
+      "date": "2026-10-28",
+      "store": "Nexton",
+      "url": "https://nexton.by/dram/kingston/kf432c16bbk232",
+      "availability": "in-stock",
+      "note": "Точное совпадение артикула KF432C16BBK2/32. Цена без доставки; перепроверь цену и наличие перед покупкой.",
+      "model": "Kingston FURY Beast KF432C16BBK2/32, 2×16 ГБ",
+      "evidence": {
+        "method": "direct-http-get",
+        "status": 200,
+        "checkedAt": "2026-10-28",
+        "modelMatch": "exact-model-or-listed-cpu-oem",
+        "excerpt": "1 548,80 р.; В наличии"
+      }
+    },
+    "ak400": {
+      "price": 80.42,
+      "currency": "BYN",
+      "date": "2026-10-28",
+      "store": "Мастердом",
+      "url": "https://masterdom.by/sistemy-ohlazhdeniya/deepcool-ak400/",
+      "availability": "in-stock",
+      "note": "Цена при 100% оплате сразу одним чеком; рассрочка/кредит дороже. Обычный AK400, не Digital. Цена без доставки; перепроверь цену и наличие перед покупкой.",
+      "model": "DeepCool AK400",
+      "evidence": {
+        "method": "direct-http-get",
+        "status": 200,
+        "checkedAt": "2026-10-28",
+        "modelMatch": "exact-model-or-listed-cpu-oem",
+        "excerpt": "80,42 р.; В наличии на складе"
+      }
+    },
+    "a650bn": {
+      "price": 191.68,
+      "currency": "BYN",
+      "date": "2026-10-28",
+      "store": "Мастердом",
+      "url": "https://masterdom.by/bloki-pitaniya/msi-mag-a650bn/",
+      "availability": "in-stock",
+      "note": "Цена при 100% оплате сразу одним чеком; рассрочка/кредит дороже. Цена без доставки; перепроверь цену и наличие перед покупкой.",
+      "model": "MSI MAG A650BN",
+      "evidence": {
+        "method": "direct-http-get",
+        "status": 200,
+        "checkedAt": "2026-10-28",
+        "modelMatch": "exact-model-or-listed-cpu-oem",
+        "excerpt": "191,68 р.; В наличии на складе"
+      }
+    },
+    "cc560": {
+      "price": 266.4,
+      "currency": "BYN",
+      "date": "2026-10-28",
+      "store": "TECNO.BY",
+      "url": "https://www.tecno.by/chassis/deepcool/rcc560bkgaa4g2",
+      "availability": "unknown",
+      "note": "Под заказ. Обычный CC560 V2, не ARGB/Mesh/Limited. Цена без доставки; перепроверь цену и наличие перед покупкой.",
+      "model": "DeepCool CC560 V2 R-CC560-BKGAA4-G-2, чёрный",
+      "evidence": {
+        "method": "direct-http-get",
+        "status": 200,
+        "checkedAt": "2026-10-28",
+        "modelMatch": "exact-model-or-listed-cpu-oem",
+        "excerpt": "266,40 р.; Под заказ"
+      }
+    },
+    "a750gl": {
+      "price": 297.28,
+      "currency": "BYN",
+      "date": "2026-10-28",
+      "store": "Cyber Market",
+      "url": "https://www.cybermarket.by/powersupply/msi/3067zp8b11ce0",
+      "availability": "in-stock",
+      "note": "Обычный A750GL PCIE5, не модель PCIE5 II. Цена без доставки; перепроверь цену и наличие перед покупкой.",
+      "model": "MSI MAG A750GL PCIE5, 306-7ZP8B11-CE0",
+      "evidence": {
+        "method": "direct-http-get",
+        "status": 200,
+        "checkedAt": "2026-10-28",
+        "modelMatch": "exact-model",
+        "excerpt": "297,28 р.; В наличии"
+      }
+    },
+    "ddr5-32": {
+      "price": 2979.07,
+      "currency": "BYN",
+      "date": "2026-10-28",
+      "store": "ULTRAPRICE",
+      "url": "https://www.ultraprice.by/product/operativnaya-pamyat-kingston-fury-beast-2x16gb-ddr5-6000mgc-kf560c36bbek2-32",
+      "availability": "in-stock",
+      "note": "Точное совпадение артикула KF560C36BBEK2-32. Цена без доставки; перепроверь цену и наличие перед покупкой.",
+      "model": "Kingston FURY Beast KF560C36BBEK2-32, 2×16 ГБ",
+      "evidence": {
+        "method": "direct-http-get",
+        "status": 200,
+        "checkedAt": "2026-10-28",
+        "modelMatch": "exact-model",
+        "excerpt": "2 979.07 BYN; В наличии"
+      }
+    },
+    "ak620": {
+      "price": 234.84,
+      "currency": "BYN",
+      "date": "2026-10-28",
+      "store": "Мастердом",
+      "url": "https://masterdom.by/sistemy-ohlazhdeniya/deepcool-ak620-r-ak620-bknnmt-g/",
+      "availability": "in-stock",
+      "note": "Обычный AK620, не Zero Dark, Digital или G2. Цена при 100% оплате сразу одним чеком. Цена без доставки; перепроверь цену и наличие перед покупкой.",
+      "model": "DeepCool AK620 R-AK620-BKNNMT-G",
+      "evidence": {
+        "method": "direct-http-get",
+        "status": 200,
+        "checkedAt": "2026-10-28",
+        "modelMatch": "exact-model",
+        "excerpt": "234,84 р.; В наличии на складе"
+      }
     }
-  }
+  },
+  "updatedAt": "2026-10-28"
 }

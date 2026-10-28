@@ -1,0 +1,10 @@
+.quality-badge{display:block;margin:6px 0;font-size:11px;line-height:1.45;color:#dce5ec}
+.quality-badge.pending,.price-quality.stale,.price-quality.invalid,.price-quality.unavailable{color:#e4cda3}
+.quality-details{font-size:11px;line-height:1.55;margin:6px 0 10px;color:#bac5ce}
+.quality-details summary{cursor:pointer;list-style:revert}
+.quality-details summary .quality-badge{display:inline}
+.quality-details p{margin:7px 0}.quality-details a{color:#e3ebf1;text-decoration:underline;text-underline-offset:3px}
+.price-quality,.price-availability{display:block;font-size:11px;line-height:1.5;margin-top:4px}
+.price-availability{color:#b8c2ca}.part-quality{display:block;font-size:10px;line-height:1.4;color:#dac9a8;margin-top:4px}
+.quality-build-note{margin-top:8px;font-size:11px;line-height:1.5;color:#e4cda3}
+.quality-catalog-note{font-size:11px;line-height:1.5;color:#c0cbd4;margin:8px 0}

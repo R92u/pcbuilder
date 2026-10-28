@@ -1320,22 +1320,30 @@ export const catalogExtra={
       "id": "ssd-sfyr2s-2t0",
       "sku": "SFYR2S/2T0",
       "name": "Kingston Fury Renegade G5 2TB SFYR2S/2T0",
-      "short": "KINGSTON SSD 2000 ГБ",
+      "short": "FURY Renegade G5 2048 ГБ",
       "brand": "KINGSTON",
       "interface": "M.2 NVMe",
       "form": "M.2 2280",
-      "capacity": 2000,
-      "pcie": "4.0 x4",
+      "capacity": 2048,
+      "pcie": "5.0 x4",
       "readSpeed": 14700,
       "writeSpeed": 14000,
       "tbw": 2000,
       "power": 5,
       "powerAssumed": true,
-      "detail": "2000 ГБ · M.2 2280 · PCI Express 4.0 x4",
+      "detail": "2048 ГБ · M.2 2280 · PCIe 5.0 x4",
       "sources": [
+        "https://www.kingston.com/datasheets/SFYR2S_en.pdf",
+        "https://www.kingston.com/en/ssd/gaming/kingston-fury-renegade-g5-nvme-m2-ssd",
         "https://5element.by/products/894940-ssd-kingston-fury-renegade-g5-2tb-sfyr2s-2t0"
       ],
-      "notes": "Характеристики из карточки точного артикула 5element.by. Потребление 5 Вт — допущение учебной симуляции, не измерение."
+      "notes": "Основные характеристики сверены с Kingston 28.10.2026. Потребление 5 Вт — допущение учебной симуляции, не измерение.",
+      "dimensions": [
+        80,
+        22,
+        2.3
+      ],
+      "operatingMaxC": 70
     },
     {
       "id": "ssd-aleg-960m-1tcs",
@@ -1633,22 +1641,31 @@ export const catalogExtra={
       "id": "ssd-sfyr2s-1t0",
       "sku": "SFYR2S/1T0",
       "name": "Kingston Fury Renegade G5 1TB SFYR2S/1T0",
-      "short": "KINGSTON SSD 1000 ГБ",
+      "short": "FURY Renegade G5 1024 ГБ",
       "brand": "KINGSTON",
       "interface": "M.2 NVMe",
       "form": "M.2 2280",
-      "capacity": 1000,
+      "capacity": 1024,
       "pcie": "5.0 x4",
-      "readSpeed": 7300,
-      "writeSpeed": 6000,
+      "readSpeed": 14200,
+      "writeSpeed": 11000,
       "tbw": 1000,
       "power": 5,
       "powerAssumed": true,
-      "detail": "1000 ГБ · M.2 2280 · PCI Express 5.0 x4",
+      "detail": "1024 ГБ · M.2 2280 · PCIe 5.0 x4",
       "sources": [
+        "https://www.kingston.com/datasheets/SFYR2S_en.pdf",
+        "https://www.kingston.com/en/ssd/gaming/kingston-fury-renegade-g5-nvme-m2-ssd",
+        "https://www.kingston.com/en/memory/search?partid=SFYR2S%2F1T0",
         "https://5element.by/products/894941-ssd-kingston-fury-renegade-g5-1tb-sfyr2s-1t0"
       ],
-      "notes": "Характеристики из карточки точного артикула 5element.by. Потребление 5 Вт — допущение учебной симуляции, не измерение."
+      "notes": "Основные характеристики сверены с Kingston 28.10.2026. Потребление 5 Вт — допущение учебной симуляции, не измерение.",
+      "dimensions": [
+        80,
+        22,
+        2.3
+      ],
+      "operatingMaxC": 70
     },
     {
       "id": "ssd-nt01nv7000q-1t0-e4x",
@@ -1958,7 +1975,12 @@ export const catalogExtra={
       "sockets": [
         "AM4",
         "AM5",
-        "LGA1700"
+        "LGA1851",
+        "LGA1700",
+        "LGA1200",
+        "LGA1151",
+        "LGA1150",
+        "LGA1155"
       ],
       "fans": 2,
       "fanSizeMm": 120,

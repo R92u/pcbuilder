@@ -7,7 +7,7 @@
  <link rel="icon" href="./favicon.svg" type="image/svg+xml"><link rel="stylesheet" href="./style.css"><link rel="stylesheet" href="./workbench.css"><link rel="stylesheet" href="./shop.css"><link rel="stylesheet" href="./fans.css"><link rel="stylesheet" href="./autobuild.css"><link rel="stylesheet" href="./navigation.css?v=github-20261028">
  <script type="importmap">{"imports":{"three":"./vendor/three.module.js"}}</script>
  <link rel="stylesheet" href="./design-studio.css" id="design-stylesheet">
- <link rel="stylesheet" href="./build-panel.css">
+ <link rel="stylesheet" href="./build-panel.css"><link rel="stylesheet" href="./data-quality.css">
  <script>try{if(localStorage.getItem('pcmaker-panel-collapsed')==='true')document.documentElement.dataset.panelCollapsed='true';}catch{}</script>
 </head>
 <body>
@@ -83,7 +83,7 @@
   <nav id="shop-categories" class="shop-categories" aria-label="Категории комплектующих"></nav>
   <details class="shop-filter-group" open><summary>Фильтры</summary><div class="shop-filter-fields">
    <label class="shop-check"><input type="checkbox" id="compatible-only"> Совместимые со сборкой</label>
-   <label class="shop-check"><input type="checkbox" id="shop-priced-only"> Только с подтверждённой ценой</label>
+   <label class="shop-check"><input type="checkbox" id="shop-priced-only"> Цены не старше 7 дней</label><label class="shop-check"><input type="checkbox" id="shop-verified-only"> Проверенные характеристики</label><p class="quality-catalog-note">Остальные товары доступны для ручной сборки с пометкой о проверке. Автосборка использует только проверенный набор.</p>
    <label class="shop-field">Производитель<select id="shop-brand" aria-label="Производитель"></select></label>
    <label class="shop-field">Сокет<select id="shop-socket" aria-label="Сокет"></select></label>
    <label class="shop-field">Тип памяти<select id="shop-memory" aria-label="Тип памяти"></select></label>
@@ -102,9 +102,9 @@
  <label for="autobuild-budget" id="autobuild-budget-label">Твой бюджет, ₽</label><div class="budget-input"><input id="autobuild-budget" type="number" min="1000" max="2000000" step="1" value="100000" inputmode="numeric" required aria-label="Бюджет в рублях"><span id="autobuild-currency">₽</span></div>
  <div class="budget-presets"><button type="button" data-budget-preset="80000">80 000</button><button type="button" data-budget-preset="120000">120 000</button><button type="button" data-budget-preset="200000">200 000</button></div>
  <span class="field-label">Для чего нужен ПК</span><div class="budget-purpose" role="group" aria-label="Назначение компьютера"><button type="button" data-budget-purpose="game" aria-pressed="true"><span data-icon="game"></span>Игры</button><button type="button" data-budget-purpose="study" aria-pressed="false"><span data-icon="cpu"></span>Учёба</button><button type="button" data-budget-purpose="video" aria-pressed="false"><span data-icon="video"></span>Монтаж</button></div><p id="autobuild-purpose-note" class="budget-purpose-note"></p>
- <label class="budget-check"><input id="autobuild-estimates" type="checkbox" checked>Разрешить ориентировочные цены</label><p class="small-note">Для оценочных позиций заложим резерв 10%. В бюджет должны поместиться и детали, и резерв.</p>
+ <label class="budget-check"><input id="autobuild-estimates" type="checkbox" checked>Разрешить оценки и устаревшие цены</label><p class="small-note">Для оценок и устаревших цен заложим резерв 10%. В бюджет должны поместиться и детали, и резерв.</p>
  <button id="autobuild-submit" class="button primary wide" type="submit">Подобрать сборку</button>
- <p class="small-note">8 деталей системного блока, включая корпус и видеокарту. Без монитора, периферии, ОС, доставки и сборки в магазине.</p><details class="budget-checks"><summary>Как выбираются детали</summary><p>Перебираем совместимые сочетания из каталога с доступными ценами. Для игр важнее видеокарта; для учёбы — процессор и память; для монтажа — процессор, объём памяти и SSD. Веса подбора условные: это не прогноз FPS и не рейтинг из бенчмарков.</p><p>Учебные корпуса PCmaker не продаются, поэтому в автосборке используются только серийные модели.</p></details>
+ <p class="small-note">Только модели с проверенными основными характеристиками. 8 деталей системного блока, включая корпус и видеокарту. Без монитора, периферии, ОС, доставки и сборки в магазине.</p><details class="budget-checks"><summary>Как выбираются детали</summary><p>Перебираем совместимые сочетания из каталога с доступными ценами. Для игр важнее видеокарта; для учёбы — процессор и память; для монтажа — процессор, объём памяти и SSD. Веса подбора условные: это не прогноз FPS и не рейтинг из бенчмарков.</p><p>Учебные корпуса PCmaker не продаются, поэтому в автосборке используются только серийные модели.</p></details>
  </form><section id="autobuild-result" class="budget-result" aria-label="Предложенная сборка"></section></div>
  <footer class="budget-footer"><p id="autobuild-status" role="status" aria-live="polite"></p><button id="autobuild-apply" class="button primary" disabled>Применить сборку</button></footer>
  </dialog>
@@ -112,7 +112,7 @@
  <dialog id="clear-dialog" class="info-dialog small-dialog"><h2>Начать новую сборку?</h2><p>Выбранные детали будут убраны. Корпус останется.</p><div class="dialog-actions"><button class="button" data-close="clear-dialog">Оставить сборку</button><button class="button primary" id="confirm-clear">Начать заново</button></div></dialog>
  <div id="toast" role="status" class="toast" hidden></div>
  <noscript><div class="no-script">Для 3D-конструктора нужно включить JavaScript в браузере.</div></noscript>
- <script type="module" src="./app.js?v=panel-20261028"></script>
+ <script type="module" src="./app.js?v=quality-20261028"></script>
 </body>
 </html>
 
