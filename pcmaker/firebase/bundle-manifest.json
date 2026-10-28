@@ -10,7 +10,8 @@
   "dist/lighting.js": "35df912c2ac970957a9d71d50f3d8b4c0438a2e804a32b23c15a4343418b8f75",
   "dist/store-links-by.js": "78e101d2b928923a2ecf9535091487f86f343a47238253dbc91124b4b04d426c",
   "dist/regions.js": "9b5e187735519e4a8cd97481f1f712c95b60e7055e9fd0f77eae06c517c30ae9",
-  "firebase/gallery-client.js": "6ad2c946c9828955dd6ae143be1abdfbcd3bb10cd4d597486fb2424bed036a12",
-  "dist/vendor/firebase-gallery.js": "b041d6dbf3ed12a7d03641dd132bc701f1a4908b6e322609864fdd68b2bdb040",
+  "firebase/app-check-guard.js": "cfd2312858bdbed017ae9d18d9d149f6f92c785e563739f7b763dab4d9a76b19",
+  "firebase/gallery-client.js": "9b97c8a5c9d131879d7c487bcc5c635bf180849412369dfc8f46adb47b7fec6c",
+  "dist/vendor/firebase-gallery.js": "4fec28e44cd53d55c62f7c31750f94de5ce71edad611348cb94e3fa5144610e1",
   "pnpm-lock.yaml": "07541ee000efb620a60e3ccea99a3fb093758595e5af2b26c930c3b718ce23d6"
 }

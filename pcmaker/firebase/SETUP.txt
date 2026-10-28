@@ -9,6 +9,47 @@ Title search uses a case-insensitive prefix and alphabetical order.
 The browser configuration in dist/firebase-config.json is public SDK configuration,
 not a service-account credential. Never commit CLI tokens or private keys.
 
+App Check (reCAPTCHA Enterprise):
+  The public appCheckSiteKey is restricted to pcmaker-olnw.onrender.com.
+  The browser initializes App Check before Auth/Firestore, obtains an attestation
+  token, and refreshes it automatically. Token TTL is 1 hour; risk threshold 0.5.
+  Keep the standard reCAPTCHA badge visible. Do not hide it in application CSS.
+  App Check complements Firestore Rules; it does not replace Google sign-in,
+  ownership checks, quotas, or validation. It cannot prevent all abuse.
+  Localhost uses only demo emulators: never register localhost on the production
+  reCAPTCHA key or put App Check debug tokens in source, builds, or public logs.
+  On a new domain, update reCAPTCHA domains, Auth authorized domains and the
+  browser API key's HTTP referrers before publishing there.
+  Deploy the App Check client and verify the public Market and Google sign-in
+  before enabling enforcement in Firebase Console > Security > App Check.
+  Review verified/unverified traffic first; existing tabs need a page reload.
+  This project targets Firestore enforcement. Authentication enforcement is
+  separate and requires Firebase Authentication with Identity Platform; it has
+  not been enabled or upgraded as part of this Spark configuration.
+  If legitimate traffic is blocked, inspect App Check metrics and domain/API
+  restrictions. Keep Firestore Rules intact; never fix it by opening database
+  access or committing a production debug credential.
+
+Public API key restrictions:
+  HTTP referrers: the production Render domain and the project's firebaseapp.com
+  and web.app domains, HTTPS only. This is an additional browser restriction,
+  not proof of authorization: non-browser callers can forge a Referer header.
+  APIs: Firebase Management, Logging, App Check, Identity Toolkit, Secure Token,
+  Firestore, Datastore and Firebase Rules. Unused products (including AI APIs)
+  are not permitted. Check the official Firebase API-key allowlist requirements
+  when adding another Firebase product.
+
+Repository protection:
+  Keep the repository public. main forbids deletion and non-fast-forward pushes;
+  ordinary direct pushes remain allowed. Secret scanning, push protection,
+  Dependabot alerts and automated security updates are enabled.
+  .gitignore excludes local environment files and administrator credentials.
+  It cannot remove an already committed secret. If a real secret leaks, revoke
+  or rotate it first, then remove it from history. Firebase browser configuration
+  is intentionally public; service-account private keys and CLI tokens are not.
+  Use account two-factor authentication; account-level 2FA was not verified by
+  the repository API audit.
+
 Local development (Node 24, pnpm, Java 21 for emulators):
   pnpm install --frozen-lockfile
   pnpm start

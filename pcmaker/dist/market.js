@@ -36,7 +36,7 @@ $('market-draft-name').textContent=byId[draft.build.cpu]?.short||'Начни с 
 let servicePromise,user=null,items=[],mine=false,query='',region='all',sort='newest',requestId=0,hasMore=false,editItem=null,authIntent=null;
 const local=['localhost','127.0.0.1'].includes(location.hostname);
 function configure(){
- return servicePromise||(servicePromise=Promise.all([fetch('./firebase-config.json').then(r=>{if(!r.ok)throw Error('Не удалось загрузить настройки маркета.');return r.json();}),import('./vendor/firebase-gallery.js')]).then(([config,module])=>module.createFirebaseGallery(local?{apiKey:'demo-key',projectId:'demo-pcmaker',authDomain:'demo-pcmaker.firebaseapp.com',appId:'demo-app'}:config,{emulators:local})).catch(error=>{servicePromise=null;throw error;}));
+ return servicePromise||(servicePromise=Promise.all([fetch('./firebase-config.json',{cache:'no-store'}).then(r=>{if(!r.ok)throw Error('Не удалось загрузить настройки маркета.');return r.json();}),import('./vendor/firebase-gallery.js?v=appcheck-1')]).then(([config,module])=>module.createFirebaseGallery(local?{apiKey:'demo-key',projectId:'demo-pcmaker',authDomain:'demo-pcmaker.firebaseapp.com',appId:'demo-app'}:config,{emulators:local})).catch(error=>{servicePromise=null;throw error;}));
 }
 const call=async(...args)=>(await configure()).call(...args);
 const setStatus=(text,error=false)=>{$('market-status').textContent=text;$('market-status').classList.toggle('error',error);};

@@ -1,4 +1,5 @@
 import {initializeApp} from 'firebase/app';
+import {initializeAppCheck,ReCaptchaEnterpriseProvider,getToken} from 'firebase/app-check';
 import {getAuth,GoogleAuthProvider,signInWithPopup,signOut,browserSessionPersistence,setPersistence,connectAuthEmulator} from 'firebase/auth';
 import {getFirestore,collection,doc,getDoc,getDocs,query,where,orderBy,limit,startAfter,startAt,endAt,runTransaction,serverTimestamp,updateDoc,deleteDoc,setDoc,connectFirestoreEmulator} from 'firebase/firestore';
 import {categories,resolve,sanitizeBuild} from '../dist/catalog.js';
@@ -6,11 +7,21 @@ import {compatibility,summarizePrices} from '../dist/engine.js';
 import {sanitizeFanLayout} from '../dist/fan-layout.js';
 import {sanitizeLighting} from '../dist/lighting.js';
 import {priceSnapshot,regionFor} from '../dist/regions.js';
+import {requireAppCheckToken} from './app-check-guard.js';
 const clean=(s,min,max,label)=>{if(typeof s!=='string'||s.trim().length<min||s.trim().length>max)throw Error('Проверь поле «'+label+'».');return s.trim();};
+let appCheck;
 export function publication(input){const build=sanitizeBuild(input.build);if(categories.some(([k])=>!build[k]||build[k]!==input.build[k])||!compatibility(build).ready)throw Error('Для публикации нужны все 8 совместимых компонентов.');return {title:clean(input.title,3,80,'Название'),description:clean(input.description||'',0,800,'Описание'),build,fanLayout:Object.fromEntries(sanitizeFanLayout(build,input.fanLayout).map(f=>[f.slot,f.direction])),lighting:sanitizeLighting(input.lighting),region:regionFor(input.region).id};}
 export async function createFirebaseGallery(config,{emulators=false,persistence=browserSessionPersistence}={}){
  if(!config?.projectId||!config?.apiKey)throw Error('Подключение публичной галереи Firebase ещё настраивается.');
- const app=initializeApp(config,'pcmaker-gallery'),auth=getAuth(app),db=getFirestore(app);auth.languageCode='ru';
+ const app=initializeApp(config,'pcmaker-gallery');
+ // Production attestation must start before Auth/Firestore. Local development
+ // connects only to the demo emulators and never uses production debug tokens.
+ if(!emulators){
+  if(!config.appCheckSiteKey)throw Error('Защита Маркета ещё настраивается. Попробуй позже.');
+  appCheck||=initializeAppCheck(app,{provider:new ReCaptchaEnterpriseProvider(config.appCheckSiteKey),isTokenAutoRefreshEnabled:true});
+  await requireAppCheckToken(()=>getToken(appCheck));
+ }
+ const auth=getAuth(app),db=getFirestore(app);auth.languageCode='ru';
  if(emulators){connectAuthEmulator(auth,'http://127.0.0.1:9099',{disableWarnings:true});connectFirestoreEmulator(db,'127.0.0.1',8080);}
  await setPersistence(auth,persistence);await auth.authStateReady();
  const snapshots=Object.fromEntries(await Promise.all(['ru','by'].map(async id=>[id,priceSnapshot(await fetch(id==='by'?'./prices-by.json':'./prices.json').then(r=>r.json()),id)])));const cursors=new Map();let admin=false;
