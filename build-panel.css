@@ -1,0 +1,24 @@
+/* Resize the canvas with the grid; keep controls at their readable width. */
+.workbench .workspace{--build-panel-width:clamp(340px,23vw,390px);--build-panel-gap:14px;position:relative;grid-template-columns:minmax(0,1fr) var(--build-panel-width);gap:var(--build-panel-gap);transition:grid-template-columns .3s cubic-bezier(.2,.8,.2,1),gap .3s cubic-bezier(.2,.8,.2,1)}
+.build-panel-slot{min-width:0;min-height:0;overflow:clip}
+.workbench .build-panel{width:var(--build-panel-width);transition:opacity .22s,transform .3s cubic-bezier(.2,.8,.2,1),visibility .3s}
+.workbench .build-panel-toggle{position:absolute;right:calc(var(--build-panel-width) + var(--build-panel-gap) + 12px);top:74px;z-index:18;transition:right .3s cubic-bezier(.2,.8,.2,1),transform .2s,box-shadow .2s;box-shadow:inset 0 1px 1px #ffffffa0,0 4px 18px #0005}
+.build-panel-toggle svg{transition:transform .3s}.build-panel-toggle:active{transform:scale(.92)}
+html[data-panel-collapsed=true] .workbench .workspace{grid-template-columns:minmax(0,1fr) 0px;gap:0}
+html[data-panel-collapsed=true] .workbench .build-panel{opacity:0;transform:translateX(24px);visibility:hidden;pointer-events:none}
+html[data-panel-collapsed=true] .workbench .build-panel-toggle{right:12px}
+html[data-panel-collapsed=true] .build-panel-toggle svg{transform:rotate(180deg)}
+@media(min-width:2100px){.workbench .workspace{--build-panel-width:410px}}
+@media(max-width:1100px) and (min-width:841px){.workbench .workspace{--build-panel-width:330px}}
+/* Narrow screens keep the existing stacked layout when controls are open. */
+@media(max-width:840px){
+ .workbench .workspace{--build-panel-gap:10px;grid-template-columns:minmax(0,1fr)}
+ .workbench .build-panel{width:100%}
+ .workbench .build-panel-toggle{position:fixed;right:24px;top:140px}
+ html[data-panel-collapsed=true] .workbench .workspace{grid-template-columns:minmax(0,1fr)}
+ html[data-panel-collapsed=true] .build-panel-slot{display:none}
+ html[data-panel-collapsed=true] .workbench .studio-column{height:calc(100dvh - 84px);max-height:none}
+ html[data-panel-collapsed=true] .workbench .build-panel-toggle{right:24px}
+}
+@media(max-width:540px){.workbench .build-panel-toggle{top:130px}html[data-panel-collapsed=true] .workbench .studio-column{height:calc(100dvh - 78px)}}
+@media(prefers-reduced-motion:reduce){.workbench .workspace,.workbench .build-panel,.workbench .build-panel-toggle,.build-panel-toggle svg{transition:none}.build-panel-toggle:active{transform:none}}
