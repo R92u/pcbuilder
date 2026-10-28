@@ -1,0 +1,24 @@
+/* The browser owns fullscreen; these transitions only arrange the workshop. */
+:root{--fullscreen-header-height:72px;--fullscreen-motion:.36s cubic-bezier(.2,.8,.2,1)}
+.workshop-header{transition:height var(--fullscreen-motion),transform var(--fullscreen-motion),opacity .24s,visibility .36s}
+main.workbench{transition:height var(--fullscreen-motion),padding var(--fullscreen-motion)}
+.workbench .studio{transition:border-radius var(--fullscreen-motion),border-color var(--fullscreen-motion)}
+.workbench .scene-top{transition:opacity .2s,visibility .36s}
+.fullscreen-exit{position:fixed;top:max(18px,env(safe-area-inset-top));right:max(18px,env(safe-area-inset-right));z-index:60;width:44px;height:44px;box-shadow:inset 0 1px 1px #ffffffa0,0 4px 20px #0006}
+.fullscreen-exit[hidden]{display:none}
+.scene-fullscreen body{overflow:hidden}
+.scene-fullscreen .workshop-header{height:0;transform:translateY(calc(-1 * var(--fullscreen-header-height)));opacity:0;visibility:hidden;pointer-events:none;border-bottom-width:0}
+.scene-fullscreen main.workbench{height:100dvh;padding:0}
+.scene-fullscreen .workbench .workspace{height:100%;grid-template-columns:minmax(0,1fr) 0px;gap:0}
+.scene-fullscreen .workbench .studio-column{height:100%;min-height:0;max-height:none}
+.scene-fullscreen .workbench .studio{border-radius:0;border-color:transparent}
+.scene-fullscreen .workbench .build-panel{transform:translateX(100%);opacity:0;visibility:hidden;pointer-events:none}
+.scene-fullscreen .workbench .build-panel-toggle,.scene-fullscreen .workbench .scene-top{opacity:0;visibility:hidden;pointer-events:none}
+@media(max-width:840px){
+ :root{--fullscreen-header-height:64px}
+ .scene-fullscreen .workbench .workspace{grid-template-columns:minmax(0,1fr);grid-template-rows:minmax(0,1fr) 0px}
+ /* Override the saved collapsed mobile height without changing that setting. */
+ html.scene-fullscreen[data-panel-collapsed=true] .workbench .studio-column{height:100dvh}
+}
+@media(max-width:540px){:root{--fullscreen-header-height:58px}}
+@media(prefers-reduced-motion:reduce){.workshop-header,main.workbench,.workbench .studio,.workbench .scene-top{transition:none}}
