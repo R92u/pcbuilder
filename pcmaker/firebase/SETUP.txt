@@ -10,6 +10,9 @@ The browser configuration in dist/firebase-config.json is public SDK configurati
 not a service-account credential. Never commit CLI tokens or private keys.
 
 App Check (reCAPTCHA Enterprise):
+  Both Firebase App Check API and reCAPTCHA Enterprise API must be enabled
+  in the project. A provider configuration alone does not enable the exchange
+  API for the public SDK key.
   The public appCheckSiteKey is restricted to pcmaker-olnw.onrender.com.
   The browser initializes App Check before Auth/Firestore, obtains an attestation
   token, and refreshes it automatically. Token TTL is 1 hour; risk threshold 0.5.
@@ -26,6 +29,10 @@ App Check (reCAPTCHA Enterprise):
   This project targets Firestore enforcement. Authentication enforcement is
   separate and requires Firebase Authentication with Identity Platform; it has
   not been enabled or upgraded as part of this Spark configuration.
+  Verified 2026-10-28: Firestore enforcement is ENFORCED. An anonymous direct
+  REST query that succeeded before now returns 403 without App Check, including
+  with a forged production Referer. The deployed Market still loads and Google
+  sign-in succeeds. Other Firebase products do not inherit this enforcement.
   If legitimate traffic is blocked, inspect App Check metrics and domain/API
   restrictions. Keep Firestore Rules intact; never fix it by opening database
   access or committing a production debug credential.
@@ -49,6 +56,15 @@ Repository protection:
   is intentionally public; service-account private keys and CLI tokens are not.
   Use account two-factor authentication; account-level 2FA was not verified by
   the repository API audit.
+
+Dependency audit, 2026-10-28:
+  Compatible security updates reduced pnpm audit from 27 advisories to 3.
+  pnpm audit --prod reports zero. The remaining firebase-tools development
+  dependencies are basic-ftp 5.x (high; fixed in 6.2.1), uuid 9.x (moderate;
+  fixed in 11.1.1), and @opentelemetry/core 1.x (moderate; fixed in 2.8.0).
+  They are absent from the static browser bundle. Do not force cross-major
+  overrides without testing the CLI workflows that consume these packages.
+  Recheck upstream firebase-tools and the audit before updating developer tools.
 
 Local development (Node 24, pnpm, Java 21 for emulators):
   pnpm install --frozen-lockfile

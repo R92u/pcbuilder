@@ -3,3 +3,6 @@ allowBuilds:
   esbuild: true
   protobufjs: false
   re2: false
+overrides:
+  # Firestore pins an older Node transport; keep the security fix within major 1.
+  '@grpc/grpc-js@>=1.9.0 <1.13.6': 1.13.6

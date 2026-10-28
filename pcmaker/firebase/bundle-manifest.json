@@ -13,5 +13,5 @@
   "firebase/app-check-guard.js": "cfd2312858bdbed017ae9d18d9d149f6f92c785e563739f7b763dab4d9a76b19",
   "firebase/gallery-client.js": "9b97c8a5c9d131879d7c487bcc5c635bf180849412369dfc8f46adb47b7fec6c",
   "dist/vendor/firebase-gallery.js": "4fec28e44cd53d55c62f7c31750f94de5ce71edad611348cb94e3fa5144610e1",
-  "pnpm-lock.yaml": "07541ee000efb620a60e3ccea99a3fb093758595e5af2b26c930c3b718ce23d6"
+  "pnpm-lock.yaml": "6c91e41700a3c1aae40658aea2569f9854c2062c4190c2a5bd29faf9ac93abcf"
 }
