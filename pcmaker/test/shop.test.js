@@ -42,3 +42,13 @@ test('Fresh-price filter excludes stale, future, unavailable and undated snapsho
  const prices={rtx4060:{price:100,date:'2026-10-21'},rtx3090:{price:100,date:'2026-10-20'},rx7600:{price:100,date:'2026-10-29'},rx6600:{price:100,date:'2026-10-28',availability:'out-of-stock'},rtx3060:{price:100}};
  assert.deepEqual(filtered({category:'gpu',priced:true},prices).map(p=>p.id),['rtx4060']);
 });
+
+
+test('Workplace catalogue filters peripheral colours and keeps PC compatibility rules separate',()=>{
+ const extra=[{id:'peripheral-white',kind:'peripheral',category:'keyboard',name:'White keyboard',brand:'Keys',colors:['white'],specsVerified:true},{id:'peripheral-black',kind:'peripheral',category:'keyboard',name:'Black keyboard',brand:'Keys',colors:['black'],specsVerified:true}];
+ const products=[...shopProducts,...extra];
+ const result=filterProducts(products,{...defaults,category:'keyboard',color:'white',compatible:true,verified:true},demoBuild,{});
+ assert.deepEqual(result.map(p=>p.id),['peripheral-white']);
+ assert.deepEqual(filterProducts(products,{...defaults,category:'gpu'},demoBuild,{}).map(p=>p.id),filtered({category:'gpu'}).map(p=>p.id));
+ assert.equal(filterProducts(products,{...defaults,color:'white',min:'1'},demoBuild,{}).length,0,'Missing regional prices are not treated as zero');
+});

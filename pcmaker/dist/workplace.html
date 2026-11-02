@@ -9,7 +9,7 @@
  <link rel="stylesheet" href="./design-studio.css" id="design-stylesheet">
  <link rel="stylesheet" href="./build-panel.css"><link rel="stylesheet" href="./data-quality.css"><link rel="stylesheet" href="./fullscreen.css">
  <script>try{if(localStorage.getItem('pcmaker-panel-collapsed')==='true')document.documentElement.dataset.panelCollapsed='true';}catch{}</script>
-<link rel="stylesheet" href="./workplace.css"><link rel="stylesheet" href="./workplace-integrated.css">
+<link rel="stylesheet" href="./workplace.css"><link rel="stylesheet" href="./workplace-integrated.css?v=peripheral-shop-20261102">
 </head>
 <body class="workplace-page workplace-integrated" data-workplace="true">
 <button id="fullscreen-exit" class="round-button fullscreen-exit" aria-label="Выйти из полного экрана" title="Выйти из полного экрана · Esc" hidden><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3 8h5V3m8 0v5h5M8 21v-5H3m18 0h-5v5"/></svg></button>
@@ -64,11 +64,8 @@
      <p class="small-note">Обороты задаются отдельно для вдува и выдува во вкладке «Симуляция». Потоки и нагрев — учебная модель. Кабели следуют за вентиляторами; разветвители подключаются во вкладке «Кабели».</p>
     </section>
    </div><section id="peripherals-panel" class="workplace-panel" aria-label="Выбор периферии" hidden>
-   <div class="workplace-panel-title"><div><span class="eyebrow">ДОПОЛНИ СБОРКУ</span><h2>Периферия</h2></div><span class="workplace-count" id="workplace-count">30 моделей</span></div>
+   <div class="workplace-panel-title"><div><span class="eyebrow">ДОПОЛНИ СБОРКУ</span><h2>Периферия</h2></div><span class="workplace-count" id="workplace-count">3 устройства</span></div>
    <div class="workplace-selection" id="workplace-selection" aria-label="Выбранные устройства"></div>
-   <div class="workplace-tabs" role="tablist" aria-label="Тип устройства"><button role="tab" id="tab-monitor" aria-controls="workplace-products" aria-selected="true" data-peripheral-category="monitor">Мониторы</button><button role="tab" id="tab-keyboard" aria-controls="workplace-products" aria-selected="false" tabindex="-1" data-peripheral-category="keyboard">Клавиатуры</button><button role="tab" id="tab-mouse" aria-controls="workplace-products" aria-selected="false" tabindex="-1" data-peripheral-category="mouse">Мыши</button></div>
-   <label class="workplace-filter">Цвет <select id="workplace-color" aria-label="Цвет"><option value="all">Все цвета</option><option value="black">Чёрный</option><option value="white">Белый / светлый</option></select></label>
-   <div id="workplace-products" role="tabpanel" aria-labelledby="tab-monitor"></div>
    <div class="workplace-total"><div><span>Периферия · без ПК и стола</span><strong id="workplace-total" aria-live="polite"></strong></div><p id="workplace-total-note"></p><p>Снимок цен с источниками, без доставки. Проверь наличие, продавца, оригинальность и гарантию перед покупкой.</p></div>
   </section></aside></div>
   </section>
@@ -86,15 +83,16 @@
 <section id="menu-metrics" class="workshop-menu" role="dialog" aria-modal="false" aria-labelledby="menu-metrics-title" hidden><div class="menu-heading"><h2 id="menu-metrics-title">Показатели</h2><button class="round-button menu-close" data-menu-close aria-label="Закрыть меню показатели"><span data-icon="close"></span></button></div><div class="metrics" aria-label="Расчётные показатели"><article><span class="metric-label"><span data-icon="cpu"></span> Процессор</span><div><strong id="cpu-temp">—</strong><span class="unit">°C</span><span class="metric-state" id="cpu-state">Нет данных</span></div><div class="metric-track"><span id="cpu-bar"></span></div></article><article><span class="metric-label"><span data-icon="gpu"></span> Видеокарта</span><div><strong id="gpu-temp">—</strong><span class="unit">°C</span><span class="metric-state" id="gpu-state">Нет данных</span></div><div class="metric-track"><span id="gpu-bar"></span></div></article><article><span class="metric-label"><span data-icon="bolt"></span> Потребление</span><div><strong id="power-value">—</strong><span class="unit">Вт</span></div><span class="metric-foot" id="power-note">Запусти симуляцию</span></article><article><span class="metric-label"><span data-icon="fan"></span> Вентиляторы корпуса</span><div><strong id="fan-value">—</strong><span class="unit">об/мин</span></div><span class="metric-foot">Скорость группы на вдув</span></article></div><div id="other-temps" class="other-temps"></div><p class="menu-note" id="metrics-note">Показатели появятся после запуска симуляции в правой панели.</p></section>
 <section id="menu-help" class="workshop-menu" role="dialog" aria-modal="false" aria-labelledby="menu-help-title" hidden><div class="menu-heading"><h2 id="menu-help-title">Помощь</h2><button class="round-button menu-close" data-menu-close aria-label="Закрыть меню помощь"><span data-icon="close"></span></button></div><dl class="control-guide"><div><dt>ЛКМ + движение</dt><dd>Вращение компьютера</dd></div><div><dt>Колесо мыши</dt><dd>Приближение и отдаление</dd></div><div><dt>ПКМ на детали</dt><dd>Характеристики и нагрев</dd></div><div><dt>Перетащить штекер</dt><dd>Подключение кабеля</dd></div></dl><div class="simulation-note"><span data-icon="info"></span><p>Температуры и воздух — учебная симуляция, а не измерения реального ПК. <button id="method-button">Как это работает <span>↗</span></button></p></div><footer><span class="footer-brand">PCmaker<span> / </span>Сначала собери. Потом покупай.</span><button id="sources-button">Источники и ограничения <span>↗</span></button><span class="footer-caption">ШКОЛЬНЫЙ ПРОЕКТ · 2026</span></footer></section>
  <dialog id="catalog-dialog" class="catalog-dialog shop-dialog" aria-labelledby="catalog-title">
- <header class="shop-header"><div><span class="shop-eyebrow">МАГАЗИН КОМПЛЕКТУЮЩИХ</span><h2 id="catalog-title">Все комплектующие</h2></div><span class="shop-region">Москва · ₽</span><button class="round-button" data-close="catalog-dialog" aria-label="Закрыть магазин"><span data-icon="close"></span></button></header>
+ <header class="shop-header"><div><span class="shop-eyebrow">МАГАЗИН ПК И ПЕРИФЕРИИ</span><h2 id="catalog-title">Все комплектующие</h2></div><span class="shop-region">Москва · ₽</span><button class="round-button" data-close="catalog-dialog" aria-label="Закрыть магазин"><span data-icon="close"></span></button></header>
  <div class="shop-layout"><aside class="shop-sidebar">
-  <div class="shop-build-summary"><strong>Моя сборка</strong><div><span>Детали<b id="shop-part-count">0/8</b></span><span><span id="shop-build-price-label">Известные цены</span><b id="shop-build-price">—</b></span><span>Оценка мощности<b id="shop-power">—</b></span></div></div>
+  <div class="shop-build-summary"><strong>Мой ПК</strong><div><span>Детали<b id="shop-part-count">0/8</b></span><span><span id="shop-build-price-label">Известные цены</span><b id="shop-build-price">—</b></span><span>Оценка мощности<b id="shop-power">—</b></span></div></div>
   <nav id="shop-categories" class="shop-categories" aria-label="Категории комплектующих"></nav>
   <details class="shop-filter-group" open><summary>Фильтры</summary><div class="shop-filter-fields">
-   <label class="shop-check"><input type="checkbox" id="compatible-only"> Совместимые со сборкой</label>
+   <label class="shop-check"><input type="checkbox" id="compatible-only"> Совместимые детали ПК</label>
    <label class="shop-check"><input type="checkbox" id="shop-priced-only"> Цены не старше 7 дней</label><label class="shop-check"><input type="checkbox" id="shop-verified-only"> Проверенные характеристики</label><p class="quality-catalog-note">Остальные товары доступны для ручной сборки с пометкой о проверке. Автосборка использует только проверенный набор.</p>
    <label class="shop-field">Производитель<select id="shop-brand" aria-label="Производитель"></select></label>
    <label class="shop-field">Сокет<select id="shop-socket" aria-label="Сокет"></select></label>
+   <label class="shop-field" id="shop-color-field" hidden>Цвет<select id="shop-color" aria-label="Цвет товара"><option value="">Все цвета</option><option value="black">Чёрный</option><option value="white">Белый / светлый</option></select></label>
    <label class="shop-field">Тип памяти<select id="shop-memory" aria-label="Тип памяти"></select></label>
    <div class="shop-field"><span id="shop-price-unit">Цена, ₽</span><div class="shop-price-inputs"><input id="shop-price-min" type="number" min="0" step="100" placeholder="От" aria-label="Цена от"><span>—</span><input id="shop-price-max" type="number" min="0" step="100" placeholder="До" aria-label="Цена до"></div></div>
    <button class="shop-reset" data-shop-reset>Сбросить фильтры</button>
@@ -122,6 +120,6 @@
  <div id="toast" role="status" class="toast" hidden></div>
  <noscript><div class="no-script">Для 3D-конструктора нужно включить JavaScript в браузере.</div></noscript>
  <dialog id="peripheral-dialog" aria-labelledby="peripheral-title"><div class="peripheral-dialog-top"><span class="eyebrow">ХАРАКТЕРИСТИКИ</span><button class="round-button" id="peripheral-close" aria-label="Закрыть характеристики">×</button></div><div id="peripheral-details"></div></dialog>
-<script type="module" src="./builder-app.js"></script>
+<script type="module" src="./builder-app.js?v=peripheral-shop-20261102"></script>
 </body>
 </html>

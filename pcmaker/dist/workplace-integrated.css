@@ -12,3 +12,5 @@
 .workplace-integrated #peripheral-dialog{overflow:auto}
 .workplace-integrated .round-button.build-panel-toggle{width:28px;height:96px;border-radius:18px 0 0 18px}
 @media(max-width:839px){.workplace-integrated #computer-panel{overflow:visible}.workplace-integrated .workplace-overview{gap:5px;left:10px;bottom:10px}.workplace-integrated .workplace-overview .round-button{width:34px;height:34px}}
+
+.shop-peripheral .shop-card-actions{flex-wrap:wrap}.shop-peripheral .shop-card-actions .button{width:100%;font-size:11px}.shop-peripheral .price-source{font-size:10px;line-height:1.5;color:#acb9c1}
