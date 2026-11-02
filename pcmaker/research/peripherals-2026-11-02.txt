@@ -35,3 +35,145 @@ G502: опубликованная цена 2999 RUB в карточке М.Ви
 недостающие региональные цены, возраст/доступность предложений,
 наличие локальных фото и атрибуции. В браузере: все 9 вариантов,
 клик по 3D, модальная карточка, фильтр, перезагрузка и мобильная ширина.
+
+Расширение от 02.11.2026 — 30 позиций, по 10 на категорию.
+Новые товары: dist/peripherals-extra.js. Фото: peripheral-images.json.
+Цены прочитаны из отдельных карточек 02.11.2026; не из поискового сниппета.
+Redragon: RUB из каталога производителя, доступность покупки не подтверждается.
+ANDPRO: RUB и наличие из карточки магазина; фото этих мониторов — из ANDPRO.
+Белые варианты имеют собственные артикулы и цены, а не перекрашенную карточку.
+LG: у продавца встречаются несовпадающие яркость/разрешение; параметры взяты у LG.
+LG 29U531A: 2560x1080, 250 кд/м² тип., не 1920x1080/350 кд/м² из части карточек.
+LG 34U530A: 400 кд/м² тип.; 500 кд/м² в магазине не названо типичным значением.
+Uranus Pro 82: производитель указывает 81 клавишу; число в названии не подменяет спецификацию.
+MG8: форма перфорированного корпуса взята с фото. Мелкие отверстия в 3D стилизованы.
+Параметры, которых нет у производителя, не выдумываются. Гарантия зависит от региона продавца.
+3D: габариты в мм, корпуса и основные черты упрощены; изображения 512 px максимум.
+Клавиатуры: 60%, 65%, 75%, TKL, 100%; низкий профиль Anubis; цифровые блоки.
+Беспроводные мыши/клавиатуры отображаются с USB-приёмником без постоянного кабеля.
+
+Redragon Fizz Grey | 70675
+Характеристики: https://redragon.ru/product/fizz-white-gray
+Цена: 3209 RUB | Redragon | unknown
+https://redragon.ru/product/fizz-white-gray
+Размеры Ш×Г×В, мм: 295.7 × 105.6 × 33.5
+
+Redragon Lakshmi | 78119
+Характеристики: https://redragon.ru/product/lakshmi
+Цена: 2676 RUB | Redragon | unknown
+https://redragon.ru/product/lakshmi
+Размеры Ш×Г×В, мм: 291.0 × 102.0 × 36.0
+
+Redragon Mitra | 75015
+Характеристики: https://redragon.ru/product/mitra
+Цена: 4155 RUB | Redragon | unknown
+https://redragon.ru/product/mitra
+Размеры Ш×Г×В, мм: 435.0 × 123.0 × 37.0
+
+Redragon Anubis | 70505
+Характеристики: https://redragon.ru/product/anubis
+Цена: 4329 RUB | Redragon | unknown
+https://redragon.ru/product/anubis
+Размеры Ш×Г×В, мм: 356.0 × 126.0 × 18.5
+
+Redragon Anubis White | 70506
+Характеристики: https://redragon.ru/product/anubis-white
+Цена: 5161 RUB | Redragon | unknown
+https://redragon.ru/product/anubis-white
+Размеры Ш×Г×В, мм: 356.0 × 126.0 × 18.5
+
+Redragon Whisper | 71964
+Характеристики: https://redragon.ru/product/whisper
+Цена: 6326 RUB | Redragon | unknown
+https://redragon.ru/product/whisper
+Размеры Ш×Г×В, мм: 441.0 × 130.0 × 37.0
+
+Redragon Uranus Pro 82 | 73324
+Характеристики: https://redragon.ru/product/uranus-pro-82
+Цена: 13719 RUB | Redragon | unknown
+https://redragon.ru/product/uranus-pro-82
+Размеры Ш×Г×В, мм: 333.0 × 146.0 × 37.0
+
+Redragon K1ng 4K Pro White | 72212
+Характеристики: https://redragon.ru/product/k1ng-4k-pro-white
+Цена: 5572 RUB | Redragon | unknown
+https://redragon.ru/product/k1ng-4k-pro-white
+Размеры Ш×Г×В, мм: 64.0 × 120.0 × 37.0
+
+Redragon Trident | 71864
+Характеристики: https://redragon.ru/product/trident
+Цена: 1712 RUB | Redragon | unknown
+https://redragon.ru/product/trident
+Размеры Ш×Г×В, мм: 64.5 × 124.0 × 41.0
+
+Redragon Azzmach Lite White | 73156
+Характеристики: https://redragon.ru/product/azzmach-lite-white
+Цена: 1567 RUB | Redragon | unknown
+https://redragon.ru/product/azzmach-lite-white
+Размеры Ш×Г×В, мм: 69.0 × 122.0 × 40.0
+
+Redragon Gainer | 75170
+Характеристики: https://redragon.ru/product/gainer
+Цена: 1219 RUB | Redragon | unknown
+https://redragon.ru/product/gainer
+Размеры Ш×Г×В, мм: 74.0 × 128.0 × 41.0
+
+Redragon Aatrox | 71276
+Характеристики: https://redragon.ru/product/aatrox
+Цена: 2544 RUB | Redragon | unknown
+https://redragon.ru/product/aatrox
+Размеры Ш×Г×В, мм: 86.0 × 123.4 × 49.5
+
+Redragon MG8 | 73466
+Характеристики: https://redragon.ru/product/mg8
+Цена: 9892 RUB | Redragon | unknown
+https://redragon.ru/product/mg8
+Размеры Ш×Г×В, мм: 60.0 × 117.0 × 39.0
+
+Redragon Storm Pro | 78127
+Характеристики: https://redragon.ru/product/storm-pro
+Цена: 3472 RUB | Redragon | unknown
+https://redragon.ru/product/storm-pro
+Размеры Ш×Г×В, мм: 65.5 × 126.8 × 41.0
+
+MSI PRO MP225 | 9S6-3PC6CM-004
+Характеристики: https://www.msi.com/Business-Productivity-Monitor/PRO-MP225/Specification
+Цена: 9288 RUB | ANDPRO | out-of-stock
+https://andpro.ru/catalog/monitors_projectors/monitors/monitor_msi_pro_mp225_21_5_ips_chyernyy_9s6_3pc6cm_004/
+Размеры Ш×Г×В, мм: 489.4 × 182.3 × 384.8
+
+MSI PRO MP243W E14 | 9S6-3PD1CT-037
+Характеристики: https://www.msi.com/Business-Productivity-Monitor/PRO-MP243W-E14/Specification
+Цена: 9396 RUB | ANDPRO | in-stock
+https://andpro.ru/catalog/monitors_projectors/monitors/monitor_msi_mp243w_e14_23_8_ips_belyy_9s6_3pd1ct_037/
+Размеры Ш×Г×В, мм: 540.13 × 188.2 × 408.72
+
+MSI PRO MP273QW E14 | 9S6-3PE2CH-059
+Характеристики: https://www.msi.com/Business-Productivity-Monitor/PRO-MP273QW-E14/Specification
+Цена: 17854 RUB | ANDPRO | out-of-stock
+https://andpro.ru/catalog/monitors_projectors/monitors/monitor_msi_mp273qw_e14_27_ips_belyy_9s6_3pe2ch_059/
+Размеры Ш×Г×В, мм: 613.49 × 201.01 × 470.61
+
+MSI MAG 272QPF E20 | 9S6-3CF7CA-009
+Характеристики: https://www.msi.com/Monitor/MAG-272QPF-E20/Specification
+Цена: 20964 RUB | ANDPRO | in-stock
+https://andpro.ru/catalog/monitors_projectors/monitors/monitor_msi_mag_272qpf_e20_27_led_ips_chyernyy_9s6_3cf7ca_009/
+Размеры Ш×Г×В, мм: 615 × 227.9 × 538.5
+
+MSI MPG 321URXW QD-OLED | 9S6-3DD29A-051
+Характеристики: https://www.msi.com/Monitor/MPG-321URXW-QD-OLED/Specification
+Цена: 100600 RUB | ANDPRO | in-stock
+https://andpro.ru/catalog/monitors_projectors/monitors/monitor_msi_mpg_321urxw_qd_oled_31_5_qd_oled_belyy_9s6_3dd29a_051/
+Размеры Ш×Г×В, мм: 718 × 242 × 483
+
+LG 29U531A-W | 29U531A-W.ARUZ
+Характеристики: https://www.lg.com/au/monitors/ultrawide/29u531a-w/
+Цена: 14826 RUB | ANDPRO | in-stock
+https://andpro.ru/catalog/monitors_projectors/monitors/monitor_lg_29u531a_w_29_ips_belyy_29u531a_w_aruz/
+Размеры Ш×Г×В, мм: 688.5 × 220 × 408.7
+
+LG 34U530A-W | 34U530A-W.ARUZ
+Характеристики: https://www.lg.com/in/monitors/ultrawide/34u530a-w/
+Цена: 23752 RUB | ANDPRO | in-stock
+https://andpro.ru/catalog/monitors_projectors/monitors/monitor_lg_34u530a_w_34_ips_belyy_34u530a_w_aruz/
+Размеры Ш×Г×В, мм: 816.5 × 230 × 534.2

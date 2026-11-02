@@ -1,5 +1,5 @@
 import './navigation.js';
-import {peripherals,peripheralCategories,peripheralById,sanitizeWorkplace,peripheralQuote} from './peripherals.js';
+import {peripherals,peripheralCategories,peripheralById,sanitizeWorkplace,peripheralQuote} from './peripherals.js?v=expanded-20261102';
 import {sanitizeBuild,demoBuild} from './catalog.js';
 import {regionFor} from './regions.js';
 import {priceQuality} from './price-quality.js';
@@ -20,6 +20,7 @@ function offerLink(p){const offer=p.offers[regionId];return offer?`<a href="${e(
 function choose(id){const p=peripheralById[id];if(!p)return;selection[p.category]=id;const stored=save('pcmaker-workplace',selection);scene?.setPeripherals(selection);render();if(!stored){$('workplace-scene-status').textContent='Браузер не разрешил сохранить выбор. Он останется доступен до закрытия страницы.';$('workplace-scene-status').hidden=false;}}
 function setCategory(key){category=key;color='all';$('workplace-color').value=color;render();}
 function render(){
+ $('workplace-count').textContent=peripherals.length+' моделей';
  $('workplace-selection').innerHTML=Object.entries(selection).map(([key,id])=>`<button class="workplace-selected" data-select-category="${key}" title="Выбрать ${e(peripheralCategories[key].toLowerCase())}"><span><small>${e(peripheralCategories[key])}</small><strong>${e(peripheralById[id].name)}</strong></span><span>↗</span></button>`).join('');
  document.querySelectorAll('[data-category]').forEach(b=>{const active=b.dataset.category===category;b.setAttribute('aria-selected',String(active));b.tabIndex=active?0:-1;});
  $('workplace-products').setAttribute('aria-labelledby','tab-'+category);
@@ -30,7 +31,7 @@ function render(){
 }
 function details(id){const p=peripheralById[id];if(!p)return;inspected=id;
  const specs={'Артикул / модель':p.sku,'Цвет':p.color,'Размеры (Ш × Г × В)':p.dimensions.join(' × ')+' мм',...p.specs};
- $('peripheral-details').innerHTML=`<div class="peripheral-detail"><div><div class="peripheral-detail-image"><img src="./assets/peripherals/${p.id}.webp" alt="${e(p.name)}"></div>${price(p)}${offerLink(p)}<button class="button primary" data-choose="${id}">${selection[p.category]===id?'Оставить на столе':'Поставить на стол'}</button><p>3D-модель упрощена: сохранены габариты, цвет и основные особенности формы. Мелкие элементы и маркировка условные.</p><a href="${e(p.source)}" target="_blank" rel="noopener noreferrer">Характеристики производителя ↗</a><p>Фото: ${p.name.startsWith('Redragon')?'Redragon':p.name.startsWith('Xiaomi')?'Xiaomi':'Logitech'}. Параметры сверены 02.11.2026. Неуказанные производителем сведения не дополняются предположениями.</p></div><div><h2 id="peripheral-title">${e(p.name)}</h2><p>${e(p.description)}</p><dl>${Object.entries(specs).map(([k,v])=>`<div><dt>${e(k)}</dt><dd>${e(v)}</dd></div>`).join('')}</dl></div></div>`;
+ $('peripheral-details').innerHTML=`<div class="peripheral-detail"><div><div class="peripheral-detail-image"><img src="./assets/peripherals/${p.id}.webp" alt="${e(p.name)}"></div>${price(p)}${offerLink(p)}<button class="button primary" data-choose="${id}">${selection[p.category]===id?'Оставить на столе':'Поставить на стол'}</button><p>3D-модель упрощена: сохранены габариты, цвет и основные особенности формы. Мелкие элементы и маркировка условные.</p><a href="${e(p.source)}" target="_blank" rel="noopener noreferrer">Характеристики производителя ↗</a><p>Фото: ${e(p.photoCredit||p.name.split(' ')[0])}. Параметры сверены 02.11.2026. Неуказанные производителем сведения не дополняются предположениями.</p></div><div><h2 id="peripheral-title">${e(p.name)}</h2><p>${e(p.description)}</p><dl>${Object.entries(specs).map(([k,v])=>`<div><dt>${e(k)}</dt><dd>${e(v)}</dd></div>`).join('')}</dl></div></div>`;
  if(!$('peripheral-dialog').open)$('peripheral-dialog').showModal();
 }
 document.addEventListener('click',ev=>{const b=ev.target.closest('button');if(!b)return;if(b.dataset.choose){choose(b.dataset.choose);if($('peripheral-dialog').open)$('peripheral-dialog').close();}if(b.dataset.details)details(b.dataset.details);if(b.dataset.category)setCategory(b.dataset.category);if(b.dataset.selectCategory){setCategory(b.dataset.selectCategory);scene?.focus(b.dataset.selectCategory);}if(b.dataset.view)scene?.focus(b.dataset.view);});
@@ -43,7 +44,7 @@ render();
 const savedBuild=read('pcmaker-build'),build=sanitizeBuild(savedBuild||demoBuild);
 $('workplace-pc-note').textContent=savedBuild?'Твой компьютер из конструктора':'Пример ПК · свою сборку можно создать в конструкторе';
 try{
- const {WorkplaceScene}=await import('./workplace-scene.js');scene=new WorkplaceScene($('workplace-canvas'),build,{fans:read('pcmaker-fans')?.[build.case],lighting:read('pcmaker-lighting')});scene.setPeripherals(selection);scene.onProduct=details;
+ const {WorkplaceScene}=await import('./workplace-scene.js?v=expanded-20261102');scene=new WorkplaceScene($('workplace-canvas'),build,{fans:read('pcmaker-fans')?.[build.case],lighting:read('pcmaker-lighting')});scene.setPeripherals(selection);scene.onProduct=details;
  scene.onContextLost=()=>{$('workplace-scene-status').textContent='3D-контекст потерян. Обнови страницу; выбор сохранён.';$('workplace-scene-status').hidden=false;};
  $('workplace-scene-status').hidden=true;
 }catch(error){console.error('Workplace 3D:',error);$('workplace-scene-status').textContent='Не удалось запустить 3D. Выбор товаров и характеристики доступны справа. Попробуй браузер с WebGL.';}

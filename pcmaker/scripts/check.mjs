@@ -12,7 +12,7 @@ for(const [file,expected] of Object.entries(bundle)){
  const actual=createHash('sha256').update(fs.readFileSync(path.join(root,file),'utf8').replace(/\r\n/g,'\n')).digest('hex');
  if(actual!==expected)throw Error('Firebase bundle is stale: '+file+'; run npm run build:firebase');
 }
-for(const name of ['workplace.html','workplace.css','workplace.js','workplace-scene.js','peripherals.js','peripheral-images.json','price-quality.js','verification.js','verification-data.js','data-quality-ui.js','data-quality.css']){
+for(const name of ['workplace.html','workplace.css','workplace.js','workplace-scene.js','peripherals.js','peripherals-extra.js','peripheral-shapes.js','peripheral-images.json','price-quality.js','verification.js','verification-data.js','data-quality-ui.js','data-quality.css']){
  const file=path.join(root,'dist',name);if(!fs.existsSync(file))throw Error('Missing '+name);
  if(name.endsWith('.js')){const result=spawnSync(process.execPath,['--check',file],{encoding:'utf8'});if(result.status!==0)throw Error(result.stderr);}
 }

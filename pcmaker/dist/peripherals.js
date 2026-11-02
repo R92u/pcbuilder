@@ -1,4 +1,5 @@
 import {priceQuality} from './price-quality.js';
+import {extraPeripherals} from './peripherals-extra.js?v=expanded-20261102';
 
 // Dimensions are [width, depth, height] in millimetres. Prices are dated
 // observations, not live offers. Never infer a BYN price from a RUB quote.
@@ -19,6 +20,7 @@ export const peripherals=[
  {id:'king',category:'mouse',name:'Redragon K1ng 4K Pro',sku:'72211',color:'Чёрный',colors:['black'],dimensions:[64.3,120.8,37.9],wired:false,rgb:false,description:'Компактная · беспроводная · 4000 Гц',specs:{'Подключение':'USB / радио 2,4 ГГц / Bluetooth','Сенсор':'Оптический Pixart P3395','Разрешение':'100–26000 DPI','Кнопки':'6 + колесо-кнопка (по каталогу)','Переключатели':'Huano, 20 млн нажатий','Частота опроса':'До 4000 Гц, ресивер в комплекте','Максимальное ускорение':'50 g','Скорость':'650 IPS','Подсветка':'Нет','Аккумулятор':'Li-ion, 400 мА·ч','Автономность':'10–48 ч, зависит от режима','Дальность':'До 10 м','Масса':'50 г в таблице; 49 г в описании производителя','Кабель':'1,8 м ±5%','Материал':'Пластик, без перфорации','Грузики':'Нет','Совместимость':'Windows 2000 и новее, Mac OS X 10','Гарантия производителя':'12 месяцев'},source:'https://redragon.ru/product/k1ng-4k-pro',offers:red('k1ng-4k-pro',5663)},
  {id:'g502',category:'mouse',name:'Logitech G502 HERO',sku:'910-005470',color:'Чёрный',colors:['black'],dimensions:[75,132,40],wired:true,rgb:true,description:'Праворукая · HERO 25K · 11 кнопок',specs:{'Подключение':'Проводное, USB','Сенсор':'HERO 25K, оптический','Разрешение':'100–25600 DPI (с актуальной прошивкой)','Частота опроса':'1000 Гц / 1 мс','Кнопки':'11 программируемых','Максимальное ускорение':'>40 g','Скорость':'>400 IPS','Подсветка':'LIGHTSYNC RGB','Масса без кабеля':'121 г','Регулировка массы':'5 грузиков по 3,6 г, до +18 г','Кабель':'2,1 м','Память':'До 5 профилей','Колесо':'Два режима, свободная прокрутка','ПО':'Logitech G HUB','Форма':'Для правой руки, упор под большой палец'},source:'https://www.logitechg.com/en-us/shop/p/g502-hero-gaming-mouse.910-005469',offers:{ru:{price:2999,date,store:'М.Видео',kind:'store',availability:'unknown',url:'https://www.mvideo.ru/products/50174882'}}}
 ];
+peripherals.push(...extraPeripherals);
 export const peripheralById=Object.fromEntries(peripherals.map(p=>[p.id,p]));
 export const defaultWorkplace={monitor:'a27i',keyboard:'fizz',mouse:'griffin'};
 export function sanitizeWorkplace(input){return Object.fromEntries(Object.keys(peripheralCategories).map(key=>[key,peripheralById[input?.[key]]?.category===key?input[key]:defaultWorkplace[key]]));}
