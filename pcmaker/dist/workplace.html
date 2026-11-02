@@ -1,0 +1,37 @@
+<!doctype html>
+<html lang="ru" data-design="glass">
+<head>
+ <meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+ <meta name="theme-color" content="#141619"><meta name="description" content="Рабочее место PCmaker: выбери реальные монитор, клавиатуру и мышь, сравни размеры в 3D, характеристики и цены.">
+ <title>Рабочее место — PCmaker</title><link rel="icon" href="./favicon.svg" type="image/svg+xml">
+ <link rel="stylesheet" href="./style.css"><link rel="stylesheet" href="./navigation.css?v=github-20261028"><link rel="stylesheet" href="./design-studio.css"><link rel="stylesheet" href="./workplace.css">
+ <script type="importmap">{"imports":{"three":"./vendor/three.module.js"}}</script>
+</head>
+<body class="workplace-page">
+ <header class="header workplace-header">
+  <div class="brand-navigation"><button class="brand" id="brand-toggle" aria-label="PCmaker — выбрать раздел" aria-expanded="false" aria-controls="brand-switcher"><span class="brand-mark">P<span>↗</span></span><span class="brand-name">PC<span class="brand-light">maker</span><i></i></span><span class="brand-chevron" aria-hidden="true">⌄</span></button><nav id="brand-switcher" class="brand-switcher" aria-label="Разделы PCmaker" hidden><a href="./"><span class="brand-destination-icon">▧</span><span><strong>PCmaker</strong><small>Конструктор компьютера</small></span></a><a href="./market.html"><span class="brand-destination-icon">▦</span><span><strong>Маркет</strong><small>Сборки сообщества</small></span></a><a href="./workplace.html" aria-current="page"><span class="brand-destination-icon">▱</span><span><strong>Рабочее место</strong><small>Монитор, клавиатура и мышь</small></span></a></nav></div>
+  <span class="workplace-location">ТВОЁ ПРОСТРАНСТВО</span>
+  <div class="workplace-actions"><label class="region"><span class="sr-only">Регион цен</span><select id="workplace-region" aria-label="Регион цен"><option value="ru">Москва / RUB</option><option value="by">Минск / BYN</option></select></label><a class="round-button" href="https://github.com/R92u/pcbuilder" target="_blank" rel="noopener noreferrer" aria-label="GitHub — исходный код (новая вкладка)" title="GitHub">↗</a></div>
+ </header>
+ <main class="workplace-layout">
+  <section class="workplace-stage" aria-label="Рабочее место в 3D">
+   <div id="workplace-canvas" aria-label="Вращай сцену мышью, приближай колёсиком. Нажми на периферию для характеристик."></div>
+   <div class="workplace-heading"><span class="eyebrow">PCMAKER / РАБОЧЕЕ МЕСТО</span><h1>Всё на своих местах.</h1><p>Сравни размеры. Собери свой сетап.</p></div>
+   <div class="workplace-camera" aria-label="Ракурсы"><button class="round-button" data-view="all" title="Всё рабочее место" aria-label="Всё рабочее место">↺</button><button class="round-button" data-view="monitor" title="Монитор крупно" aria-label="Монитор крупно">▣</button><button class="round-button" data-view="keyboard" title="Клавиатура крупно" aria-label="Клавиатура крупно">⌨</button><button class="round-button" data-view="mouse" title="Мышь крупно" aria-label="Мышь крупно">◒</button></div>
+   <div class="workplace-caption"><span id="workplace-pc-note">Твой компьютер из конструктора</span><a href="./">Изменить ПК ↗</a></div>
+   <p id="workplace-scene-status" role="status" aria-live="polite">Загружаю рабочее место…</p>
+   <p class="workplace-hint">Вращение — мышь · Приближение — колесо · Характеристики — клик</p>
+  </section>
+  <aside class="workplace-panel" aria-label="Выбор периферии">
+   <div class="workplace-panel-title"><div><span class="eyebrow">ДОПОЛНИ СБОРКУ</span><h2>Периферия</h2></div><span class="workplace-count">9 моделей</span></div>
+   <div class="workplace-selection" id="workplace-selection" aria-label="Выбранные устройства"></div>
+   <div class="workplace-tabs" role="tablist" aria-label="Тип устройства"><button role="tab" id="tab-monitor" aria-controls="workplace-products" aria-selected="true" data-category="monitor">Мониторы</button><button role="tab" id="tab-keyboard" aria-controls="workplace-products" aria-selected="false" tabindex="-1" data-category="keyboard">Клавиатуры</button><button role="tab" id="tab-mouse" aria-controls="workplace-products" aria-selected="false" tabindex="-1" data-category="mouse">Мыши</button></div>
+   <label class="workplace-filter">Цвет <select id="workplace-color" aria-label="Цвет"><option value="all">Все цвета</option><option value="black">Чёрный</option><option value="white">Белый / светлый</option></select></label>
+   <div id="workplace-products" role="tabpanel" aria-labelledby="tab-monitor"></div>
+   <div class="workplace-total"><div><span>Периферия · без ПК и стола</span><strong id="workplace-total" aria-live="polite"></strong></div><p id="workplace-total-note"></p><p>Снимок цен с источниками, без доставки. Проверь наличие, продавца, оригинальность и гарантию перед покупкой.</p></div>
+  </aside>
+ </main>
+ <dialog id="peripheral-dialog" aria-labelledby="peripheral-title"><div class="peripheral-dialog-top"><span class="eyebrow">ХАРАКТЕРИСТИКИ</span><button class="round-button" id="peripheral-close" aria-label="Закрыть характеристики">×</button></div><div id="peripheral-details"></div></dialog>
+ <script type="module" src="./workplace.js"></script>
+</body>
+</html>
