@@ -103,7 +103,7 @@ export const interactionMethods={
   if(!visible){this.updatePlugHandle();return;}
   const curve=cableCurve(cablePreviewPoints(this.looseSpec,this.looseEnd,this.dragging.snapped),.09);
   this.looseTube.geometry.dispose();this.looseTube.geometry=new THREE.TubeGeometry(curve,96,Math.max(.018,this.looseSpec.radius*Math.sqrt(this.looseSpec.strands)),6,false);
-  this.plug.position.copy(this.looseEnd);this.plug.lookAt(curve.getPoint(.94));this.updatePlugHandle();
+  this.plug.position.copy(this.looseEnd);this.plug.lookAt(this.root.localToWorld(curve.getPoint(.94)));this.updatePlugHandle();
  },
  updatePlugHandle(){
   if(this.sourceMarker){const source=this.root.localToWorld(this.sourcePosition.clone()).project(this.camera);this.sourceMarker.style.left=(source.x*.5+.5)*this.container.clientWidth+'px';this.sourceMarker.style.top=(-source.y*.5+.5)*this.container.clientHeight+'px';this.sourceMarker.hidden=!!this.plugHandle&&!this.dragging||source.z>1||source.z< -1||Math.abs(source.x)>1||Math.abs(source.y)>1;}

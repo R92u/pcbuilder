@@ -68,13 +68,13 @@ export const fanSceneMethods={
  updateFanMarkers(){
   if(!this.fanEditing)return;
   const w=this.container.clientWidth,h=this.container.clientHeight;
-  for(const {button,slot} of this.fanMarkers||[]){const p=new THREE.Vector3(...slot.position).project(this.camera);button.style.left=(p.x*.5+.5)*w+'px';button.style.top=(-p.y*.5+.5)*h+'px';button.hidden=p.z>1||Math.abs(p.x)>1||Math.abs(p.y)>1;}
+  for(const {button,slot} of this.fanMarkers||[]){const p=this.root.localToWorld(new THREE.Vector3(...slot.position)).project(this.camera);button.style.left=(p.x*.5+.5)*w+'px';button.style.top=(-p.y*.5+.5)*h+'px';button.hidden=p.z>1||Math.abs(p.x)>1||Math.abs(p.y)>1;}
  },
  bindFanDrag(button,spec){
   button.onpointerdown=ev=>{
    if(ev.button!==0)return;ev.preventDefault();ev.stopPropagation();
    const group=this.caseFanMeshes.get(spec.id),normal=this.camera.getWorldDirection(new THREE.Vector3());
-   this.fanDrag={id:ev.pointerId,fanId:spec.id,button,group,origin:group.position.clone(),plane:new THREE.Plane().setFromNormalAndCoplanarPoint(normal,group.position),start:[ev.clientX,ev.clientY],moved:false};
+   this.fanDrag={id:ev.pointerId,fanId:spec.id,button,group,origin:group.position.clone(),plane:new THREE.Plane().setFromNormalAndCoplanarPoint(normal,group.getWorldPosition(new THREE.Vector3())),start:[ev.clientX,ev.clientY],moved:false};
    button.setPointerCapture(ev.pointerId);this.controls.enabled=false;
    button.classList.add('held');
    for(const marker of this.fanMarkers){const error=placementError(this.currentBuild,this.fanLayout,spec.id,marker.slot.id);marker.button.classList.toggle('eligible',!error);marker.button.classList.toggle('blocked',!!error);}
@@ -83,7 +83,7 @@ export const fanSceneMethods={
    const d=this.fanDrag;if(!d||d.id!==ev.pointerId)return;
    if(Math.hypot(ev.clientX-d.start[0],ev.clientY-d.start[1])>4)d.moved=true;
    const r=this.container.getBoundingClientRect();this.raycaster.setFromCamera(new THREE.Vector2((ev.clientX-r.left)/r.width*2-1,-(ev.clientY-r.top)/r.height*2+1),this.camera);
-   const point=this.raycaster.ray.intersectPlane(d.plane,new THREE.Vector3());if(point)d.group.position.copy(point);
+   const point=this.raycaster.ray.intersectPlane(d.plane,new THREE.Vector3());if(point)d.group.position.copy(d.group.parent.worldToLocal(point));
    const target=this.fanDropAt(ev.clientX,ev.clientY);for(const m of this.fanMarkers)m.button.classList.toggle('drop-ready',m.slot.id===target&&!placementError(this.currentBuild,this.fanLayout,d.fanId,target));
   };
   button.onpointerup=ev=>this.endFanDrag(ev,false);button.onpointercancel=ev=>this.endFanDrag(ev,true);

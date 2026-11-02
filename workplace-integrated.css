@@ -1,0 +1,14 @@
+/* Shared workbench layout; only the peripheral controls are specific to this page. */
+.workplace-integrated .workplace-mode{display:flex;gap:6px;padding:12px;border-bottom:1px solid #ffffff25;flex-shrink:0}
+.workplace-mode button{flex:1;padding:10px 8px;border:1px solid transparent;border-radius:12px;color:#b7c5cc;font-size:12px}
+.workplace-mode button[aria-pressed=true]{color:#fff;border-color:#ffffff45;background:linear-gradient(140deg,#ffffff30,#ffffff08);box-shadow:inset 0 1px #ffffff70}
+.workplace-integrated #computer-panel{display:flex;flex-direction:column;min-height:0;flex:1;overflow:hidden}
+.workplace-integrated #computer-panel>section{flex:1;overflow:auto;min-height:0;padding-left:18px;padding-right:18px;overscroll-behavior:contain;scrollbar-width:thin;scrollbar-color:#ffffff40 transparent}
+.workplace-integrated .workplace-panel{border:0;border-radius:0;background:none;box-shadow:none;backdrop-filter:none;flex:1;min-height:0;overflow:auto}
+.workplace-integrated .workplace-overview{position:absolute;z-index:4;left:16px;bottom:16px;display:flex;gap:8px;padding:8px;border-radius:28px;background:#ffffff0a;backdrop-filter:blur(16px);border:1px solid #ffffff25}
+.workplace-integrated .workplace-selection{grid-template-columns:1fr}
+.workplace-integrated .workplace-selected strong{font-size:11px}
+.workplace-integrated .workplace-product-picture{height:140px}
+.workplace-integrated #peripheral-dialog{overflow:auto}
+.workplace-integrated .round-button.build-panel-toggle{width:28px;height:96px;border-radius:18px 0 0 18px}
+@media(max-width:839px){.workplace-integrated #computer-panel{overflow:visible}.workplace-integrated .workplace-overview{gap:5px;left:10px;bottom:10px}.workplace-integrated .workplace-overview .round-button{width:34px;height:34px}}
