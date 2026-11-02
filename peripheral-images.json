@@ -1,0 +1,47 @@
+{
+  "fizz": {
+    "image": "assets/peripherals/fizz.webp",
+    "sourcePage": "https://redragon.ru/product/fizz-white-yellow-gray",
+    "sourceImage": "https://redragon.ru/public/r/800x800/products/13707/b0819fb6.webp"
+  },
+  "ryze": {
+    "image": "assets/peripherals/ryze.webp",
+    "sourcePage": "https://redragon.ru/product/ryze",
+    "sourceImage": "https://redragon.ru/public/r/800x800/products/10770/cd2eb46c.webp"
+  },
+  "shiva": {
+    "image": "assets/peripherals/shiva.webp",
+    "sourcePage": "https://redragon.ru/product/shiva",
+    "sourceImage": "https://redragon.ru/public/r/800x800/products/7498/b0b7fd7e.webp"
+  },
+  "griffin": {
+    "image": "assets/peripherals/griffin.webp",
+    "sourcePage": "https://redragon.ru/product/griffin-white",
+    "sourceImage": "https://redragon.ru/public/r/800x800/products/12757/2377706c.webp"
+  },
+  "king": {
+    "image": "assets/peripherals/king.webp",
+    "sourcePage": "https://redragon.ru/product/k1ng-4k-pro",
+    "sourceImage": "https://redragon.ru/public/r/800x800/products/12840/74e629e4.webp"
+  },
+  "a24i": {
+    "image": "assets/peripherals/a24i.webp",
+    "sourcePage": "https://www.mi.com/global/product/xiaomi-monitor-a24i-2026/",
+    "sourceImage": "https://i02.appmifile.com/310_operatorx_operatorx_opx/02/12/2025/292df666cde06d56763f0d0d1a544291.png"
+  },
+  "a27i": {
+    "image": "assets/peripherals/a27i.webp",
+    "sourcePage": "https://www.mi.com/global/product/xiaomi-monitor-a27i-2026/",
+    "sourceImage": "https://i02.appmifile.com/mi-com-product/fly-birds/xiaomi-monitor-a27i-2026/pc/9f2b0f9d2bf640f4150957c91f95b769.jpg"
+  },
+  "g34wqi": {
+    "image": "assets/peripherals/g34wqi.webp",
+    "sourcePage": "https://www.mi.com/global/product/xiaomi-curved-gaming-monitor-g34wqi-2026/",
+    "sourceImage": "https://i02.appmifile.com/874_operatorx_operatorx_opx/18/11/2025/f09f6167b4a0879f10473e5be3b15667.png"
+  },
+  "g502": {
+    "image": "assets/peripherals/g502.webp",
+    "sourcePage": "https://www.logitechg.com/en-us/shop/p/g502-hero-gaming-mouse.910-005469",
+    "sourceImage": "https://resource.logitechg.com/w_544,h_466,ar_7:6,c_pad,q_auto,f_auto,dpr_1.0/d_transparent.gif/content/dam/gaming/en/non-braid/hyjal-g502-hero/2025/g502-hero-mouse-top-angle-gallery-1.png"
+  }
+}
