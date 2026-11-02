@@ -1,6 +1,6 @@
 .brand-navigation{position:relative;flex:none;z-index:70}
 /* Raise the header's whole stacking context above floating workspace panels. */
-.header:has(#brand-toggle[aria-expanded=true]){z-index:100}
+.header:has(#brand-toggle[aria-expanded=true]){z-index:100;backdrop-filter:none;-webkit-backdrop-filter:none}
 .brand-navigation .brand{padding:0;white-space:nowrap;color:var(--text);background:none}
 .brand-chevron{font-size:15px;font-weight:400;letter-spacing:0;color:#888888;margin-left:1px;transition:transform .18s}
 .brand[aria-expanded=true] .brand-chevron{transform:rotate(180deg);color:var(--accent)}
