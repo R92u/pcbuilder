@@ -43,5 +43,110 @@
     "image": "assets/peripherals/g502.webp",
     "sourcePage": "https://www.logitechg.com/en-us/shop/p/g502-hero-gaming-mouse.910-005469",
     "sourceImage": "https://resource.logitechg.com/w_544,h_466,ar_7:6,c_pad,q_auto,f_auto,dpr_1.0/d_transparent.gif/content/dam/gaming/en/non-braid/hyjal-g502-hero/2025/g502-hero-mouse-top-angle-gallery-1.png"
+  },
+  "fizz-white-gray": {
+    "image": "assets/peripherals/fizz-white-gray.webp",
+    "sourcePage": "https://redragon.ru/product/fizz-white-gray",
+    "sourceImage": "https://redragon.ru/public/r/800x800/products/8809/4cf187ac.webp"
+  },
+  "lakshmi": {
+    "image": "assets/peripherals/lakshmi.webp",
+    "sourcePage": "https://redragon.ru/product/lakshmi",
+    "sourceImage": "https://redragon.ru/public/r/800x800/products/8240/5128b742.webp"
+  },
+  "mitra": {
+    "image": "assets/peripherals/mitra.webp",
+    "sourcePage": "https://redragon.ru/product/mitra",
+    "sourceImage": "https://redragon.ru/public/r/800x800/products/7200/6ac2896c.webp"
+  },
+  "anubis": {
+    "image": "assets/peripherals/anubis.webp",
+    "sourcePage": "https://redragon.ru/product/anubis",
+    "sourceImage": "https://redragon.ru/public/r/800x800/products/8798/5bf50694.webp"
+  },
+  "anubis-white": {
+    "image": "assets/peripherals/anubis-white.webp",
+    "sourcePage": "https://redragon.ru/product/anubis-white",
+    "sourceImage": "https://redragon.ru/public/r/800x800/products/8799/32b79be7.webp"
+  },
+  "whisper": {
+    "image": "assets/peripherals/whisper.webp",
+    "sourcePage": "https://redragon.ru/product/whisper",
+    "sourceImage": "https://redragon.ru/public/r/800x800/products/12839/f5661a35.webp"
+  },
+  "uranus-pro-82": {
+    "image": "assets/peripherals/uranus-pro-82.webp",
+    "sourcePage": "https://redragon.ru/product/uranus-pro-82",
+    "sourceImage": "https://redragon.ru/public/r/800x800/products/15429/650c0b6b.webp"
+  },
+  "k1ng-4k-pro-white": {
+    "image": "assets/peripherals/k1ng-4k-pro-white.webp",
+    "sourcePage": "https://redragon.ru/product/k1ng-4k-pro-white",
+    "sourceImage": "https://redragon.ru/public/r/800x800/products/13470/f0f53511.webp"
+  },
+  "trident": {
+    "image": "assets/peripherals/trident.webp",
+    "sourcePage": "https://redragon.ru/product/trident",
+    "sourceImage": "https://redragon.ru/public/r/800x800/products/12711/4a66c9c0.webp"
+  },
+  "azzmach-lite-white": {
+    "image": "assets/peripherals/azzmach-lite-white.webp",
+    "sourcePage": "https://redragon.ru/product/azzmach-lite-white",
+    "sourceImage": "https://redragon.ru/public/r/800x800/products/15426/449a1f43.webp"
+  },
+  "gainer": {
+    "image": "assets/peripherals/gainer.webp",
+    "sourcePage": "https://redragon.ru/product/gainer",
+    "sourceImage": "https://redragon.ru/public/r/800x800/products/6427/ee04e21f.webp"
+  },
+  "aatrox": {
+    "image": "assets/peripherals/aatrox.webp",
+    "sourcePage": "https://redragon.ru/product/aatrox",
+    "sourceImage": "https://redragon.ru/public/r/800x800/products/12368/b85faea3.webp"
+  },
+  "mg8": {
+    "image": "assets/peripherals/mg8.webp",
+    "sourcePage": "https://redragon.ru/product/mg8",
+    "sourceImage": "https://redragon.ru/public/r/800x800/products/15446/12604057.webp"
+  },
+  "storm-pro": {
+    "image": "assets/peripherals/storm-pro.webp",
+    "sourcePage": "https://redragon.ru/product/storm-pro",
+    "sourceImage": "https://redragon.ru/public/r/800x800/products/8256/d0428862.webp"
+  },
+  "mp225": {
+    "image": "assets/peripherals/mp225.webp",
+    "sourcePage": "https://andpro.ru/catalog/monitors_projectors/monitors/monitor_msi_pro_mp225_21_5_ips_chyernyy_9s6_3pc6cm_004/",
+    "sourceImage": "https://andpro.ru/upload/iblock/40e/32tbg1updt13d2ox6l6u4q4qosoz0xcl/5ad98c96_33ae_11ef_8149_001e67d1aaeb_1cfc32bf_33b6_11ef_8149_001e67d1aaeb.jpg"
+  },
+  "mp243w": {
+    "image": "assets/peripherals/mp243w.webp",
+    "sourcePage": "https://andpro.ru/catalog/monitors_projectors/monitors/monitor_msi_mp243w_e14_23_8_ips_belyy_9s6_3pd1ct_037/",
+    "sourceImage": "https://andpro.ru/upload/resize_cache/iblock/c55/q23m0ks0dn0m9ax78qre2xngbbxypfi7/800_800_1/230e03f2_38a5_11f1_970f_6cb31103f52c_6a404b87_4918_11f1_9711_6cb31103f52c.jpg"
+  },
+  "mp273qw": {
+    "image": "assets/peripherals/mp273qw.webp",
+    "sourcePage": "https://andpro.ru/catalog/monitors_projectors/monitors/monitor_msi_mp273qw_e14_27_ips_belyy_9s6_3pe2ch_059/",
+    "sourceImage": "https://andpro.ru/upload/resize_cache/iblock/6c6/85pz7eh1xiz1gnjn1duuhkjfju76zy5f/800_800_1/c1f4b59e_7492_11f1_9715_6cb31103f52c_2dd6808e_7495_11f1_9715_6cb31103f52c.jpg"
+  },
+  "mag272": {
+    "image": "assets/peripherals/mag272.webp",
+    "sourcePage": "https://andpro.ru/catalog/monitors_projectors/monitors/monitor_msi_mag_272qpf_e20_27_led_ips_chyernyy_9s6_3cf7ca_009/",
+    "sourceImage": "https://andpro.ru/upload/resize_cache/iblock/fd9/v3l0nafxw6yv4a3klwobpz0rnr46g1ml/800_800_1/fe355782_d698_11f0_970a_6cb31103f52c_7f00e2f2_d69f_11f0_970a_6cb31103f52c.jpg"
+  },
+  "mpg321w": {
+    "image": "assets/peripherals/mpg321w.webp",
+    "sourcePage": "https://andpro.ru/catalog/monitors_projectors/monitors/monitor_msi_mpg_321urxw_qd_oled_31_5_qd_oled_belyy_9s6_3dd29a_051/",
+    "sourceImage": "https://andpro.ru/upload/resize_cache/iblock/e73/i4na99j0yn1s1sm3r52m4ns7hljura5a/800_800_1/fb693a8e_d698_11f0_970a_6cb31103f52c_716203c0_d69f_11f0_970a_6cb31103f52c.jpg"
+  },
+  "lg29": {
+    "image": "assets/peripherals/lg29.webp",
+    "sourcePage": "https://andpro.ru/catalog/monitors_projectors/monitors/monitor_lg_29u531a_w_29_ips_belyy_29u531a_w_aruz/",
+    "sourceImage": "https://andpro.ru/upload/resize_cache/iblock/610/jjbvve3woh8afnjug4q8af38e098pl99/800_800_1/36190835_a8d9_11f0_9702_6cb31103f52c_c5b73bac_af16_11f0_9704_6cb31103f52c.jpg"
+  },
+  "lg34": {
+    "image": "assets/peripherals/lg34.webp",
+    "sourcePage": "https://andpro.ru/catalog/monitors_projectors/monitors/monitor_lg_34u530a_w_34_ips_belyy_34u530a_w_aruz/",
+    "sourceImage": "https://andpro.ru/upload/resize_cache/iblock/1a5/sat4vx6vx1yyl7ic5oecbqgw8g3kkgc0/800_800_1/3619085a_a8d9_11f0_9702_6cb31103f52c_21dc275b_b4af_11f0_9706_6cb31103f52c.jpg"
   }
 }

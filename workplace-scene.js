@@ -1,6 +1,8 @@
 import * as THREE from 'three';
 import {PCScene} from './scene.js';
-import {peripheralById,sanitizeWorkplace} from './peripherals.js';
+import {peripheralById,sanitizeWorkplace} from './peripherals.js?v=expanded-20261102';
+
+import {keyboardLayout,peripheralAppearance} from './peripheral-shapes.js?v=expanded-20261102';
 
 const plastic=color=>new THREE.MeshStandardMaterial({color,roughness:.62,metalness:.08});
 const deskY=7.5;
@@ -13,46 +15,29 @@ function label(g,text,w,h,x,y,z,rotation=[0,0,0],color='#b6bdc1'){
  const m=new THREE.Mesh(new THREE.PlaneGeometry(w,h),new THREE.MeshStandardMaterial({map,transparent:true,depthWrite:false,roughness:.7,polygonOffset:true,polygonOffsetFactor:-1}));m.position.set(x,y,z);m.rotation.set(...rotation);g.add(m);
 }
 function keyboard(p){
- const g=new THREE.Group(),[w,d,h]=p.dimensions.map(v=>v/100),full=p.id==='shiva',light=p.id==='fizz',base=plastic(light?'#d6d8d6':'#171b1e'),dark=plastic('#292f33'),white=plastic('#dddeda'),yellow=plastic('#d4b950');
- box(g,w,h*.5,d,0,h*.25,0,base);box(g,w-.07,.025,full?d*.68:d-.05,0,h*.53,full?-d*.13:0,dark);
- if(full){box(g,w-.05,.07,d*.24,0,.08,d*.36,plastic('#22282c'));label(g,'REDRAGON',.5,.075,0,.121,d*.36,[-Math.PI/2,0,0]);}
- const layout=[];
- const rows=full||p.keys===61?[14,14,13,12,8]:[15,15,14,14,10];
- const standardWidths=[[...Array(13).fill(1),2],[1.5,...Array(12).fill(1),1.5],[1.75,...Array(11).fill(1),2.25],[2.25,...Array(10).fill(1),2.75],[1.25,1.25,1.25,6.25,1.25,1.25,1.25,1.25]];
- const legends=[['Esc','1','2','3','4','5','6','7','8','9','0','−','=','←'],['Tab','Q','W','E','R','T','Y','U','I','O','P','[',']','\\'],['Caps','A','S','D','F','G','H','J','K','L',';',"'",'Enter'],['Shift','Z','X','C','V','B','N','M',',','.','/','Shift'],['Ctrl','Win','Alt','','Alt','Fn','Menu','Ctrl']];
- const areaW=full?w*.57:w-.12,areaD=full?d*.51:d-.12,left=full?-w*.14:0,top=full?-d*.03:0;
- for(let row=0;row<5;row++){
-  const count=rows[row],unit=areaW/(full||p.keys===61?15:row===4?15:count);
-  for(let col=0;col<count;col++){
-   const widths=full||p.keys===61?standardWidths[row]:row===4?[1,1,1,5,1,1,1,1,1,2]:Array(count).fill(1);
-   const start=widths.slice(0,col).reduce((a,b)=>a+b,0),kw=widths[col]*unit;
-   layout.push({x:left-areaW/2+start*unit+kw/2,z:top-areaD/2+(row+.5)*areaD/5,w:kw-.025,d:areaD/5-.025,row,col,legend:legends[row][col]??['↑','↓','←','→'][col%4]});
-  }
- }
- if(full){
-  const functions=['Esc',...Array.from({length:12},(_,i)=>'F'+(i+1)),'Prt','Scr','Pause'];
-  for(let i=0;i<16;i++)layout.push({x:-w*.40+i*w*.82/15,z:-d*.40,w:.18,d:.15,row:5,col:i,legend:functions[i]});
-  const nav=['Ins','Home','PgUp','Del','End','PgDn','↑','←','↓','→'];
-  for(let i=0;i<10;i++)layout.push({x:w*.18+(i<6?i%3:i===6?1:i-7)*.2,z:-d*.22+(i<6?Math.floor(i/3):i===6?3:4)*.22,w:.17,d:.18,row:6,col:i,legend:nav[i]});
-  const numberpad=[['Num',0,0],['/',1,0],['*',2,0],['−',3,0],['7',0,1],['8',1,1],['9',2,1],['+',3,1.5],['4',0,2],['5',1,2],['6',2,2],['1',0,3],['2',1,3],['3',2,3],['Ent',3,3.5],['0',.5,4],['.',2,4]];
-  numberpad.forEach(([legend,x,z],i)=>layout.push({x:w*.31+x*.18,z:-d*.23+z*.22,w:legend==='0'?.33:.15,d:['+','Ent'].includes(legend)?.40:.18,row:7,col:i,legend}));
-  for(let i=0;i<8;i++)layout.push({x:-w*.47,z:-d*.35+i*.15,w:.15,d:.12,row:8,col:i,legend:i===0?'MR':i===7?'Fn':'G'+i});
-  layout[0].legend='~';
- }
+ const g=new THREE.Group(),[w,d,h]=p.dimensions.map(v=>v/100),style=peripheralAppearance(p),light=p.colors.includes('white')&&!p.colors.includes('black');
+ box(g,w,h*.5,d,0,h*.25,0,plastic(style.body));
+ box(g,w-.07,.025,p.id==='shiva'?d*.68:d-.05,0,h*.53,p.id==='shiva'?-d*.13:0,plastic(light?'#a6afae':'#171e22'));
+ if(p.id==='shiva')box(g,w-.05,.07,d*.24,0,.08,d*.36,plastic('#22282c'));
+ const layout=keyboardLayout(p);
  const geometry=new THREE.BoxGeometry(1,1,1),keys=new THREE.InstancedMesh(geometry,plastic('#ffffff'),layout.length),t=new THREE.Object3D();keys.castShadow=true;
- layout.forEach((k,i)=>{t.position.set(k.x,h*.78,k.z);t.scale.set(k.w,h*.38,k.d);t.updateMatrix();keys.setMatrixAt(i,t.matrix);const accent=light&&(k.row===0&&k.col===0||k.row===4&&k.col===3),modifier=k.row===4||k.col===0||k.col===rows[k.row]-1;keys.setColorAt(i,new THREE.Color(accent?'#e6c52e':light?modifier?'#a59f91':'#e6e4dd':p.id==='ryze'&&k.col>0&&k.col<11?'#d7d8d4':'#3b4247'));});g.add(keys);
+ layout.forEach((k,i)=>{t.position.set(k.x,h*.78,k.z);t.scale.set(k.w,h*.38,k.d);t.updateMatrix();keys.setMatrixAt(i,t.matrix);
+ const accent=p.id==='fizz'&&(k.legend==='Esc'||k.legend===''),ryze=p.id==='ryze'&&!k.modifier;
+ keys.setColorAt(i,new THREE.Color(accent?'#e6c52e':ryze?'#d7d8d4':k.modifier?style.modifiers:style.keys));});g.add(keys);
  // One small atlas for the key legends, shared by all key surfaces.
  const c=document.createElement('canvas');c.width=c.height=512;const ctx=c.getContext('2d');ctx.fillStyle=light?'#605c54':'#d9e4e5';ctx.textAlign='center';
  for(let i=0;i<layout.length;i++){const text=layout[i].legend??(layout[i].row===5?'F'+(layout[i].col+1):String(layout[i].col+1));ctx.font=(text.length>2?'10':'18')+'px Arial';ctx.fillText(text,(i%8)*64+32,Math.floor(i/8)*32+22,58);}
  const map=new THREE.CanvasTexture(c);map.colorSpace=THREE.SRGBColorSpace;const legendMat=new THREE.MeshStandardMaterial({map,transparent:true,depthWrite:false,roughness:.8});
  layout.forEach((k,i)=>{const geo=new THREE.PlaneGeometry(Math.min(k.w,.23),.115),uv=geo.attributes.uv;for(let j=0;j<uv.count;j++)uv.setXY(j,(uv.getX(j)+i%8)/8,(uv.getY(j)+15-Math.floor(i/8))/16);const m=new THREE.Mesh(geo,legendMat);m.rotation.x=-Math.PI/2;m.position.set(k.x,h*.98,k.z);g.add(m);});
  const led=new THREE.MeshStandardMaterial({color:0xc8e2e8,emissive:0xc8e2e8,emissiveIntensity:.8,roughness:.4});
- for(const sign of [-1,1])box(g,w-.1,.018,.018,0,h*.53,sign*(full?d*.32:d*.46),led);
- g.userData.cableStart=[0,.09,-d/2];
+ if(p.rgb!==false)for(const sign of [-1,1])box(g,w-.1,.012,.012,0,h*.53,sign*(p.id==='shiva'?d*.32:d*.46),led);
+ if(p.knob){const knob=new THREE.Mesh(new THREE.CylinderGeometry(.065,.065,.065,20),plastic('#b7bcbd'));knob.position.set(w*.45,h,-d*.39);g.add(knob);}
+ label(g,p.brand||'REDRAGON',.45,.055,0,h*.52,d*.49,[-Math.PI/2,0,0]);
+ if(p.wired!==false)g.userData.cableStart=[0,.09,-d/2];
  return g;
 }
 function mouse(p){
- const g=new THREE.Group(),[w,d,h]=p.dimensions.map(v=>v/100),white=p.id==='griffin',mat=plastic(white?'#e2e5e3':'#242b2f'),trim=plastic('#11191d');
+ const g=new THREE.Group(),[w,d,h]=p.dimensions.map(v=>v/100),white=p.colors.includes('white')&&!p.colors.includes('black'),mat=plastic(peripheralAppearance(p).body),trim=plastic('#11191d');
  const shell=new THREE.Mesh(new THREE.SphereGeometry(1,32,20,0,Math.PI*2,0,Math.PI/2),mat);shell.scale.set(w*.46,h*.92,d*.49);shell.position.y=.02;g.add(shell);
  box(g,w*.70,.045,d*.76,0,.027,0,trim);
  // Curved click panels follow the shell instead of floating rectangular pads.
@@ -65,32 +50,43 @@ function mouse(p){
  const wheelY=.02+h*.92*Math.sqrt(1-(.22/.49)**2);
  box(g,.095,.02,.22,0,wheelY,-d*.22,trim);
  const wheel=new THREE.Mesh(new THREE.CylinderGeometry(.075,.075,.065,20),plastic('#687277'));wheel.rotation.z=Math.PI/2;wheel.position.set(0,wheelY+.015,-d*.22);g.add(wheel);
- for(let i=0;i<(p.id==='king'?1:2);i++){const z=-.02+i*.08,y=.03+h*.92*Math.sqrt(1-(z/(d*.49))**2);box(g,.065,.018,.05,0,y,z,trim);}
- for(let i=0;i<2;i++)box(g,.04,.055,.16,-w*.43,h*.46,-d*.12+i*.19,trim);
- if(p.id==='g502'||p.id==='griffin'){const shape=new THREE.Shape();shape.moveTo(-w*.35,-d*.26);shape.lineTo(-w*.51,-d*.19);shape.lineTo(-w*.53,d*.16);shape.lineTo(-w*.34,d*.32);shape.closePath();const rest=new THREE.Mesh(new THREE.ExtrudeGeometry(shape,{depth:.055,bevelEnabled:true,bevelSize:.015,bevelThickness:.01,bevelSegments:1}),trim);rest.rotation.x=Math.PI/2;rest.position.y=.10;g.add(rest);}
+ for(let i=0;i<(p.id==='mg8'?0:['king','k1ng-4k-pro-white','azzmach-lite-white'].includes(p.id)?1:2);i++){const z=-.02+i*.08,y=.03+h*.92*Math.sqrt(1-(z/(d*.49))**2);box(g,.065,.018,.05,0,y,z,trim);}
+ for(let i=0;i<(p.sideButtons||2);i++){const many=p.sideButtons>3;box(g,.04,many?.065:.055,many?.095:.16,-w*.43,h*(many?.3+Math.floor(i/4)*.17:.46),many?-d*.24+(i%4)*.12:-d*.12+i*.19,trim);}
+ if(p.thumbRest||p.id==='g502'||p.id==='griffin'){const shape=new THREE.Shape();shape.moveTo(-w*.35,-d*.26);shape.lineTo(-w*.51,-d*.19);shape.lineTo(-w*.53,d*.16);shape.lineTo(-w*.34,d*.32);shape.closePath();const rest=new THREE.Mesh(new THREE.ExtrudeGeometry(shape,{depth:.055,bevelEnabled:true,bevelSize:.015,bevelThickness:.01,bevelSegments:1}),trim);rest.rotation.x=Math.PI/2;rest.position.y=.10;g.add(rest);}
  if(p.id==='g502')for(let i=0;i<3;i++)box(g,.025,.02,.07,-w*.30,h*.65,-d*.23+i*.10,plastic('#a9cdd6'));
+ if(p.perforated||p.id==='mg8'){for(let row=0;row<5;row++)for(let col=0;col<5;col++){const x=(col-2)*w*.12,z=d*(.02+row*.075),y=.025+h*.93*Math.sqrt(Math.max(0,1-(x/(w*.46))**2-(z/(d*.49))**2));const hole=new THREE.Mesh(new THREE.CircleGeometry(p.id==='mg8'?.04:.018,p.id==='mg8'?3:6),trim);hole.rotation.x=-Math.PI/2;hole.position.set(x,y,z);g.add(hole);}}
+ const seamZ=Array.from({length:9},(_,i)=>d*(-.44+i*.045));
+ tube(g,seamZ.map(z=>[0,.03+h*.94*Math.sqrt(1-(z/(d*.49))**2),z]),.004);
  const logoZ=d*.16,logoY=.035+h*.92*Math.sqrt(1-(logoZ/(d*.49))**2);
  label(g,p.id==='g502'?'G':'REDRAGON',p.id==='g502'?.13:.25,.07,0,logoY,logoZ,[-Math.PI/2+.24,0,0],p.rgb?'#add4dd':'#879094');
  if(p.wired)g.userData.cableStart=[0,.06,-d/2];
  return g;
 }
 function monitor(p){
- const g=new THREE.Group(),[w,d,h]=p.dimensions.map(v=>v/100),screenH=(w-.10)/p.ratio,bodyY=h-screenH/2-.04,black=plastic('#171d20'),metal=plastic('#2b3439');
- box(g,p.curved?2.7:2.2,.065,p.curved?2.6:1.65,0,.04,0,metal);box(g,.23,h*.55,.18,0,h*.29,-.06,metal);
- const screen=new THREE.Group();screen.position.set(0,bodyY,0);g.add(screen);
+ const g=new THREE.Group(),[w,d,h]=p.dimensions.map(v=>v/100),style=peripheralAppearance(p),screenH=Math.min((p.bodyHeight||1000)/100-.10,(w-.10)/p.ratio),bodyH=p.bodyHeight?p.bodyHeight/100:screenH+.10,bodyY=h-bodyH/2,body=plastic(style.body),bezel=plastic(style.bezel||style.body),metal=plastic(style.body),panelZ=-d*.08;
+ const baseW=Math.min(w*.48,p.stand==='l'?2.45:3.15),baseD=d*.94;
+ if(p.stand==='angular'){
+  const shape=new THREE.Shape();shape.moveTo(-baseW/2,-baseD/2);shape.lineTo(baseW/2,-baseD/2);shape.lineTo(baseW*.38,baseD/2);shape.lineTo(-baseW*.38,baseD/2);shape.closePath();
+  const base=new THREE.Mesh(new THREE.ExtrudeGeometry(shape,{depth:.065,bevelEnabled:false}),metal);base.rotation.x=-Math.PI/2;base.position.y=.025;g.add(base);
+ }else if(p.stand==='l'){
+  box(g,baseW,.055,.55,0,.04,baseD*.28,metal);box(g,.32,.055,baseD*.8,0,.04,-baseD*.05,metal);
+ }else box(g,baseW,.065,baseD,0,.04,0,metal);
+ box(g,p.stand==='l'?.16:.29,h*.55,.18,0,h*.29,-d*.17,metal);
+ const screen=new THREE.Group();screen.position.set(0,bodyY,panelZ);g.add(screen);
  const canvas=document.createElement('canvas');canvas.width=512;canvas.height=256;const ctx=canvas.getContext('2d'),bg=ctx.createLinearGradient(0,0,512,256);bg.addColorStop(0,'#152e36');bg.addColorStop(.55,'#587b89');bg.addColorStop(1,'#d0dbd7');ctx.fillStyle=bg;ctx.fillRect(0,0,512,256);
  for(let i=0;i<8;i++){ctx.strokeStyle='#d6efff25';ctx.lineWidth=8;ctx.beginPath();ctx.ellipse(350,310,80+i*28,160+i*18,-.7,0,Math.PI*2);ctx.stroke();}ctx.fillStyle='#ffffffde';ctx.font='300 30px Arial';ctx.fillText('PCmaker',26,205);ctx.font='12px Arial';ctx.fillText('ТВОЁ РАБОЧЕЕ МЕСТО',28,229);
  const texture=new THREE.CanvasTexture(canvas);texture.colorSpace=THREE.SRGBColorSpace;
  const surface=new THREE.PlaneGeometry(w-.09,screenH-.10,p.curved?40:1,1);
  if(p.curved){const pos=surface.attributes.position;for(let i=0;i<pos.count;i++){const x=pos.getX(i);pos.setZ(i,x*x/30);}surface.computeVertexNormals();}
+ if(!p.curved)box(screen,w,bodyH,.025,0,0,.08,bezel);
  const display=new THREE.Mesh(surface,new THREE.MeshBasicMaterial({map:texture}));display.position.z=.105;screen.add(display);
  // Match the bent panel with a segmented rear shell and flush edge strips.
  const segments=p.curved?32:1;
- for(let i=0;i<segments;i++){const x=-w/2+w/segments*(i+.5),z=p.curved?x*x/30:0,angle=p.curved?-Math.atan(x/15):0;const b=box(screen,w/segments+.006,screenH,.16,x,0,z-.01,black);b.rotation.y=angle;for(const sign of [-1,1]){const edge=box(screen,w/segments+.008,.05,.19,x,sign*screenH/2,z,black);edge.rotation.y=angle;}}
- for(const sign of [-1,1])box(screen,.045,screenH,.19,sign*w/2,0,p.curved?w*w/120:0,black);
- label(screen,'xiaomi',.48,.065,0,-screenH/2+.012,.11);
- for(let i=0;i<(p.curved?4:2);i++){box(screen,.13,.065,.03,-.25+i*.18,-screenH*.25,-.105,plastic('#839092'));box(screen,.10,.037,.035,-.25+i*.18,-screenH*.25,-.124,black);}
- g.userData.cableStart=[-.25,bodyY-screenH*.25,-.14];
+ for(let i=0;i<segments;i++){const x=-w/2+w/segments*(i+.5),z=p.curved?x*x/30:0,angle=p.curved?-Math.atan(x/15):0;const b=box(screen,w/segments+.006,bodyH,.16,x,0,z-.01,body);b.rotation.y=angle;for(const sign of [-1,1]){const edge=box(screen,w/segments+.008,.05,.19,x,sign*bodyH/2,z,bezel);edge.rotation.y=angle;}}
+ for(const sign of [-1,1])box(screen,.045,bodyH,.19,sign*w/2,0,p.curved?w*w/120:0,bezel);
+ label(screen,p.brand||'xiaomi',.48,.065,0,-bodyH/2+.04,.11,[0,0,0],p.colors.includes('white')&&p.id!=='mpg321w'?'#68767b':'#b6bdc1');
+ for(let i=0;i<(p.curved?4:2);i++){box(screen,.13,.065,.03,-.25+i*.18,-screenH*.25,-.105,plastic('#839092'));box(screen,.10,.037,.035,-.25+i*.18,-screenH*.25,-.124,plastic('#111719'));}
+ g.userData.cableStart=[-.25,bodyY-screenH*.25,panelZ-.14];
  return g;
 }
 
@@ -121,7 +117,7 @@ export class WorkplaceScene extends PCScene{
   for(const group of [...this.peripheralRoot.children]){
    const p=peripheralById[group.userData.productId],port=p.category==='monitor'?video[0]:usb[p.category==='keyboard'?0:1];if(!port)continue;
    const end=port.getWorldPosition(new THREE.Vector3()),wire=new THREE.Group();this.peripheralRoot.add(wire);
-   if(!p.wired&&p.category==='mouse'){box(wire,.14,.055,.07,end.x+.05,end.y,end.z,plastic('#151b20'));continue;}
+   if(p.wired===false&&p.category!=='monitor'){box(wire,.14,.055,.07,end.x+.05,end.y,end.z,plastic('#151b20'));continue;}
    const start=group.localToWorld(new THREE.Vector3(...group.userData.cableStart)),z=-3.45+(p.category==='keyboard'?.05:p.category==='mouse'?.10:0),outside=end.x+.28;
    const route=p.category==='monitor'?[[start.x,start.y,start.z],[start.x,start.y,start.z-.3],[start.x,deskY+.08,z]]:[[start.x,start.y,start.z],[start.x,deskY+.08,start.z-.3],[p.category==='keyboard'?-4:2.8,deskY+.08,.45],[p.category==='keyboard'?-4:2.8,deskY+.08,z]];
    tube(wire,[...route,[outside,deskY+.08,z],[outside,deskY+.12,end.z-.25],[outside,end.y-.15,end.z],[end.x+.1,end.y,end.z],end.toArray()],.017);
