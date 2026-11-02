@@ -6,9 +6,9 @@ import {portsFor,cablesFor} from './wiring.js';
 import {hardwareFinish} from './surfaces.js';
 import {caseLayout,gpuSlots,coolerLayout,CPU_CENTER} from './layout.js';
 import {cableCurve,strandPoints} from './cable-geometry.js';
-import {fanSceneMethods} from './fan-scene.js';
+import {fanSceneMethods} from './fan-scene.js?v=world-coordinates';
 import {lightingSceneMethods} from './lighting-scene.js';
-import {interactionMethods} from './interaction.js';
+import {interactionMethods} from './interaction.js?v=world-coordinates';
 
 const C={metal:0x222a2f,edge:0x485257,black:0x101618,silver:0x879398,pcb:0x17211c,light:0xe4edff};
 const mat=(color,roughness=.5,metalness=.25)=>hardwareFinish(new THREE.MeshStandardMaterial({color,roughness,metalness}));

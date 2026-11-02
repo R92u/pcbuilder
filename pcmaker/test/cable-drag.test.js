@@ -1,6 +1,6 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
-import {PerspectiveCamera,Vector2,Vector3} from '../dist/vendor/three.module.js';
+import {PerspectiveCamera,Vector2,Vector3,Group} from '../dist/vendor/three.module.js';
 import {demoBuild} from '../dist/catalog.js';
 import {cablesFor} from '../dist/wiring.js';
 import {beginCableDrag,cableDragPoint,cablePreviewPoints,cableCurve} from '../dist/cable-geometry.js';
@@ -31,5 +31,22 @@ test('Snapping previews the installed route between the same two physical connec
   assert.deepEqual(route.map(v=>v.toArray()),cable.points);
   assert.ok(curve.getPoint(0).distanceTo(new Vector3(...cable.points[0]))<1e-9);
   assert.ok(curve.getPoint(1).distanceTo(target)<1e-9);
+ }
+});
+
+
+test('Workplace sockets stay anchored when the PC is rotated and raised onto a desk',()=>{
+ const root=new Group();root.position.set(6,7.55,-.6);root.rotation.y=-Math.PI/2;root.updateMatrixWorld(true);
+ const camera=new PerspectiveCamera(36,1.5,.1,220);camera.position.set(15,14,15);camera.lookAt(6,10,0);camera.updateMatrixWorld();
+ for(const cable of cablesFor({...demoBuild,cooler:'aio-le240-v2'})){
+  const local=new Vector3(...cable.points[0]),world=root.localToWorld(local.clone()),screen=world.clone().project(camera),pointer=new Vector2(screen.x,screen.y);
+  const drag=beginCableDrag(camera,world,pointer),initial=cableDragPoint(camera,pointer,drag);
+  assert.ok(root.worldToLocal(initial).distanceTo(local)<1e-9,cable.id+' starts at its source');
+  const moved=cableDragPoint(camera,pointer.clone().add(new Vector2(.08,-.06)),drag),endpoint=root.worldToLocal(moved);
+  const curve=cableCurve(cablePreviewPoints(cable,endpoint));
+  assert.ok(root.localToWorld(curve.getPoint(0)).distanceTo(world)<1e-9,cable.id+' keeps its source anchored');
+  const endScreen=root.localToWorld(curve.getPoint(1)).project(camera);
+  assert.ok(Math.abs(endScreen.x-screen.x-.08)<1e-9);
+  assert.ok(Math.abs(endScreen.y-screen.y+.06)<1e-9);
  }
 });
