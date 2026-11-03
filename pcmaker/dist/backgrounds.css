@@ -6,7 +6,7 @@
 .scene-backdrop[data-preset=light],.background-preview[data-preview=light]{background-image:radial-gradient(ellipse at 35% 20%,#fff 0%,#dce2e5 48%,#929fa8 100%)}
 .studio[data-background] .scene-top{color:#eef4f8;text-shadow:0 1px 5px #000,0 1px 12px #000;}
 .studio[data-background] .scene-label,.studio[data-background] .model-tag{color:#eef4f8}
-#menu-background{width:390px}
+#menu-background{width:390px;overflow-anchor:none}
 .background-grid{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin:16px 0}
 .background-choice{padding:6px!important;border:1px solid #ffffff24;border-radius:12px;background:#ffffff05;text-align:left;color:#dce5ed;overflow:hidden;transition:border-color .2s,background .2s,transform .2s}
 .background-choice:hover{background:#ffffff12;border-color:#ffffff65}
