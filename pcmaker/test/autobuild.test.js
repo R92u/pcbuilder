@@ -21,9 +21,10 @@ test('Fresh offers override estimates; invalid, absent and zero offers are never
  for(const offer of [{price:0},{price:10},null]){assert.equal(budgetPrice(p,'gpu',{[p.id]:offer},false,'RUB',now),null);assert.equal(budgetPrice(p,'gpu',{[p.id]:offer},true,'RUB',now).estimated,true);}
 });
 test('Reserve applies only to estimates and totals remain exact to a kopeck',()=>{
- const q=quoteBuild(verifiedBuild,prices,true,'RUB',now);assert.ok(q.estimatedCount>0);assert.equal(Math.round(q.planned*100),Math.round((q.total+q.reserve)*100));
+ const mixed={...freshOffers};delete mixed[verifiedBuild.storage];mixed[verifiedBuild.cpu]={...mixed[verifiedBuild.cpu],date:'2026-10-20'};
+ const q=quoteBuild(verifiedBuild,mixed,true,'RUB',now);assert.equal(q.estimatedCount,2);assert.equal(q.staleCount,1);assert.equal(q.planningCount,1);assert.equal(Math.round(q.planned*100),Math.round((q.total+q.reserve)*100));
  assert.equal(Math.round(q.reserve*100),q.rows.filter(r=>r.quote.estimated).reduce((s,r)=>s+Math.ceil(r.quote.price*100*.10),0));
- assert.equal(quoteBuild(verifiedBuild,prices,false,'RUB',now),null);
+ assert.equal(quoteBuild(verifiedBuild,mixed,false,'RUB',now),null);
 });
 test('All purposes yield complete compatible physical builds within the full budget including reserve',()=>{
  const staleOffers=Object.fromEntries(Object.entries(freshOffers).map(([id,p])=>[id,{...p,date:'2026-10-20'}]));

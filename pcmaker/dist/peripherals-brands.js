@@ -1,3 +1,5 @@
+import {peripheralOfferUpdates} from './foreign-prices.js';
+import {selectRegionalOffer,priceTotals} from './money.js';
 import {brandPeripherals} from './peripherals-brands-data.js';
 import {priceQuality} from './price-quality.js';
 import {extraPeripherals} from './peripherals-extra.js?v=expanded-20261102';
@@ -22,10 +24,12 @@ export const peripherals=[
  {id:'g502',category:'mouse',name:'Logitech G502 HERO',sku:'910-005470',color:'Чёрный',colors:['black'],dimensions:[75,132,40],wired:true,rgb:true,description:'Праворукая · HERO 25K · 11 кнопок',specs:{'Подключение':'Проводное, USB','Сенсор':'HERO 25K, оптический','Разрешение':'100–25600 DPI (с актуальной прошивкой)','Частота опроса':'1000 Гц / 1 мс','Кнопки':'11 программируемых','Максимальное ускорение':'>40 g','Скорость':'>400 IPS','Подсветка':'LIGHTSYNC RGB','Масса без кабеля':'121 г','Регулировка массы':'5 грузиков по 3,6 г, до +18 г','Кабель':'2,1 м','Память':'До 5 профилей','Колесо':'Два режима, свободная прокрутка','ПО':'Logitech G HUB','Форма':'Для правой руки, упор под большой палец'},source:'https://www.logitechg.com/en-us/shop/p/g502-hero-gaming-mouse.910-005469',offers:{ru:{price:2999,date,store:'М.Видео',kind:'store',availability:'unknown',url:'https://www.mvideo.ru/products/50174882'}}}
 ];
 peripherals.push(...extraPeripherals,...brandPeripherals);
+for(const p of peripherals)p.offers={...p.offers,...peripheralOfferUpdates[p.id]};
 export const peripheralById=Object.fromEntries(peripherals.map(p=>[p.id,p]));
 export const defaultWorkplace={monitor:'a27i',keyboard:'fizz',mouse:'griffin'};
 export function sanitizeWorkplace(input){return Object.fromEntries(Object.keys(peripheralCategories).map(key=>[key,peripheralById[input?.[key]]?.category===key?input[key]:defaultWorkplace[key]]));}
 export function peripheralQuote(selection,region='ru',now=Date.now()){
- const items=Object.values(sanitizeWorkplace(selection)).map(id=>{const p=peripheralById[id],offer=p.offers[region],quality=priceQuality(offer,now);return {product:p,offer,quality,priced:!!offer&&quality.status!=='invalid'};});
- return {items,total:items.reduce((sum,i)=>sum+(i.priced?i.offer.price:0),0),priced:items.filter(i=>i.priced).length,complete:items.every(i=>i.priced),purchasable:items.every(i=>i.priced&&i.quality.status==='fresh'&&i.offer.kind==='store'&&i.offer.availability==='in-stock')};
+ const items=Object.values(sanitizeWorkplace(selection)).map(id=>{const p=peripheralById[id],offer=selectRegionalOffer(p.offers,region,now),quality=priceQuality(offer,now);return {product:p,offer,quality,priced:!!offer&&quality.status!=='invalid'};});
+ const totals=priceTotals(items.filter(i=>i.priced).map(i=>i.offer),region==='by'?'BYN':'RUB');
+ return {items,totals,total:(totals.RUB||0)+(totals.BYN||0),priced:items.filter(i=>i.priced).length,complete:items.every(i=>i.priced),purchasable:items.every(i=>i.priced&&i.quality.status==='fresh'&&i.offer.kind==='store'&&i.offer.availability==='in-stock')};
 }

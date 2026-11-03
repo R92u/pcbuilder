@@ -1991,7 +1991,7 @@ export const brandPeripherals = [
     "category": "mouse",
     "name": "Logitech PRO 2 LIGHTSPEED",
     "brand": "Logitech",
-    "sku": "910-007291",
+    "sku": "910-007246",
     "color": "Чёрный",
     "colors": [
       "black"
@@ -2001,7 +2001,7 @@ export const brandPeripherals = [
       125.0,
       40.0
     ],
-    "source": "https://www.logitechg.com/en-us/shop/p/pro-2-lightspeed.910-007291",
+    "source": "https://www.logitechg.com/en-us/shop/p/pro-2-lightspeed.910-007246",
     "specs": {
       "Производитель": "Logitech",
       "Модель": "PRO 2 LIGHTSPEED",
@@ -2037,7 +2037,7 @@ export const brandPeripherals = [
     "dpiButtons": 1,
     "verifiedAt": "2026-11-03",
     "photoCredit": "Logitech",
-    "specsSource": "https://www.logitechg.com/en-us/shop/p/pro-2-lightspeed.910-007291"
+    "specsSource": "https://www.logitechg.com/en-us/shop/p/pro-2-lightspeed.910-007246"
   },
   {
     "id": "logitech-pro-mechanical-gaming-keyboard",
@@ -2246,7 +2246,7 @@ export const brandPeripherals = [
     "category": "keyboard",
     "name": "Logitech PRO X TKL",
     "brand": "Logitech",
-    "sku": "920-012154",
+    "sku": "920-012127",
     "color": "Чёрный",
     "colors": [
       "black"
@@ -2256,7 +2256,7 @@ export const brandPeripherals = [
       150.0,
       38.0
     ],
-    "source": "https://www.logitechg.com/en-us/shop/p/pro-x-tkl-wireless-keyboard.920-012154",
+    "source": "https://www.logitechg.com/en-us/shop/p/pro-x-tkl-wireless-keyboard.920-012127",
     "specs": {
       "Производитель": "Logitech",
       "Модель": "PRO X TKL",
@@ -2283,7 +2283,7 @@ export const brandPeripherals = [
     "lightingColor": "#e4edff",
     "verifiedAt": "2026-11-03",
     "photoCredit": "Logitech",
-    "specsSource": "https://www.logitechg.com/en-us/shop/p/pro-x-tkl-wireless-keyboard.920-012154"
+    "specsSource": "https://www.logitechg.com/en-us/shop/p/pro-x-tkl-wireless-keyboard.920-012127"
   },
   {
     "id": "logitech-pro-x2-superlight-wireless-mouse",

@@ -3,12 +3,13 @@ import {catalog,categories,resolve} from './catalog.js';
 import {compatibility} from './engine.js';
 import {estimatePrice,estimateDate,gpuRanks} from './budget-data.js';
 import {isVerified} from './verification.js';
-import {priceQuality} from './price-quality.js';
+import {priceQuality} from './price-quality.js?v=prices-20261104';
 
 export const purposes={game:{name:'Игры',description:'Приоритет видеокарте и сбалансированному процессору.',ram:16,storage:1000},study:{name:'Учёба',description:'Процессор, память и SSD. Без переплаты за мощную видеокарту.',ram:16,storage:500},video:{name:'Монтаж',description:'Больше ресурсов процессору, от 32 ГБ памяти и 1 ТБ SSD.',ram:32,storage:1000}};
 const kopecks=n=>Math.round(n*100);
 export function budgetPrice(part,category,prices={},allowEstimates=true,currency='RUB',now=Date.now()){
  const offer=prices[part.id];
+ if(offer?.currency&&offer.currency!==currency)return null;
  if(offer?.availability==='out-of-stock')return null;
  const quality=priceQuality(offer,now);
  if((offer?.currency||'RUB')===currency&&offer?.store&&/^https:\/\//.test(offer.url||'')&&['fresh','stale'].includes(quality.status)){

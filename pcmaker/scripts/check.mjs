@@ -4,6 +4,9 @@ import {spawnSync} from 'node:child_process';
 import {byId} from '../dist/catalog.js';
 import {productImages} from '../dist/product-images.js';
 import {priceSnapshot} from '../dist/regions.js';
+import {foreignComponentOffers,peripheralOfferUpdates} from '../dist/foreign-prices.js';
+import {peripheralById} from '../dist/peripherals-brands.js';
+import {validForeignOffer} from '../dist/money.js';
 import {priceQuality} from '../dist/price-quality.js';
 import {createHash} from 'node:crypto';
 const root=path.resolve(import.meta.dirname,'..');
@@ -12,7 +15,7 @@ for(const [file,expected] of Object.entries(bundle)){
  const actual=createHash('sha256').update(fs.readFileSync(path.join(root,file),'utf8').replace(/\r\n/g,'\n')).digest('hex');
  if(actual!==expected)throw Error('Firebase bundle is stale: '+file+'; run npm run build:firebase');
 }
-for(const name of ['backgrounds.js','background-state.js','backgrounds.css','assets/backgrounds/room.jpg','assets/backgrounds/city-day.jpg','assets/backgrounds/city-night.jpg','peripherals-brands-data.js','peripherals-brands.js','keyboard-layout-brands.js','keyboard-model-brands.js','keyboard-controls-brands.js','mouse-model-brands.js','shop-catalog-brands.js','workplace-store-brands.js','keyboard-model.js','keyboard-layout.js','keyboard-controls.js','workplace-scene-v4.js','mouse-model.js','workplace-scene-v3.js','builder-ui.js','shop-catalog.js','workplace-store.js','builder-app.js','workplace-assembly.js','workplace-peripherals.js','workplace-integrated.css','workplace.html','workplace.css','workplace.js','workplace-page.js','workplace-scene.js','workplace-models.js','peripherals.js','peripherals-extra.js','peripheral-shapes.js','peripheral-images.json','price-quality.js','verification.js','verification-data.js','data-quality-ui.js','data-quality.css']){
+for(const name of ['foreign-prices.js','money.js','backgrounds.js','background-state.js','backgrounds.css','assets/backgrounds/room.jpg','assets/backgrounds/city-day.jpg','assets/backgrounds/city-night.jpg','peripherals-brands-data.js','peripherals-brands.js','keyboard-layout-brands.js','keyboard-model-brands.js','keyboard-controls-brands.js','mouse-model-brands.js','shop-catalog-brands.js','workplace-store-brands.js','keyboard-model.js','keyboard-layout.js','keyboard-controls.js','workplace-scene-v4.js','mouse-model.js','workplace-scene-v3.js','builder-ui.js','shop-catalog.js','workplace-store.js','builder-app.js','workplace-assembly.js','workplace-peripherals.js','workplace-integrated.css','workplace.html','workplace.css','workplace.js','workplace-page.js','workplace-scene.js','workplace-models.js','peripherals.js','peripherals-extra.js','peripheral-shapes.js','peripheral-images.json','price-quality.js','verification.js','verification-data.js','data-quality-ui.js','data-quality.css']){
  const file=path.join(root,'dist',name);if(!fs.existsSync(file))throw Error('Missing '+name);
  if(name.endsWith('.js')){const result=spawnSync(process.execPath,['--check',file],{encoding:'utf8'});if(result.status!==0)throw Error(result.stderr);}
 }
@@ -29,6 +32,11 @@ for(const [region,file] of [['ru','prices.json'],['by','prices-by.json']]){
   if(!byId[id]||!valid.items[id]||!p.store||priceQuality(p).status==='invalid')throw Error('Invalid '+region+' offer '+id);
   if(p.availability&&!['in-stock','unknown','out-of-stock'].includes(p.availability))throw Error('Invalid availability '+id);
  }
+}
+for(const [id,offer] of Object.entries(foreignComponentOffers))if(!byId[id]||!validForeignOffer(offer))throw Error('Invalid USD component offer '+id);
+for(const [id,offers] of Object.entries(peripheralOfferUpdates)){
+ if(!peripheralById[id])throw Error('Unknown peripheral offer '+id);
+ for(const [region,offer] of Object.entries(offers))if(!['ru','usd'].includes(region)||offer.currency!==(region==='usd'?'USD':'RUB')||priceQuality(offer).status==='invalid'||!validForeignOffer({...offer,currency:'USD'}))throw Error('Invalid peripheral offer '+id);
 }
 for(const [id,photo] of Object.entries(productImages)){
  if(!byId[id])throw Error('Unknown photo product '+id);

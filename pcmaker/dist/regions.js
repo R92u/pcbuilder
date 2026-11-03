@@ -1,4 +1,6 @@
 import {productLinksBy} from './store-links-by.js';
+import {foreignComponentOffers} from './foreign-prices.js';
+import {validForeignOffer} from './money.js';
 import {dateStamp} from './price-quality.js';
 export const belarusStores={'5element.by':'5 элемент','tec.by':'TEC.BY','tecno.by':'TECNO','onlife.by':'OnLife','time-shop.by':'Time-Shop','nexton.by':'Nexton','masterdom.by':'Мастердом','cybermarket.by':'Cybermarket','unifox.by':'Unifox','ultraprice.by':'Ultraprice'};
 export function byStoreProduct(link){
@@ -23,6 +25,11 @@ export function priceSnapshot(data,id){
   items[key]={...value,currency:region.currency};
  }
  return {...data,region:region.id,currency:region.currency,items};
+}
+export function regionalSnapshot(data,id){
+ const snapshot=priceSnapshot(data,id);
+ if(snapshot.region==='ru')for(const [key,offer] of Object.entries(foreignComponentOffers))if(!snapshot.items[key]&&validForeignOffer(offer))snapshot.items[key]={...offer};
+ return snapshot;
 }
 function isByProduct(link){
  try{

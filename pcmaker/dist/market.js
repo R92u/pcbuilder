@@ -3,6 +3,7 @@ import {isVerified} from './verification.js';
 import {categories,byId,sanitizeBuild} from './catalog.js';
 import {productImages} from './product-images.js';
 import {compatibility} from './engine.js';
+import {formatTotals} from './money.js';
 import {regionFor} from './regions.js';
 import {sanitizeFanLayout,encodeFans} from './fan-layout.js';
 import {sanitizeLighting} from './lighting.js';
@@ -36,12 +37,12 @@ $('market-draft-name').textContent=byId[draft.build.cpu]?.short||'Начни с 
 let servicePromise,user=null,items=[],mine=false,query='',region='all',sort='newest',requestId=0,hasMore=false,editItem=null,authIntent=null;
 const local=['localhost','127.0.0.1'].includes(location.hostname);
 function configure(){
- return servicePromise||(servicePromise=Promise.all([fetch('./firebase-config.json',{cache:'no-store'}).then(r=>{if(!r.ok)throw Error('Не удалось загрузить настройки маркета.');return r.json();}),import('./vendor/firebase-gallery.js?v=appcheck-1')]).then(([config,module])=>module.createFirebaseGallery(local?{apiKey:'demo-key',projectId:'demo-pcmaker',authDomain:'demo-pcmaker.firebaseapp.com',appId:'demo-app'}:config,{emulators:local})).catch(error=>{servicePromise=null;throw error;}));
+ return servicePromise||(servicePromise=Promise.all([fetch('./firebase-config.json',{cache:'no-store'}).then(r=>{if(!r.ok)throw Error('Не удалось загрузить настройки маркета.');return r.json();}),import('./vendor/firebase-gallery.js?v=prices-20261104')]).then(([config,module])=>module.createFirebaseGallery(local?{apiKey:'demo-key',projectId:'demo-pcmaker',authDomain:'demo-pcmaker.firebaseapp.com',appId:'demo-app'}:config,{emulators:local})).catch(error=>{servicePromise=null;throw error;}));
 }
 const call=async(...args)=>(await configure()).call(...args);
 const setStatus=(text,error=false)=>{$('market-status').textContent=text;$('market-status').classList.toggle('error',error);};
-const money=item=>item.price.known?new Intl.NumberFormat('ru-RU',{maximumFractionDigits:2}).format(item.price.total)+' '+regionFor(item.region).symbol:'Нет цены';
-const priceNote=item=>(item.price.known?`Учтены цены ${item.price.known} из ${item.price.count} деталей`:'Нет предложений')+(item.price.stale?` · ${item.price.stale} устарели`:'')+(item.price.unavailable?` · ${item.price.unavailable} нет в наличии`:'')+(item.price.invalid?` · ${item.price.invalid} требуют проверки`:'');
+const money=item=>item.price.known?formatTotals(item.price.totals||{[regionFor(item.region).currency]:item.price.total}):'Нет цены';
+const priceNote=item=>(item.price.foreign?'USD: зарубежные цены без доставки и пошлин. ':'')+(item.price.known?`Учтены цены ${item.price.known} из ${item.price.count} деталей`:'Нет предложений')+(item.price.stale?` · ${item.price.stale} устарели`:'')+(item.price.unavailable?` · ${item.price.unavailable} нет в наличии`:'')+(item.price.invalid?` · ${item.price.invalid} требуют проверки`:'');
 const pendingParts=build=>categories.map(([key])=>byId[build[key]]).filter(p=>p&&!p.concept&&!isVerified(p));
 function updateControls(){
  $('market-account').textContent=user?.displayName||'Войти';

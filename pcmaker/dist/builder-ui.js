@@ -1,6 +1,7 @@
 import './navigation.js';
 import {isVerified} from './verification.js';
 import {verificationMarkup} from './data-quality-ui.js';
+import {formatMoney,formatTotals,foreignPriceNotice} from './money.js';
 import {priceQuality} from './price-quality.js';
 import {createBuildPanel} from './build-panel.js';
 const buildPanel=createBuildPanel();
@@ -11,7 +12,7 @@ function showWorkplaceMode(mode){if(!workplace)return;const peripheral=mode==='p
 import {createFullscreen} from './fullscreen.js';
 import {revealPanel,hidePanel} from './motion.js';
 import {createThermalPanel} from './thermal-panel.js';
-import {regions,regionFor,priceSnapshot} from './regions.js';
+import {regions,regionFor,regionalSnapshot as priceSnapshot} from './regions.js';
 import {createAutoBuilder} from './autobuild-ui.js';
 import {quoteBuild} from './autobuild.js';
 import {coolingAnalysis} from './cooling.js';
@@ -75,7 +76,7 @@ function renderBuild(){
  fanLayout=sanitizeFanLayout(build,savedFans[build.case]);settings.fanLayout=fanLayout;saveFans();if(scene)scene.fanLayout=fanLayout;
  const check=compatibility(build),parts=resolve(build);$('parts-count').textContent=`${8-check.missing.length}/8`;
  $('build-subtitle').textContent=check.missing.length?`Выбрано ${8-check.missing.length} из 8 компонентов`:'Сборка готова к проверке';
- $('parts-list').innerHTML=categories.map(([key,label])=>{const p=parts[key],price=p&&priceFor(p.id),bad=check.errors.some(err=>err.parts.includes(key));return `<button class="part-row ${p?'selected':'empty'} ${bad?'conflict':''}" data-category="${key}" aria-label="${e(label)}: ${e(p?.name||'выбрать')}"><span class="part-icon">${icon(key)}</span><span class="part-text"><span class="part-category">${e(label)}</span><span class="part-name">${e(p?.short||'Выбрать комплектующее')}</span>${p&&price?`<span class="part-price">${money(price.price)} ${region.symbol}${priceQuality(price).status==='stale'?' · устарела':priceQuality(price).status==='unavailable'?' · нет в наличии':priceQuality(price).status==='invalid'?' · требует проверки':''}</span>`:''}</span><span class="part-action">${key==='case'?'↗':p?'↔':'+'}</span></button>`;}).join('');
+ $('parts-list').innerHTML=categories.map(([key,label])=>{const p=parts[key],price=p&&priceFor(p.id),bad=check.errors.some(err=>err.parts.includes(key));return `<button class="part-row ${p?'selected':'empty'} ${bad?'conflict':''}" data-category="${key}" aria-label="${e(label)}: ${e(p?.name||'выбрать')}"><span class="part-icon">${icon(key)}</span><span class="part-text"><span class="part-category">${e(label)}</span><span class="part-name">${e(p?.short||'Выбрать комплектующее')}</span>${p&&price?`<span class="part-price">${formatMoney(price.price,price.currency||region.currency)}${priceQuality(price).status==='stale'?' · устарела':priceQuality(price).status==='unavailable'?' · нет в наличии':priceQuality(price).status==='invalid'?' · требует проверки':''}</span>`:''}</span><span class="part-action">${key==='case'?'↗':p?'↔':'+'}</span></button>`;}).join('');
  $('scene-hint').hidden=Object.entries(parts).filter(([key,p])=>key!=='case'&&p).length>0;
  if(check.errors.length)$('compatibility').innerHTML=`<div class="compat-box error"><strong>${icon('alert')} Есть несовместимость</strong><ul>${check.errors.map(v=>`<li>${e(v.text)}</li>`).join('')}</ul></div>`;
  else if(check.missing.length)$('compatibility').innerHTML=`<div class="compat-box neutral"><strong>${icon('info')} Добавь ещё ${check.missing.length} ${check.missing.length===1?'компонент':check.missing.length<5?'компонента':'компонентов'}</strong><span>Совместимость проверяется при каждом выборе.</span></div>`;
@@ -84,8 +85,9 @@ function renderBuild(){
  if(pending.length)$('compatibility').insertAdjacentHTML('beforeend',`<p class="quality-build-note">Характеристики требуют проверки: ${pending.map(p=>e(p.short)).join(', ')}. Проверка совместимости использует текущие данные каталога.</p>`);
  const sum=summarizePrices(build,priceData.items);
  $('price-caption').textContent=sum.stale+sum.unavailable+sum.invalid?'Сумма по снимкам цен':sum.concepts?'Цены комплектующих':sum.complete?'Стоимость по предложениям':'Известная часть стоимости';
- $('price-total').innerHTML=sum.known?`${money(sum.total)} <small>${region.symbol}</small>`:`— <small>${region.symbol}</small>`;
+ $('price-total').innerHTML=sum.known?e(formatTotals(sum.totals)):`— <small>${region.symbol}</small>`;
  $('price-note').textContent=sum.known?`${sum.known} из ${sum.count} выбранных деталей. ${sum.complete?'':'Сумма неполная: остальные цены не подтверждены.'} Предложения разных магазинов без доставки; условия — в магазине комплектующих. Регион: ${region.city}. ${sum.stale?sum.stale+' цен устарели. ':''}${sum.unavailable?sum.unavailable+' предложений нет в наличии. ':''}${sum.invalid?sum.invalid+' цен требуют проверки. ':''}${sum.fresh===sum.known?'Цены проверены не более 7 дней назад.':'Сумма справочная; даты и условия — в карточках товаров.'}`:`Цены для ${region.cityGenitive} пока не подтверждены. Ссылки на магазины — в карточках деталей.`;
+ if(sum.foreign)$('price-note').textContent+=' '+foreignPriceNotice;
  if(sum.concepts)$('price-note').textContent+=' Учебный корпус PCmaker не продаётся и не включён в стоимость.';
  if((autoPlan?.region||'ru')===regionId&&autoPlan?.build&&categories.every(([key])=>autoPlan.build[key]===build[key])){
   const quote=quoteBuild(build,priceData.items,autoPlan.allowEstimates,region.currency);

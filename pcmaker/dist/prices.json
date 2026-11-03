@@ -1,6 +1,6 @@
 {
   "city": "Москва",
-  "checkedAt": "2026-10-10",
+  "checkedAt": "2026-11-04",
   "items": {
     "980": {
       "price": 27990,
@@ -42,10 +42,12 @@
       "url": "https://www.dns-shop.ru/product/55cc9b9165b71b80/videokarta-msi-geforce-rtx-3060-ventus-2x-oc-lhr-rtx-3060-ventus-2x-12g-oc/"
     },
     "ddr4-32": {
-      "price": 35999,
-      "date": "2026-10-10",
-      "store": "DNS",
-      "url": "https://www.dns-shop.ru/product/9ed60ce7fae5ed20/operativnaa-pamat-kingston-fury-beast-black-kf432c16bbk232-32-gb/"
+      "price": 54533.0,
+      "date": "2026-11-04",
+      "store": "KNS",
+      "url": "https://www.kns.ru/product/operativnaya-pamyat-kingston-fury-beast-black-kf432c16bbk2-32/",
+      "currency": "RUB",
+      "availability": "in-stock"
     },
     "ak400": {
       "price": 2050,
@@ -72,58 +74,74 @@
       "url": "https://www.dns-shop.ru/product/0d7e80408f5fed20/korpus-deepcool-cc560-v2-r-cc560-bkgaa4-g-2-cernyj/"
     },
     "r5-5600x": {
-      "price": 12450,
-      "date": "2026-10-10",
+      "price": 12320.0,
+      "date": "2026-11-04",
       "store": "Регард",
       "url": "https://www.regard.ru/product/370871/processor-amd-ryzen-5-5600x-oem",
+      "currency": "RUB",
+      "availability": "in-stock",
       "note": "Комплектация OEM."
     },
     "r7-7700x": {
-      "price": 21730,
-      "date": "2026-10-10",
+      "price": 21630.0,
+      "date": "2026-11-04",
       "store": "Регард",
       "url": "https://www.regard.ru/product/419168/processor-amd-ryzen-7-7700x-oem",
+      "currency": "RUB",
+      "availability": "in-stock",
       "note": "Комплектация OEM."
     },
     "i5-12400f": {
-      "price": 13070,
-      "date": "2026-10-10",
+      "price": 12370.0,
+      "date": "2026-11-04",
       "store": "Регард",
       "url": "https://www.regard.ru/product/421881/processor-intel-core-i5-12400f-oem",
+      "currency": "RUB",
+      "availability": "in-stock",
       "note": "Комплектация OEM."
     },
     "i5-12600k": {
-      "price": 23580,
-      "date": "2026-10-10",
+      "price": 22060.0,
+      "date": "2026-11-04",
       "store": "Регард",
       "url": "https://www.regard.ru/product/411820/processor-intel-core-i5-12600k-oem",
+      "currency": "RUB",
+      "availability": "in-stock",
       "note": "Комплектация OEM."
     },
     "i5-13400f": {
-      "price": 15740,
-      "date": "2026-10-10",
+      "price": 14670.0,
+      "date": "2026-11-04",
       "store": "Регард",
       "url": "https://www.regard.ru/product/468799/processor-intel-core-i5-13400f-oem",
+      "currency": "RUB",
+      "availability": "in-stock",
       "note": "Комплектация OEM."
     },
     "ddr4-16-3200": {
-      "price": 23190,
-      "date": "2026-10-10",
-      "store": "Регард",
-      "url": "https://www.regard.ru/product/395207/operativnaia-pamiat-16gb-ddr4-3200mhz-kingston-fury-beast-black-kf432c16bbk2-16-2x8gb-kit"
+      "price": 22110.0,
+      "date": "2026-11-04",
+      "store": "KNS",
+      "url": "https://www.kns.ru/product/operativnaya-pamyat-kingston-fury-beast-black-kf432c16bbk2-16/",
+      "currency": "RUB",
+      "availability": "in-stock"
     },
     "r7-5700x": {
-      "price": 15370,
-      "date": "2026-10-10",
+      "price": 14850.0,
+      "date": "2026-11-04",
       "store": "Регард",
       "url": "https://www.regard.ru/product/418534/processor-amd-ryzen-7-5700x-oem",
+      "currency": "RUB",
+      "availability": "in-stock",
       "note": "Комплектация OEM."
     },
     "r7-7800x3d": {
-      "price": 28970,
-      "date": "2026-10-10",
+      "price": 28910.0,
+      "date": "2026-11-04",
       "store": "Регард",
       "url": "https://www.regard.ru/product/73872/processor-amd-ryzen-7-7800x3d-oem",
+      "currency": "RUB",
+      "availability": "in-stock",
       "note": "Комплектация OEM."
     },
     "i5-14600k": {
@@ -134,25 +152,30 @@
       "note": "Комплектация OEM."
     },
     "r7-5800x": {
-      "price": 24390,
-      "date": "2026-10-10",
+      "price": 25070.0,
+      "date": "2026-11-04",
       "store": "Регард",
       "url": "https://www.regard.ru/product/370866/processor-amd-ryzen-7-5800x-oem/description",
+      "currency": "RUB",
+      "availability": "out-of-stock",
       "note": "Комплектация OEM."
     },
     "i3-12100f": {
-      "price": 10290,
-      "date": "2026-10-10",
+      "price": 9550.0,
+      "date": "2026-11-04",
       "store": "Регард",
       "url": "https://www.regard.ru/product/422920/processor-intel-core-i3-12100f-oem/description",
+      "currency": "RUB",
+      "availability": "in-stock",
       "note": "Комплектация OEM."
     },
     "ddr4-32-3600": {
-      "price": 9389.73,
-      "date": "2026-10-10",
-      "store": "Onecom",
-      "url": "https://onecom.ru/catalog/?ELEMENT_ID=347328&SECTION_ID=64359",
-      "note": "При оплате наличными; безналично 9 812,27 ₽."
+      "price": 68063.0,
+      "date": "2026-11-04",
+      "store": "KNS",
+      "url": "https://www.kns.ru/product/operativnaya-pamyat-kingston-fury-beast-black-kf436c18bbk2-32/",
+      "currency": "RUB",
+      "availability": "in-stock"
     },
     "b650": {
       "price": 14340,
@@ -167,10 +190,12 @@
       "url": "https://www.regard.ru/product/475658/materinskaia-plata-msi-pro-b760m-p-ddr4"
     },
     "rx7600": {
-      "price": 40990,
-      "date": "2026-10-10",
-      "store": "Регард",
-      "url": "https://www.regard.ru/product/49311/videokarta-amd-radeon-rx-7600-sapphire-pulse-8gb-11324-01-20g"
+      "price": 45540.0,
+      "date": "2026-11-04",
+      "store": "KNS",
+      "url": "https://www.kns.ru/product/videokarta-sapphire-amd-radeon-rx-7600-pulse-8gb-11324-01-20g/",
+      "currency": "RUB",
+      "availability": "out-of-stock"
     },
     "rtx4070super": {
       "price": 82167,
@@ -187,17 +212,20 @@
       "note": "Наличными; безналичный расчёт — 13 816,73 ₽. В наличии, без доставки."
     },
     "b650-tomahawk-wifi": {
-      "price": 27383,
-      "date": "2026-10-10",
-      "store": "Apltech",
-      "url": "https://www.apltech.ru/tovar/438085/msi-mag-b650-tomahawk-wifi-mag-b650-tomahawk-wifi",
-      "note": "Товар в другом регионе; самовывоз в Москве через 25–30 дней бесплатно. Цена с НДС 22%."
+      "price": 19553.0,
+      "date": "2026-11-04",
+      "store": "KNS",
+      "url": "https://www.kns.ru/product/materinskaya-plata-msi-mag-b650-tomahawk-wifi/",
+      "currency": "RUB",
+      "availability": "out-of-stock"
     },
     "kc3000-1tb": {
-      "price": 25490,
-      "date": "2026-10-10",
-      "store": "Регард",
-      "url": "https://www.regard.ru/product/413495/nakopitel-ssd-1tb-kingston-kc3000-skc3000s-1024g"
+      "price": 29659.0,
+      "date": "2026-11-04",
+      "store": "KNS",
+      "url": "https://www.kns.ru/product/ssd-disk-kingston-kc3000-1tb-skc3000s-1024g/",
+      "currency": "RUB",
+      "availability": "in-stock"
     },
     "990-pro-1tb": {
       "price": 24990,
@@ -224,10 +252,12 @@
       "url": "https://www.regard.ru/product/455574/nakopitel-ssd-2tb-wd-black-sn850x-wds200t2x0e"
     },
     "nh-d15": {
-      "price": 12490,
-      "date": "2026-10-10",
-      "store": "Регард",
-      "url": "https://www.regard.ru/product/160748/kuler-noctua-nh-d15"
+      "price": 14066.0,
+      "date": "2026-11-04",
+      "store": "KNS",
+      "url": "https://www.kns.ru/product/kuler-noctua-nh-d15/",
+      "currency": "RUB",
+      "availability": "in-stock"
     },
     "a650bn": {
       "price": 5370,
@@ -254,17 +284,555 @@
       "url": "https://r-seven.ru/catalog/power/blok_pitaniya_deepcool_550w_pk550d_r_pk550d_fa0b_eu/"
     },
     "pop-air": {
-      "price": 13990,
-      "date": "2026-10-10",
-      "store": "BATYA STORE",
-      "url": "https://batyastore.ru/catalog/kompyuternaya-i-ofisnaya-tekhnika/komplektuyushchie/kompyuternye-korpusa/korpus_fractal_design_pop_air_black_tg_clear_tint_fd_c_poa1a_02/"
+      "price": 9818.0,
+      "date": "2026-11-04",
+      "store": "KNS",
+      "url": "https://www.kns.ru/product/korpus-fractal-design-pop-air-black-tg-clear-tint-fd-c-poa1a-02/",
+      "currency": "RUB",
+      "availability": "out-of-stock"
     },
     "rx9060xt-16-pulse-oc": {
-      "price": 71226,
-      "date": "2026-10-10",
+      "price": 88151.0,
+      "date": "2026-11-04",
       "store": "KNS",
       "url": "https://www.kns.ru/product/videokarta-sapphire-amd-radeon-rx-9060-xt-pulse-gaming-oc-16gb-11350-03-20g/",
-      "note": "Обычная цена без клубной скидки. В наличии на складе; самовывоз 13.10.2026 бесплатно, доставка 13.10.2026 от 450 ₽. Точный SKU 11350-03-20G."
+      "currency": "RUB",
+      "availability": "in-stock"
+    },
+    "4000d-airflow": {
+      "price": 10436.0,
+      "date": "2026-11-04",
+      "store": "KNS",
+      "url": "https://www.kns.ru/product/korpus-corsair-4000d-airflow-cc-9011200-ww/",
+      "currency": "RUB",
+      "availability": "out-of-stock"
+    },
+    "aio-le240-wh-v2": {
+      "price": 5693.0,
+      "date": "2026-11-04",
+      "store": "KNS",
+      "url": "https://www.kns.ru/product/kuler-deepcool-le240-v2-white/",
+      "currency": "RUB",
+      "availability": "in-stock"
+    },
+    "aio-le360-v2": {
+      "price": 5651.0,
+      "date": "2026-11-04",
+      "store": "KNS",
+      "url": "https://www.kns.ru/product/sistema-vodyanogo-ohlazhdeniya-deepcool-le360-v2-r-le360-bkammc-g-2/",
+      "currency": "RUB",
+      "availability": "in-stock"
+    },
+    "aio-ls520-wh": {
+      "price": 9446.0,
+      "date": "2026-11-04",
+      "store": "KNS",
+      "url": "https://www.kns.ru/product/kuler-deepcool-ls520-wh-r-ls520-whamnt-g-1/",
+      "currency": "RUB",
+      "availability": "out-of-stock"
+    },
+    "b550-tomahawk": {
+      "price": 17944.0,
+      "date": "2026-11-04",
+      "store": "KNS",
+      "url": "https://www.kns.ru/product/materinskaya-plata-msi-mag-b550-tomahawk/",
+      "currency": "RUB",
+      "availability": "out-of-stock"
+    },
+    "b650-gaming-plus-wifi": {
+      "price": 19841.0,
+      "date": "2026-11-04",
+      "store": "KNS",
+      "url": "https://www.kns.ru/product/materinskaya-plata-msi-b650-gaming-plus-wifi/",
+      "currency": "RUB",
+      "availability": "out-of-stock"
+    },
+    "b650m-a-wifi": {
+      "price": 13613.0,
+      "date": "2026-11-04",
+      "store": "KNS",
+      "url": "https://www.kns.ru/product/materinskaya-plata-msi-pro-b650m-a-wifi/",
+      "currency": "RUB",
+      "availability": "out-of-stock"
+    },
+    "ddr4-16-3600-cl17": {
+      "price": 32216.0,
+      "date": "2026-11-04",
+      "store": "KNS",
+      "url": "https://www.kns.ru/product/operativnaya-pamyat-kingston-fury-beast-black-kf436c17bbk2-16/",
+      "currency": "RUB",
+      "availability": "out-of-stock"
+    },
+    "ddr4-64-3200": {
+      "price": 116655.0,
+      "date": "2026-11-04",
+      "store": "KNS",
+      "url": "https://www.kns.ru/product/operativnaya-pamyat-kingston-fury-beast-black-kf432c16bbk2-64/",
+      "currency": "RUB",
+      "availability": "in-stock"
+    },
+    "ddr4-64-3600": {
+      "price": 116655.0,
+      "date": "2026-11-04",
+      "store": "KNS",
+      "url": "https://www.kns.ru/product/operativnaya-pamyat-kingston-fury-beast-black-kf436c18bbk2-64/",
+      "currency": "RUB",
+      "availability": "in-stock"
+    },
+    "ddr5-32": {
+      "price": 13035.0,
+      "date": "2026-11-04",
+      "store": "KNS",
+      "url": "https://www.kns.ru/product/operativnaya-pamyat-kingston-fury-beast-black-kf560c36bbek2-32/",
+      "currency": "RUB",
+      "availability": "out-of-stock"
+    },
+    "ddr5-64-5600": {
+      "price": 139178.0,
+      "date": "2026-11-04",
+      "store": "KNS",
+      "url": "https://www.kns.ru/product/operativnaya-pamyat-kingston-fury-beast-kf556c40bbk2-64/",
+      "currency": "RUB",
+      "availability": "out-of-stock"
+    },
+    "ddr5-64-6000": {
+      "price": 108529.0,
+      "date": "2026-11-04",
+      "store": "KNS",
+      "url": "https://www.kns.ru/product/operativnaya-pamyat-kingston-fury-beast-black-kf560c36bbek2-64/",
+      "currency": "RUB",
+      "availability": "out-of-stock"
+    },
+    "i5-13600k": {
+      "price": 33000.0,
+      "date": "2026-11-04",
+      "store": "KNS",
+      "url": "https://www.kns.ru/product/processor-intel-core-i5-13600k-oem/",
+      "currency": "RUB",
+      "availability": "in-stock",
+      "note": "Комплектация OEM."
+    },
+    "kc3000-2tb": {
+      "price": 45004.0,
+      "date": "2026-11-04",
+      "store": "KNS",
+      "url": "https://www.kns.ru/product/ssd-disk-kingston-kc3000-2tb-skc3000d-2048g/",
+      "currency": "RUB",
+      "availability": "out-of-stock"
+    },
+    "kc3000-4tb": {
+      "price": 68599.0,
+      "date": "2026-11-04",
+      "store": "KNS",
+      "url": "https://www.kns.ru/product/ssd-disk-kingston-kc3000-4tb-skc3000d-4096g/",
+      "currency": "RUB",
+      "availability": "out-of-stock"
+    },
+    "kc3000-512gb": {
+      "price": 22976.0,
+      "date": "2026-11-04",
+      "store": "KNS",
+      "url": "https://www.kns.ru/product/ssd-disk-kingston-kc3000-521gb-skc3000s-512g/",
+      "currency": "RUB",
+      "availability": "in-stock"
+    },
+    "mag-b760-tomahawk-wifi-ddr4": {
+      "price": 22688.0,
+      "date": "2026-11-04",
+      "store": "KNS",
+      "url": "https://www.kns.ru/product/materinskaya-plata-msi-mag-b760-tomahawk-wifi-ddr4/",
+      "currency": "RUB",
+      "availability": "out-of-stock"
+    },
+    "mem-au08ggb26cqybgh": {
+      "price": 2351.0,
+      "date": "2026-11-04",
+      "store": "KNS",
+      "url": "https://www.kns.ru/product/operativnaya-pamyat-apacer-au08ggb26cqybgh/",
+      "currency": "RUB",
+      "availability": "out-of-stock"
+    },
+    "mem-kf432c16bb-16": {
+      "price": 24379.0,
+      "date": "2026-11-04",
+      "store": "KNS",
+      "url": "https://www.kns.ru/product/operativnaya-pamyat-kingston-fury-beast-black-kf432c16bb-16/",
+      "currency": "RUB",
+      "availability": "in-stock"
+    },
+    "mem-kf432c16bb1k2-32": {
+      "price": 50284.0,
+      "date": "2026-11-04",
+      "store": "KNS",
+      "url": "https://www.kns.ru/product/operativnaya-pamyat-kingston-fury-beast-black-kf432c16bb1k2-32/",
+      "currency": "RUB",
+      "availability": "in-stock"
+    },
+    "mem-kf432c16bb2a-8": {
+      "price": 12705.0,
+      "date": "2026-11-04",
+      "store": "KNS",
+      "url": "https://www.kns.ru/product/operativnaya-pamyat-kingston-fury-beast-rgb-kf432c16bb2a-8/",
+      "currency": "RUB",
+      "availability": "in-stock"
+    },
+    "mem-kf432c16rb12-16": {
+      "price": 28545.0,
+      "date": "2026-11-04",
+      "store": "KNS",
+      "url": "https://www.kns.ru/product/operativnaya-pamyat-kingston-fury-renegade-kf432c16rb12-16/",
+      "currency": "RUB",
+      "availability": "in-stock"
+    },
+    "mem-kf436c18bb-16": {
+      "price": 35186.0,
+      "date": "2026-11-04",
+      "store": "KNS",
+      "url": "https://www.kns.ru/product/operativnaya-pamyat-kingston-fury-beast-black-kf436c18bb-16/",
+      "currency": "RUB",
+      "availability": "in-stock"
+    },
+    "mem-ks2666d4p12008g": {
+      "price": 7879.0,
+      "date": "2026-11-04",
+      "store": "KNS",
+      "url": "https://www.kns.ru/product/operativnaya-pamyat-kingspec-ks2666d4p12008g/",
+      "currency": "RUB",
+      "availability": "in-stock"
+    },
+    "mem-ks3200d4p12008g": {
+      "price": 7879.0,
+      "date": "2026-11-04",
+      "store": "KNS",
+      "url": "https://www.kns.ru/product/operativnaya-pamyat-kingspec-ks3200d4p12008g/",
+      "currency": "RUB",
+      "availability": "in-stock"
+    },
+    "mem-kvr32n22s8-16": {
+      "price": 19924.0,
+      "date": "2026-11-04",
+      "store": "KNS",
+      "url": "https://www.kns.ru/product/operativnaya-pamyat-kingston-kvr32n22s8-16/",
+      "currency": "RUB",
+      "availability": "in-stock"
+    },
+    "mem-kvr32n22s8-8wp": {
+      "price": 9240.0,
+      "date": "2026-11-04",
+      "store": "KNS",
+      "url": "https://www.kns.ru/product/operativnaya-pamyat-kingston-kvr32n22s8-8wp/",
+      "currency": "RUB",
+      "availability": "in-stock"
+    },
+    "mpg-b550-gaming-edge-wifi": {
+      "price": 31763.0,
+      "date": "2026-11-04",
+      "store": "KNS",
+      "url": "https://www.kns.ru/product/materinskaya-plata-msi-mpg-b550-gaming-edge-wifi/",
+      "currency": "RUB",
+      "availability": "out-of-stock"
+    },
+    "nh-u12s": {
+      "price": 9983.0,
+      "date": "2026-11-04",
+      "store": "KNS",
+      "url": "https://www.kns.ru/product/kuler-noctua-nh-u12s/",
+      "currency": "RUB",
+      "availability": "in-stock"
+    },
+    "nh-u14s": {
+      "price": 10890.0,
+      "date": "2026-11-04",
+      "store": "KNS",
+      "url": "https://www.kns.ru/product/kuler-noctua-nh-u14s/",
+      "currency": "RUB",
+      "availability": "out-of-stock"
+    },
+    "nh-u9s": {
+      "price": 9075.0,
+      "date": "2026-11-04",
+      "store": "KNS",
+      "url": "https://www.kns.ru/product/kuler-noctua-nh-u9s/",
+      "currency": "RUB",
+      "availability": "in-stock"
+    },
+    "nv2-2tb": {
+      "price": 15634.0,
+      "date": "2026-11-04",
+      "store": "KNS",
+      "url": "https://www.kns.ru/product/ssd-disk-kingston-nv2-2tb-snv2s-2000g/",
+      "currency": "RUB",
+      "availability": "out-of-stock"
+    },
+    "nv2-500gb": {
+      "price": 4909.0,
+      "date": "2026-11-04",
+      "store": "KNS",
+      "url": "https://www.kns.ru/product/ssd-disk-kingston-nv2-500gb-snv2s-500g/",
+      "currency": "RUB",
+      "availability": "out-of-stock"
+    },
+    "nv2": {
+      "price": 7838.0,
+      "date": "2026-11-04",
+      "store": "KNS",
+      "url": "https://www.kns.ru/product/ssd-disk-kingston-nv2-1tb-snv2s-1000g/",
+      "currency": "RUB",
+      "availability": "out-of-stock"
+    },
+    "nv3-1tb": {
+      "price": 16294.0,
+      "date": "2026-11-04",
+      "store": "KNS",
+      "url": "https://www.kns.ru/product/ssd-disk-kingston-nv3-1tb-snv3s-1000g/",
+      "currency": "RUB",
+      "availability": "in-stock"
+    },
+    "nv3-2tb": {
+      "price": 30566.0,
+      "date": "2026-11-04",
+      "store": "KNS",
+      "url": "https://www.kns.ru/product/ssd-disk-kingston-nv3-2tb-snv3s-2000g/",
+      "currency": "RUB",
+      "availability": "in-stock"
+    },
+    "p3-plus-1tb": {
+      "price": 20419.0,
+      "date": "2026-11-04",
+      "store": "KNS",
+      "url": "https://www.kns.ru/product/ssd-disk-crucial-p3-plus-1tb-ct1000p3pssd8/",
+      "currency": "RUB",
+      "availability": "out-of-stock"
+    },
+    "pro-b650-p-wifi": {
+      "price": 14809.0,
+      "date": "2026-11-04",
+      "store": "KNS",
+      "url": "https://www.kns.ru/product/materinskaya-plata-msi-pro-b650-p-wifi/",
+      "currency": "RUB",
+      "availability": "in-stock"
+    },
+    "r5-5600g": {
+      "price": 22440.0,
+      "date": "2026-11-04",
+      "store": "KNS",
+      "url": "https://www.kns.ru/product/processor-amd-ryzen-5-5600g-oem/",
+      "currency": "RUB",
+      "availability": "out-of-stock",
+      "note": "Комплектация OEM."
+    },
+    "r7-5800x3d": {
+      "price": 47438.0,
+      "date": "2026-11-04",
+      "store": "KNS",
+      "url": "https://www.kns.ru/product/processor-amd-ryzen-7-5800x3d-oem/",
+      "currency": "RUB",
+      "availability": "out-of-stock",
+      "note": "Комплектация OEM."
+    },
+    "r9-5900x": {
+      "price": 31721.0,
+      "date": "2026-11-04",
+      "store": "KNS",
+      "url": "https://www.kns.ru/product/processor-amd-ryzen-9-5900x-oem/",
+      "currency": "RUB",
+      "availability": "out-of-stock",
+      "note": "Комплектация OEM."
+    },
+    "r9-7900": {
+      "price": 43354.0,
+      "date": "2026-11-04",
+      "store": "KNS",
+      "url": "https://www.kns.ru/product/processor-amd-ryzen-9-7900-oem/",
+      "currency": "RUB",
+      "availability": "out-of-stock",
+      "note": "Комплектация OEM."
+    },
+    "r9-7950x": {
+      "price": 53460.0,
+      "date": "2026-11-04",
+      "store": "KNS",
+      "url": "https://www.kns.ru/product/processor-amd-ryzen-9-7950x-oem/",
+      "currency": "RUB",
+      "availability": "in-stock",
+      "note": "Комплектация OEM."
+    },
+    "r9-9950x": {
+      "price": 45416.0,
+      "date": "2026-11-04",
+      "store": "KNS",
+      "url": "https://www.kns.ru/product/processor-amd-ryzen-9-9950x-oem/",
+      "currency": "RUB",
+      "availability": "in-stock",
+      "note": "Комплектация OEM."
+    },
+    "renegade-ddr4-32-3600": {
+      "price": 9653.0,
+      "date": "2026-11-04",
+      "store": "KNS",
+      "url": "https://www.kns.ru/product/operativnaya-pamyat-kingston-fury-renegade-black-kf436c16rb1k2-32/",
+      "currency": "RUB",
+      "availability": "out-of-stock"
+    },
+    "renegade-ddr5-32-7200": {
+      "price": 63360.0,
+      "date": "2026-11-04",
+      "store": "KNS",
+      "url": "https://www.kns.ru/product/operativnaya-pamyat-kingston-fury-renegade-silver-kf572c38rsk2-32/",
+      "currency": "RUB",
+      "availability": "out-of-stock"
+    },
+    "rtx3050-6-ventus2x-e-oc": {
+      "price": 33000.0,
+      "date": "2026-11-04",
+      "store": "KNS",
+      "url": "https://www.kns.ru/product/videokarta-msi-nvidia-geforce-rtx-3050-ventus-2x-e-6g-oc/",
+      "currency": "RUB",
+      "availability": "in-stock"
+    },
+    "rtx4060ti-16-ventus2x-oc": {
+      "price": 59070.0,
+      "date": "2026-11-04",
+      "store": "KNS",
+      "url": "https://www.kns.ru/product/videokarta-msi-nvidia-geforce-rtx-4060-ti-ventus-2x-black-16g-oc/",
+      "currency": "RUB",
+      "availability": "out-of-stock"
+    },
+    "rtx4070tisuper-ventus3x-oc": {
+      "price": 132041.0,
+      "date": "2026-11-04",
+      "store": "KNS",
+      "url": "https://www.kns.ru/product/videokarta-msi-nvidia-geforce-rtx-4070-ti-super-ventus-3x-oc-16g/",
+      "currency": "RUB",
+      "availability": "out-of-stock"
+    },
+    "rtx4080super-ventus3x-oc": {
+      "price": 147964.0,
+      "date": "2026-11-04",
+      "store": "KNS",
+      "url": "https://www.kns.ru/product/videokarta-msi-nvidia-geforce-rtx-4080-super-16g-ventus-3x-oc/",
+      "currency": "RUB",
+      "availability": "out-of-stock"
+    },
+    "rtx4090-ventus3x-oc": {
+      "price": 236198.0,
+      "date": "2026-11-04",
+      "store": "KNS",
+      "url": "https://www.kns.ru/product/videokarta-msi-nvidia-geforce-rtx-4090-ventus-3x-24g-oc/",
+      "currency": "RUB",
+      "availability": "out-of-stock"
+    },
+    "rtx5060-ventus2x-oc": {
+      "price": 58905.0,
+      "date": "2026-11-04",
+      "store": "KNS",
+      "url": "https://www.kns.ru/product/videokarta-msi-nvidia-geforce-rtx-5060-8g-ventus-2x-oc/",
+      "currency": "RUB",
+      "availability": "out-of-stock"
+    },
+    "rx6600": {
+      "price": 32464.0,
+      "date": "2026-11-04",
+      "store": "KNS",
+      "url": "https://www.kns.ru/product/videokarta-sapphire-amd-radeon-rx-6600-8gb-11310-01-20g/",
+      "currency": "RUB",
+      "availability": "out-of-stock"
+    },
+    "rx6650xt": {
+      "price": 39188.0,
+      "date": "2026-11-04",
+      "store": "KNS",
+      "url": "https://www.kns.ru/product/videokarta-sapphire-amd-radeon-rx-6650-xt-8gb-11319-03-20g/",
+      "currency": "RUB",
+      "availability": "out-of-stock"
+    },
+    "rx7600xt-pulse": {
+      "price": 54863.0,
+      "date": "2026-11-04",
+      "store": "KNS",
+      "url": "https://www.kns.ru/product/videokarta-sapphire-amd-radeon-rx-7600-xt-pulse-gaming-oc-16gb-11339-04-20g/",
+      "currency": "RUB",
+      "availability": "out-of-stock"
+    },
+    "rx7700xt": {
+      "price": 60555.0,
+      "date": "2026-11-04",
+      "store": "KNS",
+      "url": "https://www.kns.ru/product/videokarta-sapphire-amd-radeon-rx-7700-xt-pulse-12gb-11335-04-20g/",
+      "currency": "RUB",
+      "availability": "out-of-stock"
+    },
+    "rx7800xt": {
+      "price": 77261.0,
+      "date": "2026-11-04",
+      "store": "KNS",
+      "url": "https://www.kns.ru/product/videokarta-sapphire-amd-radeon-rx-7800-xt-pulse-16gb-11330-02-20g/",
+      "currency": "RUB",
+      "availability": "out-of-stock"
+    },
+    "rx7900xt-pulse": {
+      "price": 94256.0,
+      "date": "2026-11-04",
+      "store": "KNS",
+      "url": "https://www.kns.ru/product/videokarta-sapphire-amd-radeon-rx-7900-xt-pulse-20gb-11323-02-20g/",
+      "currency": "RUB",
+      "availability": "out-of-stock"
+    },
+    "rx7900xtx-pulse": {
+      "price": 121481.0,
+      "date": "2026-11-04",
+      "store": "KNS",
+      "url": "https://www.kns.ru/product/videokarta-sapphire-amd-radeon-rx-7900-xtx-pulse-24gb-11322-02-20g/",
+      "currency": "RUB",
+      "availability": "out-of-stock"
+    },
+    "ssd-agi1t0gimai298-cb": {
+      "price": 15015.0,
+      "date": "2026-11-04",
+      "store": "KNS",
+      "url": "https://www.kns.ru/product/ssd-disk-agi-ai298-1tb-agi1t0gimai298-cb/",
+      "currency": "RUB",
+      "availability": "out-of-stock"
+    },
+    "ssd-p320p2tbm28": {
+      "price": 26235.0,
+      "date": "2026-11-04",
+      "store": "KNS",
+      "url": "https://www.kns.ru/product/ssd-disk-patriot-p320-2tb-p320p2tbm28/",
+      "currency": "RUB",
+      "availability": "out-of-stock"
+    },
+    "ssd-sfyr2s-1t0": {
+      "price": 38198.0,
+      "date": "2026-11-04",
+      "store": "KNS",
+      "url": "https://www.kns.ru/product/ssd-disk-kingston-fury-renegade-g5-1tb-sfyr2s-1t0/",
+      "currency": "RUB",
+      "availability": "in-stock"
+    },
+    "ssd-sfyr2s-2t0": {
+      "price": 55234.0,
+      "date": "2026-11-04",
+      "store": "KNS",
+      "url": "https://www.kns.ru/product/ssd-disk-kingston-fury-renegade-g5-2tb-sfyr2s-2t0/",
+      "currency": "RUB",
+      "availability": "out-of-stock"
+    },
+    "ssd-snv3s-4000g": {
+      "price": 71445.0,
+      "date": "2026-11-04",
+      "store": "KNS",
+      "url": "https://www.kns.ru/product/ssd-disk-kingston-nv3-4tb-snv3s-4000g/",
+      "currency": "RUB",
+      "availability": "in-stock"
+    },
+    "ssd-snv3s-500g": {
+      "price": 10931.0,
+      "date": "2026-11-04",
+      "store": "KNS",
+      "url": "https://www.kns.ru/product/ssd-disk-kingston-nv3-500gb-snv3s-500g/",
+      "currency": "RUB",
+      "availability": "in-stock"
     }
   },
   "availability": {

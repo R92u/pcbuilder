@@ -1,3 +1,4 @@
+import {foreignPriceNotice} from './money.js';
 import {verificationFor} from './verification.js';
 import {priceQuality} from './price-quality.js';
 import {specLabels} from './inspector.js';
@@ -12,5 +13,5 @@ export function verificationMarkup(part,details=true){
 export function offerMarkup(offer){
  if(!offer)return '';
  const quality=priceQuality(offer);
- return `<span class="price-quality ${quality.status}">${e(quality.label)}</span><span class="price-availability">${offer.availability==='in-stock'?'В наличии на дату проверки':offer.availability==='out-of-stock'?'Предложение недоступно':'Наличие уточни у магазина'}</span>`;
+ return `${offer.currency==='USD'?`<span class="shop-offer-note">${foreignPriceNotice}</span>`:''}<span class="price-quality ${quality.status}">${e(quality.label)}</span><span class="price-availability">${offer.availability==='in-stock'?'В наличии на дату проверки':offer.availability==='out-of-stock'?'Предложение недоступно':'Наличие уточни у магазина'}</span>`;
 }

@@ -1,6 +1,7 @@
 import {aioMount} from './aio.js';
 import {coolingAnalysis} from './cooling.js';
 import {categories,resolve} from './catalog.js';
+import {priceTotals} from './money.js';
 import {priceQuality} from './price-quality.js';
 export function compatibility(build) {
  const p=resolve(build), errors=[],warnings=[];
@@ -72,5 +73,6 @@ export function advanceThermals(current,target,dt) {
 export function summarizePrices(build,prices,now=Date.now()) {
  const all=Object.values(resolve(build)).filter(Boolean),chosen=all.filter(p=>!p.concept),known=chosen.filter(p=>Number.isFinite(prices[p.id]?.price)&&prices[p.id].price>0);
  const statuses=known.map(p=>priceQuality(prices[p.id],now).status),count=status=>statuses.filter(s=>s===status).length;
- return {total:known.reduce((s,p)=>s+prices[p.id].price,0),known:known.length,count:chosen.length,complete:known.length===chosen.length,concepts:all.length-chosen.length,stale:count('stale'),unavailable:count('unavailable'),invalid:count('invalid'),fresh:count('fresh')};
+ const totals=priceTotals(known.map(p=>prices[p.id]));
+ return {total:(totals.RUB||0)+(totals.BYN||0),totals,foreign:known.filter(p=>prices[p.id].currency==='USD').length,known:known.length,count:chosen.length,complete:known.length===chosen.length,concepts:all.length-chosen.length,stale:count('stale'),unavailable:count('unavailable'),invalid:count('invalid'),fresh:count('fresh')};
 }

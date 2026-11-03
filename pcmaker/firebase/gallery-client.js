@@ -6,7 +6,7 @@ import {categories,resolve,sanitizeBuild} from '../dist/catalog.js';
 import {compatibility,summarizePrices} from '../dist/engine.js';
 import {sanitizeFanLayout} from '../dist/fan-layout.js';
 import {sanitizeLighting} from '../dist/lighting.js';
-import {priceSnapshot,regionFor} from '../dist/regions.js';
+import {regionalSnapshot as priceSnapshot,regionFor} from '../dist/regions.js';
 import {requireAppCheckToken} from './app-check-guard.js';
 const clean=(s,min,max,label)=>{if(typeof s!=='string'||s.trim().length<min||s.trim().length>max)throw Error('Проверь поле «'+label+'».');return s.trim();};
 let appCheck;

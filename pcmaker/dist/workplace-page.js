@@ -3,6 +3,7 @@ import {peripherals,peripheralCategories,peripheralById,sanitizeWorkplace,periph
 import {sanitizeBuild,demoBuild} from './catalog.js';
 import {regionFor} from './regions.js';
 import {priceQuality} from './price-quality.js';
+import {selectRegionalOffer,formatMoney,formatTotals,foreignPriceNotice} from './money.js';
 
 const $=id=>document.getElementById(id),e=s=>String(s??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
 const read=key=>{try{return JSON.parse(localStorage.getItem(key));}catch{return null;}};
@@ -10,13 +11,12 @@ const save=(key,value)=>{try{localStorage.setItem(key,JSON.stringify(value));ret
 let selection=sanitizeWorkplace(read('pcmaker-workplace')),category='monitor',color='all',scene,inspected=null;
 let regionId='ru';try{regionId=regionFor(localStorage.getItem('pcmaker-region')).id;}catch{}
 const currency=()=>regionFor(regionId).symbol|| (regionId==='by'?'BYN':'₽');
-const money=n=>new Intl.NumberFormat('ru-RU',{maximumFractionDigits:2}).format(n)+' '+currency();
 $('workplace-region').value=regionId;
-function price(p){const offer=p.offers[regionId],quality=priceQuality(offer);if(!offer||quality.status==='invalid')return '<strong class="product-price">Нет цены '+e(currency())+'</strong><p class="price-source">Для этого региона предложение пока не проверено.</p>';
+function price(p){const offer=selectRegionalOffer(p.offers,regionId),quality=priceQuality(offer);if(!offer||quality.status==='invalid')return '<strong class="product-price">Нет цены '+e(currency())+'</strong><p class="price-source">Для этого региона предложение пока не проверено.</p>';
  const kind=offer.kind==='manufacturer'?'Цена каталога производителя':offer.availability==='out-of-stock'?'Последняя цена · нет в наличии':'Цена магазина';
- return `<strong class="product-price">${money(offer.price)}</strong><p class="price-source">${e(kind)} · ${e(offer.store)}<br>Проверено ${new Date(offer.date+'T12:00:00Z').toLocaleDateString('ru-RU')}${quality.status==='stale'?'<br>Цена устарела — перепроверь':''}</p>`;
+ return `<strong class="product-price">${formatMoney(offer.price,offer.currency)}</strong><p class="price-source">${e(kind)} · ${e(offer.store)}<br>Проверено ${new Date(offer.date+'T12:00:00Z').toLocaleDateString('ru-RU')}${quality.status==='stale'?'<br>Цена устарела — перепроверь':''}${offer.currency==='USD'?'<br>'+e(foreignPriceNotice):''}</p>`;
 }
-function offerLink(p){const offer=p.offers[regionId];return offer?`<a href="${e(offer.url)}" target="_blank" rel="noopener noreferrer">${offer.kind==='manufacturer'?'Цена и магазины у производителя':'Предложение '+e(offer.store)} ↗</a>`:`<a href="https://5element.by/search/?q=${encodeURIComponent(p.name)}" target="_blank" rel="noopener noreferrer">Найти в 5 элементе ↗</a>`;}
+function offerLink(p){const offer=selectRegionalOffer(p.offers,regionId);return offer?`<a href="${e(offer.url)}" target="_blank" rel="noopener noreferrer">${offer.kind==='manufacturer'?'Цена и магазины у производителя':'Предложение '+e(offer.store)} ↗</a>`:`<a href="https://5element.by/search/?q=${encodeURIComponent(p.name)}" target="_blank" rel="noopener noreferrer">Найти в 5 элементе ↗</a>`;}
 function choose(id){const p=peripheralById[id];if(!p)return;selection[p.category]=id;const stored=save('pcmaker-workplace',selection);scene?.setPeripherals(selection);render();if(!stored){$('workplace-scene-status').textContent='Браузер не разрешил сохранить выбор. Он останется доступен до закрытия страницы.';$('workplace-scene-status').hidden=false;}}
 function setCategory(key){category=key;color='all';$('workplace-color').value=color;render();}
 function render(){
@@ -26,7 +26,7 @@ function render(){
  $('workplace-products').setAttribute('aria-labelledby','tab-'+category);
  const items=peripherals.filter(p=>p.category===category&&(color==='all'||p.colors.includes(color)));
  $('workplace-products').innerHTML=items.length?items.map(p=>`<article class="workplace-product ${selection[category]===p.id?'chosen':''}"><div class="workplace-product-picture"><img src="./assets/peripherals/${p.id}.webp" alt="${e(p.name+' · '+p.color)}" loading="lazy" width="512" height="512">${selection[category]===p.id?'<span>✓ На столе</span>':''}</div><div class="workplace-product-copy"><h3>${e(p.name)}</h3><p>${e(p.description)}<br>${e(p.color)} · ${p.dimensions.map(n=>new Intl.NumberFormat('ru-RU').format(n)).join(' × ')} мм</p>${price(p)}${offerLink(p)}<div class="workplace-product-actions"><button class="button ${selection[category]===p.id?'':'primary'}" data-choose="${p.id}" ${selection[category]===p.id?'disabled':''}>${selection[category]===p.id?'Выбрано':'На стол'}</button><button class="button" data-details="${p.id}">Характеристики</button></div></div></article>`).join(''):'<p class="workplace-empty">Такого цвета пока нет в этой категории.<br>Выбери «Все цвета».</p>';
- const quote=peripheralQuote(selection,regionId);$('workplace-total').textContent=quote.priced?money(quote.total):'Нет цен';
+ const quote=peripheralQuote(selection,regionId);$('workplace-total').textContent=quote.priced?formatTotals(quote.totals):'Нет цен';
  $('workplace-total-note').textContent=quote.complete?'Сумма выбранных моделей по опубликованным ценам. '+(quote.purchasable?'':'Наличие и итоговую цену покупки нужно проверить.'):`Подтверждено цен: ${quote.priced} из 3. ${quote.priced?'Сумма неполная. ':''}Российские цены не пересчитываются в BYN.`;
 }
 function details(id){const p=peripheralById[id];if(!p)return;inspected=id;

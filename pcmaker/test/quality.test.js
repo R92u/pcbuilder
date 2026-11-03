@@ -20,9 +20,9 @@ test('Dates accept only real ISO calendar days, including leap-year boundaries',
  for(const value of ['2026-02-29','2026-04-31','2026-13-01','2026-00-01','2026-10-00','2026-1-1','2026-10-28T00:00:00Z',' 2026-10-28',20261028,null,undefined])assert.equal(dateStamp(value),null,String(value));
 });
 
-test('Price TTL is seven UTC calendar days inclusive, independent of time of day',()=>{
+test('Price TTL is seven Moscow calendar days inclusive, independent of time of day',()=>{
  for(const hour of [0,12,23]){
-  const at=Date.UTC(2026,9,28,hour,59,59);
+  const at=Date.UTC(2026,9,28,hour-3,59,59);
   assert.equal(priceQuality(offer(),at).status,'fresh');
   assert.deepEqual([priceQuality(offer({date:'2026-10-21'}),at).status,priceQuality(offer({date:'2026-10-21'}),at).age],['fresh',7]);
   assert.deepEqual([priceQuality(offer({date:'2026-10-20'}),at).status,priceQuality(offer({date:'2026-10-20'}),at).age],['stale',8]);
