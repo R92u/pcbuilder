@@ -1,1 +1,1 @@
-export {WorkplaceScene} from './workplace-scene-v3.js';
+export {WorkplaceScene} from './workplace-scene-v4.js';
