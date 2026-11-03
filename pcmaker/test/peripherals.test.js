@@ -22,12 +22,12 @@ test('every selectable product has a real article, dimension scale, full spec so
  const photos=JSON.parse(fs.readFileSync(new URL('../dist/peripheral-images.json',import.meta.url)));
  assert.equal(new Set(peripherals.map(p=>p.id)).size,peripherals.length);
  for(const key of Object.keys(peripheralCategories)){
-  const category=peripherals.filter(p=>p.category===key);assert.equal(category.length,10);
+  const category=peripherals.filter(p=>p.category===key);assert.equal(category.length,key==='monitor'?10:30);
   for(const color of ['black','white'])assert.ok(category.filter(p=>p.colors.includes(color)).length>=2);
   assert.ok(new Set(category.map(p=>p.dimensions[0])).size>=5);
  }
  for(const p of peripherals){
-  assert.ok(p.sku);assert.equal(p.dimensions.length,3);assert.ok(p.dimensions.every(v=>v>0&&v<1000));assert.ok(Object.keys(p.specs).length>=10);assert.ok(p.source.startsWith('https://'));assert.ok(p.offers.ru.price>0);
+  assert.ok(p.sku);assert.equal(p.dimensions.length,3);assert.ok(p.dimensions.every(v=>v>0&&v<1000));assert.ok(Object.keys(p.specs).length>=10);assert.ok(p.source.startsWith('https://'));if(p.offers.ru)assert.ok(p.offers.ru.price>0);
   const photo=photos[p.id];assert.equal(photo.image,'assets/peripherals/'+p.id+'.webp');assert.ok(photo.sourcePage.startsWith('https://'));assert.ok(photo.sourceImage.startsWith('https://'));assert.ok(fs.statSync(new URL('../dist/'+photo.image,import.meta.url)).size>500);
  }
  assert.ok(peripheralById.fizz.dimensions[0]<peripheralById.shiva.dimensions[0]);assert.ok(peripheralById.king.dimensions[0]<peripheralById.griffin.dimensions[0]);

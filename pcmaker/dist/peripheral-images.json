@@ -148,5 +148,245 @@
     "image": "assets/peripherals/lg34.webp",
     "sourcePage": "https://andpro.ru/catalog/monitors_projectors/monitors/monitor_lg_34u530a_w_34_ips_belyy_34u530a_w_aruz/",
     "sourceImage": "https://andpro.ru/upload/resize_cache/iblock/1a5/sat4vx6vx1yyl7ic5oecbqgw8g3kkgc0/800_800_1/3619085a_a8d9_11f0_9702_6cb31103f52c_21dc275b_b4af_11f0_9706_6cb31103f52c.jpg"
+  },
+  "razer-rz03-04702500-r3r1": {
+    "image": "assets/peripherals/razer-rz03-04702500-r3r1.webp",
+    "sourcePage": "https://www.kns.ru/product/klaviatura-razer-blackwidow-v4-x-black-rz03-04702500-r3r1/characteristics/",
+    "sourceImage": "https://www.kns.ru/linkpics/razer-blackwidow-v4-x-black-rz03-04702500-r3r1_kod_982028.jpg",
+    "credit": "Razer"
+  },
+  "razer-rz03-03392200-r3r1": {
+    "image": "assets/peripherals/razer-rz03-03392200-r3r1.webp",
+    "sourcePage": "https://www.kns.ru/product/klaviatura-razer-huntsman-mini-rz03-03392200-r3r1/characteristics/",
+    "sourceImage": "https://www.kns.ru/linkpics/razer-huntsman-mini-rz03-03392200-r3r1_kod_1079553.jpg",
+    "credit": "Razer"
+  },
+  "razer-rz03-04881600-r3r1": {
+    "image": "assets/peripherals/razer-rz03-04881600-r3r1.webp",
+    "sourcePage": "https://www.kns.ru/product/klaviatura-razer-ornata-v3-tenkeyless-black-rz03-04881600-r3r1/characteristics/",
+    "sourceImage": "https://www.kns.ru/linkpics/razer-ornata-v3-tenkeyless-black-rz03-04881600-r3r1_kod_982036.jpg",
+    "credit": "Razer"
+  },
+  "razer-rz03-04460800-r3r1": {
+    "image": "assets/peripherals/razer-rz03-04460800-r3r1.webp",
+    "sourcePage": "https://www.kns.ru/product/klaviatura-razer-ornata-v3-rz03-04460800-r3r1/characteristics/",
+    "sourceImage": "https://www.kns.ru/linkpics/razer-ornata-v3-rz03-04460800-r3r1_kod_920318.jpg",
+    "credit": "Razer"
+  },
+  "razer-rz03-04692500-r3r1": {
+    "image": "assets/peripherals/razer-rz03-04692500-r3r1.webp",
+    "sourcePage": "https://www.kns.ru/product/klaviatura-razer-blackwidow-v4-rz03-04692500-r3r1/characteristics/",
+    "sourceImage": "https://www.kns.ru/linkpics/razer-blackwidow-v4-rz03-04692500-r3r1_kod_1079552.jpg",
+    "credit": "Razer"
+  },
+  "razer-rz03-04470800-r3r1": {
+    "image": "assets/peripherals/razer-rz03-04470800-r3r1.webp",
+    "sourcePage": "https://www.kns.ru/product/klaviatura-razer-ornata-v3-x-rz03-04470800-r3r1/characteristics/",
+    "sourceImage": "https://www.kns.ru/linkpics/razer-ornata-v3-x-rz03-04470800-r3r1-0-v1.jpg",
+    "credit": "Razer"
+  },
+  "razer-rz03-03931300-r3r1": {
+    "image": "assets/peripherals/razer-rz03-03931300-r3r1.webp",
+    "sourcePage": "https://www.kns.ru/product/klaviatura-razer-huntsman-v2-purple-switch-rz03-03931300-r3r1/characteristics/",
+    "sourceImage": "https://www.kns.ru/linkpics/razer-huntsman-v2-purple-switch-rz03-03931300-r3r1_kod_875279-v1.jpg",
+    "credit": "Razer"
+  },
+  "razer-rz03-04500800-r3r1": {
+    "image": "assets/peripherals/razer-rz03-04500800-r3r1.webp",
+    "sourcePage": "https://www.kns.ru/product/klaviatura-razer-deathstalker-v2-rz03-04500800-r3r1/characteristics/",
+    "sourceImage": "https://www.kns.ru/linkpics/razer-deathstalker-v2-rz03-04500800-r3r1-0-v1.jpg",
+    "credit": "Razer"
+  },
+  "razer-rz03-04360800-r3r1": {
+    "image": "assets/peripherals/razer-rz03-04360800-r3r1.webp",
+    "sourcePage": "https://www.kns.ru/product/klaviatura-razer-deathstalker-v2-pro-rz03-04360800-r3r1/characteristics/",
+    "sourceImage": "https://www.kns.ru/linkpics/razer-deathstalker-v2-pro-rz03-04360800-r3r1-0-v1.jpg",
+    "credit": "Razer"
+  },
+  "razer-rz03-03390200-r3m1": {
+    "image": "assets/peripherals/razer-rz03-03390200-r3m1.webp",
+    "sourcePage": "https://www.kns.ru/product/klaviatura-razer-huntsman-mini-rz03-03390200-r3m1/characteristics/",
+    "sourceImage": "https://www.kns.ru/linkpics/razer-huntsman-mini-rz03-03390200-r3m1-0-v1.jpg",
+    "credit": "Razer"
+  },
+  "razer-rz01-04000100-r3m1": {
+    "image": "assets/peripherals/razer-rz01-04000100-r3m1.webp",
+    "sourcePage": "https://www.kns.ru/product/mish-razer-basilisk-v3-rz01-04000100-r3m1/characteristics/",
+    "sourceImage": "https://www.kns.ru/linkpics/razer-basilisk-v3-rz01-04000100-r3m1_kod_802123-v1.jpg",
+    "credit": "Razer"
+  },
+  "razer-rz01-04910100-r3m1": {
+    "image": "assets/peripherals/razer-rz01-04910100-r3m1.webp",
+    "sourcePage": "https://www.kns.ru/product/mish-razer-viper-v3-hyperspeed-rz01-04910100-r3m1/characteristics/",
+    "sourceImage": "https://www.kns.ru/linkpics/razer-viper-v3-hyperspeed-rz01-04910100-r3m1_kod_861914-v1.jpg",
+    "credit": "Razer"
+  },
+  "razer-rz01-04640100-r3m1": {
+    "image": "assets/peripherals/razer-rz01-04640100-r3m1.webp",
+    "sourcePage": "https://www.kns.ru/product/mish-razer-deathadder-v3-rz01-04640100-r3m1/characteristics/",
+    "sourceImage": "https://www.kns.ru/linkpics/razer-deathadder-v3-rz01-04640100-r3m1_kod_938649.jpg",
+    "credit": "Razer"
+  },
+  "razer-rz01-04130100-r3c1": {
+    "image": "assets/peripherals/razer-rz01-04130100-r3c1.webp",
+    "sourcePage": "https://www.kns.ru/product/mish-razer-deathadder-v2-x-hyperspeed-rz01-04130100-r3c1/characteristics/",
+    "sourceImage": "https://www.kns.ru/linkpics/razer-deathadder-v2-x-hyperspeed-rz01-04130100-r3c1_kod_938631.jpg",
+    "credit": "Razer"
+  },
+  "razer-rz01-04630200-r3a1": {
+    "image": "assets/peripherals/razer-rz01-04630200-r3a1.webp",
+    "sourcePage": "https://www.kns.ru/product/mish-razer-deathadder-v3-pro-rz01-04630200-r3a1/characteristics/",
+    "sourceImage": "https://www.kns.ru/linkpics/razer-deathadder-v3-pro-rz01-04630200-r3a1_kod_1013702.jpg",
+    "credit": "Razer"
+  },
+  "razer-rz01-04650100-r3m1": {
+    "image": "assets/peripherals/razer-rz01-04650100-r3m1.webp",
+    "sourcePage": "https://www.kns.ru/product/mish-razer-cobra-rz01-04650100-r3m1/characteristics/",
+    "sourceImage": "https://www.kns.ru/linkpics/razer-cobra-rz01-04650100-r3m1_kod_861902-v1.jpg",
+    "credit": "Razer"
+  },
+  "razer-rz01-03850100-r3c1": {
+    "image": "assets/peripherals/razer-rz01-03850100-r3c1.webp",
+    "sourcePage": "https://www.kns.ru/product/mish-razer-deathadder-essential-rz01-03850100-r3c1/characteristics/",
+    "sourceImage": "https://www.kns.ru/linkpics/razer-deathadder-essential-rz01-03850100-r3c1_kod_996466.jpg",
+    "credit": "Razer"
+  },
+  "razer-rz01-04620100-r3g1": {
+    "image": "assets/peripherals/razer-rz01-04620100-r3g1.webp",
+    "sourcePage": "https://www.kns.ru/product/mish-razer-basilisk-v3-pro-rz01-04620100-r3g1/characteristics/",
+    "sourceImage": "https://www.kns.ru/linkpics/razer-basilisk-v3-pro-rz01-04620100-r3g1_kod_887389.jpg",
+    "credit": "Razer"
+  },
+  "razer-rz01-03730100-r3a1": {
+    "image": "assets/peripherals/razer-rz01-03730100-r3a1.webp",
+    "sourcePage": "https://www.kns.ru/product/mish-razer-orochi-v2-rz01-03730100-r3a1/characteristics/",
+    "sourceImage": "https://www.kns.ru/linkpics/razer-orochi-v2-rz01-03730100-r3a1_kod_1013706.jpg",
+    "credit": "Razer"
+  },
+  "razer-rz01-03850200-r3c1": {
+    "image": "assets/peripherals/razer-rz01-03850200-r3c1.webp",
+    "sourcePage": "https://www.kns.ru/product/mish-razer-deathadder-essential-rz01-03850200-r3c1/characteristics/",
+    "sourceImage": "https://www.kns.ru/linkpics/razer-deathadder-essential-rz01-03850200-r3c1_kod_938626.jpg",
+    "credit": "Razer"
+  },
+  "logitech-g213-rgb-gaming-keyboard": {
+    "image": "assets/peripherals/logitech-g213-rgb-gaming-keyboard.webp",
+    "sourcePage": "https://www.logitechg.com/en-us/shop/p/g213-rgb-gaming-keyboard.920-008083",
+    "sourceImage": "https://resource.logitechg.com/w_544,h_466,ar_7:6,c_pad,q_auto,f_auto,dpr_1.0/d_transparent.gif/content/dam/gaming/en/non-braid/g213-finch/g213-gallery-1-nb.png",
+    "credit": "Logitech"
+  },
+  "logitech-g309-lightspeed-gaming-mouse": {
+    "image": "assets/peripherals/logitech-g309-lightspeed-gaming-mouse.webp",
+    "sourcePage": "https://www.logitechg.com/en-us/shop/p/g309-lightspeed-gaming-mouse.910-007205",
+    "sourceImage": "https://resource.logitechg.com/w_544,h_466,ar_7:6,c_pad,q_auto,f_auto,dpr_1.0/d_transparent.gif/content/dam/gaming/en/products/G309-Lightspeed-Gaming-Mouse/gallery/g309-lightspeed-wireless-mouse-white-gallery-1.png",
+    "credit": "Logitech"
+  },
+  "logitech-g413-se-gaming-keyboard": {
+    "image": "assets/peripherals/logitech-g413-se-gaming-keyboard.webp",
+    "sourcePage": "https://www.logitechg.com/en-us/shop/p/g413-se-gaming-keyboard.920-010433",
+    "sourceImage": "https://resource.logitechg.com/w_544,h_466,ar_7:6,c_pad,q_auto,f_auto,dpr_1.0/d_transparent.gif/content/dam/gaming/en/products/g413-se/g413-se-gallery-4-new.png",
+    "credit": "Logitech"
+  },
+  "logitech-g413-tkl-se-gaming-keyboard": {
+    "image": "assets/peripherals/logitech-g413-tkl-se-gaming-keyboard.webp",
+    "sourcePage": "https://www.logitechg.com/en-us/shop/p/g413-tkl-se-gaming-keyboard.920-010442",
+    "sourceImage": "https://resource.logitechg.com/w_544,h_466,ar_7:6,c_pad,q_auto,f_auto,dpr_1.0/d_transparent.gif/content/dam/gaming/en/products/g413-se-tkl/2025/gallery/g413-tkl-se-mechanical-keyboard-top-angle-gallery-1.png",
+    "credit": "Logitech"
+  },
+  "logitech-g502-lightspeed-wireless-gaming-mouse": {
+    "image": "assets/peripherals/logitech-g502-lightspeed-wireless-gaming-mouse.webp",
+    "sourcePage": "https://www.logitechg.com/en-us/shop/p/g502-lightspeed-wireless-gaming-mouse.910-005565",
+    "sourceImage": "https://resource.logitechg.com/w_544,h_466,ar_7:6,c_pad,q_auto,f_auto,dpr_1.0/d_transparent.gif/content/dam/gaming/en/products/g502-lightspeed-gaming-mouse/g502-lightspeed-gallery-1.png",
+    "credit": "Logitech"
+  },
+  "logitech-g502-x-wired-lightforce": {
+    "image": "assets/peripherals/logitech-g502-x-wired-lightforce.webp",
+    "sourcePage": "https://www.logitechg.com/en-us/shop/p/g502-x-wired-lightforce.910-006144",
+    "sourceImage": "https://resource.logitechg.com/w_544,h_466,ar_7:6,c_pad,q_auto,f_auto,dpr_1.0/d_transparent.gif/content/dam/gaming/en/products/g502x-corded/gallery/g502x-corded-gallery-1-white.png",
+    "credit": "Logitech"
+  },
+  "logitech-g502-x-wireless-lightforce": {
+    "image": "assets/peripherals/logitech-g502-x-wireless-lightforce.webp",
+    "sourcePage": "https://www.logitechg.com/en-us/shop/p/g502-x-wireless-lightforce.910-006187",
+    "sourceImage": "https://resource.logitechg.com/w_544,h_466,ar_7:6,c_pad,q_auto,f_auto,dpr_1.0/d_transparent.gif/content/dam/gaming/en/products/g502x-lightspeed/gallery/g502-x-lightspeed-mouse-top-angle-white-gallery-1.png",
+    "credit": "Logitech"
+  },
+  "logitech-g512-mechanical-gaming-keyboard": {
+    "image": "assets/peripherals/logitech-g512-mechanical-gaming-keyboard.webp",
+    "sourcePage": "https://www.logitechg.com/en-us/shop/p/g512-mechanical-gaming-keyboard.920-008936",
+    "sourceImage": "https://resource.logitechg.com/c_fill,q_auto,f_auto,dpr_1.0/d_transparent.gif/content/dam/gaming/en/non-braid/flying-v-mx-g512/g513-backlit-mechanical-gaming-keyboard.png",
+    "credit": "Logitech"
+  },
+  "logitech-g515-tkl-wireless-keyboard": {
+    "image": "assets/peripherals/logitech-g515-tkl-wireless-keyboard.webp",
+    "sourcePage": "https://www.logitechg.com/en-us/shop/p/g515-tkl-wireless-keyboard",
+    "sourceImage": "https://resource.logitechg.com/w_544,h_466,ar_7:6,c_pad,q_auto,f_auto,dpr_1.0/d_transparent.gif/content/dam/gaming/en/products/g515-lightspeed-tkl/gallery/g515-keyboard-black-gallery-1-us.png",
+    "credit": "Logitech"
+  },
+  "logitech-g903-hero-wireless-gaming-mouse": {
+    "image": "assets/peripherals/logitech-g903-hero-wireless-gaming-mouse.webp",
+    "sourcePage": "https://www.logitechg.com/en-us/shop/p/g903-hero-wireless-gaming-mouse.910-005670",
+    "sourceImage": "https://resource.logitechg.com/w_544,h_466,ar_7:6,c_pad,q_auto,f_auto,dpr_1.0/d_transparent.gif/content/dam/gaming/en/products/g903-hero/2025-update/g903-lightspeed-mouse-top-angle-gallery-1.png",
+    "credit": "Logitech"
+  },
+  "logitech-g915-x-mechanical-gaming-keyboard": {
+    "image": "assets/peripherals/logitech-g915-x-mechanical-gaming-keyboard.webp",
+    "sourcePage": "https://www.logitechg.com/en-us/shop/p/g915-x-mechanical-gaming-keyboard",
+    "sourceImage": "https://resource.logitechg.com/w_544,h_466,ar_7:6,c_pad,q_auto,f_auto,dpr_1.0/d_transparent.gif/content/dam/gaming/en/products/g915-x-wired/gallery/g915-x-mechanical-gaming-keyboard-carbon-gallery-1-us.png",
+    "credit": "Logitech"
+  },
+  "logitech-g915-x-tkl-wireless": {
+    "image": "assets/peripherals/logitech-g915-x-tkl-wireless.webp",
+    "sourcePage": "https://www.logitechg.com/en-us/shop/p/g915-x-tkl-wireless",
+    "sourceImage": "https://resource.logitechg.com/w_544,h_466,ar_7:6,c_pad,q_auto,f_auto,dpr_1.0/d_transparent.gif/content/dam/gaming/en/products/g915-x-lightspeed-tkl/gallery/g915-x-tkl-wireless-keyboard-gallery-1-us.png",
+    "credit": "Logitech"
+  },
+  "logitech-pro-2-lightspeed": {
+    "image": "assets/peripherals/logitech-pro-2-lightspeed.webp",
+    "sourcePage": "https://www.logitechg.com/en-us/shop/p/pro-2-lightspeed.910-007291",
+    "sourceImage": "https://resource.logitechg.com/c_fill,q_auto,f_auto,dpr_1.0/d_transparent.gif/content/dam/gaming/en/products/pro-2-lightspeed/gallery/pro2-lightspeed-black-new-gallery1.png",
+    "credit": "Logitech"
+  },
+  "logitech-pro-mechanical-gaming-keyboard": {
+    "image": "assets/peripherals/logitech-pro-mechanical-gaming-keyboard.webp",
+    "sourcePage": "https://www.logitechg.com/en-us/shop/p/pro-mechanical-gaming-keyboard.920-009388",
+    "sourceImage": "https://resource.logitechg.com/w_544,h_466,ar_7:6,c_pad,q_auto,f_auto,dpr_1.0/d_transparent.gif/content/dam/gaming/en/products/pro-keyboard/pro-clicky-gallery-1.png",
+    "credit": "Logitech"
+  },
+  "logitech-pro-x-60-wireless-keyboard": {
+    "image": "assets/peripherals/logitech-pro-x-60-wireless-keyboard.webp",
+    "sourcePage": "https://www.logitechg.com/en-us/shop/p/pro-x-60-wireless-keyboard",
+    "sourceImage": "https://resource.logitechg.com/w_544,h_466,ar_7:6,c_pad,q_auto,f_auto,dpr_1.0/d_transparent.gif/content/dam/gaming/en/products/pro-x60-wireless-keyboard/gallery/pro-x-60-keyboard-white-gallery-1-us.png",
+    "credit": "Logitech"
+  },
+  "logitech-pro-x-superlight-2-dex": {
+    "image": "assets/peripherals/logitech-pro-x-superlight-2-dex.webp",
+    "sourcePage": "https://www.logitechg.com/en-us/shop/p/pro-x-superlight-2-dex.910-007328",
+    "sourceImage": "https://resource.logitechg.com/w_544,h_466,ar_7:6,c_pad,q_auto,f_auto,dpr_1.0/d_transparent.gif/content/dam/gaming/en/products/pro-x-superlight-2-dex/gallery/new-gallery-assets-2025/pro-x-superlight-2-dex-mouse-top-angle-black-gallery-1.png",
+    "credit": "Logitech"
+  },
+  "logitech-pro-x-superlight-2-se": {
+    "image": "assets/peripherals/logitech-pro-x-superlight-2-se.webp",
+    "sourcePage": "https://www.logitechg.com/en-us/shop/p/pro-x-superlight-2-se.910-007646",
+    "sourceImage": "https://resource.logitechg.com/w_544,h_466,ar_7:6,c_pad,q_auto,f_auto,dpr_1.0/d_transparent.gif/content/dam/gaming/en/products/pro-x-superlight-2-se-pdp/gallery/pro-x-superlight-2-se-black-top-angle-gallery-1.png",
+    "credit": "Logitech"
+  },
+  "logitech-pro-x-tkl-wireless-keyboard": {
+    "image": "assets/peripherals/logitech-pro-x-tkl-wireless-keyboard.webp",
+    "sourcePage": "https://www.logitechg.com/en-us/shop/p/pro-x-tkl-wireless-keyboard.920-012154",
+    "sourceImage": "https://resource.logitechg.com/c_fill,q_auto,f_auto,dpr_1.0/d_transparent.gif/content/dam/gaming/en/products/pro-x-tkl/gallery-2-pro-x-tkl-black-lightspeed-gaming-keyboard.png.png",
+    "credit": "Logitech"
+  },
+  "logitech-pro-x2-superlight-wireless-mouse": {
+    "image": "assets/peripherals/logitech-pro-x2-superlight-wireless-mouse.webp",
+    "sourcePage": "https://www.logitechg.com/en-us/shop/p/pro-x2-superlight-wireless-mouse.910-006636",
+    "sourceImage": "https://resource.logitechg.com/w_544,h_466,ar_7:6,c_pad,q_auto,f_auto,dpr_1.0/d_transparent.gif/content/dam/gaming/en/products/pro-x-superlight-2/new-gallery-assets-2025/pro-x-superlight-2-mice-top-angle-white-gallery-1.png",
+    "credit": "Logitech"
+  },
+  "redragon-storm": {
+    "image": "assets/peripherals/redragon-storm.webp",
+    "sourcePage": "https://redragon.ru/product/storm",
+    "sourceImage": "https://redragon.ru/public/r/800x800/products/7931/133c71e0.webp",
+    "credit": "Redragon"
   }
 }

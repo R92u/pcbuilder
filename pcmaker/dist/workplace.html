@@ -5,7 +5,7 @@
  <meta name="theme-color" content="#141619"><meta name="description" content="PCmaker — собери компьютер в 3D, проверь совместимость деталей и исследуй охлаждение в учебной симуляции.">
  <title>Рабочее место — PCmaker</title>
  <link rel="icon" href="./favicon.svg" type="image/svg+xml"><link rel="stylesheet" href="./style.css"><link rel="stylesheet" href="./workbench.css"><link rel="stylesheet" href="./shop.css"><link rel="stylesheet" href="./fans.css"><link rel="stylesheet" href="./autobuild.css"><link rel="stylesheet" href="./navigation.css?v=menu-layer-20261102-2">
- <script type="importmap">{"imports":{"three":"./vendor/three.module.js","./workplace-assembly.js":"./workplace-scene-v4.js"}}</script>
+ <script type="importmap">{"imports": {"three": "./vendor/three.module.js", "./workplace-assembly.js": "./workplace-scene-v4.js", "./peripherals.js": "./peripherals-brands.js", "./keyboard-layout.js": "./keyboard-layout-brands.js", "./keyboard-controls.js":"./keyboard-controls-brands.js","./keyboard-model.js": "./keyboard-model-brands.js", "./mouse-model.js": "./mouse-model-brands.js", "./shop-catalog.js": "./shop-catalog-brands.js", "./workplace-store.js": "./workplace-store-brands.js", "./peripherals.js?v=expanded-20261102": "./peripherals-brands.js"}}</script>
  <link rel="stylesheet" href="./design-studio.css" id="design-stylesheet">
  <link rel="stylesheet" href="./build-panel.css"><link rel="stylesheet" href="./data-quality.css"><link rel="stylesheet" href="./fullscreen.css">
  <script>try{if(localStorage.getItem('pcmaker-panel-collapsed')==='true')document.documentElement.dataset.panelCollapsed='true';}catch{}</script>
@@ -99,7 +99,7 @@
   </div></details>
   <p class="shop-disclaimer">Цены — снимок на дату проверки. Магазин, наличие и условия покупки могут измениться.</p>
  </aside><section class="shop-main" aria-label="Каталог товаров">
-  <div class="shop-tools"><div><strong id="catalog-count"></strong><span id="shop-announcement" role="status"></span></div><label class="shop-sort"><span class="sr-only">Сортировка</span><select id="shop-sort" aria-label="Сортировка"><option value="default">По умолчанию</option><option value="price-up">Сначала дешевле</option><option value="price-down">Сначала дороже</option><option value="name">По названию</option></select></label><label class="search-field"><span data-icon="search"></span><input id="catalog-search" placeholder="Поиск модели…" aria-label="Поиск комплектующих"></label></div>
+  <div class="shop-tools"><div><strong id="catalog-count"></strong><span id="shop-announcement" role="status"></span></div><label class="shop-sort"><span class="sr-only">Сортировка</span><select id="shop-sort" aria-label="Сортировка"><option value="default">По умолчанию</option><option value="price-up">Сначала дешевле</option><option value="price-down">Сначала дороже</option><option value="brand">Бренд А–Я</option><option value="name">По названию</option></select></label><label class="search-field"><span data-icon="search"></span><input id="catalog-search" placeholder="Поиск модели…" aria-label="Поиск комплектующих"></label></div>
   <div id="shop-results" class="shop-results"><div id="catalog-options" class="shop-grid"></div></div>
  </section></div>
  </dialog>
