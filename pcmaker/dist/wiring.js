@@ -27,6 +27,7 @@ export function portsFor(build={}){
  for(const key of ['gpu16','gpu1','gpu2','gpu3'])map[key].position[0]=gpuLayout(p.gpu||{}).edgeX-.10;
  for(const key of ['audio','usb2','panel']){map[key].position=[-.85,boardBottom(p.motherboard)+.04,map[key].position[2]];map[key].axis='-y';}
  if(p.motherboard?.cpuPowerPinCounts?.[1]===4)map.eps2.name='CPU_PWR2 · 4 pin';
+ if(p.motherboard?.cpuPowerPinCounts?.[0]===4)map.eps.name='CPU_PWR · 4 pin';
  return map;
 }
 // Every route begins at a rendered socket / strain relief and enters the tray
@@ -43,7 +44,8 @@ export function cablesFor(build,fanLayout){
  };
  if(p.psu&&p.motherboard){
   add('atx','Питание платы · ATX 24 pin','Блок питания',true,supply('atx',3.42,.89),12);
-  add('eps','Питание CPU · EPS 4+4 pin','Блок питания',true,supply('eps',4.40,-1.30).concat([[-.45,4.13,-1.30]]),8);
+  const cpuPins=p.motherboard.cpuPowerPinCounts?.[0]||8;
+  add('eps','Питание CPU · EPS '+(cpuPins===4?'4':'4+4')+' pin','Блок питания',true,supply('eps',4.40,-1.30).concat([[-.45,4.13,-1.30]]),cpuPins);
   if((p.motherboard.epsConnectors??1)>1&&(p.psu.epsConnectors??1)>1){
    const pins=p.motherboard.cpuPowerPinCounts?.[1]||8;
    add('eps2','Доп. питание CPU · EPS '+(pins===4?'4':'4+4')+' pin','Блок питания',false,supply('eps2',4.40,-.86).concat([[-.45,4.34,-.98],[-.45,4.13,-.98]]),pins);

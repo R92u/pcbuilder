@@ -17,6 +17,7 @@ function pipe(group,points,radius=.027){
 // Original low-poly hardware geometry: open fin stacks, bent heatpipes, perforated
 // backplate and sculpted rails. This is a visual approximation, not a CAD model.
 export function makeDetailedGPU(p){
+ if(p.modelStyle==='compact-budget')return makeCompactGPU.call(this,p);
  const g=new THREE.Group(),len=p.length/100,rear=-1.86,end=rear+len,center=(rear+end)/2;
  const large=p.fans>=3,layout=gpuLayout(p),{thickness,top,bottom}=layout;
  const sapphire=p.manufacturer==='SAPPHIRE',zotac=p.id==='rtx3090';
@@ -92,11 +93,50 @@ export function makeDetailedGPU(p){
  // Standard rear PCI bracket width must not scale with the cooler width.
  const bracketHeight=gpuSlots(p)*.18;
  this.box(root,1.64,bracketHeight,.035,.07,2.47-bracketHeight/2,-2.145,0x606a6b);
- const gpuPorts=p.ports?.flatMap(port=>Array.from({length:parseInt(port)||1},()=>/HDMI/i.test(port)?'HDMI':'DP'))||['DP','DP','DP','HDMI'];
- for(let i=0;i<gpuPorts.length;i++)this.rearPort(root,'video',-.49+i*.34,top-.205,.22,.083,0,gpuPorts[i]);
+ addVideoPorts.call(this,root,p,top);
  for(let i=0;i<11;i++)this.box(root,.065,.045,.008,-.53+i*.115,2.47-bracketHeight+.085,-2.168,0x0a1013);
  for(const x of [-.64,.70])this.screw(root,x,top+.017,-2.17,'z',.024);
  if(p.connectorType==='16pin')this.headerSocket(root,'gpu16',2,6,.029);
  else for(let i=0;i<p.connectors;i++)this.headerSocket(root,'gpu'+(i+1),2,4,.041);
  return root;
+}
+
+function addVideoPorts(g,p,top){
+ const ports=p.ports?.flatMap(port=>Array.from({length:parseInt(port)||1},()=>/DVI/i.test(port)?'DVI':/HDMI/i.test(port)?'HDMI':'DP'))||['DP','DP','DP','HDMI'];
+ let x=-.56;
+ for(const type of ports){
+  const width=type==='DVI'?.43:.22;
+  if(type==='DVI'){
+   this.box(g,width,.15,.045,x+width/2,top-.205,-2.168,0xb4b9b8);
+   this.box(g,width-.075,.105,.048,x+width/2,top-.205,-2.194,0x182024);
+   for(let r=0;r<3;r++)for(let c=0;c<8;c++)this.box(g,.014,.014,.008,x+.075+c*.033,top-.24+r*.035,-2.222,0x918b67);
+   for(const dx of [.025,width-.025])this.screw(g,x+dx,top-.205,-2.218,'z',.018);
+  }else this.rearPort(g,'video',x+width/2,top-.205,width,.083,0,type);
+  x+=width+.12;
+ }
+}
+
+// Small slot-powered cards use a compact aluminium heatsink and exposed PCB,
+// not the large RTX backplate/heatpipe assembly. Geometry remains illustrative.
+function makeCompactGPU(p){
+ const g=new THREE.Group(),l=gpuLayout(p),len=p.length/100,cx=-.80+l.width/2,z=(l.rear+l.end)/2;
+ this.box(g,l.width-.04,.035,len-.07,cx,l.top-.03,z,0x182521);
+ for(let i=0;i<8;i++)this.box(g,.11,.026,.075,cx-.15,l.top+.003,l.rear+.18+i*(len-.30)/8,0x101718);
+ for(let i=0;i<22;i++)this.box(g,.045,.045,.016,-.80,l.top-.046,l.rear+.20+i*.034,0xa39253);
+ for(let i=0;i<Math.round(len*27);i++)this.box(g,l.width-.10,l.thickness-.14,.012,cx,l.top-l.thickness/2,l.rear+.07+i*(len-.14)/Math.round(len*27),0x798181);
+ const shell=0x1c2227,trim=p.fans===2?0x929c9d:0x313a40;
+ for(const x of [-.80,l.edgeX])this.box(g,.045,.12,len-.05,x,l.bottom+.015,z,shell);
+ for(const end of [l.rear+.04,l.end-.04])this.box(g,l.width,.12,.055,cx,l.bottom+.015,end,trim);
+ for(let i=0;i<p.fans;i++){
+  const fz=p.fans===1?l.rear+len*.63:l.rear+(i+.5)*len/p.fans,size=Math.min(l.width-.14,len/p.fans-.10);
+  this.fan(g,size,cx,l.bottom-.02,fz,[Math.PI/2,0,0],'gpu',false);
+  for(const side of [-1,1]){const bar=this.box(g,.07,.055,size*.70,cx+side*size*.45,l.bottom-.035,fz,trim);bar.rotation.y=side*.22;}
+  this.text(g,'MSI',size*.24,.045,cx,l.bottom-.145,fz,[Math.PI/2,0,0],'#aab3b5');
+ }
+ this.label(g,p,Math.min(.58,len-.2),.22,cx,l.top+.012,l.rear+.45,[-Math.PI/2,0,Math.PI/2]);
+ this.text(g,p.short.toUpperCase(),len*.74,.055,l.edgeX+.025,l.bottom+.055,z,[0,Math.PI/2,0],'#8d989b');
+ const h=gpuSlots(p)*.18;
+ this.box(g,1.64,h,.035,.07,2.47-h/2,-2.145,0x606a6b);addVideoPorts.call(this,g,p,l.top);
+ for(const x of [-.64,.70])this.screw(g,x,l.top+.017,-2.17,'z',.024);
+ return g;
 }

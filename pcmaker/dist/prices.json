@@ -833,6 +833,140 @@
       "url": "https://www.kns.ru/product/ssd-disk-kingston-nv3-500gb-snv3s-500g/",
       "currency": "RUB",
       "availability": "in-stock"
+    },
+    "r3-4100": {
+      "url": "https://www.kns.ru/product/processor-amd-ryzen-3-4100-oem/",
+      "price": 4579.0,
+      "currency": "RUB",
+      "date": "2026-11-04",
+      "store": "KNS",
+      "availability": "out-of-stock",
+      "note": "Последняя цена магазина. Товара нет в наличии; в автосборке не используется."
+    },
+    "r5-4500": {
+      "url": "https://www.regard.ru/product/327854/processor-amd-ryzen-5-4500-oem",
+      "price": 7940,
+      "currency": "RUB",
+      "date": "2026-11-02",
+      "store": "Регард",
+      "availability": "in-stock",
+      "note": "OEM. Публичная карточка магазина проверена 04.11; дата индексированного снимка — 02.11. Цена и наличие требуют перепроверки."
+    },
+    "a520m-a-pro": {
+      "url": "https://www.kns.ru/product/materinskaya-plata-msi-a520m-a-pro/",
+      "price": 4125.0,
+      "currency": "RUB",
+      "date": "2026-11-04",
+      "store": "KNS",
+      "availability": "in-stock"
+    },
+    "h610m-e-ddr4": {
+      "url": "https://www.kns.ru/product/materinskaya-plata-msi-pro-h610m-e-ddr4/",
+      "price": 6105.0,
+      "currency": "RUB",
+      "date": "2026-11-04",
+      "store": "KNS",
+      "availability": "in-stock"
+    },
+    "gt1030-aero-oc": {
+      "url": "https://www.kns.ru/product/videokarta-msi-gt-1030-aero-itx-2g-oc/",
+      "price": 6889.0,
+      "currency": "RUB",
+      "date": "2026-11-04",
+      "store": "KNS",
+      "availability": "out-of-stock",
+      "note": "Последняя цена магазина. Товара нет в наличии; в автосборке не используется."
+    },
+    "gtx1650-d6-ventus-xs-oc": {
+      "url": "https://www.kns.ru/product/videokarta-msi-nvidia-geforce-gtx-1650-d6-ventus-xs-oc/",
+      "price": 25451.0,
+      "currency": "RUB",
+      "date": "2026-11-04",
+      "store": "KNS",
+      "availability": "out-of-stock",
+      "note": "Последняя цена магазина. Товара нет в наличии; в автосборке не используется."
+    },
+    "patriot-8-3200": {
+      "url": "https://www.kns.ru/product/operativnaya-pamyat-patriot-signature-line-psd48g320081/",
+      "price": 6311.0,
+      "currency": "RUB",
+      "date": "2026-11-04",
+      "store": "KNS",
+      "availability": "in-stock"
+    },
+    "patriot-16-3200": {
+      "url": "https://www.kns.ru/product/operativnaya-pamyat-patriot-signature-psd416g320081/",
+      "price": 13613.0,
+      "currency": "RUB",
+      "date": "2026-11-04",
+      "store": "KNS",
+      "availability": "in-stock"
+    },
+    "p300-256": {
+      "url": "https://www.kns.ru/product/ssd-disk-patriot-p300-256gb-p300p256gm28/",
+      "price": 5775.0,
+      "currency": "RUB",
+      "date": "2026-11-04",
+      "store": "KNS",
+      "availability": "in-stock"
+    },
+    "p300-512": {
+      "url": "https://www.kns.ru/product/ssd-disk-patriot-p300-512gb-p300p512gm28/",
+      "price": 9364.0,
+      "currency": "RUB",
+      "date": "2026-11-04",
+      "store": "KNS",
+      "availability": "in-stock"
+    },
+    "ag200": {
+      "url": "https://www.kns.ru/product/kuler-deepcool-ag200/",
+      "price": 908.0,
+      "currency": "RUB",
+      "date": "2026-11-04",
+      "store": "KNS",
+      "availability": "in-stock"
+    },
+    "ag300": {
+      "url": "https://www.kns.ru/product/kuler-deepcool-ag300/",
+      "price": 990.0,
+      "currency": "RUB",
+      "date": "2026-11-04",
+      "store": "KNS",
+      "availability": "in-stock"
+    },
+    "pf450": {
+      "url": "https://www.kns.ru/product/blok-pitaniya-deepcool-450w-pf450/",
+      "price": 3218.0,
+      "currency": "RUB",
+      "date": "2026-11-04",
+      "store": "KNS",
+      "availability": "in-stock"
+    },
+    "pf500": {
+      "url": "https://www.kns.ru/product/blok-pitaniya-deepcool-500w-pf500/",
+      "price": 3506.0,
+      "currency": "RUB",
+      "date": "2026-11-04",
+      "store": "KNS",
+      "availability": "in-stock"
+    },
+    "matrexx40": {
+      "url": "https://www.kns.ru/product/korpus-deepcool-matrexx-40/",
+      "price": 3590.0,
+      "currency": "RUB",
+      "date": "2026-11-04",
+      "store": "KNS",
+      "availability": "out-of-stock",
+      "note": "Последняя цена магазина. Товара нет в наличии; в автосборке не используется."
+    },
+    "matrexx55-mesh": {
+      "url": "https://www.kns.ru/product/korpus-deepcool-matrexx-55-mesh/",
+      "price": 5486.0,
+      "currency": "RUB",
+      "date": "2026-11-04",
+      "store": "KNS",
+      "availability": "out-of-stock",
+      "note": "Последняя цена магазина. Товара нет в наличии; в автосборке не используется."
     }
   },
   "availability": {

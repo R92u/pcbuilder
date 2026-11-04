@@ -1,7 +1,9 @@
 // Manufacturer and retailer photographs with source attribution and explicit series captions.
 import {productImagesExtra} from './product-images-extra.js';
+import {productImagesBudget} from './product-images-budget.js';
 export const productImages={
  ...productImagesExtra,
+ ...productImagesBudget,
   "980": {
     "id": "980",
     "sourcePage": "https://www.samsung.com/de/memory-storage/nvme-ssd/980-1tb-nvme-pcie-gen-3-mz-v8v1t0bw/",

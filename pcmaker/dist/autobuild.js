@@ -1,7 +1,7 @@
 import {regionFromCurrency} from './regions.js';
 import {catalog,categories,resolve} from './catalog.js';
 import {compatibility} from './engine.js';
-import {estimatePrice,estimateDate,gpuRanks} from './budget-data.js';
+import {estimatePrice,estimateDateFor,gpuRanks} from './budget-data.js';
 import {isVerified} from './verification.js';
 import {priceQuality} from './price-quality.js?v=prices-20261104';
 
@@ -19,7 +19,7 @@ export function budgetPrice(part,category,prices={},allowEstimates=true,currency
  }
  if(quality.status==='unavailable')return null;
  const value=currency==='RUB'&&allowEstimates&&estimatePrice(part,category);
- return value?{price:value,planned:kopecks(value)+Math.ceil(kopecks(value)*.10),reserve:Math.ceil(kopecks(value)*.10)/100,estimated:true,kind:'estimate',date:estimateDate}:null;
+ return value?{price:value,planned:kopecks(value)+Math.ceil(kopecks(value)*.10),reserve:Math.ceil(kopecks(value)*.10)/100,estimated:true,kind:'estimate',date:estimateDateFor(part)}:null;
 }
 export function quoteBuild(build,prices,allowEstimates=true,currency='RUB',now=Date.now()){
  const parts=resolve(build),rows=categories.map(([key,label])=>({key,label,part:parts[key],quote:parts[key]&&isVerified(parts[key])&&budgetPrice(parts[key],key,prices,allowEstimates,currency,now)}));

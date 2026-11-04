@@ -22,6 +22,7 @@ export function compatibility(build) {
   warnings.push('СЖО: радиатор '+(aio?.wall==='front'?'спереди на вдув':'сверху на выдув')+'. Корпусные вентиляторы в занятой зоне сняты. Перед покупкой проверь толщину радиатора, RAM и VRM по руководству корпуса.');
  }
  if(p.ram?.heightUnknown&&p.cooler)warnings.push('Высота выбранной памяти не подтверждена: проверь зазор с кулером или радиатором.');
+ if(p.cooler?.ramClearanceUnknown&&p.ram)warnings.push('Зазор выбранного кулера с памятью не указан производителем: проверь посадку модулей.');
  if(p.cooler&&p.ram&&!p.cooler.ramUnrestricted&&!p.cooler.ramUnrestrictedSockets?.includes(p.cpu?.socket||p.motherboard?.socket)&&p.ram.height>p.cooler.ramClearance){if(p.cooler.adjustableFrontFan){const height=p.cooler.height+p.ram.height-p.cooler.ramClearance;if(p.case&&height>p.case.coolerLimit)add('ram-height','Поднятый над памятью вентилятор кулера не помещается в корпусе.',['cooler','ram','case']);else warnings.push(`Передний вентилятор кулера нужно поднять: общая высота около ${height.toFixed(1)} мм.`);}else add('ram-height','Модули памяти не помещаются под вентилятором кулера.',['cooler','ram']);}
  if(p.psu&&p.case&&Number.isFinite(p.case.psuLimit)&&p.psu.length>p.case.psuLimit)add('psu-size','Блок питания слишком длинный для корпуса.',['psu','case']);
  if(p.psu&&p.case?.psuLimitUnknown)warnings.push('Производитель корпуса не указал предел длины БП: проверь место для блока питания и его кабелей.');

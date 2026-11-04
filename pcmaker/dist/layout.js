@@ -18,7 +18,8 @@ export function caseLayout(p={},gpu,cooler){
  if(mount?.wall==='front')front=Math.max(front,gpuLayout(gpu||{}).end+.74);
  const side=Math.max(1.12,CPU_CENTER.x+(p.coolerLimit||165)/100+.13);
  const fanSize=(p.fanSizeMm||120)/100;
- const fanYs=(p.frontFanCount??3)===1?[2.83]:p.frontFanCount===2?[2.2,3.4]:fanSize>1.2?[1.05,2.45,3.85]:[1.4,2.65,3.9];
+ const frontMounts=p.frontFanMounts??p.frontFanCount??3;
+ const fanYs=frontMounts===0?[]:frontMounts===1?[2.83]:frontMounts===2?[2.2,3.4]:fanSize>1.2?[1.05,2.45,3.85]:[1.4,2.65,3.9];
  return {front,rear:-2.1,centerZ:(front-2.1)/2,depth:front+2.1,side,back:-1.19,fanZ:front-.13,fanYs,fanSize,ioZ:front-.38};
 }
 export const CABLE_CHANNEL_X=-1.105;
@@ -41,7 +42,7 @@ export function psuCableSource(p,id){
 }
 export function frontIOPosition(p,frame,id){
  const count=(p?.usbA??1)+(p?.usb2??0);
- const x={usb3:-.70,usb2:-.36,usbC:count>1?-.03:-.36,audio:.34,panel:.72}[id];
+ const x={usb3:count>2?-.75:-.70,usb2:count>2?-.45:-.36,usbC:count>1?-.03:-.36,audio:.34,panel:.72}[id];
  return [x,4.645,frame.ioZ];
 }
 export const frontFanSource=frame=>[-.80,frame.fanYs[Math.floor(frame.fanYs.length/2)],frame.fanZ-.14];

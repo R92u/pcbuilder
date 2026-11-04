@@ -29,7 +29,7 @@ export function createAutoBuilder({getPrices,beforeOpen,onApply,initialPlan=null
   const budget=Number($('autobuild-budget').value),allowEstimates=$('autobuild-estimates').checked;
   if(!Number.isFinite(budget)||budget<region.minBudget||budget>region.maxBudget){preview({status:'invalid',message:'Укажи бюджет от '+region.minBudget+' до '+region.maxBudget+' '+region.symbol+'.'});return;}
   const request=++generation;$('autobuild-submit').disabled=true;$('autobuild-submit').textContent='Подбираем…';$('autobuild-status').textContent='Проверяем сочетания комплектующих…';$('autobuild-result').setAttribute('aria-busy','true');
-  try{worker=new Worker(new URL('./autobuild-worker.js?v=prices-20261104',import.meta.url),{type:'module'});
+  try{worker=new Worker(new URL('./autobuild-worker.js?v=budget-20261104',import.meta.url),{type:'module'});
    worker.onmessage=({data})=>{if(request!==generation)return;stop();preview(data);};
    worker.onerror=()=>{if(request!==generation)return;stop();preview({status:'error',message:'Подбор не загрузился. Обнови страницу и попробуй снова.'});};
    worker.postMessage({budget,purpose,allowEstimates,currency:region.currency,prices:getPrices().items});

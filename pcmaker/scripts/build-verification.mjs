@@ -2,7 +2,7 @@ import fs from 'node:fs';
 import {byId,categories,catalog} from '../dist/catalog.js';
 import {dateStamp} from '../dist/price-quality.js';
 const records={};
-for(const name of ['verification-core.json','verification-support.json']){
+for(const name of ['verification-core.json','verification-support.json','verification-budget.json']){
  const evidence=JSON.parse(fs.readFileSync(new URL('../research/'+name,import.meta.url),'utf8'));
  for(const [id,record] of Object.entries(evidence.items)){
   if(records[id]||!byId[id])throw Error('Duplicate or unknown reviewed product '+id);

@@ -1,5 +1,5 @@
 // Mount sizes from case manuals; concept cases use authored teaching dimensions.
-export const radiatorSupport={cc560:{top:[240],front:[240,360]},'4000d-airflow':{top:[240],front:[240,360]},'pop-air':{top:[240],front:[240]},'pop-air-white':{top:[240],front:[240]},'h7-flow':{top:[240,360],front:[240,360]},'ch560-white':{top:[240,360],front:[240,360]},'pcmaker-panorama':{top:[240,360]},'pcmaker-dual-chamber':{top:[240,360]},'pcmaker-compact':{top:[240]}};
+export const radiatorSupport={matrexx40:{top:[240],front:[240]},'matrexx55-mesh':{top:[240],front:[240,360]},cc560:{top:[240],front:[240,360]},'4000d-airflow':{top:[240],front:[240,360]},'pop-air':{top:[240],front:[240]},'pop-air-white':{top:[240],front:[240]},'h7-flow':{top:[240,360],front:[240,360]},'ch560-white':{top:[240,360],front:[240,360]},'pcmaker-panorama':{top:[240,360]},'pcmaker-dual-chamber':{top:[240,360]},'pcmaker-compact':{top:[240]}};
 export function aioMount(p={}){
  if(p.cooler?.type!=='aio'||!p.case)return null;
  const support=radiatorSupport[p.case.id]|| (p.case.concept==='dual'?{top:[240,360]}:{}),size=p.cooler.radiator;

@@ -46,7 +46,7 @@ export function placementError(build,layout,id,slotId){
 export function defaultFanLayout(build){
  const p=resolve(build).case,slots=fanMounts(build);
  const walls=p?.concept==='panorama'?['left','top']:p?.concept==='dual'?['front','rear']:p?.concept==='compact'?['front','top']:['front','rear'];
- const chosen=slots.filter(s=>walls.includes(s.wall));
+ const chosen=slots.filter(s=>walls.includes(s.wall)&&(!Number.isFinite(p?.frontFanMounts)||Number(s.id.split('-')[1])<=(p[s.wall+'FanCount']||0)));
  return chosen.map((s,i)=>({id:'fan'+(i+1),slot:s.id,direction:['rear','top'].includes(s.wall)?'out':'in'}));
 }
 export function sanitizeFanLayout(build,input){

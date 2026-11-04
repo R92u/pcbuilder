@@ -171,7 +171,7 @@ export const modelMethods={
   this.text(g,p.brand||'MSI',.27,.09,-.677,2.0,.25,[0,Math.PI/2,0],'#c0c5c3');
   const battery=this.cylinder(g,.095,.024,-.864,Math.max(bottom+.15,1.75),-1.35,0xc4c6c2);battery.rotation.z=Math.PI/2;this.text(g,'CR2032',.14,.035,-.842,Math.max(bottom+.15,1.75),-1.35,[0,Math.PI/2,0],'#444b4c');
   for(let i=0;i<(p.id==='b650'?4:6);i++){const y=Math.max(bottom+.1,1.80)+(i%3)*.12,z=.52+Math.floor(i/3)*.13;this.box(g,.13,.08,.10,-.83,y,z,0x181f1f);this.box(g,.008,.043,.063,-.76,y,z,0x050706);}
-  for(const [id,rows,cols] of [['atx',2,12],['eps',2,4],['cpuFan',1,4],['pump',1,4],['frontFan',1,4],['rearFan',1,4],['usb3',2,10],['usb2',2,5],['audio',2,5],['panel',2,5]])this.headerSocket(g,id,rows,cols,id==='atx'?.038:.042);
+  for(const [id,rows,cols] of [['atx',2,12],['eps',2,(p.cpuPowerPinCounts?.[0]||8)/2],['cpuFan',1,4],['pump',1,4],['frontFan',1,4],['rearFan',1,4],['usb3',2,10],['usb2',2,5],['audio',2,5],['panel',2,5]])this.headerSocket(g,id,rows,cols,id==='atx'?.038:.042);
   if((p.epsConnectors??(p.id==='b650'?2:1))>1)this.headerSocket(g,'eps2',2,(p.cpuPowerPinCounts?.[1]||8)/2,.042);if(p.usbCHeader)this.headerSocket(g,'usbC',2,10,.02);
   this.makeRearIO(g,p);batchSolids(g);return g;
  },
@@ -206,10 +206,11 @@ export const modelMethods={
  makeRAM(p){
   const g=new THREE.Group(),height=(p.height||34)/100,edge=-.84+height,center=-.84+height/2;
   for(let i=0;i<p.modules;i++){const z=p.modules>2?.03+i*.15:.18+i*.30;
-   this.box(g,height,1.29,.045,center,3.43,z,0x17231c);this.box(g,height-.035,1.19,.069,center+.012,3.46,z,0x22292c);
-   for(let j=0;j<8;j++){this.box(g,.12,.095,.020,center,2.96+j*.14,z+.044,0x0b1010);this.box(g,.02,.044,.076,edge+.003,2.94+j*.147,z,0x424d52);}
+   this.box(g,height,1.29,.045,center,3.43,z,p.heatspreader===false?0x1c2323:0x17231c);
+   if(p.heatspreader!==false)this.box(g,height-.035,1.19,.069,center+.012,3.46,z,0x22292c);
+   for(let j=0;j<8;j++){this.box(g,.12,.095,.020,center,2.96+j*.14,z+.044,0x0b1010);if(p.heatspreader!==false)this.box(g,.02,.044,.076,edge+.003,2.94+j*.147,z,0x424d52);}
    for(let j=0;j<30;j++)this.box(g,.059,.018,.048,-.83,2.84+j*.038,z,0xb5a661);
-   this.label(g,p,.88,Math.min(.20,height-.06),center,3.46,z+.057,[0,0,Math.PI/2]);this.text(g,p.memory,.27,.035,center,2.93,z+.057,[0,0,0],'#89928f');
+   this.label(g,p,p.heatspreader===false?.48:.88,Math.min(.20,height-.06),center,p.heatspreader===false?3.75:3.46,z+.057,[0,0,Math.PI/2]);this.text(g,p.memory,.27,.035,center,2.93,z+.057,[0,0,0],'#89928f');
   }batchSolids(g);return g;
  },
  makeGPU(p){const g=makeDetailedGPU.call(this,p);batchSolids(g);return g;},

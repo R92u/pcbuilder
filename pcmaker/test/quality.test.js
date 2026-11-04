@@ -72,7 +72,7 @@ test('Regional snapshots reject missing or invalid dates, currency mismatch and 
 test('Verification is bound to reviewed specification values and fails closed after a catalog drift',()=>{
  assert.ok(Object.keys(verificationRecords).length>=30);
  for(const [id,record] of Object.entries(verificationRecords)){
-  assert.ok(byId[id],id);assert.equal(isVerified(byId[id]),true,id);assert.equal(record.checkedAt,'2026-10-28');assert.ok(record.sources.length>0,id);assert.ok(record.sources.every(url=>new URL(url).protocol==='https:'),id);assert.ok(Object.keys(record.values).length>0,id);
+  assert.ok(byId[id],id);assert.equal(isVerified(byId[id]),true,id);assert.notEqual(dateStamp(record.checkedAt),null);assert.ok(record.sources.length>0,id);assert.ok(record.sources.every(url=>new URL(url).protocol==='https:'),id);assert.ok(Object.keys(record.values).length>0,id);
  }
  assert.equal(verificationFor({...part,socket:'WRONG'}).status,'pending');
  assert.equal(verificationFor({id:'not-reviewed'}).status,'pending');assert.equal(verificationFor(undefined).status,'pending');

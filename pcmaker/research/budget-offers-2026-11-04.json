@@ -1,0 +1,172 @@
+{
+  "checkedAt": "2026-11-04",
+  "note": "Открытые карточки магазинов. Отсутствующие товары сохраняют последнюю цену с пометкой; это не действующее предложение. Фотографии относятся к точным карточкам SKU.",
+  "items": {
+    "r3-4100": {
+      "id": "r3-4100",
+      "title": "Процессор AMD Ryzen 3 4100 OEM",
+      "url": "https://www.kns.ru/product/processor-amd-ryzen-3-4100-oem/",
+      "price": 4579.0,
+      "currency": "RUB",
+      "date": "2026-11-04",
+      "store": "KNS",
+      "availability": "out-of-stock",
+      "note": "Последняя цена магазина. Товара нет в наличии; в автосборке не используется."
+    },
+    "r5-4500": {
+      "id": "r5-4500",
+      "title": "Процессор AMD Ryzen 5 4500 OEM",
+      "url": "https://www.regard.ru/product/327854/processor-amd-ryzen-5-4500-oem",
+      "price": 7940,
+      "currency": "RUB",
+      "date": "2026-11-02",
+      "store": "Регард",
+      "availability": "in-stock",
+      "note": "OEM. Публичная карточка магазина проверена 04.11; дата индексированного снимка — 02.11. Цена и наличие требуют перепроверки."
+    },
+    "a520m-a-pro": {
+      "id": "a520m-a-pro",
+      "title": "Материнская плата MSI A520M-A Pro",
+      "url": "https://www.kns.ru/product/materinskaya-plata-msi-a520m-a-pro/",
+      "price": 4125.0,
+      "currency": "RUB",
+      "date": "2026-11-04",
+      "store": "KNS",
+      "availability": "in-stock"
+    },
+    "h610m-e-ddr4": {
+      "id": "h610m-e-ddr4",
+      "title": "Материнская плата MSI Pro H610M-E DDR4",
+      "url": "https://www.kns.ru/product/materinskaya-plata-msi-pro-h610m-e-ddr4/",
+      "price": 6105.0,
+      "currency": "RUB",
+      "date": "2026-11-04",
+      "store": "KNS",
+      "availability": "in-stock"
+    },
+    "gt1030-aero-oc": {
+      "id": "gt1030-aero-oc",
+      "title": "Видеокарта MSI nVidia GeForce GT 1030 Aero ITX 2G OC",
+      "url": "https://www.kns.ru/product/videokarta-msi-gt-1030-aero-itx-2g-oc/",
+      "price": 6889.0,
+      "currency": "RUB",
+      "date": "2026-11-04",
+      "store": "KNS",
+      "availability": "out-of-stock",
+      "note": "Последняя цена магазина. Товара нет в наличии; в автосборке не используется."
+    },
+    "gtx1650-d6-ventus-xs-oc": {
+      "id": "gtx1650-d6-ventus-xs-oc",
+      "title": "Видеокарта MSI nVidia GeForce GTX 1650 D6 Ventus XS OC",
+      "url": "https://www.kns.ru/product/videokarta-msi-nvidia-geforce-gtx-1650-d6-ventus-xs-oc/",
+      "price": 25451.0,
+      "currency": "RUB",
+      "date": "2026-11-04",
+      "store": "KNS",
+      "availability": "out-of-stock",
+      "note": "Последняя цена магазина. Товара нет в наличии; в автосборке не используется."
+    },
+    "patriot-8-3200": {
+      "id": "patriot-8-3200",
+      "title": "Оперативная память Patriot Signature Line PSD48G320081",
+      "url": "https://www.kns.ru/product/operativnaya-pamyat-patriot-signature-line-psd48g320081/",
+      "price": 6311.0,
+      "currency": "RUB",
+      "date": "2026-11-04",
+      "store": "KNS",
+      "availability": "in-stock"
+    },
+    "patriot-16-3200": {
+      "id": "patriot-16-3200",
+      "title": "Оперативная память Patriot Signature PSD416G320081",
+      "url": "https://www.kns.ru/product/operativnaya-pamyat-patriot-signature-psd416g320081/",
+      "price": 13613.0,
+      "currency": "RUB",
+      "date": "2026-11-04",
+      "store": "KNS",
+      "availability": "in-stock"
+    },
+    "p300-256": {
+      "id": "p300-256",
+      "title": "SSD диск Patriot P300 256Gb P300P256GM28",
+      "url": "https://www.kns.ru/product/ssd-disk-patriot-p300-256gb-p300p256gm28/",
+      "price": 5775.0,
+      "currency": "RUB",
+      "date": "2026-11-04",
+      "store": "KNS",
+      "availability": "in-stock"
+    },
+    "p300-512": {
+      "id": "p300-512",
+      "title": "SSD диск Patriot P300 512Gb P300P512GM28",
+      "url": "https://www.kns.ru/product/ssd-disk-patriot-p300-512gb-p300p512gm28/",
+      "price": 9364.0,
+      "currency": "RUB",
+      "date": "2026-11-04",
+      "store": "KNS",
+      "availability": "in-stock"
+    },
+    "ag200": {
+      "id": "ag200",
+      "title": "Кулер Deepcool AG200",
+      "url": "https://www.kns.ru/product/kuler-deepcool-ag200/",
+      "price": 908.0,
+      "currency": "RUB",
+      "date": "2026-11-04",
+      "store": "KNS",
+      "availability": "in-stock"
+    },
+    "ag300": {
+      "id": "ag300",
+      "title": "Кулер Deepcool AG300",
+      "url": "https://www.kns.ru/product/kuler-deepcool-ag300/",
+      "price": 990.0,
+      "currency": "RUB",
+      "date": "2026-11-04",
+      "store": "KNS",
+      "availability": "in-stock"
+    },
+    "pf450": {
+      "id": "pf450",
+      "title": "Блок питания Deepcool 450W PF450",
+      "url": "https://www.kns.ru/product/blok-pitaniya-deepcool-450w-pf450/",
+      "price": 3218.0,
+      "currency": "RUB",
+      "date": "2026-11-04",
+      "store": "KNS",
+      "availability": "in-stock"
+    },
+    "pf500": {
+      "id": "pf500",
+      "title": "Блок питания Deepcool 500W PF500",
+      "url": "https://www.kns.ru/product/blok-pitaniya-deepcool-500w-pf500/",
+      "price": 3506.0,
+      "currency": "RUB",
+      "date": "2026-11-04",
+      "store": "KNS",
+      "availability": "in-stock"
+    },
+    "matrexx40": {
+      "id": "matrexx40",
+      "title": "Корпус Deepcool Matrexx 40",
+      "url": "https://www.kns.ru/product/korpus-deepcool-matrexx-40/",
+      "price": 3590.0,
+      "currency": "RUB",
+      "date": "2026-11-04",
+      "store": "KNS",
+      "availability": "out-of-stock",
+      "note": "Последняя цена магазина. Товара нет в наличии; в автосборке не используется."
+    },
+    "matrexx55-mesh": {
+      "id": "matrexx55-mesh",
+      "title": "Корпус Deepcool Matrexx 55 Mesh",
+      "url": "https://www.kns.ru/product/korpus-deepcool-matrexx-55-mesh/",
+      "price": 5486.0,
+      "currency": "RUB",
+      "date": "2026-11-04",
+      "store": "KNS",
+      "availability": "out-of-stock",
+      "note": "Последняя цена магазина. Товара нет в наличии; в автосборке не используется."
+    }
+  }
+}

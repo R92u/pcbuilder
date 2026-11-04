@@ -1044,5 +1044,595 @@ export const verificationRecords={
       "PSU limit 220 мм — максимум страницы, положение корзины HDD и место для кабелей отдельно не проверены.",
       "Два штатных 120мм AirGuide подтверждены; расположение один спереди/один сзади по размерному руководству в этом проходе не проверено."
     ]
+  },
+  "r3-4100": {
+    "checkedAt": "2026-11-04",
+    "sources": [
+      "https://www.amd.com/en/support/downloads/drivers.html/processors/ryzen/ryzen-4000-series/amd-ryzen-3-4100.html"
+    ],
+    "values": {
+      "sku": "100-000000510",
+      "socket": "AM4",
+      "memory": "DDR4",
+      "cores": 4,
+      "threads": 8,
+      "tdp": 65,
+      "tmax": 95,
+      "baseGHz": 3.8,
+      "boostGHz": 4,
+      "cacheMB": 4,
+      "maxRam": 128,
+      "officialMemoryMaxMTs": 3200,
+      "pcieGeneration": 3,
+      "integratedGraphics": false
+    },
+    "assumptions": [
+      "88 Вт — авторский предел мощности в симуляции, не измерение конкретного процессора."
+    ],
+    "limitations": [
+      "Проверка сокета не заменяет список CPU и версию BIOS конкретной платы."
+    ]
+  },
+  "r5-4500": {
+    "checkedAt": "2026-11-04",
+    "sources": [
+      "https://www.amd.com/en/support/downloads/drivers.html/processors/ryzen/ryzen-4000-series/amd-ryzen-5-4500.html"
+    ],
+    "values": {
+      "sku": "100-000000644",
+      "socket": "AM4",
+      "memory": "DDR4",
+      "cores": 6,
+      "threads": 12,
+      "tdp": 65,
+      "tmax": 95,
+      "baseGHz": 3.6,
+      "boostGHz": 4.1,
+      "cacheMB": 8,
+      "maxRam": 128,
+      "officialMemoryMaxMTs": 3200,
+      "pcieGeneration": 3,
+      "integratedGraphics": false
+    },
+    "assumptions": [
+      "88 Вт — авторский предел мощности в симуляции, не измерение конкретного процессора."
+    ],
+    "limitations": [
+      "Проверка сокета не заменяет список CPU и версию BIOS конкретной платы."
+    ]
+  },
+  "a520m-a-pro": {
+    "checkedAt": "2026-11-04",
+    "sources": [
+      "https://www.msi.com/Motherboard/A520M-A-PRO/Specification"
+    ],
+    "values": {
+      "socket": "AM4",
+      "chipset": "AMD A520",
+      "memory": "DDR4",
+      "form": "Micro-ATX",
+      "slots": 2,
+      "maxRam": 64,
+      "m2": true,
+      "m2Slots": 1,
+      "sataPorts": 4,
+      "epsConnectors": 1,
+      "cpuPowerPinCounts": [
+        4
+      ],
+      "usbCHeader": false,
+      "systemFanHeaders": 1,
+      "dimensions": [
+        236,
+        200
+      ],
+      "ports": [
+        {
+          "type": "usbA",
+          "count": 4,
+          "label": "USB 3.2 Gen 1 Type-A",
+          "location": "rear"
+        },
+        {
+          "type": "usb2",
+          "count": 2,
+          "label": "USB 2.0 Type-A",
+          "location": "rear"
+        },
+        {
+          "type": "hdmi",
+          "count": 1,
+          "label": "HDMI",
+          "location": "rear"
+        },
+        {
+          "type": "dvi",
+          "count": 1,
+          "label": "DVI",
+          "location": "rear"
+        },
+        {
+          "type": "ethernet",
+          "count": 1,
+          "label": "LAN 1 Гбит/с",
+          "location": "rear"
+        },
+        {
+          "type": "audio",
+          "count": 3,
+          "label": "Аудио 3,5 мм",
+          "location": "rear"
+        },
+        {
+          "type": "ps2",
+          "count": 1,
+          "label": "PS/2 клавиатура / мышь",
+          "location": "rear"
+        }
+      ],
+      "lan": "1 Гбит/с",
+      "wifi": false,
+      "biosNote": "Перед покупкой сверь процессор и версию BIOS со списком поддержки MSI."
+    },
+    "assumptions": [],
+    "limitations": [
+      "Расположение портов в 3D схематическое. Списки CPU/QVL и версии BIOS не проверяются автоматически."
+    ]
+  },
+  "h610m-e-ddr4": {
+    "checkedAt": "2026-11-04",
+    "sources": [
+      "https://www.msi.com/Motherboard/PRO-H610M-E-DDR4/Specification"
+    ],
+    "values": {
+      "socket": "LGA1700",
+      "chipset": "Intel H610",
+      "memory": "DDR4",
+      "form": "Micro-ATX",
+      "slots": 2,
+      "maxRam": 64,
+      "m2": true,
+      "m2Slots": 1,
+      "sataPorts": 4,
+      "epsConnectors": 1,
+      "cpuPowerPinCounts": [
+        8
+      ],
+      "usbCHeader": false,
+      "systemFanHeaders": 2,
+      "dimensions": [
+        236,
+        200
+      ],
+      "ports": [
+        {
+          "type": "usbA",
+          "count": 2,
+          "label": "USB 3.2 Gen 1 Type-A",
+          "location": "rear"
+        },
+        {
+          "type": "usb2",
+          "count": 4,
+          "label": "USB 2.0 Type-A",
+          "location": "rear"
+        },
+        {
+          "type": "hdmi",
+          "count": 1,
+          "label": "HDMI",
+          "location": "rear"
+        },
+        {
+          "type": "vga",
+          "count": 1,
+          "label": "VGA",
+          "location": "rear"
+        },
+        {
+          "type": "ethernet",
+          "count": 1,
+          "label": "LAN 1 Гбит/с",
+          "location": "rear"
+        },
+        {
+          "type": "audio",
+          "count": 3,
+          "label": "Аудио 3,5 мм",
+          "location": "rear"
+        },
+        {
+          "type": "ps2",
+          "count": 1,
+          "label": "PS/2 клавиатура / мышь",
+          "location": "rear"
+        }
+      ],
+      "lan": "1 Гбит/с",
+      "wifi": false,
+      "biosNote": "Перед покупкой сверь процессор и версию BIOS со списком поддержки MSI."
+    },
+    "assumptions": [],
+    "limitations": [
+      "Расположение портов в 3D схематическое. Списки CPU/QVL и версии BIOS не проверяются автоматически."
+    ]
+  },
+  "gt1030-aero-oc": {
+    "checkedAt": "2026-11-04",
+    "sources": [
+      "https://www.msi.com/Graphics-Card/GeForce-GT-1030-AERO-ITX-2G-OC/Specification"
+    ],
+    "values": {
+      "vram": 2,
+      "vramType": "GDDR5",
+      "length": 147,
+      "width": 102,
+      "thickness": 38,
+      "dimensions": [
+        147,
+        102,
+        38
+      ],
+      "power": 30,
+      "recommendedPsu": 300,
+      "connectorType": "none",
+      "connectors": 0,
+      "fans": 1,
+      "boostMHz": 1518,
+      "busBits": 64,
+      "cudaCores": 384,
+      "ports": [
+        "1 × HDMI 2.0b",
+        "1 × SL-DVI-D"
+      ]
+    },
+    "assumptions": [
+      "90 °C — условный предел симуляции; тепловые коэффициенты и относительный вес автоподбора не являются тестами производительности."
+    ],
+    "limitations": []
+  },
+  "gtx1650-d6-ventus-xs-oc": {
+    "checkedAt": "2026-11-04",
+    "sources": [
+      "https://www.msi.com/Graphics-Card/GeForce-GTX-1650-D6-VENTUS-XS-OC/Specification"
+    ],
+    "values": {
+      "vram": 4,
+      "vramType": "GDDR6",
+      "length": 178,
+      "width": 111,
+      "thickness": 38,
+      "dimensions": [
+        178,
+        111,
+        38
+      ],
+      "power": 75,
+      "recommendedPsu": 300,
+      "connectorType": "none",
+      "connectors": 0,
+      "fans": 2,
+      "boostMHz": 1620,
+      "busBits": 128,
+      "cudaCores": 896,
+      "ports": [
+        "1 × DisplayPort 1.4a",
+        "1 × HDMI 2.0b",
+        "1 × DL-DVI-D"
+      ]
+    },
+    "assumptions": [
+      "90 °C — условный предел симуляции; тепловые коэффициенты и относительный вес автоподбора не являются тестами производительности."
+    ],
+    "limitations": []
+  },
+  "patriot-8-3200": {
+    "checkedAt": "2026-11-04",
+    "sources": [
+      "https://assets.website-files.com/62d47b34a77cc16dd813922c/62d47b35a77cc10ca4139891_PSD48G320081%20Sku%20Sheet_042220%20Copyable.pdf"
+    ],
+    "values": {
+      "sku": "PSD48G320081",
+      "memory": "DDR4",
+      "capacity": 8,
+      "modules": 1,
+      "speed": 3200,
+      "cl": 22,
+      "latency": "22-22-22-52",
+      "voltage": 1.2,
+      "profile": "JEDEC",
+      "height": 31,
+      "dimensions": [
+        133,
+        31,
+        3.2
+      ]
+    },
+    "assumptions": [],
+    "limitations": []
+  },
+  "patriot-16-3200": {
+    "checkedAt": "2026-11-04",
+    "sources": [
+      "https://www.shoprbc.com/images/products/rbc_icecat/_documents_/795/mmo_85959795_1603791722_521_15484.pdf"
+    ],
+    "values": {
+      "sku": "PSD416G320081",
+      "memory": "DDR4",
+      "capacity": 16,
+      "modules": 1,
+      "speed": 3200,
+      "cl": 22,
+      "latency": "22-22-22-52",
+      "voltage": 1.2,
+      "profile": "JEDEC",
+      "height": 31,
+      "dimensions": [
+        133,
+        31,
+        3.2
+      ]
+    },
+    "assumptions": [],
+    "limitations": []
+  },
+  "p300-256": {
+    "checkedAt": "2026-11-04",
+    "sources": [
+      "https://assets-global.website-files.com/62d47b34a77cc14cdd139230/659e48eb94b1373cf9b7a272_Patriot_Product_Sheet_P300.pdf"
+    ],
+    "values": {
+      "sku": "P300P256GM28",
+      "interface": "M.2 NVMe",
+      "form": "M.2 2280",
+      "pcie": "3.0 x4",
+      "pcieGeneration": 3,
+      "pcieLanes": 4,
+      "capacity": 256,
+      "operatingMaxC": 70,
+      "dimensions": [
+        80,
+        22,
+        3.8
+      ]
+    },
+    "assumptions": [
+      "3 Вт — условная активная мощность для учебного нагрева."
+    ],
+    "limitations": [
+      "Документ серии 24Q1a подтверждает SKU/ёмкость/интерфейс/габариты, но таблица скорости относится к 2 ТБ. Скорость и TBW для 256/512 ГБ не экстраполированы."
+    ]
+  },
+  "p300-512": {
+    "checkedAt": "2026-11-04",
+    "sources": [
+      "https://assets-global.website-files.com/62d47b34a77cc14cdd139230/659e48eb94b1373cf9b7a272_Patriot_Product_Sheet_P300.pdf"
+    ],
+    "values": {
+      "sku": "P300P512GM28",
+      "interface": "M.2 NVMe",
+      "form": "M.2 2280",
+      "pcie": "3.0 x4",
+      "pcieGeneration": 3,
+      "pcieLanes": 4,
+      "capacity": 512,
+      "operatingMaxC": 70,
+      "dimensions": [
+        80,
+        22,
+        3.8
+      ]
+    },
+    "assumptions": [
+      "3 Вт — условная активная мощность для учебного нагрева."
+    ],
+    "limitations": [
+      "Документ серии 24Q1a подтверждает SKU/ёмкость/интерфейс/габариты, но таблица скорости относится к 2 ТБ. Скорость и TBW для 256/512 ГБ не экстраполированы."
+    ]
+  },
+  "ag200": {
+    "checkedAt": "2026-11-04",
+    "sources": [
+      "https://www.deepcool.com/products/Cooling/cpuaircoolers/AG200-Single-Tower-CPU-Cooler-1851-1700-AM5/2022/16203.shtml"
+    ],
+    "values": {
+      "sku": "R-AG200-BKNNMN-G",
+      "type": "air",
+      "height": 133,
+      "dimensions": [
+        119,
+        77,
+        133
+      ],
+      "sockets": [
+        "AM4",
+        "AM5",
+        "LGA1700",
+        "LGA1200",
+        "LGA1151",
+        "LGA1150",
+        "LGA1155",
+        "LGA1851"
+      ],
+      "towers": 1,
+      "heatpipes": 2,
+      "fans": 1,
+      "fanSizeMm": 92,
+      "minRpm": 500,
+      "maxRpm": 3050,
+      "fanAirflowCFM": 36.75
+    },
+    "assumptions": [
+      "efficiency=0.95 — условный коэффициент учебной модели."
+    ],
+    "limitations": [
+      "Зазор с памятью не подтверждён числом; требуется проверка по месту."
+    ]
+  },
+  "ag300": {
+    "checkedAt": "2026-11-04",
+    "sources": [
+      "https://www.deepcool.com/products/Cooling/cpuaircoolers/AG300-Single-Tower-CPU-Cooler-1700-AM5/2022/16202.shtml"
+    ],
+    "values": {
+      "sku": "R-AG300-BKNNMN-G",
+      "type": "air",
+      "height": 129,
+      "dimensions": [
+        119,
+        77,
+        129
+      ],
+      "sockets": [
+        "AM4",
+        "AM5",
+        "LGA1700",
+        "LGA1200",
+        "LGA1151",
+        "LGA1150",
+        "LGA1155"
+      ],
+      "towers": 1,
+      "heatpipes": 3,
+      "fans": 1,
+      "fanSizeMm": 92,
+      "minRpm": 500,
+      "maxRpm": 3050,
+      "fanAirflowCFM": 36.75
+    },
+    "assumptions": [
+      "efficiency=1.0 — условный коэффициент учебной модели."
+    ],
+    "limitations": [
+      "Зазор с памятью не подтверждён числом; требуется проверка по месту."
+    ]
+  },
+  "pf450": {
+    "checkedAt": "2026-11-04",
+    "sources": [
+      "https://www.deepcool.com/products/PowerSupplyUnits/powersupplyunits/PF450D-230V-Power-Supply-Unit/2021/15141.shtml"
+    ],
+    "values": {
+      "sku": "R-PF450D-HA0B-EU",
+      "watts": 450,
+      "length": 140,
+      "dimensions": [
+        150,
+        140,
+        86
+      ],
+      "form": "ATX",
+      "modular": false,
+      "certification": "80 PLUS 230V EU White",
+      "connectors": 2,
+      "epsConnectors": 1,
+      "connector16pin": false,
+      "sataConnectors": 6,
+      "pcieCableCount": 1,
+      "fanSizeMm": 120
+    },
+    "assumptions": [],
+    "limitations": []
+  },
+  "pf500": {
+    "checkedAt": "2026-11-04",
+    "sources": [
+      "https://www.deepcool.com/products/PowerSupplyUnits/powersupplyunits/PF500D-230V-Power-Supply-Unit/2021/15140.shtml"
+    ],
+    "values": {
+      "sku": "R-PF500D-HA0B-EU",
+      "watts": 500,
+      "length": 140,
+      "dimensions": [
+        150,
+        140,
+        86
+      ],
+      "form": "ATX",
+      "modular": false,
+      "certification": "80 PLUS 230V EU White",
+      "connectors": 2,
+      "epsConnectors": 1,
+      "connector16pin": false,
+      "sataConnectors": 6,
+      "pcieCableCount": 1,
+      "fanSizeMm": 120
+    },
+    "assumptions": [],
+    "limitations": []
+  },
+  "matrexx40": {
+    "checkedAt": "2026-11-04",
+    "sources": [
+      "https://global.deepcool.com/products/Cases/fulltowercases/2021/11876.shtml"
+    ],
+    "values": {
+      "sku": "DP-MATX-MATREXX40",
+      "color": "black",
+      "forms": [
+        "Micro-ATX",
+        "Mini-ITX"
+      ],
+      "gpuLimit": 320,
+      "coolerLimit": 165,
+      "psuLimit": 160,
+      "dimensions": [
+        400,
+        215,
+        431
+      ],
+      "frontFanMounts": 3,
+      "frontFanCount": 0,
+      "rearFanCount": 1,
+      "topFanCount": 0,
+      "fanSizeMm": 120,
+      "expansionSlots": 4,
+      "usbA": 1,
+      "usb2": 1,
+      "usbC": 0,
+      "audio": "Комбинированный 3,5 мм"
+    },
+    "assumptions": [],
+    "limitations": [
+      "Радиаторы: MATREXX 40 — 240 мм сверху/спереди; MATREXX 55 MESH — 240 мм сверху, 240/360 мм спереди. Толщину и зазоры нужно сверять отдельно."
+    ]
+  },
+  "matrexx55-mesh": {
+    "checkedAt": "2026-11-04",
+    "sources": [
+      "https://www.deepcool.com/products/Cases/Matrexx-55-Mesh-Mid-Tower-ATX-Case/2021/4655.shtml",
+      "https://www.kns.ru/product/korpus-deepcool-matrexx-55-mesh/"
+    ],
+    "values": {
+      "sku": "DP-ATX-MATREXX55-MESH",
+      "color": "black",
+      "forms": [
+        "ATX",
+        "Micro-ATX",
+        "Mini-ITX"
+      ],
+      "gpuLimit": 380,
+      "coolerLimit": 160,
+      "psuLimit": 170,
+      "dimensions": [
+        460,
+        215,
+        480
+      ],
+      "frontFanMounts": 3,
+      "frontFanCount": 0,
+      "rearFanCount": 0,
+      "topFanCount": 0,
+      "fanSizeMm": 120,
+      "expansionSlots": 7,
+      "usbA": 1,
+      "usb2": 2,
+      "usbC": 0,
+      "audio": "2 × 3,5 мм"
+    },
+    "assumptions": [],
+    "limitations": [
+      "Радиаторы: MATREXX 40 — 240 мм сверху/спереди; MATREXX 55 MESH — 240 мм сверху, 240/360 мм спереди. Толщину и зазоры нужно сверять отдельно."
+    ]
   }
 };

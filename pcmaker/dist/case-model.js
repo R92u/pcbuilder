@@ -60,8 +60,10 @@ export function makeChassis(p={id:'cc560',short:'CC560 V2',frontFanCount:3,usbA:
  for(let i=0;i<7;i++){
   const cover=new THREE.Group(),y=2.38-i*.18;cover.userData.slotCenter=y;cover.userData.animated=true;g.add(cover);this.slotCovers.push(cover);
   this.box(cover,1.64,.18,.04,.07,y,rear-.045,white?0xabb3b7:0x41494b);
-  for(let j=0;j<10;j++)this.box(cover,.045,.045,.009,-.46+j*.11,y,rear-.072,0x11181b);
-  this.screw(cover,.84,y,rear-.085,'z',.022);
+  if(i<(p.expansionSlots||7)){
+   for(let j=0;j<10;j++)this.box(cover,.045,.045,.009,-.46+j*.11,y,rear-.072,0x11181b);
+   this.screw(cover,.84,y,rear-.085,'z',.022);
+  }
  }
 
  const fascia=new THREE.Group();g.add(fascia);if(p.concept)this.makeConceptFront(fascia,p);else this.makeCaseFront(fascia,p);fascia.position.z=front-2.1;fascia.scale.x=(width-.10)/2.20;fascia.position.x=centerX;
@@ -81,14 +83,14 @@ export function makeChassis(p={id:'cc560',short:'CC560 V2',frontFanCount:3,usbA:
  this.box(g,1.88,.032,.43,0,4.679,frame.ioZ,black);
  for(const id of ['usb3',...(p.usb2?['usb2']:[]),...(p.usbC?['usbC']:[]),'audio','panel'])this.box(g,.13,.065,.09,...frontIOPosition(p,frame,id),0x161e21);
  // Each front I/O has its own mounting position (two USB-A never share USB-C).
- const usbX=[-.70,-.36],usbCount=(p.usbA??1)+(p.usb2??0);
+ const usbCount=(p.usbA??1)+(p.usb2??0),usbX=usbCount>2?[-.75,-.45,-.15]:[-.70,-.36];
  for(let i=0;i<usbCount;i++){
   const x=usbX[i],col=i<(p.usbA??1)?0x2b73ae:0x252d30;
   this.box(g,.19,.018,.105,x,4.71,frame.ioZ,0x919b9f);this.box(g,.15,.021,.076,x,4.72,frame.ioZ,0x060a0c);this.box(g,.127,.022,.020,x,4.727,frame.ioZ+.021,col);
   this.text(g,i<(p.usbA??1)?'USB 3':'USB 2',.26,.05,x,4.704,frame.ioZ-.15,[-Math.PI/2,0,0],white?'#30393b':'#9aa8af');
  }
  if(p.usbC){const x=usbCount>1?-.03:-.36;this.box(g,.115,.018,.06,x,4.71,frame.ioZ,0x8b989f);this.box(g,.083,.024,.037,x,4.717,frame.ioZ,0x080d0f);this.text(g,'USB-C',.23,.05,x,4.704,frame.ioZ-.15,[-Math.PI/2,0,0]);}
- const audioX=p.audio?.startsWith('2')?[.08,.34]:[.34];
+ const audioX=p.audio?.startsWith('2')?[usbCount>2?.14:.08,.34]:[.34];
  for(const x of audioX){this.cylinder(g,.047,.014,x,4.71,frame.ioZ,0x8d9a9c);this.cylinder(g,.031,.016,x,4.718,frame.ioZ,0x050a0c);}
  this.cylinder(g,.082,.022,.72,4.714,frame.ioZ,white?0x838e93:0x50585b);this.text(g,'⏻',.09,.09,.72,4.728,frame.ioZ,[-Math.PI/2,0,0],'#c0c4c6');
  this.text(g,p.short,.83,.06,side-.049,.46,centerZ,[0,Math.PI/2,0],white?'#343e44':'#929ca2');

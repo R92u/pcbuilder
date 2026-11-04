@@ -21,7 +21,7 @@ export function filterProducts(products,filters,build,prices){
   const rangeCurrency=filters.currency||filters.regionCurrency||'RUB';
   return (filters.category==='all'||p.category===filters.category)&&
    (!query||`${p.name} ${p.detail} ${p.sku||''} ${p.color||''}`.toLocaleLowerCase('ru').includes(query))&&
-   (!filters.brand||manufacturer(p)===filters.brand)&&(!filters.color||p.colors?.includes(filters.color))&&
+   (!filters.budget||p.budgetTier)&&(!filters.brand||manufacturer(p)===filters.brand)&&(!filters.color||p.colors?.includes(filters.color))&&
    (!filters.memory||[p.memory].flat().includes(filters.memory))&&(!filters.socket||p.socket===filters.socket)&&
    (!filters.currency||(Number.isFinite(price)&&currency===filters.currency))&&((filters.min===''&&filters.max==='')||currency===rangeCurrency)&&
    (!filters.priced||priceQuality(prices[p.id]).status==='fresh')&&(!filters.verified||(p.kind==='peripheral'?p.specsVerified:isVerified(p)))&&
@@ -50,7 +50,7 @@ export function createShop({getBuild,getPrices,getSource,onChoose,beforeOpen,ico
  const products=()=>[...shopProducts,...(peripheral?.products||[])],sections=()=>[...categories,...(peripheral?.categories||[])];
  const title=key=>sections().find(c=>c[0]===key)?.[1]||(peripheral?'Все товары':'Все комплектующие');
  const price=p=>{const item=getPrices().items[p.id];return item&&Number.isFinite(item.price)&&item.price>0?item:null;};
- function filters(){return {category,currency:$('shop-currency')?.value||'',regionCurrency:getPrices().currency||'RUB',color:$('shop-color')?.value||'',query:$('catalog-search').value,brand:$('shop-brand').value,socket:$('shop-socket').value,memory:$('shop-memory').value,min:$('shop-price-min').value,max:$('shop-price-max').value,compatible:$('compatible-only').checked,verified:$('shop-verified-only').checked,priced:$('shop-priced-only').checked,sort:$('shop-sort').value};}
+ function filters(){return {category,budget:$('shop-budget-only')?.checked||false,currency:$('shop-currency')?.value||'',regionCurrency:getPrices().currency||'RUB',color:$('shop-color')?.value||'',query:$('catalog-search').value,brand:$('shop-brand').value,socket:$('shop-socket').value,memory:$('shop-memory').value,min:$('shop-price-min').value,max:$('shop-price-max').value,compatible:$('compatible-only').checked,verified:$('shop-verified-only').checked,priced:$('shop-priced-only').checked,sort:$('shop-sort').value};}
  function photo(p){
   if(p.concept)return `<figure class="shop-photo"><div class="shop-image"><img src="./assets/concepts/${p.concept}.svg" alt="Эскиз ${escape(p.name)}" width="240" height="170" loading="lazy"></div><figcaption>Авторский эскиз · учебный корпус PCmaker</figcaption></figure>`;
   const asset=productImages[p.id];
@@ -83,7 +83,7 @@ export function createShop({getBuild,getPrices,getSource,onChoose,beforeOpen,ico
    if(id!=='shop-brand')$(id).closest('label').hidden=values.length<2;
   }
  }
- function reset(){if($('shop-currency'))$('shop-currency').value='';if($('shop-color'))$('shop-color').value='';for(const id of ['catalog-search','shop-brand','shop-socket','shop-memory','shop-price-min','shop-price-max'])$(id).value='';$('compatible-only').checked=false;$('shop-priced-only').checked=false;$('shop-verified-only').checked=false;$('shop-sort').value='default';render();}
+ function reset(){if($('shop-budget-only'))$('shop-budget-only').checked=false;if($('shop-currency'))$('shop-currency').value='';if($('shop-color'))$('shop-color').value='';for(const id of ['catalog-search','shop-brand','shop-socket','shop-memory','shop-price-min','shop-price-max'])$(id).value='';$('compatible-only').checked=false;$('shop-priced-only').checked=false;$('shop-verified-only').checked=false;$('shop-sort').value='default';render();}
  function selectCategory(key){category=key;$('catalog-title').textContent=title(category);for(const button of dialog.querySelectorAll('[data-shop-category]'))button.setAttribute('aria-pressed',String(button.dataset.shopCategory===key));populateFilters();reset();$('shop-results').scrollTop=0;}
  function renderCategories(){const all=products();$('shop-categories').innerHTML=[['all',peripheral?'Все товары':'Все комплектующие','layers'],...sections().map(([key,name])=>[key,name,key])].map(([key,name,symbol])=>`<button data-shop-category="${key}" aria-pressed="${key===category}">${icon(['monitor','keyboard','mouse'].includes(symbol)?'layers':symbol)}<span>${name}</span><small>${all.filter(p=>key==='all'||p.category===key).length}</small></button>`).join('');}
  renderCategories();
@@ -97,5 +97,6 @@ export function createShop({getBuild,getPrices,getSource,onChoose,beforeOpen,ico
  for(const id of ['catalog-search','shop-price-min','shop-price-max'])$(id).addEventListener('input',render);
  for(const id of ['shop-currency','shop-brand','shop-socket','shop-memory','compatible-only','shop-priced-only','shop-verified-only','shop-sort'])$(id).addEventListener('change',render);
  $('shop-color')?.addEventListener('change',render);
+ $('shop-budget-only')?.addEventListener('change',render);
  return {registerPeripherals(adapter){peripheral=adapter;renderCategories();},open(key='all'){beforeOpen();selectCategory(key);$('shop-announcement').textContent='';if(innerWidth<=640)dialog.querySelector('.shop-filter-group').open=false;dialog.showModal();},refresh(){if(dialog.open)render();}};
 }
