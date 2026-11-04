@@ -184,7 +184,7 @@ export class PCScene {
  resize(){const {width,height}=this.container.getBoundingClientRect();if(!width||!height)return;this.camera.aspect=width/height;this.camera.updateProjectionMatrix();this.renderer.setSize(width,height,false);this.fitCaseView();}
  frame(time){
   if(time-this.last<1000/45){this.raf=requestAnimationFrame(this.frame);return;}
-  const dt=Math.min((time-this.last)/1000||0,.05);this.last=time;if(!this.dragging)this.controls.update();
+  const dt=Math.min((time-this.last)/1000||0,.05);this.last=time;if(!this.dragging&&!this.externalCables?.drag)this.controls.update();
   for(const f of this.fans){const fraction=f.mountId?(f.direction==='in'?this.settings.front:this.settings.rear)/100:f.kind==='front'?this.settings.front/100:f.kind==='rear'?this.settings.rear/100:f.kind==='cpu'?this.settings.cpuFan/100:(this.settings.gpuFan??60)/100;f.rotor.rotation.z-=dt*(this.running?fraction*12:0);}
   this.transitions=this.transitions.filter(t=>{const p=Math.min((time-t.start)/650,1);t.group.position.x=.65*(1-p)**3;return p<1;});
   if(this.airflow)this.updateFanFlows(dt);

@@ -1,3 +1,4 @@
+import {connectorType} from './peripheral-connections.js';
 import {makeAIO} from './aio-model.js';
 import * as THREE from 'three';
 import {hardwareFinish} from './surfaces.js';
@@ -135,7 +136,9 @@ export const modelMethods={
   }
   this.box(g,.035,.07,.025,x+.035,y,z+h/2,steel);
  },
+ externalAnchor(g,type,x,y,z=-2.20){const protocol=connectorType(type);if(!protocol)return;const anchor=new THREE.Object3D();anchor.position.set(x,y,z);anchor.userData.externalPort=protocol;g.add(anchor);return anchor;},
  rearPort(g,type,x,y,width=.20,height=.12,color=0x19252d,label=''){
+  this.externalAnchor(g,label||type,x,y);
   const z=-2.145;
   if(type==='round'){
    const ring=new THREE.Mesh(new THREE.TorusGeometry(width/2,.014,8,20),material(color,.65,.32));ring.position.set(x,y,z-.022);g.add(ring);
@@ -182,7 +185,7 @@ export const modelMethods={
   const x=-.64;
   if(p.ports?.length){
    const entries=p.ports.filter(port=>typeof port==='object'&&port.location==='rear'),rows=Math.ceil(entries.reduce((n,port)=>n+(port.count||1),0)/2),spacing=Math.min(.20,1.70/Math.max(1,rows-1));let index=0;
-   for(const port of entries)for(let n=0;n<(port.count||1);n++){const xx=x+(index%2-.5)*.24,yy=4.20-Math.floor(index/2)*spacing;index++;const type=/audio|jack|antenna|wifi|ps2/i.test(port.type)?'round':/lan|ethernet|rj45/i.test(port.type)?'lan':/hdmi|display|dp|vga/i.test(port.type)?'video':'usb';this.rearPort(g,type,xx,yy,type==='round'?.07:port.type==='spdif'?.09:.17,type==='lan'?.13:.065,0x43535e);}
+   for(const port of entries)for(let n=0;n<(port.count||1);n++){const xx=x+(index%2-.5)*.24,yy=4.20-Math.floor(index/2)*spacing;index++;const type=/audio|jack|antenna|wifi|ps2/i.test(port.type)?'round':/lan|ethernet|rj45/i.test(port.type)?'lan':/hdmi|display|dp|vga|dvi/i.test(port.type)?'video':'usb';this.rearPort(g,type,xx,yy,type==='round'?.07:port.type==='spdif'?.09:.17,type==='lan'?.13:.065,0x43535e,port.type); }
    return;
   }
   if(p.id==='b550')this.rearPort(g,'round',x,4.21,.13,.13,0x75638f,'PS/2');

@@ -1,0 +1,29 @@
+{
+  "checkedAt": "2026-11-04",
+  "scope": "Учебные подключения периферии: подтверждённые способы, тип видеосигнала, занятость порта. Это не полный перечень возможностей устройства.",
+  "catalogEvidence": "Для остальных моделей используются поля подключения и портов существующего каталога peripherals-brands-data.js / peripherals.js и их specsSource.",
+  "overrides": [
+    {"models": ["Logitech G309"], "modes": ["receiver", "bluetooth"], "source": "https://www.logitechg.com/en-us/shop/p/g309-lightspeed-gaming-mouse"},
+    {"models": ["Logitech G515 TKL"], "modes": ["usb", "receiver", "bluetooth"], "source": "https://news.logitech.com/press-releases/news-details/2024/Introducing-Logitechs-G515--A-Next-Generation-Low-Profile-Keyboard-for-High-Performance-Gaming/default.aspx"},
+    {"models": ["Logitech G915 X TKL"], "modes": ["usb", "receiver", "bluetooth"], "source": "https://www.logitechg.com/en-us/shop/p/g915-x-tkl-wireless"},
+    {"models": ["Logitech PRO X 60"], "modes": ["usb", "receiver", "bluetooth"], "source": "https://www.logitechg.com/en-us/shop/p/pro-x-60-wireless-keyboard"},
+    {"models": ["Logitech PRO X TKL"], "modes": ["usb", "receiver", "bluetooth"], "source": "https://news.logitech.com/press-releases/news-details/2023/Logitech-G-Takes-Esports-Performance-to-New-Levels-With-New-PRO-Series-Gear/default.aspx"},
+    {"models": ["Logitech G903"], "modes": ["usb", "receiver"], "source": "https://www.logitech.com/assets/65260/3/g903-lightspeed-wireless-gaming-mouse.pdf"},
+    {"models": ["Logitech G502 LIGHTSPEED"], "modes": ["usb", "receiver"], "source": "https://www.logitech.com/assets/65648/3/g502-lightspeed.pdf"},
+    {"models": ["Logitech G502 X LIGHTSPEED"], "modes": ["usb", "receiver"], "source": "https://www.logitech.com/assets/66193/g502-x-artanis-web-qsg.pdf"},
+    {"models": ["Logitech PRO X SUPERLIGHT 2"], "modes": ["usb", "receiver"], "source": "https://www.logitech.com/assets/66332/logitech-g-pro-x-superlight-2-lightspeed-gaming-mouse.pdf"},
+    {"models": ["Logitech PRO 2 LIGHTSPEED"], "modes": ["usb", "receiver"], "source": "https://www.logitech.com/assets/70209/pro_2_lightspeed_qsg_amr.pdf"},
+    {"models": ["Logitech PRO X SUPERLIGHT 2 DEX"], "modes": ["receiver"], "source": "https://www.logitechg.com/en-us/shop/p/pro-x-superlight-2-dex", "note": "USB-режим пока не включён: отдельное подтверждение передачи данных не зафиксировано в этом исследовании."},
+    {"models": ["Logitech PRO X SUPERLIGHT 2 SE"], "modes": ["receiver"], "source": "https://www.logitechg.com/en-us/shop/p/pro-x-superlight-2-se", "note": "USB-режим пока не включён: отдельное подтверждение передачи данных не зафиксировано в этом исследовании."},
+    {"models": ["Razer DeathStalker V2 Pro"], "modes": ["usb", "receiver", "bluetooth"], "source": "https://dl.razerzone.com/master-guides/RazerSynapse3/DEATHSTALKERV2PRO-00000658-en.pdf"},
+    {"models": ["Razer DeathAdder V2 X HyperSpeed"], "modes": ["receiver", "bluetooth"], "source": "https://dl.razerzone.com/master-guides/RazerSynapse3/DEATHADDERV2XHYPERSPEED-00000156-en.pdf"},
+    {"models": ["Razer DeathAdder V3 Pro"], "modes": ["usb", "receiver"], "source": "https://dl.razerzone.com/master-guides/RazerSynapse3/DEATHADDERV3PRO-00000182-en.pdf"},
+    {"models": ["Razer Basilisk V3 Pro"], "modes": ["usb", "receiver", "bluetooth"], "source": "https://press.razer.com/product-news/razer-introduces-its-most-advanced-mouse-to-date-the-razer-basilisk-v3-pro/"},
+    {"models": ["Razer Orochi V2"], "modes": ["receiver", "bluetooth"], "source": "https://dl.razerzone.com/master-guides/RazerSynapse3/OROCHIV2-00000148-en.pdf"}
+  ],
+  "motherboardEvidence": [
+    {"id": "b650", "bluetooth": true, "source": "https://storage-asset.msi.com/datasheet/mb/cn/PRO-B650-S-WIFI.pdf"},
+    {"id": "b550", "bluetooth": false, "source": "https://us.msi.com/Motherboard/B550-A-PRO/Specification"}
+  ],
+  "limitations": ["Нет подключения к реальным USB/Bluetooth-устройствам браузера.", "USB-C Alt Mode, переходники, ограничения частоты/разрешения монитора и электропитание не моделируются.", "Один приёмник занимает один USB-A порт; совместное использование приёмников несколькими устройствами не моделируется.", "Геометрия разъёмов схематична, путь кабеля редактируется на плоскости стола."]
+}

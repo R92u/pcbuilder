@@ -107,6 +107,7 @@ function addVideoPorts(g,p,top){
  for(const type of ports){
   const width=type==='DVI'?.43:.22;
   if(type==='DVI'){
+   this.externalAnchor(g,'DVI',x+width/2,top-.205,-2.23);
    this.box(g,width,.15,.045,x+width/2,top-.205,-2.168,0xb4b9b8);
    this.box(g,width-.075,.105,.048,x+width/2,top-.205,-2.194,0x182024);
    for(let r=0;r<3;r++)for(let c=0;c<8;c++)this.box(g,.014,.014,.008,x+.075+c*.033,top-.24+r*.035,-2.222,0x918b67);
