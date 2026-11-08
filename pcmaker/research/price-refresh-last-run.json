@@ -1,0 +1,14 @@
+{
+  "checkedAt": "2026-11-08T07:31:48.782Z",
+  "attempted": 21,
+  "updated": 21,
+  "failed": 0,
+  "sources": {
+    "lifebook-shop.ru": {
+      "attempted": 21,
+      "updated": 21,
+      "failed": 0,
+      "reasons": {}
+    }
+  }
+}

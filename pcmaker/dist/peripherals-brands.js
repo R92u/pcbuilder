@@ -2,6 +2,7 @@ import {peripheralOfferUpdates} from './foreign-prices.js';
 import {selectRegionalOffer,priceTotals} from './money.js';
 import {brandPeripherals} from './peripherals-brands-data.js';
 import {priceQuality} from './price-quality.js';
+import {updatedOffers} from './live-price-data.js';
 import {extraPeripherals} from './peripherals-extra.js?v=expanded-20261102';
 
 // Dimensions are [width, depth, height] in millimetres. Prices are dated
@@ -26,10 +27,11 @@ export const peripherals=[
 peripherals.push(...extraPeripherals,...brandPeripherals);
 for(const p of peripherals)p.offers={...p.offers,...peripheralOfferUpdates[p.id]};
 export const peripheralById=Object.fromEntries(peripherals.map(p=>[p.id,p]));
+export const offersForPeripheral=p=>updatedOffers(p.id,p.offers);
 export const defaultWorkplace={monitor:'a27i',keyboard:'fizz',mouse:'griffin'};
 export function sanitizeWorkplace(input){return Object.fromEntries(Object.keys(peripheralCategories).map(key=>[key,peripheralById[input?.[key]]?.category===key?input[key]:defaultWorkplace[key]]));}
 export function peripheralQuote(selection,region='ru',now=Date.now()){
- const items=Object.values(sanitizeWorkplace(selection)).map(id=>{const p=peripheralById[id],offer=selectRegionalOffer(p.offers,region,now),quality=priceQuality(offer,now);return {product:p,offer,quality,priced:!!offer&&quality.status!=='invalid'};});
+ const items=Object.values(sanitizeWorkplace(selection)).map(id=>{const p=peripheralById[id],offer=selectRegionalOffer(updatedOffers(p.id,p.offers,undefined,now),region,now),quality=priceQuality(offer,now);return {product:p,offer,quality,priced:!!offer&&quality.status!=='invalid'};});
  const totals=priceTotals(items.filter(i=>i.priced).map(i=>i.offer),region==='by'?'BYN':'RUB');
  return {items,totals,total:(totals.RUB||0)+(totals.BYN||0),priced:items.filter(i=>i.priced).length,complete:items.every(i=>i.priced),purchasable:items.every(i=>i.priced&&i.quality.status==='fresh'&&i.offer.kind==='store'&&i.offer.availability==='in-stock')};
 }

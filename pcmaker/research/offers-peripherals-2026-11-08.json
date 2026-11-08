@@ -1,0 +1,512 @@
+{
+  "checkedAt": "2026-11-08",
+  "offers": [
+    {
+      "id": "razer-rz01-04000100-r3m1",
+      "region": "by",
+      "price": 195.0,
+      "currency": "BYN",
+      "date": "2026-11-08",
+      "store": "5 элемент",
+      "kind": "store",
+      "availability": "in-stock",
+      "url": "https://5element.by/products/779125-mysh-razer-basilisk-v3-rz01-04000100-r3m1",
+      "evidence": "Прямая карточка 5element.by, HTTP GET 2026-11-08. Product.name: Мышь Razer Basilisk V3 (RZ01-04000100-R3M1). data-article: RZ01-04000100-R3M1; артикул каталога: RZ01-04000100-R3M1. JSON-LD offers.price=195.00, priceCurrency=BYN, availability=https://schema.org/InStock. Цвет на странице: Черный Длина мыши 130 мм Гарантийное обслуживание Гарантия 1 год Страна про."
+    },
+    {
+      "id": "razer-rz01-04910100-r3m1",
+      "region": "by",
+      "price": 265.0,
+      "currency": "BYN",
+      "date": "2026-11-08",
+      "store": "5 элемент",
+      "kind": "store",
+      "availability": "in-stock",
+      "url": "https://5element.by/products/815149-besprovodnaya-mysh-razer-viper-v3-hyperspeed-chernyy-rz01-04910100-r3m1",
+      "evidence": "Прямая карточка 5element.by, HTTP GET 2026-11-08. Product.name: Беспроводная мышь RAZER Viper V3 HyperSpeed (черный) RZ01-04910100-R3M1. data-article: RZ01-04910100-R3M1; артикул каталога: RZ01-04910100-R3M1. JSON-LD offers.price=265.00, priceCurrency=BYN, availability=https://schema.org/InStock. Цвет на странице: Черный Длина мыши 127.1 мм Гарантийное обслуживание Гарантия 1 год Страна п."
+    },
+    {
+      "id": "razer-rz01-04640100-r3m1",
+      "region": "by",
+      "price": 245.0,
+      "currency": "BYN",
+      "date": "2026-11-08",
+      "store": "5 элемент",
+      "kind": "store",
+      "availability": "in-stock",
+      "url": "https://5element.by/products/786276-igrovaya-mysh-razer-deathadder-v3-rz01-04640100-r3m",
+      "evidence": "Прямая карточка 5element.by, HTTP GET 2026-11-08. Product.name: Игровая мышь Razer Deathadder V3 (RZ01-04640100-R3M). data-article: RZ01-04640100-R3M1; артикул каталога: RZ01-04640100-R3M1. JSON-LD offers.price=245.00, priceCurrency=BYN, availability=https://schema.org/InStock. Цвет на странице: Черный Длина мыши 128 мм Гарантийное обслуживание Гарантия 1 год Страна про."
+    },
+    {
+      "id": "razer-rz01-04130100-r3c1",
+      "region": "by",
+      "price": 165.0,
+      "currency": "BYN",
+      "date": "2026-11-08",
+      "store": "5 элемент",
+      "kind": "store",
+      "availability": "in-stock",
+      "url": "https://5element.by/products/799720-mysh-razer-deathadder-v2-x-hyperspeed-rz01-04130100-r3c1",
+      "evidence": "Прямая карточка 5element.by, HTTP GET 2026-11-08. Product.name: Мышь Razer DeathAdder V2 X HyperSpeed (RZ01-04130100-R3C1). data-article: RZ01-04130100-R3C1 черный; артикул каталога: RZ01-04130100-R3C1. JSON-LD offers.price=165.00, priceCurrency=BYN, availability=https://schema.org/InStock. Цвет на странице: Черный Длина мыши 127 мм Гарантийное обслуживание Гарантия 1 год Страна про."
+    },
+    {
+      "id": "razer-rz01-04630200-r3a1",
+      "region": "by",
+      "price": 378.0,
+      "currency": "BYN",
+      "date": "2026-11-08",
+      "store": "5 элемент",
+      "kind": "store",
+      "availability": "in-stock",
+      "url": "https://5element.by/products/rz01-04630200-r3a1-deathadder-v3-pro-belyy-mysh-razer",
+      "evidence": "Прямая карточка 5element.by, HTTP GET 2026-11-08. Product.name: Игровая мышь Razer Deathadder V3 Pro Mercury White. data-article: RZ01-04630200-R3A1; артикул каталога: RZ01-04630200-R3A1. JSON-LD offers.price=378.00, priceCurrency=BYN, availability=https://schema.org/InStock. Цвет на странице: Белый Длина мыши 128 мм Гарантийное обслуживание Гарантия 1 год Страна прои."
+    },
+    {
+      "id": "razer-rz01-03850100-r3c1",
+      "region": "by",
+      "price": 65.0,
+      "currency": "BYN",
+      "date": "2026-11-08",
+      "store": "5 элемент",
+      "kind": "store",
+      "availability": "in-stock",
+      "url": "https://5element.by/products/855590-mysh-razer-deathadder-essential-rz01-03850100-r3c1",
+      "evidence": "Прямая карточка 5element.by, HTTP GET 2026-11-08. Product.name: Мышь Razer DeathAdder Essential (RZ01-03850100-R3C1). data-article: RZ01-03850100-R3C1; артикул каталога: RZ01-03850100-R3C1. JSON-LD offers.price=65.00, priceCurrency=BYN, availability=https://schema.org/InStock. Цвет на странице: Черный Длина мыши 125.7 мм Гарантийное обслуживание Гарантия 1 год Страна п."
+    },
+    {
+      "id": "razer-rz01-03850200-r3c1",
+      "region": "by",
+      "price": 65.0,
+      "currency": "BYN",
+      "date": "2026-11-08",
+      "store": "5 элемент",
+      "kind": "store",
+      "availability": "in-stock",
+      "url": "https://5element.by/products/855591-mysh-razer-deathadder-essential-white-rz01-03850200-r3c1",
+      "evidence": "Прямая карточка 5element.by, HTTP GET 2026-11-08. Product.name: Мышь Razer DeathAdder Essential White (RZ01-03850200-R3C1). data-article: RZ01-03850200-R3C1; артикул каталога: RZ01-03850200-R3C1. JSON-LD offers.price=65.00, priceCurrency=BYN, availability=https://schema.org/InStock. Цвет на странице: Белый Длина мыши 127 мм Гарантийное обслуживание Гарантия 1 год Страна прои."
+    },
+    {
+      "id": "ryze",
+      "region": "by",
+      "price": 129.0,
+      "currency": "BYN",
+      "date": "2026-11-08",
+      "store": "5 элемент",
+      "kind": "store",
+      "availability": "in-stock",
+      "url": "https://5element.by/products/893016-provodnaya-igrovaya-klaviatura-redragon-ryze-71342-krasnye-svichi",
+      "evidence": "Прямая карточка 5element.by, HTTP GET 2026-11-08. Product.name: Проводная игровая клавиатура REDRAGON Ryze (71342) красные свичи. data-article: 71342; артикул каталога: 71342. JSON-LD offers.price=129.00, priceCurrency=BYN, availability=https://schema.org/InStock. Цвет на странице: Черный Дополнительные свойства клавиатуры Повышенная износостойкость Характ."
+    },
+    {
+      "id": "shiva",
+      "region": "by",
+      "price": 95.0,
+      "currency": "BYN",
+      "date": "2026-11-08",
+      "store": "5 элемент",
+      "kind": "store",
+      "availability": "in-stock",
+      "url": "https://5element.by/products/892331-klaviatura-redragon-shiva",
+      "evidence": "Прямая карточка 5element.by, HTTP GET 2026-11-08. Product.name: Клавиатура Redragon Shiva. data-article: 77689; артикул каталога: 77689. JSON-LD offers.price=95.00, priceCurrency=BYN, availability=https://schema.org/InStock. Цвет на странице: Черный Характеристики мыши Колесо прокрутки мыши Нет Цвет мыши Черный Гаран."
+    },
+    {
+      "id": "lakshmi",
+      "region": "by",
+      "price": 75.0,
+      "currency": "BYN",
+      "date": "2026-11-08",
+      "store": "5 элемент",
+      "kind": "store",
+      "availability": "in-stock",
+      "url": "https://5element.by/products/892220-klaviatura-redragon-lakshmi",
+      "evidence": "Прямая карточка 5element.by, HTTP GET 2026-11-08. Product.name: Клавиатура Redragon Lakshmi. data-article: 78119; артикул каталога: 78119. JSON-LD offers.price=75.00, priceCurrency=BYN, availability=https://schema.org/InStock. Цвет на странице: Черный Характеристики мыши Колесо прокрутки мыши Нет Цвет мыши Черный Гаран."
+    },
+    {
+      "id": "fizz-white-gray",
+      "region": "by",
+      "price": 95.0,
+      "currency": "BYN",
+      "date": "2026-11-08",
+      "store": "5 элемент",
+      "kind": "store",
+      "availability": "in-stock",
+      "url": "https://5element.by/products/893181-klaviatura-redragon-fizz-seryy-belyy-70675",
+      "evidence": "Прямая карточка 5element.by, HTTP GET 2026-11-08. Product.name: Клавиатура Redragon Fizz (серый/белый) 70675. data-article: 70675; артикул каталога: 70675. JSON-LD offers.price=95.00, priceCurrency=BYN, availability=https://schema.org/InStock. Цвет на странице: Белый, Серый Характеристики мыши Колесо прокрутки мыши Нет Цвет мыши Белый,."
+    },
+    {
+      "id": "anubis-white",
+      "region": "by",
+      "price": 149.0,
+      "currency": "BYN",
+      "date": "2026-11-08",
+      "store": "5 элемент",
+      "kind": "store",
+      "availability": "in-stock",
+      "url": "https://5element.by/products/893177-klaviatura-redragon-anubis-belyy-70506",
+      "evidence": "Прямая карточка 5element.by, HTTP GET 2026-11-08. Product.name: Клавиатура Redragon Anubis (белый) 70506. data-article: 70506; артикул каталога: 70506. JSON-LD offers.price=149.00, priceCurrency=BYN, availability=https://schema.org/InStock. Цвет на странице: Белый Характеристики мыши Цвет мыши Белый Гарантийное обслуживание Гарантия."
+    },
+    {
+      "id": "whisper",
+      "region": "by",
+      "price": 169.0,
+      "currency": "BYN",
+      "date": "2026-11-08",
+      "store": "5 элемент",
+      "kind": "store",
+      "availability": "in-stock",
+      "url": "https://5element.by/products/892760-klaviatura-redragon-whisper",
+      "evidence": "Прямая карточка 5element.by, HTTP GET 2026-11-08. Product.name: Клавиатура Redragon Whisper. data-article: 71964; артикул каталога: 71964. JSON-LD offers.price=169.00, priceCurrency=BYN, availability=https://schema.org/InStock. Цвет на странице: Белый, Оранжевый, Синий Характеристики мыши Колесо прокрутки мыши Нет Цвет ."
+    },
+    {
+      "id": "mitra",
+      "region": "by",
+      "price": 125.0,
+      "currency": "BYN",
+      "date": "2026-11-08",
+      "store": "5 элемент",
+      "kind": "store",
+      "availability": "in-stock",
+      "url": "https://5element.by/products/892340-klaviatura-redragon-mitra-rgb",
+      "evidence": "Прямая карточка 5element.by, HTTP GET 2026-11-08. Product.name: Клавиатура Redragon Mitra RGB. data-article: 75015; артикул каталога: 75015. JSON-LD offers.price=125.00, priceCurrency=BYN, availability=https://schema.org/InStock. Цвет на странице: Черный Дополнительные свойства клавиатуры Повышенная износостойкость Характ."
+    },
+    {
+      "id": "griffin",
+      "region": "by",
+      "price": 54.0,
+      "currency": "BYN",
+      "date": "2026-11-08",
+      "store": "5 элемент",
+      "kind": "store",
+      "availability": "in-stock",
+      "url": "https://5element.by/products/815322-provodnaya-igrovaya-mysh-redragon-griffin-belyy-rgb-7knopok-7200dpi-77836",
+      "evidence": "Прямая карточка 5element.by, HTTP GET 2026-11-08. Product.name: Проводная игровая мышь REDRAGON Griffin белый,RGB,7кнопок,7200dpi (77836). data-article: 77836; артикул каталога: 77836. JSON-LD offers.price=54.00, priceCurrency=BYN, availability=https://schema.org/InStock. Цвет на странице: Белый Длина мыши 127 мм Гарантийное обслуживание Гарантия 18 месяцев Страна."
+    },
+    {
+      "id": "trident",
+      "region": "by",
+      "price": 85.0,
+      "currency": "BYN",
+      "date": "2026-11-08",
+      "store": "5 элемент",
+      "kind": "store",
+      "availability": "in-stock",
+      "url": "https://5element.by/products/818205-igrovaya-mysh-redragon-trident-71864-belyy",
+      "evidence": "Прямая карточка 5element.by, HTTP GET 2026-11-08. Product.name: Игровая мышь Redragon Trident (71864) белый. data-article: 71864; артикул каталога: 71864. JSON-LD offers.price=85.00, priceCurrency=BYN, availability=https://schema.org/InStock. Цвет на странице: Белый Длина мыши 124 мм Гарантийное обслуживание Гарантия 18 месяцев Страна."
+    },
+    {
+      "id": "gainer",
+      "region": "by",
+      "price": 39.9,
+      "currency": "BYN",
+      "date": "2026-11-08",
+      "store": "5 элемент",
+      "kind": "store",
+      "availability": "in-stock",
+      "url": "https://5element.by/products/567529-provodnaya-igrovaya-mysh-redragon-gainer",
+      "evidence": "Прямая карточка 5element.by, HTTP GET 2026-11-08. Product.name: Проводная игровая мышь Redragon Gainer. data-article: 75170; артикул каталога: 75170. JSON-LD offers.price=39.90, priceCurrency=BYN, availability=https://schema.org/InStock. Цвет на странице: Черный Длина мыши 125 мм Гарантийное обслуживание Гарантия 18 месяцев Стран."
+    },
+    {
+      "id": "king",
+      "region": "by",
+      "price": 149.0,
+      "currency": "BYN",
+      "date": "2026-11-08",
+      "store": "5 элемент",
+      "kind": "store",
+      "availability": "in-stock",
+      "url": "https://5element.by/products/818231-besprovodnaya-igrovaya-mysh-redragon-k1ng-4k-pro-72211",
+      "evidence": "Прямая карточка 5element.by, HTTP GET 2026-11-08. Product.name: Беспроводная игровая мышь Redragon K1ng 4K Pro (72211). data-article: 72211; артикул каталога: 72211. JSON-LD offers.price=149.00, priceCurrency=BYN, availability=https://schema.org/InStock. Цвет на странице: Черный Длина мыши 120 мм Гарантийное обслуживание Гарантия 18 месяцев Стран."
+    },
+    {
+      "id": "storm-pro",
+      "region": "by",
+      "price": 99.0,
+      "currency": "BYN",
+      "date": "2026-11-08",
+      "store": "5 элемент",
+      "kind": "store",
+      "availability": "in-stock",
+      "url": "https://5element.by/products/729572-mysh-redragon-storm-pro",
+      "evidence": "Прямая карточка 5element.by, HTTP GET 2026-11-08. Product.name: Мышь Redragon Storm Pro. data-article: 78127; артикул каталога: 78127. JSON-LD offers.price=99.00, priceCurrency=BYN, availability=https://schema.org/InStock. Цвет на странице: Черный Длина мыши 127 мм Гарантийное обслуживание Гарантия 18 месяцев Стран."
+    },
+    {
+      "id": "redragon-storm",
+      "region": "by",
+      "price": 73.0,
+      "currency": "BYN",
+      "date": "2026-11-08",
+      "store": "5 элемент",
+      "kind": "store",
+      "availability": "in-stock",
+      "url": "https://5element.by/products/729570-mysh-redragon-storm-belyy",
+      "evidence": "Прямая карточка 5element.by, HTTP GET 2026-11-08. Product.name: Мышь Redragon Storm (белый). data-article: 77933; артикул каталога: Storm. JSON-LD offers.price=73.00, priceCurrency=BYN, availability=https://schema.org/InStock. Цвет на странице: Белый Длина мыши 127 мм Гарантийное обслуживание Гарантия 18 месяцев Страна."
+    },
+    {
+      "id": "mp273qw",
+      "region": "by",
+      "price": 573.0,
+      "currency": "BYN",
+      "date": "2026-11-08",
+      "store": "5 элемент",
+      "kind": "store",
+      "availability": "in-stock",
+      "url": "https://5element.by/products/monitor-msi-pro-mp273qw-e14",
+      "evidence": "Прямая карточка 5element.by, HTTP GET 2026-11-08. Product.name: Монитор MSI Pro MP273QW E14. data-article: MP273QW Pro E14 9S6-3PE2CH-059; артикул каталога: 9S6-3PE2CH-059. JSON-LD offers.price=573.00, priceCurrency=BYN, availability=https://schema.org/InStock. Цвет на странице: Белый Экран Сенсорный экран Нет Технологии AMD FreeSync Частота обновления ."
+    },
+    {
+      "id": "a27i",
+      "region": "by",
+      "price": 529.0,
+      "currency": "BYN",
+      "date": "2026-11-08",
+      "store": "5 элемент",
+      "kind": "store",
+      "availability": "in-stock",
+      "url": "https://5element.by/products/igrovoy-monitor-xiaomi-monitor-a27i-2026-p27fda-ragl",
+      "evidence": "Прямая карточка 5element.by, HTTP GET 2026-11-08. Product.name: Игровой монитор Xiaomi Monitor A27i 2026 P27FDA-RAGL. data-article: ELA6410EU; артикул каталога: ELA6660RU / P27FDA-RAGL. JSON-LD offers.price=529.00, priceCurrency=BYN, availability=https://schema.org/InStock. Цвет на странице: Черный Комплектация Адаптер питания, Документация Экран Сенсорный экран Нет.",
+      "note": "Модель P27FDA-RAGL (A27i 2026); локальный код упаковки ELA6660RU магазин не указывает."
+    }
+  ],
+  "unresolved": [
+    {
+      "id": "a24i",
+      "region": "by",
+      "reason": "Новое предложение точной модели/артикула в BYN в рамках этой проверки не подтверждено; RUB/USD и существующие предложения проверяются отдельно."
+    },
+    {
+      "id": "g34wqi",
+      "region": "by",
+      "reason": "Новое предложение точной модели/артикула в BYN в рамках этой проверки не подтверждено; RUB/USD и существующие предложения проверяются отдельно."
+    },
+    {
+      "id": "fizz",
+      "region": "by",
+      "reason": "Новое предложение точной модели/артикула в BYN в рамках этой проверки не подтверждено; RUB/USD и существующие предложения проверяются отдельно."
+    },
+    {
+      "id": "g502",
+      "region": "by",
+      "reason": "Новое предложение точной модели/артикула в BYN в рамках этой проверки не подтверждено; RUB/USD и существующие предложения проверяются отдельно."
+    },
+    {
+      "id": "anubis",
+      "region": "by",
+      "reason": "Новое предложение точной модели/артикула в BYN в рамках этой проверки не подтверждено; RUB/USD и существующие предложения проверяются отдельно."
+    },
+    {
+      "id": "uranus-pro-82",
+      "region": "by",
+      "reason": "Новое предложение точной модели/артикула в BYN в рамках этой проверки не подтверждено; RUB/USD и существующие предложения проверяются отдельно."
+    },
+    {
+      "id": "k1ng-4k-pro-white",
+      "region": "by",
+      "reason": "Новое предложение точной модели/артикула в BYN в рамках этой проверки не подтверждено; RUB/USD и существующие предложения проверяются отдельно."
+    },
+    {
+      "id": "azzmach-lite-white",
+      "region": "by",
+      "reason": "Новое предложение точной модели/артикула в BYN в рамках этой проверки не подтверждено; RUB/USD и существующие предложения проверяются отдельно."
+    },
+    {
+      "id": "aatrox",
+      "region": "by",
+      "reason": "Новое предложение точной модели/артикула в BYN в рамках этой проверки не подтверждено; RUB/USD и существующие предложения проверяются отдельно."
+    },
+    {
+      "id": "mg8",
+      "region": "by",
+      "reason": "Новое предложение точной модели/артикула в BYN в рамках этой проверки не подтверждено; RUB/USD и существующие предложения проверяются отдельно."
+    },
+    {
+      "id": "mp225",
+      "region": "by",
+      "reason": "Новое предложение точной модели/артикула в BYN в рамках этой проверки не подтверждено; RUB/USD и существующие предложения проверяются отдельно."
+    },
+    {
+      "id": "mp243w",
+      "region": "by",
+      "reason": "Новое предложение точной модели/артикула в BYN в рамках этой проверки не подтверждено; RUB/USD и существующие предложения проверяются отдельно."
+    },
+    {
+      "id": "mag272",
+      "region": "by",
+      "reason": "Новое предложение точной модели/артикула в BYN в рамках этой проверки не подтверждено; RUB/USD и существующие предложения проверяются отдельно."
+    },
+    {
+      "id": "mpg321w",
+      "region": "by",
+      "reason": "Новое предложение точной модели/артикула в BYN в рамках этой проверки не подтверждено; RUB/USD и существующие предложения проверяются отдельно."
+    },
+    {
+      "id": "lg29",
+      "region": "by",
+      "reason": "Новое предложение точной модели/артикула в BYN в рамках этой проверки не подтверждено; RUB/USD и существующие предложения проверяются отдельно."
+    },
+    {
+      "id": "lg34",
+      "region": "by",
+      "reason": "Новое предложение точной модели/артикула в BYN в рамках этой проверки не подтверждено; RUB/USD и существующие предложения проверяются отдельно."
+    },
+    {
+      "id": "razer-rz03-04702500-r3r1",
+      "region": "by",
+      "reason": "Новое предложение точной модели/артикула в BYN в рамках этой проверки не подтверждено; RUB/USD и существующие предложения проверяются отдельно."
+    },
+    {
+      "id": "razer-rz03-03392200-r3r1",
+      "region": "by",
+      "reason": "Новое предложение точной модели/артикула в BYN в рамках этой проверки не подтверждено; RUB/USD и существующие предложения проверяются отдельно."
+    },
+    {
+      "id": "razer-rz03-04881600-r3r1",
+      "region": "by",
+      "reason": "Новое предложение точной модели/артикула в BYN в рамках этой проверки не подтверждено; RUB/USD и существующие предложения проверяются отдельно."
+    },
+    {
+      "id": "razer-rz03-04460800-r3r1",
+      "region": "by",
+      "reason": "Новое предложение точной модели/артикула в BYN в рамках этой проверки не подтверждено; RUB/USD и существующие предложения проверяются отдельно."
+    },
+    {
+      "id": "razer-rz03-04692500-r3r1",
+      "region": "by",
+      "reason": "Новое предложение точной модели/артикула в BYN в рамках этой проверки не подтверждено; RUB/USD и существующие предложения проверяются отдельно."
+    },
+    {
+      "id": "razer-rz03-04470800-r3r1",
+      "region": "by",
+      "reason": "Новое предложение точной модели/артикула в BYN в рамках этой проверки не подтверждено; RUB/USD и существующие предложения проверяются отдельно."
+    },
+    {
+      "id": "razer-rz03-03931300-r3r1",
+      "region": "by",
+      "reason": "Новое предложение точной модели/артикула в BYN в рамках этой проверки не подтверждено; RUB/USD и существующие предложения проверяются отдельно."
+    },
+    {
+      "id": "razer-rz03-04500800-r3r1",
+      "region": "by",
+      "reason": "Новое предложение точной модели/артикула в BYN в рамках этой проверки не подтверждено; RUB/USD и существующие предложения проверяются отдельно."
+    },
+    {
+      "id": "razer-rz03-04360800-r3r1",
+      "region": "by",
+      "reason": "Новое предложение точной модели/артикула в BYN в рамках этой проверки не подтверждено; RUB/USD и существующие предложения проверяются отдельно."
+    },
+    {
+      "id": "razer-rz03-03390200-r3m1",
+      "region": "by",
+      "reason": "Новое предложение точной модели/артикула в BYN в рамках этой проверки не подтверждено; RUB/USD и существующие предложения проверяются отдельно."
+    },
+    {
+      "id": "razer-rz01-04650100-r3m1",
+      "region": "by",
+      "reason": "Новое предложение точной модели/артикула в BYN в рамках этой проверки не подтверждено; RUB/USD и существующие предложения проверяются отдельно."
+    },
+    {
+      "id": "razer-rz01-04620100-r3g1",
+      "region": "by",
+      "reason": "Новое предложение точной модели/артикула в BYN в рамках этой проверки не подтверждено; RUB/USD и существующие предложения проверяются отдельно."
+    },
+    {
+      "id": "razer-rz01-03730100-r3a1",
+      "region": "by",
+      "reason": "Новое предложение точной модели/артикула в BYN в рамках этой проверки не подтверждено; RUB/USD и существующие предложения проверяются отдельно."
+    },
+    {
+      "id": "logitech-g213-rgb-gaming-keyboard",
+      "region": "by",
+      "reason": "Новое предложение точной модели/артикула в BYN в рамках этой проверки не подтверждено; RUB/USD и существующие предложения проверяются отдельно."
+    },
+    {
+      "id": "logitech-g309-lightspeed-gaming-mouse",
+      "region": "by",
+      "reason": "Новое предложение точной модели/артикула в BYN в рамках этой проверки не подтверждено; RUB/USD и существующие предложения проверяются отдельно."
+    },
+    {
+      "id": "logitech-g413-se-gaming-keyboard",
+      "region": "by",
+      "reason": "Новое предложение точной модели/артикула в BYN в рамках этой проверки не подтверждено; RUB/USD и существующие предложения проверяются отдельно."
+    },
+    {
+      "id": "logitech-g413-tkl-se-gaming-keyboard",
+      "region": "by",
+      "reason": "Новое предложение точной модели/артикула в BYN в рамках этой проверки не подтверждено; RUB/USD и существующие предложения проверяются отдельно."
+    },
+    {
+      "id": "logitech-g502-lightspeed-wireless-gaming-mouse",
+      "region": "by",
+      "reason": "Новое предложение точной модели/артикула в BYN в рамках этой проверки не подтверждено; RUB/USD и существующие предложения проверяются отдельно."
+    },
+    {
+      "id": "logitech-g502-x-wired-lightforce",
+      "region": "by",
+      "reason": "Новое предложение точной модели/артикула в BYN в рамках этой проверки не подтверждено; RUB/USD и существующие предложения проверяются отдельно."
+    },
+    {
+      "id": "logitech-g502-x-wireless-lightforce",
+      "region": "by",
+      "reason": "Новое предложение точной модели/артикула в BYN в рамках этой проверки не подтверждено; RUB/USD и существующие предложения проверяются отдельно."
+    },
+    {
+      "id": "logitech-g512-mechanical-gaming-keyboard",
+      "region": "by",
+      "reason": "Новое предложение точной модели/артикула в BYN в рамках этой проверки не подтверждено; RUB/USD и существующие предложения проверяются отдельно."
+    },
+    {
+      "id": "logitech-g515-tkl-wireless-keyboard",
+      "region": "by",
+      "reason": "Новое предложение точной модели/артикула в BYN в рамках этой проверки не подтверждено; RUB/USD и существующие предложения проверяются отдельно."
+    },
+    {
+      "id": "logitech-g903-hero-wireless-gaming-mouse",
+      "region": "by",
+      "reason": "Новое предложение точной модели/артикула в BYN в рамках этой проверки не подтверждено; RUB/USD и существующие предложения проверяются отдельно."
+    },
+    {
+      "id": "logitech-g915-x-mechanical-gaming-keyboard",
+      "region": "by",
+      "reason": "Новое предложение точной модели/артикула в BYN в рамках этой проверки не подтверждено; RUB/USD и существующие предложения проверяются отдельно."
+    },
+    {
+      "id": "logitech-g915-x-tkl-wireless",
+      "region": "by",
+      "reason": "Новое предложение точной модели/артикула в BYN в рамках этой проверки не подтверждено; RUB/USD и существующие предложения проверяются отдельно."
+    },
+    {
+      "id": "logitech-pro-2-lightspeed",
+      "region": "by",
+      "reason": "Новое предложение точной модели/артикула в BYN в рамках этой проверки не подтверждено; RUB/USD и существующие предложения проверяются отдельно."
+    },
+    {
+      "id": "logitech-pro-mechanical-gaming-keyboard",
+      "region": "by",
+      "reason": "Новое предложение точной модели/артикула в BYN в рамках этой проверки не подтверждено; RUB/USD и существующие предложения проверяются отдельно."
+    },
+    {
+      "id": "logitech-pro-x-60-wireless-keyboard",
+      "region": "by",
+      "reason": "Новое предложение точной модели/артикула в BYN в рамках этой проверки не подтверждено; RUB/USD и существующие предложения проверяются отдельно."
+    },
+    {
+      "id": "logitech-pro-x-superlight-2-dex",
+      "region": "by",
+      "reason": "Новое предложение точной модели/артикула в BYN в рамках этой проверки не подтверждено; RUB/USD и существующие предложения проверяются отдельно."
+    },
+    {
+      "id": "logitech-pro-x-superlight-2-se",
+      "region": "by",
+      "reason": "Новое предложение точной модели/артикула в BYN в рамках этой проверки не подтверждено; RUB/USD и существующие предложения проверяются отдельно."
+    },
+    {
+      "id": "logitech-pro-x-tkl-wireless-keyboard",
+      "region": "by",
+      "reason": "Новое предложение точной модели/артикула в BYN в рамках этой проверки не подтверждено; RUB/USD и существующие предложения проверяются отдельно."
+    },
+    {
+      "id": "logitech-pro-x2-superlight-wireless-mouse",
+      "region": "by",
+      "reason": "Новое предложение точной модели/артикула в BYN в рамках этой проверки не подтверждено; RUB/USD и существующие предложения проверяются отдельно."
+    }
+  ]
+}

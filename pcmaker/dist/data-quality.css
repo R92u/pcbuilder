@@ -8,3 +8,6 @@
 .price-availability{color:#b8c2ca}.part-quality{display:block;font-size:10px;line-height:1.4;color:#dac9a8;margin-top:4px}
 .quality-build-note{margin-top:8px;font-size:11px;line-height:1.5;color:#e4cda3}
 .quality-catalog-note{font-size:11px;line-height:1.5;color:#c0cbd4;margin:8px 0}
+.price-checked,.price-refresh-note,.shop-offer .price-checked,.shop-offer .price-refresh-note{display:block;font-size:11px;line-height:1.5;margin-top:6px;color:#dae3e9}
+.price-checked.unavailable,.price-checked.stale,.price-refresh-note{color:#dfcaa6}
+.shop-price-coverage{font-size:11px;line-height:1.5;color:#bcc8d0;margin:0 0 12px}

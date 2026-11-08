@@ -1,0 +1,45 @@
+name: Refresh public price offers
+on:
+  schedule:
+    - cron: '23 4 * * *'
+  workflow_dispatch:
+permissions:
+  contents: write
+concurrency:
+  group: price-refresh
+  cancel-in-progress: false
+jobs:
+  refresh:
+    if: github.ref == 'refs/heads/main'
+    runs-on: ubuntu-latest
+    timeout-minutes: 25
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: main
+          fetch-depth: 2
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '24'
+      - name: Read public product offers
+        run: node pcmaker/scripts/refresh-prices.mjs
+      - name: Validate refreshed data
+        run: node pcmaker/scripts/check.mjs
+      - name: Publish verified snapshot to main
+        shell: bash
+        run: |
+          git add pcmaker/dist/live-prices.json pcmaker/research/price-refresh-last-run.json
+          if git diff --cached --quiet; then exit 0; fi
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git commit -m 'Refresh public price offers'
+          git pull --rebase origin main
+          node pcmaker/scripts/check.mjs
+          git push origin HEAD:main
+      - name: Upload refresh coverage report
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: price-refresh-report
+          path: pcmaker/research/price-refresh-last-run.json
+          if-no-files-found: ignore

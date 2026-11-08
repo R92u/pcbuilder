@@ -1,0 +1,160 @@
+{
+  "checkedAt": "2026-11-08T07:22:06.558Z",
+  "attempted": 323,
+  "updated": 260,
+  "failed": 63,
+  "sources": {
+    "dns-shop.ru": {
+      "attempted": 9,
+      "updated": 0,
+      "failed": 9,
+      "reasons": {
+        "unsupported-source": 9
+      }
+    },
+    "onecom.ru": {
+      "attempted": 2,
+      "updated": 0,
+      "failed": 2,
+      "reasons": {
+        "unsupported-source": 2
+      }
+    },
+    "r-seven.ru": {
+      "attempted": 1,
+      "updated": 0,
+      "failed": 1,
+      "reasons": {
+        "unsupported-source": 1
+      }
+    },
+    "tec.by": {
+      "attempted": 5,
+      "updated": 0,
+      "failed": 5,
+      "reasons": {
+        "unsupported-source": 5
+      }
+    },
+    "regard.ru": {
+      "attempted": 21,
+      "updated": 11,
+      "failed": 10,
+      "reasons": {
+        "product-not-confirmed": 1,
+        "http-429": 9
+      }
+    },
+    "kns.ru": {
+      "attempted": 110,
+      "updated": 103,
+      "failed": 7,
+      "reasons": {
+        "product-not-confirmed": 7
+      }
+    },
+    "5element.by": {
+      "attempted": 109,
+      "updated": 109,
+      "failed": 0,
+      "reasons": {}
+    },
+    "masterdom.by": {
+      "attempted": 4,
+      "updated": 3,
+      "failed": 1,
+      "reasons": {
+        "product-not-confirmed": 1
+      }
+    },
+    "tecno.by": {
+      "attempted": 2,
+      "updated": 1,
+      "failed": 1,
+      "reasons": {
+        "http-404": 1
+      }
+    },
+    "onlife.by": {
+      "attempted": 1,
+      "updated": 0,
+      "failed": 1,
+      "reasons": {
+        "unsupported-source": 1
+      }
+    },
+    "time-shop.by": {
+      "attempted": 1,
+      "updated": 1,
+      "failed": 0,
+      "reasons": {}
+    },
+    "cybermarket.by": {
+      "attempted": 2,
+      "updated": 0,
+      "failed": 2,
+      "reasons": {
+        "robots-unavailable": 2
+      }
+    },
+    "nexton.by": {
+      "attempted": 2,
+      "updated": 2,
+      "failed": 0,
+      "reasons": {}
+    },
+    "unifox.by": {
+      "attempted": 1,
+      "updated": 0,
+      "failed": 1,
+      "reasons": {
+        "price-not-confirmed": 1
+      }
+    },
+    "ultraprice.by": {
+      "attempted": 1,
+      "updated": 1,
+      "failed": 0,
+      "reasons": {}
+    },
+    "newegg.com": {
+      "attempted": 2,
+      "updated": 0,
+      "failed": 2,
+      "reasons": {
+        "http-403": 2
+      }
+    },
+    "andpro.ru": {
+      "attempted": 10,
+      "updated": 10,
+      "failed": 0,
+      "reasons": {}
+    },
+    "redragon.ru": {
+      "attempted": 20,
+      "updated": 19,
+      "failed": 1,
+      "reasons": {
+        "product-not-confirmed": 1
+      }
+    },
+    "mvideo.ru": {
+      "attempted": 1,
+      "updated": 0,
+      "failed": 1,
+      "reasons": {
+        "unsupported-source": 1
+      }
+    },
+    "logitechg.com": {
+      "attempted": 19,
+      "updated": 0,
+      "failed": 19,
+      "reasons": {
+        "product-not-confirmed": 15,
+        "price-not-confirmed": 4
+      }
+    }
+  }
+}

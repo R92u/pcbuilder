@@ -2,6 +2,8 @@ import {productLinksBy} from './store-links-by.js';
 import {foreignComponentOffers} from './foreign-prices.js';
 import {validForeignOffer} from './money.js';
 import {dateStamp} from './price-quality.js';
+import {byId} from './catalog.js';
+import {getLivePrices,updatedOffer} from './live-price-data.js';
 export const belarusStores={'5element.by':'5 элемент','tec.by':'TEC.BY','tecno.by':'TECNO','onlife.by':'OnLife','time-shop.by':'Time-Shop','nexton.by':'Nexton','masterdom.by':'Мастердом','cybermarket.by':'Cybermarket','unifox.by':'Unifox','ultraprice.by':'Ultraprice'};
 export function byStoreProduct(link){
  try{const u=new URL(link),host=u.hostname.replace(/^www\./,'');
@@ -26,9 +28,17 @@ export function priceSnapshot(data,id){
  }
  return {...data,region:region.id,currency:region.currency,items};
 }
-export function regionalSnapshot(data,id){
- const snapshot=priceSnapshot(data,id);
- if(snapshot.region==='ru')for(const [key,offer] of Object.entries(foreignComponentOffers))if(!snapshot.items[key]&&validForeignOffer(offer))snapshot.items[key]={...offer};
+export function regionalSnapshot(data,id,live=getLivePrices()){
+ const snapshot=priceSnapshot(data,id),local={...snapshot.items};
+ for(const key of new Set([...Object.keys(local),...Object.keys(live.items?.[id]||{})])){
+  if(!byId[key])continue;
+  const offer=updatedOffer(key,id,local[key],live);
+  if(offer&&(id!=='by'||byStoreProduct(offer.url)))snapshot.items[key]=offer;
+ }
+ if(snapshot.region==='ru')for(const key of new Set([...Object.keys(foreignComponentOffers),...Object.keys(live.items?.usd||{})])){
+  const offer=updatedOffer(key,'usd',foreignComponentOffers[key],live);
+  if(byId[key]&&!snapshot.items[key]&&validForeignOffer(offer))snapshot.items[key]=offer;
+ }
  return snapshot;
 }
 function isByProduct(link){

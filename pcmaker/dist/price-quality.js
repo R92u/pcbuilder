@@ -17,3 +17,8 @@ export function priceQuality(offer,now=Date.now()){
  return age>priceMaxAgeDays?{status:'stale',label:'Цена устарела — перепроверь',age}:{status:'fresh',label:'Проверена не более 7 дней назад',age};
 }
 export const usablePrice=offer=>Number.isFinite(offer?.price)&&offer.price>0;
+export function formatPriceDate(value){return dateStamp(value)===null?'дата неизвестна':value.split('-').reverse().join('.');}
+export function offerStatusLine(offer){
+ const availability=offer?.availability==='in-stock'?'В наличии':offer?.availability==='out-of-stock'?'Нет в наличии':'Наличие не подтверждено';
+ return `Проверено ${formatPriceDate(offer?.date)} · ${availability}`;
+}

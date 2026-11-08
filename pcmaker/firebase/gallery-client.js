@@ -7,6 +7,7 @@ import {compatibility,summarizePrices} from '../dist/engine.js';
 import {sanitizeFanLayout} from '../dist/fan-layout.js';
 import {sanitizeLighting} from '../dist/lighting.js';
 import {regionalSnapshot as priceSnapshot,regionFor} from '../dist/regions.js';
+import {loadLivePrices} from '../dist/live-price-data.js';
 import {requireAppCheckToken} from './app-check-guard.js';
 const clean=(s,min,max,label)=>{if(typeof s!=='string'||s.trim().length<min||s.trim().length>max)throw Error('Проверь поле «'+label+'».');return s.trim();};
 let appCheck;
@@ -24,7 +25,8 @@ export async function createFirebaseGallery(config,{emulators=false,persistence=
  const auth=getAuth(app),db=getFirestore(app);auth.languageCode='ru';
  if(emulators){connectAuthEmulator(auth,'http://127.0.0.1:9099',{disableWarnings:true});connectFirestoreEmulator(db,'127.0.0.1',8080);}
  await setPersistence(auth,persistence);await auth.authStateReady();
- const snapshots=Object.fromEntries(await Promise.all(['ru','by'].map(async id=>[id,priceSnapshot(await fetch(id==='by'?'./prices-by.json':'./prices.json').then(r=>r.json()),id)])));const cursors=new Map();let admin=false;
+ await loadLivePrices();
+ const snapshots=Object.fromEntries(await Promise.all(['ru','by'].map(async id=>[id,priceSnapshot(await fetch(id==='by'?'./prices-by.json':'./prices.json',{cache:'no-cache',signal:AbortSignal.timeout(8000)}).then(r=>r.ok?r.json():{}).catch(()=>({})),id)])));const cursors=new Map();let admin=false;
  const publicUser=async()=>{const u=auth.currentUser;if(!u)return null;admin=!!(await u.getIdTokenResult()).claims.admin;return {id:u.uid,displayName:u.displayName||'Автор',username:'Google',admin};};
  const ready=()=>{if(!auth.currentUser)throw Error('Войди через Google.');return auth.currentUser;};
  const dataCard=s=>{const d=s.data(),region=regionFor(d.region),build=sanitizeBuild(d.build);return {id:s.id,...d,build,fanLayout:Object.entries(d.fanLayout||{}).map(([slot,direction],i)=>({id:'fan'+(i+1),slot,direction})),author:{id:d.authorId,name:d.authorName,username:''},createdAt:d.createdAt?.toMillis()||Date.now(),updatedAt:d.updatedAt?.toMillis()||Date.now(),price:{...summarizePrices(build,snapshots[region.id].items),currency:region.currency,checkedAt:snapshots[region.id].checkedAt},compatible:compatibility(build).ready};};

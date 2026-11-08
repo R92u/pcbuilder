@@ -8,6 +8,8 @@ import {foreignComponentOffers,peripheralOfferUpdates} from '../dist/foreign-pri
 import {peripheralById} from '../dist/peripherals-brands.js';
 import {validForeignOffer} from '../dist/money.js';
 import {priceQuality} from '../dist/price-quality.js';
+import {validLiveOffer} from '../dist/live-price-data.js';
+import {byStoreProduct} from '../dist/regions.js';
 import {createHash} from 'node:crypto';
 const root=path.resolve(import.meta.dirname,'..');
 const bundle=JSON.parse(fs.readFileSync(path.join(root,'firebase/bundle-manifest.json'),'utf8'));
@@ -15,7 +17,7 @@ for(const [file,expected] of Object.entries(bundle)){
  const actual=createHash('sha256').update(fs.readFileSync(path.join(root,file),'utf8').replace(/\r\n/g,'\n')).digest('hex');
  if(actual!==expected)throw Error('Firebase bundle is stale: '+file+'; run npm run build:firebase');
 }
-for(const name of ['peripheral-connections.js','peripheral-cables.js','peripheral-cables.css','catalog-budget.js','product-images-budget.js','foreign-prices.js','money.js','backgrounds.js','background-state.js','backgrounds.css','assets/backgrounds/room.jpg','assets/backgrounds/city-day.jpg','assets/backgrounds/city-night.jpg','peripherals-brands-data.js','peripherals-brands.js','keyboard-layout-brands.js','keyboard-model-brands.js','keyboard-controls-brands.js','mouse-model-brands.js','shop-catalog-brands.js','workplace-store-brands.js','keyboard-model.js','keyboard-layout.js','keyboard-controls.js','workplace-scene-v4.js','mouse-model.js','workplace-scene-v3.js','builder-ui.js','shop-catalog.js','workplace-store.js','builder-app.js','workplace-assembly.js','workplace-peripherals.js','workplace-integrated.css','workplace.html','workplace.css','workplace.js','workplace-page.js','workplace-scene.js','workplace-models.js','peripherals.js','peripherals-extra.js','peripheral-shapes.js','peripheral-images.json','price-quality.js','verification.js','verification-data.js','data-quality-ui.js','data-quality.css']){
+for(const name of ['live-price-data.js','peripheral-connections.js','peripheral-cables.js','peripheral-cables.css','catalog-budget.js','product-images-budget.js','foreign-prices.js','money.js','backgrounds.js','background-state.js','backgrounds.css','assets/backgrounds/room.jpg','assets/backgrounds/city-day.jpg','assets/backgrounds/city-night.jpg','peripherals-brands-data.js','peripherals-brands.js','keyboard-layout-brands.js','keyboard-model-brands.js','keyboard-controls-brands.js','mouse-model-brands.js','shop-catalog-brands.js','workplace-store-brands.js','keyboard-model.js','keyboard-layout.js','keyboard-controls.js','workplace-scene-v4.js','mouse-model.js','workplace-scene-v3.js','builder-ui.js','shop-catalog.js','workplace-store.js','builder-app.js','workplace-assembly.js','workplace-peripherals.js','workplace-integrated.css','workplace.html','workplace.css','workplace.js','workplace-page.js','workplace-scene.js','workplace-models.js','peripherals.js','peripherals-extra.js','peripheral-shapes.js','peripheral-images.json','price-quality.js','verification.js','verification-data.js','data-quality-ui.js','data-quality.css']){
  const file=path.join(root,'dist',name);if(!fs.existsSync(file))throw Error('Missing '+name);
  if(name.endsWith('.js')){const result=spawnSync(process.execPath,['--check',file],{encoding:'utf8'});if(result.status!==0)throw Error(result.stderr);}
 }
@@ -32,6 +34,14 @@ for(const [region,file] of [['ru','prices.json'],['by','prices-by.json']]){
   if(!byId[id]||!valid.items[id]||!p.store||priceQuality(p).status==='invalid')throw Error('Invalid '+region+' offer '+id);
   if(p.availability&&!['in-stock','unknown','out-of-stock'].includes(p.availability))throw Error('Invalid availability '+id);
  }
+}
+const live=JSON.parse(fs.readFileSync(path.join(root,'dist/live-prices.json'),'utf8'));
+if(live.schemaVersion!==1||!live.items||!live.checks)throw Error('Invalid live price schema');
+for(const [region,items] of Object.entries(live.items))for(const [id,offer] of Object.entries(items)){
+ if((!byId[id]&&!peripheralById[id])||!validLiveOffer(offer,region)||region==='by'&&!byStoreProduct(offer.url))throw Error('Invalid live offer '+region+':'+id);
+}
+for(const [region,checks] of Object.entries(live.checks))for(const [id,check] of Object.entries(checks)){
+ if(!['ru','by','usd'].includes(region)||(!byId[id]&&!peripheralById[id])||!['updated','blocked','unavailable','unverified','error'].includes(check.status)||!Number.isFinite(Date.parse(check.attemptedAt)))throw Error('Invalid live price check '+region+':'+id);
 }
 for(const [id,offer] of Object.entries(foreignComponentOffers))if(!byId[id]||!validForeignOffer(offer))throw Error('Invalid USD component offer '+id);
 for(const [id,offers] of Object.entries(peripheralOfferUpdates)){

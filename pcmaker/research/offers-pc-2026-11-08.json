@@ -1,0 +1,1572 @@
+{
+  "checkedAt": "2026-11-08",
+  "method": "Прямая загрузка точной карточки: KNS Москва — Product/Offer microdata, Lifebook — sku, Product price и наличие. Сверяется модель или артикул, не используются клубные и зачёркнутые цены. Для Lifebook выбрана цена физических лиц.",
+  "offers": [
+    {
+      "id": "r5-5600",
+      "region": "ru",
+      "price": 11579.0,
+      "currency": "RUB",
+      "date": "2026-11-08",
+      "store": "KNS",
+      "kind": "store",
+      "availability": "in-stock",
+      "url": "https://www.kns.ru/product/processor-amd-ryzen-5-5600-oem/",
+      "note": "Комплектация OEM, без комплектного кулера.",
+      "evidence": {
+        "title": "Процессор AMD Ryzen 5 5600 OEM",
+        "identity": "AMD Ryzen 5 5600 OEM",
+        "availability": "http://schema.org/InStock",
+        "availabilityText": "Наличие: В наличии на складе Самовывоз: послезавтра, бесплатно Доставка: послезавтра, от 450р. Создать оферту ЕАИСТ",
+        "priceProperty": "11579",
+        "contentSha256": "41f3f23a33345611c5c37f33b5c206bb6da0ee222be1f465904b8ebac0565df7"
+      }
+    },
+    {
+      "id": "r5-7600",
+      "region": "ru",
+      "price": 18924.0,
+      "currency": "RUB",
+      "date": "2026-11-08",
+      "store": "KNS",
+      "kind": "store",
+      "availability": "in-stock",
+      "url": "https://www.kns.ru/product/processor-amd-ryzen-5-7600-oem/",
+      "note": "Комплектация OEM, без комплектного кулера.",
+      "evidence": {
+        "title": "Процессор AMD Ryzen 5 7600 OEM",
+        "identity": "AMD Ryzen 5 7600 OEM",
+        "availability": "http://schema.org/InStock",
+        "availabilityText": "Наличие: В наличии на складе Самовывоз: послезавтра, бесплатно Доставка: послезавтра, от 450р. Создать оферту ЕАИСТ",
+        "priceProperty": "18924",
+        "contentSha256": "26d1d07c75ef2aa49678cc424b9c5ae76374b8609a9a00922cfcf3b84f802eb7"
+      }
+    },
+    {
+      "id": "r5-5500",
+      "region": "ru",
+      "price": 9794.0,
+      "currency": "RUB",
+      "date": "2026-11-08",
+      "store": "KNS",
+      "kind": "store",
+      "availability": "in-stock",
+      "url": "https://www.kns.ru/product/processor-amd-ryzen-5-5500-oem/",
+      "note": "Комплектация OEM, без комплектного кулера.",
+      "evidence": {
+        "title": "Процессор AMD Ryzen 5 5500 OEM",
+        "identity": "AMD Ryzen 5 5500 OEM",
+        "availability": "http://schema.org/InStock",
+        "availabilityText": "Наличие: В наличии на складе Самовывоз: послезавтра, бесплатно Доставка: послезавтра, от 450р. Создать оферту ЕАИСТ",
+        "priceProperty": "9794",
+        "contentSha256": "bd48ea955361e0155cd9e1d473d90cef9670d11fd724eca70d4a69ce184a4f91"
+      }
+    },
+    {
+      "id": "r7-5700g",
+      "region": "ru",
+      "price": 21622.0,
+      "currency": "RUB",
+      "date": "2026-11-08",
+      "store": "KNS",
+      "kind": "store",
+      "availability": "in-stock",
+      "url": "https://www.kns.ru/product/processor-amd-ryzen-7-5700g-oem/",
+      "note": "Комплектация OEM, без комплектного кулера.",
+      "evidence": {
+        "title": "Процессор AMD Ryzen 7 5700G OEM",
+        "identity": "AMD Ryzen 7 5700G OEM",
+        "availability": "http://schema.org/InStock",
+        "availabilityText": "Наличие: В наличии на складе Самовывоз: послезавтра, бесплатно Доставка: послезавтра, от 450р. Создать оферту ЕАИСТ",
+        "priceProperty": "21622",
+        "contentSha256": "35164d85f17840838494dbddfbcf0e3be89f320b26b7aeb2551e60f1bb6a503e"
+      }
+    },
+    {
+      "id": "r9-5950x",
+      "region": "ru",
+      "price": 38803.0,
+      "currency": "RUB",
+      "date": "2026-11-08",
+      "store": "KNS",
+      "kind": "store",
+      "availability": "in-stock",
+      "url": "https://www.kns.ru/product/processor-amd-ryzen-9-5950x-oem/",
+      "note": "Комплектация OEM, без комплектного кулера.",
+      "evidence": {
+        "title": "Процессор AMD Ryzen 9 5950X OEM",
+        "identity": "AMD Ryzen 9 5950X OEM",
+        "availability": "http://schema.org/InStock",
+        "availabilityText": "Наличие: В наличии на складе Самовывоз: послезавтра, бесплатно Доставка: послезавтра, от 450р. Создать оферту ЕАИСТ",
+        "priceProperty": "38803",
+        "contentSha256": "1f459b248b33a47bc93e82beddbd369d515f9763b25a023fe8eacfc912fc3f49"
+      }
+    },
+    {
+      "id": "r5-7600x",
+      "region": "ru",
+      "price": 16351.0,
+      "currency": "RUB",
+      "date": "2026-11-08",
+      "store": "KNS",
+      "kind": "store",
+      "availability": "in-stock",
+      "url": "https://www.kns.ru/product/processor-amd-ryzen-5-7600x-oem/",
+      "note": "Комплектация OEM, без комплектного кулера.",
+      "evidence": {
+        "title": "Процессор AMD Ryzen 5 7600X OEM",
+        "identity": "AMD Ryzen 5 7600X OEM",
+        "availability": "http://schema.org/InStock",
+        "availabilityText": "Наличие: В наличии на складе Самовывоз: послезавтра, бесплатно Доставка: послезавтра, от 450р. Создать оферту ЕАИСТ",
+        "priceProperty": "16351",
+        "contentSha256": "98f5c0e7a2b31d9c89ead523b031e0a329d12c7b13ea288e2f3aa55eb371f16a"
+      }
+    },
+    {
+      "id": "b550",
+      "region": "ru",
+      "price": 12492.0,
+      "currency": "RUB",
+      "date": "2026-11-08",
+      "store": "KNS",
+      "kind": "store",
+      "availability": "in-stock",
+      "url": "https://www.kns.ru/product/materinskaya-plata-msi-b550-a-pro/",
+      "note": "",
+      "evidence": {
+        "title": "Материнская плата MSI B550-A Pro",
+        "identity": "MSI B550-A Pro",
+        "availability": "http://schema.org/InStock",
+        "availabilityText": "Наличие: В наличии на складе Самовывоз: послезавтра, бесплатно Доставка: послезавтра, от 450р. Создать оферту ЕАИСТ",
+        "priceProperty": "12492",
+        "contentSha256": "ff92729c623d9755779d77e3901e2470af54e2d032bc4a840efef683ef237da8"
+      }
+    },
+    {
+      "id": "b760-p-wifi",
+      "region": "ru",
+      "price": 15231.0,
+      "currency": "RUB",
+      "date": "2026-11-08",
+      "store": "KNS",
+      "kind": "store",
+      "availability": "out-of-stock",
+      "url": "https://www.kns.ru/product/materinskaya-plata-msi-pro-b760-p-wifi-ddr5/",
+      "note": "Последняя опубликованная цена; товар отсутствует, не считать доступным предложением.",
+      "evidence": {
+        "title": "Материнская плата MSI Pro B760-P WiFi",
+        "identity": "MSI Pro B760-P WiFi",
+        "availability": "http://schema.org/OutOfStock",
+        "availabilityText": "Наличие: Нет в наличии более 6 месяцев. Пожалуйста, перезвоните, мы постараемся подобрать аналог!",
+        "priceProperty": "15231",
+        "contentSha256": "323c4d3a6934046f6fc5247cda4bec7c1c5ea07963ed53ddf34500043b201990"
+      }
+    },
+    {
+      "id": "rtx4060",
+      "region": "ru",
+      "price": 40089.0,
+      "currency": "RUB",
+      "date": "2026-11-08",
+      "store": "KNS",
+      "kind": "store",
+      "availability": "out-of-stock",
+      "url": "https://www.kns.ru/product/videokarta-msi-nvidia-geforce-rtx-4060-ventus-2x-black-8g/",
+      "note": "Последняя опубликованная цена; товар отсутствует, не считать доступным предложением.",
+      "evidence": {
+        "title": "Видеокарта MSI nVidia GeForce RTX 4060 Ventus 2X Black 8G",
+        "identity": "MSI nVidia GeForce RTX 4060 Ventus 2X Black 8G",
+        "availability": "http://schema.org/OutOfStock",
+        "availabilityText": "Наличие: Нет в наличии более 60 дней. Вероятно MSI nVidia GeForce RTX 4060 Ventus 2X Black 8G снят с производства. Пожалуйста, перезвоните, мы постараемся подобрать аналог!",
+        "priceProperty": "40089",
+        "contentSha256": "f92b6d7e3c7b07a9ceee62106030501614b8ebf8280831467f3167d9b9a6a3aa"
+      }
+    },
+    {
+      "id": "rtx4060ti",
+      "region": "ru",
+      "price": 46231.0,
+      "currency": "RUB",
+      "date": "2026-11-08",
+      "store": "KNS",
+      "kind": "store",
+      "availability": "out-of-stock",
+      "url": "https://www.kns.ru/product/videokarta-msi-nvidia-geforce-rtx-4060-ti-ventus-2x-black-8g-oc/",
+      "note": "Последняя опубликованная цена; товар отсутствует, не считать доступным предложением.",
+      "evidence": {
+        "title": "Видеокарта MSI nVidia GeForce RTX 4060 Ti Ventus 2X Black 8G OC",
+        "identity": "MSI nVidia GeForce RTX 4060 Ti Ventus 2X Black 8G OC",
+        "availability": "http://schema.org/OutOfStock",
+        "availabilityText": "Наличие: Нет в наличии более 60 дней. Вероятно MSI nVidia GeForce RTX 4060 Ti Ventus 2X Black 8G OC снят с производства. Пожалуйста, перезвоните, мы постараемся подобрать аналог!",
+        "priceProperty": "46231",
+        "contentSha256": "2592e87dccb40f02e46af4028ec49ea8a5e52cf6f46b3d8c15c1a64913e9f62b"
+      }
+    },
+    {
+      "id": "ak400",
+      "region": "ru",
+      "price": 2075.0,
+      "currency": "RUB",
+      "date": "2026-11-08",
+      "store": "KNS",
+      "kind": "store",
+      "availability": "in-stock",
+      "url": "https://www.kns.ru/product/kuler-deepcool-ak400/",
+      "note": "",
+      "evidence": {
+        "title": "Кулер Deepcool AK400 Black",
+        "identity": "Deepcool AK400 Black",
+        "availability": "http://schema.org/InStock",
+        "availabilityText": "Наличие: В наличии на складе Самовывоз: послезавтра, бесплатно Доставка: послезавтра, от 450р. Создать оферту ЕАИСТ",
+        "priceProperty": "2075",
+        "contentSha256": "ac8b62d0f4ee8d7e6e034129973d5d3b16b0a94c7db882fe8a963c77e5fdad2d"
+      }
+    },
+    {
+      "id": "ak620",
+      "region": "ru",
+      "price": 5395.0,
+      "currency": "RUB",
+      "date": "2026-11-08",
+      "store": "KNS",
+      "kind": "store",
+      "availability": "in-stock",
+      "url": "https://www.kns.ru/product/kuler-deepcool-ak620/",
+      "note": "",
+      "evidence": {
+        "title": "Кулер Deepcool AK620 Black",
+        "identity": "Deepcool AK620 Black",
+        "availability": "http://schema.org/InStock",
+        "availabilityText": "Наличие: В наличии на складе Самовывоз: послезавтра, бесплатно Доставка: послезавтра, от 450р. Создать оферту ЕАИСТ",
+        "priceProperty": "5395",
+        "contentSha256": "2356c167d9ebd39582362f0c0f38e7f9683b34a7921d8b8c8ac2d5f7f4c7935d"
+      }
+    },
+    {
+      "id": "aio-le240-v2",
+      "region": "ru",
+      "price": 5105.0,
+      "currency": "RUB",
+      "date": "2026-11-08",
+      "store": "KNS",
+      "kind": "store",
+      "availability": "in-stock",
+      "url": "https://www.kns.ru/product/sistema-vodyanogo-ohlazhdeniya-deepcool-le240-v2-r-le240-bkammc-g-2/",
+      "note": "",
+      "evidence": {
+        "title": "Система водяного охлаждения Deepcool LE240 V2 Black R-LE240-BKAMMC-G-2",
+        "identity": "Deepcool LE240 V2 Black R-LE240-BKAMMC-G-2",
+        "availability": "http://schema.org/InStock",
+        "availabilityText": "Наличие: В наличии на складе Самовывоз: послезавтра, бесплатно Доставка: послезавтра, от 450р. Создать оферту ЕАИСТ",
+        "priceProperty": "5105",
+        "contentSha256": "773813fe74674d69e5ba9b25ce13cc473e0b51e72ab357740657bd89bc79df90"
+      }
+    },
+    {
+      "id": "pk550",
+      "region": "ru",
+      "price": 4731.0,
+      "currency": "RUB",
+      "date": "2026-11-08",
+      "store": "KNS",
+      "kind": "store",
+      "availability": "out-of-stock",
+      "url": "https://www.kns.ru/product/blok-pitaniya-deepcool-550w-pk550d/",
+      "note": "Последняя опубликованная цена; товар отсутствует или ожидается. Не считать доступным предложением.",
+      "evidence": {
+        "title": "Блок питания Deepcool 550W PK550D GamerStorm",
+        "identity": "Deepcool 550W PK550D",
+        "availability": "http://schema.org/SoldOut",
+        "availabilityText": "Наличие: Нет в наличии Пожалуйста, перезвоните, мы постараемся подобрать лучший аналог 5,0",
+        "priceProperty": "4731",
+        "contentSha256": "9ceedf1560e0b283ac9334443d6fde9b13bdf52b4587b9186c3a015f467f5d48"
+      }
+    },
+    {
+      "id": "a850",
+      "region": "ru",
+      "price": 9255.0,
+      "currency": "RUB",
+      "date": "2026-11-08",
+      "store": "KNS",
+      "kind": "store",
+      "availability": "in-stock",
+      "url": "https://www.kns.ru/product/blok-pitaniya-msi-850w-mag-a850gl/",
+      "note": "",
+      "evidence": {
+        "title": "Блок питания MSI 850W MAG A850GL Black",
+        "identity": "MSI 850W MAG A850GL Black",
+        "availability": "http://schema.org/InStock",
+        "availabilityText": "Наличие: В наличии на складе Самовывоз: послезавтра, бесплатно Доставка: послезавтра, от 450р. Создать оферту ЕАИСТ",
+        "priceProperty": "9255",
+        "contentSha256": "3ef3c10dcb44d9e592f7bb6861b6e2571408aa49c69daf122b19315cac3ea942"
+      }
+    },
+    {
+      "id": "cc560",
+      "region": "ru",
+      "price": 6101.0,
+      "currency": "RUB",
+      "date": "2026-11-08",
+      "store": "KNS",
+      "kind": "store",
+      "availability": "in-stock",
+      "url": "https://www.kns.ru/product/korpus-deepcool-cc560-v2-black/",
+      "note": "",
+      "evidence": {
+        "title": "Корпус Deepcool CC560 V2 Black",
+        "identity": "Deepcool CC560 V2 Black",
+        "availability": "http://schema.org/InStock",
+        "availabilityText": "Наличие: В наличии на складе Самовывоз: послезавтра, бесплатно Доставка: послезавтра, от 600р. Создать оферту ЕАИСТ",
+        "priceProperty": "6101",
+        "contentSha256": "55e3e982b550c061b5cd76b00d1e1100813e2f99ef437b727ed8c317e53c32ff"
+      }
+    },
+    {
+      "id": "r7-7700",
+      "region": "ru",
+      "price": 18551.0,
+      "currency": "RUB",
+      "date": "2026-11-08",
+      "store": "KNS",
+      "kind": "store",
+      "availability": "in-stock",
+      "url": "https://www.kns.ru/product/processor-amd-ryzen-7-7700-oem/",
+      "note": "Комплектация OEM, без комплектного кулера.",
+      "evidence": {
+        "title": "Процессор AMD Ryzen 7 7700 OEM",
+        "identity": "AMD Ryzen 7 7700 OEM",
+        "availability": "http://schema.org/InStock",
+        "availabilityText": "Наличие: В наличии на складе Самовывоз: послезавтра, бесплатно Доставка: послезавтра, от 450р. Создать оферту ЕАИСТ",
+        "priceProperty": "18551",
+        "contentSha256": "9f50077349d5b2990f9fd563aadcbc0f4bb677cbeb7d231f9e3e3a8dc6754620"
+      }
+    },
+    {
+      "id": "r5-9600x",
+      "region": "ru",
+      "price": 17970.0,
+      "currency": "RUB",
+      "date": "2026-11-08",
+      "store": "KNS",
+      "kind": "store",
+      "availability": "in-stock",
+      "url": "https://www.kns.ru/product/processor-amd-ryzen-5-9600x-oem/",
+      "note": "Комплектация OEM, без комплектного кулера.",
+      "evidence": {
+        "title": "Процессор AMD Ryzen 5 9600X OEM",
+        "identity": "AMD Ryzen 5 9600X OEM",
+        "availability": "http://schema.org/InStock",
+        "availabilityText": "Наличие: В наличии на складе Самовывоз: послезавтра, бесплатно Доставка: послезавтра, от 450р. Создать оферту ЕАИСТ",
+        "priceProperty": "17970",
+        "contentSha256": "f070060f28189e84a05c6f8ee5d8f4d498cbafa1f945746f9958c0a05e2ca3b3"
+      }
+    },
+    {
+      "id": "r7-9700x",
+      "region": "ru",
+      "price": 24444.0,
+      "currency": "RUB",
+      "date": "2026-11-08",
+      "store": "KNS",
+      "kind": "store",
+      "availability": "in-stock",
+      "url": "https://www.kns.ru/product/processor-amd-ryzen-7-9700x-oem/",
+      "note": "Комплектация OEM, без комплектного кулера.",
+      "evidence": {
+        "title": "Процессор AMD Ryzen 7 9700X OEM",
+        "identity": "AMD Ryzen 7 9700X OEM",
+        "availability": "http://schema.org/InStock",
+        "availabilityText": "Наличие: В наличии на складе Самовывоз: послезавтра, бесплатно Доставка: послезавтра, от 450р. Создать оферту ЕАИСТ",
+        "priceProperty": "24444",
+        "contentSha256": "955f9288188917155c1156b75ba004246c3b591714cadfdc99225fffb3d1d1eb"
+      }
+    },
+    {
+      "id": "r9-9900x",
+      "region": "ru",
+      "price": 37267.0,
+      "currency": "RUB",
+      "date": "2026-11-08",
+      "store": "KNS",
+      "kind": "store",
+      "availability": "in-stock",
+      "url": "https://www.kns.ru/product/processor-amd-ryzen-9-9900x-oem/",
+      "note": "Комплектация OEM, без комплектного кулера.",
+      "evidence": {
+        "title": "Процессор AMD Ryzen 9 9900X OEM",
+        "identity": "AMD Ryzen 9 9900X OEM",
+        "availability": "http://schema.org/InStock",
+        "availabilityText": "Наличие: В наличии на складе Самовывоз: послезавтра, бесплатно Доставка: послезавтра, от 450р. Создать оферту ЕАИСТ",
+        "priceProperty": "37267",
+        "contentSha256": "984775dcc32188cc17dcef5873b904855b4b53b0cc4fc99121742546c1aa7f70"
+      }
+    },
+    {
+      "id": "i7-12700k",
+      "region": "ru",
+      "price": 28386.0,
+      "currency": "RUB",
+      "date": "2026-11-08",
+      "store": "KNS",
+      "kind": "store",
+      "availability": "in-stock",
+      "url": "https://www.kns.ru/product/processor-intel-core-i7-12700k-oem/",
+      "note": "Комплектация OEM, без комплектного кулера.",
+      "evidence": {
+        "title": "Процессор Intel Core i7 12700K OEM",
+        "identity": "Intel Core i7 12700K OEM",
+        "availability": "http://schema.org/InStock",
+        "availabilityText": "Наличие: В наличии на складе Самовывоз: послезавтра, бесплатно Доставка: послезавтра, от 450р. Создать оферту ЕАИСТ",
+        "priceProperty": "28386",
+        "contentSha256": "5a5be7af2f7cd6cd8fcd6c7558d477c092a6a45326a5177cae26e39e75f2bee4"
+      }
+    },
+    {
+      "id": "i7-14700k",
+      "region": "ru",
+      "price": 38678.0,
+      "currency": "RUB",
+      "date": "2026-11-08",
+      "store": "KNS",
+      "kind": "store",
+      "availability": "in-stock",
+      "url": "https://www.kns.ru/product/processor-intel-core-i7-14700k-oem/",
+      "note": "Комплектация OEM, без комплектного кулера.",
+      "evidence": {
+        "title": "Процессор Intel Core i7 14700K OEM",
+        "identity": "Intel Core i7 14700K OEM",
+        "availability": "http://schema.org/InStock",
+        "availabilityText": "Наличие: В наличии на складе Самовывоз: послезавтра, бесплатно Доставка: послезавтра, от 450р. Создать оферту ЕАИСТ",
+        "priceProperty": "38678",
+        "contentSha256": "9fb2a6a1d6729e809ef43eb2d893a86dc65a73fbfb8924586c5a28268f64a1b2"
+      }
+    },
+    {
+      "id": "mag-z790-tomahawk-wifi",
+      "region": "ru",
+      "price": 23074.0,
+      "currency": "RUB",
+      "date": "2026-11-08",
+      "store": "KNS",
+      "kind": "store",
+      "availability": "out-of-stock",
+      "url": "https://www.kns.ru/product/materinskaya-plata-msi-z790-tomahawk-wifi/",
+      "note": "Последняя опубликованная цена; товар отсутствует или ожидается. Не считать доступным предложением.",
+      "evidence": {
+        "title": "Материнская плата MSI MAG Z790 Tomahawk WiFi",
+        "identity": "MSI MAG Z790 Tomahawk WiFi",
+        "availability": "http://schema.org/SoldOut",
+        "availabilityText": "Наличие: Нет в наличии Пожалуйста, перезвоните, мы постараемся подобрать лучший аналог",
+        "priceProperty": "23074",
+        "contentSha256": "ea59a4a8d3ef61def88b0c56aab025768c084b6d0fcac24fbc2e0696d803bd27"
+      }
+    },
+    {
+      "id": "mpg-b550-gaming-plus",
+      "region": "ru",
+      "price": 13529.0,
+      "currency": "RUB",
+      "date": "2026-11-08",
+      "store": "KNS",
+      "kind": "store",
+      "availability": "out-of-stock",
+      "url": "https://www.kns.ru/product/materinskaya-plata-msi-mpg-b550-gaming-plus/",
+      "note": "Последняя опубликованная цена; товар отсутствует или ожидается. Не считать доступным предложением.",
+      "evidence": {
+        "title": "Материнская плата MSI MPG B550 Gaming Plus",
+        "identity": "MSI MPG B550 Gaming Plus",
+        "availability": "http://schema.org/SoldOut",
+        "availabilityText": "Наличие: Нет в наличии Пожалуйста, перезвоните, мы постараемся подобрать лучший аналог 5,0",
+        "priceProperty": "13529",
+        "contentSha256": "1dfaed99cb712c135d9fd6227881d2277fed74aed69288a1517e2b666ed0c9e6"
+      }
+    },
+    {
+      "id": "b550m-pro-vdh",
+      "region": "ru",
+      "price": 11911.0,
+      "currency": "RUB",
+      "date": "2026-11-08",
+      "store": "KNS",
+      "kind": "store",
+      "availability": "out-of-stock",
+      "url": "https://www.kns.ru/product/materinskaya-plata-msi-b550m-pro-vdh/",
+      "note": "Последняя опубликованная цена; товар отсутствует или ожидается. Не считать доступным предложением.",
+      "evidence": {
+        "title": "Материнская плата MSI B550M Pro-VDH",
+        "identity": "MSI B550M Pro-VDH",
+        "availability": "http://schema.org/SoldOut",
+        "availabilityText": "Наличие: Нет в наличии Пожалуйста, перезвоните, мы постараемся подобрать лучший аналог 4,8",
+        "priceProperty": "11911",
+        "contentSha256": "92bf67c5010923834468d3c73aa351c24893081c2b768cf8e28017a6349e3b3e"
+      }
+    },
+    {
+      "id": "prime-b550m-a",
+      "region": "ru",
+      "price": 10251.0,
+      "currency": "RUB",
+      "date": "2026-11-08",
+      "store": "KNS",
+      "kind": "store",
+      "availability": "in-stock",
+      "url": "https://www.kns.ru/product/materinskaya-plata-asus-prime-b550m-a/",
+      "note": "",
+      "evidence": {
+        "title": "Материнская плата ASUS Prime B550M-A",
+        "identity": "ASUS Prime B550M-A",
+        "availability": "http://schema.org/InStock",
+        "availabilityText": "Наличие: В наличии на складе Самовывоз: послезавтра, бесплатно Доставка: послезавтра, от 450р. Создать оферту ЕАИСТ",
+        "priceProperty": "10251",
+        "contentSha256": "efc0d20d58b80d72162eaa8e39004481b5ba27c77b834fd863a841da07124e3a"
+      }
+    },
+    {
+      "id": "tuf-b650-plus-wifi",
+      "region": "ru",
+      "price": 26353.0,
+      "currency": "RUB",
+      "date": "2026-11-08",
+      "store": "KNS",
+      "kind": "store",
+      "availability": "out-of-stock",
+      "url": "https://www.kns.ru/product/materinskaya-plata-asus-tuf-gaming-b650-plus-wifi/",
+      "note": "Последняя опубликованная цена; товар отсутствует или ожидается. Не считать доступным предложением.",
+      "evidence": {
+        "title": "Материнская плата ASUS TUF Gaming B650-Plus WiFi",
+        "identity": "ASUS TUF Gaming B650-Plus WiFi",
+        "availability": "http://schema.org/SoldOut",
+        "availabilityText": "Наличие: Ожидается Создать оферту ЕАИСТ",
+        "priceProperty": "26353",
+        "contentSha256": "dc5b01dff31769d8e1eccc2df4dbfce382e8c2681c72012fc6c7eccf95d600fe"
+      }
+    },
+    {
+      "id": "b650-eagle-ax",
+      "region": "ru",
+      "price": 14774.0,
+      "currency": "RUB",
+      "date": "2026-11-08",
+      "store": "KNS",
+      "kind": "store",
+      "availability": "in-stock",
+      "url": "https://www.kns.ru/product/materinskaya-plata-gigabyte-b650-eagle-ax/",
+      "note": "Ревизию платы 1.0/1.1 необходимо уточнить у продавца.",
+      "evidence": {
+        "title": "Материнская плата GigaByte B650 Eagle AX",
+        "identity": "GigaByte B650 Eagle AX",
+        "availability": "http://schema.org/InStock",
+        "availabilityText": "Наличие: В наличии на складе Самовывоз: послезавтра, бесплатно Доставка: послезавтра, от 450р. Создать оферту ЕАИСТ",
+        "priceProperty": "14774",
+        "contentSha256": "e5e1a48f8042ddd302958e92d1fa179c7dd62c28aa338e9259c8c3d0182500b0"
+      }
+    },
+    {
+      "id": "ak500",
+      "region": "ru",
+      "price": 5063.0,
+      "currency": "RUB",
+      "date": "2026-11-08",
+      "store": "KNS",
+      "kind": "store",
+      "availability": "out-of-stock",
+      "url": "https://www.kns.ru/product/kuler-deepcool-ak500/",
+      "note": "Последняя опубликованная цена; товар отсутствует или ожидается. Не считать доступным предложением.",
+      "evidence": {
+        "title": "Кулер Deepcool AK500 Black",
+        "identity": "Deepcool AK500 Black",
+        "availability": "http://schema.org/SoldOut",
+        "availabilityText": "Наличие: Нет в наличии Пожалуйста, перезвоните, мы постараемся подобрать лучший аналог",
+        "priceProperty": "5063",
+        "contentSha256": "3a6da4a20b9fa47f7746f73f337ba9549b2e3baa828d1a248868b40a775d1d66"
+      }
+    },
+    {
+      "id": "rtx5050-ventus2x-oc",
+      "region": "ru",
+      "price": 49053.0,
+      "currency": "RUB",
+      "date": "2026-11-08",
+      "store": "KNS",
+      "kind": "store",
+      "availability": "out-of-stock",
+      "url": "https://www.kns.ru/product/videokarta-msi-nvidia-geforce-rtx-5050-8g-ventus-2x-oc/",
+      "note": "Последняя опубликованная цена; товар отсутствует или ожидается. Не считать доступным предложением.",
+      "evidence": {
+        "title": "Видеокарта MSI nVidia GeForce RTX 5050 8G Ventus 2X OC",
+        "identity": "MSI nVidia GeForce RTX 5050 8G Ventus 2X OC",
+        "availability": "http://schema.org/SoldOut",
+        "availabilityText": "Наличие: Нет в наличии Пожалуйста, перезвоните, мы постараемся подобрать лучший аналог",
+        "priceProperty": "49053",
+        "contentSha256": "6d70d5abf04f2f40f749284d9e3b6f38412d087d42653c06e33cf9d1b9e22d3d"
+      }
+    },
+    {
+      "id": "rtx5060ti-16-ventus2x-oc-plus",
+      "region": "ru",
+      "price": 93832.0,
+      "currency": "RUB",
+      "date": "2026-11-08",
+      "store": "KNS",
+      "kind": "store",
+      "availability": "out-of-stock",
+      "url": "https://www.kns.ru/product/videokarta-msi-nvidia-geforce-rtx-5060-ti-16g-ventus-2x-oc-plus/",
+      "note": "Последняя опубликованная цена; товар отсутствует или ожидается. Не считать доступным предложением.",
+      "evidence": {
+        "title": "Видеокарта MSI nVidia GeForce RTX 5060 Ti 16G Ventus 2X OC Plus",
+        "identity": "MSI nVidia GeForce RTX 5060 Ti 16G Ventus 2X OC Plus",
+        "availability": "http://schema.org/SoldOut",
+        "availabilityText": "Наличие: Ожидается Создать оферту ЕАИСТ",
+        "priceProperty": "93832",
+        "contentSha256": "9bcf8e8ef5e056e11bb59f886e262f51ea0b6e910739e1e755ef856f13dffdd3"
+      }
+    },
+    {
+      "id": "rtx5070ti-ventus3x-oc",
+      "region": "ru",
+      "price": 171852.0,
+      "currency": "RUB",
+      "date": "2026-11-08",
+      "store": "KNS",
+      "kind": "store",
+      "availability": "in-stock",
+      "url": "https://www.kns.ru/product/videokarta-msi-nvidia-geforce-rtx-5070-ti-16g-ventus-3x-oc/",
+      "note": "",
+      "evidence": {
+        "title": "Видеокарта MSI nVidia GeForce RTX 5070 Ti 16G Ventus 3X OC",
+        "identity": "MSI nVidia GeForce RTX 5070 Ti 16G Ventus 3X OC",
+        "availability": "http://schema.org/InStock",
+        "availabilityText": "Наличие: В наличии на складе Самовывоз: послезавтра, бесплатно Доставка: послезавтра, от 450р. Создать оферту ЕАИСТ",
+        "priceProperty": "171852",
+        "contentSha256": "88407b234572266ca98b8ccd29debda716a3dcd4f4cad802fa86c488c4e24110"
+      }
+    },
+    {
+      "id": "rtx5080-ventus3x-oc",
+      "region": "ru",
+      "price": 254603.0,
+      "currency": "RUB",
+      "date": "2026-11-08",
+      "store": "KNS",
+      "kind": "store",
+      "availability": "in-stock",
+      "url": "https://www.kns.ru/product/videokarta-msi-nvidia-geforce-rtx-5080-16g-ventus-3x-oc/",
+      "note": "",
+      "evidence": {
+        "title": "Видеокарта MSI nVidia GeForce RTX 5080 16G Ventus 3X OC",
+        "identity": "MSI nVidia GeForce RTX 5080 16G Ventus 3X OC",
+        "availability": "http://schema.org/InStock",
+        "availabilityText": "Наличие: В наличии на складе Самовывоз: послезавтра, бесплатно Доставка: послезавтра, от 450р. Создать оферту ЕАИСТ",
+        "priceProperty": "254603",
+        "contentSha256": "43184a522f2c14672c848f6d9ab37676d18f3b73672a6cc2399111dc7b2dd090"
+      }
+    },
+    {
+      "id": "rtx5090-ventus3x-oc",
+      "region": "ru",
+      "price": 1287745.0,
+      "currency": "RUB",
+      "date": "2026-11-08",
+      "store": "KNS",
+      "kind": "store",
+      "availability": "in-stock",
+      "url": "https://www.kns.ru/product/videokarta-msi-nvidia-geforce-rtx-5090-32g-ventus-3x-oc/",
+      "note": "",
+      "evidence": {
+        "title": "Видеокарта MSI nVidia GeForce RTX 5090 32G Ventus 3X OC",
+        "identity": "MSI nVidia GeForce RTX 5090 32G Ventus 3X OC",
+        "availability": "http://schema.org/InStock",
+        "availabilityText": "Наличие: В наличии на складе Самовывоз: послезавтра, бесплатно Доставка: послезавтра, от 450р. Создать оферту ЕАИСТ",
+        "priceProperty": "1287745",
+        "contentSha256": "83e993da977782ae96571f80bdff7d6ab518e7a2310be4b77e690d5e9caef71c"
+      }
+    },
+    {
+      "id": "rx9060xt-8-pulse",
+      "region": "ru",
+      "price": 48016.0,
+      "currency": "RUB",
+      "date": "2026-11-08",
+      "store": "KNS",
+      "kind": "store",
+      "availability": "out-of-stock",
+      "url": "https://www.kns.ru/product/videokarta-sapphire-amd-radeon-rx-9060-xt-pulse-8gb-11350-05-20g/",
+      "note": "Последняя опубликованная цена; товар отсутствует или ожидается. Не считать доступным предложением.",
+      "evidence": {
+        "title": "Видеокарта Sapphire AMD Radeon RX 9060 XT Pulse 8Gb 11350-05-20G",
+        "identity": "11350-05-20G",
+        "availability": "http://schema.org/SoldOut",
+        "availabilityText": "Наличие: Нет в наличии Пожалуйста, перезвоните, мы постараемся подобрать лучший аналог",
+        "priceProperty": "48016",
+        "contentSha256": "579dba9b72ce4afb68f5fb08725841d8b404d6016a8d88e6efb2bda0c8e509a6"
+      }
+    },
+    {
+      "id": "rx9070-pulse",
+      "region": "ru",
+      "price": 93292.0,
+      "currency": "RUB",
+      "date": "2026-11-08",
+      "store": "KNS",
+      "kind": "store",
+      "availability": "out-of-stock",
+      "url": "https://www.kns.ru/product/videokarta-sapphire-amd-radeon-rx-9070-pulse-16gb-11349-03-20g/",
+      "note": "Последняя опубликованная цена; товар отсутствует или ожидается. Не считать доступным предложением.",
+      "evidence": {
+        "title": "Видеокарта Sapphire AMD Radeon RX 9070 Pulse Gaming 16Gb 11349-03-20G",
+        "identity": "11349-03-20G",
+        "availability": "http://schema.org/SoldOut",
+        "availabilityText": "Наличие: Нет в наличии Пожалуйста, перезвоните, мы постараемся подобрать лучший аналог",
+        "priceProperty": "93292",
+        "contentSha256": "a3499e695723329ba747f7baa9ef49e6dca01a074a268b04066fc346c820ce88"
+      }
+    },
+    {
+      "id": "rx9070xt-pulse",
+      "region": "ru",
+      "price": 128650.0,
+      "currency": "RUB",
+      "date": "2026-11-08",
+      "store": "KNS",
+      "kind": "store",
+      "availability": "in-stock",
+      "url": "https://www.kns.ru/product/videokarta-sapphire-amd-radeon-rx-9070-xt-pulse-16gb-11348-03-20g/",
+      "note": "",
+      "evidence": {
+        "title": "Видеокарта Sapphire AMD Radeon RX 9070 XT Pulse 16Gb 11348-03-20G",
+        "identity": "11348-03-20G",
+        "availability": "http://schema.org/InStock",
+        "availabilityText": "Наличие: В наличии на складе Самовывоз: послезавтра, бесплатно Доставка: послезавтра, от 450р. Создать оферту ЕАИСТ",
+        "priceProperty": "128650",
+        "contentSha256": "1fb2e01086d08eaec7932aea5405bd06e821bdb2a87ee73dd9a2bf1a1ea0ba1c"
+      }
+    },
+    {
+      "id": "a550bn",
+      "region": "ru",
+      "price": 4275.0,
+      "currency": "RUB",
+      "date": "2026-11-08",
+      "store": "KNS",
+      "kind": "store",
+      "availability": "in-stock",
+      "url": "https://www.kns.ru/product/blok-pitaniya-msi-550w-mag-a550bn/",
+      "note": "",
+      "evidence": {
+        "title": "Блок питания MSI 550W MAG A550BN",
+        "identity": "MSI 550W MAG A550BN",
+        "availability": "http://schema.org/InStock",
+        "availabilityText": "Наличие: В наличии на складе Самовывоз: послезавтра, бесплатно Доставка: послезавтра, от 450р. Создать оферту ЕАИСТ",
+        "priceProperty": "4275",
+        "contentSha256": "bfc855ef932790fd550739285ed7e5f8c277ade6f39e1c393be0f46208f28728"
+      }
+    },
+    {
+      "id": "a1000gl",
+      "region": "ru",
+      "price": 13488.0,
+      "currency": "RUB",
+      "date": "2026-11-08",
+      "store": "KNS",
+      "kind": "store",
+      "availability": "in-stock",
+      "url": "https://www.kns.ru/product/blok-pitaniya-msi-1000w-mag-a1000gl/",
+      "note": "",
+      "evidence": {
+        "title": "Блок питания MSI 1000W MAG A1000GL PCIE5 Black",
+        "identity": "MSI 1000W MAG A1000GL PCIE5 Black",
+        "availability": "http://schema.org/InStock",
+        "availabilityText": "Наличие: В наличии на складе Самовывоз: послезавтра, бесплатно Доставка: послезавтра, от 800р. Создать оферту ЕАИСТ",
+        "priceProperty": "13488",
+        "contentSha256": "c4a1e172350824427b8b4f299fcf7207aee9756c27666660020fb7380106f12d"
+      }
+    },
+    {
+      "id": "ddr5-32-5200",
+      "region": "ru",
+      "price": 63910.0,
+      "currency": "RUB",
+      "date": "2026-11-08",
+      "store": "KNS",
+      "kind": "store",
+      "availability": "in-stock",
+      "url": "https://www.kns.ru/product/operativnaya-pamyat-kingston-fury-beast-kf552c40bbk2-32/",
+      "note": "",
+      "evidence": {
+        "title": "Оперативная память Kingston Fury Beast KF552C40BBK2-32",
+        "identity": "KF552C40BBK2-32",
+        "availability": "http://schema.org/InStock",
+        "availabilityText": "Наличие: В наличии на складе Самовывоз: послезавтра, бесплатно Доставка: послезавтра, от 450р. Создать оферту ЕАИСТ",
+        "priceProperty": "63910",
+        "contentSha256": "d7e9422b475cd0f20306c758c765a4c8430e0eed44cf8169131fd61c355a9932"
+      }
+    },
+    {
+      "id": "ddr5-32-6000-cl30",
+      "region": "ru",
+      "price": 80220.0,
+      "currency": "RUB",
+      "date": "2026-11-08",
+      "store": "KNS",
+      "kind": "store",
+      "availability": "in-stock",
+      "url": "https://www.kns.ru/product/operativnaya-pamyat-kingston-fury-beast-black-expo-kf560c30bbek2-32/",
+      "note": "",
+      "evidence": {
+        "title": "Оперативная память Kingston Fury Beast Black Expo KF560C30BBEK2-32",
+        "identity": "KF560C30BBEK2-32",
+        "availability": "http://schema.org/InStock",
+        "availabilityText": "Наличие: В наличии на складе Самовывоз: послезавтра, бесплатно Доставка: послезавтра, от 450р. Создать оферту ЕАИСТ",
+        "priceProperty": "80220",
+        "contentSha256": "6ed15904921b7a016949824475b26adb11d578726ad00fe32f1875c3309ac0a2"
+      }
+    },
+    {
+      "id": "renegade-ddr5-32-6400",
+      "region": "ru",
+      "price": 70384.0,
+      "currency": "RUB",
+      "date": "2026-11-08",
+      "store": "KNS",
+      "kind": "store",
+      "availability": "in-stock",
+      "url": "https://www.kns.ru/product/operativnaya-pamyat-kingston-fury-renegade-silver-kf564c32rsk2-32/",
+      "note": "",
+      "evidence": {
+        "title": "Оперативная память Kingston Fury Renegade Silver KF564C32RSK2-32",
+        "identity": "KF564C32RSK2-32",
+        "availability": "http://schema.org/InStock",
+        "availabilityText": "Наличие: В наличии на складе Самовывоз: послезавтра, бесплатно Доставка: послезавтра, от 450р. Создать оферту ЕАИСТ",
+        "priceProperty": "70384",
+        "contentSha256": "945c6d4525775e6f53e250b9838f8294d956470ad610c38cc62ee30ab51c4a14"
+      }
+    },
+    {
+      "id": "990-pro-2tb",
+      "region": "ru",
+      "price": 49302.0,
+      "currency": "RUB",
+      "date": "2026-11-08",
+      "store": "KNS",
+      "kind": "store",
+      "availability": "out-of-stock",
+      "url": "https://www.kns.ru/product/ssd-disk-samsung-990-pro-2tb-mz-v9p2t0bw/",
+      "note": "Последняя опубликованная цена; товар отсутствует, не считать доступным предложением.",
+      "evidence": {
+        "title": "SSD диск Samsung 990 PRO 2Tb MZ-V9P2T0BW",
+        "identity": "MZ-V9P2T0BW",
+        "availability": "http://schema.org/SoldOut",
+        "availabilityText": "Наличие: Ожидается Создать оферту ЕАИСТ",
+        "priceProperty": "49302",
+        "contentSha256": "479f61f66f72274129cd6914511a1223f544ae156d26c8a20106aac6932c50c8"
+      }
+    },
+    {
+      "id": "990-pro-4tb",
+      "region": "ru",
+      "price": 87856.0,
+      "currency": "RUB",
+      "date": "2026-11-08",
+      "store": "KNS",
+      "kind": "store",
+      "availability": "in-stock",
+      "url": "https://www.kns.ru/product/ssd-disk-samsung-990-pro-4tb-mz-v9p4t0bw/",
+      "note": "",
+      "evidence": {
+        "title": "SSD диск Samsung 990 PRO 4Tb MZ-V9P4T0BW",
+        "identity": "MZ-V9P4T0BW",
+        "availability": "http://schema.org/InStock",
+        "availabilityText": "Наличие: В наличии на складе Самовывоз: послезавтра, бесплатно Доставка: послезавтра, от 450р. Создать оферту ЕАИСТ",
+        "priceProperty": "87856",
+        "contentSha256": "2115179162386a642736febad97331b037506a3b57f6de5194f5a2709b71de95"
+      }
+    },
+    {
+      "id": "980-500gb",
+      "region": "ru",
+      "price": 23655.0,
+      "currency": "RUB",
+      "date": "2026-11-08",
+      "store": "KNS",
+      "kind": "store",
+      "availability": "in-stock",
+      "url": "https://www.kns.ru/product/ssd-disk-samsung-980-500gb-mz-v8v500bw/",
+      "note": "",
+      "evidence": {
+        "title": "SSD диск Samsung 980 500Gb MZ-V8V500BW",
+        "identity": "MZ-V8V500BW",
+        "availability": "http://schema.org/InStock",
+        "availabilityText": "Наличие: В наличии в магазине Самовывоз: завтра, бесплатно Доставка: завтра, от 450р. Создать оферту ЕАИСТ",
+        "priceProperty": "23655",
+        "contentSha256": "d57e20d360ae997a1b51402f0260d305ada988d37d8b6ee205e22bcaed246315"
+      }
+    },
+    {
+      "id": "assassin-iv",
+      "region": "ru",
+      "price": 8217.0,
+      "currency": "RUB",
+      "date": "2026-11-08",
+      "store": "KNS",
+      "kind": "store",
+      "availability": "in-stock",
+      "url": "https://www.kns.ru/product/kuler-deepcool-assassin-iv/",
+      "note": "",
+      "evidence": {
+        "title": "Кулер Deepcool Assassin IV Black",
+        "identity": "Deepcool Assassin IV Black",
+        "availability": "http://schema.org/InStock",
+        "availabilityText": "Наличие: В наличии на складе Самовывоз: послезавтра, бесплатно Доставка: послезавтра, от 450р. Создать оферту ЕАИСТ",
+        "priceProperty": "8217",
+        "contentSha256": "3b020727849f83db94b399f738e1c03ade246c577ff42ae747a30216b8f35b9f"
+      }
+    },
+    {
+      "id": "ai1300p",
+      "region": "ru",
+      "price": 33657.0,
+      "currency": "RUB",
+      "date": "2026-11-08",
+      "store": "KNS",
+      "kind": "store",
+      "availability": "out-of-stock",
+      "url": "https://www.kns.ru/product/blok-pitaniya-msi-1300w-meg-ai1300p/",
+      "note": "Последняя опубликованная цена; товар отсутствует, не считать доступным предложением.",
+      "evidence": {
+        "title": "Блок питания MSI 1300W MEG Ai1300P",
+        "identity": "MSI 1300W MEG Ai1300P",
+        "availability": "http://schema.org/SoldOut",
+        "availabilityText": "Наличие: Нет в наличии Пожалуйста, перезвоните, мы постараемся подобрать лучший аналог Мощность: 1300W, форм-фактор: ATX, размер вентилятора: 120 мм, тип разъема для материнской платы: 24 pin, дополнительно: PFC активный, 80PLUS Platinum, 306-7ZP4A11-CE0 Код товара: 698656",
+        "priceProperty": "33657",
+        "contentSha256": "f513946a822c2e2baf1ebc5bcbf45d5533d4c917565b1113fe131e9cd459332e"
+      }
+    },
+    {
+      "id": "pk650d",
+      "region": "ru",
+      "price": 6267.0,
+      "currency": "RUB",
+      "date": "2026-11-08",
+      "store": "KNS",
+      "kind": "store",
+      "availability": "out-of-stock",
+      "url": "https://www.kns.ru/product/blok-pitaniya-deepcool-650w-pk650d/",
+      "note": "Последняя опубликованная цена; товар отсутствует, не считать доступным предложением.",
+      "evidence": {
+        "title": "Блок питания Deepcool 650W PK650D GamerStorm",
+        "identity": "Deepcool 650W PK650D",
+        "availability": "http://schema.org/SoldOut",
+        "availabilityText": "Наличие: Нет в наличии Пожалуйста, перезвоните, мы постараемся подобрать лучший аналог",
+        "priceProperty": "6267",
+        "contentSha256": "d1d06f231881843b83b72891200c866859d4b9da7df78ac6d28886a69241768c"
+      }
+    },
+    {
+      "id": "pq650m",
+      "region": "ru",
+      "price": 10251.0,
+      "currency": "RUB",
+      "date": "2026-11-08",
+      "store": "KNS",
+      "kind": "store",
+      "availability": "out-of-stock",
+      "url": "https://www.kns.ru/product/blok-pitaniya-deepcool-650w-pq650m/",
+      "note": "Последняя опубликованная цена; товар отсутствует, не считать доступным предложением.",
+      "evidence": {
+        "title": "Блок питания Deepcool 650W PQ650M",
+        "identity": "Deepcool 650W PQ650M",
+        "availability": "http://schema.org/OutOfStock",
+        "availabilityText": "Наличие: Нет в наличии более 60 дней. Вероятно Deepcool 650W PQ650M снят с производства. Пожалуйста, перезвоните, мы постараемся подобрать аналог!",
+        "priceProperty": "10251",
+        "contentSha256": "f03d6802e829ca9da408006db6e2fa556b1240861df2c8c1975366b68fd29ccb"
+      }
+    },
+    {
+      "id": "pq750m",
+      "region": "ru",
+      "price": 10915.0,
+      "currency": "RUB",
+      "date": "2026-11-08",
+      "store": "KNS",
+      "kind": "store",
+      "availability": "out-of-stock",
+      "url": "https://www.kns.ru/product/blok-pitaniya-deepcool-750w-pq750m/",
+      "note": "Последняя опубликованная цена; товар отсутствует, не считать доступным предложением.",
+      "evidence": {
+        "title": "Блок питания Deepcool 750W PQ750M",
+        "identity": "Deepcool 750W PQ750M",
+        "availability": "http://schema.org/OutOfStock",
+        "availabilityText": "Наличие: Нет в наличии более 60 дней. Вероятно Deepcool 750W PQ750M снят с производства. Пожалуйста, перезвоните, мы постараемся подобрать аналог!",
+        "priceProperty": "10915",
+        "contentSha256": "18801953ae44345fe875eae56668bca49422c778587af42e7fbaef9ace702611"
+      }
+    },
+    {
+      "id": "pq850m",
+      "region": "ru",
+      "price": 13986.0,
+      "currency": "RUB",
+      "date": "2026-11-08",
+      "store": "KNS",
+      "kind": "store",
+      "availability": "out-of-stock",
+      "url": "https://www.kns.ru/product/blok-pitaniya-deepcool-850w-pq850m/",
+      "note": "Последняя опубликованная цена; товар отсутствует, не считать доступным предложением.",
+      "evidence": {
+        "title": "Блок питания Deepcool 850W PQ850M",
+        "identity": "Deepcool 850W PQ850M",
+        "availability": "http://schema.org/OutOfStock",
+        "availabilityText": "Наличие: Нет в наличии более 60 дней. Вероятно Deepcool 850W PQ850M снят с производства. Пожалуйста, перезвоните, мы постараемся подобрать аналог!",
+        "priceProperty": "13986",
+        "contentSha256": "bb800a253232dd9d3c0084bbdfd419415cf3a2ca033f7a37401958f0ebf264e4"
+      }
+    },
+    {
+      "id": "ddr4-32",
+      "region": "ru",
+      "price": 52300.0,
+      "currency": "RUB",
+      "date": "2026-11-08",
+      "store": "Lifebook",
+      "kind": "store",
+      "availability": "in-stock",
+      "url": "https://lifebook-shop.ru/catalog/pc-components/ram/kf432c16bbk2_32/",
+      "note": "Цена для физических лиц; цена для юридических лиц с НДС может отличаться. Доставка не включена.",
+      "evidence": {
+        "title": "Оперативная память Kingston KF432C16BBK2/32, 32 ГБ (2x16 ГБ), DDR4, 3200 МГц, DIMM, PC4-25600, CL16",
+        "identity": "KF432C16BBK2/32",
+        "availabilityText": "В наличии",
+        "priceProperty": "52300.0",
+        "contentSha256": "f091a384418dd8fa34a95ab9e3cfc9a13aef973916a7907a622e60e39ffa5b54"
+      }
+    },
+    {
+      "id": "ddr4-16-3200",
+      "region": "ru",
+      "price": 23050.0,
+      "currency": "RUB",
+      "date": "2026-11-08",
+      "store": "Lifebook",
+      "kind": "store",
+      "availability": "in-stock",
+      "url": "https://lifebook-shop.ru/catalog/pc-components/ram/kf432c16bbk2_16/",
+      "note": "Цена для физических лиц; цена для юридических лиц с НДС может отличаться. Доставка не включена.",
+      "evidence": {
+        "title": "Оперативная память Kingston KF432C16BBK2/16, 16 ГБ (2x8 ГБ), DDR4, 3200 МГц, DIMM, CL16",
+        "identity": "KF432C16BBK2/16",
+        "availabilityText": "В наличии",
+        "priceProperty": "23050.0",
+        "contentSha256": "96fba4778795e9cd4b63716cc0d254bafb5a3ab610f490c3ce8bc67e61a22ee7"
+      }
+    },
+    {
+      "id": "ddr5-32-5600",
+      "region": "ru",
+      "price": 66600.0,
+      "currency": "RUB",
+      "date": "2026-11-08",
+      "store": "Lifebook",
+      "kind": "store",
+      "availability": "in-stock",
+      "url": "https://lifebook-shop.ru/catalog/pc-components/ram/kf556c40bbk2_32/",
+      "note": "Цена для физических лиц; цена для юридических лиц с НДС может отличаться. Доставка не включена.",
+      "evidence": {
+        "title": "Оперативная память Kingston KF556C40BBK2-32, 32 ГБ (2x16 ГБ), DDR5, 5600 МГц, DIMM, PC5-44800, CL40",
+        "identity": "KF556C40BBK2-32",
+        "availabilityText": "В наличии",
+        "priceProperty": "66600.0",
+        "contentSha256": "d0eb7900b117b37fdcdd127b18cf8f4c1c1695577a2805f1bbcb7c399ecb65b0"
+      }
+    },
+    {
+      "id": "mem-kf432c16bb-16",
+      "region": "ru",
+      "price": 24650.0,
+      "currency": "RUB",
+      "date": "2026-11-08",
+      "store": "Lifebook",
+      "kind": "store",
+      "availability": "in-stock",
+      "url": "https://lifebook-shop.ru/catalog/pc-components/ram/kf432c16bb_16/",
+      "note": "Цена для физических лиц; цена для юридических лиц с НДС может отличаться. Доставка не включена.",
+      "evidence": {
+        "title": "Оперативная память Kingston KF432C16BB/16, 16 ГБ, DDR4, 3200 МГц, DIMM, CL16",
+        "identity": "KF432C16BB/16",
+        "availabilityText": "В наличии",
+        "priceProperty": "24650.0",
+        "contentSha256": "e95a37a6382fb5f9c90edc7e36e758b0480f946e27bc6f1e4181c0f25f56041d"
+      }
+    },
+    {
+      "id": "mem-kf432c16bb2a-8",
+      "region": "ru",
+      "price": 12450.0,
+      "currency": "RUB",
+      "date": "2026-11-08",
+      "store": "Lifebook",
+      "kind": "store",
+      "availability": "in-stock",
+      "url": "https://lifebook-shop.ru/catalog/pc-components/ram/kf432c16bb2a_8/",
+      "note": "Цена для физических лиц; цена для юридических лиц с НДС может отличаться. Доставка не включена.",
+      "evidence": {
+        "title": "Оперативная память Kingston KF432C16BB2A/8, 8 ГБ, DDR4, 3200 МГц, DIMM, PC4-25600, CL16",
+        "identity": "KF432C16BB2A/8",
+        "availabilityText": "В наличии",
+        "priceProperty": "12450.0",
+        "contentSha256": "5068e8518a0da69aea26be7412957f3ba35cff7bd131060c756f03ebd1f608bd"
+      }
+    },
+    {
+      "id": "mem-ks3200d4p13508g",
+      "region": "ru",
+      "price": 7150.0,
+      "currency": "RUB",
+      "date": "2026-11-08",
+      "store": "Lifebook",
+      "kind": "store",
+      "availability": "in-stock",
+      "url": "https://lifebook-shop.ru/catalog/pc-components/ram/ks3200d4p13508g/",
+      "note": "Цена для физических лиц; цена для юридических лиц с НДС может отличаться. Доставка не включена.",
+      "evidence": {
+        "title": "Оперативная память Оперативная память DDR4 8GB 3200MHz Kingspec KS3200D4P13508G RTL PC4-25600 CL18 DIMM 288-pin 1.35В dual rank Ret [KS3200D4P13508G] (SHENZHEN KINGSPEC ELECTRONICS TECHNOLOGY CO LTD KS3200D4P13508G)",
+        "identity": "KS3200D4P13508G",
+        "availabilityText": "В наличии Осталось мало",
+        "priceProperty": "7150.0",
+        "contentSha256": "35b75b24887fe1bda9337f7544efbe18323a2aca53bc02205e91610cc4fd9070",
+        "availability": "https://schema.org/InStock"
+      }
+    },
+    {
+      "id": "mem-kf556c36bbek2-32",
+      "region": "ru",
+      "price": 66600.0,
+      "currency": "RUB",
+      "date": "2026-11-08",
+      "store": "Lifebook",
+      "kind": "store",
+      "availability": "in-stock",
+      "url": "https://lifebook-shop.ru/catalog/pc-components/ram/kf556c36bbek2_32/",
+      "note": "Цена для физических лиц; цена для юридических лиц с НДС может отличаться. Доставка не включена.",
+      "evidence": {
+        "title": "Оперативная память Kingston KF556C36BBEK2-32, 32 ГБ (2x16 ГБ), DDR5, 5600 МГц, DIMM, PC5-44800, CL36",
+        "identity": "KF556C36BBEK2-32",
+        "availabilityText": "В наличии",
+        "priceProperty": "66600.0",
+        "contentSha256": "451578dde441b034ae361adde193f6cdaffdf0fdf8cb923c7b23bd74b68f54dc"
+      }
+    },
+    {
+      "id": "mem-kf556c36bbe-16",
+      "region": "ru",
+      "price": 34850.0,
+      "currency": "RUB",
+      "date": "2026-11-08",
+      "store": "Lifebook",
+      "kind": "store",
+      "availability": "in-stock",
+      "url": "https://lifebook-shop.ru/catalog/pc-components/ram/kf556c36bbe_16/",
+      "note": "Цена для физических лиц; цена для юридических лиц с НДС может отличаться. Доставка не включена.",
+      "evidence": {
+        "title": "Оперативная память Kingston KF556C36BBE-16, 16 ГБ, DDR5, 5600 МГц, DIMM, PC5-41600, CL36",
+        "identity": "KF556C36BBE-16",
+        "availabilityText": "В наличии",
+        "priceProperty": "34850.0",
+        "contentSha256": "345a3e2aa27605313d7385bad0be78c11712e6572298b71d0f9d5827c4daa6c6"
+      }
+    },
+    {
+      "id": "mem-kf560c30bbek2-16",
+      "region": "ru",
+      "price": 41250.0,
+      "currency": "RUB",
+      "date": "2026-11-08",
+      "store": "Lifebook",
+      "kind": "store",
+      "availability": "in-stock",
+      "url": "https://lifebook-shop.ru/catalog/pc-components/ram/kf560c30bbek2_16/",
+      "note": "Цена для физических лиц; цена для юридических лиц с НДС может отличаться. Доставка не включена.",
+      "evidence": {
+        "title": "Оперативная память Kingston KF560C30BBEK2-16, 16 ГБ (2x8 ГБ), DDR5, CL30",
+        "identity": "KF560C30BBEK2-16",
+        "availabilityText": "В наличии",
+        "priceProperty": "41250.0",
+        "contentSha256": "928f6cb5ca7bd25b1e157d65cbc03e6721add5da60cb3a746812bb42f61fef1d"
+      }
+    },
+    {
+      "id": "mem-kf564c32bbek2-32",
+      "region": "ru",
+      "price": 69400.0,
+      "currency": "RUB",
+      "date": "2026-11-08",
+      "store": "Lifebook",
+      "kind": "store",
+      "availability": "in-stock",
+      "url": "https://lifebook-shop.ru/catalog/pc-components/ram/kf564c32bbek2_32/",
+      "note": "Цена для физических лиц; цена для юридических лиц с НДС может отличаться. Доставка не включена.",
+      "evidence": {
+        "title": "Оперативная память Kingston KF564C32BBEK2-32, 32 ГБ (2x16 ГБ), DDR5, 6400 МГц, DIMM, PC5-51200, CL32",
+        "identity": "KF564C32BBEK2-32",
+        "availabilityText": "В наличии",
+        "priceProperty": "69400.0",
+        "contentSha256": "7fbdf9b954d26268107736d6010867e6730dcfba8463ce1df402ab2f0e8c89cf"
+      }
+    },
+    {
+      "id": "mem-kf552c40bba-8",
+      "region": "ru",
+      "price": 19500.0,
+      "currency": "RUB",
+      "date": "2026-11-08",
+      "store": "Lifebook",
+      "kind": "store",
+      "availability": "in-stock",
+      "url": "https://lifebook-shop.ru/catalog/pc-components/ram/kf552c40bba_8/",
+      "note": "Цена для физических лиц; цена для юридических лиц с НДС может отличаться. Доставка не включена.",
+      "evidence": {
+        "title": "Оперативная память Kingston KF552C40BBA-8, 8 ГБ, DDR5, 5200 МГц, DIMM, CL40",
+        "identity": "KF552C40BBA-8",
+        "availabilityText": "В наличии",
+        "priceProperty": "19500.0",
+        "contentSha256": "5d41d1ed00ea8d859310378222022fce40cb12cb89f448974c728d3938e8b11f"
+      }
+    },
+    {
+      "id": "kc3000-1tb",
+      "region": "ru",
+      "price": 32700.0,
+      "currency": "RUB",
+      "date": "2026-11-08",
+      "store": "Lifebook",
+      "kind": "store",
+      "availability": "in-stock",
+      "url": "https://lifebook-shop.ru/catalog/pc-components/ssd/skc3000s_1024g/",
+      "note": "Цена для физических лиц; цена для юридических лиц с НДС может отличаться. Доставка не включена.",
+      "evidence": {
+        "title": "Твердотельный накопитель Kingston SSD KC3000, 1024 ГБ, 3D TLC, чтение 7000 МБ/с, 800 ТБ",
+        "identity": "SKC3000S/1024G",
+        "availabilityText": "В наличии",
+        "priceProperty": "32700.0",
+        "contentSha256": "684b9d19ea954c9e6c1fb770033ba14c1c4aee269e1fc2995df2a60c06825436"
+      }
+    },
+    {
+      "id": "nv3-1tb",
+      "region": "ru",
+      "price": 16150.0,
+      "currency": "RUB",
+      "date": "2026-11-08",
+      "store": "Lifebook",
+      "kind": "store",
+      "availability": "in-stock",
+      "url": "https://lifebook-shop.ru/catalog/pc-components/ssd/snv3s_1000g/",
+      "note": "Цена для физических лиц; цена для юридических лиц с НДС может отличаться. Доставка не включена.",
+      "evidence": {
+        "title": "Твердотельный накопитель Kingston SSD NV3, 1 ТБ, 3D TLC, чтение 6000 МБ/с, 320 ТБ, M.2 2280",
+        "identity": "SNV3S/1000G",
+        "availabilityText": "В наличии",
+        "priceProperty": "16150.0",
+        "contentSha256": "158cfcf6a0b059ffdf42e3515e6ff85b8a2f2eae47942bc70121df4081223db8"
+      }
+    },
+    {
+      "id": "nv3-2tb",
+      "region": "ru",
+      "price": 30050.0,
+      "currency": "RUB",
+      "date": "2026-11-08",
+      "store": "Lifebook",
+      "kind": "store",
+      "availability": "in-stock",
+      "url": "https://lifebook-shop.ru/catalog/pc-components/ssd/snv3s_2000g/",
+      "note": "Цена для физических лиц; цена для юридических лиц с НДС может отличаться. Доставка не включена.",
+      "evidence": {
+        "title": "Твердотельный накопитель Kingston SSD NV3, 2 ТБ, 3D TLC, чтение 6000 МБ/с, 640 ТБ",
+        "identity": "SNV3S/2000G",
+        "availabilityText": "В наличии",
+        "priceProperty": "30050.0",
+        "contentSha256": "1b6e106421027d2c542cc09759b15eb8c5887716b0bd08832203912c9e469ac1"
+      }
+    },
+    {
+      "id": "ssd-agammixs60-1t-cs",
+      "region": "ru",
+      "price": 17450.0,
+      "currency": "RUB",
+      "date": "2026-11-08",
+      "store": "Lifebook",
+      "kind": "store",
+      "availability": "in-stock",
+      "url": "https://lifebook-shop.ru/catalog/pc-components/ssd/agammixs60_1t_cs/",
+      "note": "Цена для физических лиц; цена для юридических лиц с НДС может отличаться. Доставка не включена.",
+      "evidence": {
+        "title": "Твердотельный накопитель ADATA SSD GAMMIX S60 BLADE, 1 ТБ, 3D NAND, чтение 5000 МБ/с, 250 ТБ",
+        "identity": "AGAMMIXS60-1T-CS",
+        "availabilityText": "В наличии",
+        "priceProperty": "17450.0",
+        "contentSha256": "0c64173fb20f57b34b499805d95c529dee193f7d7de7bc2b45b866f503704657"
+      }
+    },
+    {
+      "id": "ssd-snv3s-500g",
+      "region": "ru",
+      "price": 11100.0,
+      "currency": "RUB",
+      "date": "2026-11-08",
+      "store": "Lifebook",
+      "kind": "store",
+      "availability": "in-stock",
+      "url": "https://lifebook-shop.ru/catalog/pc-components/ssd/snv3s_500g/",
+      "note": "Цена для физических лиц; цена для юридических лиц с НДС может отличаться. Доставка не включена.",
+      "evidence": {
+        "title": "Твердотельный накопитель Kingston SSD NV3, 500 ГБ, 3D TLC, чтение 5000 МБ/с, 160 ТБ, M.2 2280",
+        "identity": "SNV3S/500G",
+        "availabilityText": "В наличии",
+        "priceProperty": "11100.0",
+        "contentSha256": "b04c55a66fa3b972eef1f9cd9d4af0a544370facbd73388d64407402a5ecf43d"
+      }
+    },
+    {
+      "id": "ssd-sleg-860-1000gcs",
+      "region": "ru",
+      "price": 16900.0,
+      "currency": "RUB",
+      "date": "2026-11-08",
+      "store": "Lifebook",
+      "kind": "store",
+      "availability": "in-stock",
+      "url": "https://lifebook-shop.ru/catalog/pc-components/ssd/sleg_860_1000gcs/",
+      "note": "Цена для физических лиц; цена для юридических лиц с НДС может отличаться. Доставка не включена.",
+      "evidence": {
+        "title": "Твердотельный накопитель ADATA SSD LEGEND 860, 1 ТБ, 3D NAND, чтение 6000 МБ/с, 320 ТБ",
+        "identity": "SLEG-860-1000GCS",
+        "availabilityText": "В наличии",
+        "priceProperty": "16900.0",
+        "contentSha256": "11988c5c60e82088fa8bea815a13d684e6f1775b25f3df6ed7d2c1a630cced0d"
+      }
+    },
+    {
+      "id": "ssd-sleg-900p-2tcs",
+      "region": "ru",
+      "price": 35300.0,
+      "currency": "RUB",
+      "date": "2026-11-08",
+      "store": "Lifebook",
+      "kind": "store",
+      "availability": "in-stock",
+      "url": "https://lifebook-shop.ru/catalog/pc-components/ssd/sleg_900p_2tcs/",
+      "note": "Цена для физических лиц; цена для юридических лиц с НДС может отличаться. Доставка не включена.",
+      "evidence": {
+        "title": "Твердотельный накопитель ADATA SSD LEGEND 900 PRO, 2000 ГБ, 3D NAND, чтение 7400 МБ/с, 1200 ТБ",
+        "identity": "SLEG-900P-2TCS",
+        "availabilityText": "В наличии",
+        "priceProperty": "35300.0",
+        "contentSha256": "da06f999d7e2664d4c7aabbd5f0af3a0f58292fd10e3d7af7fc0126ee5f92fa6"
+      }
+    },
+    {
+      "id": "ssd-agammixs70b-1t-cs",
+      "region": "ru",
+      "price": 19350.0,
+      "currency": "RUB",
+      "date": "2026-11-08",
+      "store": "Lifebook",
+      "kind": "store",
+      "availability": "in-stock",
+      "url": "https://lifebook-shop.ru/catalog/pc-components/ssd/agammixs70b_1t_cs/",
+      "note": "Цена для физических лиц; цена для юридических лиц с НДС может отличаться. Доставка не включена.",
+      "evidence": {
+        "title": "Твердотельный накопитель ADATA SSD GAMMIX S70 BLADE, 1 ТБ, 3D TLC, чтение 7400 МБ/с, 740 ТБ",
+        "identity": "AGAMMIXS70B-1T-CS",
+        "availabilityText": "В наличии Осталось мало",
+        "priceProperty": "19350.0",
+        "contentSha256": "3236a01614a42afaf4df14ab4212b03ac1d12b27ecd91ab0a6a55d0c30432117",
+        "availability": "https://schema.org/InStock"
+      }
+    },
+    {
+      "id": "ssd-smar-980b-1tcs",
+      "region": "ru",
+      "price": 21200.0,
+      "currency": "RUB",
+      "date": "2026-11-08",
+      "store": "Lifebook",
+      "kind": "store",
+      "availability": "in-stock",
+      "url": "https://lifebook-shop.ru/catalog/pc-components/ssd/smar_980b_1tcs/",
+      "note": "Цена для физических лиц; цена для юридических лиц с НДС может отличаться. Доставка не включена.",
+      "evidence": {
+        "title": "Твердотельный накопитель ADATA SSD XPG MARS 980 BLADE, 1 ТБ, PCIe 5.0 x4, 9 ГБ ОЗУ",
+        "identity": "SMAR-980B-1TCS",
+        "availabilityText": "В наличии",
+        "priceProperty": "21200.0",
+        "contentSha256": "8f62b6e30f298f89d02cb9e48405135fb753ca7d5f8eacfb142b7b50619bf382"
+      }
+    },
+    {
+      "id": "ssd-aleg-960m-2tcs",
+      "region": "ru",
+      "price": 35450.0,
+      "currency": "RUB",
+      "date": "2026-11-08",
+      "store": "Lifebook",
+      "kind": "store",
+      "availability": "in-stock",
+      "url": "https://lifebook-shop.ru/catalog/pc-components/ssd/aleg_960m_2tcs/",
+      "note": "Цена для физических лиц; цена для юридических лиц с НДС может отличаться. Доставка не включена.",
+      "evidence": {
+        "title": "Твердотельный накопитель ADATA SSD LEGEND 960 MAX, 2 ТБ, 3D NAND, чтение 7400 МБ/с, 1560 ТБ",
+        "identity": "ALEG-960M-2TCS",
+        "availabilityText": "В наличии",
+        "priceProperty": "35450.0",
+        "contentSha256": "861ba73cdd19ac00e1ef649488c178b6d5a771179ce3bbddf7b8187dac4c74e1"
+      }
+    },
+    {
+      "id": "ssd-smar-980b-2tcs",
+      "region": "ru",
+      "price": 39350.0,
+      "currency": "RUB",
+      "date": "2026-11-08",
+      "store": "Lifebook",
+      "kind": "store",
+      "availability": "in-stock",
+      "url": "https://lifebook-shop.ru/catalog/pc-components/ssd/smar_980b_2tcs/",
+      "note": "Цена для физических лиц; цена для юридических лиц с НДС может отличаться. Доставка не включена.",
+      "evidence": {
+        "title": "Твердотельный накопитель ADATA SSD XPG MARS 980 BLADE, 2 ТБ, 3D NAND, чтение 14000 МБ/с, 1480 ТБ",
+        "identity": "SMAR-980B-2TCS",
+        "availabilityText": "В наличии",
+        "priceProperty": "39350.0",
+        "contentSha256": "bad166fe3987354155466e0645e75382f81849e574ed4786c1e31e4f0e64798b"
+      }
+    },
+    {
+      "id": "ssd-sleg-860-500gcs",
+      "region": "ru",
+      "price": 10150.0,
+      "currency": "RUB",
+      "date": "2026-11-08",
+      "store": "Lifebook",
+      "kind": "store",
+      "availability": "in-stock",
+      "url": "https://lifebook-shop.ru/catalog/pc-components/ssd/sleg_860_500gcs/",
+      "note": "Цена для физических лиц; цена для юридических лиц с НДС может отличаться. Доставка не включена.",
+      "evidence": {
+        "title": "Твердотельный накопитель ADATA SSD LEGEND 860, 500 ГБ, 3D NAND, чтение 5000 МБ/с, 160 ТБ",
+        "identity": "SLEG-860-500GCS",
+        "availabilityText": "В наличии",
+        "priceProperty": "10150.0",
+        "contentSha256": "9ba852d5e9c8472ab55fbed4a7a5d8448b723c5c7a87962e5f5bcb9a78cfe91d"
+      }
+    },
+    {
+      "id": "nh-d12l",
+      "region": "ru",
+      "price": 11100.0,
+      "currency": "RUB",
+      "date": "2026-11-08",
+      "store": "Lifebook",
+      "kind": "store",
+      "availability": "in-stock",
+      "url": "https://lifebook-shop.ru/catalog/pc-components/pc-cooling-systems/air-cooling-for-processors/nh_d12l/",
+      "note": "Цена для физических лиц; цена для юридических лиц с НДС может отличаться. Доставка не включена.",
+      "evidence": {
+        "title": "Кулер для процессора Noctua NH-D12L, AM4, AM5, LGA1150, LGA1155, LGA1156, LGA1200 и др., до 148 Вт",
+        "identity": "NH-D12L",
+        "availabilityText": "В наличии",
+        "priceProperty": "11100.0",
+        "contentSha256": "113b19d57260a80e80d604246ac840b64e0f5ca7350b654ae7d62ab22af579e2"
+      }
+    },
+    {
+      "id": "nh-d15s-chromax",
+      "region": "ru",
+      "price": 14200.0,
+      "currency": "RUB",
+      "date": "2026-11-08",
+      "store": "Lifebook",
+      "kind": "store",
+      "availability": "in-stock",
+      "url": "https://lifebook-shop.ru/catalog/pc-components/pc-cooling-systems/air-cooling-for-processors/nh_d15schromax_black/",
+      "note": "Цена для физических лиц; цена для юридических лиц с НДС может отличаться. Доставка не включена.",
+      "evidence": {
+        "title": "Кулер для процессора Noctua NH-D15S chromax.black, до 167 Вт, вентилятор 140 мм, шум 24.6 дБА",
+        "identity": "NH-D15Schromax.black",
+        "availabilityText": "В наличии",
+        "priceProperty": "14200.0",
+        "contentSha256": "9ad2588138a7a07ad17e5dc34ff27f6161e3317b90db17488c5d74e215958e16"
+      }
+    },
+    {
+      "id": "ddr5-16-5200",
+      "region": "ru",
+      "price": 37800.0,
+      "currency": "RUB",
+      "date": "2026-11-08",
+      "store": "Lifebook",
+      "kind": "store",
+      "availability": "in-stock",
+      "url": "https://lifebook-shop.ru/catalog/pc-components/ram/kf552c40bbk2_16/",
+      "note": "Цена для физических лиц; цена для юридических лиц с НДС может отличаться. Доставка не включена.",
+      "evidence": {
+        "title": "Оперативная память Kingston KF552C40BBK2-16, 16 ГБ (2x8 ГБ), DDR5, 5200 МГц, DIMM, PC5-41600, CL40",
+        "identity": "KF552C40BBK2-16",
+        "availabilityText": "В наличии Осталось мало",
+        "priceProperty": "37800.0",
+        "contentSha256": "c3595f27742372cd4f445a1cb049cd493dde1793d514e677adbe826eb6549cf7",
+        "availability": "https://schema.org/InStock"
+      }
+    }
+  ],
+  "unresolved": [
+    {
+      "id": "rtx5070-ventus2x-oc-white",
+      "url": "https://www.kns.ru/product/videokarta-msi-nvidia-geforce-rtx-5070-12g-ventus-2x-oc-white/",
+      "reason": "Price/currency invalid"
+    }
+  ],
+  "alternatives": [
+    {
+      "id": "ddr5-32-5200",
+      "region": "ru",
+      "price": 66600.0,
+      "currency": "RUB",
+      "date": "2026-11-08",
+      "store": "Lifebook",
+      "kind": "store",
+      "availability": "in-stock",
+      "url": "https://lifebook-shop.ru/catalog/pc-components/ram/kf552c40bbk2_32/",
+      "note": "Цена для физических лиц; цена для юридических лиц с НДС может отличаться. Доставка не включена.",
+      "evidence": {
+        "title": "Оперативная память Kingston KF552C40BBK2-32, 32 ГБ (2x16 ГБ), DDR5, 5200 МГц, DIMM, PC5-48000, CL40",
+        "identity": "KF552C40BBK2-32",
+        "availabilityText": "В наличии Осталось мало",
+        "priceProperty": "66600.0",
+        "contentSha256": "d06fe6cb50b495e24b02e39352dfccb3d7d6b3e2cb37e44ad6a939c1cd6d1b15",
+        "availability": "https://schema.org/InStock"
+      }
+    },
+    {
+      "id": "ddr5-16-5200",
+      "region": "ru",
+      "price": 38886.0,
+      "currency": "RUB",
+      "date": "2026-11-08",
+      "store": "KNS",
+      "kind": "store",
+      "availability": "in-stock",
+      "url": "https://www.kns.ru/product/operativnaya-pamyat-kingston-fury-beast-kf552c40bbk2-16/",
+      "note": "",
+      "evidence": {
+        "title": "Оперативная память Kingston Fury Beast KF552C40BBK2-16",
+        "identity": "KF552C40BBK2-16",
+        "availability": "http://schema.org/InStock",
+        "availabilityText": "Наличие: В наличии на складе Самовывоз: послезавтра, бесплатно Доставка: послезавтра, от 450р. Создать оферту ЕАИСТ",
+        "priceProperty": "38886",
+        "contentSha256": "be49ff070ebce2a8a6b7ecbc3633ef653a6e2ae23cac881fc0075f4b5e6f6910"
+      }
+    }
+  ]
+}

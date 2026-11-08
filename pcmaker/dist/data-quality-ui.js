@@ -1,6 +1,6 @@
 import {foreignPriceNotice} from './money.js';
 import {verificationFor} from './verification.js';
-import {priceQuality} from './price-quality.js';
+import {priceQuality,offerStatusLine,formatPriceDate} from './price-quality.js';
 import {specLabels} from './inspector.js';
 const e=s=>String(s??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
 export function verificationMarkup(part,details=true){
@@ -13,5 +13,6 @@ export function verificationMarkup(part,details=true){
 export function offerMarkup(offer){
  if(!offer)return '';
  const quality=priceQuality(offer);
- return `${offer.currency==='USD'?`<span class="shop-offer-note">${foreignPriceNotice}</span>`:''}<span class="price-quality ${quality.status}">${e(quality.label)}</span><span class="price-availability">${offer.availability==='in-stock'?'В наличии на дату проверки':offer.availability==='out-of-stock'?'Предложение недоступно':'Наличие уточни у магазина'}</span>`;
+ const check=offer.priceCheck,failed=check&&check.status!=='updated';
+ return `<span class="price-checked ${quality.status}" title="Цена и наличие зафиксированы в указанную дату; окончательные условия — в магазине">${e(offerStatusLine(offer))}</span>${quality.status!=='fresh'?`<span class="price-quality ${quality.status}">${e(quality.label)}</span>`:''}${failed?`<span class="price-refresh-note">Повторная проверка ${e(formatPriceDate(check.attemptedAt.slice(0,10)))}: цену подтвердить не удалось. Сохранён предыдущий снимок.</span>`:''}${offer.currency==='USD'?`<span class="shop-offer-note">${foreignPriceNotice}</span>`:''}`;
 }
