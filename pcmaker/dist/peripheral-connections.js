@@ -19,6 +19,7 @@ export function connectorType(value=''){
 }
 export function connectionModes(p){
  if(!p)return [];
+ if(Array.isArray(p.connectionModes))return [...new Set(p.connectionModes.filter(m=>['usb','receiver','bluetooth'].includes(m)))];
  if(p.category==='monitor'){
   const s=p.specs?.['Порты']||'';return ['hdmi','dp','vga','dvi'].filter(t=>({hdmi:/HDMI/i,dp:/DisplayPort|\bDP\b/i,vga:/VGA|D-Sub/i,dvi:/DVI/i})[t].test(s));
  }

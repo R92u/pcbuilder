@@ -22,7 +22,7 @@ test('every selectable product has a real article, dimension scale, full spec so
  const photos=JSON.parse(fs.readFileSync(new URL('../dist/peripheral-images.json',import.meta.url)));
  assert.equal(new Set(peripherals.map(p=>p.id)).size,peripherals.length);
  for(const key of Object.keys(peripheralCategories)){
-  const category=peripherals.filter(p=>p.category===key);assert.equal(category.length,key==='monitor'?10:30);
+  const category=peripherals.filter(p=>p.category===key);assert.equal(category.length,key==='monitor'?10:key==='keyboard'?44:30);
   for(const color of ['black','white'])assert.ok(category.filter(p=>p.colors.includes(color)).length>=2);
   assert.ok(new Set(category.map(p=>p.dimensions[0])).size>=5);
  }

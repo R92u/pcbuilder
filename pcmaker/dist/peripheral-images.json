@@ -388,5 +388,89 @@
     "sourcePage": "https://redragon.ru/product/storm",
     "sourceImage": "https://redragon.ru/public/r/800x800/products/7931/133c71e0.webp",
     "credit": "Redragon"
+  },
+  "keychron-c3-pro-8k-c3px-h1z": {
+    "image": "assets/peripherals/keychron-c3-pro-8k-c3px-h1z.webp",
+    "sourcePage": "https://www.kns.ru/product/klaviatura-keychron-c3-pro-8k-c3px-h1z/",
+    "sourceImage": "https://www.kns.ru/linkpics/keychron-c3-pro-8k-c3px-h1z_kod_1057255.jpg",
+    "credit": "KNS"
+  },
+  "keychron-c1-pro-8k-c1px-m1": {
+    "image": "assets/peripherals/keychron-c1-pro-8k-c1px-m1.webp",
+    "sourcePage": "https://www.kns.ru/product/klaviatura-keychron-c1-pro-8k-c1px-m1/",
+    "sourceImage": "https://www.kns.ru/linkpics/keychron-c1-pro-8k-c1px-m1_kod_1057227.jpg",
+    "credit": "KNS"
+  },
+  "keychron-b6-pro-b6p-k12": {
+    "image": "assets/peripherals/keychron-b6-pro-b6p-k12.webp",
+    "sourcePage": "https://www.kns.ru/product/klaviatura-keychron-b6-pro-b6p-k12/",
+    "sourceImage": "https://www.kns.ru/linkpics/keychron-b6-pro-b6p-k12_kod_1078158.jpg",
+    "credit": "KNS"
+  },
+  "keychron-v1-max-v1m-d4-ru": {
+    "image": "assets/peripherals/keychron-v1-max-v1m-d4-ru.webp",
+    "sourcePage": "https://www.kns.ru/product/klaviatura-keychron-v1-max-v1m-d4-ru/",
+    "sourceImage": "https://www.kns.ru/linkpics/keychron-v1-max-v1m-d4-ru_kod_1095707.jpg",
+    "credit": "KNS"
+  },
+  "aula-au75-white": {
+    "image": "assets/peripherals/aula-au75-white.webp",
+    "sourcePage": "https://www.kns.ru/product/klaviatura-aula-au75-white/",
+    "sourceImage": "https://www.kns.ru/linkpics/aula-au75-white_kod_1109401.jpg",
+    "credit": "KNS"
+  },
+  "aula-f87-6978080502353": {
+    "image": "assets/peripherals/aula-f87-6978080502353.webp",
+    "sourcePage": "https://www.kns.ru/product/klaviatura-aula-f87-6978080502353/",
+    "sourceImage": "https://www.kns.ru/linkpics/aula-f87-6978080502353_kod_1109599.jpg",
+    "credit": "KNS"
+  },
+  "aula-win60he-pro-edition-6978080504111": {
+    "image": "assets/peripherals/aula-win60he-pro-edition-6978080504111.webp",
+    "sourcePage": "https://www.kns.ru/product/klaviatura-aula-win60he-pro-edition-6978080504111/",
+    "sourceImage": "https://www.kns.ru/linkpics/aula-win60he-pro-edition-6978080504111_kod_1109646.jpg",
+    "credit": "KNS"
+  },
+  "hyperx-alloy-core-rgb-4p4f5aa": {
+    "image": "assets/peripherals/hyperx-alloy-core-rgb-4p4f5aa.webp",
+    "sourcePage": "https://www.kns.ru/product/klaviatura-hyperx-alloy-core-rgb-4p4f5aa/",
+    "sourceImage": "https://www.kns.ru/linkpics/hyperx-alloy-core-rgb-4p4f5aa_kod_997936.jpg",
+    "credit": "KNS"
+  },
+  "hyperx-alloy-origins-4p4f6aa": {
+    "image": "assets/peripherals/hyperx-alloy-origins-4p4f6aa.webp",
+    "sourcePage": "https://www.kns.ru/product/klaviatura-hyperx-alloy-origins-4p4f6aa/",
+    "sourceImage": "https://www.kns.ru/linkpics/hyperx-alloy-origins-4p4f6aa_kod_996440.jpg",
+    "credit": "KNS"
+  },
+  "asus-rog-strix-scope-ii-x-nx-snow-v2-90mp03xf-bkra00": {
+    "image": "assets/peripherals/asus-rog-strix-scope-ii-x-nx-snow-v2-90mp03xf-bkra00.webp",
+    "sourcePage": "https://www.kns.ru/product/klaviatura-asus-rog-strix-scope-ii-x-nx-snow-v2-90mp03xf-bkra00/",
+    "sourceImage": "https://www.kns.ru/linkpics/asus-rog-strix-scope-ii-x-nx-snow-v2-90mp03xf-bkra00_kod_1050157.jpg",
+    "credit": "KNS"
+  },
+  "corsair-gaming-k55-ch-9206015-ru": {
+    "image": "assets/peripherals/corsair-gaming-k55-ch-9206015-ru.webp",
+    "sourcePage": "https://www.kns.ru/product/klaviatura-corsair-gaming-k55-ch-9206015-ru/",
+    "sourceImage": "https://www.kns.ru/linkpics/corsair-gaming-k55-ch-9206015-ru-0.jpg",
+    "credit": "KNS"
+  },
+  "corsair-k60-rgb-pro-ch-910d019-ru": {
+    "image": "assets/peripherals/corsair-k60-rgb-pro-ch-910d019-ru.webp",
+    "sourcePage": "https://www.kns.ru/product/klaviatura-corsair-k60-rgb-pro-ch-910d019-ru/",
+    "sourceImage": "https://www.kns.ru/linkpics/corsair-k60-rgb-pro-ch-910d019-ru-0-v1.jpg",
+    "credit": "KNS"
+  },
+  "akko-5075b-plus": {
+    "image": "assets/peripherals/akko-5075b-plus.webp",
+    "sourcePage": "https://en.akkogear.com/product/blacksilver-5075b-plus-mechanical-keyboard/",
+    "sourceImage": "https://en.akkogear.com/wp-content/uploads/2023/07/BlackSilver-5075B-Plus.png",
+    "credit": "Akko"
+  },
+  "akko-3068b-plus": {
+    "image": "assets/peripherals/akko-3068b-plus.webp",
+    "sourcePage": "https://en.akkogear.com/product/blackgold-3068b-mechanical-keyboard/",
+    "sourceImage": "https://en.akkogear.com/wp-content/uploads/2022/01/BlackGold-3068B.jpg",
+    "credit": "Akko"
   }
 }

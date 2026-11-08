@@ -6,7 +6,7 @@ import {keyboardLayout} from '../dist/keyboard-layout.js';
 import {createKeyboardModel,keycapGeometry,keyboardProfile,keycapColor,sanitizeKeyboardLighting} from '../dist/keyboard-model.js';
 const products=peripherals.filter(p=>p.category==='keyboard');
 
-test('all ten keyboard meshes have finite, bounded geometry and a modest render budget',()=>{
+test('all keyboard meshes have finite, bounded geometry and a modest render budget',()=>{
  for(const p of products){
   const model=createKeyboardModel(p,{withTexture:false}),profile=keyboardProfile(p),bounds=new THREE.Box3().setFromObject(model),size=bounds.getSize(new THREE.Vector3());
   assert.ok(size.x<=profile.w+.025,p.id+' width');assert.ok(size.z<=profile.d+.035,p.id+' depth');assert.ok(size.y<=profile.h*1.08,p.id+' height');assert.ok(bounds.min.y>=-.002,p.id+' desk');
@@ -16,6 +16,14 @@ test('all ten keyboard meshes have finite, bounded geometry and a modest render 
   assert.equal(model.getObjectByName('keycaps').count,p.keys);
   assert.ok(model.userData.cableStart.every(Number.isFinite));
  }
+});
+
+test('opaque new key legends stay unlit while RGB wells change, and thin models retain physical proportions',()=>{
+ const p=peripheralById['akko-5075b-plus'],model=createKeyboardModel(p,{withTexture:false}),glyph=model.getObjectByName('key-legends'),wells=model.getObjectByName('key-light-wells'),c=new THREE.Color();
+ model.userData.updateLighting({mode:'color',color:'#ff0000'});const ink=[...glyph.geometry.attributes.color.array];
+ model.userData.updateLighting({mode:'color',color:'#00ff00'});assert.deepEqual([...glyph.geometry.attributes.color.array],ink);wells.getColorAt(0,c);assert.equal(c.getHexString(),'00ff00');
+ for(const p of products){assert.ok(p.dimensions[2]<70,p.id+' realistic height');}
+ for(const p of products.filter(p=>p.knob))for(const k of keyboardLayout(p))assert.ok(Math.abs(k.x-p.dimensions[0]/100*.449)>k.w/2+.10||Math.abs(k.z+p.dimensions[1]/100*.352)>k.d/2+.10,p.id+' knob clears '+k.legend);
 });
 
 test('keycaps form closed non-degenerate surfaces with top normals facing out',()=>{

@@ -2,6 +2,12 @@ import test from 'node:test';
 import assert from 'node:assert/strict';
 import {peripherals,peripheralQuote,defaultWorkplace} from '../dist/peripherals.js';
 import {filterProducts,manufacturer} from '../dist/shop-catalog.js';
+import {additionalKeyboards} from '../dist/peripherals-keyboards14.js';
+import {connectionModes} from '../dist/peripheral-connections.js';
+
+test('new wired and tri-mode keyboards retain their actual connection choices',()=>{
+ for(const p of additionalKeyboards)assert.deepEqual(connectionModes(p),p.wired?['usb']:['usb','receiver','bluetooth'],p.id);
+});
 
 test('each brand has ten mice and ten keyboards, independently filterable',()=>{
  for(const brand of ['Razer','Logitech','Redragon'])for(const category of ['keyboard','mouse']){

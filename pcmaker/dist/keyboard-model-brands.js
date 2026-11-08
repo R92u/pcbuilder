@@ -8,6 +8,7 @@ export function keyboardProfile(p){
 }
 export function keycapColor(p,k){
  const s=keyboardProfile(p),l=k.legend;
+ if(p.accentKeys?.[l])return p.accentKeys[l];
  if(p.id==='fizz')return l==='Esc'||l==='Space'?'#d7b700':k.modifier?'#a8a69b':'#d8dad4';
  if(p.id==='fizz-white-gray')return k.modifier&&l!=='Space'?'#dedfdc':'#525b67';
  if(p.id==='ryze')return l==='Esc'||l==='Space'?'#df592f':k.modifier||['5','6','7','8','9'].includes(l)?'#1e252d':'#dadbd6';
@@ -23,6 +24,7 @@ export function keyboardLightColor(p,k,time=0,settings={mode:'photo',color:'#e4e
  if(settings.mode==='rainbow')return c.setHSL(((k.x/s.w+.5)*.75+time/7000)%1,.85,.54);
  if(p.id==='fizz')return c.set('#ffb99d');
  const x=k.x/s.w+.5,z=k.z/s.d+.5;
+ if(p.lightingZones===3)return c.setHSL([.97,.12,.64][Math.min(2,Math.floor(x*3))],.78,.55);
  const phase=p.id==='shiva'?.80+x*.55:p.id==='ryze'?.98-x*.43:p.id==='fizz-white-gray'||p.id==='lakshmi'?[0,.62,.03,.36,.16][k.row]:.55+x*.8+z*.3;
  return c.setHSL((phase%1+1)%1,.72,.57);
 }
@@ -42,11 +44,11 @@ export function keycapGeometry(){
  const geo=new THREE.BufferGeometry();geo.setAttribute('position',new THREE.Float32BufferAttribute(pos,3));geo.setIndex(indices);geo.computeVertexNormals();return geo;
 }
 const ru=Object.fromEntries([..."QWERTYUIOP[]ASDFGHJKL;'ZXCVBNM,./"].map((l,i)=>[l,[...'ЙЦУКЕНГШЩЗХЪФЫВАПРОЛДЖЭЯЧСМИТЬБЮ.'][i]]));
-function legendAtlas(layout){
+function legendAtlas(layout,p){
  const c=document.createElement('canvas');c.width=c.height=512;const ctx=c.getContext('2d');ctx.fillStyle='#fff';ctx.textBaseline='middle';
  layout.forEach((k,i)=>{const x=i%8*64,y=Math.floor(i/8)*32,l=k.legend;
   ctx.textAlign='left';ctx.font=(l.length>2?'11':'17')+'px Arial';ctx.fillText(l==='Space'?'—':l,x+7,y+11,50);
-  if(ru[l]){ctx.font='12px Arial';ctx.textAlign='right';ctx.fillText(ru[l],x+55,y+24);}
+  if(p.legendLanguage!=='en'&&ru[l]){ctx.font='12px Arial';ctx.textAlign='right';ctx.fillText(ru[l],x+55,y+24);}
  });
  const t=new THREE.CanvasTexture(c);t.colorSpace=THREE.SRGBColorSpace;t.anisotropy=4;return t;
 }
@@ -77,7 +79,7 @@ export function createKeyboardModel(p,{withTexture=true}={}){
    v.set(x,1.004,z).applyMatrix4(t.matrix);glyphPos.push(v.x,v.y,v.z);glyphUv.push((i%8+u)/8,(15-Math.floor(i/8)+vv)/16);glyphColors.push(1,1,1);
   }
  });
- const atlas=withTexture?legendAtlas(layout):null,glyphGeo=new THREE.BufferGeometry();glyphGeo.setAttribute('position',new THREE.Float32BufferAttribute(glyphPos,3));glyphGeo.setAttribute('uv',new THREE.Float32BufferAttribute(glyphUv,2));glyphGeo.setAttribute('color',new THREE.Float32BufferAttribute(glyphColors,3));glyphGeo.computeVertexNormals();
+ const atlas=withTexture?legendAtlas(layout,p):null,glyphGeo=new THREE.BufferGeometry();glyphGeo.setAttribute('position',new THREE.Float32BufferAttribute(glyphPos,3));glyphGeo.setAttribute('uv',new THREE.Float32BufferAttribute(glyphUv,2));glyphGeo.setAttribute('color',new THREE.Float32BufferAttribute(glyphColors,3));glyphGeo.computeVertexNormals();
  const glyphMat=new THREE.MeshBasicMaterial({map:atlas,transparent:true,depthWrite:false,vertexColors:true,toneMapped:false,polygonOffset:true,polygonOffsetFactor:-1});
  const glyphs=new THREE.Mesh(glyphGeo,glyphMat);glyphs.name='key-legends';g.add(glyphs);
  // Slim feet, USB socket and status lamps remain inside the real dimensions.
@@ -90,7 +92,7 @@ export function createKeyboardModel(p,{withTexture=true}={}){
  g.userData.updateLighting=(settings,time=0)=>{
   const off=!s.rgb||settings.mode==='off';wells.visible=!off;
   const colors=glyphGeo.attributes.color;
-  layout.forEach((k,i)=>{const c=off?new THREE.Color(keycapColor(p,k)).getHSL({}).l>.4?new THREE.Color('#59636a'):new THREE.Color('#b7c0c1'):keyboardLightColor(p,k,time,settings);wells.setColorAt(i,c);for(let j=0;j<6;j++)colors.setXYZ(i*6+j,c.r,c.g,c.b);});
+  layout.forEach((k,i)=>{const ink=new THREE.Color(keycapColor(p,k)).getHSL({}).l>.4?new THREE.Color('#59636a'):new THREE.Color('#b7c0c1'),light=keyboardLightColor(p,k,time,settings),c=off||p.shineThrough===false?ink:light;wells.setColorAt(i,light);for(let j=0;j<6;j++)colors.setXYZ(i*6+j,c.r,c.g,c.b);});
   wells.instanceColor.needsUpdate=true;colors.needsUpdate=true;
  };
  g.userData.updateLighting(sanitizeKeyboardLighting());return g;
