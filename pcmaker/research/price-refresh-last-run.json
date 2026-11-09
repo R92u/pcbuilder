@@ -1,8 +1,8 @@
 {
-  "checkedAt": "2026-11-08T07:34:04.005Z",
-  "attempted": 406,
-  "updated": 314,
-  "failed": 92,
+  "checkedAt": "2026-11-09T13:04:18.728Z",
+  "attempted": 420,
+  "updated": 216,
+  "failed": 204,
   "sources": {
     "dns-shop.ru": {
       "attempted": 2,
@@ -29,11 +29,11 @@
       "reasons": {}
     },
     "kns.ru": {
-      "attempted": 158,
-      "updated": 123,
-      "failed": 35,
+      "attempted": 170,
+      "updated": 25,
+      "failed": 145,
       "reasons": {
-        "product-not-confirmed": 35
+        "product-not-confirmed": 145
       }
     },
     "onecom.ru": {
@@ -154,6 +154,14 @@
       "reasons": {
         "product-not-confirmed": 15,
         "price-not-confirmed": 4
+      }
+    },
+    "invalid": {
+      "attempted": 2,
+      "updated": 0,
+      "failed": 2,
+      "reasons": {
+        "unsafe-url": 2
       }
     }
   }
