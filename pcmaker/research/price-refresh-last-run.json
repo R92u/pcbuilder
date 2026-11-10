@@ -1,8 +1,8 @@
 {
-  "checkedAt": "2026-11-09T13:04:18.728Z",
+  "checkedAt": "2026-11-10T12:47:38.442Z",
   "attempted": 420,
-  "updated": 216,
-  "failed": 204,
+  "updated": 317,
+  "failed": 103,
   "sources": {
     "dns-shop.ru": {
       "attempted": 2,
@@ -22,19 +22,19 @@
         "source-rate-limited": 9
       }
     },
+    "kns.ru": {
+      "attempted": 170,
+      "updated": 126,
+      "failed": 44,
+      "reasons": {
+        "product-not-confirmed": 44
+      }
+    },
     "lifebook-shop.ru": {
       "attempted": 21,
       "updated": 21,
       "failed": 0,
       "reasons": {}
-    },
-    "kns.ru": {
-      "attempted": 170,
-      "updated": 25,
-      "failed": 145,
-      "reasons": {
-        "product-not-confirmed": 145
-      }
     },
     "onecom.ru": {
       "attempted": 2,
