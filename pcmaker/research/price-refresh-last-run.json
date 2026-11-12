@@ -1,8 +1,8 @@
 {
-  "checkedAt": "2026-11-11T11:57:37.513Z",
+  "checkedAt": "2026-11-12T12:57:08.015Z",
   "attempted": 420,
-  "updated": 171,
-  "failed": 249,
+  "updated": 191,
+  "failed": 229,
   "sources": {
     "dns-shop.ru": {
       "attempted": 2,
@@ -27,8 +27,14 @@
       "updated": 0,
       "failed": 170,
       "reasons": {
-        "robots-unavailable": 170
+        "product-not-confirmed": 170
       }
+    },
+    "lifebook-shop.ru": {
+      "attempted": 21,
+      "updated": 21,
+      "failed": 0,
+      "reasons": {}
     },
     "onecom.ru": {
       "attempted": 2,
@@ -44,15 +50,6 @@
       "failed": 5,
       "reasons": {
         "unsupported-source": 5
-      }
-    },
-    "lifebook-shop.ru": {
-      "attempted": 21,
-      "updated": 0,
-      "failed": 21,
-      "reasons": {
-        "http-403": 1,
-        "source-blocked": 20
       }
     },
     "5element.by": {
@@ -103,12 +100,6 @@
       "failed": 0,
       "reasons": {}
     },
-    "ultraprice.by": {
-      "attempted": 1,
-      "updated": 1,
-      "failed": 0,
-      "reasons": {}
-    },
     "unifox.by": {
       "attempted": 1,
       "updated": 0,
@@ -116,6 +107,12 @@
       "reasons": {
         "price-not-confirmed": 1
       }
+    },
+    "ultraprice.by": {
+      "attempted": 1,
+      "updated": 1,
+      "failed": 0,
+      "reasons": {}
     },
     "newegg.com": {
       "attempted": 2,
@@ -128,9 +125,11 @@
     },
     "andpro.ru": {
       "attempted": 10,
-      "updated": 10,
-      "failed": 0,
-      "reasons": {}
+      "updated": 9,
+      "failed": 1,
+      "reasons": {
+        "http-404": 1
+      }
     },
     "redragon.ru": {
       "attempted": 20,
