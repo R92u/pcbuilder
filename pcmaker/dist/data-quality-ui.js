@@ -10,9 +10,10 @@ export function verificationMarkup(part,details=true){
  if(!details)return badge;
  return `<details class="quality-details"><summary>${badge}</summary><p>Сверено ${e(v.checkedAt)}. Проверены: ${e(Object.keys(v.values).map(k=>specLabels[k]||k).join(', '))}.</p>${[...v.assumptions,...v.limitations].map(t=>`<p>${e(t)}</p>`).join('')}<p>Проверка характеристик не заменяет проверку BIOS, монтажных зазоров и наличия товара.</p><div>${v.sources.map((url,i)=>`<a href="${e(url)}" target="_blank" rel="noopener noreferrer">Источник ${i+1} ↗</a>`).join(' · ')}</div></details>`;
 }
-export function offerMarkup(offer){
+export function offerMarkup(offer,{compact=false}={}){
  if(!offer)return '';
  const quality=priceQuality(offer);
  const check=offer.priceCheck,manual=check?.reason==='manual-review-required',failed=check&&check.status!=='updated'&&!manual;
+ if(compact)return `<span class="price-checked ${quality.status}" title="${e(offer.note||'Цена и наличие на дату проверки')}">${e(offerStatusLine(offer))}</span>${!['fresh','unavailable'].includes(quality.status)?`<span class="price-quality ${quality.status}">${e(quality.label)}</span>`:''}${manual?'<span class="price-refresh-note" title="Автоматическое обновление Ozon пока недоступно">Ручная проверка цены</span>':''}${failed?`<span class="price-refresh-note" title="Повторная проверка ${e(formatPriceDate(check.attemptedAt.slice(0,10)))} не удалась; сохранена прежняя цена и дата">Последнее обновление не удалось</span>`:''}${offer.currency==='USD'?`<span class="shop-offer-note" title="${e(foreignPriceNotice)}">Зарубежная цена · без пересчёта</span>`:''}`;
  return `<span class="price-checked ${quality.status}" title="Цена и наличие зафиксированы в указанную дату; окончательные условия — в магазине">${e(offerStatusLine(offer))}</span>${quality.status!=='fresh'?`<span class="price-quality ${quality.status}">${e(quality.label)}</span>`:''}${manual?'<span class="price-refresh-note">Цена проверена вручную. Автоматическое обновление Ozon пока недоступно.</span>':''}${failed?`<span class="price-refresh-note">Повторная проверка ${e(formatPriceDate(check.attemptedAt.slice(0,10)))}: цену подтвердить не удалось. Сохранён предыдущий снимок.</span>`:''}${offer.currency==='USD'?`<span class="shop-offer-note">${foreignPriceNotice}</span>`:''}`;
 }

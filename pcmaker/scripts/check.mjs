@@ -12,6 +12,7 @@ import {validLiveOffer} from '../dist/live-price-data.js';
 import {byStoreProduct} from '../dist/regions.js';
 import {createHash} from 'node:crypto';
 const root=path.resolve(import.meta.dirname,'..');
+for(const file of ['store-picker.js','store-picker.css'])if(!fs.existsSync(path.join(root,'dist',file)))throw Error('Missing '+file);
 const bundle=JSON.parse(fs.readFileSync(path.join(root,'firebase/bundle-manifest.json'),'utf8'));
 for(const [file,expected] of Object.entries(bundle)){
  const actual=createHash('sha256').update(fs.readFileSync(path.join(root,file),'utf8').replace(/\r\n/g,'\n')).digest('hex');
