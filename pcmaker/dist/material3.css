@@ -1,0 +1,306 @@
+/* Optional Material 3 skin. No layout, renderer or custom-background changes.
+ * Color roles: https://github.com/material-components/material-web/blob/main/docs/theming/color.md
+ * Shape scale: https://github.com/material-components/material-web/blob/main/docs/theming/shape.md
+ */
+html[data-design=material3]{
+ color-scheme:dark;
+ --md-sys-color-primary:#a6c8ff;
+ --md-sys-color-on-primary:#00315f;
+ --md-sys-color-primary-container:#23476f;
+ --md-sys-color-on-primary-container:#d4e4ff;
+ --md-sys-color-secondary:#bcc8db;
+ --md-sys-color-secondary-container:#354457;
+ --md-sys-color-on-secondary-container:#dce7fa;
+ --md-sys-color-surface:#10141b;
+ --md-sys-color-surface-container-low:#191e27;
+ --md-sys-color-surface-container:#1d232e;
+ --md-sys-color-surface-container-high:#272e3a;
+ --md-sys-color-surface-container-highest:#313846;
+ --md-sys-color-on-surface:#e2e7f0;
+ --md-sys-color-on-surface-variant:#c2cad8;
+ --md-sys-color-outline:#8993a3;
+ --md-sys-color-outline-variant:#414957;
+ --md-sys-color-error:#ffb4ab;
+ --md-sys-color-error-container:#59312e;
+ --md-sys-color-on-error-container:#ffdad5;
+ --bg:var(--md-sys-color-surface);
+ --panel:var(--md-sys-color-surface-container);
+ --text:var(--md-sys-color-on-surface);
+ --muted:var(--md-sys-color-on-surface-variant);
+ --line:var(--md-sys-color-outline-variant);
+ --accent:var(--md-sys-color-primary);
+ --accent-dark:var(--md-sys-color-primary-container);
+ --green:#b1d8b8;
+ --orange:#efc38b;
+ --glass:var(--md-sys-color-surface-container);
+ --glass-panel:var(--md-sys-color-surface-container);
+ --glass-control:var(--md-sys-color-surface-container-high);
+ --glass-selected:var(--md-sys-color-secondary-container);
+ --glass-tip:var(--md-sys-color-surface-container-high);
+ --glass-shadow:none;
+}
+html[data-design=material3] body{
+ background:var(--md-sys-color-surface);
+ color:var(--md-sys-color-on-surface);
+ font-family:Roboto,"Segoe UI",Arial,sans-serif;
+ -webkit-font-smoothing:antialiased;
+}
+html[data-design=material3] :is(button,input,select,textarea,summary){font-family:inherit}
+html[data-design=material3] :is(h1,h2,h3,h4){font-weight:500;letter-spacing:0}
+
+/* Large surfaces use opaque tonal elevation instead of reflections or blur. */
+html[data-design=material3] :is(.workshop-header,.market-header,.workplace-header){
+ background:var(--md-sys-color-surface-container-low);
+ border-color:var(--md-sys-color-outline-variant);
+ box-shadow:none;
+ backdrop-filter:none;
+ -webkit-backdrop-filter:none;
+}
+html[data-design=material3] :is(.workbench .build-panel,.market-sidebar,.workplace-panel){
+ background:var(--md-sys-color-surface-container);
+ color:var(--md-sys-color-on-surface);
+ border-color:transparent;
+ border-radius:24px;
+ box-shadow:none;
+ backdrop-filter:none;
+ -webkit-backdrop-filter:none;
+ scrollbar-color:var(--md-sys-color-outline-variant) transparent;
+}
+html[data-design=material3] .workplace-integrated .workplace-panel{background:transparent;border-radius:0}
+html[data-design=material3] :is(.workshop-menu,.workbench .component-inspector,.header nav.brand-switcher,.thermal-panel,#theme-menu,#peripheral-cable-panel){
+ background:var(--md-sys-color-surface-container-high);
+ color:var(--md-sys-color-on-surface);
+ border-color:var(--md-sys-color-outline-variant);
+ border-radius:24px;
+ box-shadow:0 6px 18px #0005;
+ backdrop-filter:none;
+ -webkit-backdrop-filter:none;
+ scrollbar-color:var(--md-sys-color-outline) transparent;
+}
+html[data-design=material3] :is(dialog,dialog.shop-dialog,dialog.autobuild-dialog,.market-page .gallery-dialog){
+ background:var(--md-sys-color-surface-container-high);
+ color:var(--md-sys-color-on-surface);
+ border-color:transparent;
+ border-radius:28px;
+ box-shadow:0 12px 36px #0006;
+ backdrop-filter:none;
+ -webkit-backdrop-filter:none;
+}
+html[data-design=material3] dialog::backdrop{background:#0009;backdrop-filter:none;-webkit-backdrop-filter:none}
+html[data-design=material3] :is(.dialog-top,.shop-header,.budget-header,.budget-footer,.gallery-header,.peripheral-dialog-top){
+ background:transparent;
+ border-color:var(--md-sys-color-outline-variant);
+}
+html[data-design=material3] :is(.shop-sidebar,.budget-form){background:var(--md-sys-color-surface-container);border-color:var(--md-sys-color-outline-variant)}
+html[data-design=material3] .budget-footer{background:var(--md-sys-color-surface-container-high)}
+html[data-design=material3] .budget-result{background:transparent;box-shadow:none}
+html[data-design=material3] .workbench .studio{border-color:var(--md-sys-color-outline-variant);border-radius:24px;box-shadow:none}
+html[data-design=material3] .workbench .studio::before{display:none}
+html[data-design=material3].scene-fullscreen .workbench .studio{border-radius:0;border-color:transparent}
+
+/* Controls retain their existing dimensions and interaction targets. */
+html[data-design=material3] :is(.round-button,.market-page .round-button,.workbench .build-panel-toggle,.icon-button,.button,.store-picker>.store-picker-toggle){
+ color:var(--md-sys-color-on-surface-variant);
+ background:var(--md-sys-color-surface-container-highest);
+ border-color:transparent;
+ border-radius:999px;
+ box-shadow:none;
+ text-shadow:none;
+ backdrop-filter:none;
+ -webkit-backdrop-filter:none;
+ font-weight:500;
+ transition:background-color .18s,color .18s,border-color .18s,box-shadow .18s,transform .18s;
+}
+html[data-design=material3] :is(.round-button,.button)::before{display:none}
+html[data-design=material3] :is(.round-button,.market-page .round-button,.workbench .build-panel-toggle,.icon-button,.button,.store-picker>.store-picker-toggle):hover{
+ background:#3c4554;
+ color:var(--md-sys-color-on-surface);
+ border-color:transparent;
+ box-shadow:none;
+}
+html[data-design=material3] :is(.round-button,.button,.store-picker>.store-picker-toggle):active{background:#455062;box-shadow:none}
+html[data-design=material3] .button{font-size:12px;letter-spacing:.1px}
+html[data-design=material3] :is(.button.primary,.shop-card-actions>.button.primary){
+ background:var(--md-sys-color-primary);
+ color:var(--md-sys-color-on-primary);
+ border-color:transparent;
+ box-shadow:none;
+}
+html[data-design=material3] .button.primary:hover{background:#b4d1ff;color:var(--md-sys-color-on-primary);box-shadow:0 2px 6px #0003}
+html[data-design=material3] .button.primary:active{background:#c1d9ff;color:var(--md-sys-color-on-primary)}
+html[data-design=material3] :is(.shop-launch,.round-button[aria-expanded=true],.round-button[aria-pressed=true]){
+ background:var(--md-sys-color-primary-container);
+ color:var(--md-sys-color-on-primary-container);
+ border-color:transparent;
+ box-shadow:none;
+}
+html[data-design=material3] :is(.shop-launch,.round-button[aria-expanded=true],.round-button[aria-pressed=true]):hover{background:#315781}
+html[data-design=material3] .workbench .build-panel-toggle{border-radius:20px 0 0 20px;background:var(--md-sys-color-secondary-container);color:var(--md-sys-color-on-secondary-container)}
+html[data-design=material3] .fullscreen-exit{background:var(--md-sys-color-secondary-container);box-shadow:0 3px 10px #0004}
+html[data-design=material3] :is(.button:disabled,.round-button:disabled,.fan-walls button:disabled,.shop-card-actions>.button:disabled){
+ background:#2e3440;
+ color:#969eac;
+ border-color:transparent;
+ opacity:1;
+ box-shadow:none;
+ cursor:default;
+ transform:none;
+}
+html[data-design=material3] :is(button,a,summary,input,select,textarea,[tabindex]):focus-visible{outline:3px solid var(--md-sys-color-primary);outline-offset:3px}
+html[data-design=material3] :is(.search-field,.market-search,.budget-input):focus-within{border-color:var(--md-sys-color-primary);outline:2px solid var(--md-sys-color-primary);outline-offset:1px;box-shadow:none}
+
+/* Navigation, tabs and selections use the same filled-tonal state. */
+html[data-design=material3] .brand-mark{background:var(--md-sys-color-primary);color:var(--md-sys-color-on-primary);border-radius:12px;box-shadow:none}
+html[data-design=material3] .brand-mark>span{background:var(--md-sys-color-on-primary);border-color:var(--md-sys-color-on-primary);color:var(--md-sys-color-primary)}
+html[data-design=material3] :is(.brand-chevron,.brand-switcher small){color:var(--md-sys-color-on-surface-variant)}
+html[data-design=material3] .brand-switcher a{border-radius:16px;color:var(--md-sys-color-on-surface-variant)}
+html[data-design=material3] .brand-destination-icon{background:transparent;border-color:transparent;color:inherit;box-shadow:none}
+html[data-design=material3] :is(.toolbar-separator,.section-divider){background:var(--md-sys-color-outline-variant)}
+html[data-design=material3] :is(.workbench .panel-tabs,.workplace-mode,.workplace-tabs,.wiring-modes){background:transparent;border-color:var(--md-sys-color-outline-variant);box-shadow:none}
+html[data-design=material3] :is(.workbench .panel-tabs button,.workplace-mode button,.workplace-tabs button,.market-collections button,.gallery-tabs button,.chip,.camera-views button,.workloads button,.rgb-modes button,.budget-purpose button,.budget-presets button,.fan-walls button,.fan-list button,.fan-concepts button,.background-choice){
+ background:var(--md-sys-color-surface-container-high);
+ color:var(--md-sys-color-on-surface-variant);
+ border-color:var(--md-sys-color-outline-variant);
+ border-radius:16px;
+ box-shadow:none;
+ font-weight:500;
+}
+html[data-design=material3] :is(.workbench .panel-tabs button,.workplace-mode button,.workplace-tabs button,.market-collections button,.gallery-tabs button,.chip,.camera-views button,.workloads button,.rgb-modes button,.budget-purpose button,.budget-presets button,.fan-walls button,.fan-list button,.fan-concepts button,.background-choice):hover{background:var(--md-sys-color-surface-container-highest);border-color:var(--md-sys-color-outline)}
+html[data-design=material3] :is(.workbench .panel-tabs button[aria-selected=true],.workplace-mode button[aria-pressed=true],.workplace-tabs button[aria-selected=true],.market-collections button[aria-pressed=true],.gallery-tabs button[aria-pressed=true],.chip.active,.camera-views button.active,.workloads button.active,.rgb-modes button[aria-pressed=true],.wiring-modes [aria-pressed=true],.budget-purpose button[aria-pressed=true],.fan-walls button[aria-pressed=true],.fan-list button[aria-pressed=true],.fan-concepts button[aria-pressed=true],.background-choice[aria-pressed=true],.brand-switcher a[aria-current=page]){
+ background:var(--md-sys-color-secondary-container);
+ color:var(--md-sys-color-on-secondary-container);
+ border-color:transparent;
+ box-shadow:none;
+}
+html[data-design=material3] .panel-tabs button[aria-selected=true]::after{display:none}
+html[data-design=material3] :is(.brand-switcher a:hover,.brand-switcher a:focus-visible){background:var(--md-sys-color-surface-container-highest);color:var(--md-sys-color-on-surface)}
+html[data-design=material3] #theme-menu button{background:var(--md-sys-color-surface-container-high);border-color:var(--md-sys-color-outline-variant);border-radius:16px;color:var(--md-sys-color-on-surface);box-shadow:none}
+html[data-design=material3] #theme-menu button:hover{background:var(--md-sys-color-surface-container-highest)}
+html[data-design=material3] #theme-menu button[aria-pressed=true]{background:var(--md-sys-color-secondary-container);border-color:transparent;color:var(--md-sys-color-on-secondary-container)}
+html[data-design=material3] #theme-menu :is(p,small){color:var(--md-sys-color-on-surface-variant)}
+html[data-design=material3] #parts-count{background:var(--md-sys-color-primary-container);color:var(--md-sys-color-on-primary-container);border-color:transparent;border-radius:8px}
+html[data-design=material3] #fan-flow-toggle[aria-pressed=true]{background:var(--md-sys-color-secondary-container);color:var(--md-sys-color-on-secondary-container)}
+
+/* Cards and compact supporting text. */
+html[data-design=material3] :is(.workbench .part-row,.shop-card,.market-grid .gallery-card,.workplace-product,.workplace-selected,.catalog-item,.budget-product,.budget-total,.shop-build-summary,.market-draft,.fan-selection,.metrics article,.thermal-primary>div,.gallery-parts,.gallery-report){
+ background:var(--md-sys-color-surface-container-low);
+ border-color:var(--md-sys-color-outline-variant);
+ border-radius:16px;
+ box-shadow:none;
+ backdrop-filter:none;
+ -webkit-backdrop-filter:none;
+}
+html[data-design=material3] .workbench .part-row{min-height:68px;padding:12px}
+html[data-design=material3] .workbench .part-row:hover{background:var(--md-sys-color-surface-container-highest);border-color:var(--md-sys-color-outline);box-shadow:none}
+html[data-design=material3] .workbench .part-row.empty{background:transparent;border-color:var(--md-sys-color-outline-variant)}
+html[data-design=material3] :is(.shop-card:hover,.market-grid .gallery-card:hover){border-color:var(--md-sys-color-outline);box-shadow:0 2px 8px #0003}
+html[data-design=material3] :is(.shop-card.is-selected,.workplace-product.chosen){border-color:var(--md-sys-color-primary);box-shadow:inset 0 0 0 1px var(--md-sys-color-primary)}
+html[data-design=material3] :is(.part-icon,.part-row.empty .part-icon,.fan-list button>b){background:var(--md-sys-color-secondary-container);color:var(--md-sys-color-on-secondary-container);border-color:transparent;border-radius:12px;box-shadow:none}
+html[data-design=material3] :is(.part-name,.shop-card h3,.catalog-item h3,.market-grid .gallery-title-link,.gallery-detail-price,.market-draft strong,.slider-field output,.budget-empty h3,.price-summary strong,.price-summary strong>small){color:var(--md-sys-color-on-surface)}
+html[data-design=material3] :is(.part-category,.part-price,.part-action,.part-row.empty .part-name,.panel-heading>div>span,.price-summary p,.price-summary>div>span,.price-region,.shop-card-kind,.shop-specs,.shop-sku,.shop-source-links,.shop-disclaimer,.shop-region,.shop-eyebrow,.shop-photo figcaption,.shop-build-summary>div>span,.market-heading p,.market-location,.market-section-label,.market-draft>div>span,.market-draft p,.market-draft strong span,.market-card-specs dt,.market-card-specs dd,.market-card-specs small,.market-price-note,.market-disclaimer,.market-status:not(.error),.market-result-label>span,.market-grid .gallery-card-copy small,.market-filter-content p,.market-empty p){color:var(--md-sys-color-on-surface-variant)}
+html[data-design=material3] :is(.menu-note,.panel-intro,.small-note,.wiring-help,.wiring-note,.control-guide dd,.load-summary,.sim-status,.metric-label,.metric-foot,.metric-state,.unit,.fan-help,.fan-feedback,.fan-walls button small,.fan-list button small,.slider-field small,.budget-purpose-note,.budget-product p,.budget-product small,.budget-total p,.budget-total span,.budget-footer p,.budget-checks,.budget-category,.peripheral-detail p,.peripheral-detail dt,.workplace-product p,.workplace-selected small,.workplace-total p,.gallery-dialog p,.gallery-parts span,.gallery-card-copy small){color:var(--md-sys-color-on-surface-variant)}
+html[data-design=material3] :is(.workshop-menu h3,.control-guide dt,.field-label,.slider-field>span,.load-summary b,.component-inspector h3,.component-inspector dd,.inspector-connections b,.market-result-label strong,.market-filters summary,.market-filter-content>label,.shop-field,.shop-check,.shop-filter-group summary,.budget-checks b,.gallery-form-wrap label){color:var(--md-sys-color-on-surface)}
+html[data-design=material3] .workbench .part-name{font-size:13px;line-height:1.35}
+html[data-design=material3] .part-category{font-size:11px;line-height:1.4}
+html[data-design=material3] :is(.shop-card h3,.workplace-product h3){font-size:14px;line-height:1.45}
+html[data-design=material3] :is(.shop-specs,.shop-field,.shop-check,.shop-filter-group summary,.shop-categories button,.market-filter-content>label,.market-card-specs){font-size:12px;line-height:1.5}
+html[data-design=material3] :is(.shop-card-kind,.shop-sku,.shop-photo figcaption,.shop-source-links,.shop-region,.shop-disclaimer,.shop-build-summary>div>span,.store-picker-note){font-size:11px;line-height:1.45}
+html[data-design=material3] :is(.shop-offer strong,.catalog-price,.market-grid .gallery-card-copy strong,.workplace-product .product-price,.peripheral-detail .product-price){color:var(--md-sys-color-on-surface)}
+html[data-design=material3] :is(.shop-offer a,.shop-source-links a,.text-action,.info-dialog a,.market-builder-link,.market-draft a,.gallery-text-actions button,.budget-product a,.peripheral-detail a){color:var(--md-sys-color-primary)}
+html[data-design=material3] :is(.shop-card .shop-detail-button,.shop-dialog .shop-card .quality-badge,.shop-dialog .shop-card .quality-details,.shop-dialog .shop-card .price-quality,.shop-dialog .shop-card .price-checked,.shop-dialog .shop-card .price-refresh-note,.shop-dialog .shop-card .price-source){color:var(--md-sys-color-on-surface-variant);font-size:11px;line-height:1.5}
+html[data-design=material3] :is(.shop-card-actions>.button,.workplace-product-actions>.button){min-height:38px;height:auto;padding:8px 12px;border-radius:999px;font-size:12px}
+html[data-design=material3] .shop-build-summary>div{grid-template-columns:minmax(0,1fr);gap:9px}
+html[data-design=material3] .shop-build-summary>div>span{flex-direction:row;align-items:baseline;justify-content:space-between;gap:12px;min-width:0}
+html[data-design=material3] .shop-build-summary b{flex-shrink:0;font-size:12px}
+html[data-design=material3] :is(.price-summary,.market-filters,.market-disclaimer,.market-tools,.shop-tools,.shop-filter-group,.component-inspector header,.component-inspector dl>div,.gallery-parts>div,.gallery-status,.workplace-total,.external-route,.simulation-note){border-color:var(--md-sys-color-outline-variant)}
+
+/* Store selection expands inside its card; no floating clipping or new layout. */
+html[data-design=material3] .store-picker>.store-picker-toggle{background:var(--md-sys-color-secondary-container);color:var(--md-sys-color-on-secondary-container);border-color:transparent;border-radius:999px;box-shadow:none;font-size:12px;min-height:42px}
+html[data-design=material3] .store-picker>.store-picker-toggle:hover{background:#43546a}
+html[data-design=material3] .store-picker[open]>.store-picker-toggle{background:var(--md-sys-color-primary-container);color:var(--md-sys-color-on-primary-container)}
+html[data-design=material3] .store-picker-options{background:var(--md-sys-color-surface-container-high);border-color:transparent;border-radius:16px;padding:6px;box-shadow:none}
+html[data-design=material3] .store-picker-options>.store-picker-link{color:var(--md-sys-color-on-surface);border-radius:12px;font-size:12px;min-height:44px}
+html[data-design=material3] .store-picker-link:hover{background:var(--md-sys-color-secondary-container)}
+html[data-design=material3] .store-picker-note{color:var(--md-sys-color-on-surface-variant)}
+
+/* Outlined fields, native menus, range inputs and compact filter controls. */
+html[data-design=material3] :is(.region select,.shop-field input,.shop-field select,.shop-sort select,.market-page select,.workplace-page select,.fan-target-label select,.connection-action select,.gallery-dialog input:not([type=checkbox]),.gallery-dialog textarea,.search-field,.market-search,.budget-input){
+ background:var(--md-sys-color-surface-container-low);
+ color:var(--md-sys-color-on-surface);
+ border-color:var(--md-sys-color-outline);
+ border-radius:12px;
+ box-shadow:none;
+ backdrop-filter:none;
+ -webkit-backdrop-filter:none;
+}
+html[data-design=material3] :is(.region select,.shop-field select,.shop-sort select,.market-page select,.workplace-page select){font-size:12px}
+html[data-design=material3] :is(.search-field input,.market-search input,.budget-input input){background:transparent;color:var(--md-sys-color-on-surface);box-shadow:none}
+html[data-design=material3] :is(.search-field input,.market-search input){font-size:13px}
+html[data-design=material3] :is(input,textarea)::placeholder{color:var(--md-sys-color-on-surface-variant);opacity:1}
+html[data-design=material3] select option{background:var(--md-sys-color-surface-container-high);color:var(--md-sys-color-on-surface)}
+html[data-design=material3] :is(input[type=checkbox],input[type=radio]){accent-color:var(--md-sys-color-primary)}
+html[data-design=material3] .slider-field input[type=range]{background:linear-gradient(to right,var(--md-sys-color-primary) var(--fill,60%),var(--md-sys-color-surface-container-highest) var(--fill,60%))}
+html[data-design=material3] .slider-field input[type=range]::-webkit-slider-thumb{background:var(--md-sys-color-primary);box-shadow:none}
+html[data-design=material3] .slider-field input[type=range]::-moz-range-thumb{background:var(--md-sys-color-primary);box-shadow:none}
+html[data-design=material3] :is(.shop-categories button,.shop-categories small,.market-collections button>span){color:inherit}
+html[data-design=material3] .shop-categories button{border-radius:999px;color:var(--md-sys-color-on-surface-variant)}
+html[data-design=material3] .shop-categories button:hover{background:var(--md-sys-color-surface-container-highest)}
+html[data-design=material3] .shop-categories button[aria-pressed=true]{background:var(--md-sys-color-secondary-container);border-color:transparent;color:var(--md-sys-color-on-secondary-container)}
+html[data-design=material3] .shop-categories button[aria-pressed=true] small{color:inherit}
+html[data-design=material3] :is(.market-reset,.shop-reset){color:var(--md-sys-color-primary);background:transparent;border-color:var(--md-sys-color-outline);border-radius:999px}
+html[data-design=material3] .market-reset:hover{background:var(--md-sys-color-primary-container)}
+
+/* Peripheral cabling and simulation overlays can be mounted outside the scene. */
+html[data-design=material3] #peripheral-cable-panel select{background:var(--md-sys-color-surface-container-low);border-color:var(--md-sys-color-outline);color:var(--md-sys-color-on-surface);border-radius:12px}
+html[data-design=material3] #peripheral-cable-panel :is(label,small){color:var(--md-sys-color-on-surface-variant)}
+html[data-design=material3] #peripheral-cable-panel [role=status]{color:var(--md-sys-color-on-primary-container)}
+html[data-design=material3] :is(.thermal-eyebrow,.thermal-status,.thermal-primary>div>span,.thermal-primary small,.thermal-panel dt,.thermal-panel footer,.thermal-grip){color:var(--md-sys-color-on-surface-variant)}
+html[data-design=material3] .thermal-panel h2{font-size:18px;font-weight:500}
+html[data-design=material3] .thermal-primary>div{padding:12px 9px}
+html[data-design=material3] .thermal-track{background:var(--md-sys-color-surface-container-highest);height:4px;border-radius:4px}
+html[data-design=material3] .thermal-track i{background:var(--md-sys-color-primary)}
+html[data-design=material3] .thermal-primary .hot strong{color:var(--orange)}
+html[data-design=material3] .thermal-primary .hot .thermal-track i{background:var(--orange)}
+html[data-design=material3] .thermal-panel footer{border-color:var(--md-sys-color-outline-variant)}
+html[data-design=material3] :is(.scene-hint,.airflow-legend,.workplace-integrated .workplace-overview,.workplace-caption,.inspect-shortcuts){background:var(--md-sys-color-surface-container-high);border-color:var(--md-sys-color-outline-variant);color:var(--md-sys-color-on-surface);box-shadow:none;backdrop-filter:none;-webkit-backdrop-filter:none;border-radius:20px}
+html[data-design=material3] .workshop-menu :is(.inspect-shortcuts,.scene-tools){background:transparent;border-color:transparent;box-shadow:none;backdrop-filter:none}
+html[data-design=material3] .workshop-menu .inspect-shortcuts button{background:var(--md-sys-color-surface-container-highest);border-color:transparent;color:var(--md-sys-color-on-surface);border-radius:12px;box-shadow:none}
+html[data-design=material3] :is(.cable-row,.cable-row:hover){background:var(--md-sys-color-surface-container-low);border-color:var(--md-sys-color-outline-variant);border-radius:12px}
+html[data-design=material3] .cable-row.selected{background:var(--md-sys-color-secondary-container);border-color:var(--md-sys-color-primary)}
+html[data-design=material3] :is(.wiring-progress,.inspector-temperature strong,.thermal-compact){color:var(--md-sys-color-on-primary-container)}
+html[data-design=material3] :is(.port-marker,.fan-marker,.plug-handle,.external-socket,.cable-source){background:var(--md-sys-color-surface-container-high);color:var(--md-sys-color-on-surface);border-color:var(--md-sys-color-outline);box-shadow:0 2px 6px #0004;backdrop-filter:none;-webkit-backdrop-filter:none}
+html[data-design=material3] :is(.port-marker.target,.fan-marker.selected,.fan-marker.held,.plug-handle.held,.external-socket.external-point){background:var(--md-sys-color-primary);color:var(--md-sys-color-on-primary);border-color:var(--md-sys-color-primary);box-shadow:0 0 0 4px #a6c8ff29}
+html[data-design=material3] :is(.port-marker span,.socket-source>span,.plug-handle small){background:var(--md-sys-color-surface-container-high);color:var(--md-sys-color-on-surface);border-color:var(--md-sys-color-outline-variant);box-shadow:0 2px 6px #0004;backdrop-filter:none;-webkit-backdrop-filter:none}
+html[data-design=material3] :is(.port-marker.connected,.fan-marker.eligible){border-color:var(--green)}
+html[data-design=material3] :is(.port-marker.drop-ready,.fan-marker.drop-ready,.external-socket.external-target.compatible){background:var(--green);color:#163b23;border-color:var(--green);box-shadow:0 0 0 4px #b1d8b829}
+
+/* Community, notices and error colors keep their meaning. */
+html[data-design=material3] :is(.market-empty,.workplace-empty){background:var(--md-sys-color-surface-container-low);border-color:var(--md-sys-color-outline-variant);border-radius:24px}
+html[data-design=material3] .market-empty>span{background:var(--md-sys-color-secondary-container);border-color:transparent;color:var(--md-sys-color-on-secondary-container);border-radius:20px;box-shadow:none}
+html[data-design=material3] .market-grid .button.wide{border-radius:999px;background:var(--md-sys-color-secondary-container);border-color:transparent;color:var(--md-sys-color-on-secondary-container);min-height:38px}
+html[data-design=material3] .market-grid .button.wide:hover{background:#43546a}
+html[data-design=material3] .market-active-filters span{background:var(--md-sys-color-secondary-container);color:var(--md-sys-color-on-secondary-container);border-color:transparent;border-radius:8px}
+html[data-design=material3] .market-loading-card{border-color:transparent;border-radius:16px;background:linear-gradient(105deg,#1d232e 20%,#313846 40%,#1d232e 60%);background-size:300% 100%}
+html[data-design=material3] :is(.toast,.shop-3d){background:var(--md-sys-color-surface-container-highest);color:var(--md-sys-color-on-surface);border-color:var(--md-sys-color-outline-variant);box-shadow:0 3px 12px #0004;backdrop-filter:none;-webkit-backdrop-filter:none}
+html[data-design=material3] :is(.compat-box,.budget-ready,.market-compatible){background:#233a2c;border-color:#41664c;color:#c1e9c8;box-shadow:none}
+html[data-design=material3] .compat-box.neutral{background:var(--md-sys-color-surface-container-highest);color:var(--md-sys-color-on-surface-variant);border-color:var(--md-sys-color-outline-variant)}
+html[data-design=material3] :is(.compat-box.error,.market-status.error,.workbench .part-row.conflict){background:var(--md-sys-color-error-container);border-color:#a76b65;color:var(--md-sys-color-on-error-container)}
+html[data-design=material3] :is(.gallery-dialog .error,.shop-conflict){color:var(--md-sys-color-error)}
+html[data-design=material3] .cooling-alert{background:#3d3325;border-color:#6f5c3f;color:#f1d4a7}
+html[data-design=material3] :is(.cooling-ok,.shop-compatible){color:var(--green)}
+html[data-design=material3] :is(.beta-pill,.workplace-count){background:var(--md-sys-color-secondary-container);color:var(--md-sys-color-on-secondary-container);border-color:transparent}
+html[data-design=material3] .info-dialog code{background:var(--md-sys-color-surface-container-low);color:var(--md-sys-color-on-primary-container)}
+
+@media(max-width:640px){
+ html[data-design=material3] :is(dialog,dialog.shop-dialog,dialog.autobuild-dialog,.market-page .gallery-dialog){border-radius:24px}
+ html[data-design=material3] :is(.workbench .build-panel,.workshop-menu,.thermal-panel,.market-sidebar){border-radius:20px}
+ html[data-design=material3] .market-account-actions .primary{font-size:0}
+ html[data-design=material3] .workbench .panel-tabs button{font-size:11px}
+ html[data-design=material3] .shop-categories button{font-size:11px}
+ html[data-design=material3] .market-grid .gallery-title-link{font-size:13px}
+ html[data-design=material3] .store-picker-options>.store-picker-link{flex-wrap:wrap;gap:3px 8px}
+ html[data-design=material3] .store-picker-note{text-align:left}
+}
+@media(prefers-reduced-motion:reduce){
+ html[data-design=material3] :is(.round-button,.button,.store-picker-toggle){transition:none}
+}

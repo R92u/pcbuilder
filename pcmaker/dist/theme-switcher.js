@@ -1,4 +1,4 @@
-const themes=[['glass','Жидкое стекло','Основной дизайн'],['audit','По аудиту','Крупный текст и подписи'],['terminal','Терминал','Графит и зелёные акценты'],['minimal','Минимализм','Нейтральные цвета, минимум эффектов']];
+const themes=[['glass','Жидкое стекло','Основной дизайн'],['material3','Material 3','Тёмные поверхности и голубой акцент'],['audit','По аудиту','Крупный текст и подписи'],['terminal','Терминал','Графит и зелёные акценты'],['minimal','Минимализм','Нейтральные цвета, минимум эффектов']];
 const host=document.querySelector('.workshop-header-actions,.market-account-actions');
 if(host){
  const button=document.createElement('button');button.className='round-button theme-toggle';button.type='button';button.title='Варианты дизайна';button.setAttribute('aria-label','Варианты дизайна');button.setAttribute('popovertarget','theme-menu');button.innerHTML='<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><path d="M12 3a9 9 0 1 0 0 18h2a2 2 0 0 0 0-4h-1a2 2 0 0 1 0-4h3a5 5 0 0 0 0-10Z"/><circle cx="7" cy="10" r="1"/><circle cx="10" cy="6" r="1"/><circle cx="6" cy="15" r="1"/></svg>';host.prepend(button);
