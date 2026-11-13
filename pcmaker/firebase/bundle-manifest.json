@@ -11,9 +11,11 @@
   "dist/engine.js": "865bd350cf172b72404edfcbdceba253650ec587fb6673b891ca7f6b51fc71f3",
   "dist/lighting.js": "35df912c2ac970957a9d71d50f3d8b4c0438a2e804a32b23c15a4343418b8f75",
   "dist/store-links-by.js": "78e101d2b928923a2ecf9535091487f86f343a47238253dbc91124b4b04d426c",
+  "dist/store-links-ozon.js": "1070010de7acdfc5d1495fc5bbfd95dcac85e4252cd7c35689b877a39062bd98",
+  "dist/ozon-policy.js": "a63f36505e5c001e35284e848f8c1b42edd53f1c48720720ec7266b2b7de2e73",
   "dist/foreign-prices.js": "10aa48b04e48f509bf7b3ac821736abd8407e5162420c4675c3bae3305f7bdca",
-  "dist/live-price-data.js": "ed365e46da3507a7381fc23e108526418f6c9bcaa07a11548db38cb4071bdc7b",
-  "dist/regions.js": "dd9905704da1b4a29f5ad394f6a53ef81c36b82d83c92badaffe9d7d24fdddd3",
+  "dist/live-price-data.js": "24a66ebf49aa6b555af79d65ed48548ff17b28ade3dfd0c7f6909340e2c7a9c1",
+  "dist/regions.js": "602960769e51be001ef0f43cb6921d59d7aae8579f407806494471d0a8b7fadc",
   "firebase/app-check-guard.js": "cfd2312858bdbed017ae9d18d9d149f6f92c785e563739f7b763dab4d9a76b19",
   "firebase/gallery-client.js": "4e89e8a0acea72da714f4fbf2f091d7596e3ecb28acef04d0954d9ec5d2d5e28",
   "dist/budget-data.js": "cd5afd8bcab52acf5a64b51cdcf47dad9f80b3c4d44dce3d5a0d3b669749536e",
@@ -21,7 +23,7 @@
   "dist/verification.js": "8e143a04c1416ab131b9070112018bb05f6ec5ccf540f140de12ffa20d18f35d",
   "dist/autobuild.js": "ce82bb7adcb5aa0355d5852d5a70338b3010c5c53c4926fc6b6abfc040f376e8",
   "src/autobuild-worker.js": "6a3be09ac1341902d8c4821bd645a49af859ab47458239e638051b7584b415db",
-  "dist/vendor/firebase-gallery.js": "4402c10a09f5287f31fd1d0598b79b0ea026779a9631b500f966ac9f470c9cb1",
-  "dist/autobuild-worker.js": "fb013a450e577947e4d6dda8b7fa16c9ccb45d7021b2b0e9ef226682e05cd788",
+  "dist/vendor/firebase-gallery.js": "e8baddcb1513c2f31223c86076916740919fbb26111647ca4c6735d8e9fa30a8",
+  "dist/autobuild-worker.js": "0203da63dda534016710857e67c2367643793430c7c592d602838e602708ed28",
   "pnpm-lock.yaml": "6c91e41700a3c1aae40658aea2569f9854c2062c4190c2a5bd29faf9ac93abcf"
 }

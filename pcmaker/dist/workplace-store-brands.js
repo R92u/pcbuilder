@@ -1,6 +1,6 @@
 import './navigation.js';
 import {peripherals,peripheralCategories,peripheralById,sanitizeWorkplace,peripheralQuote,offersForPeripheral} from './peripherals.js?v=expanded-20261102';
-import {regionFor} from './regions.js';
+import {regionFor,storeLink,ozonOfferNotice} from './regions.js';
 import {formatMoney,formatTotals,selectRegionalOffer,foreignPriceNotice} from './money.js';
 import {priceQuality} from './price-quality.js';
 import {offerMarkup} from './data-quality-ui.js';
@@ -17,7 +17,16 @@ function price(p){const offer=selectRegionalOffer(offersForPeripheral(p),regionI
  const kind=offer.kind==='manufacturer'?'Цена каталога производителя':offer.availability==='out-of-stock'?'Последняя цена · нет в наличии':'Цена магазина';
  return `<strong class="product-price">${formatMoney(offer.price,offer.currency)}</strong>${offerMarkup(offer)}<p class="price-source">${e(kind)} · ${e(offer.store)}${offer.note?'<br>'+e(offer.note):''}</p>`;
 }
-function offerLink(p){if(!selectRegionalOffer(offersForPeripheral(p),regionId)&&regionId==='ru')return `<a href="https://www.dns-shop.ru/search/?q=${encodeURIComponent(p.name)}" target="_blank" rel="noopener noreferrer">Найти в DNS ↗</a>`;const offer=selectRegionalOffer(offersForPeripheral(p),regionId);return offer?`${offer.currency==='USD'?`<a href="https://www.dns-shop.ru/search/?q=${encodeURIComponent(p.name)}" target="_blank" rel="noopener noreferrer">Найти в DNS ↗</a> · `:''}<a href="${e(offer.url)}" target="_blank" rel="noopener noreferrer">${offer.kind==='manufacturer'?'Цена и магазины у производителя':'Предложение '+e(offer.store)} ↗</a>`:`<a href="https://5element.by/search/?q=${encodeURIComponent(p.name)}" target="_blank" rel="noopener noreferrer">Найти в 5 элементе ↗</a>`;}
+function offerLink(p){
+ const offer=selectRegionalOffer(offersForPeripheral(p),regionId);
+ const source=offer?`<a href="${e(offer.url)}" target="_blank" rel="noopener noreferrer">${offer.kind==='manufacturer'?'Цена и магазины у производителя':'Предложение '+e(offer.store)} ↗</a>`:'';
+ if(regionId==='ru'){
+  const link=storeLink(p,p.category,{currency:'RUB',items:{[p.id]:offer}});
+  const separateSource=offer?.url===link.url?'':source;
+  return `${separateSource}${separateSource?' · ':''}<a href="${e(link.url)}" target="_blank" rel="noopener noreferrer">${e(link.label)}</a><span class="shop-offer-note">${e(ozonOfferNotice)}</span>`;
+ }
+ return source||`<a href="https://5element.by/?digiSearch=true&term=${encodeURIComponent(p.sku||p.name)}" target="_blank" rel="noopener noreferrer">Найти в 5 элементе ↗</a>`;
+}
 function choose(id){const p=peripheralById[id];if(!p)return;selection[p.category]=id;const stored=save('pcmaker-workplace',selection);getScene()?.setPeripherals(selection);render();refreshShop();if(!stored){$('workplace-total-note').textContent='Браузер не разрешил сохранить выбор. Он доступен до закрытия страницы.';}}
 function render(){
  $('workplace-count').textContent=Object.keys(selection).length+' устройства';

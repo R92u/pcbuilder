@@ -13,6 +13,6 @@ export function verificationMarkup(part,details=true){
 export function offerMarkup(offer){
  if(!offer)return '';
  const quality=priceQuality(offer);
- const check=offer.priceCheck,failed=check&&check.status!=='updated';
- return `<span class="price-checked ${quality.status}" title="Цена и наличие зафиксированы в указанную дату; окончательные условия — в магазине">${e(offerStatusLine(offer))}</span>${quality.status!=='fresh'?`<span class="price-quality ${quality.status}">${e(quality.label)}</span>`:''}${failed?`<span class="price-refresh-note">Повторная проверка ${e(formatPriceDate(check.attemptedAt.slice(0,10)))}: цену подтвердить не удалось. Сохранён предыдущий снимок.</span>`:''}${offer.currency==='USD'?`<span class="shop-offer-note">${foreignPriceNotice}</span>`:''}`;
+ const check=offer.priceCheck,manual=check?.reason==='manual-review-required',failed=check&&check.status!=='updated'&&!manual;
+ return `<span class="price-checked ${quality.status}" title="Цена и наличие зафиксированы в указанную дату; окончательные условия — в магазине">${e(offerStatusLine(offer))}</span>${quality.status!=='fresh'?`<span class="price-quality ${quality.status}">${e(quality.label)}</span>`:''}${manual?'<span class="price-refresh-note">Цена проверена вручную. Автоматическое обновление Ozon пока недоступно.</span>':''}${failed?`<span class="price-refresh-note">Повторная проверка ${e(formatPriceDate(check.attemptedAt.slice(0,10)))}: цену подтвердить не удалось. Сохранён предыдущий снимок.</span>`:''}${offer.currency==='USD'?`<span class="shop-offer-note">${foreignPriceNotice}</span>`:''}`;
 }

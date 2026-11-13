@@ -1,6 +1,6 @@
 // Deliberately conservative: one exact public Product/Offer, never search results,
 // recommendation prices, aggregates, currency conversion or anti-bot workarounds.
-export const allowedHosts = new Set(['kns.ru','regard.ru','5element.by','andpro.ru','redragon.ru','masterdom.by','tecno.by','time-shop.by','cybermarket.by','nexton.by','unifox.by','ultraprice.by','dns-shop.ru','newegg.com','logitechg.com','onecom.ru','r-seven.ru','tec.by','onlife.by','mvideo.ru','lifebook-shop.ru']);
+export const allowedHosts = new Set(['kns.ru','regard.ru','5element.by','andpro.ru','redragon.ru','masterdom.by','tecno.by','time-shop.by','cybermarket.by','nexton.by','unifox.by','ultraprice.by','dns-shop.ru','newegg.com','logitechg.com','onecom.ru','r-seven.ru','tec.by','onlife.by','mvideo.ru','lifebook-shop.ru','ozon.ru']);
 export const supportedHosts = new Set(['kns.ru','regard.ru','5element.by','andpro.ru','redragon.ru','masterdom.by','tecno.by','time-shop.by','cybermarket.by','nexton.by','unifox.by','ultraprice.by','logitechg.com','newegg.com','lifebook-shop.ru']);
 export const hostOf = url => new URL(url).hostname.replace(/^www\./,'');
 export function allowedURL(value, original) {
@@ -112,6 +112,8 @@ export function emptyOverlay() {return {schemaVersion:1,checkedAt:null,items:{ru
 export function applyResult(overlay,target,result,attemptedAt) {
   overlay.items[target.region]??={};overlay.checks[target.region]??={};
   if(result.offer) overlay.items[target.region][target.id]=result.offer;
+  // A manually reviewed quote can be preferred without claiming a new check.
+  else if(result.retainedOffer) overlay.items[target.region][target.id]={...result.retainedOffer};
   const reason=result.error||null;
   overlay.checks[target.region][target.id]={attemptedAt,status:result.offer?'updated':/access|robots|source-rate-limited|source-blocked|http-40[13]|http-429/.test(reason)?'blocked':reason==='http-404'?'unavailable':/network|timeout|http-5/.test(reason)?'error':'unverified',reason,url:allowedURL(target.offer.url)?target.offer.url:null};
   overlay.checkedAt=attemptedAt;
@@ -134,26 +136,76 @@ export function robotsAllowed(body,url) {
   }
   return chosen.allow;
 }
-export async function fetchHTML(url,{fetcher=fetch,timeout=20000,maxBytes=4000000}={}) {
-  if(!allowedURL(url))return {error:'unsafe-url'};
-  try {
+// Retry only transient transport failures. Access restrictions are never worked around.
+const retryableFetchError = error => /^(?:network-error|timeout|http-429|http-5\d\d)$/.test(error||'');
+function retryAfter(value, now) {
+  if(value===null)return {};
+  const raw=value.trim(), seconds=/^\d+$/.test(raw)?Number(raw):null;
+  const httpDate=/^(?:Mon|Tue|Wed|Thu|Fri|Sat|Sun), \d{2} (?:Jan|Feb|Mar|Apr|May|Jun|Jul|Aug|Sep|Oct|Nov|Dec) \d{4} \d{2}:\d{2}:\d{2} GMT$/i.test(raw);
+  const at=seconds===null&&httpDate?Date.parse(raw):NaN;
+  const ms=seconds===null?at-now:seconds*1000;
+  return Number.isFinite(ms)&&ms<=Number.MAX_SAFE_INTEGER?{retryAfterMs:Math.max(0,ms)}:{retryAfterUnusable:true};
+}
+async function fetchAttempt(url,{fetcher,timeout,maxBytes,now}) {
+  const controller=new AbortController();let reader;
+  // The deadline includes redirects and streamed body reads, not only response headers.
+  const expired=new Promise((_,reject)=>{
+    controller.signal.addEventListener('abort',()=>{
+      void reader?.cancel().catch(()=>{});
+      reject(new DOMException('Request deadline exceeded','TimeoutError'));
+    },{once:true});
+  });
+  const timer=setTimeout(()=>controller.abort(),timeout);
+  async function read(response) {
+    if(Number(response.headers.get('content-length'))>maxBytes){void response.body?.cancel().catch(()=>{});return {error:'body-too-large'};}
+    if(!response.body)return {html:''};
+    reader=response.body.getReader();const parts=[];let size=0;
+    while(true){const chunk=await reader.read();if(chunk.done)break;size+=chunk.value.length;if(size>maxBytes){void reader.cancel().catch(()=>{});return {error:'body-too-large'};}parts.push(chunk.value);}
+    const data=new Uint8Array(size);let offset=0;for(const part of parts){data.set(part,offset);offset+=part.length;}
+    const charset=response.headers.get('content-type')?.match(/charset\s*=\s*([\w-]+)/i)?.[1]||'utf-8';
+    return {html:new TextDecoder(charset).decode(data)};
+  }
+  async function request() {
     let current=url;
     for(let redirects=0;redirects<4;redirects++) {
-      const response=await fetcher(current,{redirect:'manual',signal:AbortSignal.timeout(timeout),headers:{'User-Agent':'PCmakerPriceBot/1.0 (+https://github.com/R92u/pcbuilder)','Accept':'text/html,application/xhtml+xml,text/plain;q=0.8','Accept-Language':'ru,en;q=0.8'}});
+      const response=await fetcher(current,{redirect:'manual',signal:controller.signal,headers:{'User-Agent':'PCmakerPriceBot/1.0 (+https://github.com/R92u/pcbuilder)','Accept':'text/html,application/xhtml+xml,text/plain;q=0.8','Accept-Language':'ru,en;q=0.8'}});
+      if(controller.signal.aborted){void response.body?.cancel().catch(()=>{});return {error:'timeout'};}
+      const diagnostics={httpStatus:response.status};
       if(response.status>=300&&response.status<400) {
-        if(response.status===304)return {error:'not-modified-without-evidence'};
+        void response.body?.cancel().catch(()=>{});
+        if(response.status===304)return {error:'not-modified-without-evidence',...diagnostics};
         const next=new URL(response.headers.get('location')||'',current).href;
-        if(!allowedURL(next,url))return {error:'unsafe-redirect'};
+        if(!allowedURL(next,url))return {error:'unsafe-redirect',...diagnostics};
         current=next;continue;
       }
-      if(!response.ok)return {error:'http-'+response.status};
-      if(Number(response.headers.get('content-length'))>maxBytes)return {error:'body-too-large'};
-      const reader=response.body.getReader(),parts=[];let size=0;
-      while(true){const chunk=await reader.read();if(chunk.done)break;size+=chunk.value.length;if(size>maxBytes){await reader.cancel();return {error:'body-too-large'};}parts.push(chunk.value);}
-      const data=new Uint8Array(size);let offset=0;for(const part of parts){data.set(part,offset);offset+=part.length;}
-      const charset=response.headers.get('content-type')?.match(/charset\s*=\s*([\w-]+)/i)?.[1]||'utf-8';
-      return {html:new TextDecoder(charset).decode(data),url:current};
+      if(!response.ok&&!retryableFetchError('http-'+response.status)) {
+        void response.body?.cancel().catch(()=>{});
+        return {error:'http-'+response.status,...diagnostics};
+      }
+      if(response.headers.get('cf-mitigated')==='challenge') {
+        void response.body?.cancel().catch(()=>{});
+        return {error:'access-blocked',...diagnostics};
+      }
+      const body=await read(response);
+      if(body.error)return {...body,...diagnostics};
+      const title=text(body.html.match(/<title\b[^>]*>([\s\S]*?)<\/title>/i)?.[1]||'');
+      if(/access denied|just a moment|captcha|доступ ограничен|подтвердите.*человек/i.test(title))return {error:'access-blocked',...diagnostics};
+      if(!response.ok)return {error:'http-'+response.status,...diagnostics,...retryAfter(response.headers.get('retry-after'),now())};
+      return {...body,url:current,...diagnostics};
     }
     return {error:'redirect-limit'};
-  } catch(e) {return {error:e.name==='TimeoutError'||e.name==='AbortError'?'timeout':'network-error'};}
+  }
+  try {return await Promise.race([request(),expired]);}
+  catch(e){return {error:controller.signal.aborted||e.name==='TimeoutError'||e.name==='AbortError'?'timeout':'network-error'};}
+  finally{clearTimeout(timer);}
+}
+export async function fetchHTML(url,{fetcher=fetch,timeout=20000,maxBytes=4000000,retries=2,maxRetryDelay=5000,delay=ms=>new Promise(resolve=>setTimeout(resolve,ms)),now=Date.now}={}) {
+  if(!allowedURL(url))return {error:'unsafe-url'};
+  const retryLimit=Math.max(0,Math.min(2,Number.isFinite(retries)?Math.floor(retries):2));
+  for(let attempt=0;attempt<=retryLimit;attempt++) {
+    const result=await fetchAttempt(url,{fetcher,timeout,maxBytes,now});
+    const wait=Math.max(1000*2**attempt,result.retryAfterMs||0);
+    if(!retryableFetchError(result.error)||attempt===retryLimit||result.retryAfterUnusable||wait>maxRetryDelay)return {...result,attempts:attempt+1};
+    await delay(wait);
+  }
 }

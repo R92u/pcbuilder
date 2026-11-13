@@ -50,10 +50,55 @@ test('Fetch rejects foreign redirects, untrusted hosts, oversized responses and 
  const redirect=await fetchHTML(target.offer.url,{fetcher:async()=>new Response(null,{status:302,headers:{location:'https://127.0.0.1/private'}})});assert.equal(redirect.error,'unsafe-redirect');
  const unchanged=await fetchHTML(target.offer.url,{fetcher:async()=>new Response(null,{status:304})});assert.equal(unchanged.error,'not-modified-without-evidence');
  const huge=await fetchHTML(target.offer.url,{maxBytes:5,fetcher:async()=>new Response('123456')});assert.equal(huge.error,'body-too-large');
- const failure=await fetchHTML(target.offer.url,{fetcher:async()=>{throw Error('token must not be copied');}});assert.deepEqual(failure,{error:'network-error'});
+ const failure=await fetchHTML(target.offer.url,{fetcher:async()=>{throw Error('token must not be copied');},delay:async()=>{}});assert.deepEqual(failure,{error:'network-error',attempts:3});
 });
 test('Robots exclusions, wildcards, longer allow rules and specific agents are honored',()=>{
  const robots='User-agent: *\nDisallow: /private\nDisallow: /*?*\nAllow: /private/public\nUser-agent: OtherBot\nDisallow: /';
  assert.equal(robotsAllowed(robots,'https://www.kns.ru/product/a/'),true);assert.equal(robotsAllowed(robots,'https://www.kns.ru/private/a'),false);assert.equal(robotsAllowed(robots,'https://www.kns.ru/private/public/a'),true);assert.equal(robotsAllowed(robots,'https://www.kns.ru/product/a/?q=x'),false);
  assert.equal(robotsAllowed('User-agent: PCmakerPriceBot\nDisallow: /\nUser-agent: *\nAllow: /','https://www.kns.ru/product/a/'),false);
+});
+
+
+test('Transient fetch failures retry at most twice and recover without changing source',async()=>{
+ const waits=[];let requests=0;
+ const result=await fetchHTML(target.offer.url,{delay:async ms=>waits.push(ms),fetcher:async()=>{
+  if(++requests===1)throw Error('temporary');
+  if(requests===2)return new Response('maintenance',{status:503});
+  return new Response('verified product');
+ }});
+ assert.equal(result.html,'verified product');assert.equal(result.url,target.offer.url);assert.equal(result.attempts,3);
+ assert.deepEqual(waits,[1000,2000]);
+ let repeated=0;
+ const exhausted=await fetchHTML(target.offer.url,{retries:50,delay:async()=>{},fetcher:async()=>{repeated++;return new Response('',{status:502});}});
+ assert.equal(repeated,3);assert.equal(exhausted.error,'http-502');assert.equal(exhausted.httpStatus,502);
+});
+
+test('Retry-After delays are honored; excessive or invalid values stop the host request',async()=>{
+ const now=Date.parse('2026-11-13T12:00:00Z');
+ for(const header of ['3','Fri, 13 Nov 2026 12:00:03 GMT']){
+  let requests=0;const waits=[];
+  const result=await fetchHTML(target.offer.url,{now:()=>now,delay:async ms=>waits.push(ms),fetcher:async()=>++requests===1?new Response('',{status:429,headers:{'retry-after':header}}):new Response('ok')});
+  assert.equal(result.html,'ok');assert.deepEqual(waits,[3000]);
+ }
+ for(const header of ['120','invalid','-1','1.5']){
+  let requests=0;
+  const result=await fetchHTML(target.offer.url,{now:()=>now,delay:async()=>assert.fail('must not sleep or retry early'),fetcher:async()=>{requests++;return new Response('',{status:429,headers:{'retry-after':header}});}});
+  assert.equal(result.error,'http-429');assert.equal(requests,1);
+  if(header==='120')assert.equal(result.retryAfterMs,120000);else assert.equal(result.retryAfterUnusable,true);
+ }
+});
+
+test('Authentication failures, blocked pages and unsafe redirects are never retried',async()=>{
+ const responses=[()=>new Response('',{status:401}),()=>new Response('',{status:403}),()=>new Response('<title>Just a moment</title>',{status:503}),()=>new Response('<title>Captcha</title>'),()=>new Response('',{status:503,headers:{'cf-mitigated':'challenge'}}),()=>new Response(null,{status:302,headers:{location:'https://127.0.0.1/private'}})];
+ for(const response of responses){
+  let requests=0;
+  const result=await fetchHTML(target.offer.url,{delay:async()=>assert.fail('blocked sources must not retry'),fetcher:async()=>{requests++;return response();}});
+  assert.ok(result.error);assert.equal(requests,1);
+ }
+});
+
+test('Fetch deadline covers a stalled streamed body and cancels it',async()=>{
+ let cancelled=false;
+ const result=await fetchHTML(target.offer.url,{timeout:20,retries:0,fetcher:async()=>new Response(new ReadableStream({start(controller){controller.enqueue(new TextEncoder().encode('partial'));},cancel(){cancelled=true;}}))});
+ assert.equal(result.error,'timeout');assert.equal(result.attempts,1);assert.equal(cancelled,true);
 });

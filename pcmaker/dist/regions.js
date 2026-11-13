@@ -1,4 +1,6 @@
 import {productLinksBy} from './store-links-by.js';
+import {productLinksOzon} from './store-links-ozon.js';
+import {isApprovedOzonOffer,isOzonOffer,ozonProductURL} from './ozon-policy.js';
 import {foreignComponentOffers} from './foreign-prices.js';
 import {validForeignOffer} from './money.js';
 import {dateStamp} from './price-quality.js';
@@ -23,6 +25,7 @@ export function priceSnapshot(data,id){
  for(const [key,value] of Object.entries(data?.items||{})){
   if((value.currency||data.currency||'RUB')!==region.currency||!Number.isFinite(value.price)||value.price<=0)continue;
   if(dateStamp(value.date)===null)continue;
+  if(id!=='by'&&isOzonOffer(value)&&!isApprovedOzonOffer({...value,currency:value.currency||data.currency||'RUB'}))continue;
   try{const u=new URL(value.url);if(u.protocol!=='https:'||u.username||u.password||u.port||id==='by'&&!byStoreProduct(value.url))continue;}catch{continue;}
   items[key]={...value,currency:region.currency};
  }
@@ -49,6 +52,9 @@ function isByProduct(link){
    &&!u.username&&!u.password&&!u.port;
  }catch{return false;}
 }
+export function ozonStoreProduct(link){
+ const url=ozonProductURL(link);return url?{url,store:'Ozon'}:null;
+}
 export function storeLink(part,category,data={},source={}){
  if(data.currency==='BYN'){
   const candidate=[productLinksBy[part.id],data.items?.[part.id]?.url,source?.storeUrl].find(isByProduct);
@@ -59,8 +65,9 @@ export function storeLink(part,category,data={},source={}){
    label:'Найти в 5 элементе ↗'
   };
  }
- const candidate=[data.dnsLinks?.[part.id],source?.storeUrl,data.items?.[part.id]?.url].find(link=>{try{const u=new URL(link);return u.protocol==='https:'&&u.hostname.replace(/^www\./,'')==='dns-shop.ru'&&u.pathname.startsWith('/product/');}catch{return false;}});
- return candidate?{url:candidate,label:'Товар в DNS ↗'}:{url:'https://www.dns-shop.ru/search/?q='+encodeURIComponent(part.sku||part.name),label:'Найти в DNS ↗'};
+ const candidate=[productLinksOzon[part.id],data.ozonLinks?.[part.id],data.items?.[part.id]?.url].map(ozonStoreProduct).find(Boolean);
+ return candidate?{url:candidate.url,label:'Товар на Ozon ↗'}:{url:'https://www.ozon.ru/search/?text='+encodeURIComponent(part.sku||part.name),label:'Найти на Ozon ↗'};
 }
 export const marketLink=part=>'https://market.yandex.ru/search?text='+encodeURIComponent(part.sku||part.name);
+export const ozonOfferNotice='На Ozon выбирай продавца Ozon или официальный магазин бренда. Сравнивай обычную цену без Ozon Карты.';
 export const authenticityNotice='Проверь продавца, оригинальность и гарантию перед покупкой. Наличие товара на маркетплейсе не подтверждает его подлинность.';

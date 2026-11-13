@@ -1,4 +1,5 @@
 import {priceQuality,dateStamp} from './price-quality.js';
+import {isApprovedOzonOffer,isOzonOffer} from './ozon-policy.js';
 
 const currencies={ru:'RUB',by:'BYN',usd:'USD'};
 const empty=()=>({schemaVersion:1,items:{ru:{},by:{},usd:{}},checks:{ru:{},by:{},usd:{}}});
@@ -6,6 +7,7 @@ let current=empty();
 export const getLivePrices=()=>current;
 export function validLiveOffer(offer,region,now=Date.now()){
  if(!currencies[region]||offer?.currency!==currencies[region]||!offer.store||priceQuality(offer,now).status==='invalid')return false;
+ if(isOzonOffer(offer)&&!isApprovedOzonOffer(offer))return false;
  if(!['in-stock','out-of-stock','unknown'].includes(offer.availability))return false;
  try{const u=new URL(offer.url);return u.protocol==='https:'&&!u.username&&!u.password&&!u.port&&u.pathname!=='/'&&!/search/i.test(u.pathname);}catch{return false;}
 }
@@ -24,6 +26,7 @@ export async function loadLivePrices(fetcher=fetch){
  catch{return current;}finally{clearTimeout(timeout);}
 }
 export function updatedOffer(id,region,base,live=current,now=Date.now()){
+ if(isOzonOffer(base)&&!isApprovedOzonOffer(base))base=undefined;
  const update=live?.items?.[region]?.[id],useUpdate=validLiveOffer(update,region,now)&&(!base||priceQuality(base,now).status==='invalid'||update.date>=base.date);
  const offer=useUpdate?update:base;if(!offer)return undefined;
  const check=live?.checks?.[region]?.[id],priceCheck=check?.url===offer.url&&check.attemptedAt?.slice(0,10)>=offer.date?check:undefined;

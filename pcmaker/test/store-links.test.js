@@ -2,8 +2,9 @@ import test from 'node:test';
 import assert from 'node:assert/strict';
 import fs from 'node:fs';
 import {byId} from '../dist/catalog.js';
-import {priceSnapshot,storeLink,byStoreProduct,belarusStores} from '../dist/regions.js';
+import {priceSnapshot,storeLink,byStoreProduct,belarusStores,ozonStoreProduct} from '../dist/regions.js';
 import {productLinksBy} from '../dist/store-links-by.js';
+import {productLinksOzon} from '../dist/store-links-ozon.js';
 
 test('verified BY product pages open directly even without a price',()=>{
  const noPrices=priceSnapshot({},'by');
@@ -49,9 +50,70 @@ test('Supported alternative BY stores retain direct product links and explicit s
  }
 });
 
-test('RU links stay on DNS, including models with a BY match',()=>{
+test('RU links open approved Ozon product pages, including models with a BY match',()=>{
  const part=byId.ak400;
- assert.equal(new URL(storeLink(part,'cooler',{currency:'RUB'}).url).hostname,'www.dns-shop.ru');
- const url='https://www.dns-shop.ru/product/123/exact-model/';
- assert.deepEqual(storeLink(part,'cooler',{currency:'RUB',dnsLinks:{ak400:url}}),{url,label:'Товар в DNS ↗'});
+ const url='https://www.ozon.ru/product/deepcool-ak400-123456789/';
+ assert.deepEqual(storeLink(part,'cooler',{currency:'RUB',ozonLinks:{ak400:url}}),{url,label:'Товар на Ozon ↗'});
+ assert.deepEqual(storeLink(part,'cooler',{currency:'RUB',items:{ak400:{url}}}),{url,label:'Товар на Ozon ↗'});
+ const alternative='https://ozon.ru/product/987654321/';
+ assert.deepEqual(storeLink(part,'cooler',{currency:'RUB',ozonLinks:{ak400:url},items:{ak400:{url:alternative}}}),{url,label:'Товар на Ozon ↗'});
+ assert.deepEqual(ozonStoreProduct(alternative),{url:alternative,store:'Ozon'});
+});
+
+test('Missing Ozon card uses an explicitly labelled exact-model or SKU search without changing price evidence',()=>{
+ for(const part of [{id:'unknown',name:'Модель A & B / 16 ГБ + OC'},{id:'unknown',name:'Модель',sku:'ABC+123/16G & RGB'}]){
+  const data={currency:'RUB',items:{unknown:{price:1234,url:'https://www.regard.ru/product/123/exact-model',store:'Регард',date:'2026-11-13'}},dnsLinks:{unknown:'https://www.dns-shop.ru/product/123/example/'}};
+  const before=structuredClone(data);
+  const link=storeLink(part,'gpu',data,{storeUrl:'https://www.dns-shop.ru/product/123/example/'}),url=new URL(link.url);
+  assert.equal(link.label,'Найти на Ozon ↗');
+  assert.equal(url.origin,'https://www.ozon.ru');assert.equal(url.pathname,'/search/');
+  assert.equal(url.searchParams.get('text'),part.sku||part.name);
+  assert.deepEqual(data,before,'A destination link must not invent or relabel price evidence');
+ }
+});
+
+test('Reviewed Ozon destination survives a price fallback to a different store',()=>{
+ for(const [id,url] of Object.entries(productLinksOzon)){
+  assert.deepEqual(ozonStoreProduct(url),{url,store:'Ozon'},id);
+  const data={currency:'RUB',items:{[id]:{url:'https://www.kns.ru/product/backup/',store:'KNS',price:1000}}};
+  assert.deepEqual(storeLink({id,name:'Exact model'},null,data),{url,label:'Товар на Ozon ↗'},id);
+  assert.equal(data.items[id].store,'KNS');
+ }
+});
+
+test('Ozon product links reject credentials, ports, search URLs and non-product destinations',()=>{
+ const part={id:'unknown',name:'Exact model'};
+ for(const url of [
+  'http://www.ozon.ru/product/model-123/',
+  'https://www.ozon.ru.evil.test/product/model-123/',
+  'https://seller.ozon.ru/product/model-123/',
+  'https://user:password@www.ozon.ru/product/model-123/',
+  'https://www.ozon.ru:8080/product/model-123/',
+  'https://www.ozon.ru:443/product/model-123/',
+  'https://www.ozon.ru/',
+  'https://www.ozon.ru/search/?text=model',
+  'https://www.ozon.ru/category/model-123/',
+  'https://www.ozon.ru/product/',
+  'https://www.ozon.ru/product/model/',
+  'https://www.ozon.ru/product/model-123/characteristics/',
+  'https://www.ozon.ru/product/model-123/?text=another',
+  'https://www.ozon.ru/product/model-123/?redirect=https://evil.test',
+  'https://www.ozon.ru/product/model-123/#search',
+  'https://www.ozon.ru/product/model%2fsearch-123/',
+  ' https://www.ozon.ru/product/model-123/',
+  'https://www.ozon.ru/product/model-123/\n',
+  null,undefined
+ ]){
+  assert.equal(ozonStoreProduct(url),null,String(url));
+  assert.equal(storeLink(part,'gpu',{currency:'RUB',ozonLinks:{unknown:url},items:{unknown:{url}}}).label,'Найти на Ozon ↗',String(url));
+ }
+ const valid='https://www.ozon.ru/product/exact-model-123/';
+ assert.deepEqual(storeLink(part,'gpu',{currency:'RUB',ozonLinks:{unknown:'https://evil.test'},items:{unknown:{url:valid}}}),{url:valid,label:'Товар на Ozon ↗'});
+});
+
+test('Ozon destinations never replace the Belarus direct-product and explicit search rules',()=>{
+ const known=byId.ak400,url='https://www.ozon.ru/product/model-123/';
+ assert.deepEqual(storeLink(known,'cooler',{currency:'BYN',ozonLinks:{[known.id]:url}}),{url:productLinksBy[known.id],label:'Товар в 5 элементе ↗'});
+ const link=storeLink({id:'unknown',name:'Exact model'},'gpu',{currency:'BYN',ozonLinks:{unknown:url},items:{unknown:{url}}});
+ assert.equal(link.label,'Найти в 5 элементе ↗');assert.equal(new URL(link.url).hostname,'5element.by');
 });
