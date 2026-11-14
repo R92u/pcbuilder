@@ -5,6 +5,7 @@ import {peripherals,peripheralById} from '../dist/peripherals-brands.js';
 import {foreignComponentOffers} from '../dist/foreign-prices.js';
 import {emptyOverlay,applyResult,parseOffer,fetchHTML,hostOf,supportedHosts,robotsAllowed} from './price-refresh-core.mjs';
 import {createRefreshPlan,planSummary,runRefreshPlan,updateHostCircuit} from './price-refresh-plan.mjs';
+import {recordRefreshObservations} from '../dist/price-history.js';
 
 const root=path.resolve(import.meta.dirname,'..'),targetFile=path.join(root,'dist/live-prices.json');
 const args=Object.fromEntries(process.argv.slice(2).map(s=>s.replace(/^--/, '').split('=')));
@@ -71,6 +72,10 @@ if(args.plan==='true'){
  }
  for(const [host,source] of Object.entries(summary.sources))console.log(host+': '+source.updated+'/'+source.attempted+' offers confirmed');
  const temporary=targetFile+'.tmp';await fs.writeFile(temporary,JSON.stringify(overlay,null,2)+'\n');await fs.rename(temporary,targetFile);
+ const historyFile=path.join(root,'dist/price-history.json');let previousHistory;
+ try{previousHistory=JSON.parse(await fs.readFile(historyFile,'utf8'));}catch(error){if(error.code!=='ENOENT')throw error;}
+ const history=recordRefreshObservations(previousHistory,results,{now:now.getTime(),observedAt:attemptedAt});
+ await fs.writeFile(historyFile+'.tmp',JSON.stringify(history)+'\n');await fs.rename(historyFile+'.tmp',historyFile);
  await fs.writeFile(path.join(root,'research/price-refresh-last-run.json'),JSON.stringify(summary,null,2)+'\n');
  console.log(JSON.stringify(summary,null,2));
 }

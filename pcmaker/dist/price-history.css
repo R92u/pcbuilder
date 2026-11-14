@@ -1,0 +1,247 @@
+/* Price-history dialog; all layout and theme rules stay within this feature. */
+.price-history-dialog{
+ --ph-text:var(--text,#f2f5f7);
+ --ph-muted:#bec8d0;
+ --ph-accent:#e5f0fa;
+ --ph-border:#ffffff29;
+ --ph-surface:#ffffff07;
+ --ph-chart:#11182065;
+ --ph-control:#ffffff0c;
+ --ph-selected:#ffffff24;
+ --ph-option:#292e35;
+ --ph-radius:14px;
+ width:min(1000px,calc(100vw - 32px));
+ max-width:calc(100vw - 32px);
+ max-height:calc(100dvh - 40px);
+ padding:0;
+ overflow:auto;
+ overscroll-behavior:contain;
+ scrollbar-width:thin;
+ scrollbar-color:#aab9c455 transparent;
+ color:var(--ph-text);
+ font-size:13px;
+ line-height:1.55;
+}
+.price-history-dialog [hidden]{display:none!important}
+.price-history-header{
+ display:flex;
+ align-items:flex-start;
+ justify-content:space-between;
+ gap:20px;
+ padding:18px 28px 16px;
+ border-bottom:1px solid var(--ph-border);
+}
+.price-history-header>div{min-width:0}
+.price-history-header h2{margin:0;font-size:26px;font-weight:500;line-height:1.25;letter-spacing:-.6px}
+.price-history-header p{max-width:660px;margin:8px 0 0;color:var(--ph-muted);font-size:12px;overflow-wrap:anywhere}
+.price-history-header p:first-child{margin:0 0 8px;font-size:9px;letter-spacing:1.6px}
+.price-history-header .icon-button{width:40px;height:40px;min-width:40px;min-height:40px;margin:-5px -6px 0 0;color:var(--ph-text)}
+.price-history-controls{
+ display:grid;
+ grid-template-columns:minmax(0,1fr) minmax(110px,150px) auto;
+ align-items:end;
+ gap:16px;
+ margin:23px 28px 20px;
+}
+.price-history-field{display:grid;gap:7px;min-width:0;margin:0;color:var(--ph-muted);font-size:11px}
+.price-history-field select{
+ display:block;
+ width:100%;
+ min-width:0;
+ max-width:100%;
+ min-height:42px;
+ padding:10px 30px 10px 12px;
+ border:1px solid var(--ph-border);
+ border-radius:10px;
+ background:var(--ph-control);
+ color:var(--ph-text);
+ font:inherit;
+ font-size:12px;
+ text-overflow:ellipsis;
+ cursor:pointer;
+}
+.price-history-field select option{background:var(--ph-option);color:var(--ph-text)}
+.price-history-periods{display:flex;align-items:center;gap:4px;min-width:0;padding:4px;border:1px solid var(--ph-border);border-radius:12px;background:var(--ph-surface)}
+.price-history-periods button{
+ min-width:61px;
+ min-height:34px;
+ padding:7px 10px;
+ border:1px solid transparent;
+ border-radius:8px;
+ color:var(--ph-muted);
+ font-size:12px;
+ white-space:nowrap;
+}
+.price-history-periods button:hover{background:var(--ph-control);color:var(--ph-text)}
+.price-history-periods button[aria-pressed=true],.price-history-periods button[aria-selected=true]{border-color:var(--ph-border);background:var(--ph-selected);color:var(--ph-text);font-weight:600}
+.price-history-summary{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:11px;margin:0 28px 19px}
+.price-history-stat{min-width:0;padding:15px 17px;border:1px solid var(--ph-border);border-radius:var(--ph-radius);background:var(--ph-surface)}
+.price-history-stat>span,.price-history-stat>label{display:block;color:var(--ph-muted);font-size:11px}
+.price-history-stat strong{display:block;margin:7px 0 3px;color:var(--ph-text);font-size:clamp(20px,2.3vw,27px);font-weight:500;line-height:1.25;letter-spacing:-.6px;font-variant-numeric:tabular-nums;overflow-wrap:anywhere}
+.price-history-stat small{display:block;color:var(--ph-muted);font-size:10px;line-height:1.5;overflow-wrap:anywhere}
+.price-history-chart{position:relative;min-width:0;margin:0 28px 16px;padding:17px 14px 10px;border:1px solid var(--ph-border);border-radius:var(--ph-radius);background:var(--ph-chart)}
+.price-history-svg{display:block;width:100%;height:auto;max-height:360px;overflow:visible;fill:none;stroke:none;touch-action:pan-y}
+.price-history-svg :is(path,line,polyline,circle){vector-effect:non-scaling-stroke}
+.price-history-grid{fill:none;stroke:var(--ph-border);stroke-width:1;stroke-dasharray:3 5}
+.price-history-line{fill:none;stroke:var(--ph-accent);stroke-width:2.5;stroke-linecap:round;stroke-linejoin:round}
+.price-history-line.is-source-change{stroke-dasharray:6 5}
+.price-history-legend .is-source-change i{height:0;background:none;border-top:2px dashed var(--ph-accent)}
+.price-history-single{margin:5px 0 0;text-align:center;color:var(--ph-muted);font-size:11px}
+.price-history-point{cursor:pointer;outline:none}
+.price-history-point circle:not(.price-history-hit){fill:var(--ph-option);stroke:var(--ph-accent);stroke-width:2}
+.price-history-point .price-history-hit{fill:transparent;stroke:none;pointer-events:all}
+.price-history-point:hover circle:not(.price-history-hit),.price-history-point[aria-pressed=true] circle:not(.price-history-hit),.price-history-point[aria-selected=true] circle:not(.price-history-hit){fill:var(--ph-accent);stroke:var(--ph-accent);stroke-width:3}
+.price-history-point:focus-visible circle:not(.price-history-hit){fill:var(--ph-accent);stroke:var(--ph-option);stroke-width:3;filter:drop-shadow(0 0 3px var(--ph-accent))}
+.price-history-point:focus-visible{outline:2px solid var(--ph-accent);outline-offset:5px}
+.price-history-point.is-partial circle:not(.price-history-hit){fill:none;stroke:var(--ph-muted);stroke-width:1.7}
+.price-history-point.is-partial:hover circle:not(.price-history-hit),.price-history-point.is-partial[aria-pressed=true] circle:not(.price-history-hit),.price-history-point.is-partial:focus-visible circle:not(.price-history-hit){fill:none;stroke:var(--ph-accent);stroke-width:3}
+.price-history-axis{fill:var(--ph-muted);stroke:none;font:11px Arial,sans-serif;font-variant-numeric:tabular-nums}
+.price-history-axis text{fill:var(--ph-muted);stroke:none}
+.price-history-range,.price-history-legend{display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:8px 18px;color:var(--ph-muted);font-size:11px;line-height:1.6}
+.price-history-range{margin:0 28px 10px}
+.price-history-legend{margin:0 28px 16px}
+.price-history-legend>span{display:inline-flex;align-items:center;gap:7px}
+.price-history-legend i{display:inline-block;width:18px;height:2px;flex-shrink:0;border-radius:2px;background:var(--ph-accent)}
+.price-history-legend .is-partial i{width:9px;height:9px;margin:0 4px;border:1.5px solid var(--ph-muted);border-radius:50%;background:none}
+.price-history-details{min-width:0;margin:0 28px 20px;padding:16px 18px;border:1px solid var(--ph-border);border-radius:var(--ph-radius);background:var(--ph-surface)}
+.price-history-details:empty{display:none}
+.price-history-details h3{margin:0 0 9px;font-size:15px;font-weight:500;line-height:1.5}
+.price-history-details>p{margin:6px 0;color:var(--ph-muted);font-size:12px;overflow-wrap:anywhere}
+.price-history-details>strong{font-size:19px;font-weight:500;font-variant-numeric:tabular-nums}
+.price-history-details>ul{margin:14px 0 0;padding:0;list-style:none}
+.price-history-details>ul>li{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:18px;padding:12px 0;border-top:1px solid var(--ph-border)}
+.price-history-details>ul>li>span{min-width:0;overflow-wrap:anywhere}
+.price-history-details>ul>li>span:last-child{text-align:right;font-variant-numeric:tabular-nums}
+.price-history-details>ul>li small{display:block;margin-top:3px;color:var(--ph-muted);font-size:10px;line-height:1.5}
+.price-history-details dl{display:grid;gap:9px;margin:12px 0 0}
+.price-history-details dl>div{display:flex;justify-content:space-between;gap:18px}
+.price-history-details dt{color:var(--ph-muted)}
+.price-history-details dd{margin:0;text-align:right;font-variant-numeric:tabular-nums}
+.price-history-dialog a{color:var(--ph-accent);text-decoration:underline;text-decoration-thickness:1px;text-underline-offset:3px;overflow-wrap:anywhere}
+.price-history-dialog a:hover{color:var(--ph-text)}
+.price-history-table{width:100%;margin:12px 0 0;border-collapse:collapse;text-align:left;font-size:12px;line-height:1.6}
+.price-history-table caption{padding:0 0 12px;color:var(--ph-muted);text-align:left;font-size:12px}
+.price-history-table th,.price-history-table td{padding:11px 12px;border-bottom:1px solid var(--ph-border);vertical-align:top}
+.price-history-table th{color:var(--ph-muted);font-size:11px;font-weight:500}
+.price-history-table td{color:var(--ph-text);font-variant-numeric:tabular-nums}
+.price-history-table th:first-child,.price-history-table td:first-child{padding-left:0}
+.price-history-table th:last-child,.price-history-table td:last-child{padding-right:0}
+.price-history-table tbody tr:last-child td{border-bottom:0}
+.price-history-table tbody tr:hover{background:var(--ph-control)}
+.price-history-table td small{display:block;margin-top:3px;color:var(--ph-muted);font-size:10px;line-height:1.5}
+.price-history-table td a{display:inline-block;margin-right:7px}
+.price-history-table-wrap{max-width:100%;overflow-x:auto;overscroll-behavior-x:contain;scrollbar-width:thin;scrollbar-color:#aab9c455 transparent}
+.price-history-notice,.price-history-coverage,.price-history-composition{margin:0 28px 18px;color:var(--ph-muted);font-size:12px;line-height:1.7;overflow-wrap:anywhere}
+.price-history-notice{padding:12px 15px;border:1px solid var(--ph-border);border-radius:11px;background:var(--ph-surface)}
+.price-history-notice p{margin:0}
+.price-history-notice p+p{margin-top:7px}
+.price-history-notice a{color:var(--ph-accent)}
+.price-history-composition summary{cursor:pointer;color:var(--ph-text);padding:6px 0}
+.price-history-composition p{margin:5px 0 0}
+.price-history-composition ul{margin:8px 0 0;padding-left:20px}
+.price-history-composition li+li{margin-top:5px}
+.price-history-coverage strong{color:var(--ph-text);font-weight:500}
+.price-history-details .price-history-coverage{margin:6px 0;font-size:12px}
+.price-history-empty{display:grid;place-items:center;align-content:center;gap:10px;min-height:230px;padding:28px 24px;text-align:center;color:var(--ph-muted);font-size:13px;line-height:1.7}
+.price-history-empty h3{margin:0;color:var(--ph-text);font-size:19px;font-weight:500}
+.price-history-empty p{max-width:490px;margin:0}
+.price-history-date-list{min-width:0;margin:0 28px 24px;padding:15px 18px;border:1px solid var(--ph-border);border-radius:var(--ph-radius);background:var(--ph-surface)}
+.price-history-date-list>summary{padding:2px 0;color:var(--ph-text);font-size:12px;cursor:pointer}
+.price-history-date-list[open]>summary{margin-bottom:6px}
+.price-history-date-list button{min-height:36px;padding:7px 10px;border:1px solid var(--ph-border);border-radius:8px;background:var(--ph-control);color:var(--ph-muted);font-size:11px;font-variant-numeric:tabular-nums}
+.price-history-date-list button:hover,.price-history-date-list button[aria-pressed=true]{background:var(--ph-selected);color:var(--ph-text);border-color:var(--ph-accent)}
+.price-history-dialog :is(button,select,a,summary,[tabindex]):focus-visible{outline:2px solid var(--ph-accent);outline-offset:3px}
+.price-history-dialog :is(button,select):disabled{cursor:not-allowed;opacity:.5}
+
+html[data-design=material3] .price-history-dialog{
+ --ph-text:var(--md-sys-color-on-surface,#e2e7f0);
+ --ph-muted:var(--md-sys-color-on-surface-variant,#c2cad8);
+ --ph-accent:var(--md-sys-color-primary,#a6c8ff);
+ --ph-border:var(--md-sys-color-outline-variant,#414957);
+ --ph-surface:var(--md-sys-color-surface-container,#1d232e);
+ --ph-chart:var(--md-sys-color-surface-container-low,#191e27);
+ --ph-control:var(--md-sys-color-surface-container-highest,#313846);
+ --ph-selected:var(--md-sys-color-secondary-container,#354457);
+ --ph-option:var(--md-sys-color-surface-container-high,#272e3a);
+ --ph-radius:16px;
+}
+html[data-design=material3] .price-history-periods{border-radius:999px}
+html[data-design=material3] .price-history-periods button{border-radius:999px}
+html:is([data-design=terminal],[data-design=minimal]) .price-history-dialog{
+ --ph-text:var(--variant-text);
+ --ph-muted:var(--variant-muted);
+ --ph-accent:var(--variant-accent);
+ --ph-border:var(--variant-border);
+ --ph-surface:var(--variant-panel);
+ --ph-chart:var(--bg);
+ --ph-control:var(--variant-panel);
+ --ph-selected:var(--accent-dark);
+ --ph-option:var(--variant-panel);
+ --ph-radius:var(--variant-radius);
+}
+html:is([data-design=terminal],[data-design=minimal]) :is(.price-history-field select,.price-history-periods,.price-history-periods button,.price-history-date-list button,.price-history-notice){border-radius:var(--variant-radius)}
+html[data-design=terminal] .price-history-axis{font-family:'Cascadia Code',Consolas,monospace}
+html[data-design=audit] .price-history-dialog{
+ --ph-text:#eef5ff;
+ --ph-muted:#c2cedd;
+ --ph-accent:#c7e0ff;
+ --ph-border:#6b7e96;
+ --ph-surface:#202e40;
+ --ph-chart:#101b29;
+ --ph-control:#243448;
+ --ph-selected:#35577b;
+ --ph-option:#172231;
+ --ph-radius:8px;
+ font-size:15px;
+}
+html[data-design=audit] :is(.price-history-header p,.price-history-field,.price-history-field select,.price-history-periods button,.price-history-stat>span,.price-history-stat small,.price-history-details>p,.price-history-table,.price-history-table th,.price-history-table td small,.price-history-notice,.price-history-coverage,.price-history-composition,.price-history-date-list button,.price-history-range,.price-history-legend){font-size:14px}
+html[data-design=audit] :is(.price-history-details>ul>li,.price-history-details>ul>li small,.price-history-date-list>summary){font-size:14px}
+html[data-design=audit] :is(.price-history-periods button,.price-history-date-list button,.price-history-field select,.price-history-header .icon-button){min-height:44px}
+html[data-design=audit] .price-history-axis{font-size:13px}
+
+@media(max-width:700px){
+ .price-history-controls{grid-template-columns:minmax(0,1fr) minmax(100px,.6fr);gap:12px}
+ .price-history-periods{grid-column:1/-1;justify-self:start}
+ .price-history-stat{padding:13px}
+ .price-history-stat strong{font-size:21px}
+ .price-history-table{font-size:11px}
+ .price-history-table th,.price-history-table td{padding:10px 8px}
+}
+@media(max-width:540px){
+ .price-history-dialog{width:calc(100vw - 16px);max-width:calc(100vw - 16px);max-height:calc(100dvh - 16px)}
+ .price-history-header{padding:20px 17px 17px;gap:12px}
+ .price-history-header h2{font-size:23px}
+ .price-history-header p{font-size:11px}
+ .price-history-controls{margin:18px 16px 16px;grid-template-columns:minmax(0,1fr) 106px;gap:11px}
+ .price-history-field select{padding-left:9px;padding-right:22px;font-size:12px;min-height:44px}
+ .price-history-periods{justify-self:stretch}
+ .price-history-periods button{flex:1;min-width:0;min-height:36px}
+ .price-history-summary{grid-template-columns:1fr;gap:7px;margin:0 16px 15px}
+ .price-history-stat{display:grid;grid-template-columns:minmax(0,1fr) auto;align-items:center;column-gap:12px;row-gap:3px;padding:11px 13px}
+ .price-history-stat strong{grid-column:2;grid-row:1/3;margin:0;font-size:20px;text-align:right;letter-spacing:-.4px}
+ .price-history-stat small{grid-column:1}
+ .price-history-chart{margin:0 16px 14px;padding:13px 9px 9px}
+ .price-history-details{margin:0 16px 16px;padding:13px 12px}
+ .price-history-details h3{font-size:14px}
+ .price-history-details dl>div{gap:10px}
+ .price-history-details>ul>li{gap:12px;font-size:11px}
+ .price-history-details>ul>li small{font-size:9px}
+ .price-history-notice,.price-history-coverage,.price-history-composition{margin:0 16px 16px;font-size:11px}
+ .price-history-notice{padding:11px 12px}
+ .price-history-range,.price-history-legend{font-size:10px;gap:5px 10px}
+ .price-history-range{margin:0 16px 10px}
+ .price-history-legend{margin:0 16px 14px}
+ .price-history-date-list{margin:0 16px 18px;padding:13px 12px}
+ .price-history-table{min-width:430px}
+ .price-history-empty{min-height:215px;padding:23px 12px;font-size:12px}
+ .price-history-empty h3{font-size:18px}
+}
+@media(prefers-reduced-motion:reduce){
+ .price-history-dialog[open]{animation:none}
+ .price-history-dialog :is(button,a,select,.price-history-point){transition:none;animation:none}
+}
+@media(forced-colors:active){
+ .price-history-dialog{--ph-text:CanvasText;--ph-muted:CanvasText;--ph-accent:LinkText;--ph-border:ButtonBorder;--ph-surface:Canvas;--ph-chart:Canvas;--ph-control:Canvas;--ph-selected:Canvas;--ph-option:Canvas}
+ .price-history-line,.price-history-point circle{forced-color-adjust:none}
+ .price-history-periods button[aria-pressed=true],.price-history-date-list button[aria-pressed=true]{border:2px solid Highlight}
+}

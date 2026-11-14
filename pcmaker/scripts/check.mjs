@@ -9,10 +9,15 @@ import {peripheralById} from '../dist/peripherals-brands.js';
 import {validForeignOffer} from '../dist/money.js';
 import {priceQuality} from '../dist/price-quality.js';
 import {validLiveOffer} from '../dist/live-price-data.js';
+import {normalizePriceHistory,historyToday,priceSourceKey,historyCurrencies} from '../dist/price-history.js';
 import {byStoreProduct} from '../dist/regions.js';
 import {createHash} from 'node:crypto';
 const root=path.resolve(import.meta.dirname,'..');
-for(const file of ['theme-switcher.js','material3.css','store-picker.js','store-picker.css'])if(!fs.existsSync(path.join(root,'dist',file)))throw Error('Missing '+file);
+for(const file of ['theme-switcher.js','material3.css','store-picker.js','store-picker.css','price-history.css','price-history.json'])if(!fs.existsSync(path.join(root,'dist',file)))throw Error('Missing '+file);
+for(const name of ['price-history.js','price-history-ui.js']){
+ const file=path.join(root,'dist',name);if(!fs.existsSync(file))throw Error('Missing '+name);
+ const result=spawnSync(process.execPath,['--check',file],{encoding:'utf8'});if(result.status!==0)throw Error(result.stderr);
+}
 const bundle=JSON.parse(fs.readFileSync(path.join(root,'firebase/bundle-manifest.json'),'utf8'));
 for(const [file,expected] of Object.entries(bundle)){
  const actual=createHash('sha256').update(fs.readFileSync(path.join(root,file),'utf8').replace(/\r\n/g,'\n')).digest('hex');
@@ -43,6 +48,18 @@ for(const [region,items] of Object.entries(live.items))for(const [id,offer] of O
 }
 for(const [region,checks] of Object.entries(live.checks))for(const [id,check] of Object.entries(checks)){
  if(!['ru','by','usd'].includes(region)||(!byId[id]&&!peripheralById[id])||!['updated','blocked','unavailable','unverified','error'].includes(check.status)||!Number.isFinite(Date.parse(check.attemptedAt)))throw Error('Invalid live price check '+region+':'+id);
+}
+const history=JSON.parse(fs.readFileSync(path.join(root,'dist/price-history.json'),'utf8'));
+if(history.schemaVersion!==1||!history.items||Object.keys(history.items).sort().join(',')!=='by,ru,usd')throw Error('Invalid price history schema');
+for(const [region,items] of Object.entries(history.items))for(const [id,rows] of Object.entries(items)){
+ if((!byId[id]&&!peripheralById[id])||!Array.isArray(rows)||!rows.length)throw Error('Invalid price history product '+region+':'+id);
+ const seen=new Set();let previousDate='';
+ for(const offer of rows){
+  // Validate old observations at their own date: aging history must not break a future deploy.
+  const valid=normalizePriceHistory({schemaVersion:1,items:{[region]:{[id]:[offer]}}},{now:offer.date+'T12:00:00Z'}).items[region]?.[id]?.[0],key=offer.date+'|'+priceSourceKey(offer);
+  if(!valid||offer.currency!==historyCurrencies[region]||offer.date>historyToday()||offer.date<previousDate||seen.has(key))throw Error('Invalid price history observation '+region+':'+id+':'+offer.date);
+  seen.add(key);previousDate=offer.date;
+ }
 }
 for(const [id,offer] of Object.entries(foreignComponentOffers))if(!byId[id]||!validForeignOffer(offer))throw Error('Invalid USD component offer '+id);
 for(const [id,offers] of Object.entries(peripheralOfferUpdates)){

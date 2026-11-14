@@ -17,6 +17,7 @@ import {revealPanel,hidePanel} from './motion.js';
 import {createThermalPanel} from './thermal-panel.js';
 import {regions,regionFor,regionalSnapshot as priceSnapshot} from './regions.js';
 import {createAutoBuilder} from './autobuild-ui.js';
+import {createPriceHistory} from './price-history-ui.js';
 import {quoteBuild} from './autobuild.js';
 import {coolingAnalysis} from './cooling.js';
 import {caseLighting,gpuLighting,sanitizeLighting} from './lighting.js';
@@ -34,6 +35,7 @@ const safeUrl=u=>{try{const url=new URL(u);return url.protocol==='https:'?url.hr
 const paths={cpu:'M7 7h10v10H7z M9 1v3m6-3v3M9 20v3m6-3v3M1 9h3m-3 6h3m16-6h3m-3 6h3',motherboard:'M4 3h16v18H4z M8 7h5v5H8z M16 6v8M8 16h8m-8 3h5',gpu:'M3 6h18v12H3z M5 18v3m3-3v2 M8 9a3 3 0 1 0 0 6 3 3 0 0 0 0-6 M16 9a3 3 0 1 0 0 6 3 3 0 0 0 0-6',ram:'M2 7h20v10H2z M5 10h3v4H5zm6 0h3v4h-3zm6 0h2v4h-2 M5 17v3m4-3v3m4-3v3m4-3v3',storage:'M4 6h16v12H4z M8 10h5v4H8z M17 9v6',cooler:'M7 4h10v16H7z M4 7h16M4 11h16M4 15h16M4 19h16',psu:'M3 5h18v14H3z M8 8a4 4 0 1 0 0 8 4 4 0 0 0 0-8 M17 9v6',case:'M5 2h14v20H5z M9 6h6M9 17h6 M10 10h4v4h-4z',fan:'M12 12c-6-2-5-9 0-9 4 0 3 5 0 9zm0 0c5-4 10 0 8 4-2 4-7 1-8-4zm0 0c1 6-5 10-8 6-3-3 2-6 8-6z',plus:'M12 5v14M5 12h14',minus:'M5 12h14',close:'m6 6 12 12M6 18 18 6',spark:'m12 3 2.5 6.5L21 12l-6.5 2.5L12 21l-2.5-6.5L3 12l6.5-2.5z',rotate:'M3 10a9 9 0 1 1 1 7M3 4v6h6',zoom:'M10 4a6 6 0 1 0 0 12 6 6 0 0 0 0-12 M15 15l6 6 M7 10h6m-3-3v6',orbit:'M3 12a9 4 0 1 0 18 0 9 4 0 0 0-18 0 M12 3a4 9 0 1 0 0 18 4 9 0 0 0 0-18',layers:'m12 3 10 5-10 5L2 8z M2 12l10 5 10-5M2 16l10 5 10-5',eye:'M2 12s3-7 10-7 10 7 10 7-3 7-10 7S2 12 2 12z M12 9a3 3 0 1 0 0 6 3 3 0 0 0 0-6',wind:'M3 7h12c4 0 4-5 1-5M3 12h16c4 0 4 6 0 6M3 17h7c4 0 4 5 1 5',mouse:'M7 4c0-4 10-4 10 0v10c0 8-10 8-10 0z M12 3v5',bolt:'m13 2-9 12h7l-1 8 10-13h-7z',info:'M12 2a10 10 0 1 0 0 20 10 10 0 0 0 0-20 M12 11v6m0-10v.1',trash:'M3 6h18M9 6V3h6v3M6 6l1 15h10l1-15M10 10v7m4-7v7',play:'m7 3 14 9-14 9z',pause:'M7 4h3v16H7zm7 0h3v16h-3z',moon:'M20 14A9 9 0 0 1 10 3a9 9 0 1 0 10 11z',game:'M7 7h10c6 0 7 14 3 14l-5-5H9l-5 5C0 21 1 7 7 7z M6 10v5m-2-2h4m8-2v.1m3 3v.1',video:'M3 5h14v14H3z M17 10l5-3v10l-5-3',search:'M10 3a7 7 0 1 0 0 14 7 7 0 0 0 0-14 M16 16l5 5',check:'m5 12 4 4L19 6',alert:'m12 3 10 18H2z M12 9v5m0 3v.1'};
 paths.wand='m4 20 12-12 4 4L8 24z M14 10l4 4 M6 3v4M4 5h4M17 1v4m-2-2h4M21 18v4m-2-2h4';
 paths.shop='M3 9h18l-2-6H5z M4 9v12h16V9 M8 21v-7h5v7 M3 9c0 4 5 4 5 0 0 4 4 4 4 0 0 4 4 4 4 0 0 4 5 4 5 0';
+paths.chart='M4 3v17h17 M7 14l4-4 4 2 6-7';
 const icon=n=>`<svg viewBox="0 0 24 24" aria-hidden="true"><path d="${paths[n]||paths.cpu}"/></svg>`;
 function icons(root=document){root.querySelectorAll('[data-icon]').forEach(el=>el.innerHTML=icon(el.dataset.icon));}icons();
 let saved;try{saved=JSON.parse(localStorage.getItem('pcmaker-build'));}catch{}
@@ -135,6 +137,8 @@ const autoBuilder=createAutoBuilder({initialPlan:autoPlan,getPrices:()=>priceDat
  savedFans[build.case]=defaultFanLayout(build);connections=[];selectedCable=null;resetSimulation();renderBuild();setTab('parts');scene?.reset();toast(wireMode==='manual'?'Сборка применена. Тяни кабели от точек разъёмов прямо в 3D.':'Сборка применена. Можно запускать симуляцию.');
 }});
 $('autobuild-button').onclick=()=>autoBuilder.open();
+const priceHistory=createPriceHistory({getBuild:()=>build,getRegion:()=>regionId,getPrices:()=>priceData,beforeOpen:()=>{closeWorkshopMenu(false);closeInspector(false);}});
+$('price-history-button').onclick=()=>priceHistory.open();
 document.addEventListener('pcmaker:navigation-open',()=>{closeWorkshopMenu(false);closeInspector(false);});
 $('fans-button').onclick=()=>{const open=buildPanel.collapsed||activeTab!=='fans';setTab(open?'fans':'parts');if(open){scene?.viewFanWall(fanUI.getWall());$('auto-rotate').setAttribute('aria-pressed','false');}};
 $('fan-flow-toggle').onclick=()=>{$('airflow-toggle').click();};
