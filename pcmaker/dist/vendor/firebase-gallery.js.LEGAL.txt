@@ -716,10 +716,10 @@ re2js/build/index.js:
   * re2js
   * RE2JS is the JavaScript port of RE2, a regular expression engine that provides linear time matching
   *
-  * @version v2.8.6
+  * @version v2.9.1
   * @author Oleksii Vasyliev
   * @homepage https://github.com/le0pard/re2js#readme
-  * @repository github:le0pard/re2js
+  * @repository [object Object]
   * @license MIT
   */
 

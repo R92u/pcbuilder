@@ -23,7 +23,7 @@
   "dist/verification.js": "8e143a04c1416ab131b9070112018bb05f6ec5ccf540f140de12ffa20d18f35d",
   "dist/autobuild.js": "ce82bb7adcb5aa0355d5852d5a70338b3010c5c53c4926fc6b6abfc040f376e8",
   "src/autobuild-worker.js": "6a3be09ac1341902d8c4821bd645a49af859ab47458239e638051b7584b415db",
-  "dist/vendor/firebase-gallery.js": "e8baddcb1513c2f31223c86076916740919fbb26111647ca4c6735d8e9fa30a8",
+  "dist/vendor/firebase-gallery.js": "390df8a5f8f112f5ee9ee419592204a6af2ec934ea71e83e2b64994298d8e7e2",
   "dist/autobuild-worker.js": "0203da63dda534016710857e67c2367643793430c7c592d602838e602708ed28",
-  "pnpm-lock.yaml": "6c91e41700a3c1aae40658aea2569f9854c2062c4190c2a5bd29faf9ac93abcf"
+  "pnpm-lock.yaml": "9fb4fc44dbe103c9acb3f38fbfc348cfcdad2a2c339fc238d3e327b12244f559"
 }
