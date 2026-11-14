@@ -2409,6 +2409,98 @@ export const catalog = {
       "sources": [
         "https://www.gigabyte.com/Motherboard/B650-EAGLE-AX-rev-10-11/sp"
       ]
+    },
+    {
+      "id": "b550m-aorus-elite",
+      "name": "GIGABYTE B550M AORUS ELITE",
+      "short": "B550M AORUS ELITE",
+      "brand": "Gigabyte",
+      "manufacturer": "Gigabyte",
+      "sku": "B550M AORUS ELITE",
+      "revision": "1.0 / 1.1 / 1.2",
+      "socket": "AM4",
+      "chipset": "AMD B550",
+      "memory": "DDR4",
+      "form": "Micro-ATX",
+      "slots": 4,
+      "maxRam": 128,
+      "officialMemoryMaxMTs": 3200,
+      "ocMemoryMaxMTs": 4733,
+      "profile": "XMP",
+      "m2": true,
+      "m2Slots": 2,
+      "sataPorts": 4,
+      "storageInterfaces": "M2A_CPU: SATA / PCIe до 4.0 ×4, 2242–22110; M2B_SB: SATA / PCIe 3.0 ×2, 2242–2280; SATA 6 Гбит/с, RAID 0/1/10",
+      "pcie": "PCIe ×16 до 4.0 ×16 от CPU; PCIe ×16 (3.0 ×4) и PCIe ×1 (3.0 ×1) от чипсета",
+      "epsConnectors": 1,
+      "cpuPowerPinCounts": [
+        8
+      ],
+      "cpuFanHeaders": 1,
+      "systemFanHeaders": 2,
+      "usbCHeader": false,
+      "internalUSB": "1 × USB 3.2 Gen 1 (2 порта), 1 × USB 2.0 (2 порта)",
+      "rgbHeaders": "2 × ARGB, 2 × RGB, 1 × RGB CPU-кулера; RGB Fusion 2.0",
+      "audioCodec": "Realtek HD Audio, до 7.1 каналов",
+      "biosFlashback": true,
+      "ports": [
+        {
+          "type": "usbA",
+          "count": 4,
+          "label": "USB Type-A 3.2 Gen 1, 5 Гбит/с",
+          "location": "rear"
+        },
+        {
+          "type": "usbA",
+          "count": 4,
+          "label": "USB Type-A 2.0",
+          "location": "rear"
+        },
+        {
+          "type": "hdmi",
+          "count": 1,
+          "label": "HDMI 2.1",
+          "location": "rear"
+        },
+        {
+          "type": "dvi",
+          "count": 1,
+          "label": "DVI-D",
+          "location": "rear"
+        },
+        {
+          "type": "ethernet",
+          "count": 1,
+          "label": "RJ-45, 1 Гбит/с",
+          "location": "rear"
+        },
+        {
+          "type": "audio",
+          "count": 3,
+          "label": "Аудио 3.5 мм",
+          "location": "rear"
+        },
+        {
+          "type": "ps2",
+          "count": 1,
+          "label": "PS/2 Combo",
+          "location": "rear"
+        }
+      ],
+      "dimensions": [
+        244,
+        244
+      ],
+      "wifi": false,
+      "bluetooth": false,
+      "lan": "Realtek, 1 Гбит/с",
+      "detail": "Micro-ATX · AM4 · 4 слота DDR4 · 2× M.2 · без Wi-Fi",
+      "biosNote": "Проверь точный процессор и минимальную версию BIOS в CPU Support List своей ревизии платы. Есть Q-Flash Plus.",
+      "notes": "Характеристики rev. 1.0/1.1/1.2. Поколение PCIe и скорость памяти зависят от CPU; 4733 МТ/с — разгон. Видеовыходы работают только с CPU со встроенной графикой. Поддержка ECC зависит от CPU. Помпа подключается к SYS_FAN; отдельного разъёма помпы нет. Ревизию товара уточняй по маркировке платы.",
+      "sources": [
+        "https://www.gigabyte.com/Motherboard/B550M-AORUS-ELITE-rev-10-11-12/sp",
+        "https://download.gigabyte.com/FileList/Manual/mb_manual_b550m-aorus-elite_e_1201.pdf"
+      ]
     }
   ],
   "gpu": [

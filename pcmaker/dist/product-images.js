@@ -2,6 +2,7 @@
 import {productImagesExtra} from './product-images-extra.js';
 import {productImagesBudget} from './product-images-budget.js';
 export const productImages={
+ "b550m-aorus-elite":{"id": "b550m-aorus-elite", "sourcePage": "https://www.gigabyte.com/Motherboard/B550M-AORUS-ELITE-rev-10-11-12/sp", "sourceImage": "https://static.gigabyte.com/StaticFile/Image/Global/91a4df8b5a5ec566b2e502aa50e7ede9/ProductRemoveBg/25359", "credit": "manufacturer", "image": "assets/catalog/b550m-aorus-elite.webp"},
  ...productImagesExtra,
  ...productImagesBudget,
   "980": {

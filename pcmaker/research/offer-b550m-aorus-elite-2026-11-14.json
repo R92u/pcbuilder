@@ -1,0 +1,24 @@
+{
+  "checkedAt": "2026-11-14",
+  "offers": [
+    {
+      "id": "b550m-aorus-elite",
+      "region": "ru",
+      "price": 10220,
+      "currency": "RUB",
+      "date": "2026-11-14",
+      "store": "Регард",
+      "kind": "store",
+      "availability": "in-stock",
+      "url": "https://www.regard.ru/product/362841/materinskaia-plata-gigabyte-b550m-aorus-elite",
+      "note": "Обычная цена. Магазин не фиксирует ревизию платы.",
+      "evidence": {
+        "title": "Материнская плата Gigabyte B550M AORUS ELITE",
+        "identity": "B550M AORUS ELITE, ID 362841",
+        "priceText": "10 220 ₽",
+        "availabilityText": "В наличии",
+        "method": "Карточка магазина открыта 14.11.2026, Москва. Цена и наличие в блоке основного товара, не в рекомендациях."
+      }
+    }
+  ]
+}

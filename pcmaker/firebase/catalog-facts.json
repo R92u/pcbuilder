@@ -1965,5 +1965,13 @@
     ],
     "front": [],
     "ram": 9999
+  },
+  "b550m-aorus-elite": {
+    "category": "motherboard",
+    "socket": "AM4",
+    "memory": "DDR4",
+    "maxRam": 128,
+    "slots": 4,
+    "form": "Micro-ATX"
   }
 }

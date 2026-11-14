@@ -1,7 +1,7 @@
 {
   "dist/catalog-extra.js": "0e9056aa0bffd97c753ccf1cdcbb3eb895ae5b33ba91615f94f6cb565dd41c77",
   "dist/catalog-budget.js": "9da9c13e19ee8bf9be2fb54f5e3f69d41d83805a78d39f81c43483da8ad8df56",
-  "dist/catalog.js": "adc81e974a0b47cda28800bd4873fa1dcb46acca31fdc77c2d328106069728e4",
+  "dist/catalog.js": "edaeb531426e8ec7512ef38bf2f99a7bdd0f502c31ca002e12bed9fda63e0d78",
   "dist/aio.js": "e58d69e1d93493d3e665bcb6e6bd16bf54138cc5a75c7c8254bc2a60d35f8354",
   "dist/layout.js": "7584c5b8531cca2438b2695a20c144c896b9da2dd68b6751eebe8d777e9f2445",
   "dist/fan-layout.js": "18647d3ea197317ccad5241f6469d1424c2dafab19cd28d0da94fee4cb63878c",
@@ -18,12 +18,12 @@
   "dist/regions.js": "602960769e51be001ef0f43cb6921d59d7aae8579f407806494471d0a8b7fadc",
   "firebase/app-check-guard.js": "cfd2312858bdbed017ae9d18d9d149f6f92c785e563739f7b763dab4d9a76b19",
   "firebase/gallery-client.js": "4e89e8a0acea72da714f4fbf2f091d7596e3ecb28acef04d0954d9ec5d2d5e28",
-  "dist/budget-data.js": "cd5afd8bcab52acf5a64b51cdcf47dad9f80b3c4d44dce3d5a0d3b669749536e",
-  "dist/verification-data.js": "9764eedb6999011f96d780cbc9c526864c5b1b4168583ad5a8f5d863f62cda86",
+  "dist/budget-data.js": "53d3c22b3f8750321318ae8bf9052dd1de37488eb1f1b76f2311605f53bca16c",
+  "dist/verification-data.js": "811ca0eb85d86320abc9026e356e66e53e6c03db777ea8e98062d1d72bec29c1",
   "dist/verification.js": "8e143a04c1416ab131b9070112018bb05f6ec5ccf540f140de12ffa20d18f35d",
   "dist/autobuild.js": "ce82bb7adcb5aa0355d5852d5a70338b3010c5c53c4926fc6b6abfc040f376e8",
   "src/autobuild-worker.js": "6a3be09ac1341902d8c4821bd645a49af859ab47458239e638051b7584b415db",
-  "dist/vendor/firebase-gallery.js": "390df8a5f8f112f5ee9ee419592204a6af2ec934ea71e83e2b64994298d8e7e2",
-  "dist/autobuild-worker.js": "0203da63dda534016710857e67c2367643793430c7c592d602838e602708ed28",
+  "dist/vendor/firebase-gallery.js": "295be0def1bf9ec43d1bbdb5d3dff51cffdf305480337f7ca4a840f6753c76e9",
+  "dist/autobuild-worker.js": "cb82496b16a8cc343a3ad76396614745ea72636507803cb6541be21ce03c62fd",
   "pnpm-lock.yaml": "9fb4fc44dbe103c9acb3f38fbfc348cfcdad2a2c339fc238d3e327b12244f559"
 }

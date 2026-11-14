@@ -2,7 +2,7 @@
 // market prices. They are used only with the explicit estimates option.
 // A verified offer always takes precedence; estimated positions get a reserve.
 export const estimateDate='2026-10-10';
-export const estimateDateFor=part=>part?.budgetTier?'2026-11-04':estimateDate;
+export const estimateDateFor=part=>part?.id==='b550m-aorus-elite'?'2026-11-14':part?.budgetTier?'2026-11-04':estimateDate;
 const cpuPrices=[8500,18000,36000,12500,15500,24500,30000,22000,29000,10500,13500,24000,16000,27000,27000,8500,13000,17500,27000,36000,19500,23000,33000,47000,22000,30000,43000,58000,27500,37000];
 export const cpuOrder=['r5-5600','r5-7600','r9-7900x','r5-5600x','r7-5700x','r7-5800x','r7-5800x3d','r7-7700x','r7-7800x3d','i3-12100f','i5-12400f','i5-12600k','i5-13400f','i5-13600k','i5-14600k','r5-5500','r5-5600g','r7-5700g','r9-5900x','r9-5950x','r5-7600x','r7-7700','r9-7900','r9-7950x','r5-9600x','r7-9700x','r9-9900x','r9-9950x','i7-12700k','i7-14700k'];
 // Relative selection weights, not measured FPS or benchmark scores.
@@ -15,7 +15,7 @@ const estimates={...Object.fromEntries(cpuOrder.map((id,i)=>[id,cpuPrices[i]])),
  'r3-4100':5000,'r5-4500':8000,'a520m-a-pro':4500,'h610m-e-ddr4':6500,
  'patriot-8-3200':6500,'patriot-16-3200':14000,'p300-256':6000,'p300-512':9500,
  'ag200':1000,'ag300':1100,'pf450':3500,'pf500':3700,'matrexx40':4000,'matrexx55-mesh':6000,
- 'b550m-pro-vdh':9500,'prime-b550m-a':10000,'b550':11700,'b550-tomahawk':15500,'mpg-b550-gaming-plus':12500,'mpg-b550-gaming-edge-wifi':18000,'b550m-pro-vdh-wifi':13200,
+ 'b550m-aorus-elite':10200,'b550m-pro-vdh':9500,'prime-b550m-a':10000,'b550':11700,'b550-tomahawk':15500,'mpg-b550-gaming-plus':12500,'mpg-b550-gaming-edge-wifi':18000,'b550m-pro-vdh-wifi':13200,
  'b650':14500,'b650m-a-wifi':15000,'pro-b650-p-wifi':17000,'b650-gaming-plus-wifi':18500,'tuf-b650-plus-wifi':24000,'b650-eagle-ax':16000,'b650-tomahawk-wifi':27500,
  'b760m-p-ddr4':9000,'b760-p-wifi':15000,'mag-b760-tomahawk-wifi-ddr4':19000,'mag-z790-tomahawk-wifi':29000,
  'ag400':1900,'ak400':2100,'ak620':4900,'ak500':4500,'ag500':3000,'assassin-iv':10000,'nh-u12s-redux':6500,'nh-d15':12500,'nh-u12a':14000,'nh-u14s':10000,'nh-d15s-chromax':13000,'nh-d12l':12000,'nh-u9s':8500,'nh-d15-g2':19000,'nh-u12s':9500,

@@ -1,6 +1,6 @@
 {
   "schemaVersion": 1,
-  "checkedAt": "2026-11-14T11:37:19.726Z",
+  "checkedAt": "2026-11-14T19:59:48.131Z",
   "items": {
     "ru": {
       "980": {
@@ -2507,6 +2507,17 @@
         "verification": "structured-data",
         "currency": "RUB",
         "sourceTitle": "Кулер Noctua NH-U12S Redux"
+      },
+      "b550m-aorus-elite": {
+        "price": 10220,
+        "currency": "RUB",
+        "date": "2026-11-14",
+        "store": "Регард",
+        "kind": "store",
+        "availability": "in-stock",
+        "url": "https://www.regard.ru/product/362841/materinskaia-plata-gigabyte-b550m-aorus-elite",
+        "note": "Обычная цена. Магазин не фиксирует ревизию платы.",
+        "verification": "reviewed-source"
       }
     },
     "by": {
@@ -8012,6 +8023,12 @@
             "requestAttempts": 1
           }
         ]
+      },
+      "b550m-aorus-elite": {
+        "attemptedAt": "2026-11-14T19:59:48.131Z",
+        "status": "updated",
+        "reason": null,
+        "url": "https://www.regard.ru/product/362841/materinskaia-plata-gigabyte-b550m-aorus-elite"
       }
     },
     "by": {

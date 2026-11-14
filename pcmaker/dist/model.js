@@ -34,7 +34,7 @@ export function batchSolids(group){
  }
 }
 
-function boardTexture(name){
+function boardTexture(name,aorus=false){
  const canvas=document.createElement('canvas');canvas.width=512;canvas.height=512;const c=canvas.getContext('2d');c.scale(512/1536,512/1800);
  c.fillStyle='#151b19';c.fillRect(0,0,1536,1800);
  let seed=913;const rand=()=>{seed=(seed*1664525+1013904223)>>>0;return seed/4294967296;};
@@ -47,6 +47,11 @@ function boardTexture(name){
  }
  c.strokeStyle='#818780';c.lineWidth=2;
  for(let i=0;i<90;i++){const x=35+rand()*1460,y=35+rand()*1730;c.strokeRect(x,y,14+rand()*24,7+rand()*17);c.fillStyle='#b2b6a9';c.font='10px monospace';c.fillText((i%2?'R':'C')+(100+i),x,y-4);}
+ if(aorus){
+  // Muted diagonal silkscreen, rather than luminous text floating above the PCB.
+  c.save();c.beginPath();c.rect(55,520,1420,790);c.clip();
+  for(let i=0;i<4;i++){c.strokeStyle=i===0?'#818784':'#555e5d';c.lineWidth=i===0?22:8;c.beginPath();c.moveTo(120+i*48,650);c.lineTo(1270+i*48,1240);c.stroke();}c.restore();
+ }
  c.fillStyle='#b9bdb6';c.font='bold 30px Arial';c.fillText(name,90,1010);c.font='17px monospace';
  for(const [label,x,y] of [['PCI_E1',110,1260],['M2_1 · PCIe',175,840],['HD AUDIO',70,1755],['JUSB1',780,1755],['JFP1',1280,1755],['DDR / DUAL CHANNEL',1210,300],['ATX_PWR1',1390,780],['CORE BOOST',360,380],['CPU_PWR1',270,75],['SYS_FAN',1320,1130]])c.fillText(label,x,y);
  const tex=new THREE.CanvasTexture(canvas);tex.colorSpace=THREE.SRGBColorSpace;tex.anisotropy=2;return tex;
@@ -153,8 +158,9 @@ export const modelMethods={
  },
  makeCase(p){const g=makeChassis.call(this,p);batchSolids(g);},
  makeMotherboard(p){
+  const aorus=p.id==='b550m-aorus-elite';
   const g=new THREE.Group(),bottom=boardBottom(p),height=4.215-bottom,cy=(4.215+bottom)/2,small=p.form==='Micro-ATX';this.box(g,.055,height,2.42,-.94,cy,-.62,pcb);
-  const surface=new THREE.Mesh(new THREE.PlaneGeometry(2.42,height),new THREE.MeshStandardMaterial({map:boardTexture((p.brand||'MSI')+' / '+p.short),roughness:.63,metalness:.20}));surface.rotation.y=Math.PI/2;surface.position.set(-.909,cy,-.62);g.add(surface);
+  const surface=new THREE.Mesh(new THREE.PlaneGeometry(2.42,height),new THREE.MeshStandardMaterial({map:boardTexture((p.brand||'MSI')+' / '+p.short,aorus),roughness:.63,metalness:.20}));surface.rotation.y=Math.PI/2;surface.position.set(-.909,cy,-.62);g.add(surface);
   this.box(g,.12,.60,.68,-.845,3.44,-.55,0x242b2c);this.box(g,.02,.50,.58,-.774,3.44,-.55,0x7d8586);
   this.box(g,.01,.425,.475,-.76,3.44,-.55,0x1b2421);this.rod(g,[-.724,3.14,-.88],[-.724,3.69,-.88],.016,0xaab0b1);
   for(const z of [-1.40,-.05])for(const y of [3.10,3.78])this.screw(g,-.73,y,z);
@@ -162,18 +168,36 @@ export const modelMethods={
   for(let i=0;i<10;i++){const y=2.76+i*.135;this.box(g,.10,.084,.13,-.824,y,-1.16,0x363e3f);this.box(g,.022,.065,.085,-.902,y,-.98,0x111416);this.text(g,'R22',.07,.04,-.763,y,-1.16,[0,Math.PI/2,Math.PI/2],'#9ca3a0');}
   for(let i=0;i<15;i++){const cap=this.cylinder(g,.033,.10,-.829,2.72+i*.095,-1.31,0x929a96);cap.rotation.z=Math.PI/2;this.box(g,.006,.004,.044,-.773,2.72+i*.095,-1.31,0x343a36);}
   // Sculpted VRM heatsink fins and I/O cover.
-  this.box(g,.23,1.52,.32,-.78,3.38,-1.59,0x2d3438);for(let i=0;i<21;i++)this.box(g,.025,.022,.35,-.655,2.70+i*.066,-1.59,0x646f73);
-  this.text(g,p.short,.90,.085,-.634,3.43,-1.59,[0,Math.PI/2,Math.PI/2],'#b1b8b8');
-  for(let i=0;i<10;i++)this.box(g,.15,.038,.66,-.80,4.0+i*.013,-.61,0x4c585d);
+  if(aorus){
+   const outline=new THREE.Shape();outline.moveTo(-.23,-.65);outline.lineTo(.14,-.65);outline.lineTo(.23,-.49);outline.lineTo(.23,.64);outline.lineTo(-.15,.64);outline.lineTo(-.23,.48);outline.closePath();
+   const cover=new THREE.Mesh(new THREE.ExtrudeGeometry(outline,{depth:.18,bevelEnabled:true,bevelThickness:.012,bevelSize:.012,bevelSegments:1,steps:1}),material(0x24282c,.38,.55));cover.rotation.y=Math.PI/2;cover.position.set(-.87,3.50,-1.57);cover.castShadow=true;cover.receiveShadow=true;g.add(cover);
+   for(let i=0;i<6;i++)this.box(g,.018,.038,.35,-.668,3.01+i*.045,-1.57,0x3c4448);
+   this.text(g,'AORUS',.55,.10,-.665,3.60,-1.56,[0,Math.PI/2,Math.PI/2],'#b9bcb8');
+   // The orange stripe is printed paint, not RGB illumination.
+   for(let i=0;i<2;i++){const stripe=this.box(g,.008,.33,.012,-.665,3.92,-1.69+i*.025,0xa56328);stripe.rotation.x=.25;}
+   for(let i=0;i<5;i++)this.box(g,.075,.10,.10,-.84,4.04,-.99+i*.18,0x3c4243);
+  }else{
+   this.box(g,.23,1.52,.32,-.78,3.38,-1.59,0x2d3438);for(let i=0;i<21;i++)this.box(g,.025,.022,.35,-.655,2.70+i*.066,-1.59,0x646f73);
+   this.text(g,p.short,.90,.085,-.634,3.43,-1.59,[0,Math.PI/2,Math.PI/2],'#b1b8b8');
+   for(let i=0;i<10;i++)this.box(g,.15,.038,.66,-.80,4.0+i*.013,-.61,0x4c585d);
+  }
   for(let i=0;i<(p.slots||4);i++){const z=(p.slots===2?.18:0.03)+i*(p.slots===2?.30:.15);this.box(g,.15,1.34,.073,-.826,3.43,z,0x0a0d0e);this.box(g,.008,1.23,.022,-.744,3.43,z,0x736e42);for(const y of [2.76,4.10])this.box(g,.13,.08,.084,-.82,y,z,0x434d4d);}
   for(let i=0;i<(small?2:3);i++){const y=GPU_TOP-.055-i*.31;this.box(g,.11,.079,1.30,-.83,y,-.72,i===0?0x919c9f:0x242b2a);this.box(g,.016,.029,1.20,-.764,y,-.72,0x060a08);this.box(g,.09,.13,.08,-.80,y,-.03,0x7c8787);}
   for(let i=0;i<5;i++){this.box(g,.012,.16,.20,-.90,Math.max(bottom+.18,1.55)+(i%2)*.8,-1.4+i*.43,0x080d0d);for(let k=0;k<6;k++)this.box(g,.01,.011,.027,-.896,Math.max(bottom+.12,1.49)+(i%2)*.8+k*.027,-1.53+i*.43,0x979e8c);}
   for(let i=0;i<75;i++){const y=bottom+.12+(i%11)*(small?.10:.15),z=-1.71+Math.floor(i/11)*.28;this.box(g,.013,.026,.048,-.897,y,z,0x655f43);this.box(g,.016,.018,.016,-.893,y,z+.031,0xa6aaa0);}
   for(const y of [bottom+.14,2.6,4.12])for(const z of [-1.72,.55])this.screw(g,-.878,y,z,'x',.038);
-  this.box(g,.18,.41,.64,-.80,1.98,.25,0x31393c);for(let i=0;i<7;i++)this.box(g,.023,.020,.54,-.695,1.82+i*.049,.25,0x627078);
-  this.text(g,p.brand||'MSI',.27,.09,-.677,2.0,.25,[0,Math.PI/2,0],'#c0c5c3');
+  if(aorus){
+   this.box(g,.13,.36,.43,-.82,2.10,.24,0x242a2d);this.box(g,.022,.30,.36,-.744,2.10,.24,0x363e42);
+   this.text(g,'AORUS',.28,.07,-.731,2.10,.24,[0,Math.PI/2,0],'#a6aaa7');
+   // Third expansion slot is physically x1; the other two retain their full length.
+   this.box(g,.10,.065,.28,-.83,2.22,-1.23,0x202625);this.box(g,.012,.022,.23,-.774,2.22,-1.23,0x050807);
+   for(const y of [2.70,1.98]){this.box(g,.085,.06,.13,-.855,y,-.24,0x171d1b);this.screw(g,-.885,y,-1.04,'x',.025);}
+  }else{
+   this.box(g,.18,.41,.64,-.80,1.98,.25,0x31393c);for(let i=0;i<7;i++)this.box(g,.023,.020,.54,-.695,1.82+i*.049,.25,0x627078);
+   this.text(g,p.brand||'MSI',.27,.09,-.677,2.0,.25,[0,Math.PI/2,0],'#c0c5c3');
+  }
   const battery=this.cylinder(g,.095,.024,-.864,Math.max(bottom+.15,1.75),-1.35,0xc4c6c2);battery.rotation.z=Math.PI/2;this.text(g,'CR2032',.14,.035,-.842,Math.max(bottom+.15,1.75),-1.35,[0,Math.PI/2,0],'#444b4c');
-  for(let i=0;i<(p.id==='b650'?4:6);i++){const y=Math.max(bottom+.1,1.80)+(i%3)*.12,z=.52+Math.floor(i/3)*.13;this.box(g,.13,.08,.10,-.83,y,z,0x181f1f);this.box(g,.008,.043,.063,-.76,y,z,0x050706);}
+  for(let i=0;i<(p.sataPorts??(p.id==='b650'?4:6));i++){const y=Math.max(bottom+.1,1.80)+(i%3)*.12,z=.52+Math.floor(i/3)*.13;this.box(g,.13,.08,.10,-.83,y,z,0x181f1f);this.box(g,.008,.043,.063,-.76,y,z,0x050706);}
   for(const [id,rows,cols] of [['atx',2,12],['eps',2,(p.cpuPowerPinCounts?.[0]||8)/2],['cpuFan',1,4],['pump',1,4],['frontFan',1,4],['rearFan',1,4],['usb3',2,10],['usb2',2,5],['audio',2,5],['panel',2,5]])this.headerSocket(g,id,rows,cols,id==='atx'?.038:.042);
   if((p.epsConnectors??(p.id==='b650'?2:1))>1)this.headerSocket(g,'eps2',2,(p.cpuPowerPinCounts?.[1]||8)/2,.042);if(p.usbCHeader)this.headerSocket(g,'usbC',2,10,.02);
   this.makeRearIO(g,p);batchSolids(g);return g;

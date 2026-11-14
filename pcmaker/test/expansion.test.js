@@ -6,8 +6,8 @@ import {cablesFor,reconcileConnections} from '../dist/wiring.js';
 import {componentSpecs} from '../dist/inspector.js';
 const settings={load:'stress',ambient:22,front:60,rear:60,cpuFan:60};
 
-test('Expanded catalog has 266 sourced models plus three educational cases',()=>{
- const entries=Object.values(catalog).flat();assert.equal(entries.length,269);assert.equal(new Set(entries.map(p=>p.id)).size,269);assert.equal(catalog.case.length,11);
+test('Expanded catalog has 267 sourced models plus three educational cases',()=>{
+ const entries=Object.values(catalog).flat();assert.equal(entries.length,270);assert.equal(new Set(entries.map(p=>p.id)).size,270);assert.equal(catalog.case.length,11);
  for(const [key,parts] of Object.entries(catalog))for(const p of parts){if(!p.concept)assert.ok(p.sources.some(u=>u.startsWith('https://')),p.id);assert.ok(componentSpecs(p,key).length>3,p.id);}
 });
 test('Intel supports either memory generation, but the motherboard determines which',()=>{
@@ -32,7 +32,7 @@ test('Every inspected component has a finite gradually changing thermal estimate
 });
 test('Raising a cooler fan over RAM also checks remaining case height',()=>{
  assert.ok(compatibility({...demoBuild,cooler:'nh-d15'}).errors.some(e=>e.code==='ram-height'));
- const fit=compatibility({...demoBuild,cooler:'nh-d15',case:'4000d-airflow'});assert.ok(!fit.errors.some(e=>e.code==='ram-height'));assert.ok(fit.warnings.some(w=>w.includes('поднять')));
+ const fit=compatibility({...demoBuild,cooler:'nh-d15',case:'4000d-airflow'});assert.ok(!fit.errors.some(e=>e.code==='ram-height'));assert.ok(fit.warnings.some(w=>w.includes('РїРѕРґРЅСЏС‚СЊ')));
 });
 test('Replacing a case resets its leads but preserves PSU to motherboard wiring',()=>{
  const next={...demoBuild,case:'pop-air'},result=reconcileConnections(demoBuild,next,['atx','eps','cpuFan','frontFan','panel','usb2']);assert.deepEqual(result,['atx','eps','cpuFan']);
