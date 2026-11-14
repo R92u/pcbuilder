@@ -32,7 +32,7 @@ test('Every inspected component has a finite gradually changing thermal estimate
 });
 test('Raising a cooler fan over RAM also checks remaining case height',()=>{
  assert.ok(compatibility({...demoBuild,cooler:'nh-d15'}).errors.some(e=>e.code==='ram-height'));
- const fit=compatibility({...demoBuild,cooler:'nh-d15',case:'4000d-airflow'});assert.ok(!fit.errors.some(e=>e.code==='ram-height'));assert.ok(fit.warnings.some(w=>w.includes('РїРѕРґРЅСЏС‚СЊ')));
+ const fit=compatibility({...demoBuild,cooler:'nh-d15',case:'4000d-airflow'});assert.ok(!fit.errors.some(e=>e.code==='ram-height'));assert.ok(fit.warnings.some(w=>w.includes('поднять')));
 });
 test('Replacing a case resets its leads but preserves PSU to motherboard wiring',()=>{
  const next={...demoBuild,case:'pop-air'},result=reconcileConnections(demoBuild,next,['atx','eps','cpuFan','frontFan','panel','usb2']);assert.deepEqual(result,['atx','eps','cpuFan']);
