@@ -1,18 +1,25 @@
 {
-  "checkedAt": "2026-11-13T16:33:24.942Z",
+  "checkedAt": "2026-11-14T11:37:19.726Z",
   "scope": {
     "region": "all",
     "host": "all",
     "limit": 500
   },
   "attempted": 418,
-  "updated": 330,
-  "failed": 79,
+  "updated": 200,
+  "failed": 209,
   "manualRetained": 9,
-  "offerAttempts": 414,
-  "fallbackUpdated": 0,
+  "offerAttempts": 422,
+  "fallbackUpdated": 5,
   "withBackup": 25,
   "sources": {
+    "lifebook-shop.ru": {
+      "attempted": 26,
+      "updated": 26,
+      "failed": 0,
+      "reasons": {},
+      "causes": {}
+    },
     "regard.ru": {
       "attempted": 20,
       "updated": 13,
@@ -28,19 +35,14 @@
     },
     "kns.ru": {
       "attempted": 162,
-      "updated": 135,
-      "failed": 27,
+      "updated": 0,
+      "failed": 162,
       "reasons": {
-        "product-not-confirmed": 27
+        "robots-unavailable": 162
       },
-      "causes": {}
-    },
-    "lifebook-shop.ru": {
-      "attempted": 21,
-      "updated": 21,
-      "failed": 0,
-      "reasons": {},
-      "causes": {}
+      "causes": {
+        "http-403": 162
+      }
     },
     "andpro.ru": {
       "attempted": 10,
@@ -106,19 +108,12 @@
       "reasons": {},
       "causes": {}
     },
-    "cybermarket.by": {
-      "attempted": 2,
-      "updated": 2,
-      "failed": 0,
-      "reasons": {},
-      "causes": {}
-    },
     "dns-shop.ru": {
-      "attempted": 6,
+      "attempted": 9,
       "updated": 0,
-      "failed": 6,
+      "failed": 9,
       "reasons": {
-        "unsupported-source": 6
+        "unsupported-source": 9
       },
       "causes": {}
     },
@@ -147,6 +142,13 @@
       "reasons": {
         "unsupported-source": 1
       },
+      "causes": {}
+    },
+    "cybermarket.by": {
+      "attempted": 2,
+      "updated": 2,
+      "failed": 0,
+      "reasons": {},
       "causes": {}
     },
     "unifox.by": {
