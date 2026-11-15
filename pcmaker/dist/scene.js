@@ -35,7 +35,7 @@ export class PCScene {
   const floor=new THREE.Mesh(new THREE.PlaneGeometry(200,200),new THREE.ShadowMaterial({opacity:.3}));floor.rotation.x=-Math.PI/2;floor.receiveShadow=true;floor.position.y=.04;this.scene.add(floor);
   const grid=new THREE.GridHelper(16,32,0x626b73,0x495159);grid.material.transparent=true;grid.material.opacity=.17;grid.position.y=.02;this.scene.add(grid);
   this.makeCase();this.makeFlows();this.initInteraction();
-  this.resizeObserver=new ResizeObserver(()=>this.resize());this.resizeObserver.observe(container);this.resize();this.reset();
+  this.resizeObserver=new ResizeObserver(()=>this.resize());this.resizeObserver.observe(container);this.resize();this.applyResize();this.reset();
   this.renderer.domElement.addEventListener('webglcontextlost',e=>{e.preventDefault();this.onContextLost?.();});
   this.frame=this.frame.bind(this);this.raf=requestAnimationFrame(this.frame);
  }
@@ -181,9 +181,26 @@ export class PCScene {
  setOptions(options){Object.assign(this,options);this.updateSideGuards();this.glass.visible=!this.hideGlass;this.rearPanel.visible=!this.hideRearPanel;if(this.parts.cooler)this.parts.cooler.visible=!this.hideCooler;this.flowGroup.visible=this.airflow;this.updateMarkers();}
  reset(){this.view('assembly');}
  zoom(factor){const offset=this.camera.position.clone().sub(this.controls.target);offset.multiplyScalar(factor);offset.setLength(THREE.MathUtils.clamp(offset.length(),4.2,19));this.camera.position.copy(this.controls.target).add(offset);this.controls.update();}
- resize(){const {width,height}=this.container.getBoundingClientRect();if(!width||!height)return;this.camera.aspect=width/height;this.camera.updateProjectionMatrix();this.renderer.setSize(width,height,false);this.fitCaseView();}
+ resize(){
+  const rect=this.container.getBoundingClientRect();if(!Number.isFinite(rect.width)||!Number.isFinite(rect.height)||rect.width<=0||rect.height<=0)return;
+  const width=Math.max(1,Math.round(rect.width)),height=Math.max(1,Math.round(rect.height));
+  // ResizeObserver runs after animation callbacks. Resizing the drawing buffer
+  // here would erase the frame just rendered, leaving a transparent canvas.
+  // Keep that frame until the next draw and coalesce intermediate CSS sizes.
+  this.pendingResize=width===this.viewportWidth&&height===this.viewportHeight?null:{width,height};
+ }
+ applyResize(){
+  if(!this.pendingResize)return;
+  const {width,height}=this.pendingResize;this.pendingResize=null;
+  this.viewportWidth=width;this.viewportHeight=height;
+  this.camera.aspect=width/height;this.camera.updateProjectionMatrix();
+  this.renderer.setSize(width,height,false);this.fitCaseView();
+ }
  frame(time){
-  if(time-this.last<1000/45){this.raf=requestAnimationFrame(this.frame);return;}
+  // A buffer resize must always be followed by a draw in this same callback,
+  // even between the normally throttled frames during a panel transition.
+  if(time-this.last<1000/45&&!this.pendingResize){this.raf=requestAnimationFrame(this.frame);return;}
+  this.applyResize();
   const dt=Math.min((time-this.last)/1000||0,.05);this.last=time;if(!this.dragging&&!this.externalCables?.drag)this.controls.update();
   for(const f of this.fans){const fraction=f.mountId?(f.direction==='in'?this.settings.front:this.settings.rear)/100:f.kind==='front'?this.settings.front/100:f.kind==='rear'?this.settings.rear/100:f.kind==='cpu'?this.settings.cpuFan/100:(this.settings.gpuFan??60)/100;f.rotor.rotation.z-=dt*(this.running?fraction*12:0);}
   this.transitions=this.transitions.filter(t=>{const p=Math.min((time-t.start)/650,1);t.group.position.x=.65*(1-p)**3;return p<1;});
