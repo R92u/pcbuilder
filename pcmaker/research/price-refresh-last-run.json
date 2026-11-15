@@ -1,18 +1,31 @@
 {
-  "checkedAt": "2026-11-14T11:37:19.726Z",
+  "checkedAt": "2026-11-15T12:03:49.195Z",
   "scope": {
     "region": "all",
     "host": "all",
     "limit": 500
   },
-  "attempted": 418,
-  "updated": 200,
-  "failed": 209,
+  "attempted": 419,
+  "updated": 231,
+  "failed": 179,
   "manualRetained": 9,
-  "offerAttempts": 422,
-  "fallbackUpdated": 5,
+  "offerAttempts": 420,
+  "fallbackUpdated": 0,
   "withBackup": 25,
   "sources": {
+    "regard.ru": {
+      "attempted": 21,
+      "updated": 14,
+      "failed": 7,
+      "reasons": {
+        "product-not-confirmed": 1,
+        "http-429": 1,
+        "source-rate-limited": 5
+      },
+      "causes": {
+        "http-429": 5
+      }
+    },
     "lifebook-shop.ru": {
       "attempted": 26,
       "updated": 26,
@@ -20,29 +33,14 @@
       "reasons": {},
       "causes": {}
     },
-    "regard.ru": {
-      "attempted": 20,
-      "updated": 13,
-      "failed": 7,
-      "reasons": {
-        "product-not-confirmed": 2,
-        "http-429": 1,
-        "source-rate-limited": 4
-      },
-      "causes": {
-        "http-429": 4
-      }
-    },
     "kns.ru": {
-      "attempted": 162,
-      "updated": 0,
-      "failed": 162,
+      "attempted": 159,
+      "updated": 31,
+      "failed": 128,
       "reasons": {
-        "robots-unavailable": 162
+        "product-not-confirmed": 128
       },
-      "causes": {
-        "http-403": 162
-      }
+      "causes": {}
     },
     "andpro.ru": {
       "attempted": 10,
@@ -103,7 +101,18 @@
     },
     "ultraprice.by": {
       "attempted": 1,
-      "updated": 1,
+      "updated": 0,
+      "failed": 1,
+      "reasons": {
+        "robots-unavailable": 1
+      },
+      "causes": {
+        "timeout": 1
+      }
+    },
+    "cybermarket.by": {
+      "attempted": 2,
+      "updated": 2,
       "failed": 0,
       "reasons": {},
       "causes": {}
@@ -142,13 +151,6 @@
       "reasons": {
         "unsupported-source": 1
       },
-      "causes": {}
-    },
-    "cybermarket.by": {
-      "attempted": 2,
-      "updated": 2,
-      "failed": 0,
-      "reasons": {},
       "causes": {}
     },
     "unifox.by": {
