@@ -33,6 +33,17 @@ export function keyboardLayout(p){
   add('Rec',0,-.85,.85,.45,true);add('Play',4,-.85,1.2,.45,true);
  }else if(p.id==='whisper')for(let i=0;i<4;i++)add(['■','◀','▶','♪'][i],19+i,0,1,.85,true);
  if(p.macroKeys)for(let i=0;i<p.macroKeys;i++)units.push({legend:'G'+(i+1),x:0,z:start+i*5/p.macroKeys,w:.8,d:5/p.macroKeys-.10,modifier:true,row:2});
+ if(p.keyboardFamily==='lunacy-moonlight'){
+  // Reference coordinates from the manufacturer's orthographic Moonlight photo.
+  // Scroll Lock/Pause are replaced by the modular volume knob.
+  const [w,d]=p.dimensions.map(n=>n/100);
+  for(const k of units)if(/^F\d+$/.test(k.legend))k.x=2+Number(k.legend.slice(1))-1+Math.floor((Number(k.legend.slice(1))-1)/4)*.5;
+  return units.filter(k=>!['Scr','Pause'].includes(k.legend)).map(k=>({...k,
+   photoX:(37+(k.x+k.w/2)*71)/1386,photoY:(36+(k.z+k.d/2)*71)/538,
+   photoW:k.w*71/1386,photoD:k.d*71/538,
+   x:((37+(k.x+k.w/2)*71)/1386-.5)*w,z:((36+(k.z+k.d/2)*71)/538-.5)*d,
+   w:k.w*71/1386*w-.012,d:k.d*71/538*d-.012}));
+ }
  const extra=p.keys-units.length;if(extra>0)for(let i=0;i<extra;i++)add(['Vol−','Vol+','Mute','Play'][i%4],i*1.2,-.8,1,.55,true);
  const [w,d]=p.dimensions.map(n=>n/100),minZ=Math.min(...units.map(k=>k.z)),maxX=Math.max(...units.map(k=>k.x+k.w)),maxZ=Math.max(...units.map(k=>k.z+k.d));
  const padX=shiva?.13:.065,padZ=p.format==='75%'?.14:.055,depth=shiva||p.wristRest?d*.66:d-padZ*2;

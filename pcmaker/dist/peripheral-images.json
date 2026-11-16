@@ -472,5 +472,17 @@
     "sourcePage": "https://en.akkogear.com/product/blackgold-3068b-mechanical-keyboard/",
     "sourceImage": "https://en.akkogear.com/wp-content/uploads/2022/01/BlackGold-3068B.jpg",
     "credit": "Akko"
+  },
+  "lunacy-moonlight-white": {
+    "image": "assets/peripherals/lunacy-moonlight-white.webp",
+    "sourcePage": "https://shop.lunacy.ru/products/mehanicheskaya-igrovaya-klaviatura-dlya-kompytera-lunacy-moonlight-g3ms-onyx-lspck01-white-100016",
+    "sourceImage": "https://avatars.mds.yandex.net/get-yastore/17761178/wnsl45zzhwbw9hkbkl9878vwpptrpgfh/orig",
+    "credit": "Lunacy"
+  },
+  "lunacy-moonlight-iskra": {
+    "image": "assets/peripherals/lunacy-moonlight-iskra.webp",
+    "sourcePage": "https://shop.lunacy.ru/products/mehanicheskaya-igrovaya-klaviatura-dlya-kompytera-lunacy-x-honkai-star-rail-iskra-g3ms-aquamarine-chernaya-lhmnlght85kbb-101017",
+    "sourceImage": "https://avatars.mds.yandex.net/get-yastore/21136051/j89545lqr7sxkmqqnslpl9pms4b5kmbh/orig",
+    "credit": "Lunacy"
   }
 }

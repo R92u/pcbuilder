@@ -1,5 +1,6 @@
 import * as THREE from './vendor/three.module.js';
 import {keyboardLayout} from './keyboard-layout.js';
+import {createLunacyKeyboard} from './keyboard-lunacy.js';
 
 export function keyboardProfile(p){
  const light=p.colors.includes('white')&&!p.colors.includes('black');
@@ -53,6 +54,7 @@ function legendAtlas(layout,p){
  const t=new THREE.CanvasTexture(c);t.colorSpace=THREE.SRGBColorSpace;t.anisotropy=4;return t;
 }
 export function createKeyboardModel(p,{withTexture=true}={}){
+ if(p.keyboardFamily==='lunacy-moonlight')return createLunacyKeyboard(p,{withTexture},{slab,mat,keyboardLayout,keyboardLightColor,sanitizeKeyboardLighting});
  const g=new THREE.Group(),s=keyboardProfile(p),{w,d,h}=s,layout=keyboardLayout(p),deckY=h*(s.low?.52:.43),capH=h*(s.low?.28:s.wrist?.27:.37);
  g.name='keyboard-'+p.id;g.userData.keyboardId=p.id;
  slab(g,w,s.wrist?d*.72:d,deckY,0,s.body,s.wrist?.035:.04,s.wrist?-d*.14:0);
