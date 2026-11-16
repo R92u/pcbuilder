@@ -1,15 +1,15 @@
 {
-  "checkedAt": "2026-11-15T12:03:49.195Z",
+  "checkedAt": "2026-11-16T12:56:04.908Z",
   "scope": {
     "region": "all",
     "host": "all",
     "limit": 500
   },
   "attempted": 419,
-  "updated": 231,
-  "failed": 179,
+  "updated": 202,
+  "failed": 208,
   "manualRetained": 9,
-  "offerAttempts": 420,
+  "offerAttempts": 422,
   "fallbackUpdated": 0,
   "withBackup": 25,
   "sources": {
@@ -34,11 +34,11 @@
       "causes": {}
     },
     "kns.ru": {
-      "attempted": 159,
-      "updated": 31,
-      "failed": 128,
+      "attempted": 161,
+      "updated": 1,
+      "failed": 160,
       "reasons": {
-        "product-not-confirmed": 128
+        "product-not-confirmed": 160
       },
       "causes": {}
     },
@@ -101,14 +101,10 @@
     },
     "ultraprice.by": {
       "attempted": 1,
-      "updated": 0,
-      "failed": 1,
-      "reasons": {
-        "robots-unavailable": 1
-      },
-      "causes": {
-        "timeout": 1
-      }
+      "updated": 1,
+      "failed": 0,
+      "reasons": {},
+      "causes": {}
     },
     "cybermarket.by": {
       "attempted": 2,
