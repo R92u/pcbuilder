@@ -76,7 +76,7 @@ test('Verification is bound to reviewed specification values and fails closed af
  }
  assert.equal(verificationFor({...part,socket:'WRONG'}).status,'pending');
  assert.equal(verificationFor({id:'not-reviewed'}).status,'pending');assert.equal(verificationFor(undefined).status,'pending');
- assert.equal(verificationFor(catalog.case.find(p=>p.concept)).status,'concept');
+ assert.equal(verificationFor({id:'test-concept',concept:'panorama'}).status,'concept');
  assert.equal(isVerified(byId.rtx4060),false,'Ambiguous RTX 4060 power revisions are intentionally not verified');
 });
 

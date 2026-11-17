@@ -7,16 +7,16 @@ import {defaultFanLayout} from '../dist/fan-layout.js';
 import {caseLighting,gpuLighting,sanitizeLighting,lightingSources} from '../dist/lighting.js';
 import {lightingSceneMethods} from '../dist/lighting-scene.js';
 import {Group,Mesh,BoxGeometry,MeshStandardMaterial,Texture} from '../dist/vendor/three.module.js';
-const build={...demoBuild,case:'pcmaker-dual'},settings={load:'game',ambient:22,front:60,rear:60,cpuFan:60};
+const build={...demoBuild,case:'cc560'},settings={load:'game',ambient:22,front:60,rear:60,cpuFan:60};
 const pair=(a,b)=>[{id:'fan1',slot:a,direction:'in'},{id:'fan2',slot:b,direction:'out'}];
 const codes=analysis=>analysis.warnings.map(w=>w.code);
 test('Moving the same two fans to a short path reduces exchange and increases heat',()=>{
- const good=thermalTargets(build,{...settings,fanLayout:pair('front-2','rear-3')}),bad=thermalTargets(build,{...settings,fanLayout:pair('front-2','front-3')});
+ const good=thermalTargets(build,{...settings,fanLayout:pair('front-2','rear-1')}),bad=thermalTargets(build,{...settings,fanLayout:pair('front-2','front-3')});
  assert.ok(!codes(good.cooling).includes('short-path'));assert.ok(codes(bad.cooling).includes('short-path'));
  assert.ok(bad.flow<good.flow);assert.ok(bad.case>good.case);assert.ok(bad.gpu>good.gpu);
 });
 test('Rear intake against the tower cooler raises CPU thermal resistance',()=>{
- const good=thermalTargets(build,{...settings,fanLayout:pair('front-2','rear-3')}),bad=thermalTargets(build,{...settings,fanLayout:pair('rear-3','front-2')});
+ const good=thermalTargets(build,{...settings,fanLayout:pair('front-2','rear-1')}),bad=thermalTargets(build,{...settings,fanLayout:pair('rear-1','front-2')});
  assert.ok(codes(bad.cooling).includes('cooler-counterflow'));assert.ok(bad.cpu>good.cpu);
 });
 test('All-in, all-out, zero fans and zero RPM report distinct actionable warnings',()=>{
