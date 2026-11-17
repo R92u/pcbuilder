@@ -1,3 +1,4 @@
+import {connectionModes} from '../dist/peripheral-connections.js';
 import test from 'node:test';
 import assert from 'node:assert/strict';
 import {Vector3,Box3} from '../dist/vendor/three.module.js';
@@ -24,7 +25,7 @@ test('Every mouse has a closed, outward-facing shell without degenerate triangle
   const buttons=model.children.filter(o=>o.name==='side-button');assert.equal(buttons.length,p.sideButtons||(p.id==='g502'?3:2));
   let triangles=0;model.traverse(o=>{if(o.geometry)triangles+=(o.geometry.index?.count||o.geometry.attributes.position.count)/3*(o.isInstancedMesh?o.count:1);});
   assert.ok(triangles<12000,p.id+' stays within the mesh budget');
-  assert.equal(!!model.userData.cableStart,!!p.wired,p.id+' cable attachment');
+  assert.equal(!!model.userData.cableStart,!!p.wired||!!model.getObjectByName('usb-c-port'),p.id+' cable attachment');
  }
 });
 
@@ -34,4 +35,16 @@ test('Perforation and ergonomic outlines remain specific to their models',()=>{
  assert.equal(profiles['k1ng-4k-pro-white'].perforated,false);
  assert.equal(profiles.g502.ergonomic,true);assert.equal(profiles.aatrox.ergonomic,true);
  assert.equal(profiles.king.ergonomic,false);assert.equal(profiles['k1ng-4k-pro-white'].light,true);
+});
+test('Lunacy HSR edition has its own paint, physical controls and underside',()=>{
+ const p=peripherals.find(p=>p.id==='lunacy-one-hsr-iskra');assert.ok(p);
+ const model=createMouseModel(p,{withTexture:false}),shell=model.getObjectByName('continuous-shell');
+ assert.deepEqual(connectionModes(p),['usb','receiver']);assert.equal(p.sku,'LMOHSR');assert.equal(mouseProfile(p).iskra,true);assert.equal(p.dpiButtons,0);
+ assert.equal(model.children.filter(o=>o.name==='side-button').length,2);
+ assert.ok(Array.isArray(shell.material));assert.ok(shell.geometry.groups.some(g=>g.materialIndex===1));
+ assert.equal(model.getObjectByName('scroll-wheel').material.color.getHexString(),'bd2732');
+ assert.ok(model.getObjectByName('optical-sensor'));assert.ok(model.getObjectByName('usb-c-port'));
+ assert.equal(model.children.filter(o=>o.name==='ptfe-skate').length,4);
+ assert.deepEqual(model.userData.cableStart,model.getObjectByName('usb-c-port').position.toArray());
+ assert.equal(model.getObjectByName('cable-boot'),undefined,'wireless model has no permanent cable');
 });

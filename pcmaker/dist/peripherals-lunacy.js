@@ -25,3 +25,25 @@ export const lunacyKeyboards=[
  {...common,id:'lunacy-moonlight-iskra',name:'Lunacy Moonlight × Honkai: Star Rail «Искра»',sku:'LHMNLGHT85KBB',color:'Чёрный / красный / белый',colors:['black'],dimensions:[369,143,45],printStyle:'iskra',appearance:{body:'#b9202a',keys:'#141619',modifiers:'#bd2630',deck:'#17191c'},description:'TKL · 85 клавиш · G3MS Aquamarine · USB · RGB',source:iskra,offers:offer(11990,iskra,'in-stock'),
   specs:{...commonSpecs,'Переключатели':'G3MS Aquamarine, линейные','Издание':'Лимитированная коллаборация Lunacy × Honkai: Star Rail','Дизайн':'Искра: рисунки на клавишах, красная рамка, ромбический узор корпуса','Стабилизаторы':'С заводской смазкой','Габариты устройства':'369 × 143 × 45 мм (ширина × глубина × высота), по карточке производителя на Яндекс Маркете','Масса':'950 г по карточке Яндекс Маркета; не переносится значение 850 г базовой Moonlight','Источник габаритов':'https://market.yandex.ru/card/mekhanicheskaya-igrovaya-klaviatura-dlya-kompyutera-lunacy-x-honkai-star-rail-iskra-g3ms-aquamarine-chernaya-lhmnlght85kbb/6184297926','Источник особенностей':'https://www.lunacy.ru/lunacy-moonlight-iskra-keyboard','Комплект':'Кабель, пуллер, 32 дополнительных кейкапа, четыре свитча, акриловый стенд, стикеры, документация, карточка с кодом','Комплектация издания':'Состав указан по выбранной карточке официального магазина; промоматериалы описывают разные наборы стендов'}},
 ];
+// Lunacy One collaboration edition; manufacturer specs and dated store observation.
+const iskraMouse='https://shop.lunacy.ru/products/mysh-besprovodnaya-lunacy-x-honkai-star-rail-limitirovannoe-izdanie-iskra-101016';
+export const lunacyMice=[{
+ id:'lunacy-one-hsr-iskra',category:'mouse',brand:'Lunacy',name:'Lunacy x Honkai: Star Rail «Искра»',sku:'LMOHSR',
+ color:'Красный / белый / чёрный',colors:['red','white','black'],dimensions:[62.4,118.7,39.4],
+ wired:false,connectionModes:['usb','receiver'],rgb:false,dpiButtons:0,sideButtons:2,printStyle:'hsr-iskra',
+ photoCredit:'Lunacy · официальный магазин',
+ verifiedAt:date,description:'Lunacy One · Искра · PAW3395 · 26 000 DPI · 1000 Гц · 57 г',source:iskraMouse,
+ offers:offer(8490,iskraMouse,'unknown'),
+ specs:{'Издание':'Лимитированная коллаборация Lunacy x Honkai: Star Rail, персонаж Искра',
+ 'Сенсор':'PixArt PAW3395','Разрешение':'До 26 000 DPI','Частота опроса':'125–1000 Гц','Скорость':'До 650 IPS','Ускорение':'До 50 g',
+ 'Подключение':'Радиоканал 2,4 ГГц через USB-ресивер; проводное USB-C. Bluetooth не заявлен',
+ 'Масса':'57 г','Кнопки':'5: левая, правая, нажатие колеса и две боковые',
+ 'Переключатели':'Huano Transparent Blue Shell Pink Dot; основные поддерживают Hot Swap',
+ 'Аккумулятор':'300 мА·ч, Li-ion','Автономность':'40 ч при 1000 Гц; до 100 ч при 125 Гц, радио 2,4 ГГц',
+ 'Кабель':'Съёмный USB-A — USB-C, паракорд, 1,8 м','Подсветка':'Нет RGB; индикатор состояния',
+ 'Габариты устройства':'62,4 × 118,7 × 39,4 мм (Ш × Г × В)',
+ 'Источник габаритов':'https://market.yandex.ru/card/mysh-besprovodnaya-lunacy-x-honkai-star-rail-limitirovannoye-izdaniye-iskra/6184113395',
+ 'Источник характеристик':'https://hsr.lunacy.ru/mishka-lunacy',
+ 'Дизайн 3D':'Упрощённая модель по фотографиям: красный корпус, ромбы, контрастные кнопки и маска кролика; мелкая маркировка условная',
+ 'Гарантия':'1 год','Проверено':date}
+}];

@@ -484,5 +484,11 @@
     "sourcePage": "https://shop.lunacy.ru/products/mehanicheskaya-igrovaya-klaviatura-dlya-kompytera-lunacy-x-honkai-star-rail-iskra-g3ms-aquamarine-chernaya-lhmnlght85kbb-101017",
     "sourceImage": "https://avatars.mds.yandex.net/get-yastore/21136051/j89545lqr7sxkmqqnslpl9pms4b5kmbh/orig",
     "credit": "Lunacy"
+  },
+  "lunacy-one-hsr-iskra": {
+    "image": "assets/peripherals/lunacy-one-hsr-iskra.webp",
+    "sourcePage": "https://shop.lunacy.ru/products/mysh-besprovodnaya-lunacy-x-honkai-star-rail-limitirovannoe-izdanie-iskra-101016",
+    "sourceImage": "https://avatars.mds.yandex.net/get-yastore/20776375/cvw2kcl7h5cz2jqmsrcr9hjntbcvgtlq/x640",
+    "credit": "Lunacy"
   }
 }
