@@ -1,15 +1,15 @@
 {
-  "checkedAt": "2026-11-16T12:56:04.908Z",
+  "checkedAt": "2026-11-17T13:38:26.336Z",
   "scope": {
     "region": "all",
     "host": "all",
     "limit": 500
   },
-  "attempted": 419,
-  "updated": 202,
-  "failed": 208,
+  "attempted": 435,
+  "updated": 333,
+  "failed": 93,
   "manualRetained": 9,
-  "offerAttempts": 422,
+  "offerAttempts": 435,
   "fallbackUpdated": 0,
   "withBackup": 25,
   "sources": {
@@ -34,11 +34,11 @@
       "causes": {}
     },
     "kns.ru": {
-      "attempted": 161,
-      "updated": 1,
-      "failed": 160,
+      "attempted": 177,
+      "updated": 131,
+      "failed": 46,
       "reasons": {
-        "product-not-confirmed": 160
+        "product-not-confirmed": 46
       },
       "causes": {}
     },
@@ -78,11 +78,9 @@
     },
     "tecno.by": {
       "attempted": 2,
-      "updated": 1,
-      "failed": 1,
-      "reasons": {
-        "http-404": 1
-      },
+      "updated": 2,
+      "failed": 0,
+      "reasons": {},
       "causes": {}
     },
     "time-shop.by": {
@@ -114,11 +112,11 @@
       "causes": {}
     },
     "dns-shop.ru": {
-      "attempted": 9,
+      "attempted": 6,
       "updated": 0,
-      "failed": 9,
+      "failed": 6,
       "reasons": {
-        "unsupported-source": 9
+        "unsupported-source": 6
       },
       "causes": {}
     },
