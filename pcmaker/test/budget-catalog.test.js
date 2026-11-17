@@ -52,8 +52,8 @@ test('Empty fan mounts do not become included fans or cooling capacity',()=>{
 
 test('Budget filter works together with category, stock-price and compatibility filters',()=>{
  const filters={budget:true,category:'all',min:'',max:'',sort:'price-up'};
- assert.equal(filterProducts(shopProducts,filters,{},prices).length,16);
- assert.equal(filterProducts(shopProducts,{...filters,category:'gpu'}, {},prices).length,2);
+ assert.equal(filterProducts(shopProducts,filters,{},prices).length,32);
+ assert.equal(filterProducts(shopProducts,{...filters,category:'gpu'}, {},prices).length,10);
  assert.deepEqual(filterProducts(shopProducts,{...filters,category:'motherboard',compatible:true},build,prices).map(p=>p.id),['a520m-a-pro']);
  assert.ok(filterProducts(shopProducts,{...filters,priced:true},{},prices).every(p=>prices[p.id].availability!=='out-of-stock'));
 });

@@ -1,0 +1,412 @@
+{
+  "items": {
+    "r3-3100": {
+      "checkedAt": "2026-11-17",
+      "sources": [
+        "https://www.amd.com/en/support/downloads/drivers.html/processors/ryzen/ryzen-3000-series/amd-ryzen-3-3100.html"
+      ],
+      "values": {
+        "socket": "AM4",
+        "memory": "DDR4",
+        "cores": 4,
+        "threads": 8,
+        "tdp": 65,
+        "baseGHz": 3.6,
+        "boostGHz": 3.9,
+        "cacheMB": 16,
+        "integratedGraphics": false
+      },
+      "assumptions": [
+        "OEM: кулер приобретается отдельно. Поддержку процессора и нужную версию BIOS проверяют по списку CPU конкретной платы. 88 Вт — условный предел учебной симуляции, не измерение. Температурный предел 95 °C в модели условный."
+      ],
+      "limitations": [
+        "Проверка характеристик не заменяет список поддержки CPU и BIOS конкретной платы."
+      ]
+    },
+    "r3-3300x": {
+      "checkedAt": "2026-11-17",
+      "sources": [
+        "https://www.amd.com/en/support/downloads/drivers.html/processors/ryzen/ryzen-3000-series/amd-ryzen-3-3300x.html"
+      ],
+      "values": {
+        "socket": "AM4",
+        "memory": "DDR4",
+        "cores": 4,
+        "threads": 8,
+        "tdp": 65,
+        "baseGHz": 3.8,
+        "boostGHz": 4.3,
+        "cacheMB": 16,
+        "integratedGraphics": false
+      },
+      "assumptions": [
+        "OEM: кулер приобретается отдельно. Поддержку процессора и нужную версию BIOS проверяют по списку CPU конкретной платы. 88 Вт — условный предел учебной симуляции, не измерение. Температурный предел 95 °C в модели условный."
+      ],
+      "limitations": [
+        "Проверка характеристик не заменяет список поддержки CPU и BIOS конкретной платы."
+      ]
+    },
+    "r5-3500": {
+      "checkedAt": "2026-11-17",
+      "sources": [
+        "https://www.amd.com/en/support/downloads/drivers.html/processors/ryzen/ryzen-3000-series/amd-ryzen-5-3500.html"
+      ],
+      "values": {
+        "socket": "AM4",
+        "memory": "DDR4",
+        "cores": 6,
+        "threads": 6,
+        "tdp": 65,
+        "baseGHz": 3.6,
+        "boostGHz": 4.1,
+        "cacheMB": 16,
+        "integratedGraphics": false
+      },
+      "assumptions": [
+        "OEM: кулер приобретается отдельно. Поддержку процессора и нужную версию BIOS проверяют по списку CPU конкретной платы. 88 Вт — условный предел учебной симуляции, не измерение."
+      ],
+      "limitations": [
+        "Проверка характеристик не заменяет список поддержки CPU и BIOS конкретной платы."
+      ]
+    },
+    "r5-3600": {
+      "checkedAt": "2026-11-17",
+      "sources": [
+        "https://www.amd.com/en/support/downloads/drivers.html/processors/ryzen/ryzen-3000-series/amd-ryzen-5-3600.html"
+      ],
+      "values": {
+        "socket": "AM4",
+        "memory": "DDR4",
+        "cores": 6,
+        "threads": 12,
+        "tdp": 65,
+        "baseGHz": 3.6,
+        "boostGHz": 4.2,
+        "cacheMB": 32,
+        "integratedGraphics": false
+      },
+      "assumptions": [
+        "OEM: кулер приобретается отдельно. Поддержку процессора и нужную версию BIOS проверяют по списку CPU конкретной платы. 88 Вт — условный предел учебной симуляции, не измерение."
+      ],
+      "limitations": [
+        "Проверка характеристик не заменяет список поддержки CPU и BIOS конкретной платы."
+      ]
+    },
+    "g6900": {
+      "checkedAt": "2026-11-17",
+      "sources": [
+        "https://cdrdv2-public.intel.com/754040/CPM-21-02_12thGen_QuickRefGuide_P2_v2.pdf"
+      ],
+      "values": {
+        "socket": "LGA1700",
+        "memory": [
+          "DDR4",
+          "DDR5"
+        ],
+        "cores": 2,
+        "threads": 2,
+        "tdp": 46,
+        "baseGHz": 3.4,
+        "boostGHz": 3.4,
+        "cacheMB": 4,
+        "integratedGraphics": true
+      },
+      "assumptions": [
+        "OEM: кулер приобретается отдельно. Поддержку процессора и нужную версию BIOS проверяют по списку CPU конкретной платы. Тип памяти определяется материнской платой."
+      ],
+      "limitations": [
+        "Проверка характеристик не заменяет список поддержки CPU и BIOS конкретной платы."
+      ]
+    },
+    "g7400": {
+      "checkedAt": "2026-11-17",
+      "sources": [
+        "https://cdrdv2-public.intel.com/754040/CPM-21-02_12thGen_QuickRefGuide_P2_v2.pdf"
+      ],
+      "values": {
+        "socket": "LGA1700",
+        "memory": [
+          "DDR4",
+          "DDR5"
+        ],
+        "cores": 2,
+        "threads": 4,
+        "tdp": 46,
+        "baseGHz": 3.7,
+        "boostGHz": 3.7,
+        "cacheMB": 6,
+        "integratedGraphics": true
+      },
+      "assumptions": [
+        "OEM: кулер приобретается отдельно. Поддержку процессора и нужную версию BIOS проверяют по списку CPU конкретной платы. Тип памяти определяется материнской платой."
+      ],
+      "limitations": [
+        "Проверка характеристик не заменяет список поддержки CPU и BIOS конкретной платы."
+      ]
+    },
+    "i3-12100": {
+      "checkedAt": "2026-11-17",
+      "sources": [
+        "https://cdrdv2-public.intel.com/754040/CPM-21-02_12thGen_QuickRefGuide_P2_v2.pdf"
+      ],
+      "values": {
+        "socket": "LGA1700",
+        "memory": [
+          "DDR4",
+          "DDR5"
+        ],
+        "cores": 4,
+        "threads": 8,
+        "tdp": 60,
+        "baseGHz": 3.3,
+        "boostGHz": 4.3,
+        "cacheMB": 12,
+        "integratedGraphics": true
+      },
+      "assumptions": [
+        "OEM: кулер приобретается отдельно. Поддержку процессора и нужную версию BIOS проверяют по списку CPU конкретной платы. Тип памяти определяется материнской платой."
+      ],
+      "limitations": [
+        "Проверка характеристик не заменяет список поддержки CPU и BIOS конкретной платы."
+      ]
+    },
+    "gt710-1gd3h-lp": {
+      "checkedAt": "2026-11-17",
+      "sources": [
+        "https://www.msi.com/Graphics-Card/GT-710-1GD3H-LP/Specification"
+      ],
+      "values": {
+        "vram": 1,
+        "vramType": "DDR3",
+        "dimensions": [
+          146,
+          69,
+          19
+        ],
+        "fans": 0,
+        "connectorType": "none",
+        "connectors": 0,
+        "busBits": 64,
+        "ports": [
+          "1 × HDMI 1.4",
+          "1 × DVI-D",
+          "1 × VGA"
+        ]
+      },
+      "assumptions": [
+        "Питание только через слот PCIe. Для офисных задач и нетребовательных игр. Температурный предел 90 °C — условный параметр учебной модели."
+      ],
+      "limitations": [
+        "3D-модель схематична; нагрев приблизительный."
+      ]
+    },
+    "gt710-2gd3h-lp": {
+      "checkedAt": "2026-11-17",
+      "sources": [
+        "https://www.msi.com/Graphics-Card/GT-710-2GD3H-LP/Specification"
+      ],
+      "values": {
+        "vram": 2,
+        "vramType": "DDR3",
+        "dimensions": [
+          146,
+          69,
+          19
+        ],
+        "fans": 0,
+        "connectorType": "none",
+        "connectors": 0,
+        "busBits": 64,
+        "ports": [
+          "1 × HDMI 1.4",
+          "1 × DVI-D",
+          "1 × VGA"
+        ]
+      },
+      "assumptions": [
+        "Питание только через слот PCIe. Для офисных задач и нетребовательных игр. Температурный предел 90 °C — условный параметр учебной модели."
+      ],
+      "limitations": [
+        "3D-модель схематична; нагрев приблизительный."
+      ]
+    },
+    "gt730-n730-2gd3": {
+      "checkedAt": "2026-11-17",
+      "sources": [
+        "https://www.msi.com/Graphics-Card/N730-2GD3/Specification"
+      ],
+      "values": {
+        "vram": 2,
+        "vramType": "DDR3",
+        "dimensions": [
+          152,
+          106,
+          38
+        ],
+        "fans": 1,
+        "connectorType": "none",
+        "connectors": 0,
+        "busBits": 128,
+        "ports": [
+          "1 × HDMI 1.4",
+          "1 × DVI-D",
+          "1 × VGA"
+        ]
+      },
+      "assumptions": [
+        "Питание только через слот PCIe. Для офисных задач и нетребовательных игр. Температурный предел 90 °C — условный параметр учебной модели."
+      ],
+      "limitations": [
+        "3D-модель схематична; нагрев приблизительный."
+      ]
+    },
+    "gt730-n730k-lp-oc": {
+      "checkedAt": "2026-11-17",
+      "sources": [
+        "https://storage-asset.msi.com/datasheet/original/vga/global/N730K-2GD5LPOC.pdf"
+      ],
+      "values": {
+        "vram": 2,
+        "vramType": "GDDR5",
+        "dimensions": [
+          141,
+          69,
+          29
+        ],
+        "fans": 1,
+        "connectorType": "none",
+        "connectors": 0,
+        "busBits": 64,
+        "ports": [
+          "1 × HDMI 1.4",
+          "1 × DVI-D",
+          "1 × VGA"
+        ]
+      },
+      "assumptions": [
+        "Питание только через слот PCIe. Для офисных задач и нетребовательных игр. Температурный предел 90 °C — условный параметр учебной модели."
+      ],
+      "limitations": [
+        "3D-модель схематична; нагрев приблизительный."
+      ]
+    },
+    "gt730-asus-sl": {
+      "checkedAt": "2026-11-17",
+      "sources": [
+        "https://www.asus.com/ru/motherboards-components/graphics-cards/asus/gt730-sl-2gd5-brk/techspec/"
+      ],
+      "values": {
+        "vram": 2,
+        "vramType": "GDDR5",
+        "dimensions": [
+          165,
+          69,
+          39
+        ],
+        "fans": 0,
+        "connectorType": "none",
+        "connectors": 0,
+        "busBits": 64,
+        "ports": [
+          "1 × HDMI 1.4",
+          "1 × DVI-D",
+          "1 × VGA"
+        ]
+      },
+      "assumptions": [
+        "Питание только через слот PCIe. Для офисных задач и нетребовательных игр. Температурный предел 90 °C — условный параметр учебной модели. Мощность в симуляции взята как ориентир для графического чипа, не измерение этой платы."
+      ],
+      "limitations": [
+        "3D-модель схематична; нагрев приблизительный."
+      ]
+    },
+    "gt1030-msi-passive": {
+      "checkedAt": "2026-11-17",
+      "sources": [
+        "https://www.msi.com/Graphics-Card/GeForce-GT-1030-2GH-LP-OC/Specification"
+      ],
+      "values": {
+        "vram": 2,
+        "vramType": "GDDR5",
+        "dimensions": [
+          153,
+          69,
+          38
+        ],
+        "fans": 0,
+        "connectorType": "none",
+        "connectors": 0,
+        "busBits": 64,
+        "ports": [
+          "1 × HDMI 2.0b",
+          "1 × DisplayPort 1.4a"
+        ]
+      },
+      "assumptions": [
+        "Питание только через слот PCIe. Для офисных задач и нетребовательных игр. Температурный предел 90 °C — условный параметр учебной модели."
+      ],
+      "limitations": [
+        "3D-модель схематична; нагрев приблизительный."
+      ]
+    },
+    "gt1030-asus-sl": {
+      "checkedAt": "2026-11-17",
+      "sources": [
+        "https://www.asus.com/ru/motherboards-components/graphics-cards/asus/gt1030-sl-2g-brk/techspec/"
+      ],
+      "values": {
+        "vram": 2,
+        "vramType": "GDDR5",
+        "dimensions": [
+          173,
+          69,
+          40
+        ],
+        "fans": 0,
+        "connectorType": "none",
+        "connectors": 0,
+        "busBits": 64,
+        "ports": [
+          "1 × HDMI 2.0b",
+          "1 × DVI-D"
+        ]
+      },
+      "assumptions": [
+        "Питание только через слот PCIe. Для офисных задач и нетребовательных игр. Температурный предел 90 °C — условный параметр учебной модели. Мощность в симуляции взята как ориентир для графического чипа, не измерение этой платы."
+      ],
+      "limitations": [
+        "3D-модель схематична; нагрев приблизительный."
+      ]
+    },
+    "gt710-asus-evo": {
+      "checkedAt": "2026-11-17",
+      "sources": [
+        "https://www.asus.com/ru/motherboards-components/graphics-cards/asus/gt710-sl-2gd5-brk-evo/techspec/"
+      ],
+      "values": {
+        "vram": 2,
+        "vramType": "GDDR5",
+        "dimensions": [
+          170,
+          69,
+          39
+        ],
+        "fans": 0,
+        "connectorType": "none",
+        "connectors": 0,
+        "busBits": 64,
+        "ports": [
+          "1 × HDMI 1.4",
+          "1 × DVI-D",
+          "1 × VGA"
+        ]
+      },
+      "assumptions": [
+        "Питание только через слот PCIe. Для офисных задач и нетребовательных игр. Температурный предел 90 °C — условный параметр учебной модели. Мощность в симуляции взята как ориентир для графического чипа, не измерение этой платы."
+      ],
+      "limitations": [
+        "3D-модель схематична; нагрев приблизительный."
+      ]
+    }
+  }
+}

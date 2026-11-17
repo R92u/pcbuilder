@@ -55,7 +55,7 @@ export function thermalTargets(build,settings) {
  const effective=cooling.effective;
  const conductance=8+9*Math.sqrt(effective);
  const cpuR=((p.cooler?.type==='aio'?.18:.20)+.42*(1-fan)**1.4)/(p.cooler?.efficiency||.45)*(1+.18*cooling.counterflow);
- const gpuR=.10+.06*(1-(.3+.7*w.gpu)); // simplified automatic GPU fan curve
+ const gpuR=p.gpu?.fans===0?.85/(1+.55*Math.sqrt(effective)):.10+.06*(1-(.3+.7*w.gpu)); // simplified automatic GPU fan curve
  const cpuMax=p.cpu?.tmax||95,gpuMax=p.gpu?.tmax||90;
  // Solve a stable energy balance with thermal limiting instead of simply clipping
  // temperature while continuing to inject the full electrical power as heat.

@@ -49,7 +49,7 @@ export const frontFanSource=frame=>[-.80,frame.fanYs[Math.floor(frame.fanYs.leng
 export function gpuLayout(p={}){
  const dims=p.dimensions||[],thickness=(p.thickness||dims[2]||(p.fans>=3?52:37))/100;
  const width=(p.width||dims[1]||135)/100;
- return {rear:-1.86,end:-1.86+(p.length||240)/100,top:GPU_TOP,bottom:GPU_TOP-thickness,thickness,width,edgeX:Math.max(.45,-.80+width)};
+ return {rear:-1.86,end:-1.86+(p.length||240)/100,top:GPU_TOP,bottom:GPU_TOP-thickness,thickness,width,edgeX:p.modelStyle==='compact-budget'?- .80+width:Math.max(.45,-.80+width)};
 }
 export function coolerLayout(p={},ram,socket){
  const sizes=[p.fanSizeMm||(p.id==='nh-d15'?140:120)].flat().map(n=>n/100),size=Math.max(...sizes);
@@ -62,4 +62,4 @@ export function coolerLayout(p={},ram,socket){
 export const psuFront=p=>PSU_REAR+(p?.length||140)/100;
 export const boardBottom=p=>p?.form==='Micro-ATX'?1.80:1.285;
 
-export const gpuSlots=p=>Math.min(7,Math.ceil((gpuLayout(p).thickness+.12)/.18));
+export const gpuSlots=p=>p?.slotCount||Math.min(7,Math.ceil((gpuLayout(p).thickness+.12)/.18));

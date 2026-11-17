@@ -102,11 +102,17 @@ export function makeDetailedGPU(p){
 }
 
 function addVideoPorts(g,p,top){
- const ports=p.ports?.flatMap(port=>Array.from({length:parseInt(port)||1},()=>/DVI/i.test(port)?'DVI':/HDMI/i.test(port)?'HDMI':'DP'))||['DP','DP','DP','HDMI'];
+ const ports=p.ports?.flatMap(port=>Array.from({length:parseInt(port)||1},()=>/DVI/i.test(port)?'DVI':/HDMI/i.test(port)?'HDMI':/VGA|D-Sub/i.test(port)?'VGA':'DP'))||['DP','DP','DP','HDMI'];
  let x=-.56;
  for(const type of ports){
-  const width=type==='DVI'?.43:.22;
-  if(type==='DVI'){
+  const width=type==='DVI'?.43:type==='VGA'?.34:.22;
+  if(type==='VGA'){
+   this.externalAnchor(g,'VGA',x+width/2,top-.205,-2.23);
+   this.box(g,width,.15,.045,x+width/2,top-.205,-2.168,0xaab4b8);
+   this.box(g,width-.07,.105,.048,x+width/2,top-.205,-2.194,0x284579);
+   for(let r=0;r<3;r++)for(let c=0;c<5;c++)this.box(g,.014,.014,.008,x+.075+c*.047+(r%2)*.012,top-.24+r*.035,-2.222,0x111821);
+   for(const dx of [.025,width-.025])this.screw(g,x+dx,top-.205,-2.218,'z',.018);
+  }else if(type==='DVI'){
    this.externalAnchor(g,'DVI',x+width/2,top-.205,-2.23);
    this.box(g,width,.15,.045,x+width/2,top-.205,-2.168,0xb4b9b8);
    this.box(g,width-.075,.105,.048,x+width/2,top-.205,-2.194,0x182024);
@@ -132,7 +138,7 @@ function makeCompactGPU(p){
   const fz=p.fans===1?l.rear+len*.63:l.rear+(i+.5)*len/p.fans,size=Math.min(l.width-.14,len/p.fans-.10);
   this.fan(g,size,cx,l.bottom-.02,fz,[Math.PI/2,0,0],'gpu',false);
   for(const side of [-1,1]){const bar=this.box(g,.07,.055,size*.70,cx+side*size*.45,l.bottom-.035,fz,trim);bar.rotation.y=side*.22;}
-  this.text(g,'MSI',size*.24,.045,cx,l.bottom-.145,fz,[Math.PI/2,0,0],'#aab3b5');
+  this.text(g,p.manufacturer||'MSI',size*.24,.045,cx,l.bottom-.145,fz,[Math.PI/2,0,0],'#aab3b5');
  }
  this.label(g,p,Math.min(.58,len-.2),.22,cx,l.top+.012,l.rear+.45,[-Math.PI/2,0,Math.PI/2]);
  this.text(g,p.short.toUpperCase(),len*.74,.055,l.edgeX+.025,l.bottom+.055,z,[0,Math.PI/2,0],'#8d989b');
