@@ -9,6 +9,7 @@ import {cableCurve,strandPoints} from './cable-geometry.js';
 import {fanSceneMethods} from './fan-scene.js?v=world-coordinates';
 import {lightingSceneMethods} from './lighting-scene.js';
 import {interactionMethods} from './interaction.js?v=world-coordinates';
+import {CASE_FAN_DEPTH} from './fan-layout.js';
 
 const C={metal:0x222a2f,edge:0x485257,black:0x101618,silver:0x879398,pcb:0x17211c,light:0xe4edff};
 const mat=(color,roughness=.5,metalness=.25)=>hardwareFinish(new THREE.MeshStandardMaterial({color,roughness,metalness}));
@@ -67,7 +68,7 @@ export class PCScene {
  fan(parent,size,x,y,z,rotation,kind,lighting=null){
   const rgb=!!lighting;
   const fan=new THREE.Group();fan.position.set(x,y,z);fan.rotation.set(...rotation);parent.add(fan);
-  const depth=kind==='gpu'?.17:.23;
+  const depth=kind==='gpu'?.17:CASE_FAN_DEPTH;
   // A continuous square housing, rotor between its faces, and motor braces on
   // the exhaust side (-Z). The intake is +Z for case and CPU fans.
   for(const sign of [-1,1]){this.box(fan,size,size*.075,depth,0,sign*size*.4625,0,C.black);this.box(fan,size*.075,size,depth,sign*size*.4625,0,0,C.black);}

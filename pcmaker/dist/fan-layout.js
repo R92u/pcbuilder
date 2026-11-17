@@ -4,6 +4,32 @@ import {caseLayout,frontFanSource} from './layout.js';
 
 export const fanWalls={front:'Спереди',rear:'Сзади',top:'Сверху',bottom:'Снизу',left:'За платой',right:'Со стороны стекла'};
 const normals={front:[0,0,1],rear:[0,0,-1],top:[0,1,0],bottom:[0,-1,0],left:[-1,0,0],right:[1,0,0]};
+export const CASE_FAN_DEPTH=.23;
+// Rails reach the structural panels; their inner faces touch the fan housing.
+// Deriving them from the slots keeps every case size and manual mount aligned.
+export function fanMountRails(frame,slots){
+ const outer={front:frame.front+.10,rear:frame.rear-.045,top:4.64,bottom:.33,left:frame.back-.017,right:frame.side+.065};
+ const rails=new Map();
+ for(const slot of slots){
+  const axis=slot.normal.findIndex(Boolean),sign=slot.normal[axis];
+  const inner=slot.position[axis]+sign*CASE_FAN_DEPTH/2;
+  const end=sign>0?Math.max(outer[slot.wall],inner+.04):Math.min(outer[slot.wall],inner-.04);
+  const cross=axis===0?1:0,along=axis===2?1:2;
+  for(const side of [-1,1]){
+   const position=[...slot.position],size=[.08,.08,.08];
+   position[axis]=(inner+end)/2;size[axis]=Math.abs(end-inner);
+   position[cross]+=side*slot.size*.447;
+   position[along]=along===1?2.48:frame.centerZ;
+   size[along]=along===1?4.24:frame.depth+.10;
+   const key=[slot.wall,...position,...size].join(':');rails.set(key,{wall:slot.wall,position,size});
+  }
+ }
+ return [...rails.values()];
+}
+export function fanGeometryKey(build,layout){
+ const p=resolve(build);
+ return JSON.stringify([p.case?.id,caseLayout(p.case||{},p.gpu,p.cooler),fanMounts(build),layout]);
+}
 export function fanMounts(build){
  const p=resolve(build),f=caseLayout(p.case||{},p.gpu,p.cooler),slots=[];
  const a=aioPlacement(p,f);

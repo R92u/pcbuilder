@@ -2,7 +2,7 @@ import * as THREE from 'three';
 import {resolve} from './catalog.js';
 import {caseLighting} from './lighting.js';
 import {caseLayout} from './layout.js';
-import {fanMounts,sanitizeFanLayout,fanBasis,fanHub,placementError,fanBranchRoute} from './fan-layout.js';
+import {fanMounts,sanitizeFanLayout,fanBasis,fanHub,placementError,fanBranchRoute,fanGeometryKey,fanMountRails} from './fan-layout.js';
 import {cableCurve} from './cable-geometry.js';
 import {batchSolids} from './model.js';
 
@@ -11,11 +11,15 @@ export const fanSceneMethods={
  setFanLayout(layout){
   this.endFanDrag(null,true);
   this.fanLayout=sanitizeFanLayout(this.currentBuild||{},layout);
-  const key=JSON.stringify([this.currentBuild?.case,this.currentBuild?.gpu,this.fanLayout]);
+  const key=fanGeometryKey(this.currentBuild||{},this.fanLayout);
   if(key!==this.caseFanKey){
    this.caseFanKey=key;dispose(this.caseFans);this.fans=this.fans.filter(f=>!f.mountId);
    this.caseFans=new THREE.Group();this.root.add(this.caseFans);this.caseFanMeshes=new Map();
    const mounts=fanMounts(this.currentBuild||{}),p=resolve(this.currentBuild||{});
+   const frame=caseLayout(p.case||{},p.gpu,p.cooler),occupied=mounts.filter(s=>this.fanLayout.some(f=>f.slot===s.id));
+   for(const rail of fanMountRails(frame,occupied)){
+    const mesh=this.box(this.caseFans,...rail.size,...rail.position,p.case?.color==='white'?0xc4c9cb:0x353e44);mesh.name='fan-mount-rail';
+   }
    for(const spec of this.fanLayout){
     const slot=mounts.find(s=>s.id===spec.slot),{u,v,n}=fanBasis(slot,spec.direction);
     const group=this.fan(this.caseFans,slot.size,...slot.position,[0,0,0],'case',caseLighting(p.case));
@@ -26,9 +30,6 @@ export const fanSceneMethods={
    }
    for(const direction of ['in','out'])if(this.fanLayout.some(f=>f.direction===direction)){
     const hub=fanHub(this.currentBuild,direction);this.box(this.caseFans,.105,.19,.065,...hub,0x161e21);
-   }
-   if(p.case?.concept&&this.fanLayout.some(f=>f.slot.startsWith('right-'))){
-    const frame=caseLayout(p.case,p.gpu,p.cooler);for(const y of [2.65-frame.fanSize*.48,2.65+frame.fanSize*.48])this.box(this.caseFans,.05,.035,frame.depth-.08,frame.side-.015,y,frame.centerZ,p.case.color==='white'?0xb4bdc4:0x424953);
    }
    this.makeCaseFlows(p.case||{});this.wireKey=null;
   }

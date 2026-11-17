@@ -7,7 +7,34 @@ import {thermalTargets,compatibility} from '../dist/engine.js';
 import {cablesFor,wiringMissing,cleanConnections} from '../dist/wiring.js';
 import {cableCurve} from '../dist/cable-geometry.js';
 import {TubeGeometry} from '../dist/vendor/three.module.js';
+import {fanMountRails,fanGeometryKey,CASE_FAN_DEPTH} from '../dist/fan-layout.js';
 const concepts=catalog.case.filter(p=>p.concept),buildFor=p=>({...demoBuild,case:p.id});
+
+test('Every case fan screw is supported by a rail attached to the chassis, in both directions',()=>{
+ for(const p of catalog.case){
+  const build=buildFor(p),frame=caseLayout(p,byId[build.gpu],byId[build.cooler]),slots=fanMounts(build),rails=fanMountRails(frame,slots);
+  for(const slot of slots)for(const direction of ['in','out']){
+   const axis=slot.normal.findIndex(Boolean),{u,v}=fanBasis(slot,direction);
+   for(const x of [-1,1])for(const y of [-1,1]){
+    const screw=slot.position.map((n,i)=>n+slot.normal[i]*CASE_FAN_DEPTH/2+(u[i]*x+v[i]*y)*slot.size*.447);
+    const supports=rails.filter(r=>r.wall===slot.wall&&screw.every((n,i)=>Math.abs(n-r.position[i])<=r.size[i]/2+1e-8));
+    assert.ok(supports.length,`${p.id}/${slot.id}/${direction} screw ${x},${y} floats`);
+    for(const r of supports){
+     const outer=r.position[axis]+slot.normal[axis]*r.size[axis]/2;
+     const wall={front:frame.front,rear:frame.rear-.04,top:4.63,bottom:.36,left:frame.back,right:frame.side}[slot.wall];
+     assert.ok((outer-wall)*slot.normal[axis]>=-1e-8,`${p.id}/${slot.id} rail detached from chassis`);
+    }
+   }
+  }
+ }
+});
+test('Changing to a top radiator invalidates case fans when the chassis grows',()=>{
+ const before={...demoBuild,case:'cc560'},after={...before,cooler:catalog.cooler.find(p=>p.type==='aio'&&p.radiator===240).id};
+ const layout=[{id:'fan1',slot:'front-1',direction:'in'}];
+ assert.notEqual(caseLayout(byId[before.case],byId[before.gpu],byId[before.cooler]).front,caseLayout(byId[after.case],byId[after.gpu],byId[after.cooler]).front);
+ assert.notEqual(fanGeometryKey(before,layout),fanGeometryKey(after,layout));
+ assert.equal(fanGeometryKey(before,layout),fanGeometryKey({...before,ram:'ddr5-32'},layout));
+});
 
 test('Three distinct educational envelopes expose three mounts on each wall',()=>{
  assert.equal(concepts.length,3);assert.equal(new Set(concepts.map(p=>JSON.stringify(caseLayout(p)))).size,3);
