@@ -26,7 +26,7 @@ import {sanitizeFanLayout,defaultFanLayout,fanStats,encodeFans,decodeFans} from 
 import {componentSpecs,heatLabels} from './inspector.js';
 import {createShop} from './shop-catalog.js';
 import {cablesFor,ports,cleanConnections,wiringMissing,canConnect,reconcileConnections,connectionAfterDrop} from './wiring.js';
-import {catalog,categories,byId,emptyBuild,demoBuild,resolve,sanitizeBuild} from './catalog.js';
+import {catalog,categories,byId,emptyBuild,resolve,sanitizeBuild} from './catalog.js';
 import {compatibility,thermalTargets,advanceThermals,summarizePrices,workloads} from './engine.js';
 const $=id=>document.getElementById(id);
 const e=s=>String(s??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
@@ -241,7 +241,6 @@ document.addEventListener('click',event=>{const tab=event.target.closest('[data-
 for(const dialog of document.querySelectorAll('dialog'))dialog.addEventListener('click',ev=>{if(ev.target===dialog){const rect=dialog.getBoundingClientRect();if(ev.clientX<rect.left||ev.clientX>rect.right||ev.clientY<rect.top||ev.clientY>rect.bottom)dialog.close();}});
 
 $('open-simulation').onclick=()=>{setTab('simulation');if(innerWidth<840)$('build-panel')?.scrollIntoView({behavior:'smooth'});};
-$('demo-button').onclick=()=>{build={...demoBuild};resetSimulation();renderBuild();toast('Пример загружен. Любую деталь можно заменить вручную.');};
 $('clear-button').onclick=()=>$('clear-dialog').showModal();$('confirm-clear').onclick=()=>{build={...emptyBuild(),case:build.case};resetSimulation();renderBuild();$('clear-dialog').close();toast('Начинаем новую сборку');};
 $('method-button').onclick=method;$('sources-button').onclick=sources;
 for(const [id,property,inverted] of [['glass-toggle','hideGlass',false],['rear-panel-toggle','hideRearPanel',false],['cooler-toggle','hideCooler',false],['airflow-toggle','airflow',false]])$(id).onclick=()=>{const active=$(id).getAttribute('aria-pressed')!=='true';$(id).setAttribute('aria-pressed',active);$(id).classList.toggle('active',active);scene?.setOptions({[property]:active});if(property==='hideGlass')$(id).innerHTML=icon('layers')+(active?' Вернуть стекло':' Снять стекло');if(property==='hideRearPanel')$(id).innerHTML=icon('layers')+(active?' Вернуть крышку за платой':' Снять крышку за платой');if(property==='airflow'){$('fan-flow-toggle').setAttribute('aria-pressed',String(active));$('fan-flow-toggle').textContent=active?'Скрыть потоки воздуха':'Показать потоки воздуха';$('airflow-legend').hidden=!active;if(active&&!running)toast('Запусти симуляцию, чтобы увидеть движение воздуха');}};

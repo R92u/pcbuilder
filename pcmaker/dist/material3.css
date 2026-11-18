@@ -67,7 +67,7 @@ html[data-design=material3] :is(.workbench .build-panel,.market-sidebar,.workpla
  scrollbar-color:var(--md-sys-color-outline-variant) transparent;
 }
 html[data-design=material3] .workplace-integrated .workplace-panel{background:transparent;border-radius:0}
-html[data-design=material3] :is(.workshop-menu,.workbench .component-inspector,.header nav.brand-switcher,.thermal-panel,#theme-menu,#peripheral-cable-panel){
+html[data-design=material3] :is(.workshop-menu,.workbench .component-inspector,.header nav.brand-switcher,.thermal-panel,#settings-menu,#peripheral-cable-panel){
  background:var(--md-sys-color-surface-container-high);
  color:var(--md-sys-color-on-surface);
  border-color:var(--md-sys-color-outline-variant);
@@ -174,10 +174,6 @@ html[data-design=material3] :is(.workbench .panel-tabs button[aria-selected=true
 }
 html[data-design=material3] .panel-tabs button[aria-selected=true]::after{display:none}
 html[data-design=material3] :is(.brand-switcher a:hover,.brand-switcher a:focus-visible){background:var(--md-sys-color-surface-container-highest);color:var(--md-sys-color-on-surface)}
-html[data-design=material3] #theme-menu button{background:var(--md-sys-color-surface-container-high);border-color:var(--md-sys-color-outline-variant);border-radius:16px;color:var(--md-sys-color-on-surface);box-shadow:none}
-html[data-design=material3] #theme-menu button:hover{background:var(--md-sys-color-surface-container-highest)}
-html[data-design=material3] #theme-menu button[aria-pressed=true]{background:var(--md-sys-color-secondary-container);border-color:transparent;color:var(--md-sys-color-on-secondary-container)}
-html[data-design=material3] #theme-menu :is(p,small){color:var(--md-sys-color-on-surface-variant)}
 html[data-design=material3] #parts-count{background:var(--md-sys-color-primary-container);color:var(--md-sys-color-on-primary-container);border-color:transparent;border-radius:8px}
 html[data-design=material3] #fan-flow-toggle[aria-pressed=true]{background:var(--md-sys-color-secondary-container);color:var(--md-sys-color-on-secondary-container)}
 
@@ -224,7 +220,7 @@ html[data-design=material3] .store-picker-link:hover{background:var(--md-sys-col
 html[data-design=material3] .store-picker-note{color:var(--md-sys-color-on-surface-variant)}
 
 /* Outlined fields, native menus, range inputs and compact filter controls. */
-html[data-design=material3] :is(.region select,.shop-field input,.shop-field select,.shop-sort select,.market-page select,.workplace-page select,.fan-target-label select,.connection-action select,.gallery-dialog input:not([type=checkbox]),.gallery-dialog textarea,.search-field,.market-search,.budget-input){
+html[data-design=material3] :is(.region select,#settings-menu select,.shop-field input,.shop-field select,.shop-sort select,.market-page select,.workplace-page select,.fan-target-label select,.connection-action select,.gallery-dialog input:not([type=checkbox]),.gallery-dialog textarea,.search-field,.market-search,.budget-input){
  background:var(--md-sys-color-surface-container-low);
  color:var(--md-sys-color-on-surface);
  border-color:var(--md-sys-color-outline);

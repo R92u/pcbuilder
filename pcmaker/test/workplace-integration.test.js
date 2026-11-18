@@ -14,7 +14,15 @@ test('Workplace retains every builder control without duplicate identifiers',()=
  assert.match(workplace,/id="peripherals-panel"/);
  assert.doesNotMatch(workplace,/id="workplace-products"/);
  assert.match(workplace,/id="shop-color"/);
- assert.match(workplace,/class="round-button github-link"[^>]*><svg/);
+ for(const page of [original,workplace,html('market.html')]){
+  const header=page.match(/<header class="header\b[\s\S]*?<\/header>/)[0];
+  const settings=page.match(/<section id="settings-menu"[\s\S]*?<\/section>/)[0];
+  assert.match(header,/popovertarget="settings-menu"/);
+  assert.doesNotMatch(header,/github\.com|id="region-select"|id="theme-select"/);
+  assert.match(settings,/id="region-select"/);
+  assert.match(settings,/id="theme-select"/);
+  assert.match(settings,/href="https:\/\/github\.com\/R92u\/pcbuilder"/);
+ }
  assert.doesNotMatch(workplace,/class="workplace-heading"/);
  assert.doesNotMatch(workplace,/Сравни размеры\. Собери свой сетап/);
  assert.doesNotMatch(workplace,/data-category="(?:monitor|keyboard|mouse)"/,'Peripheral tabs must not open the PC store');

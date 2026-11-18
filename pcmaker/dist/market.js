@@ -31,6 +31,11 @@ function applyBuild(item){
  location.href='./#'+params;
 }
 const draft=getBuild(),draftCount=categories.filter(([key])=>draft.build[key]).length;
+const preferredRegion=$('region-select');
+preferredRegion.value=draft.region;
+preferredRegion.addEventListener('change',()=>{
+ try{localStorage.setItem('pcmaker-region',regionFor(preferredRegion.value).id);}catch{}
+});
 $('market-draft-count').innerHTML=draftCount+'<span>/8</span>';
 $('market-draft-name').textContent=byId[draft.build.cpu]?.short||'Начни с выбора комплектующих';
 

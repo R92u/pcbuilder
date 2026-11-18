@@ -1,13 +1,51 @@
-const themes=[['glass','Жидкое стекло','Основной дизайн'],['material3','Material 3','Тёмные поверхности и голубой акцент'],['audit','По аудиту','Крупный текст и подписи'],['terminal','Терминал','Графит и зелёные акценты'],['minimal','Минимализм','Нейтральные цвета, минимум эффектов']];
-// Older open tabs rewrite unrecognized themes to glass. Keep new choices isolated.
-const themeStorageKey='pcmaker-design-variant-v2';
-const host=document.querySelector('.workshop-header-actions,.market-account-actions');
-if(host){
- const button=document.createElement('button');button.className='round-button theme-toggle';button.type='button';button.title='Варианты дизайна';button.setAttribute('aria-label','Варианты дизайна');button.setAttribute('popovertarget','theme-menu');button.innerHTML='<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><path d="M12 3a9 9 0 1 0 0 18h2a2 2 0 0 0 0-4h-1a2 2 0 0 1 0-4h3a5 5 0 0 0 0-10Z"/><circle cx="7" cy="10" r="1"/><circle cx="10" cy="6" r="1"/><circle cx="6" cy="15" r="1"/></svg>';host.prepend(button);
- const menu=document.createElement('div');menu.id='theme-menu';menu.setAttribute('popover','auto');menu.setAttribute('aria-label','Варианты дизайна');menu.innerHTML='<h2>Варианты дизайна</h2><p>Тестовые варианты · выбор сохраняется</p>'+themes.map(([id,title,description])=>`<button type="button" data-theme="${id}" aria-pressed="false"><strong>${title}</strong><small>${description}</small></button>`).join('');document.body.append(menu);
- document.querySelectorAll('.workshop-toolbar button').forEach(b=>{const label=document.createElement('span');label.className='theme-tool-label';label.textContent=b.getAttribute('aria-label')||b.title||'';b.append(label);});
- function apply(id){if(!themes.some(t=>t[0]===id))id='glass';document.documentElement.dataset.design=id;document.body.dataset.auditDesign=String(id==='audit');document.getElementById('audit-theme').disabled=id!=='audit';menu.querySelectorAll('[data-theme]').forEach(b=>b.setAttribute('aria-pressed',String(b.dataset.theme===id)));button.title='Дизайн: '+themes.find(t=>t[0]===id)[1];document.dispatchEvent(new Event('pcmaker:design-change'));window.dispatchEvent(new Event('resize'));}
- menu.addEventListener('click',e=>{const choice=e.target.closest('[data-theme]');if(choice){apply(choice.dataset.theme);try{localStorage.setItem(themeStorageKey,choice.dataset.theme);}catch{}menu.hidePopover();button.focus();}});
- let saved='glass';try{const current=localStorage.getItem(themeStorageKey);if(current!==null)saved=current;else{const legacy=localStorage.getItem('pcmaker-design-variant');if(themes.some(t=>t[0]===legacy))saved=legacy;localStorage.setItem(themeStorageKey,saved);}}catch{}apply(saved);
- window.addEventListener('storage',e=>{if(e.key===themeStorageKey&&(e.newValue===null||themes.some(t=>t[0]===e.newValue)))apply(e.newValue);});
+const themeStorageKey = 'pcmaker-design-variant-v2';
+const themeSelect = document.getElementById('theme-select');
+const menu = document.getElementById('settings-menu');
+const trigger = document.getElementById('settings-toggle');
+const themes = new Set(Array.from(themeSelect.options, option => option.value));
+
+function applyTheme(id) {
+  const selected = themes.has(id) ? id : 'glass';
+  themeSelect.value = selected;
+  document.documentElement.dataset.design = selected;
+  document.body.dataset.auditDesign = String(selected === 'audit');
+  document.getElementById('audit-theme').disabled = selected !== 'audit';
+  document.dispatchEvent(new Event('pcmaker:design-change'));
+  window.dispatchEvent(new Event('resize'));
 }
+
+for (const button of document.querySelectorAll('.workshop-toolbar button')) {
+  const label = document.createElement('span');
+  label.className = 'theme-tool-label';
+  label.textContent = button.getAttribute('aria-label') || button.title;
+  button.append(label);
+}
+
+let saved = 'glass';
+try {
+  saved = localStorage.getItem(themeStorageKey) ?? localStorage.getItem('pcmaker-design-variant') ?? saved;
+} catch {}
+applyTheme(saved);
+
+themeSelect.addEventListener('change', () => {
+  applyTheme(themeSelect.value);
+  try { localStorage.setItem(themeStorageKey, themeSelect.value); } catch {}
+});
+window.addEventListener('storage', event => {
+  if (event.key === themeStorageKey) applyTheme(event.newValue);
+});
+
+function positionSettings() {
+  const rect = trigger.getBoundingClientRect();
+  // Leave room to scroll even on short screens and at high browser zoom.
+  const top = Math.max(8, Math.min(rect.bottom + 8, window.innerHeight - 160));
+  menu.style.setProperty('--settings-top', top + 'px');
+  menu.style.setProperty('--settings-right', Math.max(8, document.documentElement.clientWidth - rect.right) + 'px');
+}
+menu.addEventListener('beforetoggle', event => {
+  if (event.newState === 'open') positionSettings();
+  trigger.setAttribute('aria-expanded', String(event.newState === 'open'));
+});
+window.addEventListener('resize', () => {
+  if (menu.matches(':popover-open')) positionSettings();
+});

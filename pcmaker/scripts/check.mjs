@@ -13,7 +13,7 @@ import {normalizePriceHistory,historyToday,priceSourceKey,historyCurrencies} fro
 import {byStoreProduct} from '../dist/regions.js';
 import {createHash} from 'node:crypto';
 const root=path.resolve(import.meta.dirname,'..');
-for(const file of ['theme-switcher.js','material3.css','store-picker.js','store-picker.css','price-history.css','price-history.json'])if(!fs.existsSync(path.join(root,'dist',file)))throw Error('Missing '+file);
+for(const file of ['theme-switcher.js','material3.css','workshop-layout.css','favicon.svg','store-picker.js','store-picker.css','price-history.css','price-history.json'])if(!fs.existsSync(path.join(root,'dist',file)))throw Error('Missing '+file);
 for(const name of ['price-history.js','price-history-ui.js']){
  const file=path.join(root,'dist',name);if(!fs.existsSync(file))throw Error('Missing '+name);
  const result=spawnSync(process.execPath,['--check',file],{encoding:'utf8'});if(result.status!==0)throw Error(result.stderr);

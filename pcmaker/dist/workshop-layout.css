@@ -1,0 +1,98 @@
+/* The canvas and the panel meet directly below the toolbar in every theme. */
+html[data-design] body main.workbench { padding: 0; }
+html[data-design] .workbench .workspace { gap: 0; }
+html[data-design] .workbench #studio {
+  border: 0;
+  border-radius: 0 !important;
+  box-shadow: none;
+}
+.workbench .scene-top { justify-content: flex-end; }
+.scene-options { margin: 16px 0; }
+.scene-options summary { cursor: pointer; font-size: 13px; }
+.scene-options[open] summary { margin-bottom: 14px; }
+.scene-options .camera-views { margin-top: 18px; }
+
+html:not([data-design=audit]) .workshop-header {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) max-content minmax(0, 1fr);
+  column-gap: 12px;
+}
+.workshop-header .brand-navigation { justify-self: start; }
+.workshop-header .workshop-header-actions { justify-self: end; margin-left: 0; }
+.workshop-header nav.workshop-toolbar { justify-self: center; margin: 0; }
+
+@media (max-width: 820px) {
+  html:not([data-design=audit]) .workshop-header {
+    grid-template-columns: 84px minmax(0, 1fr) 84px;
+    column-gap: 6px;
+  }
+  html:not([data-design=audit]) .workshop-header .pcmaker-wordmark { display: none; }
+  html:not([data-design=audit]) .workshop-header nav.workshop-toolbar {
+    width: max-content;
+    max-width: 100%;
+    overflow-x: auto;
+  }
+}
+@media (max-width: 650px) {
+  html:not([data-design=audit]) { --fullscreen-header-height: 96px; }
+  html:not([data-design=audit]):not(.scene-fullscreen) .workshop-header {
+    height: var(--fullscreen-header-height);
+    grid-template-columns: minmax(0, 1fr) auto;
+    grid-template-rows: 44px 48px;
+    align-content: center;
+    padding-inline: 10px;
+    row-gap: 0;
+  }
+  html:not([data-design=audit]) .workshop-header-actions { grid-column: 2; grid-row: 1; }
+  html:not([data-design=audit]) .workshop-header nav.workshop-toolbar {
+    grid-column: 1 / -1;
+    grid-row: 2;
+    gap: 4px;
+    padding: 4px;
+  }
+}
+@media (max-width: 840px) {
+  html:not(.scene-fullscreen):not([data-design=audit])[data-panel-collapsed=true] .workbench .studio-column {
+    height: calc(100dvh - var(--fullscreen-header-height));
+    min-height: 0;
+  }
+  html[data-design=audit][data-panel-collapsed=true]:not(.scene-fullscreen) body:has(main.workbench) {
+    display: grid;
+    grid-template-rows: auto minmax(0, 1fr);
+    height: 100dvh;
+  }
+  html[data-design=audit][data-panel-collapsed=true]:not(.scene-fullscreen) .workbench .workspace {
+    grid-template-rows: minmax(0, 1fr) auto;
+  }
+  html[data-design=audit][data-panel-collapsed=true]:not(.scene-fullscreen) .workbench .studio-column {
+    min-height: 0;
+    height: 100%;
+  }
+}
+
+/* Keep large labelled tools centered in the accessible theme's second row. */
+html[data-design=audit] body .workshop-header nav.workshop-toolbar {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  width: min(100%, 1080px);
+}
+html[data-design=audit] .workshop-toolbar .round-button {
+  flex: 1 1 90px;
+  max-width: 110px;
+}
+@media (min-width: 941px) {
+  html[data-design=audit] { --audit-header: 150px; }
+  html[data-design=audit] .workshop-header { grid-template-rows: 58px 76px; }
+}
+@media (max-width: 540px) {
+  html[data-design=audit]:not(.scene-fullscreen) body .workshop-header {
+    display: grid;
+    grid-template-columns: 1fr auto;
+    grid-template-rows: auto auto;
+    min-height: 0;
+    align-items: center;
+  }
+  html[data-design=audit] body .workshop-header-actions { grid-column: 2; grid-row: 1; width: auto; }
+  html[data-design=audit] body .workshop-header nav.workshop-toolbar { grid-column: 1 / -1; grid-row: 2; }
+}
