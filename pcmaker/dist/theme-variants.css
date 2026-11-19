@@ -106,11 +106,10 @@ html[data-design=glass] :is(.shop-card-kind,.shop-specs,.shop-sku,.shop-offer a,
  width:100%;height:40px;padding:0 10px;border:1px solid #ffffff48;border-radius:8px;
  font:inherit;font-size:14px;color:inherit;background:var(--panel,#26292e);cursor:pointer;color-scheme:dark;
 }
-#settings-menu a{
- display:flex;align-items:center;justify-content:space-between;gap:10px;margin-top:18px;
- padding-top:14px;border-top:1px solid #ffffff30;color:inherit;font-size:13px;text-decoration:none;
-}
-#settings-menu a:hover{text-decoration:underline}
+#settings-menu .settings-links{margin-top:18px;padding-top:8px;border-top:1px solid #ffffff30}
+#settings-menu .settings-links a{display:inline-grid;place-items:center;width:40px;height:40px;border-radius:8px;color:inherit}
+#settings-menu .settings-links a:hover{background:#ffffff19}
+#settings-menu .settings-links svg{width:22px;height:22px;fill:currentColor;stroke:none}
 #settings-menu :is(select,a):focus-visible{outline:2px solid currentColor;outline-offset:3px}
 
 .market-page .market-header{
