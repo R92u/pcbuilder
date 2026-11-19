@@ -16,8 +16,10 @@ let regionId='ru';try{regionId=regionFor(localStorage.getItem('pcmaker-region'))
 const currency=()=>regionFor(regionId).symbol|| (regionId==='by'?'BYN':'₽');
 regionId=getRegion();
 function price(p,compact=false){const offer=selectRegionalOffer(offersForPeripheral(p),regionId),quality=priceQuality(offer);if(!offer||quality.status==='invalid')return '<strong class="product-price">Нет цены '+e(currency())+'</strong><p class="price-source">Для этого региона предложение пока не проверено.</p>';
+ const summary=`<strong class="product-price">${formatMoney(offer.price,offer.currency)}</strong>${offerMarkup(offer,{compact})}`;
+ if(compact)return summary;
  const kind=offer.kind==='manufacturer'?'Цена каталога производителя':offer.availability==='out-of-stock'?'Последняя цена · нет в наличии':'Цена магазина';
- return `<strong class="product-price">${formatMoney(offer.price,offer.currency)}</strong>${offerMarkup(offer,{compact})}<p class="price-source">${e(kind)} · <a href="${e(offer.url)}" target="_blank" rel="noopener noreferrer">${e(offer.store)} ↗</a>${!compact&&offer.note?'<br>'+e(offer.note):''}</p>`;
+ return `${summary}<p class="price-source">${e(kind)} · <a href="${e(offer.url)}" target="_blank" rel="noopener noreferrer">${e(offer.store)} ↗</a>${offer.note?'<br>'+e(offer.note):''}</p>`;
 }
 function offerLink(p){return storePickerMarkup(p,p.category,{currency:regionFor(regionId).currency,items:{[p.id]:selectRegionalOffer(offersForPeripheral(p),regionId)}});}
 function choose(id){const p=peripheralById[id];if(!p)return;selection[p.category]=id;const stored=save('pcmaker-workplace',selection);getScene()?.setPeripherals(selection);render();refreshShop();if(!stored){$('workplace-total-note').textContent='Браузер не разрешил сохранить выбор. Он доступен до закрытия страницы.';}}

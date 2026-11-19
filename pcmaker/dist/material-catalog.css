@@ -246,3 +246,123 @@ html[data-design=material3] {
     & .shop-card .store-picker > .store-picker-toggle { padding-inline: 5px; gap: 5px; }
   }
 }
+
+html[data-design=material3] #catalog-dialog {
+  isolation: isolate;
+}
+
+.shop-backdrop {
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  overflow: hidden;
+  border-radius: inherit;
+  pointer-events: none;
+}
+
+.shop-shape-flight {
+  position: absolute;
+  inset: 0;
+  display: grid;
+  place-items: center;
+  transform: translate(16%, -13%);
+}
+
+.shop-wave-shape {
+  width: clamp(160px, min(46vw, 54vh), 496px);
+  aspect-ratio: 1;
+  background: url("./assets/shop-wave.svg") center / contain no-repeat;
+  opacity: .36;
+  filter: blur(4px);
+  transform: rotate(-12deg);
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  #catalog-dialog[open] .shop-shape-flight {
+    animation: shop-shape-drift 36s ease-in-out infinite alternate;
+  }
+  #catalog-dialog[open] .shop-wave-shape {
+    animation: shop-shape-turn 48s linear infinite;
+  }
+  html[data-design=material3] .store-picker > .store-picker-toggle {
+    position: relative;
+    overflow: hidden;
+    transition: transform 180ms ease, border-color 180ms, background-color 180ms;
+  }
+  html[data-design=material3] .store-picker > .store-picker-toggle:active {
+    transform: scale(.97);
+  }
+  html[data-design=material3] .store-picker[open] > .store-picker-toggle::before {
+    content: "";
+    display: block;
+    position: absolute;
+    inset: 0;
+    border-radius: inherit;
+    background: var(--md-sys-color-primary);
+    pointer-events: none;
+    animation: store-open-pulse 350ms ease-out both;
+  }
+  .store-picker[open] > .store-picker-options {
+    animation: store-options-in 190ms ease-out;
+  }
+}
+@keyframes shop-shape-drift {
+  0% { transform: translate(16%, -13%); }
+  53% { transform: translate(-18%, 12%); }
+  100% { transform: translate(11%, 19%); }
+}
+@keyframes shop-shape-turn {
+  from { transform: rotate(-12deg); }
+  to { transform: rotate(348deg); }
+}
+@keyframes store-open-pulse {
+  from { transform: scaleX(.24); opacity: .3; }
+  to { transform: scaleX(1.04); opacity: 0; }
+}
+@keyframes store-options-in {
+  from { opacity: 0; transform: translateY(-4px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+@media (any-hover: hover) and (any-pointer: fine) {
+  html[data-design=material3] #catalog-dialog::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    z-index: 3;
+    pointer-events: none;
+    opacity: 0;
+    visibility: hidden;
+    background: rgb(12 18 24 / 14%);
+    backdrop-filter: blur(3px);
+    transition: opacity 160ms ease, visibility 160ms;
+  }
+
+  html[data-design=material3] #catalog-dialog.has-hover-preview::before {
+    opacity: 1;
+    visibility: visible;
+  }
+
+  html[data-design=material3] #catalog-dialog .shop-card {
+    position: relative;
+    transition: transform 180ms ease-out, box-shadow 180ms ease-out, border-color 180ms;
+  }
+
+  html[data-design=material3] #catalog-dialog .shop-card.hover-preview {
+    z-index: 4;
+    transform: scale(1.025) translateY(-2px);
+    border-color: var(--md-sys-color-primary);
+    box-shadow: 0 10px 24px rgb(0 0 0 / 32%);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html[data-design=material3] #catalog-dialog::before,
+  html[data-design=material3] #catalog-dialog .shop-card {
+    transition: none;
+  }
+
+  html[data-design=material3] #catalog-dialog .shop-card.hover-preview {
+    transform: none;
+  }
+}

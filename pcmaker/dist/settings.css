@@ -26,6 +26,13 @@
 #settings-menu .settings-links a:hover{background:#ffffff19}
 #settings-menu .settings-links svg{width:22px;height:22px;fill:currentColor;stroke:none}
 #settings-menu :is(select,a):focus-visible{outline:2px solid currentColor;outline-offset:3px}
+#settings-menu .wave-palette{display:flex;align-items:center;gap:12px}
+#wave-color{width:64px;height:36px;padding:4px;border:1px solid var(--md-sys-color-outline);border-radius:10px;background:var(--md-sys-color-surface-container);cursor:pointer}
+#wave-color::-webkit-color-swatch-wrapper{padding:0}
+#wave-color::-webkit-color-swatch{border:0;border-radius:6px}
+#wave-color::-moz-color-swatch{border:0;border-radius:6px}
+#wave-color-reset{padding:8px 12px;border-radius:20px;color:var(--md-sys-color-primary)}
+#wave-color-reset:hover:enabled{background:var(--md-sys-color-surface-container-highest)}
 
 .market-page .market-header{
  display:grid;grid-template-columns:minmax(0,1fr) auto minmax(0,1fr);align-items:center;

@@ -20,9 +20,11 @@ test('Workplace retains every builder control without duplicate identifiers',()=
   assert.match(header,/popovertarget="settings-menu"/);
   assert.doesNotMatch(header,/github\.com|id="region-select"|id="theme-select"/);
   assert.match(settings,/id="region-select"/);
+  assert.match(settings,/<input type="color" id="wave-color"/);
+  assert.match(settings,/id="wave-color-reset"/);
   assert.match(page,/<html [^>]*data-design="material3"/);
   assert.doesNotMatch(page,/theme-select|theme-switcher|theme-variants|audit-theme/);
-  assert.match(page,/src="\.\/settings\.js"/);
+  assert.match(page,/src="\.\/settings\.js(?:\?[^"]*)?"/);
   assert.match(settings,/href="https:\/\/github\.com\/R92u\/pcbuilder"/);
  }
  assert.doesNotMatch(workplace,/class="workplace-heading"/);

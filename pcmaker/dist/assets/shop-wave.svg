@@ -1,0 +1,19 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 240 240">
+  <defs>
+    <radialGradient id="light" cx=".31" cy=".23" r=".82">
+      <stop stop-color="#cae4fc"/>
+      <stop offset=".48" stop-color="#86b1d7"/>
+      <stop offset=".84" stop-color="#5886ad"/>
+      <stop offset="1" stop-color="#9cc7e6"/>
+    </radialGradient>
+  </defs>
+  <style>
+    @media (prefers-reduced-motion: no-preference) {
+      path { animation: billow 9s ease-in-out infinite alternate; }
+    }
+    @keyframes billow {
+      to { d: path("M120 26 C136 27 142 10 158 16 S169 48 187 54 S221 53 224 72 S208 100 212 120 S233 150 223 165 S191 164 180 182 S171 215 152 220 S123 206 106 211 S77 225 64 213 S63 182 46 173 S17 169 13 151 S32 123 27 104 S12 76 22 62 S51 59 61 44 S66 20 83 16 S105 25 120 26 Z"); }
+    }
+  </style>
+  <path fill="url(#light)" d="M120 23 C136 22 147 13 161 21 S170 51 189 54 S218 55 222 73 S208 102 215 118 S232 144 224 160 S192 168 183 185 S172 216 152 216 S124 202 107 210 S80 228 66 215 S62 183 45 176 S17 165 17 148 S34 123 27 104 S13 76 24 64 S54 63 63 46 S69 18 86 16 S105 24 120 23 Z"/>
+</svg>
