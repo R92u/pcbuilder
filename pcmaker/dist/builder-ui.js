@@ -2,7 +2,6 @@ let auditDesign=document.body.dataset.auditDesign==='true';
 document.addEventListener('pcmaker:design-change',()=>{auditDesign=document.body.dataset.auditDesign==='true';renderBuild();});
 import './navigation.js';
 import {loadLivePrices} from './live-price-data.js';
-import {isVerified} from './verification.js';
 import {verificationMarkup} from './data-quality-ui.js';
 import {formatMoney,formatTotals} from './money.js';
 import {priceQuality} from './price-quality.js';
@@ -76,7 +75,6 @@ function sourceFor(id){const source=sourceData.catalog.find(p=>p.appId===id);ret
 function priceFor(id){const p=priceData.items[id];return p&&Number.isFinite(p.price)&&p.price>0?p:null;}
 function setTab(tab,{reveal=true}={}){if(reveal){buildPanel.open();showWorkplaceMode('computer');if(workplace&&tab==='wiring')scene?.view('assembly');}closeWorkshopMenu(false);if(tab==='wiring'||tab==='fans')closeInspector(false);activeTab=tab;for(const b of document.querySelectorAll('[data-tab]')){const active=b.dataset.tab===tab;if(b.role==='tab')b.setAttribute('aria-selected',active);b.classList.toggle('active',active);}$('parts-panel').hidden=tab!=='parts';$('simulation-panel').hidden=tab!=='simulation';$('wiring-panel').hidden=tab!=='wiring';$('fans-panel').hidden=tab!=='fans';$('fans-button').setAttribute('aria-pressed',String(tab==='fans'));renderWiring();fanUI.render();}
 function renderBuild(){
- document.querySelector('.price-region').textContent=region.city.toUpperCase();
  closeInspector(false);
  fanLayout=sanitizeFanLayout(build,savedFans[build.case]);settings.fanLayout=fanLayout;saveFans();if(scene)scene.fanLayout=fanLayout;
  const check=compatibility(build),parts=resolve(build);$('parts-count').textContent=`${8-check.missing.length}/8`;
@@ -87,8 +85,6 @@ function renderBuild(){
  else if(check.missing.length)$('compatibility').innerHTML=`<div class="compat-box neutral"><strong>${icon('info')} Добавь ещё ${check.missing.length} ${check.missing.length===1?'компонент':check.missing.length<5?'компонента':'компонентов'}</strong><span>Совместимость проверяется при каждом выборе.</span></div>`;
  else $('compatibility').innerHTML=`<div class="compat-box"><strong>${icon('check')} ${auditDesign?'Совместимость: проверки пройдены':'Основные проверки пройдены'}</strong><span>Сокет, память, размеры и запас питания.</span>${check.warnings.map(w=>`<span class="minor-note">${auditDesign?'• ':''}${e(w)}</span>`).join('')}</div>`;
  if(auditDesign&&check.missing.length)$('compatibility').querySelector('strong').prepend('Совместимость: проверка не завершена. ');
- const pending=Object.values(parts).filter(p=>p&&!p.concept&&!isVerified(p));
- if(pending.length)$('compatibility').insertAdjacentHTML('beforeend',`<p class="quality-build-note">Характеристики требуют проверки: ${pending.map(p=>e(p.short)).join(', ')}. Проверка совместимости использует текущие данные каталога.</p>`);
  const sum=summarizePrices(build,priceData.items);
  $('price-caption').textContent=sum.stale+sum.unavailable+sum.invalid?'Сумма по снимкам цен':sum.concepts?'Цены комплектующих':sum.complete?'Стоимость по предложениям':'Известная часть стоимости';
  $('price-total').innerHTML=sum.known?e(formatTotals(sum.totals)):`— <small>${region.symbol}</small>`;
@@ -96,11 +92,11 @@ function renderBuild(){
   const quote=quoteBuild(build,priceData.items,autoPlan.allowEstimates,region.currency);
   if(quote){$('price-caption').textContent=quote.estimatedCount?'Ориентировочная стоимость':'Стоимость по снимку цен';$('price-total').innerHTML=(quote.estimatedCount?'≈ ':'')+money(quote.total)+' <small>'+region.symbol+'</small>';}
  }
- connections=reconcileConnections(wiredBuild,build,connections,fanLayout);wiredBuild={...build};scene?.setBuild(build);document.querySelector('.model-tag').textContent=parts.case?.short||'Корпус';const fans=fanStats(build,fanLayout);$('front-count').textContent=fans.inCount+' вент. на вдув';$('rear-count').textContent=fans.outCount+' вент. на выдув';$('inspect-shortcuts').innerHTML=categories.filter(([key])=>parts[key]).map(([key,label])=>`<button data-inspect="${key}" title="Характеристики: ${e(label)}" aria-label="Характеристики: ${e(label)}">${icon(key)}</button>`).join('');renderWiring();updateSimulationState();persist();fanUI.render();renderLighting();
+ connections=reconcileConnections(wiredBuild,build,connections,fanLayout);wiredBuild={...build};scene?.setBuild(build);const fans=fanStats(build,fanLayout);$('front-count').textContent=fans.inCount+' вент. на вдув';$('rear-count').textContent=fans.outCount+' вент. на выдув';$('inspect-shortcuts').innerHTML=categories.filter(([key])=>parts[key]).map(([key,label])=>`<button data-inspect="${key}" title="Характеристики: ${e(label)}" aria-label="Характеристики: ${e(label)}">${icon(key)}</button>`).join('');renderWiring();updateSimulationState();persist();fanUI.render();renderLighting();
 }
 function renderCooling(){
  const analysis=coolingAnalysis(build,settings);
- const html=analysis.warnings.length?'<div class="cooling-alert"><strong>'+(auditDesign?'⚠ Охлаждение: требуется внимание':'Проверь охлаждение')+'</strong><ul>'+analysis.warnings.map(w=>'<li>'+e(w.text)+'</li>').join('')+'</ul><small>Симуляция доступна: ошибки влияют на расчётный нагрев.</small></div>':'<div class="cooling-ok">'+(auditDesign?'✓ Охлаждение: явных проблем не найдено':'✓ Явных проблем с охлаждением не найдено')+'</div>';
+ const html=analysis.warnings.length?'<div class="cooling-alert"><strong>'+(auditDesign?'⚠ Охлаждение: требуется внимание':'Проверь охлаждение')+'</strong><ul>'+analysis.warnings.map(w=>'<li>'+e(w.text)+'</li>').join('')+'</ul><small>Симуляция доступна: ошибки влияют на расчётный нагрев.</small></div>':'';
  for(const id of ['cooling-parts','cooling-fans','cooling-simulation'])if($(id).innerHTML!==html)$(id).innerHTML=html;
 }
 function renderLighting(){

@@ -6,7 +6,8 @@ html[data-design] .workbench #studio {
   border-radius: 0 !important;
   box-shadow: none;
 }
-.workbench .scene-top { justify-content: flex-end; }
+html[data-design] .workbench #build-panel { border-radius: 0; }
+.cooling-diagnostics:empty { margin: 0; }
 .scene-options { margin: 16px 0; }
 .scene-options summary { cursor: pointer; font-size: 13px; }
 .scene-options[open] summary { margin-bottom: 14px; }
