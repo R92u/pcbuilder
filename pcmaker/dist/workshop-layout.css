@@ -7,6 +7,29 @@ html[data-design] .workbench #studio {
   box-shadow: none;
 }
 html[data-design] .workbench #build-panel { border-radius: 0; }
+/* Let the list scroll independently of the build total and test button. */
+.workbench #build-panel #parts-panel {
+  display: grid;
+  grid-template-rows: minmax(0, 1fr) auto;
+  overflow: hidden;
+  padding: 0;
+}
+.workbench .parts-scroll {
+  overflow-y: auto;
+  min-height: 0;
+  padding: 0 18px;
+  scrollbar-width: thin;
+}
+.workbench #parts-panel .price-summary {
+  margin: 0 18px;
+  padding: 10px 0 max(12px, env(safe-area-inset-bottom));
+}
+.workbench #open-simulation { margin-top: 6px; }
+@media (max-width: 840px) {
+  .workbench #build-panel:has(#parts-panel:not([hidden])):not(:has(#computer-panel[hidden])) {
+    max-height: calc(100dvh - var(--fullscreen-header-height));
+  }
+}
 .cooling-diagnostics:empty { margin: 0; }
 .scene-options { margin: 16px 0; }
 .scene-options summary { cursor: pointer; font-size: 13px; }
