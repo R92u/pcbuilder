@@ -4,7 +4,7 @@ import './navigation.js';
 import {loadLivePrices} from './live-price-data.js';
 import {isVerified} from './verification.js';
 import {verificationMarkup} from './data-quality-ui.js';
-import {formatMoney,formatTotals,foreignPriceNotice} from './money.js';
+import {formatMoney,formatTotals} from './money.js';
 import {priceQuality} from './price-quality.js';
 import {createBuildPanel} from './build-panel.js';
 const buildPanel=createBuildPanel();
@@ -92,14 +92,10 @@ function renderBuild(){
  const sum=summarizePrices(build,priceData.items);
  $('price-caption').textContent=sum.stale+sum.unavailable+sum.invalid?'Сумма по снимкам цен':sum.concepts?'Цены комплектующих':sum.complete?'Стоимость по предложениям':'Известная часть стоимости';
  $('price-total').innerHTML=sum.known?e(formatTotals(sum.totals)):`— <small>${region.symbol}</small>`;
- $('price-note').textContent=sum.known?`${sum.known} из ${sum.count} выбранных деталей. ${sum.complete?'':'Сумма неполная: остальные цены не подтверждены.'} Предложения разных магазинов без доставки; условия — в магазине комплектующих. Регион: ${region.city}. ${sum.stale?sum.stale+' цен устарели. ':''}${sum.unavailable?sum.unavailable+' предложений нет в наличии. ':''}${sum.invalid?sum.invalid+' цен требуют проверки. ':''}${sum.fresh===sum.known?'Цены проверены не более 7 дней назад.':'Сумма справочная; даты и условия — в карточках товаров.'}`:`Цены для ${region.cityGenitive} пока не подтверждены. Ссылки на магазины — в карточках деталей.`;
- if(sum.foreign)$('price-note').textContent+=' '+foreignPriceNotice;
- if(sum.concepts)$('price-note').textContent+=' Учебный корпус PCmaker не продаётся и не включён в стоимость.';
  if((autoPlan?.region||'ru')===regionId&&autoPlan?.build&&categories.every(([key])=>autoPlan.build[key]===build[key])){
   const quote=quoteBuild(build,priceData.items,autoPlan.allowEstimates,region.currency);
-  if(quote){$('price-caption').textContent=quote.estimatedCount?'Ориентировочная стоимость':'Стоимость по снимку цен';$('price-total').innerHTML=(quote.estimatedCount?'≈ ':'')+money(quote.total)+' <small>'+region.symbol+'</small>';$('price-note').textContent='Автосборка. '+quote.planningCount+' цен — ориентиры PCmaker, '+quote.staleCount+' — устаревшие предложения. '+(quote.reserve?'С резервом 10% на оценочные позиции: ≈ '+money(quote.planned)+' '+region.symbol+'. ':'')+'Бюджет: '+money(autoPlan.budget)+' '+region.symbol+'. Фактические цены могут измениться; подробности и источники — в окне автосборки.';}
+  if(quote){$('price-caption').textContent=quote.estimatedCount?'Ориентировочная стоимость':'Стоимость по снимку цен';$('price-total').innerHTML=(quote.estimatedCount?'≈ ':'')+money(quote.total)+' <small>'+region.symbol+'</small>';}
  }
- if(auditDesign){const note=$('price-note');note.textContent='Цены: '+note.textContent.replace(/ из (\d+) выбранных деталей\./,' из $1 выбранных деталей имеют цену.').replace(/\. (?=[А-ЯЁ0-9])/g,'.\n\n');}
  connections=reconcileConnections(wiredBuild,build,connections,fanLayout);wiredBuild={...build};scene?.setBuild(build);document.querySelector('.model-tag').textContent=parts.case?.short||'Корпус';const fans=fanStats(build,fanLayout);$('front-count').textContent=fans.inCount+' вент. на вдув';$('rear-count').textContent=fans.outCount+' вент. на выдув';$('inspect-shortcuts').innerHTML=categories.filter(([key])=>parts[key]).map(([key,label])=>`<button data-inspect="${key}" title="Характеристики: ${e(label)}" aria-label="Характеристики: ${e(label)}">${icon(key)}</button>`).join('');renderWiring();updateSimulationState();persist();fanUI.render();renderLighting();
 }
 function renderCooling(){
