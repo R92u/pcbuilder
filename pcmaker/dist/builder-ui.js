@@ -1,5 +1,4 @@
-let auditDesign=document.body.dataset.auditDesign==='true';
-document.addEventListener('pcmaker:design-change',()=>{auditDesign=document.body.dataset.auditDesign==='true';renderBuild();});
+const auditDesign=document.body.dataset.auditDesign==='true';
 import './navigation.js';
 import {loadLivePrices} from './live-price-data.js';
 import {verificationMarkup} from './data-quality-ui.js';

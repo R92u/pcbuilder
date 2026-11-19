@@ -1,25 +1,21 @@
-/* Optional Material 3 skin. No layout, renderer or custom-background changes.
- * Color roles: https://github.com/material-components/material-web/blob/main/docs/theming/color.md
- * Shape scale: https://github.com/material-components/material-web/blob/main/docs/theming/shape.md
- */
 html[data-design=material3]{
  color-scheme:dark;
- --md-sys-color-primary:#a6c8ff;
- --md-sys-color-on-primary:#00315f;
- --md-sys-color-primary-container:#23476f;
- --md-sys-color-on-primary-container:#d4e4ff;
- --md-sys-color-secondary:#bcc8db;
- --md-sys-color-secondary-container:#354457;
- --md-sys-color-on-secondary-container:#dce7fa;
- --md-sys-color-surface:#10141b;
- --md-sys-color-surface-container-low:#191e27;
- --md-sys-color-surface-container:#1d232e;
- --md-sys-color-surface-container-high:#272e3a;
- --md-sys-color-surface-container-highest:#313846;
- --md-sys-color-on-surface:#e2e7f0;
- --md-sys-color-on-surface-variant:#c2cad8;
- --md-sys-color-outline:#8993a3;
- --md-sys-color-outline-variant:#414957;
+ --md-sys-color-primary:#aad1fa;
+ --md-sys-color-on-primary:#09314e;
+ --md-sys-color-primary-container:#2c4964;
+ --md-sys-color-on-primary-container:#d4e9ff;
+ --md-sys-color-secondary:#bdcbd8;
+ --md-sys-color-secondary-container:#344451;
+ --md-sys-color-on-secondary-container:#dceaf6;
+ --md-sys-color-surface:#12161a;
+ --md-sys-color-surface-container-low:#191e23;
+ --md-sys-color-surface-container:#20262c;
+ --md-sys-color-surface-container-high:#293139;
+ --md-sys-color-surface-container-highest:#333c45;
+ --md-sys-color-on-surface:#f1f4f8;
+ --md-sys-color-on-surface-variant:#bbc5cf;
+ --md-sys-color-outline:#87939e;
+ --md-sys-color-outline-variant:#424d57;
  --md-sys-color-error:#ffb4ab;
  --md-sys-color-error-container:#59312e;
  --md-sys-color-on-error-container:#ffdad5;
