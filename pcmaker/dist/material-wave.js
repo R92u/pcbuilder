@@ -158,35 +158,24 @@ function measureSelection(group) {
 }
 
 const sizes = new ResizeObserver(entries => {
-  for (const entry of entries) {
-    const element = entry.target;
-    if (element.hasAttribute('data-wave-group')) {
-      measureSelection(element);
-      continue;
-    }
-    const {inlineSize: width, blockSize: height} = entry.borderBoxSize[0];
-    if (width >= 4 && height >= 4) drawWave(element, width, height, 40);
-  }
+  for (const entry of entries) measureSelection(entry.target);
 });
 
 function mount(element) {
   if (element.hasAttribute('data-wave-group')) return;
-  if (element.matches(groups)) {
-    element.setAttribute('data-wave-group', '');
-    const changes = new MutationObserver(() => measureSelection(element));
-    changes.observe(element, {subtree: true, childList: true, attributes: true, attributeFilter: ['aria-pressed', 'aria-selected', 'class']});
-    measureSelection(element);
-  }
+  element.setAttribute('data-wave-group', '');
+  const changes = new MutationObserver(() => measureSelection(element));
+  changes.observe(element, {subtree: true, childList: true, attributes: true, attributeFilter: ['aria-pressed', 'aria-selected', 'class']});
+  measureSelection(element);
   sizes.observe(element, {box: 'border-box'});
 }
 
-const targets = [groups, '.workshop-toolbar'].join(', ');
-document.querySelectorAll(targets).forEach(mount);
+document.querySelectorAll(groups).forEach(mount);
 const additions = new MutationObserver(records => {
   for (const record of records) for (const node of record.addedNodes) {
     if (node.nodeType !== 1) continue;
-    if (node.matches(targets)) mount(node);
-    node.querySelectorAll(targets).forEach(mount);
+    if (node.matches(groups)) mount(node);
+    node.querySelectorAll(groups).forEach(mount);
   }
 });
 additions.observe(document.body, {childList: true});

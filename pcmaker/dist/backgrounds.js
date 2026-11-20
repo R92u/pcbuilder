@@ -4,7 +4,11 @@ const key='pcmaker-background-v1',studio=document.querySelector('.studio'),panel
 const $=id=>document.getElementById(id);
 let state;try{state=sanitizeBackground(JSON.parse(localStorage.getItem(key)));}catch{state={...backgroundDefaults};}
 let customURL=null,operation=0,dbPromise;
-const backdrop=document.createElement('div');backdrop.className='scene-backdrop';backdrop.setAttribute('aria-hidden','true');studio.prepend(backdrop);
+const backdrop=document.createElement('div');
+backdrop.className='scene-backdrop';
+backdrop.setAttribute('aria-hidden','true');
+const backdropHost=document.documentElement.dataset.surface==='glass'?document.body:studio;
+backdropHost.prepend(backdrop);
 function status(text){$('background-status').textContent=text;}
 function save(){try{localStorage.setItem(key,JSON.stringify(state));}catch{status('Фон применён. Браузер не разрешил сохранить настройки.');}}
 function render(){

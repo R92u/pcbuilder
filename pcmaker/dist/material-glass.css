@@ -1,0 +1,124 @@
+html[data-surface=glass] {
+  --frost: linear-gradient(135deg, rgb(155 189 212 / 10%), transparent 48%),
+           rgb(19 30 42 / 74%);
+  --frost-rim: rgb(202 229 248 / 22%);
+  --frost-light: inset 0 1px rgb(238 250 255 / 26%), inset 1px 0 rgb(221 240 255 / 10%);
+  --frost-blur: blur(19px) saturate(118%);
+  --ice-button: linear-gradient(160deg, #e8f6ff 0%, #badbf5 47%, #94bfe7 100%);
+  --studio-light:
+    radial-gradient(ellipse at 86% 15%, rgb(150 202 238 / 28%), transparent 34%),
+    radial-gradient(ellipse at 18% 65%, rgb(85 145 189 / 26%), transparent 48%),
+    radial-gradient(ellipse at 54% -62%, transparent 54%, rgb(120 167 204 / 19%) 64%, rgb(179 216 239 / 27%) 65%, transparent 73%),
+    linear-gradient(145deg, #172738, #293b4c 51%, #152231 88%);
+}
+
+html[data-surface=glass] body { isolation: isolate; }
+html[data-surface=glass] body > .scene-backdrop {
+  position: fixed;
+  z-index: -1;
+}
+html[data-surface=glass] .scene-backdrop[data-preset=dark],
+html[data-surface=glass] .background-preview[data-preview=dark],
+html[data-surface=glass] body.market-page {
+  background-image: var(--studio-light);
+}
+html[data-surface=glass] .workbench #studio[data-background] { background: transparent; }
+
+html[data-surface=glass] :is(.workshop-header, .market-header) {
+  background: linear-gradient(120deg, rgb(211 235 255 / 10%), transparent 50%), rgb(17 27 38 / 70%);
+  border-bottom: 1px solid var(--frost-rim);
+  box-shadow: var(--frost-light), 0 6px 25px rgb(4 12 22 / 13%);
+  backdrop-filter: var(--frost-blur);
+}
+html[data-surface=glass] .workshop-header nav.workshop-toolbar {
+  background: linear-gradient(170deg, rgb(206 232 251 / 19%), rgb(138 179 210 / 8%) 52%, rgb(195 224 245 / 14%));
+}
+html[data-surface=glass] .workshop-header .round-button:not(#shop-button),
+html[data-surface=glass] .market-header #settings-toggle {
+  background: linear-gradient(145deg, rgb(239 250 255 / 13%), rgb(186 218 242 / 3%) 65%);
+  box-shadow: inset 0 1px rgb(245 251 255 / 24%);
+}
+html[data-surface=glass] .workshop-header .round-button:is(:hover, :focus-visible, [aria-expanded=true], [aria-pressed=true]) {
+  background-color: rgb(159 200 233 / 22%);
+}
+html[data-surface=glass] .workshop-header #shop-button,
+html[data-surface=glass] .workbench #open-simulation {
+  color: #10314c;
+  background: var(--ice-button);
+  box-shadow: inset 0 1px #f1faff, inset 0 -1px rgb(85 137 179 / 60%), 0 3px 10px rgb(5 17 29 / 18%);
+}
+html[data-surface=glass] .workshop-header #shop-button {
+  transform: none;
+  transition: box-shadow 160ms ease-out;
+}
+html[data-surface=glass] .workshop-header #shop-button:is(:hover, :focus-visible) {
+  background: var(--ice-button);
+  box-shadow: inset 0 1px #fff, inset 0 0 0 1px rgb(237 249 255 / 64%), 0 2px 9px rgb(147 200 240 / 23%);
+}
+html[data-surface=glass] .workshop-header #shop-button:active {
+  box-shadow: inset 0 1px 4px rgb(49 88 119 / 38%);
+}
+html[data-surface=glass] #open-simulation:hover { filter: brightness(1.05); }
+@media (prefers-reduced-motion: reduce) {
+  html[data-surface=glass] .workshop-header #shop-button { transition: none; }
+}
+
+html[data-surface=glass] .workbench #build-panel,
+html[data-surface=glass] :is(.workshop-menu, .header .brand-switcher, #settings-menu, .thermal-panel, .workbench .component-inspector, .market-sidebar) {
+  background: var(--frost);
+  backdrop-filter: var(--frost-blur);
+  border-color: var(--frost-rim);
+  box-shadow: var(--frost-light), 0 12px 28px rgb(3 14 24 / 21%);
+}
+html[data-surface=glass] .workbench #build-panel { border-inline-start: 1px solid var(--frost-rim); }
+html[data-surface=glass] .workbench #build-panel-toggle {
+  background: linear-gradient(110deg, #3a4e60ec, #223240ed);
+  border-color: var(--frost-rim);
+  box-shadow: var(--frost-light);
+}
+html[data-surface=glass] #build-panel .panel-tabs,
+html[data-surface=glass] #build-panel .workplace-mode {
+  background: rgb(163 199 222 / 5%);
+}
+html[data-surface=glass] #parts-list .part-row:not(.conflict) {
+  background: linear-gradient(105deg, rgb(211 234 250 / 9%), rgb(175 207 232 / 3%));
+  box-shadow: inset 0 1px rgb(228 244 255 / 11%);
+}
+html[data-surface=glass] #parts-list .part-row:not(.conflict):is(:hover, :focus-visible) {
+  background-color: rgb(164 202 235 / 15%);
+}
+html[data-surface=glass] #parts-list .part-icon {
+  background: linear-gradient(145deg, rgb(142 188 226 / 27%), rgb(124 157 185 / 12%));
+  box-shadow: inset 0 1px rgb(229 245 255 / 25%);
+}
+html[data-surface=glass] #parts-panel .price-summary {
+  background: linear-gradient(165deg, rgb(143 185 217 / 12%), rgb(13 23 34 / 34%));
+  border-top-color: var(--frost-rim);
+}
+
+html[data-surface=glass] :is(dialog.shop-dialog, dialog.autobuild-dialog, dialog.price-history-dialog, .gallery-dialog) {
+  background: linear-gradient(135deg, rgb(201 225 243 / 9%), transparent 46%), rgb(24 34 44 / 87%);
+  border: 1px solid var(--frost-rim);
+  box-shadow: var(--frost-light), 0 22px 72px rgb(4 9 15 / 44%);
+  backdrop-filter: var(--frost-blur);
+}
+html[data-surface=glass] #catalog-dialog .shop-sidebar,
+html[data-surface=glass] .market-sidebar .market-draft,
+html[data-surface=glass] .shop-sidebar .shop-build-summary {
+  background: rgb(178 209 233 / 7%);
+}
+html[data-surface=glass] #catalog-dialog .shop-card,
+html[data-surface=glass] .market-grid .gallery-card {
+  background: linear-gradient(158deg, rgb(54 70 84 / 96%), rgb(31 41 52 / 95%));
+  box-shadow: inset 0 1px rgb(233 247 255 / 14%);
+}
+html[data-surface=glass] .market-grid .gallery-card:hover,
+html[data-surface=glass] #catalog-dialog .shop-card:hover { border-color: var(--md-sys-color-outline); }
+
+@supports not (backdrop-filter: blur(1px)) {
+  html[data-surface=glass] { --frost: #263543; }
+}
+@media (prefers-reduced-transparency: reduce), (prefers-contrast: more) {
+  html[data-surface=glass] { --frost: #23313e; --frost-blur: none; }
+  html[data-surface=glass] :is(.workshop-header, .market-header, dialog[open]) { background-color: #202c37; }
+}
