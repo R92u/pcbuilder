@@ -247,7 +247,7 @@ html[data-design=material3] {
   }
 }
 
-html[data-design=material3] #catalog-dialog {
+html[data-surface=glass] #catalog-dialog {
   isolation: isolate;
 }
 
@@ -284,15 +284,15 @@ html[data-design=material3] #catalog-dialog {
   #catalog-dialog[open] .shop-wave-shape {
     animation: shop-shape-turn 48s linear infinite;
   }
-  html[data-design=material3] .store-picker > .store-picker-toggle {
+  html[data-surface=glass] .store-picker > .store-picker-toggle {
     position: relative;
     overflow: hidden;
     transition: transform 180ms ease, border-color 180ms, background-color 180ms;
   }
-  html[data-design=material3] .store-picker > .store-picker-toggle:active {
+  html[data-surface=glass] .store-picker > .store-picker-toggle:active {
     transform: scale(.97);
   }
-  html[data-design=material3] .store-picker[open] > .store-picker-toggle::before {
+  html[data-surface=glass] .store-picker[open] > .store-picker-toggle::before {
     content: "";
     display: block;
     position: absolute;
@@ -325,7 +325,7 @@ html[data-design=material3] #catalog-dialog {
 }
 
 @media (any-hover: hover) and (any-pointer: fine) {
-  html[data-design=material3] #catalog-dialog::before {
+  html[data-surface=glass] #catalog-dialog::before {
     content: "";
     position: absolute;
     inset: 0;
@@ -338,17 +338,17 @@ html[data-design=material3] #catalog-dialog {
     transition: opacity 160ms ease, visibility 160ms;
   }
 
-  html[data-design=material3] #catalog-dialog.has-hover-preview::before {
+  html[data-surface=glass] #catalog-dialog.has-hover-preview::before {
     opacity: 1;
     visibility: visible;
   }
 
-  html[data-design=material3] #catalog-dialog .shop-card {
+  html[data-surface=glass] #catalog-dialog .shop-card {
     position: relative;
     transition: transform 180ms ease-out, box-shadow 180ms ease-out, border-color 180ms;
   }
 
-  html[data-design=material3] #catalog-dialog .shop-card.hover-preview {
+  html[data-surface=glass] #catalog-dialog .shop-card.hover-preview {
     z-index: 4;
     transform: scale(1.025) translateY(-2px);
     border-color: var(--md-sys-color-primary);
@@ -357,12 +357,12 @@ html[data-design=material3] #catalog-dialog {
 }
 
 @media (prefers-reduced-motion: reduce) {
-  html[data-design=material3] #catalog-dialog::before,
-  html[data-design=material3] #catalog-dialog .shop-card {
+  html[data-surface=glass] #catalog-dialog::before,
+  html[data-surface=glass] #catalog-dialog .shop-card {
     transition: none;
   }
 
-  html[data-design=material3] #catalog-dialog .shop-card.hover-preview {
+  html[data-surface=glass] #catalog-dialog .shop-card.hover-preview {
     transform: none;
   }
 }

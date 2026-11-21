@@ -2,8 +2,8 @@ const auditDesign=document.body.dataset.auditDesign==='true';
 import './navigation.js';
 import {loadLivePrices} from './live-price-data.js';
 import {verificationMarkup} from './data-quality-ui.js';
-import {formatMoney,formatTotals} from './money.js';
-import {priceQuality} from './price-quality.js';
+import {createAssemblyPanel} from './assembly-panel.js';
+
 import {createBuildPanel} from './build-panel.js';
 const buildPanel=createBuildPanel();
 const workplace=document.body.dataset.workplace==='true';
@@ -24,7 +24,7 @@ import {sanitizeFanLayout,defaultFanLayout,fanStats,encodeFans,decodeFans} from 
 import {componentSpecs,heatLabels} from './inspector.js';
 import {createShop} from './shop-catalog.js';
 import {cablesFor,ports,cleanConnections,wiringMissing,canConnect,reconcileConnections,connectionAfterDrop} from './wiring.js';
-import {catalog,categories,byId,emptyBuild,resolve,sanitizeBuild} from './catalog.js';
+import {catalog,categories,byId,resolve,sanitizeBuild} from './catalog.js';
 import {compatibility,thermalTargets,advanceThermals,summarizePrices,workloads} from './engine.js';
 const $=id=>document.getElementById(id);
 const e=s=>String(s??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
@@ -73,24 +73,31 @@ function toast(message){$('toast').textContent=message;$('toast').hidden=false;c
 function sourceFor(id){const source=sourceData.catalog.find(p=>p.appId===id);return {...source,...byId[id]};}
 function priceFor(id){const p=priceData.items[id];return p&&Number.isFinite(p.price)&&p.price>0?p:null;}
 function setTab(tab,{reveal=true}={}){if(reveal){buildPanel.open();showWorkplaceMode('computer');if(workplace&&tab==='wiring')scene?.view('assembly');}closeWorkshopMenu(false);if(tab==='wiring'||tab==='fans')closeInspector(false);activeTab=tab;for(const b of document.querySelectorAll('[data-tab]')){const active=b.dataset.tab===tab;if(b.role==='tab')b.setAttribute('aria-selected',active);b.classList.toggle('active',active);}$('parts-panel').hidden=tab!=='parts';$('simulation-panel').hidden=tab!=='simulation';$('wiring-panel').hidden=tab!=='wiring';$('fans-panel').hidden=tab!=='fans';$('fans-button').setAttribute('aria-pressed',String(tab==='fans'));renderWiring();fanUI.render();}
+let hoveredPart=null;
+function highlightPart(key){
+ hoveredPart=key;
+ const active=inspectedKey||hoveredPart;
+ assemblyPanel.previewRow(active);
+ scene?.guides?.select(active,resolve(build)[active]?.short||categories.find(([k])=>k===active)?.[1]);
+}
+const assemblyPanel=createAssemblyPanel({icon,escape:e,priceFor,highlight:highlightPart});
 function renderBuild(){
  closeInspector(false);
  fanLayout=sanitizeFanLayout(build,savedFans[build.case]);settings.fanLayout=fanLayout;saveFans();if(scene)scene.fanLayout=fanLayout;
  const check=compatibility(build),parts=resolve(build);$('parts-count').textContent=`${8-check.missing.length}/8`;
- $('build-subtitle').textContent=check.missing.length?`${auditDesign?'Комплектность: ':''}Выбрано ${8-check.missing.length} из 8 компонентов`:(auditDesign?'Комплектность: выбрано 8 из 8 деталей':'Сборка готова к проверке');
- $('parts-list').innerHTML=categories.map(([key,label])=>{const p=parts[key],price=p&&priceFor(p.id),bad=check.errors.some(err=>err.parts.includes(key));return `<button class="part-row ${p?'selected':'empty'} ${bad?'conflict':''}" data-category="${key}" aria-label="${e(label)}: ${e(p?.name||'выбрать')}"><span class="part-icon">${icon(key)}</span><span class="part-text"><span class="part-category">${e(label)}</span><span class="part-name">${e(p?.short||'Выбрать комплектующее')}</span>${p&&price?`<span class="part-price">${formatMoney(price.price,price.currency||region.currency)}${priceQuality(price).status==='stale'?' · устарела':priceQuality(price).status==='unavailable'?' · нет в наличии':priceQuality(price).status==='invalid'?' · требует проверки':''}</span>`:''}</span><span class="part-action">${key==='case'?'↗':p?'↔':'+'}</span></button>`;}).join('');
- $('scene-hint').hidden=Object.entries(parts).filter(([key,p])=>key!=='case'&&p).length>0;
+ assemblyPanel.render(parts,check,region.currency);
  if(check.errors.length)$('compatibility').innerHTML=`<div class="compat-box error"><strong>${icon('alert')} ${auditDesign?'Совместимость: есть проблема':'Есть несовместимость'}</strong><ul>${check.errors.map(v=>`<li>${e(v.text)}</li>`).join('')}</ul></div>`;
- else if(check.missing.length)$('compatibility').innerHTML=`<div class="compat-box neutral"><strong>${icon('info')} Добавь ещё ${check.missing.length} ${check.missing.length===1?'компонент':check.missing.length<5?'компонента':'компонентов'}</strong><span>Совместимость проверяется при каждом выборе.</span></div>`;
+ else if(check.missing.length)$('compatibility').innerHTML='';
  else $('compatibility').innerHTML=`<div class="compat-box"><strong>${icon('check')} ${auditDesign?'Совместимость: проверки пройдены':'Основные проверки пройдены'}</strong><span>Сокет, память, размеры и запас питания.</span>${check.warnings.map(w=>`<span class="minor-note">${auditDesign?'• ':''}${e(w)}</span>`).join('')}</div>`;
- if(auditDesign&&check.missing.length)$('compatibility').querySelector('strong').prepend('Совместимость: проверка не завершена. ');
+
  const sum=summarizePrices(build,priceData.items);
- $('price-caption').textContent=sum.stale+sum.unavailable+sum.invalid?'Сумма по снимкам цен':sum.concepts?'Цены комплектующих':sum.complete?'Стоимость по предложениям':'Известная часть стоимости';
- $('price-total').innerHTML=sum.known?e(formatTotals(sum.totals)):`— <small>${region.symbol}</small>`;
+ let totals=sum.totals,estimated=false;
+ let caption=sum.complete?'По снимкам цен':'Известная часть · по снимкам цен';
  if((autoPlan?.region||'ru')===regionId&&autoPlan?.build&&categories.every(([key])=>autoPlan.build[key]===build[key])){
   const quote=quoteBuild(build,priceData.items,autoPlan.allowEstimates,region.currency);
-  if(quote){$('price-caption').textContent=quote.estimatedCount?'Ориентировочная стоимость':'Стоимость по снимку цен';$('price-total').innerHTML=(quote.estimatedCount?'≈ ':'')+money(quote.total)+' <small>'+region.symbol+'</small>';}
+  if(quote){totals={[region.currency]:quote.total};estimated=!!quote.estimatedCount;if(estimated)caption='Ориентировочная стоимость';}
  }
+ assemblyPanel.price(totals,region.currency,estimated,caption);
  connections=reconcileConnections(wiredBuild,build,connections,fanLayout);wiredBuild={...build};scene?.setBuild(build);const fans=fanStats(build,fanLayout);$('front-count').textContent=fans.inCount+' вент. на вдув';$('rear-count').textContent=fans.outCount+' вент. на выдув';$('inspect-shortcuts').innerHTML=categories.filter(([key])=>parts[key]).map(([key,label])=>`<button data-inspect="${key}" title="Характеристики: ${e(label)}" aria-label="Характеристики: ${e(label)}">${icon(key)}</button>`).join('');renderWiring();updateSimulationState();persist();fanUI.render();renderLighting();
 }
 function renderCooling(){
@@ -112,7 +119,7 @@ document.querySelectorAll('[data-rgb-mode]').forEach(b=>b.onclick=()=>changeLigh
 document.querySelectorAll('[data-rgb-color]').forEach(b=>b.onclick=()=>changeLighting({mode:'color',color:b.dataset.rgbColor}));
 $('rgb-color').oninput=()=>changeLighting({mode:'color',color:$('rgb-color').value});
 function resetSimulation(){thermalPanel.reset();lastTarget=null;running=false;hasRun=false;elapsed=0;thermals=initialThermals(settings.ambient);scene?.setOptions({running:false});}
-function choosePart(key,id,keepOpen=false){build[key]=id;resetSimulation();renderBuild();if(!keepOpen)$('catalog-dialog').close();toast(id?`${byId[id].short} добавлен в сборку`:'Компонент убран из сборки');}
+function choosePart(key,id,keepOpen=false){if(id)assemblyPanel.dismissHint();assemblyPanel.chooseRow(key);build[key]=id;resetSimulation();renderBuild();if(!keepOpen)$('catalog-dialog').close();toast(id?`${byId[id].short} добавлен в сборку`:'Компонент убран из сборки');}
 const shop=createShop({getBuild:()=>build,getPrices:()=>priceData,getSource:sourceFor,onChoose:(key,id)=>choosePart(key,id,true),beforeOpen:()=>{closeWorkshopMenu(false);closeInspector(false);},icon});
 function openCatalog(key){shop.open(key);}
 $('shop-button').onclick=()=>shop.open();
@@ -205,11 +212,11 @@ document.addEventListener('click',ev=>{
 document.addEventListener('keydown',ev=>{if(ev.key==='Escape')closeWorkshopMenu(true);});
 window.addEventListener('resize',positionWorkshopMenu);
 createFullscreen({beforeEnter:()=>{closeWorkshopMenu(false);closeInspector(false);},notify:toast});
-function closeInspector(restore=true){if(!$('component-inspector')||$('component-inspector').hidden)return;$('component-inspector').hidden=true;inspectedKey=null;if(restore)inspectOrigin?.focus();}
+function closeInspector(restore=true){if(!$('component-inspector')||$('component-inspector').hidden)return;$('component-inspector').hidden=true;inspectedKey=null;highlightPart(hoveredPart);if(restore)inspectOrigin?.focus();}
 function openInspector(key){
  closeWorkshopMenu(false);
  const part=resolve(build)[key];if(!part)return;
- inspectOrigin=document.activeElement;inspectedKey=key;
+ inspectOrigin=document.activeElement;inspectedKey=key;highlightPart(hoveredPart);
  const category=categories.find(c=>c[0]===key)[1],source=sourceFor(part.id),specs=componentSpecs(part,key);
  const related=cablesFor(build,fanLayout).filter(c=>key==='psu'?c.from==='Блок питания':key==='cpu'?c.id.startsWith('eps'):key==='gpu'?c.id.startsWith('gpu'):key==='cooler'?['cpuFan','pump'].includes(c.id):key==='case'?['panel','audio','usb2','usb3','usbC','frontFan','rearFan'].includes(c.id):key==='motherboard'?!c.id.startsWith('gpu'):false);
  $('inspector-category').textContent=category;$('inspector-name').textContent=part.name;
@@ -232,7 +239,6 @@ document.addEventListener('click',event=>{const tab=event.target.closest('[data-
 for(const dialog of document.querySelectorAll('dialog'))dialog.addEventListener('click',ev=>{if(ev.target===dialog){const rect=dialog.getBoundingClientRect();if(ev.clientX<rect.left||ev.clientX>rect.right||ev.clientY<rect.top||ev.clientY>rect.bottom)dialog.close();}});
 
 $('open-simulation').onclick=()=>{setTab('simulation');if(innerWidth<840)$('build-panel')?.scrollIntoView({behavior:'smooth'});};
-$('clear-button').onclick=()=>$('clear-dialog').showModal();$('confirm-clear').onclick=()=>{build={...emptyBuild(),case:build.case};resetSimulation();renderBuild();$('clear-dialog').close();toast('Начинаем новую сборку');};
 $('method-button').onclick=method;$('sources-button').onclick=sources;
 for(const [id,property,inverted] of [['glass-toggle','hideGlass',false],['rear-panel-toggle','hideRearPanel',false],['cooler-toggle','hideCooler',false],['airflow-toggle','airflow',false]])$(id).onclick=()=>{const active=$(id).getAttribute('aria-pressed')!=='true';$(id).setAttribute('aria-pressed',active);$(id).classList.toggle('active',active);scene?.setOptions({[property]:active});if(property==='hideGlass')$(id).innerHTML=icon('layers')+(active?' Вернуть стекло':' Снять стекло');if(property==='hideRearPanel')$(id).innerHTML=icon('layers')+(active?' Вернуть крышку за платой':' Снять крышку за платой');if(property==='airflow'){$('fan-flow-toggle').setAttribute('aria-pressed',String(active));$('fan-flow-toggle').textContent=active?'Скрыть потоки воздуха':'Показать потоки воздуха';$('airflow-legend').hidden=!active;if(active&&!running)toast('Запусти симуляцию, чтобы увидеть движение воздуха');}};
 $('reset-view').onclick=()=>{scene?.reset();for(const b of document.querySelectorAll('[data-view]'))b.classList.toggle('active',b.dataset.view==='assembly');};$('zoom-in').onclick=()=>scene?.zoom(.86);$('zoom-out').onclick=()=>scene?.zoom(1.16);$('auto-rotate').onclick=()=>{const on=$('auto-rotate').getAttribute('aria-pressed')!=='true';$('auto-rotate').setAttribute('aria-pressed',on);if(scene)scene.controls.autoRotate=on;};

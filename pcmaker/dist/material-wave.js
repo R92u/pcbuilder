@@ -46,7 +46,7 @@ function drawWave(element, width, height, wavelength) {
 }
 
 const groups = [
-  '.workplace-mode', '.panel-tabs', '.market-collections', '.shop-categories',
+  '#parts-list', '.workplace-mode', '.panel-tabs', '.market-collections', '.shop-categories',
   '.workloads', '.wiring-modes', '.rgb-modes', '.price-history-periods',
   '.budget-purpose', '.background-city', '.background-grid', '.camera-views',
   '.fan-walls', '.fan-list', '.cable-list'
@@ -130,7 +130,7 @@ function traceSelection(group, from, to) {
 }
 
 function measureSelection(group) {
-  const button = group.querySelector(selection);
+  const button = group.querySelector(group.id === 'parts-list' ? '.part-row.wave-current' : selection);
   if (!button || !button.offsetWidth) {
     stopTrace(group);
     group.removeAttribute('data-wave-selection');

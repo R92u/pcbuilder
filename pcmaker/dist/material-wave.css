@@ -1,10 +1,10 @@
-html[data-design=material3] [data-wave-group] {
+html[data-surface=glass] [data-wave-group] {
   position: relative;
   isolation: isolate;
 }
 
-html[data-design=material3] [data-wave-selection]::before,
-html[data-design=material3] [data-wave-selection]::after {
+html[data-surface=glass] [data-wave-selection]::before,
+html[data-surface=glass] [data-wave-selection]::after {
   content: "";
   position: absolute;
   left: 0;
@@ -18,12 +18,12 @@ html[data-design=material3] [data-wave-selection]::after {
   background: var(--md-sys-color-primary-container);
 }
 
-html[data-design=material3] [data-wave-selection]::after {
+html[data-surface=glass] [data-wave-selection]::after {
   mask-image: var(--wave-stroke);
   background: var(--wave-color, var(--md-sys-color-primary));
 }
 
-html[data-design=material3] [data-wave-group] > .wave-trace {
+html[data-surface=glass] [data-wave-group] > .wave-trace {
   position: absolute;
   inset: 0;
   width: 100%;
@@ -49,28 +49,28 @@ html[data-design=material3] [data-wave-group] > .wave-trace {
   .wave-trace { display: none; }
 }
 
-html[data-design=material3] [data-wave-selection] > button {
+html[data-surface=glass] [data-wave-selection] > button {
   background: transparent !important;
   box-shadow: none !important;
 }
 
-html[data-design=material3] [data-wave-selection] > button:hover:not(:disabled, [aria-selected=true], [aria-pressed=true], .active) {
+html[data-surface=glass] [data-wave-selection] > button:hover:not(:disabled, [aria-selected=true], [aria-pressed=true], .active) {
   background-color: color-mix(in srgb, var(--md-sys-color-primary) 8%, transparent) !important;
 }
 
-html[data-design=material3] [data-wave-selection] > button:is([aria-selected=true], [aria-pressed=true], .active) {
+html[data-surface=glass] [data-wave-selection] > button:is([aria-selected=true], [aria-pressed=true], .active) {
   border-color: transparent;
   color: var(--md-sys-color-on-primary-container);
 }
 
-html[data-design=material3] [data-wave-group] > button:focus-visible {
+html[data-surface=glass] [data-wave-group] > button:focus-visible {
   outline-offset: -5px;
 }
 
-html[data-design=material3] #build-panel .panel-tabs button {
+html[data-surface=glass] #build-panel .panel-tabs button {
   margin-block: 5px;
 }
 
-html[data-design=material3] #build-panel .panel-tabs button[aria-selected=true]::after {
+html[data-surface=glass] #build-panel .panel-tabs button[aria-selected=true]::after {
   display: none;
 }

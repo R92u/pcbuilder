@@ -1,0 +1,121 @@
+@font-face {
+ font-family: Manrope; src: url("./assets/type/manrope-latin-wght-normal.woff2") format("woff2");
+ font-weight: 200 800; font-display: swap;
+}
+@font-face {
+ font-family: Manrope; src: url("./assets/type/manrope-cyrillic-wght-normal.woff2") format("woff2");
+ font-weight: 200 800; font-display: swap; unicode-range: U+0400-045F,U+0490-0491,U+04B0-04B1,U+2116;
+}
+@font-face {
+ font-family:"JetBrains Mono"; src:url("./assets/type/jetbrains-mono-latin-wght-normal.woff2") format("woff2");
+ font-weight:100 800; font-display:swap;
+}
+html[data-surface=glass] .workbench #studio[data-background]::before {
+ content:"";display:block;position:absolute;inset:0;pointer-events:none;z-index:0;
+ background:radial-gradient(ellipse at 46% 44%,#ffffff12,transparent 49%,#08090a55 100%);
+}
+html[data-surface=glass] .workshop-header nav.workshop-toolbar {
+ gap:3px;padding:4px 6px;border-radius:999px;
+ background:linear-gradient(175deg,#5b5c5f8c,#303133c9 75%);
+ backdrop-filter:blur(16px);box-shadow:inset 0 0 0 1px #ffffff56,inset 0 1px #ffffff52;
+}
+.tool-label {display:none;}
+html[data-design=glass] .workshop-toolbar #shop-button {width:auto;padding-inline:12px;}
+.workshop-toolbar .tool-rule {width:1px;height:21px;background:#ffffff30;margin:0 4px;flex:none;}
+html[data-surface=glass] .workshop-header nav.workshop-toolbar > :is(.round-button,#shop-button) {
+ position:relative;background:transparent;backdrop-filter:none;border:0;box-shadow:none;transform:none;
+ color:#dedee0;transition:color .15s;
+}
+html[data-surface=glass] .workshop-header nav.workshop-toolbar > :is(.round-button,#shop-button):is(:hover,:focus-visible,:active) {
+ color:#fff;background:transparent;box-shadow:none;transform:none;
+}
+.workshop-toolbar > .round-button:focus-visible {outline:2px solid var(--accent);outline-offset:-2px;}
+.workshop-toolbar > .round-button::before {content:none;}
+.workshop-toolbar > .round-button::after {
+ content:"";position:absolute;left:50%;bottom:0;width:22px;height:2px;
+ transform:translateX(-50%);border-radius:2px;background:var(--accent);
+ opacity:var(--tool-mark,0);pointer-events:none;
+}
+.workshop-toolbar {--shop-mark:1;}
+.workshop-toolbar #shop-button {--tool-mark:var(--shop-mark);}
+.workshop-toolbar:has([aria-pressed=true],[aria-expanded=true]) {--shop-mark:0;}
+.workshop-toolbar:has([aria-expanded=true]) {--pressed-mark:0;}
+.workshop-toolbar [aria-pressed=true] {--tool-mark:var(--pressed-mark,1);}
+.workshop-toolbar [aria-expanded=true] {--tool-mark:var(--expanded-mark,1);}
+html:has(:is(#catalog-dialog,#autobuild-dialog,#price-history-dialog)[open]) .workshop-toolbar {
+ --pressed-mark:0;--expanded-mark:0;--shop-mark:0;
+}
+html:has(#catalog-dialog[open]) #shop-button,
+html:has(#autobuild-dialog[open]) #autobuild-button,
+html:has(#price-history-dialog[open]) #price-history-button {--tool-mark:1;}
+@media(min-width:1080px){
+ html[data-surface=glass] .workshop-header nav.workshop-toolbar .round-button {
+  display:inline-flex;flex-direction:column;width:auto;min-width:44px;height:46px;gap:3px;padding:4px 9px;
+ }
+ html[data-surface=glass] .workshop-header nav.workshop-toolbar .tool-label {
+  display:block;white-space:nowrap;font:600 10px/1.2 Manrope,sans-serif;letter-spacing:0;
+ }
+}
+@media(max-width:1079px){.workshop-toolbar .tool-rule{margin:0 1px;}}
+@media(max-width:650px){.workshop-toolbar .tool-rule{display:none;}}
+html[data-surface=glass] .workbench #build-panel {
+ background:var(--glass-panel);backdrop-filter:var(--white-glass-blur);box-shadow:var(--glass-shadow);color:#f6f6f6;
+}
+html[data-design=glass] #build-panel .panel-heading {display:flex;gap:8px;padding:16px 0 4px;}
+html[data-design=glass] #build-panel .panel-heading h2 {font:700 clamp(21px,1.8vw,27px)/1.15 Manrope,sans-serif;letter-spacing:-.7px;margin:0;}
+.slot-group {display:grid;gap:3px;}
+.slot-group h3 {font:700 11px/1.4 Manrope,sans-serif;letter-spacing:.065em;text-transform:uppercase;color:#ced0d2;margin:13px 2px 4px;}
+html[data-surface=glass] #parts-list .part-row:not(.conflict) {
+ min-height:54px;margin:0;padding:6px 10px;background:var(--glass-control);border:1px solid rgba(255,255,255,.08);border-radius:9px;box-shadow:none;
+}
+html[data-surface=glass] #parts-list .dependent:not(.conflict) {background:#ffffff09;}
+html[data-surface=glass] #parts-list .part-row:not(.conflict):is(:hover,:focus-visible){background:#ffffff24;border-color:#ffffff90;}
+html[data-surface=glass] #parts-list[data-wave-selection] .part-row.wave-current {
+ background:transparent;border-color:transparent;box-shadow:none;
+}
+html[data-surface=glass] #parts-list[data-wave-selection] .part-row.conflict.wave-current {
+ color:var(--md-sys-color-on-error-container);
+}
+#parts-list:has(.wave-current.conflict) {--md-sys-color-primary-container:var(--md-sys-color-error-container);}
+html[data-surface=glass] #parts-list .part-icon {width:38px;height:38px;flex:none;background:var(--glass-control);border:1px solid #ffffff50;color:#e0e1e2;box-shadow:none;}
+#parts-list .part-icon svg {width:21px;height:21px;}
+html[data-surface=glass] #parts-list .part-row:is(:hover,:focus-visible) .part-icon {border-color:var(--accent);color:var(--accent);}
+html[data-design=glass] #parts-list .part-row .part-category {color:#f6f6f6;font:650 13px/1.35 Manrope,sans-serif;}
+html[data-design=glass] #parts-list .part-row .part-name {color:#d6d7d8;font:450 12.5px/1.35 Manrope,sans-serif;}
+html[data-design=glass] #parts-list .part-row .part-action {margin-left:auto;width:25px;height:25px;color:var(--accent);border:1px solid #ffffff75;background:transparent;font:500 17px/1 Manrope,sans-serif;}
+.start-chip,.old-price {display:inline-flex;align-items:center;white-space:nowrap;border-radius:4px;padding:2px 5px;font:650 10px/1.25 Manrope,sans-serif;}
+.start-chip {background:#ffffff1a;color:#ebebeb;margin-left:3px;vertical-align:middle;}
+.old-price {color:#ffda94;background:#443625;}
+html[data-design=glass] #parts-list .part-price {color:var(--quiet);font-size:11px;}
+#build-health {margin:14px 0 10px;padding:12px 0 6px;border-top:1px solid #ffffff28;font:500 12px/1.4 Manrope,sans-serif;}
+.power-line {display:flex;align-items:center;justify-content:space-between;gap:6px;}
+.power-line span,#price-total {font-family:"JetBrains Mono",monospace;}
+.power-line span{color:var(--quiet);font-size:11px;}
+.power-meter {height:4px;background:#ffffff25;border-radius:5px;margin:8px 0 0;overflow:hidden;}
+.power-meter i {display:block;height:100%;background:var(--accent);transition:width .2s;}
+html[data-surface=glass] #parts-panel .price-summary {
+ display:grid;grid-template-columns:minmax(0,.8fr) minmax(0,1.5fr);gap:9px;padding-block:12px;
+ background:#202123b8;border-top:1px solid #ffffff36;
+}
+html[data-surface=glass] #parts-panel .price-summary>div {display:flex;grid-column:1/-1;align-items:flex-start;flex-direction:column-reverse;gap:2px;}
+html[data-surface=glass] #price-total {font:550 24px/1.2 "JetBrains Mono",monospace;}
+html[data-surface=glass] #price-caption {font:500 11px/1.3 Manrope,sans-serif;color:var(--quiet);}
+html[data-surface=glass] .price-summary #footer-auto,html[data-surface=glass] .workbench #open-simulation {
+ margin:0;width:100%;min-height:39px;padding:5px 8px;font:700 12px/1.2 Manrope,sans-serif;border-radius:12px;
+}
+html[data-surface=glass] .price-summary #footer-auto {border:1px solid #ffffff50;background:var(--glass-control);color:#f2f2f2;}
+html[data-surface=glass] .workbench #open-simulation {color:var(--ink);background:linear-gradient(145deg,#fff,#c9cbcd 70%,#eeeff0);box-shadow:none;}
+html[data-surface=glass] .workbench #open-simulation:disabled {opacity:1;color:#dededf;cursor:default;background:linear-gradient(to right,#656769 var(--progress),#393a3d var(--progress));}
+html[data-design=glass] .workbench .scene-hint:not([hidden]) {display:flex;align-items:center;gap:12px;padding:9px 15px;color:#f4f4f4;background:#202123eb;border:1px solid #ffffff42;font:600 13px/1.4 Manrope,sans-serif;max-width:90%;width:max-content;}
+.scene-hint>span {color:var(--accent);font-size:20px;}
+@media(prefers-reduced-motion:no-preference){.scene-hint>span{animation:hint-arrow 2.5s ease-in-out infinite;}@keyframes hint-arrow{50%{transform:translateX(3px);opacity:.65;}}}
+@media(max-width:840px){.scene-hint>span{rotate:90deg;}}
+.slot-callout {position:absolute;pointer-events:none;z-index:3;margin-left:36px;transform:translateY(-100%);padding:5px 10px;color:#fafafa;background:#222326ef;border:1px solid #cccdd0;border-radius:5px;font:650 12px Manrope,sans-serif;white-space:nowrap;}
+.slot-callout::before{content:"";position:absolute;right:100%;bottom:2px;width:37px;border-bottom:1px solid #d6d7d8;transform:rotate(-24deg);transform-origin:right;}
+.slot-callout.flip{margin-left:-36px;transform:translate(-100%,-100%);}
+.slot-callout.flip::before{right:auto;left:100%;transform:rotate(24deg);transform-origin:left;}
+
+html[data-design=glass] #parts-panel .price-summary {margin:0;padding-inline:var(--workshop-gutter);}
+.workbench #build-panel #parts-panel { grid-template-rows:minmax(0,1fr) auto auto; }
+#parts-panel > #build-health { margin:0; padding:10px var(--workshop-gutter); background:#27282ac7; }
+@media (max-height:590px) and (min-width:841px) {#parts-panel > #build-health {padding-block:5px;}.power-meter{margin:4px 0;}}

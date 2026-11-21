@@ -1,3 +1,4 @@
+import {hardwareFinish} from './surfaces.js';
 import {aioMount} from './aio.js';
 import * as THREE from 'three';
 import {caseLayout,TRAY_X,TRAY_HOLES,REAR_OPENINGS,frontIOPosition} from './layout.js';
@@ -39,15 +40,16 @@ export function makeChassis(p={id:'cc560',short:'CC560 V2',frontFanCount:3,usbA:
   const hole=new THREE.Path();hole.moveTo(x-w/2,z-d/2);hole.lineTo(x-w/2,z+d/2);hole.lineTo(x+w/2,z+d/2);hole.lineTo(x+w/2,z-d/2);hole.closePath();shape.holes.push(hole);
  }
  if(p.concept)holes(shape,'bottom',[0,2]);
- const tunnel=new THREE.Mesh(new THREE.ExtrudeGeometry(shape,{depth:.045,bevelEnabled:false}),new THREE.MeshStandardMaterial({color:steel,metalness:.5,roughness:.55}));tunnel.rotation.x=Math.PI/2;tunnel.position.y=1.155;tunnel.castShadow=true;tunnel.receiveShadow=true;g.add(tunnel);
+ const shroudColor=white?0x626a6f:0x1d2529;
+ const tunnel=new THREE.Mesh(new THREE.ExtrudeGeometry(shape,{depth:.045,bevelEnabled:false}),hardwareFinish(new THREE.MeshStandardMaterial({color:white?0x475054:0x131b1e,metalness:.20,roughness:.91})));tunnel.rotation.x=Math.PI/2;tunnel.position.y=1.155;tunnel.castShadow=true;tunnel.receiveShadow=true;g.add(tunnel);
  // Low-profile rubber edging borders the open cable pass-through.
  for(const x of [.30,.94])this.box(g,.025,.020,.72,x,1.166,.55,0x242c2e);
  for(const z of [.19,.91])this.box(g,.66,.020,.025,.62,1.166,z,0x242c2e);
- this.box(g,width,.78,.045,centerX,.73,front,black);
+ this.box(g,width,.78,.045,centerX,.73,front,shroudColor);
  if(p.id==='cc560'){
-  for(const z of [rear+.22,front-.22])this.box(g,.035,.76,.39,side-.07,.73,z,black);
-  for(const y of [.42,1.075])this.box(g,.035,.12,depth-.40,side-.07,y,centerZ,black);
- }else this.box(g,.035,.76,depth-.20,side-.07,.73,centerZ,black);
+  for(const z of [rear+.22,front-.22])this.box(g,.035,.76,.39,side-.07,.73,z,shroudColor);
+  for(const y of [.42,1.075])this.box(g,.035,.12,depth-.40,side-.07,y,centerZ,shroudColor);
+ }else this.box(g,.035,.76,depth-.20,side-.07,.73,centerZ,shroudColor);
  for(const x of [back,side])for(const z of [rear,front]){this.box(g,.10,4.25,.10,x,2.48,z,steel);for(const y of [.48,1.28,4.48])this.screw(g,x+(x>0?.06:-.06),y,z,'x');}
  for(const x of [back+.28,side-.28])for(const z of [rear+.30,front-.30]){this.box(g,.30,.19,.46,x,.16,z,black);this.box(g,.28,.04,.43,x,.065,z,0x101416);}
  // One stamped rear panel. Only the fan, I/O shield, PCI brackets and PSU
@@ -96,7 +98,7 @@ export function makeChassis(p={id:'cc560',short:'CC560 V2',frontFanCount:3,usbA:
  this.text(g,p.short,.83,.06,side-.049,.46,centerZ,[0,Math.PI/2,0],white?'#343e44':'#929ca2');
  let glassGeo=new THREE.PlaneGeometry(depth-.17,4.13);
  if(p.concept){const shape=new THREE.Shape();shape.moveTo(rear+.1,.44);shape.lineTo(front-.1,.44);shape.lineTo(front-.1,4.55);shape.lineTo(rear+.1,4.55);shape.closePath();holes(shape,'right',[2,1]);glassGeo=new THREE.ShapeGeometry(shape);}
- this.glass=new THREE.Mesh(glassGeo,new THREE.MeshPhysicalMaterial({color:0x9faeb7,roughness:.09,metalness:.18,transparent:true,opacity:.30,side:THREE.DoubleSide,depthWrite:false}));this.glass.rotation.y=Math.PI/2;this.glass.position.set(side+.06,p.concept?0:2.50,p.concept?0:centerZ);if(p.concept)this.glass.rotation.y=-Math.PI/2;this.glass.visible=!this.hideGlass;this.glass.userData.ignoreInspect=true;g.add(this.glass);
+ this.glass=new THREE.Mesh(glassGeo,new THREE.MeshPhysicalMaterial({color:0x9faeb7,roughness:.09,metalness:.14,clearcoat:.85,clearcoatRoughness:.15,envMapIntensity:1.15,transparent:true,opacity:.15,side:THREE.DoubleSide,depthWrite:false}));this.glass.rotation.y=Math.PI/2;this.glass.position.set(side+.06,p.concept?0:2.50,p.concept?0:centerZ);if(p.concept)this.glass.rotation.y=-Math.PI/2;this.glass.visible=!this.hideGlass;this.glass.userData.ignoreInspect=true;g.add(this.glass);
  // A mounted window has a visible perimeter and fasteners, even with a clear pane.
  const windowEdges=new THREE.LineSegments(new THREE.EdgesGeometry(glassGeo),new THREE.LineBasicMaterial({color:white?0xc6d8e1:0x849aa8,transparent:true,opacity:.72}));
  this.glass.add(windowEdges);

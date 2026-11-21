@@ -1,3 +1,4 @@
+import {createAssemblyGuides,contactShadow} from './assembly-guides.js';
 import * as THREE from 'three';
 import {OrbitControls} from './vendor/OrbitControls.js';
 import {resolve} from './catalog.js';
@@ -28,13 +29,18 @@ export class PCScene {
   this.camera=new THREE.PerspectiveCamera(36,1,.1,70);this.camera.position.set(8.4,5.7,8.2);
   this.controls=new OrbitControls(this.camera,this.renderer.domElement);this.controls.target.set(0,2.3,0);this.controls.enableDamping=true;this.controls.dampingFactor=.08;this.controls.minDistance=4.2;this.controls.maxDistance=19;this.controls.maxPolarAngle=Math.PI*.61;this.controls.minPolarAngle=.32;this.controls.enablePan=false;this.controls.autoRotateSpeed=.55;
   this.scene.add(new THREE.HemisphereLight(0xf2f6f8,0x1b2225,2.4));
-  const key=new THREE.DirectionalLight(0xf9fcff,3.6);key.position.set(4,7,5);key.castShadow=true;key.shadow.mapSize.set(1024,1024);Object.assign(key.shadow.camera,{left:-5,right:5,top:7,bottom:-5});key.shadow.bias=-.0005;this.scene.add(key);
+  const key=new THREE.DirectionalLight(0xf9fcff,3.6);key.position.set(4,7,5);key.castShadow=true;key.shadow.mapSize.set(1024,1024);Object.assign(key.shadow.camera,{left:-5,right:5,top:7,bottom:-5});key.shadow.radius=3;key.shadow.bias=-.0005;this.scene.add(key);
   const fill=new THREE.DirectionalLight(0xa6b8c8,1.4);fill.position.set(-4,4,-3);this.scene.add(fill);
-  const rim=new THREE.DirectionalLight(0xbad2df,2.0);rim.position.set(2,3,-5);this.scene.add(rim);
+  const rim=new THREE.DirectionalLight(0xa9f2f1,3.2);rim.position.set(-2,5,-4);this.scene.add(rim);
   const interior=new THREE.PointLight(0xe4edf4,.65,7,1.5);interior.position.set(.9,3,1);this.scene.add(interior);
   this.root=new THREE.Group();this.scene.add(this.root);
-  const floor=new THREE.Mesh(new THREE.PlaneGeometry(200,200),new THREE.ShadowMaterial({opacity:.3}));floor.rotation.x=-Math.PI/2;floor.receiveShadow=true;floor.position.y=.04;this.scene.add(floor);
-  const grid=new THREE.GridHelper(16,32,0x626b73,0x495159);grid.material.transparent=true;grid.material.opacity=.17;grid.position.y=.02;this.scene.add(grid);
+  const floor=new THREE.Mesh(new THREE.PlaneGeometry(200,200),new THREE.ShadowMaterial({opacity:.16}));floor.rotation.x=-Math.PI/2;floor.receiveShadow=true;floor.position.y=.04;this.scene.add(floor);
+  const grid=new THREE.GridHelper(16,32,0x626b73,0x495159);grid.material.transparent=true;grid.material.opacity=.24;
+  grid.material.onBeforeCompile=shader=>{
+   shader.vertexShader='varying vec2 gridPoint;\n'+shader.vertexShader.replace('#include <begin_vertex>','#include <begin_vertex>\ngridPoint=position.xz;');
+   shader.fragmentShader='varying vec2 gridPoint;\n'+shader.fragmentShader.replace('#include <color_fragment>','#include <color_fragment>\ndiffuseColor.a *= 1.0-smoothstep(2.0,8.0,length(gridPoint));');
+  };grid.position.y=.02;this.scene.add(grid);
+  this.contact=contactShadow();this.root.add(this.contact);this.guides=createAssemblyGuides(this.root,container);
   this.makeCase();this.makeFlows();this.initInteraction();
   this.resizeObserver=new ResizeObserver(()=>this.resize());this.resizeObserver.observe(container);this.resize();this.applyResize();this.reset();
   this.renderer.domElement.addEventListener('webglcontextlost',e=>{e.preventDefault();this.onContextLost?.();});
@@ -107,6 +113,7 @@ export class PCScene {
   this.setFanLayout(this.fanLayout);
   for(const [i,cover] of (this.slotCovers||[]).entries())cover.visible=!p.gpu||i>=gpuSlots(p.gpu);
   if(this.parts.cooler)this.parts.cooler.visible=!this.hideCooler;
+  this.guides.setBuild(build,p,{...this.parts,case:this.caseGroup});
   this.collectLights();this.rearPanel.visible=!this.hideRearPanel;
   if(changedCase)this.fitCaseView();
  }
@@ -164,18 +171,28 @@ export class PCScene {
   }
  }
  view(name){
-  const views={assembly:[10.4,5.0,3.8],rear:[3.4,4.1,-9.4],top:[4.8,10,5.8],cables:[-8.3,4.6,5.4]};
+  const views={assembly:[9.3,5.65,6.35],rear:[3.4,4.1,-9.4],top:[4.8,10,5.8],cables:[-8.3,4.6,5.4]};
   this.camera.position.set(...(views[name]||views.assembly));this.controls.target.set(0,2.35,0);this.fitCaseView();this.controls.update();this.endCableDrag(null,true);this.rearPanel.visible=!this.hideRearPanel;this.updateMarkers();
  }
  fitCaseView(){
   const p=resolve(this.currentBuild||{}),f=caseLayout(p.case||{},p.gpu,p.cooler),center=new THREE.Vector3((f.side+f.back)/2,2.38,f.centerZ),offset=this.camera.position.clone().sub(this.controls.target),back=offset.clone().normalize();
   const right=new THREE.Vector3().crossVectors(this.camera.up,back).normalize(),up=new THREE.Vector3().crossVectors(back,right),tanV=Math.tan(THREE.MathUtils.degToRad(this.camera.fov/2)),tanH=tanV*this.camera.aspect;
-  let distance=0;
-  for(const x of [f.back-.12,f.side+.12])for(const y of [0,4.8])for(const z of [f.rear-.16,f.front+.25]){
-   const relative=new THREE.Vector3(x,y,z).sub(center),depth=relative.dot(back);
-   distance=Math.max(distance,depth+Math.abs(relative.dot(right))/tanH,depth+Math.abs(relative.dot(up))/tanV);
+  const corners=[];
+  for(const x of [f.back-.04,f.side+.07])for(const y of [.04,4.69])for(const z of [f.rear-.10,f.front+.12]){
+   const v=new THREE.Vector3(x,y,z).sub(center);
+   corners.push([v.dot(right),v.dot(up),v.dot(back)]);
   }
-  this.controls.target.copy(center);this.camera.position.copy(center).addScaledVector(back,Math.max(offset.length(),distance*1.07));this.controls.update();
+  let near=4,far=35;
+  for(let i=0;i<16;i++){
+   const d=(near+far)/2,ys=corners.map(([,y,z])=>y/((d-z)*tanV));
+   const fitsHeight=Math.max(...ys)-Math.min(...ys)<=1.62;
+   const fitsWidth=corners.every(([x,,z])=>Math.abs(x)/((d-z)*tanH)<.86);
+   if(fitsHeight&&fitsWidth)far=d;else near=d;
+  }
+  const ys=corners.map(([,y,z])=>y/((far-z)*tanV));
+  center.addScaledVector(up,(Math.max(...ys)+Math.min(...ys))*.5*far*tanV);
+  center.addScaledVector(right,Math.min(.42,far*tanH*.055));
+  this.controls.target.copy(center);this.camera.position.copy(center).addScaledVector(back,far);this.controls.update();
  }
  makeCaseFlows(p){if(this.flowGroup){this.flowGroup.removeFromParent();this.flowGroup.traverse(o=>{o.geometry?.dispose();o.material?.dispose();});}this.flowParticles=[];this.makeFlows(p.frontFanCount??3);this.flowGroup.visible=this.airflow;}
  makeFlows(){this.makeFanFlows();}
@@ -207,9 +224,9 @@ export class PCScene {
   this.transitions=this.transitions.filter(t=>{const p=Math.min((time-t.start)/650,1);t.group.position.x=.65*(1-p)**3;return p<1;});
   if(this.airflow)this.updateFanFlows(dt);
   this.updateFanMarkers();if(this.lighting?.mode==='rainbow')this.updateLighting(time);
-  this.updateMarkers();this.renderer.render(this.scene,this.camera);this.raf=requestAnimationFrame(this.frame);
+  this.guides?.frame(time,this.camera);this.updateMarkers();this.renderer.render(this.scene,this.camera);this.guides?.drawOutline(this.renderer,this.scene,this.camera);this.raf=requestAnimationFrame(this.frame);
  }
- dispose(){cancelAnimationFrame(this.raf);this.resizeObserver.disconnect();this.controls.dispose();this.environment?.dispose();this.clearLooseCable();this.endFanDrag(null,true);window.removeEventListener('blur',this.cancelHeldPlug);window.removeEventListener('keydown',this.cancelOnEscape);this.renderer.dispose();}
+ dispose(){this.guides.dispose();this.contact.material.map.dispose();this.contact.material.dispose();this.contact.geometry.dispose();cancelAnimationFrame(this.raf);this.resizeObserver.disconnect();this.controls.dispose();this.environment?.dispose();this.clearLooseCable();this.endFanDrag(null,true);window.removeEventListener('blur',this.cancelHeldPlug);window.removeEventListener('keydown',this.cancelOnEscape);this.renderer.dispose();}
 }
 
 Object.assign(PCScene.prototype,modelMethods,interactionMethods,fanSceneMethods,lightingSceneMethods);
