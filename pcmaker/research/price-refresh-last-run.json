@@ -1,5 +1,5 @@
 {
-  "checkedAt": "2026-11-20T13:13:43.068Z",
+  "checkedAt": "2026-11-21T12:50:05.017Z",
   "scope": {
     "region": "all",
     "host": "all",
@@ -7,23 +7,23 @@
   },
   "attempted": 435,
   "updated": 333,
-  "failed": 93,
-  "manualRetained": 9,
-  "offerAttempts": 434,
+  "failed": 102,
+  "manualRetained": 0,
+  "offerAttempts": 451,
   "fallbackUpdated": 0,
   "withBackup": 25,
   "sources": {
     "regard.ru": {
-      "attempted": 21,
+      "attempted": 22,
       "updated": 14,
-      "failed": 7,
+      "failed": 8,
       "reasons": {
         "product-not-confirmed": 1,
         "http-429": 1,
-        "source-rate-limited": 5
+        "source-rate-limited": 6
       },
       "causes": {
-        "http-429": 5
+        "http-429": 6
       }
     },
     "lifebook-shop.ru": {
@@ -34,11 +34,11 @@
       "causes": {}
     },
     "kns.ru": {
-      "attempted": 176,
+      "attempted": 183,
       "updated": 132,
-      "failed": 44,
+      "failed": 51,
       "reasons": {
-        "product-not-confirmed": 44
+        "product-not-confirmed": 51
       },
       "causes": {}
     },
@@ -55,6 +55,15 @@
       "failed": 1,
       "reasons": {
         "product-not-confirmed": 1
+      },
+      "causes": {}
+    },
+    "ozon.ru": {
+      "attempted": 9,
+      "updated": 0,
+      "failed": 9,
+      "reasons": {
+        "unsupported-source": 9
       },
       "causes": {}
     },
