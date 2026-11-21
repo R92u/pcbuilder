@@ -113,7 +113,7 @@ function traceSelection(group, from, to) {
   const line = path(lead + connector + next.getAttribute('d').replace(/^M[^A-Z]+/, '').replace(/ Z$/, ''), 'wave-line');
   const total = line.getTotalLength();
   const arrival = total - next.getTotalLength();
-  const duration = 300;
+  const duration = group.id === 'parts-list' ? 900 : 300;
   const options = {duration, fill: 'both', easing: 'cubic-bezier(.32,0,.32,1)'};
   const dash = (tail, head) => ({strokeDasharray: `${head - tail}px ${total + 2}px`, strokeDashoffset: -tail + 'px'});
   if (old.isConnected) old.animate([{opacity: 1}, {opacity: 0, offset: .68}, {opacity: 0}], options);
