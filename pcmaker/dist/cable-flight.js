@@ -35,13 +35,16 @@ export class CableFlight {
     line.renderOrder = 80;
     tip.renderOrder = 81;
     this.scene.add(line);
-    this.active = {route, distances, length, position, target, offset, rotation:this.camera.quaternion.clone(), line, tip, now};
+    this.active = {route, distances, length, position, target, offset, rotation:this.camera.quaternion.clone(), line, tip, lastFrame:now, elapsed:0};
   }
 
   update(time) {
     const flight = this.active;
     if (!flight) return false;
-    const t = Math.max(0, (time - flight.now) / duration);
+    // A stall while the GPU uploads a new mesh must not consume the whole shot.
+    flight.elapsed += MathUtils.clamp(time - flight.lastFrame, 0, 120);
+    flight.lastFrame = Math.max(flight.lastFrame, time);
+    const t = flight.elapsed / duration;
     if (t >= 1) { this.cancel(); return true; }
     const distance = flight.length * smooth((t - .13) / .52);
     let i = 1;
