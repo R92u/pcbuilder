@@ -1,4 +1,3 @@
-import {storeCities,cityStoreLink} from './store-cities.js';
 const auditDesign=document.body.dataset.auditDesign==='true';
 import './navigation.js';
 import {loadLivePrices} from './live-price-data.js';
@@ -14,8 +13,7 @@ function showWorkplaceMode(mode){if(!workplace)return;const peripheral=mode==='p
 import {createFullscreen} from './fullscreen.js';
 import {revealPanel,hidePanel} from './motion.js';
 import {createThermalPanel} from './thermal-panel.js';
-import {buildCityCart} from './shopping-cart.js';
-import {regions,regionFor,storeLink,regionalSnapshot as priceSnapshot} from './regions.js';
+import {regions,regionFor,regionalSnapshot as priceSnapshot} from './regions.js';
 import {createAutoBuilder} from './autobuild-ui.js';
 import {createPriceHistory} from './price-history-ui.js';
 import {quoteBuild} from './autobuild.js';
@@ -39,23 +37,6 @@ paths.chart='M4 3v17h17 M7 14l4-4 4 2 6-7';
 const icon=n=>`<svg viewBox="0 0 24 24" aria-hidden="true"><path d="${paths[n]||paths.cpu}"/></svg>`;
 function icons(root=document){root.querySelectorAll('[data-icon]').forEach(el=>el.innerHTML=icon(el.dataset.icon));}icons();
 let saved;try{saved=JSON.parse(localStorage.getItem('pcmaker-build'));}catch{}
-let storeCity='www';
-try {
- const savedCity=localStorage.getItem('pcmaker-store-city');
- if(storeCities.has(savedCity))storeCity=savedCity;
-} catch {}
-const citySelectors=document.querySelectorAll('[data-store-city]');
-for(const select of citySelectors){
- for(const [id,name] of storeCities)select.add(new Option(name,id));
- select.value=storeCity;
- select.onchange=()=>{
-  storeCity=select.value;
-  for(const other of citySelectors)other.value=storeCity;
-  try{localStorage.setItem('pcmaker-store-city',storeCity);}catch{}
-  renderCart(resolve(build));
-  shop.refresh();
- };
-}
 let regionId='ru';try{regionId=regionFor(localStorage.getItem('pcmaker-region')).id;}catch{}
 const snapshots={ru:priceSnapshot({},'ru'),by:priceSnapshot({},'by')};
 let region=regionFor(regionId);$('region-select').value=regionId;
@@ -100,43 +81,11 @@ function highlightPart(key){
  scene?.guides?.select(active,resolve(build)[active]?.short||categories.find(([k])=>k===active)?.[1]);
 }
 const assemblyPanel=createAssemblyPanel({icon,escape:e,priceFor,highlight:highlightPart});
-function cartLink(cart, label){
- return '<a class="button wide" target="_blank" rel="noopener noreferrer" href="'+e(cart.url)+'">'+e(label)+'</a>';
-}
-
-function renderCart(parts){
- const russian=regionId==='ru';
- for(const select of citySelectors)select.closest('label').hidden=!russian;
- const city=russian?storeCities.get(storeCity):region.city;
- const cart=buildCityCart(parts,regionId,storeCity);
- const total=Object.values(parts).filter(Boolean).length;
- const complete=cart?.url && !cart.missing.length;
- const action=$('shopping-cart-action');
- action.innerHTML='<button type="button" class="button wide" aria-haspopup="dialog">Магазины · '+e(city)+'</button>';
- if(complete)action.insertAdjacentHTML('beforeend',cartLink(cart,'Открыть корзину E-Techno · Воронеж'));
- action.firstElementChild.onclick=()=>{
-  const missing=new Set(cart?.missing.map(row=>row.category));
-  const rows=Object.entries(parts).filter(([,part])=>part).map(([category,part])=>{
-   let source='Учебная модель';
-   if(!part.concept){
-    const local=russian?cityStoreLink(storeCity,part):storeLink(part,category,priceData,sourceFor(part.id));
-    const label=russian?'Найти в '+local.name:local.label;
-    source='<a href="'+e(local.url)+'" target="_blank" rel="noopener noreferrer">'+e(label)+'</a>';
-   }
-   const included=cart?.url && !complete && !missing.has(category)?' · входит в корзину E-Techno':'';
-   return '<li>'+e(part.name)+' · '+source+included+'</li>';
-  }).join('');
-  const basket=cart?.url?cartLink(cart,'Корзина E-Techno · Воронеж ('+cart.count+' из '+total+')'):'';
-  openInfo('Магазины · '+city,'<ul>'+rows+'</ul>'+basket);
- };
-}
-
 function renderBuild(){
  closeInspector(false);
  fanLayout=sanitizeFanLayout(build,savedFans[build.case]);settings.fanLayout=fanLayout;saveFans();if(scene)scene.fanLayout=fanLayout;
  const check=compatibility(build),parts=resolve(build);$('parts-count').textContent=`${8-check.missing.length}/8`;
  assemblyPanel.render(parts,check,region.currency);
- renderCart(parts);
  if(check.errors.length)$('compatibility').innerHTML=`<div class="compat-box error"><strong>${icon('alert')} ${auditDesign?'Совместимость: есть проблема':'Есть несовместимость'}</strong><ul>${check.errors.map(v=>`<li>${e(v.text)}</li>`).join('')}</ul></div>`;
  else if(check.missing.length)$('compatibility').innerHTML='';
  else $('compatibility').innerHTML=`<div class="compat-box"><strong>${icon('check')} ${auditDesign?'Совместимость: проверки пройдены':'Основные проверки пройдены'}</strong><span>Сокет, память, размеры и запас питания.</span>${check.warnings.map(w=>`<span class="minor-note">${auditDesign?'• ':''}${e(w)}</span>`).join('')}</div>`;
@@ -171,7 +120,7 @@ document.querySelectorAll('[data-rgb-color]').forEach(b=>b.onclick=()=>changeLig
 $('rgb-color').oninput=()=>changeLighting({mode:'color',color:$('rgb-color').value});
 function resetSimulation(){thermalPanel.reset();lastTarget=null;running=false;hasRun=false;elapsed=0;thermals=initialThermals(settings.ambient);scene?.setOptions({running:false});}
 function choosePart(key,id,keepOpen=false){if(id)assemblyPanel.dismissHint();assemblyPanel.chooseRow(key);build[key]=id;resetSimulation();renderBuild();if(!keepOpen)$('catalog-dialog').close();toast(id?`${byId[id].short} добавлен в сборку`:'Компонент убран из сборки');}
-const shop=createShop({getBuild:()=>build,getPrices:()=>({...priceData,storeCity}),getSource:sourceFor,onChoose:(key,id)=>choosePart(key,id,true),beforeOpen:()=>{closeWorkshopMenu(false);closeInspector(false);},icon});
+const shop=createShop({getBuild:()=>build,getPrices:()=>priceData,getSource:sourceFor,onChoose:(key,id)=>choosePart(key,id,true),beforeOpen:()=>{closeWorkshopMenu(false);closeInspector(false);},icon});
 function openCatalog(key){shop.open(key);}
 $('shop-button').onclick=()=>shop.open();
 const fanUI=createFanEditor({getBuild:()=>build,getLayout:()=>fanLayout,getScene:()=>scene,isOpen:()=>activeTab==='fans',onCase:id=>{choosePart('case',id);},onChange:next=>{
@@ -300,7 +249,7 @@ let last=performance.now(),paint=0;function tick(now){const dt=Math.min((now-las
 renderBuild();
 $('region-select').onchange=()=>{regionId=regionFor($('region-select').value).id;region=regionFor(regionId);priceData=snapshots[regionId];try{localStorage.setItem('pcmaker-region',regionId);}catch{}renderBuild();shop.refresh();autoBuilder.refresh();document.dispatchEvent(new Event('pcmaker:region-change'));toast('Регион цен: '+region.city+' / '+region.currency);};
 Promise.allSettled([fetch('./prices.json',{cache:'no-cache',signal:AbortSignal.timeout(8000)}).then(r=>{if(!r.ok)throw Error('prices');return r.json();}),fetch('./prices-by.json',{cache:'no-cache',signal:AbortSignal.timeout(8000)}).then(r=>{if(!r.ok)throw Error('prices-by');return r.json();}),fetch('./sources.json',{signal:AbortSignal.timeout(8000)}).then(r=>r.json()),loadLivePrices()]).then(results=>{for(const [i,id] of ['ru','by'].entries())snapshots[id]=priceSnapshot(results[i].status==='fulfilled'?results[i].value:snapshots[id],id);if(results[2].status==='fulfilled')sourceData=results[2].value;priceData=snapshots[regionId];renderBuild();peripheralUI?.refresh();shop.refresh();autoBuilder.refresh();});
-if(workplace){const {mountPeripherals}=await import('./workplace-store.js');peripheralUI=mountPeripherals({getScene:()=>scene,getRegion:()=>regionId,getStoreCity:()=>storeCity,openShop:key=>shop.open(key),refreshShop:()=>shop.refresh()});shop.registerPeripherals(peripheralUI.shop);document.querySelectorAll('[data-workplace-mode]').forEach(b=>b.onclick=()=>{if(b.dataset.workplaceMode==='peripherals'){setTab('parts');closeInspector(false);}showWorkplaceMode(b.dataset.workplaceMode);});document.querySelectorAll('[data-workplace-view]').forEach(b=>b.onclick=()=>{setTab('parts',{reveal:false});scene?.focus(b.dataset.workplaceView);});}
+if(workplace){const {mountPeripherals}=await import('./workplace-store.js');peripheralUI=mountPeripherals({getScene:()=>scene,getRegion:()=>regionId,openShop:key=>shop.open(key),refreshShop:()=>shop.refresh()});shop.registerPeripherals(peripheralUI.shop);document.querySelectorAll('[data-workplace-mode]').forEach(b=>b.onclick=()=>{if(b.dataset.workplaceMode==='peripherals'){setTab('parts');closeInspector(false);}showWorkplaceMode(b.dataset.workplaceMode);});document.querySelectorAll('[data-workplace-view]').forEach(b=>b.onclick=()=>{setTab('parts',{reveal:false});scene?.focus(b.dataset.workplaceView);});}
 try{const Scene=workplace?(await import('./workplace-assembly.js')).WorkplaceScene:(await import('./scene.js?v=workplace-integration')).PCScene;scene=new Scene($('viewport'));peripheralUI?.attach();scene.onInspect=openInspector;scene.onCableDrop=completeCableDrag;scene.onCablePick=id=>{selectedCable=id;setTab('wiring',{reveal:false});};scene.fanLayout=fanLayout;scene.setBuild(build);scene.onFanSelect=fanUI.select;scene.onFanDrop=fanUI.move;fanUI.render();scene.setOptions({running,hideGlass:$('glass-toggle').getAttribute('aria-pressed')==='true',hideCooler:$('cooler-toggle').getAttribute('aria-pressed')==='true',airflow:$('airflow-toggle').getAttribute('aria-pressed')==='true'});renderLighting();renderWiring();scene.onContextLost=()=>toast('3D-контекст потерян. Сохрани сборку и обнови страницу.');updateSliders();}catch(error){console.error('3D initialization failed',error);$('viewport').innerHTML=`<div class="fallback">${icon('case')}<strong>3D не удалось запустить</strong><p>Попробуй современный браузер с аппаратным ускорением.<br>Каталог, совместимость и симуляция остаются доступны.</p></div>`;$('scene-hint').hidden=true;}
 
 

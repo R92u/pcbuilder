@@ -6,7 +6,7 @@ import {formatMoney,formatTotals,selectRegionalOffer,foreignPriceNotice} from '.
 import {priceQuality} from './price-quality.js';
 import {offerMarkup} from './data-quality-ui.js';
 
-export function mountPeripherals({getScene,getRegion,getStoreCity,openShop,refreshShop}) {
+export function mountPeripherals({getScene,getRegion,openShop,refreshShop}) {
 const $=id=>document.getElementById(id),e=s=>String(s??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
 const read=key=>{try{return JSON.parse(localStorage.getItem(key));}catch{return null;}};
 const save=(key,value)=>{try{localStorage.setItem(key,JSON.stringify(value));return true;}catch{return false;}};
@@ -21,7 +21,7 @@ function price(p,compact=false){const offer=selectRegionalOffer(offersForPeriphe
  const kind=offer.kind==='manufacturer'?'Цена каталога производителя':offer.availability==='out-of-stock'?'Последняя цена · нет в наличии':'Цена магазина';
  return `${summary}<p class="price-source">${e(kind)} · <a href="${e(offer.url)}" target="_blank" rel="noopener noreferrer">${e(offer.store)} ↗</a>${offer.note?'<br>'+e(offer.note):''}</p>`;
 }
-function offerLink(p){return storePickerMarkup(p,p.category,{currency:regionFor(regionId).currency,storeCity:getStoreCity(),items:{[p.id]:selectRegionalOffer(offersForPeripheral(p),regionId)}});}
+function offerLink(p){return storePickerMarkup(p,p.category,{currency:regionFor(regionId).currency,items:{[p.id]:selectRegionalOffer(offersForPeripheral(p),regionId)}});}
 function choose(id){const p=peripheralById[id];if(!p)return;selection[p.category]=id;const stored=save('pcmaker-workplace',selection);getScene()?.setPeripherals(selection);if(p.category==='chair')getScene()?.focus('chair');render();refreshShop();if(!stored){$('workplace-total-note').textContent='Браузер не разрешил сохранить выбор. Он доступен до закрытия страницы.';}}
 function render(){
  $('workplace-count').textContent=Object.keys(selection).length+' предмета';

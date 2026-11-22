@@ -1,4 +1,3 @@
-import {cityStoreLink} from './store-cities.js';
 import {storeLink,marketLink} from './regions.js';
 
 const escape=value=>String(value??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
@@ -17,8 +16,7 @@ function linkMarkup({name,url,direct}){
 }
 export function storePickerMarkup(part,category,data={},source={}){
  if(part.category==='chair')part={...part,sku:part.name};
- const regional = data.currency !== 'BYN' && cityStoreLink(data.storeCity, part);
- const links = regional ? [regional] : [];
+ const links=[];
  if(data.currency==='BYN'){
   const local=storeLink(part,category,data,source);
   const name=new URL(local.url).hostname.replace(/^www\./,'')==='5element.by'?'5 элемент':local.label.replace(/^(?:Товар|Найти) в /,'').replace(/ ↗$/,'');
