@@ -1,6 +1,44 @@
 // Exact retailer SKUs. Unknown dimensions and thermal assumptions are explicitly marked.
 export const catalogExtra={
+  "psu": [
+    {
+      "id": "pk700d",
+      "name": "DeepCool PK700D",
+      "short": "PK700D · 700 Вт",
+      "brand": "DeepCool",
+      "sku": "R-PK700D-FA0B-EU",
+      "watts": 700,
+      "form": "ATX",
+      "length": 140,
+      "dimensions": [140, 150, 86],
+      "modular": false,
+      "connectors": 2,
+      "epsConnectors": 2,
+      "sataConnectors": 7,
+      "connector16pin": false,
+      "efficiency": "80 PLUS Bronze",
+      "detail": "700 Вт · 80 PLUS Bronze · 2 × PCIe 6+2-pin",
+      "sources": ["https://www.deepcool.com/download/pdf/PK_D.pdf", "https://e-techno.net/product/parts/psu/deepcool-pk700d/"]
+    }
+  ],
   "ram": [
+    {
+      "id": "viper-steel-16-3200",
+      "sku": "PVS416G320C6K",
+      "name": "Patriot Viper Steel 16 ГБ DDR4-3200",
+      "short": "Viper Steel 2 × 8 ГБ",
+      "brand": "Patriot",
+      "memory": "DDR4",
+      "capacity": 16,
+      "modules": 2,
+      "speed": 3200,
+      "latency": 16,
+      "voltage": 1.35,
+      "height": 44.4,
+      "profile": "XMP 2.0",
+      "detail": "2 × 8 ГБ · DDR4-3200 · CL16",
+      "sources": ["https://viper.patriotmemory.ru/documents/PVS416G320C6K-Sku-Sheet_030221.pdf"]
+    },
     {
       "id": "mem-kf432c16bb1k2-32",
       "sku": "KF432C16BB1K2/32",

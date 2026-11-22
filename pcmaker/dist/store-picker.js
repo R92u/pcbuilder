@@ -1,3 +1,4 @@
+import {cityStoreLink} from './store-cities.js';
 import {storeLink,marketLink} from './regions.js';
 
 const escape=value=>String(value??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
@@ -15,13 +16,15 @@ function linkMarkup({name,url,direct}){
  return `<a class="store-picker-link" href="${escape(url)}" target="_blank" rel="noopener noreferrer"><span class="store-picker-name">${escape(name)}</span><span class="store-picker-note">${direct?'Карточка товара':'Поиск модели'} ↗</span></a>`;
 }
 export function storePickerMarkup(part,category,data={},source={}){
- const links=[];
+ if(part.category==='chair')part={...part,sku:part.name};
+ const regional = data.currency !== 'BYN' && cityStoreLink(data.storeCity, part);
+ const links = regional ? [regional] : [];
  if(data.currency==='BYN'){
   const local=storeLink(part,category,data,source);
   const name=new URL(local.url).hostname.replace(/^www\./,'')==='5element.by'?'5 элемент':local.label.replace(/^(?:Товар|Найти) в /,'').replace(/ ↗$/,'');
   links.push({name,url:local.url,direct:local.label.startsWith('Товар')});
  }
- const ozon=storeLink(part,category,{...data,currency:'RUB'},source);
+ const ozon=storeLink(part,category,{...data,currency:'RUB',ozonLinks:{...data.ozonLinks,[part.id]:part.marketplaceLinks?.ozon||data.ozonLinks?.[part.id]}},source);
  links.push({name:'Ozon',url:ozon.url,direct:ozon.label.startsWith('Товар')});
  links.push({name:'Яндекс Маркет',url:marketLink(part),direct:false});
  const dns=[data.dnsLinks?.[part.id],source?.storeUrl,data.items?.[part.id]?.url].map(dnsProductURL).find(Boolean);

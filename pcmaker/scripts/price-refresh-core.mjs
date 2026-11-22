@@ -1,7 +1,7 @@
 // Deliberately conservative: one exact public Product/Offer, never search results,
 // recommendation prices, aggregates, currency conversion or anti-bot workarounds.
-export const allowedHosts = new Set(['kns.ru','regard.ru','5element.by','andpro.ru','redragon.ru','masterdom.by','tecno.by','time-shop.by','cybermarket.by','nexton.by','unifox.by','ultraprice.by','dns-shop.ru','newegg.com','logitechg.com','onecom.ru','r-seven.ru','tec.by','onlife.by','mvideo.ru','lifebook-shop.ru','ozon.ru']);
-export const supportedHosts = new Set(['kns.ru','regard.ru','5element.by','andpro.ru','redragon.ru','masterdom.by','tecno.by','time-shop.by','cybermarket.by','nexton.by','unifox.by','ultraprice.by','logitechg.com','newegg.com','lifebook-shop.ru']);
+export const allowedHosts = new Set(['z51.ru','kns.ru','regard.ru','5element.by','andpro.ru','redragon.ru','masterdom.by','tecno.by','time-shop.by','cybermarket.by','nexton.by','unifox.by','ultraprice.by','dns-shop.ru','newegg.com','logitechg.com','onecom.ru','r-seven.ru','tec.by','onlife.by','mvideo.ru','lifebook-shop.ru','ozon.ru']);
+export const supportedHosts = new Set(['z51.ru','kns.ru','regard.ru','5element.by','andpro.ru','redragon.ru','masterdom.by','tecno.by','time-shop.by','cybermarket.by','nexton.by','unifox.by','ultraprice.by','logitechg.com','newegg.com','lifebook-shop.ru']);
 export const hostOf = url => new URL(url).hostname.replace(/^www\./,'');
 export function allowedURL(value, original) {
   try {
@@ -17,6 +17,8 @@ const normalized = s => String(s??'').normalize('NFKC').toLowerCase().replace(/[
 const tokens = s => String(s??'').normalize('NFKC').toLowerCase().match(/[a-zа-яё0-9]+/g)||[];
 export function identityMatches(product, candidate) {
   const identifiers = [candidate.sku,candidate.mpn].filter(v=>v!==undefined).map(normalized);
+  // Exact, explicitly reviewed manufacturer title when its Product omits the SKU.
+  if(!identifiers.length&&product.priceIdentityName&&normalized(candidate.name)===normalized(product.priceIdentityName))return true;
   if(product.sku) {
     // A slash inside a part number is significant; only spaced separators denote aliases.
     const variants=String(product.sku).split(/\s+\/\s+|\s*;\s*/).filter(v=>normalized(v).length>=4);

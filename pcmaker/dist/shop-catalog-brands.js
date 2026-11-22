@@ -147,7 +147,7 @@ export function createShop({getBuild,getPrices,getSource,onChoose,beforeOpen,ico
   render();
  }
  function selectCategory(key){category=key;$('catalog-title').textContent=title(category);for(const button of dialog.querySelectorAll('[data-shop-category]'))button.setAttribute('aria-pressed',String(button.dataset.shopCategory===key));populateFilters();reset();$('shop-results').scrollTop=0;}
- function renderCategories(){const all=products();$('shop-categories').innerHTML=[['all',peripheral?'Все товары':'Все комплектующие','layers'],...sections().map(([key,name])=>[key,name,key])].map(([key,name,symbol])=>`<button data-shop-category="${key}" aria-pressed="${key===category}">${icon(['monitor','keyboard','mouse'].includes(symbol)?'layers':symbol)}<span>${name}</span><small>${all.filter(p=>key==='all'||p.category===key).length}</small></button>`).join('');}
+ function renderCategories(){const all=products();$('shop-categories').innerHTML=[['all',peripheral?'Все товары':'Все комплектующие','layers'],...sections().map(([key,name])=>[key,name,key])].map(([key,name,symbol])=>`<button data-shop-category="${key}" aria-pressed="${key===category}">${icon(['monitor','keyboard','mouse','chair'].includes(symbol)?'layers':symbol)}<span>${name}</span><small>${all.filter(p=>key==='all'||p.category===key).length}</small></button>`).join('');}
  renderCategories();
  dialog.addEventListener('click',event=>{
   const button=event.target.closest('button');if(!button)return;

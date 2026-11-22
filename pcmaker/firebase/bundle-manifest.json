@@ -1,5 +1,5 @@
 {
-  "dist/catalog-extra.js": "0e9056aa0bffd97c753ccf1cdcbb3eb895ae5b33ba91615f94f6cb565dd41c77",
+  "dist/catalog-extra.js": "5f897f39bb6abffa2b4167c86540e7a1a69b37ce3823385e9d19c41e862adf62",
   "dist/catalog-entry.js": "82cdd0c7d2bc753d06c2079b740bbabaa9453cc913fab14b8198ec79f9246cf9",
   "dist/catalog-budget.js": "9da9c13e19ee8bf9be2fb54f5e3f69d41d83805a78d39f81c43483da8ad8df56",
   "dist/catalog.js": "9059d4a1a0aec9a0df32059fcc39c621088653b6a87dc7486b4c5279a4044357",
@@ -19,12 +19,12 @@
   "dist/regions.js": "602960769e51be001ef0f43cb6921d59d7aae8579f407806494471d0a8b7fadc",
   "firebase/app-check-guard.js": "cfd2312858bdbed017ae9d18d9d149f6f92c785e563739f7b763dab4d9a76b19",
   "firebase/gallery-client.js": "4e89e8a0acea72da714f4fbf2f091d7596e3ecb28acef04d0954d9ec5d2d5e28",
-  "dist/budget-data.js": "15608e6118b5705a70e842da6bf0e03d614cb657f0386b33118d3b4e711958a2",
+  "dist/budget-data.js": "401865699833cab3c14aa847426ea58c848ab6fa343070df00b7fad4142cde50",
   "dist/verification-data.js": "b0ad5458ffd7d2aba7fb2df0ca54e6d3030a73356e8d0db42be592c0928d0a54",
   "dist/verification.js": "8e143a04c1416ab131b9070112018bb05f6ec5ccf540f140de12ffa20d18f35d",
   "dist/autobuild.js": "ce82bb7adcb5aa0355d5852d5a70338b3010c5c53c4926fc6b6abfc040f376e8",
   "src/autobuild-worker.js": "6a3be09ac1341902d8c4821bd645a49af859ab47458239e638051b7584b415db",
-  "dist/vendor/firebase-gallery.js": "80209016458fb91561b419c3736c81de822979b8ddbadc3728847823e8698fd2",
-  "dist/autobuild-worker.js": "2953048879d99967ed11f647a5eb3ba92a8ead11408f699d23c0601ecb94e1e1",
+  "dist/vendor/firebase-gallery.js": "9a0066b686bde223629a547e12225f8cfd7c91fb7182b662b2728d3bef5c767f",
+  "dist/autobuild-worker.js": "71bff0d85b2932ef0f2811f68deb08d28f3caadb042a3127511614b1b1c06ed2",
   "pnpm-lock.yaml": "9fb4fc44dbe103c9acb3f38fbfc348cfcdad2a2c339fc238d3e327b12244f559"
 }

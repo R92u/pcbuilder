@@ -1,3 +1,4 @@
+import {mg8Shell,addMG8Interior} from './mg8-model.js';
 import * as THREE from './vendor/three.module.js';
 
 // Coordinates are in the same 100 mm units as the desk and other peripherals.
@@ -8,12 +9,18 @@ export function mouseProfile(p){
   angular:p.id==='g502'||p.name.includes('G502'),perforated:p.perforated||p.id==='mg8',metal:p.id==='mg8',
   light:p.colors.includes('white')&&!p.colors.includes('black')};
 }
+// Silhouette widths sampled along the overhead MG8 reference, excluding the receiver.
+const mg8Widths=[0, 208, 306, 362, 382, 388, 390, 392, 392, 390, 391, 394, 391, 389, 380, 382, 386, 387, 392, 396, 402, 404, 402, 400, 390, 376, 356, 324, 280, 206, 0];
+function mg8Width(v){
+ const t=Math.max(0,Math.min(30,(v+1)*15)),i=Math.min(29,Math.floor(t));
+ return THREE.MathUtils.lerp(mg8Widths[i],mg8Widths[i+1],t-i)/404;
+}
 export function mouseSurface(profile,v,angle){
  const {w,d,h,ergonomic,angular}=profile;
  const cap=Math.sqrt(Math.max(0,1-Math.abs(v)**(angular?4:3.2)));
  const waist=1-.095*Math.exp(-(((v+.06)/.34)**2));
  const c=Math.cos(angle),s=Math.sin(angle),base=h*.12;
- let x=w*.49*cap*waist*c;
+ let x=profile.metal?w*.4999*mg8Width(v)*c:w*.49*cap*waist*c;
  if(ergonomic){
   x*=.86;
   // A continuous thumb ledge, rather than an intersecting extruded plate.
@@ -101,11 +108,7 @@ function texture(p,f){
  ctx.fillStyle='#11171b';ctx.beginPath();ctx.roundRect(232,80,48,92,13);ctx.fill();
  const dpi=p.dpiButtons??(['king','k1ng-4k-pro-white','mg8','azzmach-lite-white'].includes(p.id)?0:['gainer'].includes(p.id)?1:2);
  for(let i=0;i<dpi;i++){ctx.fillStyle=seam;ctx.beginPath();ctx.roundRect(242,183+i*30,28,23,5);ctx.fill();ctx.fillStyle=f.light?'#c7ccca':'#51595e';ctx.beginPath();ctx.roundRect(245,186+i*30,22,17,4);ctx.fill();}
- if(f.metal){
- // Broad triangular apertures follow the magnesium model's cutout pattern.
- const holes=[[[122,163],[166,139],[169,200]],[[185,160],[215,185],[184,214]],[[298,183],[327,160],[329,214]],[[346,141],[390,165],[345,201]],[[126,216],[171,226],[168,247]],[[340,226],[386,214],[343,247]],[[125,280],[212,308],[126,345]],[[300,308],[386,280],[385,345]],[[178,330],[250,355],[175,386]],[[262,355],[335,330],[336,386]],[[127,365],[151,392],[129,426]],[[361,391],[385,365],[383,426]]];
- for(const points of holes){ctx.beginPath();points.forEach(([x,y],i)=>i?ctx.lineTo(x,y):ctx.moveTo(x,y));ctx.closePath();ctx.fillStyle='#151b1f';ctx.fill();ctx.strokeStyle='#87909766';ctx.lineWidth=2;ctx.stroke();}
-}else if(f.perforated){
+ if(f.perforated){
  for(let row=0;row<9;row++)for(let col=0;col<7;col++){
    const x=128+col*39+(row%2)*18,y=155+row*32;
    if(y<251&&Math.abs(x-256)<40||y>375&&Math.abs(x-256)<65||x>400)continue;
@@ -130,14 +133,15 @@ function buttonPatch(f,v,angle,length,span){
 }
 export function createMouseModel(p,{withTexture=true}={}){
  const f=mouseProfile(p),group=new THREE.Group();group.name='Mouse '+p.id;
- const shellGeometry=surfaceGeometry(f);
+ const shellGeometry=f.metal?mg8Shell(f,mouseSurface):surfaceGeometry(f);
  if(f.iskra){
   const pos=shellGeometry.getAttribute('position'),idx=shellGeometry.index;let start=0,last=-1;
   for(let i=0;i<idx.count;i+=3){const bottom=[0,1,2].every(k=>pos.getY(idx.getX(i+k))<=f.h*.121),m=bottom?1:0;if(m!==last){if(last!==-1)shellGeometry.addGroup(start,i-start,last);start=i;last=m;}}
   shellGeometry.addGroup(start,idx.count-start,last);
  }
- const shell=new THREE.Mesh(shellGeometry,new THREE.MeshStandardMaterial({color:withTexture?'#ffffff':f.iskra?'#b9232d':f.light?'#e6e7e3':'#30363b',map:withTexture?texture(p,f):null,roughness:f.metal?.58:.6,metalness:f.metal?.22:.04}));if(f.iskra)shell.material=[shell.material,new THREE.MeshStandardMaterial({color:'#b9232d',roughness:.65})];shell.name='continuous-shell';shell.castShadow=true;shell.receiveShadow=true;group.add(shell);
- const dark=new THREE.MeshStandardMaterial({color:'#22292e',roughness:.7,metalness:.03});
+ const shell=new THREE.Mesh(shellGeometry,new THREE.MeshStandardMaterial({color:f.metal?'#161616':withTexture?'#ffffff':f.iskra?'#b9232d':f.light?'#e6e7e3':'#30363b',map:withTexture&&!f.metal?texture(p,f):null,roughness:f.metal?.70:.6,metalness:f.metal?.22:.04}));if(f.iskra)shell.material=[shell.material,new THREE.MeshStandardMaterial({color:'#b9232d',roughness:.65})];shell.name='continuous-shell';shell.castShadow=true;shell.receiveShadow=true;group.add(shell);
+ const dark=new THREE.MeshStandardMaterial({color:f.metal?'#111111':'#22292e',roughness:.7,metalness:.03});
+ if(f.metal)addMG8Interior(group,f,mouseSurface);
  const sideCount=p.sideButtons??(p.id==='g502'?3:2);
  for(let i=0;i<sideCount;i++){
   const many=sideCount>3,angle=many?2.28+Math.floor(i/4)*.22:2.55,v=many?-.48+(i%4)*.18:-.30+i*.25;
@@ -146,7 +150,7 @@ export function createMouseModel(p,{withTexture=true}={}){
  // Rubber wheel, axle across the mouse; only the upper arc projects above the shell.
  const wheelV=-.51,wheelZ=wheelV*f.d/2,radius=f.d*.063,axleY=mouseSurface(f,wheelV,Math.PI/2).y-radius*.63;
  const wheel=new THREE.Mesh(new THREE.CylinderGeometry(radius,radius,f.w*.105,32),f.iskra?new THREE.MeshStandardMaterial({color:'#bd2732',roughness:.65}):dark);wheel.name='scroll-wheel';wheel.rotation.z=Math.PI/2;wheel.position.set(0,axleY,wheelZ);group.add(wheel);
- const ribs=new THREE.InstancedMesh(new THREE.BoxGeometry(f.w*.107,.006,.009),new THREE.MeshStandardMaterial({color:f.iskra?'#101113':f.light?'#9ba4a5':'#697378',roughness:.75}),24),t=new THREE.Object3D();
+ const ribs=new THREE.InstancedMesh(new THREE.BoxGeometry(f.w*.107,.006,.009),new THREE.MeshStandardMaterial({color:f.iskra?'#101113':f.metal?'#202020':f.light?'#9ba4a5':'#697378',roughness:.75}),24),t=new THREE.Object3D();
  for(let i=0;i<24;i++){const a=i/24*Math.PI*2;t.position.set(0,axleY+Math.cos(a)*radius,wheelZ+Math.sin(a)*radius);t.rotation.x=a;t.updateMatrix();ribs.setMatrixAt(i,t.matrix);}ribs.name='wheel-tread';group.add(ribs);
  if(p.wired){
   const boot=new THREE.Mesh(new THREE.CylinderGeometry(.023,.028,.11,12),dark);boot.rotation.x=Math.PI/2;boot.position.set(0,f.h*.12,-f.d/2+.01);boot.name='cable-boot';group.add(boot);group.userData.cableStart=[0,f.h*.12,-f.d/2-.04];

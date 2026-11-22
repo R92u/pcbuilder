@@ -490,5 +490,11 @@
     "sourcePage": "https://shop.lunacy.ru/products/mysh-besprovodnaya-lunacy-x-honkai-star-rail-limitirovannoe-izdanie-iskra-101016",
     "sourceImage": "https://avatars.mds.yandex.net/get-yastore/20776375/cvw2kcl7h5cz2jqmsrcr9hjntbcvgtlq/x640",
     "credit": "Lunacy"
+  },
+  "zone51-core-x-weave-loft-gray": {
+    "image": "assets/peripherals/zone51-core-x-weave-loft-gray.webp",
+    "sourcePage": "https://z51.ru/catalog/kresla/core-x-weave/",
+    "sourceImage": "https://z51.ru/upload/resize_cache/iblock/944/1r13gdquoxczmezey6vkeqohyojhetnu/1094_1160_1/1500x1500_Z51_Core_GR%20%285%29.png",
+    "credit": "ZONE 51"
   }
 }

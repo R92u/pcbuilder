@@ -28,7 +28,7 @@ export class PeripheralCables{
  refresh(){
   if(!this.scene.currentBuild)return;
   this.endDrag(null,true);this.scene.scene.updateMatrixWorld(true);this.pc=resolve(this.scene.currentBuild||{});this.products={};this.groups={};this.ports=[];
-  for(const group of this.scene.peripheralRoot.children){const p=peripheralById[group.userData.productId];if(p){this.products[p.category]=p;this.groups[p.category]=group;}}
+  for(const group of this.scene.peripheralRoot.children){const p=peripheralById[group.userData.productId];if(p&&connectionModes(p).length){this.products[p.category]=p;this.groups[p.category]=group;}}
   for(const part of ['motherboard','gpu']){let index=0;this.scene.parts[part]?.traverse(node=>{if(node.userData.externalPort){const type=node.userData.externalPort;this.ports.push({id:part+':'+index++,part,type,node,name:(part==='gpu'?'Видеокарта':'Плата')+' · '+({usbA:'USB-A',usbC:'USB-C'}[type]||connectionLabels[type])+' №'+index});}});}
   const before=Object.keys(this.connections).length;this.connections=sanitizeConnections(this.connections,this.products,this.ports,this.pc);
   if(Object.keys(this.connections).length<before)this.message='Подключения заменённых или несовместимых устройств сброшены.';

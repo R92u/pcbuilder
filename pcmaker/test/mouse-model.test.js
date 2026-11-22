@@ -48,3 +48,12 @@ test('Lunacy HSR edition has its own paint, physical controls and underside',()=
  assert.deepEqual(model.userData.cableStart,model.getObjectByName('usb-c-port').position.toArray());
  assert.equal(model.getObjectByName('cable-boot'),undefined,'wireless model has no permanent cable');
 });
+
+test('MG8 palm opening exposes the battery while the adjacent centre rib occludes it',async()=>{
+ const {Raycaster}=await import('../dist/vendor/three.module.js');
+ const p=peripherals.find(item=>item.id==='mg8'),model=createMouseModel(p,{withTexture:false});
+ const {w,d,h}=mouseProfile(p);model.updateMatrixWorld(true);
+ const first=(x,z)=>new Raycaster(new Vector3(x,2*h,z),new Vector3(0,-1,0)).intersectObject(model,true)[0]?.object.name;
+ assert.equal(first(-.11*w,.15*d),'battery-sleeve');
+ assert.equal(first(0,.15*d),'continuous-shell');
+});

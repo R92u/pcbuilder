@@ -3,6 +3,8 @@ import {productImagesEntry} from './product-images-entry.js';
 import {productImagesExtra} from './product-images-extra.js';
 import {productImagesBudget} from './product-images-budget.js';
 export const productImages={
+ "viper-steel-16-3200":{"id": "viper-steel-16-3200", "sourcePage": "https://e-techno.net/product/parts/ram/patriot-viper-steel-2x8gb-ddr4/", "sourceImage": "https://e-techno.net/wp-content/uploads/2026/09/Patriot-Viper-Steel-PVS416G320C6K.webp", "credit": "retailer", "image": "assets/catalog/viper-steel-16-3200.webp"},
+ "pk700d":{"id": "pk700d", "sourcePage": "https://www.regard.ru/product/500567/blok-pitaniia-700w-deepcool-pk700d-oem", "sourceImage": "https://www.regard.ru/api/photo/goods/6349838.jpg", "credit": "retailer", "image": "assets/catalog/pk700d.webp"},
  "b550m-aorus-elite":{"id": "b550m-aorus-elite", "sourcePage": "https://www.gigabyte.com/Motherboard/B550M-AORUS-ELITE-rev-10-11-12/sp", "sourceImage": "https://static.gigabyte.com/StaticFile/Image/Global/91a4df8b5a5ec566b2e502aa50e7ede9/ProductRemoveBg/25359", "credit": "manufacturer", "image": "assets/catalog/b550m-aorus-elite.webp"},
  ...productImagesEntry,
  ...productImagesExtra,

@@ -1,0 +1,26 @@
+{
+  "checkedAt": "2026-11-22",
+  "region": "ru",
+  "source": "https://z51.ru/catalog/kresla/core-x-weave/",
+  "sku": "Z51-CHA-COF-GY",
+  "structuredProduct": {
+    "@context": "https://schema.org/",
+    "@type": "Product",
+    "name": "Игровое кресло CORE X-Weave Loft Gray",
+    "image": "https://z51.ru/upload/resize_cache/iblock/944/1r13gdquoxczmezey6vkeqohyojhetnu/1094_1160_1/1500x1500_Z51_Core_GR (5).png",
+    "brand": "ZONE 51",
+    "description": "Закажите компьютерное игровое кресло ZONE 51 Core X-Weave Loft Gray для офиса, дома или компьютерного клуба в интернет-магазине z51.ru с доставкой по Москве и РФ! Только оригинальные кресла! Большой шоу-рум в Москве. Гарантия 3 года.",
+    "offers": {
+      "@type": "Offer",
+      "url": "https://z51.ru/catalog/kresla/core-x-weave/",
+      "priceCurrency": "RUB",
+      "price": "59990",
+      "availability": "https://schema.org/InStock"
+    }
+  },
+  "notes": [
+    "Exact Loft Gray variant, not CORE Light or Dark Gray.",
+    "Manufacturer price is dated; marketplace links do not assert price or stock.",
+    "3D uses 810 × 680 × 1300 mm static configuration; simplified seams and logo."
+  ]
+}
