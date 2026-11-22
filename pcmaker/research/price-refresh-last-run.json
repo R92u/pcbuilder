@@ -1,15 +1,15 @@
 {
-  "checkedAt": "2026-11-21T12:50:05.017Z",
+  "checkedAt": "2026-11-22T12:42:38.143Z",
   "scope": {
     "region": "all",
     "host": "all",
     "limit": 500
   },
-  "attempted": 435,
-  "updated": 333,
-  "failed": 102,
+  "attempted": 436,
+  "updated": 201,
+  "failed": 235,
   "manualRetained": 0,
-  "offerAttempts": 451,
+  "offerAttempts": 456,
   "fallbackUpdated": 0,
   "withBackup": 25,
   "sources": {
@@ -34,13 +34,15 @@
       "causes": {}
     },
     "kns.ru": {
-      "attempted": 183,
-      "updated": 132,
-      "failed": 51,
+      "attempted": 184,
+      "updated": 0,
+      "failed": 184,
       "reasons": {
-        "product-not-confirmed": 51
+        "robots-unavailable": 184
       },
-      "causes": {}
+      "causes": {
+        "http-403": 184
+      }
     },
     "andpro.ru": {
       "attempted": 10,
@@ -108,13 +110,6 @@
       "reasons": {},
       "causes": {}
     },
-    "ultraprice.by": {
-      "attempted": 1,
-      "updated": 1,
-      "failed": 0,
-      "reasons": {},
-      "causes": {}
-    },
     "cybermarket.by": {
       "attempted": 2,
       "updated": 2,
@@ -123,11 +118,11 @@
       "causes": {}
     },
     "dns-shop.ru": {
-      "attempted": 6,
+      "attempted": 9,
       "updated": 0,
-      "failed": 6,
+      "failed": 9,
       "reasons": {
-        "unsupported-source": 6
+        "unsupported-source": 9
       },
       "causes": {}
     },
@@ -197,6 +192,24 @@
         "price-not-confirmed": 4
       },
       "causes": {}
+    },
+    "z51.ru": {
+      "attempted": 1,
+      "updated": 1,
+      "failed": 0,
+      "reasons": {},
+      "causes": {}
+    },
+    "ultraprice.by": {
+      "attempted": 1,
+      "updated": 0,
+      "failed": 1,
+      "reasons": {
+        "robots-unavailable": 1
+      },
+      "causes": {
+        "timeout": 1
+      }
     },
     "r-seven.ru": {
       "attempted": 1,
