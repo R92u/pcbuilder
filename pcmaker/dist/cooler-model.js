@@ -22,8 +22,13 @@ export function makeTowerCooler(p){
  for(let i=0;i<count;i++){
   const fanSize=layout.sizes[i]||size,front=count===1||i===count-1,xx=layout.top-fanSize/2-.01+(front?layout.lift:0),zz=fanZ[Math.min(i,fanZ.length-1)];
   const fan=this.fan(g,fanSize,xx,CPU_CENTER.y,zz,[0,0,0],'cpu',false);
-  for(const y of [CPU_CENTER.y-size*.40,CPU_CENTER.y+size*.40]){
-   this.rod(g,[xx-size*.43,y,zz-.10],[xx+size*.43,y,zz-.10],.009,0x8d999c);
+  const tower=towers.reduce((near,z)=>Math.abs(zz-z)<Math.abs(zz-near)?z:near,towers[0]);
+  const towardFan=Math.sign(zz-tower),finFace=tower+towardFan*layout.finDepth/2;
+  for(const y of [CPU_CENTER.y-fanSize*.40,CPU_CENTER.y+fanSize*.40]){
+   for(const x of [xx-fanSize*.43,xx+fanSize*.43]){
+    const finX=Math.max(finStart,Math.min(finEnd,x));
+    this.rod(g,[finX,y,finFace],[x,y,zz-towardFan*.09],.013,0x8d999c);
+   }
   }
   if(p.brand==='Noctua'&&!/redux|chromax/i.test(p.name))fan.traverse(o=>{if(o.material&&!o.material.map)o.material.color.set(o.userData.animated?0x6e4533:0x85705b);});
  }

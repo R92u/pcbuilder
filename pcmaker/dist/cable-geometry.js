@@ -39,8 +39,22 @@ export function strandPoints(cable,index){
  const offset=(index-(cable.strands-1)/2)*cable.radius*2.15;
  return cable.points.map((p,n)=>{
   const source=n===0&&cable.from==='Блок питания',end=n===cable.points.length-1;
-  const axis=source||cable.spreadAxis==='x'||(end&&cable.endSpreadAxis==='x')?0:1;
+  const atPlug=n>=cable.points.length-2;
+  const axis=cable.sideRun?.includes(n)?2:source||cable.spreadAxis==='x'||(atPlug&&cable.endSpreadAxis==='x')?0:1;
   const taper=source?.60:end&&cable.id==='gpu16'?.65:1;
   return p.map((v,k)=>v+(k===axis?offset*taper:0));
  });
+}
+
+export function cableCombs(cable){
+ const first=strandPoints(cable,0),last=strandPoints(cable,cable.strands-1);
+ const runs=[];
+ for(let i=1;i<cable.points.length-2;i++){
+  const a=new Vector3(...cable.points[i]),b=new Vector3(...cable.points[i+1]);
+  const direction=b.clone().sub(a),span=new Vector3(...last[i]).sub(new Vector3(...first[i]));
+  const endSpan=new Vector3(...last[i+1]).sub(new Vector3(...first[i+1]));
+  if(direction.length()<.28||span.distanceTo(endSpan)>.005||Math.abs(span.clone().normalize().dot(direction.normalize()))>.18)continue;
+  runs.push({center:a.lerp(b,.5),width:span.length()+2*cable.radius,axis:span.normalize()});
+ }
+ return runs.filter((_,index)=>index===Math.floor((runs.length-1)*.35)||index===Math.ceil((runs.length-1)*.75));
 }

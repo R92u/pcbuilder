@@ -1,5 +1,5 @@
 import {createChairModel,chairPlacement} from './chair-model.js?v=quality-20261122';
-import {connectionModes} from './peripheral-connections.js';
+import {DESK_Y as deskY,DESK_MAT,connectionModes} from './peripheral-connections.js';
 import {PeripheralCables} from './peripheral-cables.js';
 import * as THREE from 'three';
 import {createMouseModel as mouse} from './mouse-model.js';
@@ -10,7 +10,7 @@ import {peripheralAppearance} from './peripheral-shapes.js?v=expanded-20261102';
 import {createKeyboardModel as keyboard,sanitizeKeyboardLighting} from './keyboard-model.js';
 
 const plastic=color=>new THREE.MeshStandardMaterial({color,roughness:.62,metalness:.08});
-const deskY=7.5;
+
 function box(g,w,h,d,x,y,z,material){const m=new THREE.Mesh(new THREE.BoxGeometry(w,h,d),material);m.position.set(x,y,z);m.castShadow=true;m.receiveShadow=true;g.add(m);return m;}
 function dispose(group){const geometries=new Set(),materials=new Set(),textures=new Set();group.traverse(o=>{if(o.geometry)geometries.add(o.geometry);for(const m of [o.material].flat().filter(Boolean)){materials.add(m);if(m.map)textures.add(m.map);}});textures.forEach(t=>t.dispose());geometries.forEach(g=>g.dispose());materials.forEach(m=>m.dispose());group.removeFromParent();}
 function label(g,text,w,h,x,y,z,rotation=[0,0,0],color='#b6bdc1'){
@@ -23,11 +23,14 @@ function monitor(p){
  const baseW=Math.min(w*.48,p.stand==='l'?2.45:3.15),baseD=d*.94;
  if(p.stand==='angular'){
   const shape=new THREE.Shape();shape.moveTo(-baseW/2,-baseD/2);shape.lineTo(baseW/2,-baseD/2);shape.lineTo(baseW*.38,baseD/2);shape.lineTo(-baseW*.38,baseD/2);shape.closePath();
-  const base=new THREE.Mesh(new THREE.ExtrudeGeometry(shape,{depth:.065,bevelEnabled:false}),metal);base.rotation.x=-Math.PI/2;base.position.y=.025;g.add(base);
+  const base=new THREE.Mesh(new THREE.ExtrudeGeometry(shape,{depth:.065,bevelEnabled:false}),metal);base.rotation.x=-Math.PI/2;base.position.y=0;g.add(base);
  }else if(p.stand==='l'){
-  box(g,baseW,.055,.55,0,.04,baseD*.28,metal);box(g,.32,.055,baseD*.8,0,.04,-baseD*.05,metal);
- }else box(g,baseW,.065,baseD,0,.04,0,metal);
- box(g,p.stand==='l'?.16:.29,h*.55,.18,0,h*.29,-d*.17,metal);
+  box(g,baseW,.055,.55,0,.0275,baseD*.28,metal);box(g,.32,.055,baseD*.8,0,.0275,-baseD*.05,metal);
+ }else box(g,baseW,.065,baseD,0,.0325,0,metal);
+ const baseTop=p.stand==='l'?.055:.065,postZ=-d*.17,hingeY=bodyY-bodyH*.12;
+ box(g,p.stand==='l'?.16:.29,hingeY-baseTop,.18,0,(hingeY+baseTop)/2,postZ,metal);
+ const rearZ=panelZ-.09;
+ box(g,.34,.21,Math.abs(rearZ-postZ)+.09,0,hingeY,(postZ+rearZ)/2,metal);
  const screen=new THREE.Group();screen.position.set(0,bodyY,panelZ);g.add(screen);
  const canvas=document.createElement('canvas');canvas.width=512;canvas.height=256;const ctx=canvas.getContext('2d'),bg=ctx.createLinearGradient(0,0,512,256);bg.addColorStop(0,'#152e36');bg.addColorStop(.55,'#587b89');bg.addColorStop(1,'#d0dbd7');ctx.fillStyle=bg;ctx.fillRect(0,0,512,256);
  for(let i=0;i<8;i++){ctx.strokeStyle='#d6efff25';ctx.lineWidth=8;ctx.beginPath();ctx.ellipse(350,310,80+i*28,160+i*18,-.7,0,Math.PI*2);ctx.stroke();}ctx.fillStyle='#ffffffde';ctx.font='300 30px Arial';ctx.fillText('PCmaker',26,205);ctx.font='12px Arial';ctx.fillText('ТВОЁ РАБОЧЕЕ МЕСТО',28,229);
@@ -44,7 +47,7 @@ function monitor(p){
  g.userData.cableStarts={};let index=0;
  for(const mode of connectionModes(p)){
   const token={hdmi:'HDMI',dp:'(?:DisplayPort|DP)',vga:'VGA',dvi:'DVI'}[mode],count=Number((p.specs['Порты']||'').match(new RegExp('(\\d+)\\s*[×x]\\s*'+token,'i'))?.[1]||1);
-  for(let n=0;n<count;n++){const x=-.25+index++*.18;box(screen,.13,.065,.03,x,-screenH*.25,-.105,plastic('#839092'));box(screen,.10,.037,.035,x,-screenH*.25,-.124,plastic('#111719'));if(!n)g.userData.cableStarts[mode]=[x,bodyY-screenH*.25,panelZ-.14];}
+  for(let n=0;n<count;n++){const x=.44+index++*.18,back=p.curved?x*x/30:0;box(screen,.13,.065,.03,x,-screenH*.25,back-.098,plastic('#839092'));box(screen,.10,.037,.035,x,-screenH*.25,back-.119,plastic('#111719'));if(!n)g.userData.cableStarts[mode]=[x,bodyY-screenH*.25,panelZ+back-.137];}
  }
  g.userData.cableStart=Object.values(g.userData.cableStarts)[0];
  return g;
@@ -66,23 +69,24 @@ export class WorkplaceScene extends PCScene{
  view(name){this.pcCamera(()=>super.view(name));}
  viewFanWall(wall){this.pcCamera(()=>super.viewFanWall(wall));}
  pcCamera(action){
+  this.cableFlight?.cancel();
   if(!this.workplaceReady)return;
   this.focusName='pc';this.controls.autoRotate=false;this.localCamera=true;
   try{action();}finally{this.localCamera=false;}
   this.root.localToWorld(this.camera.position);this.root.localToWorld(this.controls.target);this.controls.update();this.updateMarkers();this.updateFanMarkers();
  }
  setBuild(build){super.setBuild(build);if(this.peripheralRoot)this.connectPeripherals();}
- zoom(factor){const offset=this.camera.position.clone().sub(this.controls.target);offset.multiplyScalar(factor).clampLength(this.controls.minDistance,this.controls.maxDistance);this.camera.position.copy(this.controls.target).add(offset);this.controls.update();}
+ zoom(factor){this.cableFlight?.cancel();const offset=this.camera.position.clone().sub(this.controls.target);offset.multiplyScalar(factor).clampLength(this.controls.minDistance,this.controls.maxDistance);this.camera.position.copy(this.controls.target).add(offset);this.controls.update();}
 
  reset(){if(this.workplaceReady)this.focus('all');}
  constructor(container,build,options={}){
   super(container);this.controls.maxDistance=110;this.controls.minDistance=2;this.controls.enablePan=true;this.camera.far=220;this.camera.updateProjectionMatrix();if(build){this.setBuild(build);this.setFanLayout(options.fans);}this.collectLights();this.setLighting(options.lighting);
-  this.root.rotation.y=-Math.PI/2;this.root.position.set(6,deskY+.05,-.6);this.hideGlass=true;this.glass.visible=false;
+  this.root.rotation.y=-Math.PI/2;this.root.position.set(6,deskY-.045,-.6);this.contact.position.y=.047;this.hideGlass=true;this.glass.visible=false;
   for(const light of this.scene.children.filter(o=>o.isLight&&!o.isHemisphereLight)){light.position.add(this.root.position);if(light.target){light.target.position.copy(this.root.position);this.scene.add(light.target);}}
   this.scene.children.filter(o=>o.isGridHelper).forEach(o=>o.removeFromParent());
   this.desk=new THREE.Group();this.scene.add(this.desk);box(this.desk,18,.24,8,0,deskY-.12,0,plastic('#414a4d'));
   for(const x of [-8,8])for(const z of [-3,3])box(this.desk,.25,deskY-.24,.25,x,(deskY-.24)/2,z,plastic('#1d252a'));
-  box(this.desk,8.5,.025,3.5,-1.6,deskY+.013,1.5,plastic('#171f24'));
+  box(this.desk,DESK_MAT.w,DESK_MAT.height,DESK_MAT.d,DESK_MAT.x,deskY+DESK_MAT.height/2,DESK_MAT.z,plastic('#171f24'));
   this.setKeyboardLighting();try{this.setKeyboardLighting(JSON.parse(localStorage.getItem('pcmaker-keyboard-lighting')));}catch{}
   this.keyboardLightingListener=e=>this.setKeyboardLighting(e.detail);document.addEventListener('pcmaker:keyboard-lighting',this.keyboardLightingListener);
   this.peripheralRoot=new THREE.Group();this.scene.add(this.peripheralRoot);this.externalCables=new PeripheralCables(this);this.workplaceReady=true;this.focus('all');
@@ -91,11 +95,12 @@ export class WorkplaceScene extends PCScene{
  }
  setPeripherals(value){
   for(const child of [...this.peripheralRoot.children])dispose(child);
-  this.keyboardModel=null;const selected=sanitizeWorkplace(value);for(const [key,id] of Object.entries(selected)){const p=peripheralById[id],group=key==='monitor'?monitor(p):key==='keyboard'?keyboard(p):key==='chair'?createChairModel(p):mouse(p);if(key==='mouse'&&!group.userData.cableStart&&connectionModes(p).includes('usb')){const pos=[0,.10,-p.dimensions[1]/200];box(group,.09,.04,.025,...pos,plastic('#080d10'));group.userData.cableStart=pos;}group.userData.productId=id;group.position.set(key==='mouse'?1.8:-1.9,deskY+.035,key==='monitor'?-1.45:2.0);if(key==='chair'){const placement=chairPlacement();group.position.set(...placement.position);group.position.y+=group.userData.floorOffset;group.rotation.y=placement.rotation;}this.peripheralRoot.add(group);if(key==='keyboard'){this.keyboardModel=group;group.userData.updateLighting(this.keyboardLighting||sanitizeKeyboardLighting(),this.last||0);document.dispatchEvent(new CustomEvent('pcmaker:keyboard-selected',{detail:id}));}}
+  this.keyboardModel=null;const selected=sanitizeWorkplace(value);for(const [key,id] of Object.entries(selected)){const p=peripheralById[id],group=key==='monitor'?monitor(p):key==='keyboard'?keyboard(p):key==='chair'?createChairModel(p):mouse(p);if(key==='mouse'&&!group.userData.cableStart&&connectionModes(p).includes('usb')){const pos=[0,.10,-p.dimensions[1]/200];box(group,.09,.04,.025,...pos,plastic('#080d10'));group.userData.cableStart=pos;}group.userData.productId=id;const support=key==='monitor'?deskY:deskY+DESK_MAT.height;
+   group.position.set(key==='mouse'?1.8:-1.9,support-new THREE.Box3().setFromObject(group).min.y,key==='monitor'?-1.45:2.0);if(key==='chair'){const placement=chairPlacement();group.position.set(...placement.position);group.position.y+=group.userData.floorOffset;group.rotation.y=placement.rotation;}this.peripheralRoot.add(group);if(key==='keyboard'){this.keyboardModel=group;group.userData.updateLighting(this.keyboardLighting||sanitizeKeyboardLighting(),this.last||0);document.dispatchEvent(new CustomEvent('pcmaker:keyboard-selected',{detail:id}));}}
   this.connectPeripherals();
  }
  connectPeripherals(){this.externalCables?.refresh();}
  fitWorkplace(){if(!this.focusName||this.focusName==='all')this.focus('all');}
- focus(name){if(name==='pc'){this.view('assembly');return;}this.controls.autoRotate=false;this.focusName=name;const views={connections:{target:[1,8.5,-.6],offset:[19,10,14],size:21},'desk-cables':{target:[0,7.5,0],offset:[0,21,4],size:21},all:this.peripheralRoot?.children.some(group=>peripheralById[group.userData.productId]?.category==='chair')?{target:[0,6.1,2],offset:[18,12,27],size:24}:{target:[.1,8.5,0],offset:[8,6.8,21],size:19.8},chair:{target:[-2.1,6.5,7.75],offset:[12,5,-5],size:15},monitor:{target:[-1.9,10,-1.45],offset:[1,1.5,12],size:10},keyboard:{target:[-1.9,7.6,2],offset:[0,5,4],size:6},mouse:{target:[1.8,7.7,2],offset:[2,2,3],size:3}};const view=views[name]||views.all,target=new THREE.Vector3(...view.target),offset=new THREE.Vector3(...view.offset);const minDistance=view.size/(2*Math.tan(THREE.MathUtils.degToRad(this.camera.fov/2))*Math.min(this.camera.aspect,1.45));offset.setLength(Math.max(offset.length(),minDistance));this.controls.target.copy(target);this.camera.position.copy(target).add(offset);this.controls.update();}
+ focus(name){this.cableFlight?.cancel();if(name==='pc'){this.view('assembly');return;}this.controls.autoRotate=false;this.focusName=name;const views={connections:{target:[1,8.5,-.6],offset:[19,10,14],size:21},'desk-cables':{target:[0,7.5,0],offset:[0,21,4],size:21},all:this.peripheralRoot?.children.some(group=>peripheralById[group.userData.productId]?.category==='chair')?{target:[0,6.1,2],offset:[18,12,27],size:24}:{target:[.1,8.5,0],offset:[8,6.8,21],size:19.8},chair:{target:[-2.1,6.5,7.75],offset:[12,5,-5],size:15},monitor:{target:[-1.9,10,-1.45],offset:[1,1.5,12],size:10},keyboard:{target:[-1.9,7.6,2],offset:[0,5,4],size:6},mouse:{target:[1.8,7.7,2],offset:[2,2,3],size:3}};const view=views[name]||views.all,target=new THREE.Vector3(...view.target),offset=new THREE.Vector3(...view.offset);const minDistance=view.size/(2*Math.tan(THREE.MathUtils.degToRad(this.camera.fov/2))*Math.min(this.camera.aspect,1.45));offset.setLength(Math.max(offset.length(),minDistance));this.controls.target.copy(target);this.camera.position.copy(target).add(offset);this.controls.update();}
  dispose(){this.externalCables?.dispose();document.removeEventListener('pcmaker:keyboard-lighting',this.keyboardLightingListener);if(this.peripheralRoot)dispose(this.peripheralRoot);if(this.desk)dispose(this.desk);super.dispose();}
 }

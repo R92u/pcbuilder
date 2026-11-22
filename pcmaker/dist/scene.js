@@ -1,3 +1,4 @@
+import {CableFlight} from './cable-flight.js';
 import {createAssemblyGuides,contactShadow} from './assembly-guides.js';
 import * as THREE from 'three';
 import {OrbitControls} from './vendor/OrbitControls.js';
@@ -6,7 +7,7 @@ import {modelMethods} from './model.js';
 import {portsFor,cablesFor} from './wiring.js';
 import {hardwareFinish} from './surfaces.js';
 import {caseLayout,gpuSlots,coolerLayout,CPU_CENTER} from './layout.js';
-import {cableCurve,strandPoints} from './cable-geometry.js';
+import {cableCurve,strandPoints,cableCombs} from './cable-geometry.js';
 import {fanSceneMethods} from './fan-scene.js?v=world-coordinates';
 import {lightingSceneMethods} from './lighting-scene.js';
 import {interactionMethods} from './interaction.js?v=world-coordinates';
@@ -28,6 +29,14 @@ export class PCScene {
   const pmrem=new THREE.PMREMGenerator(this.renderer);this.environment=pmrem.fromScene(room,.08);this.scene.environment=this.environment.texture;this.scene.environmentIntensity=.65;pmrem.dispose();room.traverse(o=>{o.geometry?.dispose();o.material?.dispose();});
   this.camera=new THREE.PerspectiveCamera(36,1,.1,70);this.camera.position.set(8.4,5.7,8.2);
   this.controls=new OrbitControls(this.camera,this.renderer.domElement);this.controls.target.set(0,2.3,0);this.controls.enableDamping=true;this.controls.dampingFactor=.08;this.controls.minDistance=4.2;this.controls.maxDistance=19;this.controls.maxPolarAngle=Math.PI*.61;this.controls.minPolarAngle=.32;this.controls.enablePan=false;this.controls.autoRotateSpeed=.55;
+  this.cableFlight=new CableFlight(this.scene,this.camera,this.controls);
+  this.cancelFlight=()=>this.cableFlight.cancel();
+  this.flightEvents=new AbortController();
+  const inputOptions={capture:true,passive:true,signal:this.flightEvents.signal};
+  for(const event of ['pointerdown','wheel','keydown'])document.addEventListener(event,this.cancelFlight,inputOptions);
+  window.addEventListener('blur',this.cancelFlight,inputOptions);
+  this.reduceMotion=matchMedia('(prefers-reduced-motion: reduce)');
+  this.reduceMotion.addEventListener('change',this.cancelFlight,inputOptions);
   this.scene.add(new THREE.HemisphereLight(0xf2f6f8,0x1b2225,2.4));
   const key=new THREE.DirectionalLight(0xf9fcff,3.6);key.position.set(4,7,5);key.castShadow=true;key.shadow.mapSize.set(1024,1024);Object.assign(key.shadow.camera,{left:-5,right:5,top:7,bottom:-5});key.shadow.radius=3;key.shadow.bias=-.0005;this.scene.add(key);
   const fill=new THREE.DirectionalLight(0xa6b8c8,1.4);fill.position.set(-4,4,-3);this.scene.add(fill);
@@ -99,7 +108,17 @@ export class PCScene {
   if(kind!=='gpu')this.box(fan,.075,.070,.060,(kind==='front'?-1:1)*size*.46,size*(kind==='cpu'?.40:.35),-depth/2+.015,0x11191c);
   this.fans.push({rotor,kind,parent});return fan;
  }
+ playCableFlight(worldPoints){
+  if(!this.reduceMotion.matches)this.cableFlight.start(worldPoints,performance.now());
+ }
+ showConnectedCable(id){
+  const cable=cablesFor(this.currentBuild,this.fanLayout).find(spec=>spec.id===id);
+  if(!cable||!this.cableFlight.enabled||this.reduceMotion.matches)return;
+  const curve=cableCurve(cable.points);
+  this.playCableFlight(curve.getSpacedPoints(64).map(point=>this.root.localToWorld(point)));
+ }
  setBuild(build){
+  this.cableFlight.cancel();
   const changedCase=this.currentBuild?.case!==build.case;this.currentBuild={...build};const p=resolve(build);
   const caseSignature=(p.case?.id||'cc560')+':'+(p.gpu?.length||'empty')+':'+(p.cooler?.type==='aio'?p.cooler.id:'air');
   if(p.case&&this.caseGroup.userData.signature!==caseSignature){this.caseGroup.removeFromParent();this.fans=this.fans.filter(f=>f.parent!==this.caseGroup);this.caseGroup.traverse(o=>{o.geometry?.dispose();o.material?.map?.dispose();o.material?.dispose();});this.makeCase(p.case);this.caseGroup.userData.signature=caseSignature;this.glass.visible=!this.hideGlass;this.makeCaseFlows(p.case);}
@@ -133,10 +152,13 @@ export class PCScene {
     }
     const [x,y,z]=targets[cable.id].position;
     const axis=targets[cable.id].axis,vertical=axis==='y'||axis==='-y',direction=axis==='-y'?-1:1;
-    const plug=this.box(cableGroup,.09,cable.id==='atx'?.46:.17,cable.id==='atx'?.13:.11,x+(vertical?0:.075),y+(vertical?.075*direction:0),z,0x242c30);if(vertical)plug.rotation.z=direction*Math.PI/2;
-    if(['atx','eps','eps2'].includes(cable.id)||cable.id.startsWith('gpu'))for(const t of [.44,.65]){
-     const curve=cableCurve(cable.points),point=curve.getPoint(t);
-     const comb=this.box(cableGroup,.05,cable.strands*cable.radius*2.3,.055,...point.toArray(),0x424e53);if(cable.spreadAxis==='x')comb.rotation.z=Math.PI/2;
+    const width=cable.id==='atx'?.46:cable.id==='usb3'?.43:cable.id==='gpu16'||cable.strands===8?.20:.17;
+    const plug=this.box(cableGroup,.09,width,cable.id==='atx'?.13:.11,x+(axis?0:.075),y+(vertical?.075*direction:0),z+(axis==='z'?.075:0),0x242c30);
+    if(vertical)plug.rotation.z=direction*Math.PI/2;
+    if(axis==='z')plug.rotation.y=-Math.PI/2;
+    if(['atx','eps','eps2'].includes(cable.id)||cable.id.startsWith('gpu'))for(const run of cableCombs(cable)){
+     const comb=this.box(cableGroup,.044,run.width+.012,.040,...run.center.toArray(),0x424e53);
+     comb.quaternion.setFromUnitVectors(new THREE.Vector3(0,1,0),run.axis);
     }
    }
    if(active.includes('cpuFan')||selected==='cpuFan'){
@@ -171,6 +193,7 @@ export class PCScene {
   }
  }
  view(name){
+  this.cableFlight.cancel();
   const views={assembly:[9.3,5.65,6.35],rear:[3.4,4.1,-9.4],top:[4.8,10,5.8],cables:[-8.3,4.6,5.4]};
   this.camera.position.set(...(views[name]||views.assembly));this.controls.target.set(0,2.35,0);this.fitCaseView();this.controls.update();this.endCableDrag(null,true);this.rearPanel.visible=!this.hideRearPanel;this.updateMarkers();
  }
@@ -209,6 +232,7 @@ export class PCScene {
  }
  applyResize(){
   if(!this.pendingResize)return;
+  this.cableFlight.cancel();
   const {width,height}=this.pendingResize;this.pendingResize=null;
   this.viewportWidth=width;this.viewportHeight=height;
   this.camera.aspect=width/height;this.camera.updateProjectionMatrix();
@@ -219,14 +243,14 @@ export class PCScene {
   // even between the normally throttled frames during a panel transition.
   if(time-this.last<1000/45&&!this.pendingResize){this.raf=requestAnimationFrame(this.frame);return;}
   this.applyResize();
-  const dt=Math.min((time-this.last)/1000||0,.05);this.last=time;if(!this.dragging&&!this.externalCables?.drag)this.controls.update();
+  const dt=Math.min((time-this.last)/1000||0,.05);this.last=time;if(!this.cableFlight.update(time)&&!this.dragging&&!this.externalCables?.drag)this.controls.update();
   for(const f of this.fans){const fraction=f.mountId?(f.direction==='in'?this.settings.front:this.settings.rear)/100:f.kind==='front'?this.settings.front/100:f.kind==='rear'?this.settings.rear/100:f.kind==='cpu'?this.settings.cpuFan/100:(this.settings.gpuFan??60)/100;f.rotor.rotation.z-=dt*(this.running?fraction*12:0);}
   this.transitions=this.transitions.filter(t=>{const p=Math.min((time-t.start)/650,1);t.group.position.x=.65*(1-p)**3;return p<1;});
   if(this.airflow)this.updateFanFlows(dt);
   this.updateFanMarkers();if(this.lighting?.mode==='rainbow')this.updateLighting(time);
   this.guides?.frame(time,this.camera);this.updateMarkers();this.renderer.render(this.scene,this.camera);this.guides?.drawOutline(this.renderer,this.scene,this.camera);this.raf=requestAnimationFrame(this.frame);
  }
- dispose(){this.guides.dispose();this.contact.material.map.dispose();this.contact.material.dispose();this.contact.geometry.dispose();cancelAnimationFrame(this.raf);this.resizeObserver.disconnect();this.controls.dispose();this.environment?.dispose();this.clearLooseCable();this.endFanDrag(null,true);window.removeEventListener('blur',this.cancelHeldPlug);window.removeEventListener('keydown',this.cancelOnEscape);this.renderer.dispose();}
+ dispose(){this.flightEvents.abort();this.cableFlight.cancel();this.guides.dispose();this.contact.material.map.dispose();this.contact.material.dispose();this.contact.geometry.dispose();cancelAnimationFrame(this.raf);this.resizeObserver.disconnect();this.controls.dispose();this.environment?.dispose();this.clearLooseCable();this.endFanDrag(null,true);window.removeEventListener('blur',this.cancelHeldPlug);window.removeEventListener('keydown',this.cancelOnEscape);this.renderer.dispose();}
 }
 
 Object.assign(PCScene.prototype,modelMethods,interactionMethods,fanSceneMethods,lightingSceneMethods);

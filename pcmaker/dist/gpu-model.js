@@ -28,7 +28,6 @@ export function makeDetailedGPU(p){
   this.box(g,.09,.025,.07,.55,top-.018,rear+.17+i*(len-.35)/12,0x141719);
   this.box(g,.026,.026,.036,.63,top-.020,rear+.17+i*(len-.35)/12,0x8a8772);
  }
- for(let i=0;i<22;i++)this.box(g,.048,.045,.016,-.735,top-.045,rear+.20+i*.034,0xa39253);
  // Chamfered backplate, with real openings above the short PCB / pass-through fan.
  const outline=polygon([[-.73,rear+.05],[-.64,rear-.015],[.61,rear-.015],[.74,rear+.12],[.74,end-.18],[.60,end-.035],[-.62,end-.035],[-.73,end-.14]]);
  for(let i=0;i<5;i++){
@@ -71,7 +70,7 @@ export function makeDetailedGPU(p){
   for(const x of [-.66,.66]){
    const bridge=this.box(g,.12,.075,len/p.fans-.10,x,bottom-.024,z,shell);bridge.rotation.z=x>0?-.17:.17;
   }
-  this.text(g,sapphire?'SAPPHIRE':zotac?'ZOTAC':'MSI',.28,.055,0,bottom-.156,z,[Math.PI/2,0,0],'#969e9c');
+  this.text(g,sapphire?'SAPPHIRE':zotac?'ZOTAC':'MSI',.28,.055,0,bottom-.118,z,[Math.PI/2,0,0],'#969e9c');
  }
  // Small laser markings and a factory label remain attached to their surfaces.
  this.text(g,p.short.toUpperCase(),Math.min(len-.35,1.55),.075,.797,top-.020,center,[0,Math.PI/2,0],'#858d8a');
@@ -93,6 +92,7 @@ export function makeDetailedGPU(p){
  // Standard rear PCI bracket width must not scale with the cooler width.
  const bracketHeight=gpuSlots(p)*.18;
  this.box(root,1.64,bracketHeight,.035,.07,2.47-bracketHeight/2,-2.145,0x606a6b);
+ addCardMounts.call(this,root,layout);
  addVideoPorts.call(this,root,p,top);
  for(let i=0;i<11;i++)this.box(root,.065,.045,.008,-.53+i*.115,2.47-bracketHeight+.085,-2.168,0x0a1013);
  for(const x of [-.64,.70])this.screw(root,x,top+.017,-2.17,'z',.024);
@@ -101,11 +101,22 @@ export function makeDetailedGPU(p){
  return root;
 }
 
+function addCardMounts(g,layout){
+ const y=layout.top-.055,first=-1.315,last=Math.min(-.125,layout.end-.10);
+ // A keyed PCB tongue enters the x16 socket at the same height on low-profile cards.
+ for(const [start,end] of [[first,-1.10],[-1.07,last]]){
+  if(end<=start)continue;
+  this.box(g,.20,.023,end-start,-.765,y,(start+end)/2,0x28362a);
+  for(let z=start+.018;z<end-.012;z+=.033)this.box(g,.058,.025,.019,-.783,y,z,0xa99762);
+ }
+}
+
 function addVideoPorts(g,p,top){
  const ports=p.ports?.flatMap(port=>Array.from({length:parseInt(port)||1},()=>/DVI/i.test(port)?'DVI':/HDMI/i.test(port)?'HDMI':/VGA|D-Sub/i.test(port)?'VGA':'DP'))||['DP','DP','DP','HDMI'];
  let x=-.56;
  for(const type of ports){
   const width=type==='DVI'?.43:type==='VGA'?.34:.22;
+  this.box(g,width,.17,.34,x+width/2,top-.133,-1.965,0x646c6c);
   if(type==='VGA'){
    this.externalAnchor(g,'VGA',x+width/2,top-.205,-2.23);
    this.box(g,width,.15,.045,x+width/2,top-.205,-2.168,0xaab4b8);
@@ -121,6 +132,9 @@ function addVideoPorts(g,p,top){
   }else this.rearPort(g,'video',x+width/2,top-.205,width,.083,0,type);
   x+=width+.12;
  }
+ // The rear extension supports the solder tabs of every port, even on a short PCB.
+ const left=-.72,right=x-.12;
+ this.box(g,right-left,.028,.34,(left+right)/2,top-.055,-1.96,0x192923);
 }
 
 // Small slot-powered cards use a compact aluminium heatsink and exposed PCB,
@@ -129,7 +143,6 @@ function makeCompactGPU(p){
  const g=new THREE.Group(),l=gpuLayout(p),len=p.length/100,cx=-.80+l.width/2,z=(l.rear+l.end)/2;
  this.box(g,l.width-.04,.035,len-.07,cx,l.top-.03,z,0x182521);
  for(let i=0;i<8;i++)this.box(g,.11,.026,.075,cx-.15,l.top+.003,l.rear+.18+i*(len-.30)/8,0x101718);
- for(let i=0;i<22;i++)this.box(g,.045,.045,.016,-.80,l.top-.046,l.rear+.20+i*.034,0xa39253);
  for(let i=0;i<Math.round(len*27);i++)this.box(g,l.width-.10,l.thickness-.14,.012,cx,l.top-l.thickness/2,l.rear+.07+i*(len-.14)/Math.round(len*27),0x798181);
  const shell=0x1c2227,trim=p.fans===2?0x929c9d:0x313a40;
  for(const x of [-.80,l.edgeX])this.box(g,.045,.12,len-.05,x,l.bottom+.015,z,shell);
@@ -138,12 +151,12 @@ function makeCompactGPU(p){
   const fz=p.fans===1?l.rear+len*.63:l.rear+(i+.5)*len/p.fans,size=Math.min(l.width-.14,len/p.fans-.10);
   this.fan(g,size,cx,l.bottom-.02,fz,[Math.PI/2,0,0],'gpu',false);
   for(const side of [-1,1]){const bar=this.box(g,.07,.055,size*.70,cx+side*size*.45,l.bottom-.035,fz,trim);bar.rotation.y=side*.22;}
-  this.text(g,p.manufacturer||'MSI',size*.24,.045,cx,l.bottom-.145,fz,[Math.PI/2,0,0],'#aab3b5');
+  this.text(g,p.manufacturer||'MSI',size*.24,.045,cx,l.bottom-.103,fz,[Math.PI/2,0,0],'#aab3b5');
  }
  this.label(g,p,Math.min(.58,len-.2),.22,cx,l.top+.012,l.rear+.45,[-Math.PI/2,0,Math.PI/2]);
  this.text(g,p.short.toUpperCase(),len*.74,.055,l.edgeX+.025,l.bottom+.055,z,[0,Math.PI/2,0],'#8d989b');
  const h=gpuSlots(p)*.18;
- this.box(g,1.64,h,.035,.07,2.47-h/2,-2.145,0x606a6b);addVideoPorts.call(this,g,p,l.top);
+ this.box(g,1.64,h,.035,.07,2.47-h/2,-2.145,0x606a6b);addCardMounts.call(this,g,l);addVideoPorts.call(this,g,p,l.top);
  for(const x of [-.64,.70])this.screw(g,x,l.top+.017,-2.17,'z',.024);
  return g;
 }

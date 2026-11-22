@@ -1,5 +1,5 @@
 import {hardwareFinish} from './surfaces.js';
-import {aioMount} from './aio.js';
+import {aioPlacement} from './aio.js';
 import * as THREE from 'three';
 import {caseLayout,TRAY_X,TRAY_HOLES,REAR_OPENINGS,frontIOPosition} from './layout.js';
 import {fanMounts} from './fan-layout.js';
@@ -32,9 +32,16 @@ export function makeChassis(p={id:'cc560',short:'CC560 V2',frontFanCount:3,usbA:
   for(const z of [hole.z-hole.w/2,hole.z+hole.w/2])this.box(g,.05,hole.h+.05,.025,TRAY_X,hole.y,z,0x23292b);
   for(const y of [hole.y-hole.h/2,hole.y+hole.h/2])this.box(g,.05,.025,hole.w,TRAY_X,y,hole.z,0x23292b);
  }
- for(const y of [1.42,2.60,4.12])for(const z of [-1.72,.55])this.rod(g,[-1.01,y,z],[-.972,y,z],.035,0x938768);
+ for(const x of [-.44,.64])this.box(g,.10,.020,.94,x,.37,rear+.53,0x202628);
  // An actual cutout, not a dark decal: GPU cables pass through the tunnel.
- const shroudFront=front-(aioMount(resolve(this.currentBuild||{}))?.wall==='front'?.74:.35);
+ const radiator=aioPlacement(resolve(this.currentBuild||{}),frame);
+ if(radiator?.wall==='front'){
+  // The usual case fan rails are suppressed when the front radiator occupies them.
+  for(const x of [-.56,.56])this.box(g,.08,4.30,.10,x,2.49,front+.05,steel);
+ }else if(radiator?.wall==='top'){
+  for(const offset of [-.56,.56])this.box(g,.08,.03,depth,radiator.position[0]+offset,4.635,centerZ,steel);
+ }
+ const shroudFront=front-(radiator?.wall==='front'?.74:.35);
  const shape=new THREE.Shape();shape.moveTo(-.91,rear+.04);shape.lineTo(side-.05,rear+.04);shape.lineTo(side-.05,shroudFront);shape.lineTo(-.91,shroudFront);shape.closePath();
  for(const [x,z,w,d] of [[.62,.55,.61,.70],[-.15,shroudFront-.20,.62,.30]]){
   const hole=new THREE.Path();hole.moveTo(x-w/2,z-d/2);hole.lineTo(x-w/2,z+d/2);hole.lineTo(x+w/2,z+d/2);hole.lineTo(x+w/2,z-d/2);hole.closePath();shape.holes.push(hole);

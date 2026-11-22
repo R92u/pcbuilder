@@ -1,6 +1,6 @@
 import {aioPlacement,radiatorConflict} from './aio.js';
 import {resolve} from './catalog.js';
-import {caseLayout,frontFanSource} from './layout.js';
+import {caseLayout,TRAY_X} from './layout.js';
 
 export const fanWalls={front:'Спереди',rear:'Сзади',top:'Сверху',bottom:'Снизу',left:'За платой',right:'Со стороны стекла'};
 const normals={front:[0,0,1],rear:[0,0,-1],top:[0,1,0],bottom:[0,-1,0],left:[-1,0,0],right:[1,0,0]};
@@ -86,11 +86,26 @@ export function sanitizeFanLayout(build,input){
 }
 export function fanHub(build,direction){
  const p=resolve(build),f=caseLayout(p.case||{},p.gpu,p.cooler);
- return direction==='in'?frontFanSource(f):[-.80,4.34,-1.77];
+ const x=TRAY_X+.065;
+ // Two splitter blocks sit flush with the steel tray, including on cases
+ // whose only case fan has been reversed to act as an intake.
+ return direction==='in'?[x,2.75,f.front-.31]:[x,4.34,-1.77];
 }
 export function fanBranchRoute(build,fan){
  const p=resolve(build),frame=caseLayout(p.case||{},p.gpu,p.cooler),slot=fanMounts(build).find(s=>s.id===fan.slot);
  const source=fanLead(slot,fan.direction),hub=fanHub(build,fan.direction),x=frame.side-.06,z=frame.front-.33;
+ if(slot.wall==='front'||slot.wall==='rear'){
+  const sign=slot.normal[2],edgeX=slot.position[0]+Math.sign(source[0]-slot.position[0])*(slot.size*.5+.035);
+  const serviceZ=slot.position[2]-sign*.18,wireX=hub[0]+.022;
+  const route=[source,[edgeX,source[1],source[2]],[edgeX,source[1],serviceZ]];
+  // A rear fan borders the I/O shield. Pass above the shield before moving
+  // across to the tray, even if it was installed as an intake.
+  const y=slot.wall==='rear'?Math.max(4.34,source[1]):source[1];
+  route.push([edgeX,y,serviceZ],[wireX,y,serviceZ]);
+  if(Math.abs(hub[2]-serviceZ)>.34)route.push([wireX,4.43,serviceZ],[wireX,4.43,hub[2]]);
+  route.push([wireX,hub[1],hub[2]],hub);
+  return route;
+ }
  // Route on the service rail outside the side-wall rotor row. Left-wall
  // cables pass around the tray's open front edge, never through its metal.
  const railY=source[1]>2.02&&source[1]<3.30?3.30:source[1];

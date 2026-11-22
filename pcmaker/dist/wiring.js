@@ -13,18 +13,21 @@ export const ports = {
   gpu2: {name:'GPU · 8 pin №2', position:[.48,GPU_TOP+.06,.18],axis:'y'},
   gpu3: {name:'GPU · 8 pin №3', position:[.48,GPU_TOP+.06,.48],axis:'y'},
   pump: {name:'PUMP / SYS_FAN · питание помпы',position:[-.64,4.12,-.25]},
-  cpuFan: {name:'CPU_FAN · 4 pin', position:[-.64,4.12,.35]},
+  cpuFan: {name:'CPU_FAN · 4 pin', position:[-.64,4.12,.58]},
   frontFan: {name:'SYS_FAN · вдув', position:[-.65,2.75,.64]},
   rearFan: {name:'SYS_FAN · выдув', position:[-.65,3.85,-1.58]},
-  usb3: {name:'JUSB3 · 19 pin', position:[-.65,2.35,.65]},
-  usbC: {name:'USB-C · Type-E', position:[-.65,2.12,.65]},
+  usb3: {name:'JUSB3 · 19 pin', position:[-.855,2.43,.67],axis:'z'},
+  usbC: {name:'USB-C · Type-E', position:[-.855,3.00,.67],axis:'z'},
   usb2: {name:'JUSB · 9 pin', position:[-.65,1.44,-.10]},
   audio: {name:'JAUD1 · HD AUDIO', position:[-.65,1.44,-1.50]},
   panel: {name:'JFP1 · кнопки / LED', position:[-.65,1.44,.58]}
 };
 export function portsFor(build={}){
  const p=resolve(build),map=Object.fromEntries(Object.entries(ports).map(([key,value])=>[key,{...value,position:[...value.position]}]));
- for(const key of ['gpu16','gpu1','gpu2','gpu3'])map[key].position[0]=gpuLayout(p.gpu||{}).edgeX-.10;
+ const gpu=gpuLayout(p.gpu||{}),count=Math.max(1,p.gpu?.connectors||1);
+ const firstZ=Math.min(-.12,gpu.end-.20-(count-1)*.30);
+ const pinX=p.gpu?.modelStyle==='compact-budget'?gpu.edgeX-.14:-.84+1.45*gpu.width/1.60;
+ for(const [key,index] of [['gpu16',0],['gpu1',0],['gpu2',1],['gpu3',2]])map[key].position=[pinX,GPU_TOP+.06,firstZ+index*.30];
  for(const key of ['audio','usb2','panel']){map[key].position=[-.85,boardBottom(p.motherboard)+.04,map[key].position[2]];map[key].axis='-y';}
  if(p.motherboard?.cpuPowerPinCounts?.[1]===4)map.eps2.name='CPU_PWR2 · 4 pin';
  if(p.motherboard?.cpuPowerPinCounts?.[0]===4)map.eps.name='CPU_PWR · 4 pin';
@@ -43,7 +46,7 @@ export function cablesFor(build,fanLayout){
   return [source,[source[0],source[1],exitZ],[cx,source[1],exitZ],[cx,y,exitZ],[cx,y,z],[-.45,y,z]];
  };
  if(p.psu&&p.motherboard){
-  add('atx','Питание платы · ATX 24 pin','Блок питания',true,supply('atx',3.42,.89),12);
+  add('atx','Питание платы · ATX 24 pin','Блок питания',true,supply('atx',3.42,.89).concat([[-.45,3.42,.66]]),12);
   const cpuPins=p.motherboard.cpuPowerPinCounts?.[0]||8;
   add('eps','Питание CPU · EPS '+(cpuPins===4?'4':'4+4')+' pin','Блок питания',true,supply('eps',4.40,-1.30).concat([[-.45,4.13,-1.30]]),cpuPins);
   if((p.motherboard.epsConnectors??1)>1&&(p.psu.epsConnectors??1)>1){
@@ -53,30 +56,37 @@ export function cablesFor(build,fanLayout){
  }
  const gpuIds=p.psu&&p.gpu?(p.gpu.connectorType==='16pin'?(p.psu.connector16pin?['gpu16']:[]):Array.from({length:p.gpu.connectors},(_,i)=>'gpu'+(i+1))):[];
  for(const [i,id] of gpuIds.entries()){
-  const target=targets[id].position,lane=.38+i*.16,x=Math.max(.88,gpuLayout(p.gpu).edgeX+.16);
+  const target=targets[id].position,lane=.38+i*.16,x=Math.min(frame.side-.065,Math.max(.88,gpuLayout(p.gpu).edgeX+.14));
   add(id,'Питание GPU · '+(id==='gpu16'?'16 pin':'PCIe 6+2 pin'+(gpuIds.length>1?' №'+(i+1):'')),'Блок питания',true,
-   [psuCableSource(p.psu,id),[.62,.86,lane],[.62,1.30,lane],[x,1.60,lane],[x,GPU_TOP+.23,target[2]],[target[0],GPU_TOP+.23,target[2]]],id==='gpu16'?12:8,.012,{spreadAxis:'x'});
+   [psuCableSource(p.psu,id),[.62,.86,lane],[.62,1.30,lane],[x,1.53,lane],[x,GPU_TOP+.23,lane],[x,GPU_TOP+.23,target[2]],[target[0],GPU_TOP+.23,target[2]]],id==='gpu16'?12:8,.012,{spreadAxis:'x',sideRun:[3,4,5]});
  }
  if(p.motherboard&&p.cooler?.type==='aio'){
   const a=aioPlacement(p,frame);if(a){
-   add('cpuFan','Вентиляторы радиатора · PWM','Разветвитель СЖО',true,[a.fanSource,[.90,4.00,a.fanSource[2]],[.90,4.00,.53],[-.44,4.12,.35]],4,.007);
-   add('pump','Питание помпы СЖО','Помпа на процессоре',true,[a.pumpSource,[.02,3.10,-.39],[.02,4.07,-.39],[-.44,4.12,-.25]],3,.008);
+   const rail=a.position[0]+.65;
+   add('cpuFan','Вентиляторы радиатора · PWM','Разветвитель СЖО',true,[a.fanSource,[rail,a.fanSource[1],a.fanSource[2]],[rail,3.97,a.fanSource[2]],[rail,3.97,.60],[-.38,3.97,.60],[-.38,4.12,targets.cpuFan.position[2]]],4,.007);
+   add('pump','Питание помпы СЖО','Помпа на процессоре',true,[a.pumpSource,[-.17,2.98,-.39],[.04,2.98,-.39],[.04,4.05,-.39],[-.44,4.12,-.25]],3,.008);
   }
  }else if(p.motherboard&&p.cooler){
   const l=coolerLayout(p.cooler,p.ram,p.cpu?.socket),index=Math.min((p.cooler.fans||1)-1,l.fanZ.length-1),size=l.sizes[index]||l.size;
   const start=[l.top-size*.04-.01+l.lift,CPU_CENTER.y+size*.40,l.fanZ[index]-.10];
-  add('cpuFan','Вентилятор кулера · PWM','Кулер процессора',true,[start,[start[0],4.39,start[2]],[start[0],4.39,.53],[-.44,4.39,.53],[-.44,4.12,.35]],4,.007);
+  add('cpuFan','Вентилятор кулера · PWM','Кулер процессора',true,[start,[start[0],4.39,start[2]],[start[0],4.39,.60],[-.44,4.39,.60],[-.44,4.12,targets.cpuFan.position[2]]],4,.007);
  }
  if(p.motherboard){
   const fans=sanitizeFanLayout(build,fanLayout),intake=fanHub(build,'in'),exhaust=fanHub(build,'out');
-  if(fans.some(f=>f.direction==='in'))add('frontFan','Вдув · разветвитель PWM','Разветвитель вентиляторов на вдув',true,[intake,[-.80,2.75,frame.front-.29],[-.80,2.75,.89],[-.44,2.75,.89]],4,.007);
+  if(fans.some(f=>f.direction==='in'))add('frontFan','Вдув · разветвитель PWM','Разветвитель вентиляторов на вдув',true,[intake,[-.80,2.75,intake[2]],[-.80,2.75,.89],[-.44,2.75,.89],[-.44,2.75,.64]],4,.007);
   if(fans.some(f=>f.direction==='out'))add('rearFan','Выдув · разветвитель PWM','Разветвитель вентиляторов на выдув',true,[exhaust,[-.44,4.34,-1.77],[-.44,4.25,-1.58],[-.44,3.85,-1.58]],4,.007);
   const io=(id,y,z)=>{
-   const start=frontIOPosition(p.case,frame,id),topZ=frame.ioZ;
-   return [start,[start[0],4.44,topZ],[cx,4.44,topZ],[cx,y,topZ],[cx,y,z],[-.45,y,z]];
+   const start=frontIOPosition(p.case,frame,id);
+   const [offsetY,offsetZ]={usb3:[.035,-.044],usbC:[.034,.038],audio:[-.034,-.054],usb2:[-.021,.004],panel:[-.020,.060]}[id];
+   const topY=4.44+offsetY,topZ=frame.ioZ+offsetZ;
+   return [start,[start[0],topY,topZ],[cx,topY,topZ],[cx,y,topZ],[cx,y,z],[-.45,y,z]];
   };
-  add('usb3','Передний USB 3.0','Верхняя панель корпуса',false,io('usb3',2.35,.89),1,.030);
-  if(p.case?.usbC&&p.motherboard.usbCHeader)add('usbC','Передний USB-C','Верхняя панель корпуса',false,io('usbC',2.12,.89),1,.025);
+  for(const [id,name,radius] of [['usb3','Передний USB 3.0',.030],['usbC','Передний USB-C',.025]]){
+   if(id==='usbC'&&!(p.case?.usbC&&p.motherboard.usbCHeader))continue;
+   const [x,y]=targets[id].position,route=io(id,y,.89);
+   route[route.length-1]=[x,y,.89];
+   add(id,name,'Верхняя панель корпуса',false,route,1,radius);
+  }
   for(const [id,name,strands,radius] of [['usb2','Передний USB 2.0',5,.008],['audio','Передний аудиоразъём · HD AUDIO',1,.022],['panel','Power / Reset / LED · JFP1',6,.006]]){
    if(id==='usb2'&&!p.case?.usb2)continue;
    const target=targets[id].position;

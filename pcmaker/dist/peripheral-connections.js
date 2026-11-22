@@ -46,9 +46,64 @@ export function connectionError(product,mode,target,connections={},key=product?.
  if(Object.entries(connections).some(([k,v])=>k!==key&&v?.port===target.id))return 'Этот разъём уже занят другим устройством.';
  return '';
 }
-export const DESK_Y=7.5,ROUTE_Y=7.59;
+export const DESK_Y=7.5, WIRE_RADIUS=.025, ROUTE_Y=DESK_Y+WIRE_RADIUS;
+export const DESK_MAT={x:-1.6,z:1.5,w:8.5,d:3.5,height:.025};
+export function surfaceHeight(x,z){
+ const mx=DESK_MAT.w/2-Math.abs(x-DESK_MAT.x),mz=DESK_MAT.d/2-Math.abs(z-DESK_MAT.z);
+ return DESK_Y+DESK_MAT.height*Math.max(0,Math.min(1,1+Math.min(mx,mz)/.08));
+}
+// Add contact points on both sides of the mat edge so long segments lie on
+// the correct support even when both ends are outside the mouse mat.
+export function supportedPoints(points){
+ const out=[];
+ for(let i=0;i<points.length;i++){
+  const [x,,z]=points[i];
+  if(i){
+   const [ax,,az]=points[i-1],times=[];
+   for(const [start,end,center,span] of [[ax,x,DESK_MAT.x,DESK_MAT.w],[az,z,DESK_MAT.z,DESK_MAT.d]]){
+    if(Math.abs(end-start)<1e-6)continue;
+    for(const offset of [.08,0])for(const sign of [-1,1]){
+     const t=(center+sign*(span/2+offset)-start)/(end-start);
+     if(t>0&&t<1)times.push(t);
+    }
+   }
+   for(const t of [...new Set(times)].sort((a,b)=>a-b)){
+    const nx=ax+(x-ax)*t,nz=az+(z-az)*t;
+    out.push([nx,surfaceHeight(nx,nz)+WIRE_RADIUS,nz]);
+   }
+  }
+  out.push([x,surfaceHeight(x,z)+WIRE_RADIUS,z]);
+ }
+ return out;
+}
 export function safeWaypoints(value){return Array.isArray(value)?value.slice(0,8).filter(p=>Array.isArray(p)&&p.length===3&&p.every(Number.isFinite)).map(([x,,z])=>[Math.max(-8.7,Math.min(8.7,x)),ROUTE_Y,Math.max(-3.7,Math.min(3.7,z))]):[];}
-export function defaultWaypoints(start,end,key){if(key==='monitor')return [[start[0],ROUTE_Y,-3.45],[1,ROUTE_Y,-3.45],[end[0]+.30,ROUTE_Y,-3.45]];const x=key==='keyboard'?-4:key==='mouse'?2.8:start[0];return [[x,ROUTE_Y,Math.min(start[2]-.45,.4)],[x,ROUTE_Y,-3.45],[end[0]+.30,ROUTE_Y,-3.45]];}
+// Shortest visible route around expanded footprints. The extra corner margin
+// leaves room for the cable radius and the rounded bends in the rendered tube.
+export function defaultWaypoints(entry,exit,boxes){
+ const nodes=[entry,exit];
+ for(const b of boxes)for(const x of [b.minX-.14,b.maxX+.14])for(const z of [b.minZ-.14,b.maxZ+.14]){
+  const point=[x,ROUTE_Y,z];
+  if(!routeError([point],boxes)&&!boxes.some(box=>segmentHitsBox(point,point,box)))nodes.push(point);
+ }
+ const dist=nodes.map(()=>Infinity),parents=nodes.map(()=>-1),visited=new Set();
+ dist[0]=0;
+ while(visited.size<nodes.length){
+  let best=-1;
+  for(let n=0;n<nodes.length;n++)if(!visited.has(n)&&dist[n]<Infinity&&(best===-1||dist[n]<dist[best]))best=n;
+  if(best===-1)return null;
+  if(best===1)break;
+  visited.add(best);
+  for(let n=1;n<nodes.length;n++){
+   if(visited.has(n)||routeError([nodes[best],nodes[n]],boxes))continue;
+   const distance=dist[best]+Math.hypot(nodes[n][0]-nodes[best][0],nodes[n][2]-nodes[best][2]);
+   if(distance<dist[n]){dist[n]=distance;parents[n]=best;}
+  }
+ }
+ const path=[];
+ for(let n=parents[1];n>0;n=parents[n])path.unshift(nodes[n]);
+ if(!path.length)path.push([(entry[0]+exit[0])/2,ROUTE_Y,(entry[2]+exit[2])/2]);
+ return path;
+}
 // Segment/rectangle intersection prevents a moved waypoint from routing through
 // the case even when both endpoints lie outside its footprint.
 export function segmentHitsBox(a,b,box){

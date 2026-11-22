@@ -2,7 +2,7 @@ import * as THREE from 'three';
 import {resolve} from './catalog.js';
 import {peripheralById} from './peripherals.js';
 import {cableCurve,beginCableDrag,cableDragPoint} from './cable-geometry.js';
-import {connectionModes,connectionLabels,connectionError,sanitizeConnections,defaultWaypoints,routeError,ROUTE_Y} from './peripheral-connections.js';
+import {connectionModes,connectionLabels,connectionError,sanitizeConnections,defaultWaypoints,supportedPoints,surfaceHeight,routeError,ROUTE_Y,WIRE_RADIUS} from './peripheral-connections.js';
 
 const e=s=>String(s??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
 const names={monitor:'Монитор',keyboard:'Клавиатура',mouse:'Мышь'},storage='pcmaker-peripheral-cables-v1';
@@ -39,18 +39,24 @@ export class PeripheralCables{
   const local=group.userData.cableStarts?.[this.modes[key]]||group.userData.cableStart||[0,.10,-p.dimensions[1]/200];return group.localToWorld(new THREE.Vector3(...local));
  }
  target(port){return port.node.getWorldPosition(new THREE.Vector3());}
- entry(key,a){return [a[0],ROUTE_Y,key==='monitor'?-3.45:a[2]-.30];}
+ entry(key,a){
+  const rear=key==='monitor'?this.groups.monitor.position.z-this.products.monitor.dimensions[1]*.94/200-.25:a[2]-.30;
+  return [a[0],ROUTE_Y,rear];
+ }
  obstacles(){const boxes=[this.footprint()];for(const [key,p] of Object.entries(this.products)){const g=this.groups[key],w=key==='monitor'?Math.min(p.dimensions[0]/100*.48,p.stand==='l'?2.45:3.15):p.dimensions[0]/100,d=p.dimensions[1]/100*(key==='monitor'?.94:1);boxes.push({minX:g.position.x-w/2-.04,maxX:g.position.x+w/2+.04,minZ:g.position.z-d/2-.04,maxZ:g.position.z+d/2+.04});}return boxes;}
  footprint(){const b=new THREE.Box3().setFromObject(this.scene.caseGroup);return {minX:b.min.x-.06,maxX:b.max.x+.06,minZ:b.min.z-.06,maxZ:b.max.z+.06};}
  route(key,c){
   const a=this.source(key).toArray(),target=this.ports.find(p=>p.id===c.port);if(!target)return [];
   const b=this.target(target).toArray(),outside=b[0]+.38;
-  let points=c.points?.length?c.points:defaultWaypoints(a,b,key);
+  let points=c.points;
   // Fixed source exit and final plug approach cannot be moved away from sockets.
   const entry=this.entry(key,a),exit=[outside,ROUTE_Y,b[2]];
-  if(routeError([entry,...points,exit],this.obstacles()))points=defaultWaypoints(a,b,key);
+  const obstacles=this.obstacles();
+  if(!points?.length||routeError([entry,...points,exit],obstacles))points=defaultWaypoints(entry,exit,obstacles);
+  if(!points)return [];
   c.points=points;
-  return [a,[a[0],a[1],a[2]-.15],entry,...points,exit,[outside,b[1],b[2]],b];
+  const lead=[a[0],a[1],key==='monitor'?entry[2]:a[2]-.15];
+  return [a,lead,...supportedPoints([entry,...points,exit]),[outside,b[1],b[2]],b];
  }
  draw(){
   clear(this.wires);this.wires.visible=!this.hidden;
@@ -65,8 +71,17 @@ export class PeripheralCables{
  connect(key,portId){
   const mode=this.modes[key],target=this.ports.find(p=>p.id===portId),error=connectionError(this.products[key],mode,target,this.connections,key,this.pc);
   if(error){this.say(error);return false;}
-  this.connections[key]={product:this.products[key].id,mode,port:mode==='bluetooth'?null:target.id,hardware:mode==='bluetooth'?this.pc.motherboard.id:this.pc[target.part].id,points:[]};
-  this.message=names[key]+': подключение установлено · '+connectionLabels[mode];this.draw();this.save();this.renderPanel();this.rebuildMarkers();return true;
+  const c={product:this.products[key].id,mode,port:mode==='bluetooth'?null:target.id,hardware:mode==='bluetooth'?this.pc.motherboard.id:this.pc[target.part].id,points:[]};
+  const wired=!['bluetooth','receiver'].includes(mode);
+  const path=wired?this.route(key,c):null;
+  if(wired&&!path.length){
+   this.say('Для кабеля нет свободного пути по столу.');
+   return false;
+  }
+  this.connections[key]=c;
+  this.message=names[key]+': подключение установлено · '+connectionLabels[mode];this.draw();this.save();this.renderPanel();this.rebuildMarkers();
+  if(wired)this.scene.playCableFlight?.(cableCurve(path,.12).getSpacedPoints(72));
+  return true;
  }
  say(text){this.message=text;const status=this.panel.querySelector('[role=status]');if(status)status.textContent=text;}
  renderPanel(){
@@ -84,7 +99,7 @@ export class PeripheralCables{
    case 'view':this.scene.focus('connections');return;
    case 'edit':this.edit=!this.edit;this.hidden=false;if(this.edit)this.scene.focus('desk-cables');break;
    case 'reset':if(c)c.points=[];break;
-   case 'add':if(c&&c.points.length<8){const a=c.points.at(-2)||c.points[0],b=c.points.at(-1);c.points.splice(c.points.length-1,0,a.map((v,i)=>(v+b[i])/2));}else this.message='Можно добавить до восьми точек.';break;
+   case 'add':if(c&&c.points.length<8){const a=c.points.at(-1),b=this.target(this.ports.find(t=>t.id===c.port));if(a)c.points.push([(a[0]+b.x+.38)/2,ROUTE_Y,(a[2]+b.z)/2]);}else this.message='Можно добавить до восьми точек.';break;
   }
   this.draw();this.save();this.renderPanel();this.rebuildMarkers();
  }
@@ -103,17 +118,31 @@ export class PeripheralCables{
    this.bindDrag(b,()=>({kind:'plug',key}));
   });
   for(const port of this.ports||[])this.marker(port.name,'external-target',()=>this.target(port),(b,item)=>{item.port=port;b.onclick=()=>this.connect(this.selected,port.id);});
-  const c=this.connections[this.selected];if(this.edit&&c)c.points.forEach((_,index)=>this.marker('Точка кабеля '+(index+1),'external-point',()=>new THREE.Vector3(...c.points[index]),b=>{
+  const c=this.connections[this.selected];if(this.edit&&c)c.points.forEach((_,index)=>this.marker('Точка кабеля '+(index+1),'external-point',()=>{const [x,,z]=c.points[index];return new THREE.Vector3(x,surfaceHeight(x,z)+WIRE_RADIUS,z);},b=>{
    this.bindDrag(b,()=>({kind:'point',key:this.selected,index}));b.onkeydown=ev=>{if(ev.key==='Delete'){if(c.points.length>1)c.points.splice(index,1);}else{const delta={ArrowLeft:[-.15,0],ArrowRight:[.15,0],ArrowUp:[0,-.15],ArrowDown:[0,.15]}[ev.key];if(!delta)return;this.movePoint(index,c.points[index][0]+delta[0],c.points[index][2]+delta[1]);}ev.preventDefault();this.draw();this.save();this.rebuildMarkers();this.markers.filter(m=>m.kind==='external-point')[Math.min(index,c.points.length-1)]?.button.focus();};
   }));this.update();
  }
  bindDrag(b,spec){b.onpointerdown=ev=>{if(ev.button||this.scene.dragging||this.scene.fanEditing)return;const s=spec();if(s.kind==='plug'&&['bluetooth',undefined].includes(this.modes[s.key])){this.selected=s.key;this.open(true);return;}ev.preventDefault();ev.stopPropagation();this.selected=s.key;this.edit=s.kind==='point';this.opened=true;this.panel.hidden=false;this.launch.setAttribute('aria-expanded','true');this.renderPanel();const origin=s.kind==='point'?new THREE.Vector3(...this.connections[s.key].points[s.index]):this.source(s.key);this.drag={...s,id:ev.pointerId,button:b,start:[ev.clientX,ev.clientY],origin,old:this.connections[s.key]?.points.map(p=>[...p]),...beginCableDrag(this.scene.camera,origin,this.pointer(ev))};this.scene.controls.autoRotate=false;this.scene.controls.enabled=false;b.setPointerCapture(ev.pointerId);this.update();};b.onpointermove=ev=>this.moveDrag(ev);b.onpointerup=ev=>this.endDrag(ev);b.onpointercancel=()=>this.endDrag(null,true);b.onlostpointercapture=()=>{if(this.drag)this.endDrag(null,true);};}
  pointer(ev){const r=this.scene.container.getBoundingClientRect();return new THREE.Vector2((ev.clientX-r.left)/r.width*2-1,-(ev.clientY-r.top)/r.height*2+1);}
- nearest(ev){let best=null,dist=22;for(const m of this.markers.filter(m=>m.port&&!m.button.hidden)){const r=m.button.getBoundingClientRect(),d=Math.hypot(ev.clientX-r.x-r.width/2,ev.clientY-r.y-r.height/2);if(d<dist){dist=d;best=m.port;}}return best;}
+ nearest(ev){let best=null,dist=22;for(const m of this.markers.filter(m=>m.port&&!m.button.hidden)){if(m.button.disabled)continue;const r=m.button.getBoundingClientRect(),d=Math.hypot(ev.clientX-r.x-r.width/2,ev.clientY-r.y-r.height/2);if(d<dist){dist=d;best=m.port;}}return best;}
  movePoint(index,x,z){const c=this.connections[this.selected],points=c.points.map(p=>[...p]);points[index]=[x,ROUTE_Y,z];const a=this.source(this.selected),b=this.target(this.ports.find(p=>p.id===c.port));const err=routeError([this.entry(this.selected,a.toArray()),...points,[b.x+.38,ROUTE_Y,b.z]],this.obstacles());if(err){this.say(err);return false;}c.points=points;return true;}
  moveDrag(ev){const d=this.drag;if(!d||d.id!==ev.pointerId)return;ev.preventDefault();d.moved=Math.hypot(ev.clientX-d.start[0],ev.clientY-d.start[1])>4||d.moved;
   if(d.kind==='point'){const ray=new THREE.Raycaster();ray.setFromCamera(this.pointer(ev),this.scene.camera);const hit=ray.ray.intersectPlane(new THREE.Plane(new THREE.Vector3(0,1,0),-ROUTE_Y),new THREE.Vector3());if(hit&&this.movePoint(d.index,hit.x,hit.z)){this.draw();this.update();}return;}
-  const port=this.nearest(ev),valid=port&&!connectionError(this.products[d.key],this.modes[d.key],port,this.connections,d.key,this.pc),end=valid?this.target(port):cableDragPoint(this.scene.camera,this.pointer(ev),d);clear(this.preview);if(end)line(this.preview,[d.origin.toArray(),d.origin.clone().lerp(end,.5).toArray(),end.toArray()],valid?0xbde3cf:0xcbd4d9,.032);d.target=valid?port.id:null;
+  const port=this.nearest(ev),mode=this.modes[d.key];
+  const valid=port&&!connectionError(this.products[d.key],mode,port,this.connections,d.key,this.pc);
+  clear(this.preview);
+  if(valid&&mode!=='receiver'){
+   line(this.preview,this.route(d.key,{port:port.id,points:[]}),0xbde3cf,.032);
+  }else{
+   const end=valid?this.target(port):cableDragPoint(this.scene.camera,this.pointer(ev),d);
+   if(end&&mode!=='receiver')line(this.preview,[d.origin.toArray(),end.toArray()],0xcbd4d9,.032);
+   if(end&&mode==='receiver'){
+    const receiver=new THREE.Mesh(new THREE.BoxGeometry(.15,.1,.16),new THREE.MeshStandardMaterial({color:valid?0xbde3cf:0xcbd4d9}));
+    receiver.position.copy(end);
+    this.preview.add(receiver);
+   }
+  }
+  d.target=valid?port.id:null;
  }
  endDrag(ev,cancel=false){const d=this.drag;if(!d)return;this.drag=null;this.scene.controls.enabled=true;clear(this.preview);if(d.button.hasPointerCapture(d.id))d.button.releasePointerCapture(d.id);
   if(d.kind==='point'){if(cancel)this.connections[d.key].points=d.old;else this.message='Путь кабеля сохранён.';this.draw();this.save();}

@@ -17,7 +17,7 @@ function harness(Scene=PCScene){
   container:{getBoundingClientRect:()=>rect},viewportWidth:800,viewportHeight:600,
   camera:{aspect:4/3,updateProjectionMatrix(){events.push('projection');}},
   renderer:{setSize(w,h){pixels=null;events.push(['resize',w,h]);},render(){pixels='computer';events.push('render');}},
-  controls:{update(){}},fitCaseView(){events.push('fit');},updateFanMarkers(){},updateMarkers(){},
+  controls:{update(){}},cableFlight:{cancel(){},update(){return false;}},fitCaseView(){events.push('fit');},updateFanMarkers(){},updateMarkers(){},
   fans:[],transitions:[],last:100,scene:{},frame(){},
  });
  return {scene,events,setRect(value){rect=value;},get pixels(){return pixels;}};

@@ -2,6 +2,8 @@ import {aioMount} from './aio.js';
 // Shared assembly dimensions in scene units (100 mm per unit). Port, cable and
 // mesh placement use the same anchors so changing a part cannot leave loose I/O.
 export const CPU_CENTER={x:-.694,y:3.44,z:-.55};
+// One mounting plane for the SSD, its keyed socket and the retention screw.
+export const M2_MOUNT={x:-.797,y:2.62,connectorZ:-1.30,screwZ:-.50};
 export const GPU_TOP=2.43;
 export const PSU_REAR=-2.12;
 export function caseLayout(p={},gpu,cooler){
@@ -55,7 +57,8 @@ export function coolerLayout(p={},ram,socket){
  const sizes=[p.fanSizeMm||(p.id==='nh-d15'?140:120)].flat().map(n=>n/100),size=Math.max(...sizes);
  const top=CPU_CENTER.x+(p.height||155)/100,finStart=-.29,finEnd=top-.04;
  const towers=p.towers>1?[-.98,-.23]:[-.55];
- const fanZ=p.towers>1?[-.60,.16]:p.fans===2?[-.94,-.17]:[-.17];
+ const fanOffset=.215+.115; // Tower cap half-depth plus fan frame half-depth.
+ const fanZ=towers.length>1?towers.map(z=>z+fanOffset):p.fans===2?[towers[0]-fanOffset,towers[0]+fanOffset]:[towers[0]+fanOffset];
  const lift=p.adjustableFrontFan&&ram&&!p.ramUnrestrictedSockets?.includes(socket)?Math.max(0,((ram.height||40)-(p.ramClearance||99))/100):0;
  return {size,sizes,top,finStart,finEnd,towers,fanZ,fanX:top-size/2-.01,lift,finDepth:.40};
 }

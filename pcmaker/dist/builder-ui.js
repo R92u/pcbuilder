@@ -41,6 +41,16 @@ let regionId='ru';try{regionId=regionFor(localStorage.getItem('pcmaker-region'))
 const snapshots={ru:priceSnapshot({},'ru'),by:priceSnapshot({},'by')};
 let region=regionFor(regionId);$('region-select').value=regionId;
 let build=sanitizeBuild(saved), scene, priceData=snapshots[regionId], sourceData={catalog:[]};
+const flightToggle=$('cable-flight-toggle');
+const flightKey='pcmaker-cable-flight';
+try{flightToggle.checked=localStorage.getItem(flightKey)!=='off';}catch{}
+function applyFlightPreference(){
+ if(scene){scene.cableFlight.enabled=flightToggle.checked;if(!flightToggle.checked)scene.cableFlight.cancel();}
+}
+flightToggle.onchange=()=>{applyFlightPreference();try{localStorage.setItem(flightKey,flightToggle.checked?'on':'off');}catch{}};
+window.addEventListener('storage',event=>{
+ if(event.key===flightKey||event.key===null){flightToggle.checked=event.newValue!=='off';applyFlightPreference();}
+});
 let lastTarget=null,lastLoad='idle';
 let autoPlan=null;try{autoPlan=JSON.parse(localStorage.getItem('pcmaker-autobuild'));}catch{}
 let lighting=sanitizeLighting();try{lighting=sanitizeLighting(JSON.parse(localStorage.getItem('pcmaker-lighting')));}catch{}
@@ -175,6 +185,7 @@ function attemptConnection(portId){
  if(!canConnect(selectedCable,portId)){$('wire-feedback').textContent='Этот разъём не подходит. Для выбранного кабеля нужен '+ports[selectedCable].name+'.';$('wire-feedback').classList.add('error');return;}
  resetSimulation();connections=connections.includes(selectedCable)?connections.filter(id=>id!==selectedCable):[...connections,selectedCable];
  $('wire-feedback').classList.remove('error');$('wire-feedback').textContent=ports[selectedCable].name+(connections.includes(selectedCable)?' подключён.':' отсоединён.');renderWiring();updateSimulationState();
+ if(connections.includes(selectedCable))scene?.showConnectedCable(selectedCable);
 }
 function completeCableDrag(id,port){
  const next=connectionAfterDrop(build,fanLayout,wireMode,connections,id,port);
@@ -184,7 +195,7 @@ function completeCableDrag(id,port){
  }
  resetSimulation();wireMode=next.mode;connections=next.connections;selectedCable=id;
  const message=ports[id].name+' подключён.';
- $('wire-feedback').textContent=message;$('wire-feedback').classList.remove('error');renderWiring();updateSimulationState();toast(message);
+ $('wire-feedback').textContent=message;$('wire-feedback').classList.remove('error');renderWiring();updateSimulationState();scene?.showConnectedCable(id);toast(message);
 }
 document.addEventListener('click',event=>{
  const mode=event.target.closest('[data-wiring-mode]');if(mode&&mode.dataset.wiringMode!==wireMode){wireMode=mode.dataset.wiringMode;connections=[];selectedCable=null;resetSimulation();renderWiring();updateSimulationState();$('wire-feedback').textContent='';}
@@ -250,7 +261,7 @@ renderBuild();
 $('region-select').onchange=()=>{regionId=regionFor($('region-select').value).id;region=regionFor(regionId);priceData=snapshots[regionId];try{localStorage.setItem('pcmaker-region',regionId);}catch{}renderBuild();shop.refresh();autoBuilder.refresh();document.dispatchEvent(new Event('pcmaker:region-change'));toast('Регион цен: '+region.city+' / '+region.currency);};
 Promise.allSettled([fetch('./prices.json',{cache:'no-cache',signal:AbortSignal.timeout(8000)}).then(r=>{if(!r.ok)throw Error('prices');return r.json();}),fetch('./prices-by.json',{cache:'no-cache',signal:AbortSignal.timeout(8000)}).then(r=>{if(!r.ok)throw Error('prices-by');return r.json();}),fetch('./sources.json',{signal:AbortSignal.timeout(8000)}).then(r=>r.json()),loadLivePrices()]).then(results=>{for(const [i,id] of ['ru','by'].entries())snapshots[id]=priceSnapshot(results[i].status==='fulfilled'?results[i].value:snapshots[id],id);if(results[2].status==='fulfilled')sourceData=results[2].value;priceData=snapshots[regionId];renderBuild();peripheralUI?.refresh();shop.refresh();autoBuilder.refresh();});
 if(workplace){const {mountPeripherals}=await import('./workplace-store.js');peripheralUI=mountPeripherals({getScene:()=>scene,getRegion:()=>regionId,openShop:key=>shop.open(key),refreshShop:()=>shop.refresh()});shop.registerPeripherals(peripheralUI.shop);document.querySelectorAll('[data-workplace-mode]').forEach(b=>b.onclick=()=>{if(b.dataset.workplaceMode==='peripherals'){setTab('parts');closeInspector(false);}showWorkplaceMode(b.dataset.workplaceMode);});document.querySelectorAll('[data-workplace-view]').forEach(b=>b.onclick=()=>{setTab('parts',{reveal:false});scene?.focus(b.dataset.workplaceView);});}
-try{const Scene=workplace?(await import('./workplace-assembly.js')).WorkplaceScene:(await import('./scene.js?v=workplace-integration')).PCScene;scene=new Scene($('viewport'));peripheralUI?.attach();scene.onInspect=openInspector;scene.onCableDrop=completeCableDrag;scene.onCablePick=id=>{selectedCable=id;setTab('wiring',{reveal:false});};scene.fanLayout=fanLayout;scene.setBuild(build);scene.onFanSelect=fanUI.select;scene.onFanDrop=fanUI.move;fanUI.render();scene.setOptions({running,hideGlass:$('glass-toggle').getAttribute('aria-pressed')==='true',hideCooler:$('cooler-toggle').getAttribute('aria-pressed')==='true',airflow:$('airflow-toggle').getAttribute('aria-pressed')==='true'});renderLighting();renderWiring();scene.onContextLost=()=>toast('3D-контекст потерян. Сохрани сборку и обнови страницу.');updateSliders();}catch(error){console.error('3D initialization failed',error);$('viewport').innerHTML=`<div class="fallback">${icon('case')}<strong>3D не удалось запустить</strong><p>Попробуй современный браузер с аппаратным ускорением.<br>Каталог, совместимость и симуляция остаются доступны.</p></div>`;$('scene-hint').hidden=true;}
+try{const Scene=workplace?(await import('./workplace-assembly.js')).WorkplaceScene:(await import('./scene.js?v=workplace-integration')).PCScene;scene=new Scene($('viewport'));applyFlightPreference();peripheralUI?.attach();scene.onInspect=openInspector;scene.onCableDrop=completeCableDrag;scene.onCablePick=id=>{selectedCable=id;setTab('wiring',{reveal:false});};scene.fanLayout=fanLayout;scene.setBuild(build);scene.onFanSelect=fanUI.select;scene.onFanDrop=fanUI.move;fanUI.render();scene.setOptions({running,hideGlass:$('glass-toggle').getAttribute('aria-pressed')==='true',hideCooler:$('cooler-toggle').getAttribute('aria-pressed')==='true',airflow:$('airflow-toggle').getAttribute('aria-pressed')==='true'});renderLighting();renderWiring();scene.onContextLost=()=>toast('3D-контекст потерян. Сохрани сборку и обнови страницу.');updateSliders();}catch(error){console.error('3D initialization failed',error);$('viewport').innerHTML=`<div class="fallback">${icon('case')}<strong>3D не удалось запустить</strong><p>Попробуй современный браузер с аппаратным ускорением.<br>Каталог, совместимость и симуляция остаются доступны.</p></div>`;$('scene-hint').hidden=true;}
 
 
 window.addEventListener('pagehide',event=>{if(!event.persisted)scene?.dispose();});

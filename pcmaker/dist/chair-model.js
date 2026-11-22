@@ -91,7 +91,7 @@ export function createChairModel(p,{withTexture=true}={}){
  for(const side of [-1,1]){
   const bolster=cushion(g,'seat-bolster',.7,.55,4.4,[side*2.52,4.45,-.1],inset);bolster.rotation.z=side*.10;
   const arm=new THREE.Group();arm.name=side<0?'armrest-left':'armrest-right';g.add(arm);
-  rod(arm,'arm-bracket',[side*2.45,3.25,-.9],[side*3.45,3.25,-.9],.13,metal);
+  rod(arm,'arm-bracket',[side*2.45,3.25,-.9],[side*3.45,3.25,-.5],.13,metal);
   mesh(arm,'arm-column',new THREE.CylinderGeometry(.17,.21,2.9,12),black,[side*3.45,4.7,-.5]);
   mesh(arm,'telescoping-sleeve',new THREE.CylinderGeometry(.22,.24,1.3,20),black,[side*3.45,4.0,-.5]);
   cushion(arm,'arm-pad-base',.93,.24,2.42,[side*3.45,6.12,-.35],metal);
