@@ -2,7 +2,7 @@ import {CableFlight} from './cable-flight.js';
 import {createAssemblyGuides,contactShadow} from './assembly-guides.js';
 import * as THREE from 'three';
 import {OrbitControls} from './vendor/OrbitControls.js';
-import {resolve} from './catalog.js';
+import {categories,resolve} from './catalog.js';
 import {modelMethods} from './model.js';
 import {portsFor,cablesFor} from './wiring.js';
 import {hardwareFinish} from './surfaces.js';
@@ -118,7 +118,7 @@ export class PCScene {
   this.playCableFlight(curve.getSpacedPoints(64).map(point=>this.root.localToWorld(point)));
  }
  setBuild(build){
-  this.cableFlight.cancel();
+  if(this.cableFlight.active && categories.some(([key])=>this.currentBuild?.[key]!==build[key]))this.cableFlight.cancel();
   const changedCase=this.currentBuild?.case!==build.case;this.currentBuild={...build};const p=resolve(build);
   const caseSignature=(p.case?.id||'cc560')+':'+(p.gpu?.length||'empty')+':'+(p.cooler?.type==='aio'?p.cooler.id:'air');
   if(p.case&&this.caseGroup.userData.signature!==caseSignature){this.caseGroup.removeFromParent();this.fans=this.fans.filter(f=>f.parent!==this.caseGroup);this.caseGroup.traverse(o=>{o.geometry?.dispose();o.material?.map?.dispose();o.material?.dispose();});this.makeCase(p.case);this.caseGroup.userData.signature=caseSignature;this.glass.visible=!this.hideGlass;this.makeCaseFlows(p.case);}

@@ -21,6 +21,16 @@ function fixture(build=demoBuild){
  return scene;
 }
 const close=(a,b)=>Math.abs(a-b)<1e-5;
+test('refreshing prices preserves a cable flight; replacing its hardware stops it',()=>{
+ const build={cpu:demoBuild.cpu},scene=fixture(build),cpu=new Group();
+ cpu.userData.signature=build.cpu;scene.root.add(cpu);
+ Object.assign(scene,{parts:{cpu},transitions:[],rearPanel:{},setFanLayout(){},collectLights(){},guides:{setBuild(){}},
+  cableFlight:{active:true,cancel(){this.active=false;}}});
+ scene.setBuild({...build});
+ assert.equal(scene.cableFlight.active,true);
+ scene.setBuild({cpu:null});
+ assert.equal(scene.cableFlight.active,false);
+});
 function boxBounds(scene){
  const calls=[];
  scene.box=function(parent,w,h,d,x,y,z,color,...args){
