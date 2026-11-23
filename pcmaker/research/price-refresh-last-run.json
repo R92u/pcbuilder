@@ -1,15 +1,15 @@
 {
-  "checkedAt": "2026-11-22T12:42:38.143Z",
+  "checkedAt": "2026-11-23T14:57:42.225Z",
   "scope": {
     "region": "all",
     "host": "all",
     "limit": 500
   },
   "attempted": 436,
-  "updated": 201,
-  "failed": 235,
+  "updated": 335,
+  "failed": 101,
   "manualRetained": 0,
-  "offerAttempts": 456,
+  "offerAttempts": 455,
   "fallbackUpdated": 0,
   "withBackup": 25,
   "sources": {
@@ -34,15 +34,13 @@
       "causes": {}
     },
     "kns.ru": {
-      "attempted": 184,
-      "updated": 0,
-      "failed": 184,
+      "attempted": 186,
+      "updated": 132,
+      "failed": 54,
       "reasons": {
-        "robots-unavailable": 184
+        "product-not-confirmed": 54
       },
-      "causes": {
-        "http-403": 184
-      }
+      "causes": {}
     },
     "andpro.ru": {
       "attempted": 10,
@@ -69,6 +67,13 @@
       },
       "causes": {}
     },
+    "z51.ru": {
+      "attempted": 1,
+      "updated": 1,
+      "failed": 0,
+      "reasons": {},
+      "causes": {}
+    },
     "5element.by": {
       "attempted": 131,
       "updated": 122,
@@ -89,11 +94,9 @@
     },
     "tecno.by": {
       "attempted": 2,
-      "updated": 1,
-      "failed": 1,
-      "reasons": {
-        "http-404": 1
-      },
+      "updated": 2,
+      "failed": 0,
+      "reasons": {},
       "causes": {}
     },
     "time-shop.by": {
@@ -110,6 +113,13 @@
       "reasons": {},
       "causes": {}
     },
+    "ultraprice.by": {
+      "attempted": 1,
+      "updated": 1,
+      "failed": 0,
+      "reasons": {},
+      "causes": {}
+    },
     "cybermarket.by": {
       "attempted": 2,
       "updated": 2,
@@ -118,11 +128,11 @@
       "causes": {}
     },
     "dns-shop.ru": {
-      "attempted": 9,
+      "attempted": 6,
       "updated": 0,
-      "failed": 9,
+      "failed": 6,
       "reasons": {
-        "unsupported-source": 9
+        "unsupported-source": 6
       },
       "causes": {}
     },
@@ -192,24 +202,6 @@
         "price-not-confirmed": 4
       },
       "causes": {}
-    },
-    "z51.ru": {
-      "attempted": 1,
-      "updated": 1,
-      "failed": 0,
-      "reasons": {},
-      "causes": {}
-    },
-    "ultraprice.by": {
-      "attempted": 1,
-      "updated": 0,
-      "failed": 1,
-      "reasons": {
-        "robots-unavailable": 1
-      },
-      "causes": {
-        "timeout": 1
-      }
     },
     "r-seven.ru": {
       "attempted": 1,
