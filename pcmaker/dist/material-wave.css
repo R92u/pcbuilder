@@ -1,6 +1,7 @@
 html[data-surface=glass] [data-wave-group] {
   position: relative;
   isolation: isolate;
+  --wave-fill: rgba(255, 255, 255, .035);
 }
 
 html[data-surface=glass] [data-wave-selection]::before,
@@ -15,12 +16,13 @@ html[data-surface=glass] [data-wave-selection]::after {
   height: var(--wave-height);
   transform: translate(var(--wave-x), var(--wave-y));
   mask: var(--wave-shape) center / 100% 100% no-repeat;
-  background: var(--md-sys-color-primary-container);
+  background: var(--wave-fill);
 }
 
 html[data-surface=glass] [data-wave-selection]::after {
   mask-image: var(--wave-stroke);
   background: var(--wave-color, var(--md-sys-color-primary));
+  filter: drop-shadow(0 0 3px rgba(255, 255, 255, .45));
 }
 
 html[data-surface=glass] [data-wave-group] > .wave-trace {
@@ -33,13 +35,14 @@ html[data-surface=glass] [data-wave-group] > .wave-trace {
   pointer-events: none;
 }
 
-.wave-fill { fill: var(--md-sys-color-primary-container); stroke: none; }
+.wave-fill { fill: var(--wave-fill); stroke: none; }
 .wave-line {
   fill: none;
   stroke: var(--wave-color, var(--md-sys-color-primary));
   stroke-width: 1.5px;
   stroke-linecap: round;
   stroke-linejoin: round;
+  filter: drop-shadow(0 0 3px rgba(255, 255, 255, .45));
 }
 
 @media (prefers-reduced-motion: no-preference) {
