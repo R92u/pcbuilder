@@ -16,20 +16,14 @@ html[data-surface=glass] .workbench #studio[data-background]::before {
 }
 html[data-surface=glass] .workshop-header nav.workshop-toolbar {
  gap:3px;padding:4px 6px;border-radius:0 0 24px 24px;
- background:linear-gradient(175deg,#5b5c5f8c,#303133c9 75%);
- backdrop-filter:blur(16px);box-shadow:inset 0 0 0 1px #ffffff56,inset 0 1px #ffffff52;
+ background:linear-gradient(175deg,#ffffff09,#ffffff02 75%);
+ backdrop-filter:blur(16px);-webkit-backdrop-filter:blur(16px);
+ box-shadow:inset 0 0 0 1px #ffffff9c,inset 0 1px #ffffffad,0 0 12px #ffffff24;
 }
 .workshop-header .toolbar-dock {
  position:relative;justify-self:center;align-self:start;
  width:max-content;max-width:100%;min-width:0;
 }
-.toolbar-dock::before,.toolbar-dock::after {
- content:"";position:absolute;top:calc(100% - 7px);width:1px;height:38px;
- background:linear-gradient(#ffffff70,transparent);
- pointer-events:none;
-}
-.toolbar-dock::before {left:16px;}
-.toolbar-dock::after {right:16px;}
 .workshop-toolbar .round-button .tool-label {display:none;}
 html[data-design=glass] .workshop-toolbar #shop-button {width:auto;padding-inline:12px;}
 .workshop-toolbar .tool-rule {width:1px;height:21px;background:#ffffff30;margin:0 4px;flex:none;}
@@ -85,7 +79,6 @@ html:has(#price-history-dialog[open]) #price-history-button {--tool-mark:1;}
  html[data-design=glass] .workshop-header .toolbar-dock {grid-column:1 / -1;grid-row:1;width:100%;}
  html[data-design=glass] .workshop-header .brand-navigation {grid-column:1;grid-row:2;}
  html[data-design=glass] .workshop-header .workshop-header-actions {grid-column:2;grid-row:2;}
- .toolbar-dock::before,.toolbar-dock::after {height:18px;}
  html[data-design=glass] {--fullscreen-header-height:104px;}
  html[data-surface=glass] .workshop-header nav.workshop-toolbar {
   width:100%;justify-content:flex-start;

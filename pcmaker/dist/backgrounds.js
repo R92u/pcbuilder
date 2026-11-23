@@ -1,7 +1,9 @@
 import {backgroundDefaults,sanitizeBackground,backgroundAsset,imageSize} from './background-state.js';
+import {createBackgroundContrast} from './background-contrast.js?v=adaptive-20261123';
 
 const key='pcmaker-background-v1',studio=document.querySelector('.studio'),panel=document.getElementById('menu-background');
 const $=id=>document.getElementById(id);
+const updateContrast=createBackgroundContrast(document.documentElement);
 let state;try{state=sanitizeBackground(JSON.parse(localStorage.getItem(key)));}catch{state={...backgroundDefaults};}
 let customURL=null,operation=0,dbPromise;
 const backdrop=document.createElement('div');
@@ -17,6 +19,7 @@ function render(){
  backdrop.style.backgroundImage=url?`url("${url}")`:'';
  backdrop.style.setProperty('--backdrop-blur',(['dark','light'].includes(state.preset)?0:state.blur)+'px');
  backdrop.style.setProperty('--backdrop-brightness',state.brightness/100);
+ updateContrast(state,url);
  for(const b of panel.querySelectorAll('[data-background]'))b.setAttribute('aria-pressed',String(b.dataset.background===state.preset));
  for(const b of panel.querySelectorAll('[data-background-city]'))b.setAttribute('aria-pressed',String(b.dataset.backgroundCity===state.city));
  $('background-city-controls').hidden=state.preset!=='city';
