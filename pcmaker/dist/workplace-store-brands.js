@@ -43,5 +43,13 @@ render();
 function card(product){const p=peripheralById[product.peripheralId],selected=selection[p.category]===p.id;
  return `<article class="shop-card shop-peripheral ${selected?'is-selected':''}" data-product="${e(product.id)}"><figure class="shop-photo"><div class="shop-image"><img src="./assets/peripherals/${p.id}.webp" alt="${e(p.name+' · '+p.color)}" width="240" height="170" loading="lazy"><span class="shop-photo-placeholder" hidden>Фото недоступно</span></div></figure><div class="shop-card-body"><span class="shop-card-kind">${e(peripheralCategories[p.category])}</span><h3>${e(p.name)}</h3><p class="shop-specs">${e(p.description)}<br>${e(p.color)} · ${p.dimensions.join(' × ')} мм</p><div class="shop-offer">${price(p,true)}</div><div class="shop-card-actions"><button class="button ${selected?'':'primary'}" data-choose="${p.id}" ${selected?'disabled':''}>${p.category==='chair'?(selected?'Кресло выбрано':'Выбрать кресло'):(selected?'На столе':'На стол')}</button></div>${offerLink(p)}<button class="shop-detail-button" data-details="${p.id}" aria-label="Характеристики ${e(p.name)}">Характеристики</button></div></article>`;
 }
-return {shop:{products:peripherals.map(p=>({...p,id:'peripheral-'+p.id,peripheralId:p.id,kind:'peripheral',detail:p.description,specsVerified:p.specsVerified!==false})),categories:Object.entries(peripheralCategories),offers:()=>Object.fromEntries(peripherals.map(p=>['peripheral-'+p.id,selectRegionalOffer(offersForPeripheral(p),regionId)])),card},attach(){const scene=getScene();scene.setPeripherals(selection);scene.onProduct=details;},refresh(){render();if($('peripheral-dialog').open&&inspected)details(inspected);}};
+function applySelection(next) {
+ selection=sanitizeWorkplace(next);
+ const stored=save('pcmaker-workplace',selection);
+ getScene()?.setPeripherals(selection);
+ render();
+ refreshShop();
+ return stored;
+}
+return {applySelection,getSelection:()=>({...selection}),shop:{products:peripherals.map(p=>({...p,id:'peripheral-'+p.id,peripheralId:p.id,kind:'peripheral',detail:p.description,specsVerified:p.specsVerified!==false})),categories:Object.entries(peripheralCategories),offers:()=>Object.fromEntries(peripherals.map(p=>['peripheral-'+p.id,selectRegionalOffer(offersForPeripheral(p),regionId)])),card},attach(){const scene=getScene();scene.setPeripherals(selection);scene.onProduct=details;},refresh(){render();if($('peripheral-dialog').open&&inspected)details(inspected);}};
 }

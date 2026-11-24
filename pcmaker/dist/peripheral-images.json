@@ -496,5 +496,77 @@
     "sourcePage": "https://z51.ru/catalog/kresla/core-x-weave/",
     "sourceImage": "https://z51.ru/upload/resize_cache/iblock/944/1r13gdquoxczmezey6vkeqohyojhetnu/1094_1160_1/1500x1500_Z51_Core_GR%20%285%29.png",
     "credit": "ZONE 51"
+  },
+  "zone51-atomic-chevron": {
+    "image": "assets/peripherals/zone51-atomic-chevron.webp",
+    "sourcePage": "https://z51.ru/catalog/kresla/atomic-chevron/",
+    "sourceImage": "https://z51.ru/upload/resize_cache/iblock/9ce/6b01d0r8h9wzfv9kqtrffn8ai56fdk3q/1094_1160_1/1500x1500_Z51_Atomic%20Heart_RD_1.png",
+    "credit": "ZONE 51"
+  },
+  "zone51-bad-bunny": {
+    "image": "assets/peripherals/zone51-bad-bunny.webp",
+    "sourcePage": "https://z51.ru/catalog/kresla/bad-bunny/",
+    "sourceImage": "https://z51.ru/upload/resize_cache/iblock/cba/4opuk16xdtuw393oe6kff8bfc081vq04/1094_1160_1/1500x1500_Z51_Bunny_BK_2.png",
+    "credit": "ZONE 51"
+  },
+  "zone51-bastion-light-blue": {
+    "image": "assets/peripherals/zone51-bastion-light-blue.webp",
+    "sourcePage": "https://z51.ru/catalog/kresla/bastion-light-blue/",
+    "sourceImage": "https://z51.ru/upload/resize_cache/iblock/a2f/cszmtv8vapbo7epj3wq54jhaenuliwxf/1094_1160_1/1500x1500_Z51_Bastion_LBL_2.png",
+    "credit": "ZONE 51"
+  },
+  "zone51-bunny": {
+    "image": "assets/peripherals/zone51-bunny.webp",
+    "sourcePage": "https://z51.ru/catalog/kresla/bunny/",
+    "sourceImage": "https://z51.ru/upload/resize_cache/iblock/d72/g62snqwzgcfipbyhtkuzch3uom4ysirt/1094_1160_1/1500x1500_Z51_BUNNY_1.png",
+    "credit": "ZONE 51"
+  },
+  "zone51-clubpoint-black-red": {
+    "image": "assets/peripherals/zone51-clubpoint-black-red.webp",
+    "sourcePage": "https://z51.ru/catalog/kresla/clubpoint-black-red/",
+    "sourceImage": "https://z51.ru/upload/resize_cache/iblock/056/qwvap1sela751f27p6ft8t63arcw1hov/1094_1160_1/1500x1500_Z51_CLU_BR_2.png",
+    "credit": "ZONE 51"
+  },
+  "zone51-cyberpunk-limited-royal": {
+    "image": "assets/peripherals/zone51-cyberpunk-limited-royal.webp",
+    "sourcePage": "https://z51.ru/catalog/kresla/cyberpunk-limited-royal/",
+    "sourceImage": "https://z51.ru/upload/resize_cache/iblock/78b/7ogvkf65xygbrd3s1ztr8th2u4chedq5/1094_1160_1/1500x1500_Z51_CPLRoyal_1.png",
+    "credit": "ZONE 51"
+  },
+  "zone51-frost": {
+    "image": "assets/peripherals/zone51-frost.webp",
+    "sourcePage": "https://z51.ru/catalog/kresla/frost/",
+    "sourceImage": "https://z51.ru/upload/resize_cache/iblock/dc8/5vprzyju70uttk40wjjj56k2kp2o2cd4/1094_1160_1/1500x1500_Z51_Frost_5.png",
+    "credit": "ZONE 51"
+  },
+  "zone51-gravity-black-orange": {
+    "image": "assets/peripherals/zone51-gravity-black-orange.webp",
+    "sourcePage": "https://z51.ru/catalog/kresla/gravity-black-orange/",
+    "sourceImage": "https://z51.ru/upload/resize_cache/iblock/973/bj4ux2uf3dhbjacnedhnwgx06yuh2azh/1094_1160_1/1500x1500_Z51_Gravity_BO_2.png",
+    "credit": "ZONE 51"
+  },
+  "zone51-imperial-x-weave": {
+    "image": "assets/peripherals/zone51-imperial-x-weave.webp",
+    "sourcePage": "https://z51.ru/catalog/kresla/imperial-x-weave/",
+    "sourceImage": "https://z51.ru/upload/resize_cache/iblock/053/qpk4bvssk0u7l1cnynqaxckjyfdnpsnr/1094_1160_1/1500x1500_Z51_Imperial_X-Weave%20%284%29.png",
+    "credit": "ZONE 51"
+  },
+  "zone51-invader-x-weave": {
+    "image": "assets/peripherals/zone51-invader-x-weave.webp",
+    "sourcePage": "https://z51.ru/catalog/kresla/invader-x-weave/",
+    "sourceImage": "https://z51.ru/upload/resize_cache/iblock/ebe/9khf4nh005afz58y9jn0eyhsp42q2kmr/1094_1160_1/1500x1500_Z51_InviderX-Weave_GR_6.png",
+    "credit": "ZONE 51"
+  },
+  "zone51-kitty": {
+    "image": "assets/peripherals/zone51-kitty.webp",
+    "sourcePage": "https://z51.ru/catalog/kresla/kitty/",
+    "sourceImage": "https://z51.ru/upload/resize_cache/iblock/d2f/wfrkylbolm566gzoxbktu51jdn30d75z/1094_1160_1/1500x1500_Z51_Kitty_PK%20%281%29.png",
+    "credit": "ZONE 51"
+  },
+  "zone51-minecraft-creeper": {
+    "image": "assets/peripherals/zone51-minecraft-creeper.webp",
+    "sourcePage": "https://z51.ru/catalog/kresla/minecraft-creeper/",
+    "sourceImage": "https://z51.ru/upload/resize_cache/iblock/55a/q0791b1ir6vrabq8p13izxjo0edtiyl7/1094_1160_1/1500x1500_creeper-3.png",
+    "credit": "ZONE 51"
   }
 }

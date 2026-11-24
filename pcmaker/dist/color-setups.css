@@ -1,0 +1,31 @@
+#color-setups-dialog{
+ color-scheme:dark;color:#f6f8fb;background:#24282e;
+ border:1px solid #ffffff38;border-radius:24px;padding:clamp(16px,3vw,28px);
+ width:min(690px,calc(100vw - 24px));max-height:90dvh;overflow:auto;
+ margin:auto;box-shadow:0 24px 72px #0008;
+}
+#color-setups-dialog::backdrop{background:#090c1299;backdrop-filter:blur(7px)}
+.setup-header,.setup-footer{display:flex;align-items:center;justify-content:space-between;gap:16px}
+.setup-header h2{font-size:clamp(21px,4vw,29px);letter-spacing:-.04em;margin:0}
+.setup-header button{color:inherit;font-size:22px}
+.setup-palettes{border:0;padding:0;margin:22px 0}
+.setup-palettes legend,#setup-summary{font-size:13px;color:#c7cdd2}
+#setup-swatches{display:flex;flex-wrap:wrap;gap:7px;margin-top:9px}
+#setup-swatches label{position:relative;cursor:pointer}
+#setup-swatches input{position:absolute;opacity:0}
+#setup-swatches span{display:flex;align-items:center;gap:7px;border:1px solid #ffffff32;border-radius:20px;padding:7px 12px;font-size:13px}
+#setup-swatches i{background:var(--swatch);width:15px;height:15px;border-radius:50%;box-shadow:inset 0 0 0 1px #ffffff45}
+#setup-swatches input:checked+span{background:#ffffff18;border-color:#dde6f0}
+#setup-swatches input:focus-visible+span{outline:2px solid #94caff;outline-offset:2px}
+#setup-products{list-style:none;margin:0;padding:0;display:grid;grid-template-columns:repeat(auto-fit,minmax(175px,1fr));gap:9px}
+#setup-products li{display:grid;grid-template-columns:50px 1fr;align-items:center;gap:10px;border:1px solid #ffffff20;background:#ffffff06;padding:10px;border-radius:14px}
+#setup-products img{width:50px;height:50px;object-fit:contain;background:white;border-radius:8px;padding:3px}
+#setup-products small,#setup-products strong,#setup-products em{display:block}
+#setup-products small,#setup-products em{font-size:11px;color:#c6cdd3;font-style:normal}
+#setup-products strong{font-size:13px;line-height:1.3;margin:2px 0}
+#setup-pc{font-size:13px;margin:17px 0;color:#dde2e7}
+#setup-pc summary{cursor:pointer}
+#setup-pc ul{line-height:1.6}
+.setup-footer{margin-top:18px;border-top:1px solid #ffffff22;padding-top:15px}
+.setup-footer button{flex-shrink:0}
+@media(max-width:460px){#setup-products{grid-template-columns:1fr}.setup-footer{align-items:stretch;flex-direction:column}}

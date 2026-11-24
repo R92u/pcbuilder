@@ -75,6 +75,7 @@ export function cablesFor(build,fanLayout){
   const fans=sanitizeFanLayout(build,fanLayout),intake=fanHub(build,'in'),exhaust=fanHub(build,'out');
   if(fans.some(f=>f.direction==='in'))add('frontFan','Вдув · разветвитель PWM','Разветвитель вентиляторов на вдув',true,[intake,[-.80,2.75,intake[2]],[-.80,2.75,.89],[-.44,2.75,.89],[-.44,2.75,.64]],4,.007);
   if(fans.some(f=>f.direction==='out'))add('rearFan','Выдув · разветвитель PWM','Разветвитель вентиляторов на выдув',true,[exhaust,[-.44,4.34,-1.77],[-.44,4.25,-1.58],[-.44,3.85,-1.58]],4,.007);
+  const panelName=p.case?.id==='matrexx55-mesh'?'Передняя панель корпуса':'Верхняя панель корпуса';
   const io=(id,y,z)=>{
    const start=frontIOPosition(p.case,frame,id);
    const [offsetY,offsetZ]={usb3:[.035,-.044],usbC:[.034,.038],audio:[-.034,-.054],usb2:[-.021,.004],panel:[-.020,.060]}[id];
@@ -85,13 +86,13 @@ export function cablesFor(build,fanLayout){
    if(id==='usbC'&&!(p.case?.usbC&&p.motherboard.usbCHeader))continue;
    const [x,y]=targets[id].position,route=io(id,y,.89);
    route[route.length-1]=[x,y,.89];
-   add(id,name,'Верхняя панель корпуса',false,route,1,radius);
+   add(id,name,panelName,false,route,1,radius);
   }
   for(const [id,name,strands,radius] of [['usb2','Передний USB 2.0',5,.008],['audio','Передний аудиоразъём · HD AUDIO',1,.022],['panel','Power / Reset / LED · JFP1',6,.006]]){
    if(id==='usb2'&&!p.case?.usb2)continue;
    const target=targets[id].position;
    const route=io(id,1.225,target[2]);route[route.length-1]=[-.85,1.225,target[2]];
-   add(id,name,id==='panel'?'Кнопки корпуса':'Верхняя панель корпуса',id==='panel',route.concat([[-.85,Math.max(1.23,target[1]-.14),target[2]]]),strands,radius,{endSpreadAxis:'x'});
+   add(id,name,id==='panel'?'Кнопки корпуса':panelName,id==='panel',route.concat([[-.85,Math.max(1.23,target[1]-.14),target[2]]]),strands,radius,{endSpreadAxis:'x'});
   }
  }
  return list;

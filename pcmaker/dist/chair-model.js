@@ -61,12 +61,14 @@ function branding(parent){
 }
 export function createChairModel(p,{withTexture=true}={}){
  const g=new THREE.Group();g.name='gaming-chair';
- const weave=withTexture?fabricMap():null;
- const cloth=new THREE.MeshStandardMaterial({color:'#cbcccb',roughness:.96,metalness:0,map:weave,bumpMap:weave,bumpScale:.012});
- const inset=new THREE.MeshStandardMaterial({color:'#b5b7b7',roughness:1});
- const black=new THREE.MeshStandardMaterial({color:'#25292b',roughness:.77});
- const metal=new THREE.MeshStandardMaterial({color:'#353a3c',roughness:.44,metalness:.55});
- const seam=new THREE.MeshStandardMaterial({color:'#9a9d9d',roughness:1});
+ const style=p.chairAppearance||{};
+ const leather=p.specs?.['Материалы отделки']==='Экокожа';
+ const weave=withTexture&&!leather?fabricMap():null;
+ const cloth=new THREE.MeshStandardMaterial({color:style.body||'#cbcccb',roughness:leather?.62:.96,metalness:0,map:weave,bumpMap:weave,bumpScale:.012});
+ const inset=new THREE.MeshStandardMaterial({color:style.accent||'#b5b7b7',roughness:leather?.66:1});
+ const black=new THREE.MeshStandardMaterial({color:style.hardware||'#25292b',roughness:.77});
+ const metal=new THREE.MeshStandardMaterial({color:style.hardware||'#353a3c',roughness:.44,metalness:.55});
+ const seam=new THREE.MeshStandardMaterial({color:style.accent||'#9a9d9d',roughness:1});
  // Five independent twin-wheel casters and swept steel spokes, all on the floor.
  for(let i=0;i<5;i++){
   const angle=i*Math.PI*2/5+Math.PI/2,x=Math.cos(angle)*3.15,z=Math.sin(angle)*3.15;
@@ -101,7 +103,12 @@ export function createChairModel(p,{withTexture=true}={}){
  const back=new THREE.Group();back.name='sculpted-back';back.position.set(0,4.35,-2.12);back.rotation.x=-.10;g.add(back);
  const outline=[[0,8.5],[-1.55,8.5],[-1.65,7.6],[-1.7,7.15],[-2.75,6.65],[-3.15,6.2],[-2.7,5.2],[-2.25,3.5],[-2.6,.55],[-2.6,-.1],[0,0],[2.6,-.1],[2.6,.55],[2.25,3.5],[2.7,5.2],[3.15,6.2],[2.75,6.65],[1.7,7.15],[1.65,7.6],[1.55,8.5],[0,8.5]];
  mesh(back,'back-upholstery',roundedOutline(outline,.58,.13),cloth,[0,0,-.48]);
- cushion(back,'lumbar-support',3.8,4.5,.85,[0,2.45,.30],cloth);
+ if(p.chairAppearance){
+  cushion(back,'lumbar-support',3.55,1.45,1.08,[0,1.40,.54],inset);
+  const seatWidth=Number(p.specs['Ширина сиденья (внешняя), мм']);
+  const backWidth=Number(p.specs['Ширина спинки (внешняя), мм']);
+  if(seatWidth && backWidth)back.scale.x=THREE.MathUtils.clamp(backWidth/seatWidth,.85,1.15);
+ }else cushion(back,'lumbar-support',3.8,4.5,.85,[0,2.45,.30],cloth);
  cushion(back,'upper-back-panel',4.1,2.2,.32,[0,5.65,.10],cloth);
  for(const side of [-1,1]){
   const bolster=cushion(back,'back-side-bolster',.65,4.8,.65,[side*2.15,2.65,.16],inset);bolster.rotation.z=side*.055;
@@ -115,6 +122,23 @@ export function createChairModel(p,{withTexture=true}={}){
  for(const angle of [Math.PI/2,7*Math.PI/6,11*Math.PI/6]){
   const shape=new THREE.Shape();shape.moveTo(-.045,.04);shape.lineTo(0,.45);shape.lineTo(.10,.13);shape.closePath();
   const logo=mesh(back,'headrest-emblem',new THREE.ShapeGeometry(shape),black,[0,7.2,.93]);logo.rotation.z=angle-Math.PI/2;
+ }
+ if(style.ears){
+  const cat=style.ears==='cat';
+  for(const side of [-1,1]){
+   const holder=new THREE.Group();
+   holder.position.set(side*.73,8.42,-.18);
+   holder.rotation.z=side*-.19;
+   back.add(holder);
+   if(cat){
+    const ear=new THREE.Shape();
+    ear.moveTo(-.46,0);ear.lineTo(0,.68);ear.lineTo(.46,0);ear.closePath();
+    mesh(holder,'cat-ear',new THREE.ExtrudeGeometry(ear,{depth:.16,bevelEnabled:false}),inset);
+   }else{
+    cushion(holder,'rabbit-ear',.57,1.54,.28,[0,.64,0],inset);
+    cushion(holder,'ear-lining',.28,1.10,.09,[0,.68,.14],cloth);
+   }
+  }
  }
  if(withTexture)branding(back);
  // Match the declared static configuration, including the floor contact point.

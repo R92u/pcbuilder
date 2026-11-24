@@ -45,6 +45,10 @@ export function psuCableSource(p,id){
 export function frontIOPosition(p,frame,id){
  const count=(p?.usbA??1)+(p?.usb2??0);
  const x={usb3:count>2?-.75:-.70,usb2:count>2?-.45:-.36,usbC:count>1?-.03:-.36,audio:.34,panel:.72}[id];
+ if(p?.id==='matrexx55-mesh'){
+  const middle=(frame.side+frame.back)/2,scale=(frame.side-frame.back-.10)/2.20;
+  return [middle-.845*scale,3.63+x,frame.front+.153];
+ }
  return [x,4.645,frame.ioZ];
 }
 export const frontFanSource=frame=>[-.80,frame.fanYs[Math.floor(frame.fanYs.length/2)],frame.fanZ-.14];

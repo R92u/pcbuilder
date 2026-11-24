@@ -261,6 +261,26 @@ renderBuild();
 $('region-select').onchange=()=>{regionId=regionFor($('region-select').value).id;region=regionFor(regionId);priceData=snapshots[regionId];try{localStorage.setItem('pcmaker-region',regionId);}catch{}renderBuild();shop.refresh();autoBuilder.refresh();document.dispatchEvent(new Event('pcmaker:region-change'));toast('Регион цен: '+region.city+' / '+region.currency);};
 Promise.allSettled([fetch('./prices.json',{cache:'no-cache',signal:AbortSignal.timeout(8000)}).then(r=>{if(!r.ok)throw Error('prices');return r.json();}),fetch('./prices-by.json',{cache:'no-cache',signal:AbortSignal.timeout(8000)}).then(r=>{if(!r.ok)throw Error('prices-by');return r.json();}),fetch('./sources.json',{signal:AbortSignal.timeout(8000)}).then(r=>r.json()),loadLivePrices()]).then(results=>{for(const [i,id] of ['ru','by'].entries())snapshots[id]=priceSnapshot(results[i].status==='fulfilled'?results[i].value:snapshots[id],id);if(results[2].status==='fulfilled')sourceData=results[2].value;priceData=snapshots[regionId];renderBuild();peripheralUI?.refresh();shop.refresh();autoBuilder.refresh();});
 if(workplace){const {mountPeripherals}=await import('./workplace-store.js');peripheralUI=mountPeripherals({getScene:()=>scene,getRegion:()=>regionId,openShop:key=>shop.open(key),refreshShop:()=>shop.refresh()});shop.registerPeripherals(peripheralUI.shop);document.querySelectorAll('[data-workplace-mode]').forEach(b=>b.onclick=()=>{if(b.dataset.workplaceMode==='peripherals'){setTab('parts');closeInspector(false);}showWorkplaceMode(b.dataset.workplaceMode);});document.querySelectorAll('[data-workplace-view]').forEach(b=>b.onclick=()=>{setTab('parts',{reveal:false});scene?.focus(b.dataset.workplaceView);});}
+if(!workplace){
+ $('color-setups-button')?.addEventListener('click',()=>{location.href='./workplace.html?setups=1'+location.hash;});
+}
+if(workplace){
+ const {mountColorSetups}=await import('./color-setups-ui.js');
+ mountColorSetups({
+  getBuild:()=>({...build}),
+  getSelection:peripheralUI.getSelection,
+  onApply(plan){
+   build=sanitizeBuild(plan.build);
+   resetSimulation();
+   renderBuild();
+   const stored=peripheralUI.applySelection(plan.selection);
+   setTab('parts',{reveal:false});
+   showWorkplaceMode('peripherals');
+   scene?.focus('all');
+   toast(stored?'Сетап применён':'Сетап применён до закрытия страницы');
+  }
+ });
+}
 try{const Scene=workplace?(await import('./workplace-assembly.js')).WorkplaceScene:(await import('./scene.js?v=workplace-integration')).PCScene;scene=new Scene($('viewport'));applyFlightPreference();peripheralUI?.attach();scene.onInspect=openInspector;scene.onCableDrop=completeCableDrag;scene.onCablePick=id=>{selectedCable=id;setTab('wiring',{reveal:false});};scene.fanLayout=fanLayout;scene.setBuild(build);scene.onFanSelect=fanUI.select;scene.onFanDrop=fanUI.move;fanUI.render();scene.setOptions({running,hideGlass:$('glass-toggle').getAttribute('aria-pressed')==='true',hideCooler:$('cooler-toggle').getAttribute('aria-pressed')==='true',airflow:$('airflow-toggle').getAttribute('aria-pressed')==='true'});renderLighting();renderWiring();scene.onContextLost=()=>toast('3D-контекст потерян. Сохрани сборку и обнови страницу.');updateSliders();}catch(error){console.error('3D initialization failed',error);$('viewport').innerHTML=`<div class="fallback">${icon('case')}<strong>3D не удалось запустить</strong><p>Попробуй современный браузер с аппаратным ускорением.<br>Каталог, совместимость и симуляция остаются доступны.</p></div>`;$('scene-hint').hidden=true;}
 
 

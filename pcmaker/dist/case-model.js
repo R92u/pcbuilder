@@ -1,3 +1,4 @@
+import {caseVent} from './case-fascia.js';
 import {hardwareFinish} from './surfaces.js';
 import {aioPlacement} from './aio.js';
 import * as THREE from 'three';
@@ -19,8 +20,8 @@ export function makeChassis(p={id:'cc560',short:'CC560 V2',frontFanCount:3,usbA:
  for(const z of [rear,front])this.box(g,width,.10,.18,centerX,4.63,z,steel);
  for(const x of [back,side])this.box(g,.10,.10,depth,x,4.63,centerZ,steel);
  const gridFront=front-.63,gridLength=gridFront-rear-.19;
- for(let i=0;i<=34;i++)this.box(g,width-.20,.020,.016,centerX,4.63,rear+.16+i*gridLength/34,steel);
- for(let i=0;i<16;i++)this.box(g,.014,.020,gridLength,back+.15+i*(width-.30)/15,4.636,rear+.16+gridLength/2,steel);
+ const roof=caseVent(g,width-.16,gridLength,p.id==='ch560-white'?'square':'round',steel,.092);
+ roof.rotation.x=-Math.PI/2;roof.position.set(centerX,4.635,rear+.16+gridLength/2);
  if(p.concept){const panel=new THREE.Shape();panel.moveTo(rear,.38);panel.lineTo(front,.38);panel.lineTo(front,4.58);panel.lineTo(rear,4.58);panel.closePath();holes(panel,'left',[2,1]);this.rearPanel=sheet(panel,black);this.rearPanel.rotation.y=-Math.PI/2;this.rearPanel.position.x=back+.018;g.add(this.rearPanel);}else this.rearPanel=this.box(g,.035,4.20,depth,back,2.48,centerZ,black);this.rearPanel.userData.animated=true;
  // Continuous tray with real service apertures and rubber-edged cable slots.
  const trayShape=new THREE.Shape();trayShape.moveTo(rear+.10,p.concept?.42:1.30);trayShape.lineTo(front-.27,p.concept?.42:1.30);trayShape.lineTo(front-.27,4.55);trayShape.lineTo(rear+.10,4.55);trayShape.closePath();
@@ -52,10 +53,14 @@ export function makeChassis(p={id:'cc560',short:'CC560 V2',frontFanCount:3,usbA:
  // Low-profile rubber edging borders the open cable pass-through.
  for(const x of [.30,.94])this.box(g,.025,.020,.72,x,1.166,.55,0x242c2e);
  for(const z of [.19,.91])this.box(g,.66,.020,.025,.62,1.166,z,0x242c2e);
- this.box(g,width,.78,.045,centerX,.73,front,shroudColor);
+ this.box(g,side+.86,.78,.045,(side-.96)/2,.73,shroudFront,shroudColor);
  if(p.id==='cc560'){
   for(const z of [rear+.22,front-.22])this.box(g,.035,.76,.39,side-.07,.73,z,shroudColor);
   for(const y of [.42,1.075])this.box(g,.035,.12,depth-.40,side-.07,y,centerZ,shroudColor);
+ }else if(p.id==='ch560-white'){
+  const sideMesh=caseVent(g,depth-.16,1.08,'square',0xd3d8da,.065);
+  sideMesh.rotation.y=Math.PI/2;sideMesh.position.set(side+.032,.92,centerZ);
+  for(const y of [.40,1.46])this.box(g,.06,.07,depth,side+.004,y,centerZ,steel);
  }else this.box(g,.035,.76,depth-.20,side-.07,.73,centerZ,shroudColor);
  for(const x of [back,side])for(const z of [rear,front]){this.box(g,.10,4.25,.10,x,2.48,z,steel);for(const y of [.48,1.28,4.48])this.screw(g,x+(x>0?.06:-.06),y,z,'x');}
  for(const x of [back+.28,side-.28])for(const z of [rear+.30,front-.30]){this.box(g,.30,.19,.46,x,.16,z,black);this.box(g,.28,.04,.43,x,.065,z,0x101416);}
@@ -76,7 +81,7 @@ export function makeChassis(p={id:'cc560',short:'CC560 V2',frontFanCount:3,usbA:
  }
 
  const fascia=new THREE.Group();g.add(fascia);if(p.concept)this.makeConceptFront(fascia,p);else this.makeCaseFront(fascia,p);fascia.position.z=front-2.1;fascia.scale.x=(width-.10)/2.20;fascia.position.x=centerX;
- if(white)fascia.traverse(o=>{if(o.isMesh&&o.material&&!o.material.map&&o.material.color.getHex()!==0x06090a)o.material.color.set(0xc0c6c9);});
+ if(white&&p.concept)fascia.traverse(o=>{if(o.isMesh&&o.material&&!o.material.map&&o.material.color.getHex()!==0x06090a)o.material.color.set(0xc0c6c9);});
  if(p.concept==='panorama'){
   const window=new THREE.Shape();window.moveTo(back+.08,.44);window.lineTo(side-.08,.44);window.lineTo(side-.08,4.54);window.lineTo(back+.08,4.54);window.closePath();holes(window,'front',[0,1]);
   const pane=new THREE.Mesh(new THREE.ShapeGeometry(window),new THREE.MeshPhysicalMaterial({color:0xbbceda,roughness:.1,metalness:.08,transparent:true,opacity:.12,side:THREE.DoubleSide,depthWrite:false}));pane.position.z=front+.07;g.add(pane);
@@ -87,25 +92,34 @@ export function makeChassis(p={id:'cc560',short:'CC560 V2',frontFanCount:3,usbA:
  if(!p.concept)for(const r of [.16,.24,.32,.40,.48]){const ring=new THREE.Mesh(new THREE.TorusGeometry(r,.010,6,40),new THREE.MeshStandardMaterial({color:steel,metalness:.5,roughness:.5}));ring.position.set(.31,3.93,-2.16);g.add(ring);}
  if(!p.concept)for(const x of [-.05,.66])this.rod(g,[x,3.49,-2.165],[x,4.37,-2.165],.012,steel);
  const ioApron=new THREE.Shape();ioApron.moveTo(back+.05,front-.70);ioApron.lineTo(side-.05,front-.70);ioApron.lineTo(side-.05,front-.06);ioApron.lineTo(back+.05,front-.06);ioApron.closePath();
- rectangle(ioApron,0,frame.ioZ,1.88,.43);
+ const fasciaIO=p.id==='matrexx55-mesh';
+ if(!fasciaIO)rectangle(ioApron,0,frame.ioZ,1.88,.43);
  const apron=sheet(ioApron,steel);apron.rotation.x=Math.PI/2;apron.position.y=4.695;g.add(apron);
- this.box(g,1.88,.032,.43,0,4.679,frame.ioZ,black);
+ const io=new THREE.Group();g.add(io);
+ if(fasciaIO){
+  // MATREXX 55 carries its controls vertically on the fascia.
+  io.quaternion.set(.5,.5,.5,.5);io.scale.z=.70;
+  const [x,y,z]=frontIOPosition(p,frame,'panel');
+  io.position.set(x-frame.ioZ*.70,y-.72,z-4.645);
+ }
+ this.box(io,1.88,.032,.43,0,4.679,frame.ioZ,black);
  for(const id of ['usb3',...(p.usb2?['usb2']:[]),...(p.usbC?['usbC']:[]),'audio','panel'])this.box(g,.13,.065,.09,...frontIOPosition(p,frame,id),0x161e21);
  // Each front I/O has its own mounting position (two USB-A never share USB-C).
  const usbCount=(p.usbA??1)+(p.usb2??0),usbX=usbCount>2?[-.75,-.45,-.15]:[-.70,-.36];
  for(let i=0;i<usbCount;i++){
   const x=usbX[i],col=i<(p.usbA??1)?0x2b73ae:0x252d30;
-  this.box(g,.19,.018,.105,x,4.71,frame.ioZ,0x919b9f);this.box(g,.15,.021,.076,x,4.72,frame.ioZ,0x060a0c);this.box(g,.127,.022,.020,x,4.727,frame.ioZ+.021,col);
-  this.text(g,i<(p.usbA??1)?'USB 3':'USB 2',.26,.05,x,4.704,frame.ioZ-.15,[-Math.PI/2,0,0],white?'#30393b':'#9aa8af');
+  this.box(io,.19,.018,.105,x,4.71,frame.ioZ,0x919b9f);this.box(io,.15,.021,.076,x,4.72,frame.ioZ,0x060a0c);this.box(io,.127,.022,.020,x,4.727,frame.ioZ+.021,col);
+  this.text(io,i<(p.usbA??1)?'USB 3':'USB 2',.26,.05,x,4.704,frame.ioZ-.15,[-Math.PI/2,0,0],white?'#30393b':'#9aa8af');
  }
- if(p.usbC){const x=usbCount>1?-.03:-.36;this.box(g,.115,.018,.06,x,4.71,frame.ioZ,0x8b989f);this.box(g,.083,.024,.037,x,4.717,frame.ioZ,0x080d0f);this.text(g,'USB-C',.23,.05,x,4.704,frame.ioZ-.15,[-Math.PI/2,0,0]);}
+ if(p.usbC){const x=usbCount>1?-.03:-.36;this.box(io,.115,.018,.06,x,4.71,frame.ioZ,0x8b989f);this.box(io,.083,.024,.037,x,4.717,frame.ioZ,0x080d0f);this.text(io,'USB-C',.23,.05,x,4.704,frame.ioZ-.15,[-Math.PI/2,0,0]);}
  const audioX=p.audio?.startsWith('2')?[usbCount>2?.14:.08,.34]:[.34];
- for(const x of audioX){this.cylinder(g,.047,.014,x,4.71,frame.ioZ,0x8d9a9c);this.cylinder(g,.031,.016,x,4.718,frame.ioZ,0x050a0c);}
- this.cylinder(g,.082,.022,.72,4.714,frame.ioZ,white?0x838e93:0x50585b);this.text(g,'⏻',.09,.09,.72,4.728,frame.ioZ,[-Math.PI/2,0,0],'#c0c4c6');
+ for(const x of audioX){this.cylinder(io,.047,.014,x,4.71,frame.ioZ,0x8d9a9c);this.cylinder(io,.031,.016,x,4.718,frame.ioZ,0x050a0c);}
+ this.cylinder(io,.082,.022,.72,4.714,frame.ioZ,white?0x838e93:0x50585b);this.text(io,'⏻',.09,.09,.72,4.728,frame.ioZ,[-Math.PI/2,0,0],'#c0c4c6');
  this.text(g,p.short,.83,.06,side-.049,.46,centerZ,[0,Math.PI/2,0],white?'#343e44':'#929ca2');
- let glassGeo=new THREE.PlaneGeometry(depth-.17,4.13);
+ const glassBottom=p.id==='ch560-white'?1.50:.435,glassTop=4.565;
+ let glassGeo=new THREE.PlaneGeometry(depth-.17,glassTop-glassBottom);
  if(p.concept){const shape=new THREE.Shape();shape.moveTo(rear+.1,.44);shape.lineTo(front-.1,.44);shape.lineTo(front-.1,4.55);shape.lineTo(rear+.1,4.55);shape.closePath();holes(shape,'right',[2,1]);glassGeo=new THREE.ShapeGeometry(shape);}
- this.glass=new THREE.Mesh(glassGeo,new THREE.MeshPhysicalMaterial({color:0x9faeb7,roughness:.09,metalness:.14,clearcoat:.85,clearcoatRoughness:.15,envMapIntensity:1.15,transparent:true,opacity:.15,side:THREE.DoubleSide,depthWrite:false}));this.glass.rotation.y=Math.PI/2;this.glass.position.set(side+.06,p.concept?0:2.50,p.concept?0:centerZ);if(p.concept)this.glass.rotation.y=-Math.PI/2;this.glass.visible=!this.hideGlass;this.glass.userData.ignoreInspect=true;g.add(this.glass);
+ this.glass=new THREE.Mesh(glassGeo,new THREE.MeshPhysicalMaterial({color:0x9faeb7,roughness:.09,metalness:.14,clearcoat:.85,clearcoatRoughness:.15,envMapIntensity:1.15,transparent:true,opacity:.15,side:THREE.DoubleSide,depthWrite:false}));this.glass.rotation.y=Math.PI/2;this.glass.position.set(side+.06,p.concept?0:(glassTop+glassBottom)/2,p.concept?0:centerZ);if(p.concept)this.glass.rotation.y=-Math.PI/2;this.glass.visible=!this.hideGlass;this.glass.userData.ignoreInspect=true;g.add(this.glass);
  // A mounted window has a visible perimeter and fasteners, even with a clear pane.
  const windowEdges=new THREE.LineSegments(new THREE.EdgesGeometry(glassGeo),new THREE.LineBasicMaterial({color:white?0xc6d8e1:0x849aa8,transparent:true,opacity:.72}));
  this.glass.add(windowEdges);

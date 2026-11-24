@@ -1,3 +1,4 @@
+import {makeRetailFront} from './case-fascia.js';
 import {connectorType} from './peripheral-connections.js';
 import {makeAIO} from './aio-model.js';
 import * as THREE from 'three';
@@ -91,36 +92,7 @@ export const modelMethods={
   }
   this.text(g,'PCmaker / '+p.short,.96,.07,0,.47,2.27);
  },
- makeCaseFront(g,p){
-  if(p.id==='cc560'){
-   this.box(g,1.35,4.19,.09,0,2.49,2.24,0x24292d);
-   for(const side of [-1,1]){
-    const bevel=this.box(g,.16,4.19,.075,side*.74,2.49,2.205,0x343b40);bevel.rotation.y=side*.42;
-    this.box(g,.12,4.19,.14,side*1.02,2.49,2.18,0x242a2e);
-    for(let i=0;i<56;i++)this.box(g,.17,.012,.014,side*.90,.44+i*.073,2.19,0x505a5f);
-    for(let i=0;i<4;i++)this.box(g,.008,4.1,.016,side*(.835+i*.04),2.49,2.198,0x3c474c);
-   }
-   this.text(g,'DEEPCOOL',.37,.06,0,.67,2.292,[0,0,0],'#899390');
-  }else{
-   const pop=p.frontStyle==='pop'||p.id==='pop-air',mesh=p.frontStyle==='mesh',bottom=pop?1.36:.52,top=4.49,height=top-bottom;
-   for(const side of [-1,1])this.box(g,pop?.10:.17,4.20,.16,side*(pop?1.02:.99),2.49,2.20,0x252b2e);
-   this.box(g,2.05,pop?.09:.17,.16,0,4.55,2.20,0x282f33);
-   this.box(g,2.05,pop?1.00:.16,.16,0,pop?.86:.44,2.20,0x242a2e);
-   const filter=new THREE.Mesh(new THREE.PlaneGeometry(pop?1.94:1.77,height),new THREE.MeshStandardMaterial({map:frontFilter(pop?'pop':mesh?'mesh':'triangle',p.color==='white'),metalness:.55,roughness:.57,alphaTest:.4,side:THREE.DoubleSide}));
-   filter.position.set(0,(bottom+top)/2,2.293);g.add(filter);
-   if(pop){
-    this.box(g,1.97,.015,.015,0,1.365,2.292,0x06090a);
-    this.box(g,.23,.075,.045,.89,.41,2.294,0x111719);
-    this.text(g,'fractal',.31,.065,.65,.60,2.286,[0,0,0],'#abb3b2');
-    // Separate lower drive bay door and two mounting shelves behind it.
-    for(const y of [.65,1.00])this.box(g,1.70,.025,.28,0,y,2.00,0x353d41);
-   }else{
-    this.text(g,(p.brand||'CORSAIR').toUpperCase(),.31,.055,0,.63,2.30,[0,0,0],'#a7b0b3');
-    if(!mesh)this.box(g,.04,.15,.01,-.98,4.31,2.288,0xb4b658);
-   }
-
-  }
- },
+ makeCaseFront:makeRetailFront,
  rod(g,a,b,r,color=steel){const start=new THREE.Vector3(...a),end=new THREE.Vector3(...b),delta=end.clone().sub(start);const mesh=new THREE.Mesh(new THREE.CylinderGeometry(r,r,delta.length(),12),material(color,.65,.35));mesh.position.copy(start.add(end).multiplyScalar(.5));mesh.quaternion.setFromUnitVectors(new THREE.Vector3(0,1,0),delta.normalize());g.add(mesh);return mesh;},
  screw(g,x,y,z,axis='x',radius=.033){
   const head=this.cylinder(g,radius,.018,x,y,z,0x798287);if(axis==='x')head.rotation.z=Math.PI/2;if(axis==='z')head.rotation.x=Math.PI/2;
