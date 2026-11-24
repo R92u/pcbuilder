@@ -568,5 +568,65 @@
     "sourcePage": "https://z51.ru/catalog/kresla/minecraft-creeper/",
     "sourceImage": "https://z51.ru/upload/resize_cache/iblock/55a/q0791b1ir6vrabq8p13izxjo0edtiyl7/1094_1160_1/1500x1500_creeper-3.png",
     "credit": "ZONE 51"
+  },
+  "akko-pad-akko-color": {
+    "image": "assets/peripherals/akko-pad-akko-color.webp",
+    "sourcePage": "https://en.akkogear.com/product/akko-color-mousepad/",
+    "sourceImage": "https://en.akkogear.com/wp-content/uploads/2020/05/SBD.jpg"
+  },
+  "akko-pad-cabbage-dog": {
+    "image": "assets/peripherals/akko-pad-cabbage-dog.webp",
+    "sourcePage": "https://en.akkogear.com/product/cabbage-dog-mousepad/",
+    "sourceImage": "https://en.akkogear.com/wp-content/uploads/2023/10/Cabbage-Dog-Mousepad.png"
+  },
+  "akko-pad-world-tour-tokyo-r2": {
+    "image": "assets/peripherals/akko-pad-world-tour-tokyo-r2.webp",
+    "sourcePage": "https://en.akkogear.com/product/world-tour-tokyo-r2-mouse-pad/",
+    "sourceImage": "https://en.akkogear.com/wp-content/uploads/2020/06/Tokyo-Mouse-Pad-300x300-1.png"
+  },
+  "akko-pad-ocean-star": {
+    "image": "assets/peripherals/akko-pad-ocean-star.webp",
+    "sourcePage": "https://en.akkogear.com/product/ocean-star-mouse-pad/",
+    "sourceImage": "https://en.akkogear.com/wp-content/uploads/2020/12/Ocean-Star-Mouse-Pad.png"
+  },
+  "akko-pad-world-tour-london": {
+    "image": "assets/peripherals/akko-pad-world-tour-london.webp",
+    "sourcePage": "https://en.akkogear.com/product/world-tour-london-mouse-pad/",
+    "sourceImage": "https://en.akkogear.com/wp-content/uploads/2021/12/World-Tour-London-Mouse-pad.png"
+  },
+  "akko-pad-dracula-castle": {
+    "image": "assets/peripherals/akko-pad-dracula-castle.webp",
+    "sourcePage": "https://en.akkogear.com/product/dracula-castle-mouse-pad/",
+    "sourceImage": "https://en.akkogear.com/wp-content/uploads/2021/12/Dracula-Castle-Mouse-pad.jpg"
+  },
+  "akko-pad-hello-kitty-peking-opera": {
+    "image": "assets/peripherals/akko-pad-hello-kitty-peking-opera.webp",
+    "sourcePage": "https://en.akkogear.com/product/hello-kitty-peking-opera-mouse-pad-b/",
+    "sourceImage": "https://en.akkogear.com/wp-content/uploads/2022/02/Hello-Kitty-Peking-Opera-Mouse-pad-B.png"
+  },
+  "akko-pad-piggy-party": {
+    "image": "assets/peripherals/akko-pad-piggy-party.webp",
+    "sourcePage": "https://en.akkogear.com/product/piggy-party-mousepad/",
+    "sourceImage": "https://en.akkogear.com/wp-content/uploads/2026/05/Piggy-Party-MousePad-GX.png"
+  },
+  "atlantis-og-v2-green": {
+    "image": "assets/peripherals/atlantis-og-v2-green.webp",
+    "sourcePage": "https://lamzu.com/products/lamzu-atlantis-og-v2-pro-gaming-mouse?variant=41081384009762",
+    "sourceImage": "https://lamzu.com/cdn/shop/files/productColor_V2_pro_green.png?v=1714121473"
+  },
+  "atlantis-og-v2-blue": {
+    "image": "assets/peripherals/atlantis-og-v2-blue.webp",
+    "sourcePage": "https://lamzu.com/products/lamzu-atlantis-og-v2-pro-gaming-mouse?variant=41072435724322",
+    "sourceImage": "https://lamzu.com/cdn/shop/files/productColor_V2_pro_blue.png?v=1714121473"
+  },
+  "atlantis-og-v2-miami": {
+    "image": "assets/peripherals/atlantis-og-v2-miami.webp",
+    "sourcePage": "https://lamzu.com/products/lamzu-atlantis-og-v2-pro-gaming-mouse?variant=41081383976994",
+    "sourceImage": "https://lamzu.com/cdn/shop/files/productColor_V2_pro_Miami.png?v=1714121472"
+  },
+  "akko-tokyo-r2-3108": {
+    "image": "assets/peripherals/akko-tokyo-r2-3108.webp",
+    "sourcePage": "https://en.akkogear.com/product/world-tour-tokyo-r2-3108v2-mechancial-keyboard/",
+    "sourceImage": "https://en.akkogear.com/wp-content/uploads/2020/05/R2bC.jpg"
   }
 }

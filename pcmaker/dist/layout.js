@@ -18,10 +18,11 @@ export function caseLayout(p={},gpu,cooler){
  const mount=aioMount({case:p,cooler});
  if(mount?.wall==='top')front=Math.max(front,-2.1+mount.length+.90);
  if(mount?.wall==='front')front=Math.max(front,gpuLayout(gpu||{}).end+.74);
+ if(p.leftFanCount)front=Math.max(front,3.12);
  const side=Math.max(1.12,CPU_CENTER.x+(p.coolerLimit||165)/100+.13);
  const fanSize=(p.fanSizeMm||120)/100;
  const frontMounts=p.frontFanMounts??p.frontFanCount??3;
- const fanYs=frontMounts===0?[]:frontMounts===1?[2.83]:frontMounts===2?[2.2,3.4]:fanSize>1.2?[1.05,2.45,3.85]:[1.4,2.65,3.9];
+ const fanYs=p.family==='focus-g'?[1.37,2.59]:frontMounts===0?[]:frontMounts===1?[2.83]:frontMounts===2?[2.2,3.4]:fanSize>1.2?[1.05,2.45,3.85]:[1.4,2.65,3.9];
  return {front,rear:-2.1,centerZ:(front-2.1)/2,depth:front+2.1,side,back:-1.19,fanZ:front-.13,fanYs,fanSize,ioZ:front-.38};
 }
 export const CABLE_CHANNEL_X=-1.105;

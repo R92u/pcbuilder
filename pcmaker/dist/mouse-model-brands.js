@@ -95,7 +95,7 @@ function iskraTexture(){
 function texture(p,f){
  if(f.iskra)return iskraTexture();
  const canvas=document.createElement('canvas');canvas.width=canvas.height=512;const ctx=canvas.getContext('2d');
- const body=f.light?'#e6e7e3':f.metal?'#555b60':'#30363b',seam=f.light?'#485052':'#11171b';
+ const body=p.appearance?.body||(f.light?'#e6e7e3':f.metal?'#555b60':'#30363b'),seam=f.light?'#485052':'#11171b';
  ctx.fillStyle=body;ctx.fillRect(0,0,512,512);
  const xy=(x,v)=>[(x+.5)*512,(v+1)*256];
  function path(points,color,width){ctx.beginPath();points.forEach(([x,v],i)=>{const pt=xy(x,v);i?ctx.lineTo(...pt):ctx.moveTo(...pt);});ctx.strokeStyle=color;ctx.lineWidth=width;ctx.lineJoin='round';ctx.lineCap='round';ctx.stroke();}
@@ -139,7 +139,7 @@ export function createMouseModel(p,{withTexture=true}={}){
   for(let i=0;i<idx.count;i+=3){const bottom=[0,1,2].every(k=>pos.getY(idx.getX(i+k))<=f.h*.121),m=bottom?1:0;if(m!==last){if(last!==-1)shellGeometry.addGroup(start,i-start,last);start=i;last=m;}}
   shellGeometry.addGroup(start,idx.count-start,last);
  }
- const shell=new THREE.Mesh(shellGeometry,new THREE.MeshStandardMaterial({color:f.metal?'#161616':withTexture?'#ffffff':f.iskra?'#b9232d':f.light?'#e6e7e3':'#30363b',map:withTexture&&!f.metal?texture(p,f):null,roughness:f.metal?.70:.6,metalness:f.metal?.22:.04}));if(f.iskra)shell.material=[shell.material,new THREE.MeshStandardMaterial({color:'#b9232d',roughness:.65})];shell.name='continuous-shell';shell.castShadow=true;shell.receiveShadow=true;group.add(shell);
+ const shell=new THREE.Mesh(shellGeometry,new THREE.MeshStandardMaterial({color:f.metal?'#161616':withTexture?'#ffffff':p.appearance?.body?p.appearance.body:f.iskra?'#b9232d':f.light?'#e6e7e3':'#30363b',map:withTexture&&!f.metal?texture(p,f):null,roughness:f.metal?.70:.6,metalness:f.metal?.22:.04}));if(f.iskra)shell.material=[shell.material,new THREE.MeshStandardMaterial({color:'#b9232d',roughness:.65})];shell.name='continuous-shell';shell.castShadow=true;shell.receiveShadow=true;group.add(shell);
  const dark=new THREE.MeshStandardMaterial({color:f.metal?'#111111':'#22292e',roughness:.7,metalness:.03});
  if(f.metal)addMG8Interior(group,f,mouseSurface);
  const sideCount=p.sideButtons??(p.id==='g502'?3:2);
@@ -149,7 +149,7 @@ export function createMouseModel(p,{withTexture=true}={}){
  }
  // Rubber wheel, axle across the mouse; only the upper arc projects above the shell.
  const wheelV=-.51,wheelZ=wheelV*f.d/2,radius=f.d*.063,axleY=mouseSurface(f,wheelV,Math.PI/2).y-radius*.63;
- const wheel=new THREE.Mesh(new THREE.CylinderGeometry(radius,radius,f.w*.105,32),f.iskra?new THREE.MeshStandardMaterial({color:'#bd2732',roughness:.65}):dark);wheel.name='scroll-wheel';wheel.rotation.z=Math.PI/2;wheel.position.set(0,axleY,wheelZ);group.add(wheel);
+ const wheel=new THREE.Mesh(new THREE.CylinderGeometry(radius,radius,f.w*.105,32),p.appearance?.wheel?new THREE.MeshStandardMaterial({color:p.appearance.wheel,roughness:.65}):f.iskra?new THREE.MeshStandardMaterial({color:'#bd2732',roughness:.65}):dark);wheel.name='scroll-wheel';wheel.rotation.z=Math.PI/2;wheel.position.set(0,axleY,wheelZ);group.add(wheel);
  const ribs=new THREE.InstancedMesh(new THREE.BoxGeometry(f.w*.107,.006,.009),new THREE.MeshStandardMaterial({color:f.iskra?'#101113':f.metal?'#202020':f.light?'#9ba4a5':'#697378',roughness:.75}),24),t=new THREE.Object3D();
  for(let i=0;i<24;i++){const a=i/24*Math.PI*2;t.position.set(0,axleY+Math.cos(a)*radius,wheelZ+Math.sin(a)*radius);t.rotation.x=a;t.updateMatrix();ribs.setMatrixAt(i,t.matrix);}ribs.name='wheel-tread';group.add(ribs);
  if(p.wired){

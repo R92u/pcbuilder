@@ -45,8 +45,8 @@ function appearance(product) {
 }
 
 function caseProduct(part) {
-  const white = part.color === 'white';
-  return {...part, category: 'case', color: white ? 'Белый' : 'Чёрный', colors: [white ? 'white' : 'black']};
+  const tone = SETUP_PALETTES.find(p => p.id === (part.color || 'black'));
+  return {...part, category: 'case', color: tone.label, colors: [tone.id]};
 }
 
 function colorRank(product, requested) {
@@ -98,7 +98,7 @@ export function pickColorSetup(paletteId, currentBuild, currentWorkplace = {}) {
   build.case = caseItem.id;
   const items = [caseItem];
   const selection = {};
-  for (const category of ['monitor', 'keyboard', 'mouse', 'chair']) {
+  for (const category of ['monitor', 'keyboard', 'mouse', 'chair', 'mat']) {
     const candidates = peripherals.filter(p => p.category === category);
     const picked = selectProduct(candidates, palette, currentWorkplace?.[category]);
     if (!picked) return null;

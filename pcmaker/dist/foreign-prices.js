@@ -1,5 +1,8 @@
 // Reviewed 2026-11-04. No currency conversion.
 export const foreignComponentOffers = {
+  "view-270-pink": {"price":79.99,"currency":"USD","date":"2026-11-24","store":"Thermaltake USA","kind":"manufacturer","availability":"out-of-stock","url":"https://thermaltakeusa.com/products/view-270-plus-tg-argb-bubble-pink-mid-tower-chassis-ca-1y7-00mawn-00"},
+  "view-270-green": {"price":79.99,"currency":"USD","date":"2026-11-24","store":"Thermaltake USA","kind":"manufacturer","availability":"out-of-stock","url":"https://thermaltakeusa.com/products/view-270-plus-tg-argb-matcha-green-mid-tower-chassis-ca-1y7-00mewn-01"},
+
   "nh-d15-g2": {
     "price": 159.95,
     "currency": "USD",

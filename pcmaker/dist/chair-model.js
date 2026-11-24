@@ -20,11 +20,11 @@ function mesh(parent,name,geometry,material,position=[0,0,0]){
 function roundedOutline(points,depth,bevel=.1){
  const s=new THREE.Shape();s.moveTo(...points[0]);
  for(let i=1;i<points.length;i+=2)s.quadraticCurveTo(...points[i],...points[(i+1)%points.length]);
- s.closePath();return new THREE.ExtrudeGeometry(s,{depth,bevelEnabled:true,bevelSize:bevel,bevelThickness:bevel,bevelSegments:5,curveSegments:16,steps:1});
+ s.closePath();return new THREE.ExtrudeGeometry(s,{depth,bevelEnabled:true,bevelSize:bevel,bevelThickness:bevel,bevelSegments:3,curveSegments:10,steps:1});
 }
 function cushion(parent,name,w,h,d,pos,material){
  const detailed=['seat','lumbar-support','headrest-pillow'].includes(name);
- const geometry=new THREE.SphereGeometry(1,detailed?64:32,detailed?40:20),a=geometry.attributes.position;
+ const geometry=new THREE.SphereGeometry(1,detailed?40:24,detailed?24:16),a=geometry.attributes.position;
  const pow=(v,e)=>Math.sign(v)*Math.pow(Math.abs(v),e),e1=name==='seat'?.38:.55,e2=.58;
  // A parametric superellipsoid avoids the pinched corners of coordinate-wise powers.
  const point=(lat,lon)=>{
@@ -45,18 +45,70 @@ function cushion(parent,name,w,h,d,pos,material){
  }
  return m;
 }
-function tube(parent,name,points,r,material){return mesh(parent,name,new THREE.TubeGeometry(new THREE.CatmullRomCurve3(points.map(p=>new THREE.Vector3(...p))),32,r,5,false),material);}
+function tube(parent,name,points,r,material){return mesh(parent,name,new THREE.TubeGeometry(new THREE.CatmullRomCurve3(points.map(p=>new THREE.Vector3(...p))),22,r,5,false),material);}
 function rod(parent,name,a,b,r,material){
  const start=new THREE.Vector3(...a),end=new THREE.Vector3(...b),delta=end.clone().sub(start);
  const m=mesh(parent,name,new THREE.CylinderGeometry(r,r,delta.length(),10),material,start.clone().add(end).multiplyScalar(.5).toArray());
  m.quaternion.setFromUnitVectors(new THREE.Vector3(0,1,0),delta.normalize());return m;
 }
-function branding(parent){
+function quiltedPanel(parent,p,cloth,inset,rear=false){
+ const creeper=p.id.includes('creeper'),diamond=/imperial|clubpoint|kitty/.test(p.id);
+ const racing=/atomic|bastion|gravity|cyberpunk|invader/.test(p.id);
+ const width=(t)=>1.55+.32*Math.sin(Math.PI*t)+.32*Math.exp(-((t-.81)**2)/.018);
+ const shell=(u,t)=>{
+  const crown=(1-u*u)*Math.sin(t*Math.PI);
+  const seam=racing?Math.cos((t*7-Math.abs(u)*.65)*Math.PI):Math.cos(u*3*Math.PI);
+  const relief=.043*crown*seam;
+  return [u*width(t),.57+6.05*t,rear?-.635-.20*crown:.22+.18*crown+relief];
+ };
+ const across=24,up=36,xyz=[],uv=[],indices=[];
+ for(let row=0;row<=up;row++)for(let col=0;col<=across;col++){
+  const u=col/across*2-1,t=row/up;xyz.push(...shell(u,t));uv.push(col/across,t);
+  if(col&&row){const i=row*(across+1)+col;indices.push(i-across-2,i-across-1,i,i-across-2,i,i-1);}
+ }
+ const geometry=new THREE.BufferGeometry();
+ geometry.setAttribute('position',new THREE.Float32BufferAttribute(xyz,3));
+ geometry.setAttribute('uv',new THREE.Float32BufferAttribute(uv,2));geometry.setIndex(indices);geometry.computeVertexNormals();
+ const fabric=cloth.clone();fabric.side=THREE.DoubleSide;
+ mesh(parent,rear?'rear-tailored-panel':'quilted-back-insert',geometry,fabric);
+ const threadColor=inset.color.clone().lerp(cloth.color,.32);
+ const positions=[];
+ // Place the thread on the actual padded surface, including the rounded crown.
+ const line=(u1,t1,u2,t2)=>{
+  for(let i=0;i<25;i++){
+   const a=i/25,b=(i+.60)/25;
+   for(const k of [a,b]){
+    const pos=shell(u1+(u2-u1)*k,t1+(t2-t1)*k);pos[2]+=rear?-.011:.011;positions.push(...pos);
+   }
+  }
+ };
+ for(const side of [-1,1])for(const n of [.91,.96])line(side*n,.02,side*n,.99);
+ if(!rear){
+  if(racing||diamond)for(let i=0;i<5;i++)for(const side of [-1,1]){
+   const y=.13+i*.15;line(0,y,side*.83,y+.105);
+   if(diamond)line(0,y+.15,side*.83,y+.045);
+  }
+  else for(const u of [-.54,-.49,.49,.54])line(u,.08,u,.87);
+ }else for(const side of [-1,1]){line(side*.75,.19,side*.34,.46);line(side*.34,.46,side*.78,.8);}
+ const threads=new THREE.BufferGeometry();threads.setAttribute('position',new THREE.Float32BufferAttribute(positions,3));
+ const stitching=new THREE.LineSegments(threads,new THREE.LineBasicMaterial({color:threadColor}));stitching.name='double-needle-stitching';parent.add(stitching);
+ if(creeper&&!rear){
+  const pixels=['110011','110011','001100','011110','011110','010010'];
+  for(let y=0;y<pixels.length;y++)for(let x=0;x<6;x++)if(pixels[y][x]==='1'){
+   const at=shell((x-2.5)*.155,.83-y*.047);at[2]+=.018;
+   mesh(parent,'creeper-pixel',new THREE.BoxGeometry(.31,.29,.034),inset,at);
+  }
+ }
+ for(const side of [-1,1]){
+  const pts=Array.from({length:17},(_,i)=>shell(side,i/16));tube(parent,'panel-welt',pts,.028,inset);
+ }
+}
+function branding(parent,p){
  if(typeof document==='undefined')return;
  const c=document.createElement('canvas');c.width=512;c.height=128;const ctx=c.getContext('2d');if(!ctx)return;
- ctx.fillStyle='#85888a';ctx.textAlign='center';ctx.font='500 48px sans-serif';ctx.fillText('ZONE 51',256,80);
+ ctx.fillStyle='#85888a';ctx.textAlign='center';ctx.font='500 48px sans-serif';ctx.fillText('ZONE 51',256,60);ctx.font='500 26px sans-serif';ctx.fillText(p.name.replace(/^ZONE 51 /,'').toUpperCase(),256,103,482);
  const map=new THREE.CanvasTexture(c);map.colorSpace=THREE.SRGBColorSpace;
- const m=mesh(parent,'embroidered-brand',new THREE.PlaneGeometry(1.4,.35),new THREE.MeshStandardMaterial({map,transparent:true,depthWrite:false,roughness:1}),[0,4.98,.31]);
+ const m=mesh(parent,'embroidered-brand',new THREE.PlaneGeometry(1.55,.39),new THREE.MeshStandardMaterial({map,transparent:true,depthWrite:false,roughness:1}),[0,7.68,.91]);
  m.rotation.x=-.10;
 }
 export function createChairModel(p,{withTexture=true}={}){
@@ -77,7 +129,7 @@ export function createChairModel(p,{withTexture=true}={}){
    const wheel=mesh(caster,'wheel',new THREE.CylinderGeometry(.375,.375,.15,32),black,[side*.14,.375,0]);wheel.rotation.z=Math.PI/2;
    const hub=mesh(caster,'wheel-hub',new THREE.CylinderGeometry(.21,.21,.016,24),metal,[side*.223,.375,0]);hub.rotation.z=Math.PI/2;
    const rim=mesh(caster,'rubber-sidewall',new THREE.TorusGeometry(.29,.024,6,28),black,[side*.232,.375,0]);rim.rotation.y=Math.PI/2;
-   for(let k=0;k<10;k++){const a=k*Math.PI/5;rod(caster,'hub-rib',[side*.238,.375+Math.cos(a)*.12,Math.sin(a)*.12],[side*.238,.375+Math.cos(a)*.23,Math.sin(a)*.23],.014,metal);}
+   const axle=mesh(caster,'axle-cap',new THREE.CylinderGeometry(.092,.092,.026,8),black,[side*.24,.375,0]);axle.rotation.z=Math.PI/2;
   }
   rod(caster,'caster-stem',[0,.50,0],[0,.85,0],.10,metal);
   const spoke=rod(g,'base-spoke',[0,1.05,0],[x,.78,z],.14,metal);spoke.scale.x=1.3;
@@ -109,7 +161,17 @@ export function createChairModel(p,{withTexture=true}={}){
   const backWidth=Number(p.specs['Ширина спинки (внешняя), мм']);
   if(seatWidth && backWidth)back.scale.x=THREE.MathUtils.clamp(backWidth/seatWidth,.85,1.15);
  }else cushion(back,'lumbar-support',3.8,4.5,.85,[0,2.45,.30],cloth);
- cushion(back,'upper-back-panel',4.1,2.2,.32,[0,5.65,.10],cloth);
+ quiltedPanel(back,p,cloth,inset);
+ quiltedPanel(back,p,cloth,inset,true);
+ for(const side of [-1,1]){
+  const hinge=mesh(g,'recline-hinge',new THREE.CylinderGeometry(.48,.50,.27,28),black,[side*2.73,4.48,-1.76]);hinge.rotation.z=Math.PI/2;
+  const cap=mesh(g,'hinge-cap',new THREE.CylinderGeometry(.26,.26,.03,16),metal,[side*2.88,4.48,-1.76]);cap.rotation.z=Math.PI/2;
+  tube(g,'pivot-arm',[[side*2.72,4.35,-1.78],[side*2.71,4.86,-1.98],[side*2.47,5.62,-2.12]],.105,black);
+  const strap=cushion(back,'lumbar-strap',.22,4.45,.078,[side*.99,3.4,-.79],black);
+  for(const y of [-.36,.36])mesh(strap,'slide-buckle',new THREE.BoxGeometry(.31,.055,.11),metal,[0,y,-.04]);
+ }
+ for(const y of [1.82,1.98,2.14,2.30])mesh(g,'lift-bellows',new THREE.CylinderGeometry(.32,.37,.13,18),black,[0,y,0]);
+ mesh(g,'piston',new THREE.CylinderGeometry(.19,.19,.61,18),new THREE.MeshStandardMaterial({color:0xbac0c4,metalness:.78,roughness:.25}),[0,2.61,0]);
  for(const side of [-1,1]){
   const bolster=cushion(back,'back-side-bolster',.65,4.8,.65,[side*2.15,2.65,.16],inset);bolster.rotation.z=side*.055;
   tube(back,'shoulder-stitch',[[side*1.35,7.8,.16],[side*1.7,6.7,.17],[side*1.9,5.7,.18],[side*1.55,4.85,.18]],.012,seam);
@@ -117,6 +179,10 @@ export function createChairModel(p,{withTexture=true}={}){
  }
  // The head pillow and its black rear strap are separate from the backrest.
  cushion(back,'headrest-pillow',3.35,2.15,.95,[0,7.05,.42],cloth);
+ for(const side of [-1,1]){
+  const seamPoints=[[side*2.21,4.57,1.94],[side*2.36,4.63,1.12],[side*2.39,4.65,.04],[side*2.28,4.60,-1.50]];
+  tube(g,'seat-piping',seamPoints,.034,seam);
+ }
  mesh(back,'pillow-strap',new THREE.BoxGeometry(3.25,.27,.025),black,[0,7.55,-.63]);
  // Small three-pronged stitched emblem, visible from all camera distances.
  for(const angle of [Math.PI/2,7*Math.PI/6,11*Math.PI/6]){
@@ -140,7 +206,7 @@ export function createChairModel(p,{withTexture=true}={}){
    }
   }
  }
- if(withTexture)branding(back);
+ if(withTexture)branding(back,p);
  // Match the declared static configuration, including the floor contact point.
  g.updateMatrixWorld(true);const bounds=new THREE.Box3().setFromObject(g),size=bounds.getSize(new THREE.Vector3()),[w,d,h]=p.dimensions.map(v=>v/100);
  g.scale.set(w/size.x,h/size.y,d/size.z);

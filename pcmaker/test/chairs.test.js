@@ -40,7 +40,7 @@ test('Chair has five twin casters, two armrests and finite floor-standing geomet
  assert.ok(model.getObjectByName('armrest-left'));assert.ok(model.getObjectByName('armrest-right'));
  assert.ok(model.getObjectByName('headrest-pillow'));assert.ok(model.getObjectByName('lumbar-support'));
  let wheels=0,triangles=0;
- model.traverse(o=>{if(o.name==='wheel')wheels++;if(o.geometry){assert.ok([...o.geometry.attributes.position.array,...o.geometry.attributes.normal.array].every(Number.isFinite));triangles+=(o.geometry.index?.count||o.geometry.attributes.position.count)/3;}});
+ model.traverse(o=>{if(o.name==='wheel')wheels++;if(o.isMesh){assert.ok([...o.geometry.attributes.position.array,...o.geometry.attributes.normal.array].every(Number.isFinite));triangles+=(o.geometry.index?.count||o.geometry.attributes.position.count)/3;}});
  assert.equal(wheels,10);assert.ok(triangles<50000);
  const placement=chairPlacement();model.position.set(...placement.position);model.position.y+=model.userData.floorOffset;model.rotation.y=placement.rotation;
  const bounds=new Box3().setFromObject(model);

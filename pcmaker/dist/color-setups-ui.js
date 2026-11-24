@@ -2,7 +2,7 @@ import {SETUP_PALETTES,pickColorSetup} from './color-setups.js';
 import {productImages} from './product-images.js';
 import {categories} from './catalog.js';
 
-const labels={...Object.fromEntries(categories),chair:'Кресло',keyboard:'Клавиатура',mouse:'Мышь',monitor:'Монитор'};
+const labels={...Object.fromEntries(categories),mat:'Коврик',chair:'Кресло',keyboard:'Клавиатура',mouse:'Мышь',monitor:'Монитор'};
 const notes={accent:'Цвет в деталях',neutral:'Нейтральное сочетание',retained:'Текущий корпус'};
 function element(tag,text){
  const node=document.createElement(tag);

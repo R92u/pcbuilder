@@ -19,8 +19,8 @@ export function fanMountRails(frame,slots){
    const position=[...slot.position],size=[.08,.08,.08];
    position[axis]=(inner+end)/2;size[axis]=Math.abs(end-inner);
    position[cross]+=side*slot.size*.447;
-   position[along]=along===1?2.48:frame.centerZ;
-   size[along]=along===1?4.24:frame.depth+.10;
+   position[along]=slot.wall==='left'?slot.position[along]:along===1?2.48:frame.centerZ;
+   size[along]=slot.wall==='left'?slot.size:along===1?4.24:frame.depth+.10;
    const key=[slot.wall,...position,...size].join(':');rails.set(key,{wall:slot.wall,position,size});
   }
  }
@@ -35,6 +35,7 @@ export function fanMounts(build){
  const a=aioPlacement(p,f);
  const add=(wall,position,size,i)=>{const slot={id:wall+'-'+(i+1),wall,position,size,normal:normals[wall],label:fanWalls[wall]+' · '+(i+1)};if(!radiatorConflict(slot,a))slots.push(slot);};
  if(!p.case?.concept){
+  for(let i=0;i<(p.case?.leftFanCount||0);i++)add('left',[TRAY_X+.145,2.09+i*1.22,f.front-.91],1.20,i);
   f.fanYs.forEach((y,i)=>add('front',[0,y,f.fanZ],f.fanSize,i));add('rear',[.31,3.93,-1.99],1.03,0);return slots;
  }
  const size=f.fanSize,x=f.side-size/2-.07,ys=f.fanYs;
@@ -71,7 +72,7 @@ export function placementError(build,layout,id,slotId){
 }
 export function defaultFanLayout(build){
  const p=resolve(build).case,slots=fanMounts(build);
- const walls=p?.concept==='panorama'?['left','top']:p?.concept==='dual'?['front','rear']:p?.concept==='compact'?['front','top']:['front','rear'];
+ const walls=p?.leftFanCount?['left','rear']:p?.concept==='panorama'?['left','top']:p?.concept==='dual'?['front','rear']:p?.concept==='compact'?['front','top']:['front','rear'];
  const chosen=slots.filter(s=>walls.includes(s.wall)&&(!Number.isFinite(p?.frontFanMounts)||Number(s.id.split('-')[1])<=(p[s.wall+'FanCount']||0)));
  return chosen.map((s,i)=>({id:'fan'+(i+1),slot:s.id,direction:['rear','top'].includes(s.wall)?'out':'in'}));
 }
@@ -94,6 +95,13 @@ export function fanHub(build,direction){
 export function fanBranchRoute(build,fan){
  const p=resolve(build),frame=caseLayout(p.case||{},p.gpu,p.cooler),slot=fanMounts(build).find(s=>s.id===fan.slot);
  const source=fanLead(slot,fan.direction),hub=fanHub(build,fan.direction),x=frame.side-.06,z=frame.front-.33;
+ if(slot.wall==='left'&&p.case?.leftFanCount){
+  const edge=slot.position[2]+Math.sign(source[2]-slot.position[2])*(slot.size*.5+.03);
+  const inner=slot.position[0]+.17;
+  const route=[source,[source[0],source[1],edge],[inner,source[1],edge],[inner,source[1],z]];
+  if(fan.direction==='out')route.push([inner,4.44,z],[inner,4.44,hub[2]]);
+  route.push([inner,hub[1],hub[2]],hub);return route;
+ }
  if(slot.wall==='front'||slot.wall==='rear'){
   const sign=slot.normal[2],edgeX=slot.position[0]+Math.sign(source[0]-slot.position[0])*(slot.size*.5+.035);
   const serviceZ=slot.position[2]-sign*.18,wireX=hub[0]+.022;

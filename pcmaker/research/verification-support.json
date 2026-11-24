@@ -788,6 +788,81 @@
         "Совместимость конкретного CPU требует проверки списка CPU Support и BIOS. Частоты разгона и поколение PCIe зависят от процессора.",
         "3D-модель передаёт форму и оформление платы; расположение разъёмов в учебной модели схематическое."
       ]
+    },
+    "focus-g-red": {
+      "checkedAt": "2026-11-24",
+      "sources": [
+        "https://www.fractal-design.cn/products/cases/focus/focus-g/mystic-red/"
+      ],
+      "values": {
+        "sku": "FD-CA-FOCUS-RD-W",
+        "gpuLimit": 380,
+        "coolerLimit": 165,
+        "psuLimit": 230
+      },
+      "limitations": [
+        "Свободное место зависит от установленного радиатора и кабелей."
+      ]
+    },
+    "focus-g-blue": {
+      "checkedAt": "2026-11-24",
+      "sources": [
+        "https://www.fractal-design.cn/products/cases/focus/focus-g/petrol-blue/"
+      ],
+      "values": {
+        "sku": "FD-CA-FOCUS-BU-W",
+        "gpuLimit": 380,
+        "coolerLimit": 165,
+        "psuLimit": 230
+      },
+      "limitations": [
+        "Свободное место зависит от установленного радиатора и кабелей."
+      ]
+    },
+    "focus-g-gray": {
+      "checkedAt": "2026-11-24",
+      "sources": [
+        "https://www.fractal-design.cn/products/cases/focus/focus-g/gunmetal-gray/"
+      ],
+      "values": {
+        "sku": "FD-CA-FOCUS-GY-W",
+        "gpuLimit": 380,
+        "coolerLimit": 165,
+        "psuLimit": 230
+      },
+      "limitations": [
+        "Свободное место зависит от установленного радиатора и кабелей."
+      ]
+    },
+    "view-270-green": {
+      "checkedAt": "2026-11-24",
+      "sources": [
+        "https://ru.thermaltake.com/view-270-tg-argb-plus-matcha-green-mid-tower-chassis.html"
+      ],
+      "values": {
+        "sku": "CA-1Y7-00MEWN-01",
+        "gpuLimit": 420,
+        "coolerLimit": 180,
+        "psuLimit": 220
+      },
+      "limitations": [
+        "Свободное место зависит от установленного радиатора и кабелей."
+      ]
+    },
+    "view-270-pink": {
+      "checkedAt": "2026-11-24",
+      "sources": [
+        "https://ru.thermaltake.com/view-270-plus-tg-argb-bubble-pink-mid-tower-chassis.html"
+      ],
+      "values": {
+        "sku": "CA-1Y7-00MAWN-00",
+        "gpuLimit": 420,
+        "coolerLimit": 180,
+        "psuLimit": 220
+      },
+      "limitations": [
+        "Свободное место зависит от установленного радиатора и кабелей."
+      ]
     }
   },
   "pending": [

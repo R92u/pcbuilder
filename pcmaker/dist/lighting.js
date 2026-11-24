@@ -6,6 +6,8 @@ export const lightingSources={
  'ch560-white':'https://pl.deepcool.com/products/Cases/CH560-WH-New-Generation-of-Airflow-Case/2023/17124.shtml'
 };
 export function caseLighting(part){
+ if(part?.family==='view-270')return {type:'rgb',zones:'blades'};
+ if(part?.family==='focus-g')return {type:'fixed',color:'#f5f5f0',zones:'blades'};
  if(part?.concept)return {type:'rgb',zones:'ring'};
  if(part?.id==='ch560-white')return {type:'rgb',zones:'blades'};
  if(part?.id==='cc560')return {type:'fixed',color:'#39c4c4',zones:'blades'};

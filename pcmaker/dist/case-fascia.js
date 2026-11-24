@@ -51,7 +51,7 @@ function popMesh(parent,color){
 }
 
 export function makeRetailFront(g,p){
- const white=p.color==='white',paint=white?0xd5d8db:0x272d30,edge=white?0xb9c0c5:0x191e21;
+ const white=p.color==='white',paint=p.paint||(white?0xd5d8db:0x272d30),edge=white?0xb9c0c5:0x191e21;
  const box=(w,h,d,x,y,z,col=paint)=>this.box(g,w,h,d,x,y,z,col);
  function rim(border,topBand=border,bottomBand=border){
   for(const sign of [-1,1])box(border,4.28,.20,sign*(1.10-border/2),2.50,2.18);
@@ -62,7 +62,22 @@ export function makeRetailFront(g,p){
   const mesh=caseVent(g,w,h,pattern,color,pitch);mesh.position.set(x,y,z);return mesh;
  }
  const word=(name,x,y,z,size=.31)=>this.text(g,name,size,.065,x,y,z,[0,0,0],white?'#69747c':'#a2aaac');
- if(p.id==='cc560'){
+ if(p.family==='focus-g'){
+  rim(.125,.12,.18);
+  vent(1.95,3.01,'round',0x222426,.072,0,2.04,2.24);
+  for(const y of [3.83,4.29]){
+   box(1.97,.44,.08,0,y,2.21,0x181b1d);
+   vent(1.85,.34,'round',0x343638,.055,0,y,2.255);
+  }
+  word('fractal design',0,.71,2.27,.55);
+ }else if(p.family==='view-270'){
+  rim(.06,.10,.10);
+  const pane=new THREE.Mesh(new THREE.PlaneGeometry(2.10,3.29),new THREE.MeshPhysicalMaterial({color:0xb8c7cd,roughness:.09,clearcoat:1,transparent:true,opacity:.16,depthWrite:false,side:THREE.DoubleSide}));
+  pane.position.set(0,2.91,2.25);g.add(pane);
+  box(2.17,.87,.12,0,.82,2.19);
+  vent(1.97,.59,'round',paint,.08,0,.84,2.266);
+  word('Thermaltake',.42,.46,2.274,.46);
+ }else if(p.id==='cc560'){
   rim(.05,.06,.06);
   vent(2.10,4.16,'round',0x161f22,.088,0,2.50,2.20);
   box(1.32,4.21,.09,0,2.50,2.31);

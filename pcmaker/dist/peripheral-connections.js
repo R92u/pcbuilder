@@ -48,19 +48,24 @@ export function connectionError(product,mode,target,connections={},key=product?.
 }
 export const DESK_Y=7.5, WIRE_RADIUS=.025, ROUTE_Y=DESK_Y+WIRE_RADIUS;
 export const DESK_MAT={x:-1.6,z:1.5,w:8.5,d:3.5,height:.025};
-export function surfaceHeight(x,z){
- const mx=DESK_MAT.w/2-Math.abs(x-DESK_MAT.x),mz=DESK_MAT.d/2-Math.abs(z-DESK_MAT.z);
- return DESK_Y+DESK_MAT.height*Math.max(0,Math.min(1,1+Math.min(mx,mz)/.08));
+export function deskMatLayout(product){
+ if(product?.category!=='mat')return DESK_MAT;
+ const [w,d,height]=product.dimensions.map(mm=>mm/100);
+ return {x:w>=6?-1.6:1.8,z:w>=6?1.65:2,w,d,height};
+}
+export function surfaceHeight(x,z,mat=DESK_MAT){
+ const mx=mat.w/2-Math.abs(x-mat.x),mz=mat.d/2-Math.abs(z-mat.z);
+ return DESK_Y+mat.height*Math.max(0,Math.min(1,1+Math.min(mx,mz)/.08));
 }
 // Add contact points on both sides of the mat edge so long segments lie on
 // the correct support even when both ends are outside the mouse mat.
-export function supportedPoints(points){
+export function supportedPoints(points,mat=DESK_MAT){
  const out=[];
  for(let i=0;i<points.length;i++){
   const [x,,z]=points[i];
   if(i){
    const [ax,,az]=points[i-1],times=[];
-   for(const [start,end,center,span] of [[ax,x,DESK_MAT.x,DESK_MAT.w],[az,z,DESK_MAT.z,DESK_MAT.d]]){
+   for(const [start,end,center,span] of [[ax,x,mat.x,mat.w],[az,z,mat.z,mat.d]]){
     if(Math.abs(end-start)<1e-6)continue;
     for(const offset of [.08,0])for(const sign of [-1,1]){
      const t=(center+sign*(span/2+offset)-start)/(end-start);
@@ -69,10 +74,10 @@ export function supportedPoints(points){
    }
    for(const t of [...new Set(times)].sort((a,b)=>a-b)){
     const nx=ax+(x-ax)*t,nz=az+(z-az)*t;
-    out.push([nx,surfaceHeight(nx,nz)+WIRE_RADIUS,nz]);
+    out.push([nx,surfaceHeight(nx,nz,mat)+WIRE_RADIUS,nz]);
    }
   }
-  out.push([x,surfaceHeight(x,z)+WIRE_RADIUS,z]);
+  out.push([x,surfaceHeight(x,z,mat)+WIRE_RADIUS,z]);
  }
  return out;
 }

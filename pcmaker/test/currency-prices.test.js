@@ -51,7 +51,7 @@ test('New snapshots are usable after midnight in Moscow, before UTC midnight',()
  assert.equal(priceQuality(usd,Date.parse('2026-11-03T21:00:00Z')).status,'fresh');
 });
 test('Foreign component fallback retains source and cannot replace regional prices',()=>{
- const [id,offer]=Object.entries(foreignComponentOffers)[0];
+ const id='nh-d15-g2',offer=foreignComponentOffers[id];
  assert.ok(byId[id]);assert.ok(validForeignOffer(offer,now));
  const local={...offer,currency:'RUB',price:12345};
  assert.equal(priceSnapshot({items:{[id]:local}},'ru').items[id].currency,'RUB');

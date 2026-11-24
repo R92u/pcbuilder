@@ -21,7 +21,7 @@ const estimates={"r3-3100":3500,"r3-3300x":5000,"r5-3500":4500,"r5-3500x":5500,"
  'b760m-p-ddr4':9000,'b760-p-wifi':15000,'mag-b760-tomahawk-wifi-ddr4':19000,'mag-z790-tomahawk-wifi':29000,
  'ag400':1900,'ak400':2100,'ak620':4900,'ak500':4500,'ag500':3000,'assassin-iv':10000,'nh-u12s-redux':6500,'nh-d15':12500,'nh-u12a':14000,'nh-u14s':10000,'nh-d15s-chromax':13000,'nh-d12l':12000,'nh-u9s':8500,'nh-d15-g2':19000,'nh-u12s':9500,
  'pk700d':5900,'viper-steel-16-3200':17700,'pk550':4300,'pk650d':5000,'a550bn':4600,'a650bn':5400,'a650gl':7600,'a750gl':9000,'a850':10500,'a1000g':15600,'a1000gl':13500,'a1250gl':17000,'a750g':11500,'a850g':13000,'ai1300p':26000,'pq650m':8000,'pq750m':9500,'pq850m':11500,
- 'cc560':5300,'4000d-airflow':12500,'pop-air':14000,'pop-air-white':14500,'h7-flow':15500,'ch560-white':11000
+ "focus-g-red":6500,"focus-g-blue":6500,"focus-g-gray":6500,"view-270-green":10000,"view-270-pink":10000,'cc560':5300,'4000d-airflow':12500,'pop-air':14000,'pop-air-white':14500,'h7-flow':15500,'ch560-white':11000
 };
 export function estimatePrice(part,category){
  if(!part||part.concept)return null;

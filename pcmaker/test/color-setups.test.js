@@ -11,7 +11,7 @@ test('every palette is a complete installable PC and desk from an empty build', 
     const setup = pickColorSetup(id, start);
     assert.equal(compatibility(setup.build).ready, true, id);
     assert.equal(setup.addedInternals.length, 7);
-    assert.deepEqual(Object.keys(setup.selection).sort(), ['chair','keyboard','monitor','mouse']);
+    assert.deepEqual(Object.keys(setup.selection).sort(), ['chair','keyboard','mat','monitor','mouse']);
     for (const [category, part] of Object.entries(setup.selection)) {
       assert.equal(peripheralById[part]?.category, category);
     }
@@ -25,7 +25,7 @@ test('every palette is a complete installable PC and desk from an empty build', 
 
 test('catalog accents and neutral substitutes are distinguished from the requested finish', () => {
   const preview = pickColorSetup('red', demoBuild);
-  assert.equal(preview.items.find(i => i.category === 'case').match, 'neutral');
+  assert.equal(preview.items.find(i => i.category === 'case').match, 'exact');
   assert.equal(preview.items.find(i => i.category === 'keyboard').match, 'accent');
   assert.equal(preview.items.find(i => i.category === 'mouse').match, 'exact');
   for (const [tone, match] of [['green','accent'], ['red','accent'], ['blue','exact'], ['pink','exact']]) {

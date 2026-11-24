@@ -1,5 +1,6 @@
 import {createChairModel,chairPlacement} from './chair-model.js?v=quality-20261122';
-import {DESK_Y as deskY,DESK_MAT,connectionModes} from './peripheral-connections.js';
+import {DESK_Y as deskY,deskMatLayout,surfaceHeight,connectionModes} from './peripheral-connections.js';
+import {createDeskMat} from './desk-mat-model.js';
 import {PeripheralCables} from './peripheral-cables.js';
 import * as THREE from 'three';
 import {createMouseModel as mouse} from './mouse-model.js';
@@ -86,7 +87,6 @@ export class WorkplaceScene extends PCScene{
   this.scene.children.filter(o=>o.isGridHelper).forEach(o=>o.removeFromParent());
   this.desk=new THREE.Group();this.scene.add(this.desk);box(this.desk,18,.24,8,0,deskY-.12,0,plastic('#414a4d'));
   for(const x of [-8,8])for(const z of [-3,3])box(this.desk,.25,deskY-.24,.25,x,(deskY-.24)/2,z,plastic('#1d252a'));
-  box(this.desk,DESK_MAT.w,DESK_MAT.height,DESK_MAT.d,DESK_MAT.x,deskY+DESK_MAT.height/2,DESK_MAT.z,plastic('#171f24'));
   this.setKeyboardLighting();try{this.setKeyboardLighting(JSON.parse(localStorage.getItem('pcmaker-keyboard-lighting')));}catch{}
   this.keyboardLightingListener=e=>this.setKeyboardLighting(e.detail);document.addEventListener('pcmaker:keyboard-lighting',this.keyboardLightingListener);
   this.peripheralRoot=new THREE.Group();this.scene.add(this.peripheralRoot);this.externalCables=new PeripheralCables(this);this.workplaceReady=true;this.focus('all');
@@ -95,7 +95,16 @@ export class WorkplaceScene extends PCScene{
  }
  setPeripherals(value){
   for(const child of [...this.peripheralRoot.children])dispose(child);
-  this.keyboardModel=null;const selected=sanitizeWorkplace(value);for(const [key,id] of Object.entries(selected)){const p=peripheralById[id],group=key==='monitor'?monitor(p):key==='keyboard'?keyboard(p):key==='chair'?createChairModel(p):mouse(p);if(key==='mouse'&&!group.userData.cableStart&&connectionModes(p).includes('usb')){const pos=[0,.10,-p.dimensions[1]/200];box(group,.09,.04,.025,...pos,plastic('#080d10'));group.userData.cableStart=pos;}group.userData.productId=id;const support=key==='monitor'?deskY:deskY+DESK_MAT.height;
+  this.keyboardModel=null;const selected=sanitizeWorkplace(value);
+  const product=peripheralById[selected.mat];
+  this.matLayout=deskMatLayout(product);
+  const texture=product?new THREE.TextureLoader().load('./assets/peripherals/'+product.id+'.webp'):null;
+  if(texture){texture.colorSpace=THREE.SRGBColorSpace;texture.anisotropy=Math.min(8,this.renderer.capabilities.getMaxAnisotropy());}
+  const mat=createDeskMat(product,this.matLayout,texture);
+  mat.position.set(this.matLayout.x,deskY,this.matLayout.z);this.peripheralRoot.add(mat);
+  for(const [key,id] of Object.entries(selected)){
+   if(key==='mat')continue;
+   const p=peripheralById[id],group=key==='monitor'?monitor(p):key==='keyboard'?keyboard(p):key==='chair'?createChairModel(p):mouse(p);if(key==='mouse'&&!group.userData.cableStart&&connectionModes(p).includes('usb')){const pos=[0,.10,-p.dimensions[1]/200];box(group,.09,.04,.025,...pos,plastic('#080d10'));group.userData.cableStart=pos;}group.userData.productId=id;const support=key==='monitor'?deskY:surfaceHeight(key==='mouse'?1.8:-1.9,2,this.matLayout);
    group.position.set(key==='mouse'?1.8:-1.9,support-new THREE.Box3().setFromObject(group).min.y,key==='monitor'?-1.45:2.0);if(key==='chair'){const placement=chairPlacement();group.position.set(...placement.position);group.position.y+=group.userData.floorOffset;group.rotation.y=placement.rotation;}this.peripheralRoot.add(group);if(key==='keyboard'){this.keyboardModel=group;group.userData.updateLighting(this.keyboardLighting||sanitizeKeyboardLighting(),this.last||0);document.dispatchEvent(new CustomEvent('pcmaker:keyboard-selected',{detail:id}));}}
   this.connectPeripherals();
  }

@@ -7,7 +7,7 @@ const keyboard=peripheralById.fizz,mouse=peripheralById.griffin,monitor=peripher
 const usb={id:'motherboard:0',part:'motherboard',type:'usbA'},hdmi={id:'gpu:0',part:'gpu',type:'hdmi'};
 const pc={motherboard:byId.b650,cpu:byId['r5-7600'],gpu:byId.rtx4060};
 test('All electronic peripherals expose at least one documented connection; battery mice do not grow USB cables',()=>{
- for(const p of peripherals.filter(p=>p.category!=='chair'))assert.ok(connectionModes(p).length,p.id);
+ for(const p of peripherals.filter(p=>!['chair','mat'].includes(p.category)))assert.ok(connectionModes(p).length,p.id);
  for(const id of ['logitech-g309-lightspeed-gaming-mouse','razer-rz01-03730100-r3a1','razer-rz01-04130100-r3c1'])assert.deepEqual(connectionModes(peripheralById[id]),['receiver','bluetooth']);
  assert.deepEqual(connectionModes(peripheralById.anubis),['usb','receiver','bluetooth']);
  assert.deepEqual(connectionModes(peripheralById['storm-pro']),['usb','receiver']);

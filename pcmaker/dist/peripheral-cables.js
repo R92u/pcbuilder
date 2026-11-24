@@ -56,7 +56,7 @@ export class PeripheralCables{
   if(!points)return [];
   c.points=points;
   const lead=[a[0],a[1],key==='monitor'?entry[2]:a[2]-.15];
-  return [a,lead,...supportedPoints([entry,...points,exit]),[outside,b[1],b[2]],b];
+  return [a,lead,...supportedPoints([entry,...points,exit],this.scene.matLayout),[outside,b[1],b[2]],b];
  }
  draw(){
   clear(this.wires);this.wires.visible=!this.hidden;
@@ -118,7 +118,7 @@ export class PeripheralCables{
    this.bindDrag(b,()=>({kind:'plug',key}));
   });
   for(const port of this.ports||[])this.marker(port.name,'external-target',()=>this.target(port),(b,item)=>{item.port=port;b.onclick=()=>this.connect(this.selected,port.id);});
-  const c=this.connections[this.selected];if(this.edit&&c)c.points.forEach((_,index)=>this.marker('Точка кабеля '+(index+1),'external-point',()=>{const [x,,z]=c.points[index];return new THREE.Vector3(x,surfaceHeight(x,z)+WIRE_RADIUS,z);},b=>{
+  const c=this.connections[this.selected];if(this.edit&&c)c.points.forEach((_,index)=>this.marker('Точка кабеля '+(index+1),'external-point',()=>{const [x,,z]=c.points[index];return new THREE.Vector3(x,surfaceHeight(x,z,this.scene.matLayout)+WIRE_RADIUS,z);},b=>{
    this.bindDrag(b,()=>({kind:'point',key:this.selected,index}));b.onkeydown=ev=>{if(ev.key==='Delete'){if(c.points.length>1)c.points.splice(index,1);}else{const delta={ArrowLeft:[-.15,0],ArrowRight:[.15,0],ArrowUp:[0,-.15],ArrowDown:[0,.15]}[ev.key];if(!delta)return;this.movePoint(index,c.points[index][0]+delta[0],c.points[index][2]+delta[1]);}ev.preventDefault();this.draw();this.save();this.rebuildMarkers();this.markers.filter(m=>m.kind==='external-point')[Math.min(index,c.points.length-1)]?.button.focus();};
   }));this.update();
  }

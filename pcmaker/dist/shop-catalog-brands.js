@@ -10,7 +10,7 @@ import {productImages} from './product-images.js';
 
 const escape=s=>String(s??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
 const money=n=>new Intl.NumberFormat('ru-RU',{maximumFractionDigits:2}).format(n);
-export const shopProducts=categories.flatMap(([category])=>catalog[category].map(p=>({...p,category})));
+export const shopProducts=categories.flatMap(([category])=>catalog[category].map(p=>({...p,category,...(category==='case'?{colors:[p.color||'black']}:{})})));
 export const manufacturer=p=>p.manufacturer||p.brand||p.name.split(' ')[0];
 
 // Unknown prices always remain at the end, including in descending order.
@@ -131,7 +131,7 @@ export function createShop({getBuild,getPrices,getSource,onChoose,beforeOpen,ico
  }
  function populateFilters(){
   const base=products().filter(p=>category==='all'||p.category===category);
-  if($('shop-color-field'))$('shop-color-field').hidden=!base.some(p=>p.kind==='peripheral');
+  if($('shop-color-field'))$('shop-color-field').hidden=!base.some(p=>p.colors?.length);
   const onlyPeripheral=peripheral?.categories.some(([key])=>key===category);$('compatible-only').closest('label').hidden=!!onlyPeripheral;
   for(const [id,key,label] of [['shop-brand',manufacturer,'Все производители'],['shop-socket',p=>p.socket,'Все сокеты'],['shop-memory',p=>p.memory,'Все типы памяти']]){
    const values=[...new Set(base.flatMap(key).filter(Boolean))].sort();
@@ -147,7 +147,7 @@ export function createShop({getBuild,getPrices,getSource,onChoose,beforeOpen,ico
   render();
  }
  function selectCategory(key){category=key;$('catalog-title').textContent=title(category);for(const button of dialog.querySelectorAll('[data-shop-category]'))button.setAttribute('aria-pressed',String(button.dataset.shopCategory===key));populateFilters();reset();$('shop-results').scrollTop=0;}
- function renderCategories(){const all=products();$('shop-categories').innerHTML=[['all',peripheral?'Все товары':'Все комплектующие','layers'],...sections().map(([key,name])=>[key,name,key])].map(([key,name,symbol])=>`<button data-shop-category="${key}" aria-pressed="${key===category}">${icon(['monitor','keyboard','mouse','chair'].includes(symbol)?'layers':symbol)}<span>${name}</span><small>${all.filter(p=>key==='all'||p.category===key).length}</small></button>`).join('');}
+ function renderCategories(){const all=products();$('shop-categories').innerHTML=[['all',peripheral?'Все товары':'Все комплектующие','layers'],...sections().map(([key,name])=>[key,name,key])].map(([key,name,symbol])=>`<button data-shop-category="${key}" aria-pressed="${key===category}">${icon(['monitor','keyboard','mouse','chair','mat'].includes(symbol)?'layers':symbol)}<span>${name}</span><small>${all.filter(p=>key==='all'||p.category===key).length}</small></button>`).join('');}
  renderCategories();
  dialog.addEventListener('click',event=>{
   const button=event.target.closest('button');if(!button)return;
