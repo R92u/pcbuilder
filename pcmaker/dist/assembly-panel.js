@@ -9,7 +9,7 @@ const groups=[
 ];
 const labels=Object.fromEntries(categories.map(([key,name])=>[key,name]));
 const dependent=new Set(['gpu','ram','storage','cooler']);
-export function createAssemblyPanel({icon,escape,priceFor,highlight}){
+export function createAssemblyPanel({icon,escape,priceFor,highlight,onRemove}){
  const get=id=>document.getElementById(id);
  const list=get('parts-list');
  let chosenKey=null,previewKey=null;
@@ -27,6 +27,14 @@ export function createAssemblyPanel({icon,escape,priceFor,highlight}){
  });
  for(const event of ['pointerleave','focusout'])list.addEventListener(event,()=>highlight(null));
  list.addEventListener('click',event=>{
+  const remove=event.target.closest('[data-remove-part]');
+  if(remove&&remove.dataset.removePart!=='case'){
+   const key=remove.dataset.removePart;
+   highlight(null);
+   onRemove(key);
+   list.querySelector('[data-category="'+key+'"]')?.focus({preventScroll:true});
+   return;
+  }
   const row=event.target.closest('.part-row');
   if(row){chooseRow(row.dataset.category);highlight(null);}
  });
@@ -53,7 +61,8 @@ export function createAssemblyPanel({icon,escape,priceFor,highlight}){
    const p=parts[key],offer=p&&priceFor(p.id),state=offer&&priceQuality(offer),bad=check.errors.some(err=>err.parts.includes(key));
    const start=!parts.cpu&&!parts.motherboard&&['cpu','motherboard'].includes(key),later=!p&&!parts.motherboard&&dependent.has(key);
    const note=state?.status==='stale'?'<span class="old-price" title="Снимок от '+escape(formatPriceDate(offer.date))+'">◷ Цена устарела</span>':state?.status==='unavailable'?' · нет в наличии':state?.status==='invalid'?' · требует проверки':'';
-   return '<button class="part-row '+(p?'selected':'empty')+(bad?' conflict':'')+(later?' dependent':'')+'" data-category="'+key+'" '+(later?'title="Сначала выбери плату. Этот слот тоже доступен."':'')+'><span class="part-icon">'+icon(key)+'</span><span class="part-text"><span class="part-category">'+labels[key]+(start?' <small class="start-chip">Начни здесь</small>':'')+'</span><span class="part-name">'+escape(p?.short||'Выбрать комплектующее')+'</span>'+(offer?'<span class="part-price">'+formatMoney(offer.price,offer.currency||currency)+' '+note+'</span>':'')+'</span>'+(p?'':'<span class="part-action" aria-hidden="true">+</span>')+'</button>';
+   const remove=p&&key!=='case'?'<button type="button" class="slot-remove" data-remove-part="'+key+'" aria-label="Убрать из сборки: '+escape(p.name)+'" title="Убрать из сборки">'+icon('close')+'</button>':'';
+   return '<div class="slot-entry"><button class="part-row '+(p?'selected':'empty')+(bad?' conflict':'')+(later?' dependent':'')+'" data-category="'+key+'" '+(later?'title="Сначала выбери плату. Этот слот тоже доступен."':'')+'><span class="part-icon">'+icon(key)+'</span><span class="part-text"><span class="part-category">'+labels[key]+(start?' <small class="start-chip">Начни здесь</small>':'')+'</span><span class="part-name">'+escape(p?.short||'Выбрать комплектующее')+'</span>'+(offer?'<span class="part-price">'+formatMoney(offer.price,offer.currency||currency)+' '+note+'</span>':'')+'</span>'+(p?'':'<span class="part-action" aria-hidden="true">+</span>')+'</button>'+remove+'</div>';
   };
   list.innerHTML=groups.map(([label,keys])=>'<section class="slot-group"><h3>'+label+'</h3>'+keys.map(row).join('')+'</section>').join('');
   chosenKey??=categories.find(([key])=>parts[key])?.[0];

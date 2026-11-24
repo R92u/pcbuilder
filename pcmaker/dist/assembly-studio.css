@@ -150,3 +150,15 @@ html[data-design=glass] #parts-panel .price-summary {margin:0;padding-inline:var
 .workbench #build-panel #parts-panel { grid-template-rows:minmax(0,1fr) auto auto; }
 #parts-panel > #build-health { margin:0; padding:10px var(--workshop-gutter); background:#27282ac7; }
 @media (max-height:590px) and (min-width:841px) {#parts-panel > #build-health {padding-block:5px;}.power-meter{margin:4px 0;}}
+
+.slot-entry{position:relative;min-width:0}
+#parts-list .slot-entry .part-row{width:100%}
+html #parts-list .slot-entry .part-row.selected:not(.empty):not([data-category="case"]){padding-inline-end:46px}
+.slot-remove{
+ position:absolute;inset-inline-end:5px;top:50%;transform:translateY(-50%);
+ display:grid;place-items:center;width:36px;height:36px;padding:0;
+ color:inherit;background:transparent;border:0;border-radius:9px;cursor:pointer;
+}
+.slot-remove svg{width:16px;height:16px;pointer-events:none}
+.slot-remove:is(:hover,:focus-visible){color:#fff;background:#9d3542}
+.slot-remove:focus-visible{outline:2px solid currentColor;outline-offset:1px}

@@ -139,7 +139,9 @@ function measureSelection(group) {
   }
   const last = previous.get(group);
   const width = button.offsetWidth, height = button.offsetHeight;
-  const x = button.offsetLeft, y = button.offsetTop;
+  const bounds = button.getBoundingClientRect(), origin = group.getBoundingClientRect();
+  const x = bounds.left - origin.left - group.clientLeft + group.scrollLeft;
+  const y = bounds.top - origin.top - group.clientTop + group.scrollTop;
   if (last && last.width === width && last.height === height && last.x === x && last.y === y) return;
 
   if (!last || width !== last.width || height !== last.height) drawWave(group, width, height, 34);

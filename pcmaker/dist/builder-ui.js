@@ -90,7 +90,7 @@ function highlightPart(key){
  assemblyPanel.previewRow(active);
  scene?.guides?.select(active,resolve(build)[active]?.short||categories.find(([k])=>k===active)?.[1]);
 }
-const assemblyPanel=createAssemblyPanel({icon,escape:e,priceFor,highlight:highlightPart});
+const assemblyPanel=createAssemblyPanel({icon,escape:e,priceFor,highlight:highlightPart,onRemove:key=>{if(key!=='case')choosePart(key,null,true);}});
 function renderBuild(){
  closeInspector(false);
  fanLayout=sanitizeFanLayout(build,savedFans[build.case]);settings.fanLayout=fanLayout;saveFans();if(scene)scene.fanLayout=fanLayout;
