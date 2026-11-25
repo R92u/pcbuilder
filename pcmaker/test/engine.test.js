@@ -16,3 +16,22 @@ test('Thermal limiting reduces power and preserves physically ordered temperatur
 test('Time integration approaches equilibrium without jumping or overshoot',()=>{const cold={cpu:22,gpu:22,case:22,ram:22,storage:22},target=thermalTargets(demoBuild,base),next=advanceThermals(cold,target,.25);assert.ok(next.cpu>22&&next.cpu<target.cpu);assert.deepEqual(advanceThermals(cold,target,0),cold);});
 test('Unknown prices are not represented as a complete zero-value total',()=>{const s=summarizePrices(demoBuild,{'r5-7600':{price:12345}});assert.equal(s.total,12345);assert.equal(s.complete,false);assert.equal(s.known,1);assert.equal(s.count,8);});
 test('All supported catalog combinations are numerically stable',()=>{for(const cpu of catalog.cpu)for(const gpu of catalog.gpu)for(const cooler of catalog.cooler)for(const ambient of [10,22,35])for(const speed of [0,50,100]){const t=thermalTargets({...demoBuild,cpu:cpu.id,gpu:gpu.id,cooler:cooler.id},{...base,ambient,front:speed,rear:speed,cpuFan:speed});assert.ok(t.case>=ambient);assert.ok(t.cpu>=t.case-1e-6);assert.ok(t.gpu>=t.case-1e-6);assert.ok(Number.isFinite(t.power));}});
+
+test('Manual component loads independently raise draw and temperature from idle',()=>{
+ const idle={cpu:0,gpu:0,ram:0,storage:0};
+ const calculate=componentLoads=>thermalTargets(demoBuild,{...base,componentLoads});
+ const atRest=calculate(idle);
+ for(const key of Object.keys(idle)){
+  const loaded=calculate({...idle,[key]:100});
+  assert.ok(atRest[key+'Power']>0);
+  assert.ok(loaded[key+'Power']>atRest[key+'Power']);
+  assert.ok(loaded[key]>atRest[key]);
+  assert.ok(loaded.power>atRest.power);
+  for(const other of Object.keys(idle).filter(other=>other!==key)){
+   assert.equal(loaded[other+'Power'],atRest[other+'Power']);
+  }
+  assert.equal(calculate({...idle,[key]:120}).power,loaded.power);
+  assert.equal(calculate({...idle,[key]:-20}).power,atRest.power);
+  assert.equal(thermalTargets({...demoBuild,[key]:null},{...base,componentLoads:idle})[key+'Power'],0);
+ }
+});

@@ -2,7 +2,7 @@ import './navigation.js';
 import {peripherals,peripheralCategories,peripheralById,sanitizeWorkplace,peripheralQuote,offersForPeripheral} from './peripherals.js?v=expanded-20261102';
 import {regionFor} from './regions.js';
 import {storePickerMarkup,mountStorePickers} from './store-picker.js';
-import {formatMoney,formatTotals,selectRegionalOffer,foreignPriceNotice} from './money.js';
+import {formatMoney,formatTotals,selectRegionalOffer} from './money.js';
 import {priceQuality} from './price-quality.js';
 import {offerMarkup} from './data-quality-ui.js';
 
@@ -22,14 +22,13 @@ function price(p,compact=false){const offer=selectRegionalOffer(offersForPeriphe
  return `${summary}<p class="price-source">${e(kind)} · <a href="${e(offer.url)}" target="_blank" rel="noopener noreferrer">${e(offer.store)} ↗</a>${offer.note?'<br>'+e(offer.note):''}</p>`;
 }
 function offerLink(p){return storePickerMarkup(p,p.category,{currency:regionFor(regionId).currency,items:{[p.id]:selectRegionalOffer(offersForPeripheral(p),regionId)}});}
-function choose(id){const p=peripheralById[id];if(!p)return;selection[p.category]=id;const stored=save('pcmaker-workplace',selection);getScene()?.setPeripherals(selection);if(p.category==='chair')getScene()?.focus('chair');render();refreshShop();if(!stored){$('workplace-total-note').textContent='Браузер не разрешил сохранить выбор. Он доступен до закрытия страницы.';}}
+function choose(id){const p=peripheralById[id];if(!p)return;selection[p.category]=id;const stored=save('pcmaker-workplace',selection);getScene()?.setPeripherals(selection);if(p.category==='chair')getScene()?.focus('chair');render();refreshShop();if(!stored){$('workplace-save-error').hidden=false;$('workplace-save-error').textContent='Браузер не разрешил сохранить выбор. Он доступен до закрытия страницы.';}}
 function render(){
  const chairView=document.querySelector('[data-workplace-view="chair"]');if(chairView)chairView.hidden=!selection.chair;
  $('workplace-count').textContent='Предметов: '+Object.keys(selection).length;
  $('workplace-selection').innerHTML=Object.entries(peripheralCategories).map(([key])=>[key,selection[key]]).map(([key,id])=>`<button class="workplace-selected" data-select-category="${key}" title="Выбрать ${e(peripheralCategories[key].toLowerCase())}"><span><small>${e(peripheralCategories[key])}</small><strong>${e(peripheralById[id]?.name||(key==='mat'?'Выбрать коврик':'Выбрать кресло'))}</strong></span><span>↗</span></button>`).join('');
  const quote=peripheralQuote(selection,regionId);$('workplace-total').textContent=quote.priced?formatTotals(quote.totals):'Нет цен';
- $('workplace-total-note').textContent=quote.complete?'Сумма выбранных моделей по опубликованным ценам. '+(quote.purchasable?'':'Наличие и итоговую цену покупки нужно проверить.'):`Подтверждено цен: ${quote.priced} из ${quote.items.length}. ${quote.priced?'Сумма неполная. ':''}Российские цены не пересчитываются в BYN.`;
- if(quote.totals.USD)$('workplace-total-note').textContent+=' '+foreignPriceNotice;
+ $('workplace-save-error').hidden=true;
 }
 function details(id){const p=peripheralById[id];if(!p)return;inspected=id;
  const specs={'Артикул / модель':p.sku,'Цвет':p.color,'Размеры (Ш × Г × В)':p.dimensions.join(' × ')+' мм',...p.specs};
