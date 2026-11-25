@@ -5,12 +5,18 @@
 .pcmaker-symbol{display:block;width:36px;height:36px;flex:none}
 .pcmaker-wordmark{--wordmark-size:23px;color:#f4f5f7;font:750 var(--wordmark-size)/1 Arial,sans-serif;letter-spacing:-1.1px}
 .pcmaker-wordmark .brand-light{font-weight:450}
-.brand .pcmaker-wordmark i{background:#f4f5f7}
 html[data-design=audit] .pcmaker-wordmark{font-size:var(--wordmark-size)!important;line-height:1}
 html[data-design=audit] .pcmaker-wordmark .brand-light{font-size:inherit!important;line-height:inherit}
 @media(max-width:540px){.pcmaker-symbol{width:30px;height:30px}.workshop-header .pcmaker-wordmark{display:none}.market-header .pcmaker-wordmark{--wordmark-size:18px}}
-.brand-chevron{font-size:15px;font-weight:400;letter-spacing:0;color:#888888;margin-left:1px;transition:transform .18s}
-.brand[aria-expanded=true] .brand-chevron{transform:rotate(180deg);color:var(--accent)}
+.brand-chevron {
+ display:block;flex:none;width:30px;height:24px;
+ filter:drop-shadow(0 1px 1px #10182080);
+ transition:transform .2s ease,filter .2s ease;
+}
+.brand:is(:hover,:focus-visible) .brand-chevron {filter:drop-shadow(0 0 3px #ffffff6b);}
+.brand[aria-expanded=true] .brand-chevron {transform:rotate(180deg);}
+@media(max-width:540px){.brand-chevron{width:25px;height:20px;}}
+@media(prefers-reduced-motion:reduce){.brand-chevron{transition:none;}}
 .header nav.brand-switcher{position:absolute;top:calc(100% + 16px);left:0;width:285px;max-width:calc(100vw - 28px);height:auto;display:flex;flex-direction:column;gap:5px;padding:7px;border:1px solid #3d3d3d;border-radius:13px;background:#181818;box-shadow:0 18px 65px #0008;z-index:80}
 .brand-switcher a{display:grid;grid-template-columns:35px 1fr;gap:12px;align-items:center;padding:13px 11px;border-radius:8px;color:#bfbfbf}
 .brand-switcher a:hover,.brand-switcher a:focus-visible{background:#2b2b2b;color:#fff}
