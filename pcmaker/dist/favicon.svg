@@ -1,8 +1,51 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 96 96">
-  <path fill="#fff" stroke="#454bd4" stroke-width="4.5"
-    d="M16 6 C28 2 34 9 48 9 S69 2 80 6 Q94 8 90 22 C87 33 85 40 87 52 S94 72 90 81 Q87 94 74 90 C62 86 55 85 44 87 S24 94 15 90 Q2 87 6 74 C10 62 11 55 9 44 S2 24 6 15 Q8 8 16 6Z"/>
+  <defs>
+    <path id="tile" d="M16 6 C28 2 34 9 48 9 S69 2 80 6 Q94 8 90 22 C87 33 85 40 87 52 S94 72 90 81 Q87 94 74 90 C62 86 55 85 44 87 S24 94 15 90 Q2 87 6 74 C10 62 11 55 9 44 S2 24 6 15 Q8 8 16 6Z"/>
+    <path id="fold" d="M28 77V19l40 58V19Z"/>
+    <path id="ribbon" d="M48 77V19c18 0 19 17 0 23m0 12c-19 6-18 23 0 23"/>
+    <clipPath id="face"><use href="#tile"/></clipPath>
+    <linearGradient id="glass" x1="0" y1="0" x2=".82" y2="1">
+      <stop stop-color="#edf4ff" stop-opacity=".74"/>
+      <stop offset=".37" stop-color="#c4d6e9" stop-opacity=".44"/>
+      <stop offset=".66" stop-color="#7d90ab" stop-opacity=".30"/>
+      <stop offset="1" stop-color="#d6e4ff" stop-opacity=".59"/>
+    </linearGradient>
+    <linearGradient id="bevel" x2=".66" y2="1">
+      <stop stop-color="#fff"/>
+      <stop offset=".27" stop-color="#d3dcff"/>
+      <stop offset=".55" stop-color="#727da7"/>
+      <stop offset=".83" stop-color="#aabbdc"/>
+      <stop offset="1" stop-color="#f3f8ff"/>
+    </linearGradient>
+    <linearGradient id="sheen" x1=".28" y1="0" x2=".54" y2="1">
+      <stop stop-color="#fff" stop-opacity=".65"/>
+      <stop offset=".78" stop-color="#f5f9ff" stop-opacity=".04"/>
+      <stop offset="1" stop-color="#f5f9ff" stop-opacity=".27"/>
+    </linearGradient>
+    <linearGradient id="graphite" x2=".90" y2=".44">
+      <stop stop-color="#223241"/>
+      <stop offset=".32" stop-color="#36495a"/>
+      <stop offset=".50" stop-color="#8296a6"/>
+      <stop offset=".65" stop-color="#394a59"/>
+      <stop offset="1" stop-color="#172431"/>
+    </linearGradient>
+    <linearGradient id="rose" x1="0" y1="0" x2=".68" y2="1">
+      <stop stop-color="#ffe9f1"/>
+      <stop offset=".32" stop-color="#f9acc8"/>
+      <stop offset=".62" stop-color="#d5779b"/>
+      <stop offset="1" stop-color="#ffd0de"/>
+    </linearGradient>
+  </defs>
+  <use href="#tile" fill="url(#glass)" stroke="url(#bevel)" stroke-width="4.5"/>
+  <g clip-path="url(#face)">
+    <path d="M0 0h96v13C74 18 56 23 38 38 23 50 11 55 0 56Z" fill="url(#sheen)"/>
+    <use href="#tile" transform="translate(48 48) scale(.936) translate(-48 -48)"
+         fill="none" stroke="url(#bevel)" stroke-opacity=".64" stroke-width="1.25"/>
+  </g>
   <g fill="none" stroke-linejoin="round" stroke-linecap="round">
-    <path stroke="#151620" stroke-width="5.8" d="M28 77V19l40 58V19Z"/>
-    <path stroke="#f78db5" stroke-width="5.4" d="M48 77V19c18 0 19 17 0 23m0 12c-19 6-18 23 0 23"/>
+    <use href="#fold" stroke="#dfedfa" stroke-opacity=".82" stroke-width="5.8"/>
+    <use href="#fold" stroke="url(#graphite)" stroke-width="4.4"/>
+    <use href="#ribbon" stroke="#85586e" stroke-width="5.4"/>
+    <use href="#ribbon" stroke="url(#rose)" stroke-width="4.1"/>
   </g>
 </svg>
