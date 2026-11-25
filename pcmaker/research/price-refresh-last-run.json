@@ -1,15 +1,15 @@
 {
-  "checkedAt": "2026-11-24T14:59:53.797Z",
+  "checkedAt": "2026-11-25T14:38:41.069Z",
   "scope": {
     "region": "all",
     "host": "all",
     "limit": 500
   },
-  "attempted": 436,
-  "updated": 334,
-  "failed": 102,
+  "attempted": 448,
+  "updated": 304,
+  "failed": 144,
   "manualRetained": 0,
-  "offerAttempts": 454,
+  "offerAttempts": 466,
   "fallbackUpdated": 0,
   "withBackup": 25,
   "sources": {
@@ -34,11 +34,11 @@
       "causes": {}
     },
     "kns.ru": {
-      "attempted": 185,
-      "updated": 132,
-      "failed": 53,
+      "attempted": 184,
+      "updated": 93,
+      "failed": 91,
       "reasons": {
-        "product-not-confirmed": 53
+        "product-not-confirmed": 91
       },
       "causes": {}
     },
@@ -68,8 +68,8 @@
       "causes": {}
     },
     "z51.ru": {
-      "attempted": 1,
-      "updated": 1,
+      "attempted": 13,
+      "updated": 13,
       "failed": 0,
       "reasons": {},
       "causes": {}
@@ -85,12 +85,14 @@
     },
     "masterdom.by": {
       "attempted": 4,
-      "updated": 3,
-      "failed": 1,
+      "updated": 0,
+      "failed": 4,
       "reasons": {
-        "product-not-confirmed": 1
+        "robots-unavailable": 4
       },
-      "causes": {}
+      "causes": {
+        "http-403": 4
+      }
     },
     "tecno.by": {
       "attempted": 2,
@@ -130,11 +132,11 @@
       "causes": {}
     },
     "dns-shop.ru": {
-      "attempted": 6,
+      "attempted": 7,
       "updated": 0,
-      "failed": 6,
+      "failed": 7,
       "reasons": {
-        "unsupported-source": 6
+        "unsupported-source": 7
       },
       "causes": {}
     },
