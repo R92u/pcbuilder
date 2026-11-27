@@ -13,7 +13,7 @@ export const fanSceneMethods={
   this.fanLayout=sanitizeFanLayout(this.currentBuild||{},layout);
   const key=fanGeometryKey(this.currentBuild||{},this.fanLayout);
   if(key!==this.caseFanKey){
-   this.caseFanKey=key;dispose(this.caseFans);this.fans=this.fans.filter(f=>!f.mountId);
+   this.invalidateShadows();this.caseFanKey=key;dispose(this.caseFans);this.fans=this.fans.filter(f=>!f.mountId);
    this.caseFans=new THREE.Group();this.root.add(this.caseFans);this.caseFanMeshes=new Map();
    const mounts=fanMounts(this.currentBuild||{}),p=resolve(this.currentBuild||{});
    const frame=caseLayout(p.case||{},p.gpu,p.cooler),occupied=mounts.filter(s=>this.fanLayout.some(f=>f.slot===s.id));
@@ -37,7 +37,7 @@ export const fanSceneMethods={
  },
  updateSideGuards(){for(const guard of this.sideFanGuards||[])guard.visible=!this.hideGlass||this.fanLayout?.some(f=>f.slot.startsWith('right-'));},
  setFanEditor(enabled,wall='front',selected=null){
-  this.endFanDrag(null,true);this.fanEditing=enabled;this.fanWall=wall;this.selectedFan=selected;
+  this.endFanDrag(null,true);this.projectionDirty=true;this.fanEditing=enabled;this.fanWall=wall;this.selectedFan=selected;
   this.controls.maxPolarAngle=enabled?Math.PI-.22:Math.PI*.61;
   if(enabled){this.controls.autoRotate=false;this.endCableDrag(null,true);}
   this.renderFanMarkers();
@@ -84,7 +84,7 @@ export const fanSceneMethods={
    const d=this.fanDrag;if(!d||d.id!==ev.pointerId)return;
    if(Math.hypot(ev.clientX-d.start[0],ev.clientY-d.start[1])>4)d.moved=true;
    const r=this.container.getBoundingClientRect();this.raycaster.setFromCamera(new THREE.Vector2((ev.clientX-r.left)/r.width*2-1,-(ev.clientY-r.top)/r.height*2+1),this.camera);
-   const point=this.raycaster.ray.intersectPlane(d.plane,new THREE.Vector3());if(point)d.group.position.copy(d.group.parent.worldToLocal(point));
+   const point=this.raycaster.ray.intersectPlane(d.plane,new THREE.Vector3());if(point){d.group.position.copy(d.group.parent.worldToLocal(point));this.invalidateShadows();}
    const target=this.fanDropAt(ev.clientX,ev.clientY);for(const m of this.fanMarkers)m.button.classList.toggle('drop-ready',m.slot.id===target&&!placementError(this.currentBuild,this.fanLayout,d.fanId,target));
   };
   button.onpointerup=ev=>this.endFanDrag(ev,false);button.onpointercancel=ev=>this.endFanDrag(ev,true);
@@ -98,7 +98,7 @@ export const fanSceneMethods={
  endFanDrag(ev,cancelled){
   const d=this.fanDrag;if(!d||(ev&&d.id!==ev.pointerId))return;
   const target=ev&&!cancelled?this.fanDropAt(ev.clientX,ev.clientY):null;
-  this.fanDrag=null;d.group.position.copy(d.origin);this.controls.enabled=true;
+  this.invalidateShadows();this.fanDrag=null;d.group.position.copy(d.origin);this.controls.enabled=true;
   if(d.button.hasPointerCapture(d.id))d.button.releasePointerCapture(d.id);
   for(const m of this.fanMarkers||[])m.button.classList.remove('held','eligible','drop-ready');
   this.fanDragClickSuppressed=true;setTimeout(()=>this.fanDragClickSuppressed=false,0);

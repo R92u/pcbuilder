@@ -59,6 +59,7 @@ export class PeripheralCables{
   return [a,lead,...supportedPoints([entry,...points,exit],this.scene.matLayout),[outside,b[1],b[2]],b];
  }
  draw(){
+  this.scene.invalidateShadows();
   clear(this.wires);this.wires.visible=!this.hidden;
   for(const [key,c] of Object.entries(this.connections)){
    if(c.mode==='bluetooth')continue;

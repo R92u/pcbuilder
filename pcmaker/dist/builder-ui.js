@@ -47,6 +47,16 @@ let regionId='ru';try{regionId=regionFor(localStorage.getItem('pcmaker-region'))
 const snapshots={ru:priceSnapshot({},'ru'),by:priceSnapshot({},'by')};
 let region=regionFor(regionId);$('region-select').value=regionId;
 let build=sanitizeBuild(saved), scene, priceData=snapshots[regionId], sourceData={catalog:[]};
+const shadowsToggle=$('shadows-toggle');
+const shadowsKey='pcmaker-shadows';
+try{shadowsToggle.checked=localStorage.getItem(shadowsKey)!=='off';}catch{}
+shadowsToggle.onchange=()=>{
+ scene?.setShadows(shadowsToggle.checked);
+ try{localStorage.setItem(shadowsKey,shadowsToggle.checked?'on':'off');}catch{}
+};
+window.addEventListener('storage',event=>{
+ if(event.key===shadowsKey||event.key===null){shadowsToggle.checked=event.newValue!=='off';scene?.setShadows(shadowsToggle.checked);}
+});
 const flightToggle=$('cable-flight-toggle');
 const flightKey='pcmaker-cable-flight';
 try{flightToggle.checked=localStorage.getItem(flightKey)!=='off';}catch{}
@@ -104,6 +114,7 @@ function highlightPart(key){
  hoveredPart=key;
  const active=inspectedKey||hoveredPart;
  assemblyPanel.previewRow(active);
+ if(scene)scene.frameDirty=true;
  scene?.guides?.select(active,resolve(build)[active]?.short||categories.find(([k])=>k===active)?.[1]);
 }
 const assemblyPanel=createAssemblyPanel({icon,escape:e,priceFor,highlight:highlightPart,onRemove:key=>{if(key!=='case')choosePart(key,null,true);}});
@@ -325,7 +336,7 @@ if(workplace){
   }
  });
 }
-try{const Scene=workplace?(await import('./workplace-assembly.js')).WorkplaceScene:(await import('./scene.js?v=workplace-integration')).PCScene;scene=new Scene($('viewport'));applyFlightPreference();peripheralUI?.attach();scene.onInspect=openInspector;scene.onCableDrop=completeCableDrag;scene.onCablePick=id=>{selectedCable=id;setTab('wiring',{reveal:false});};scene.fanLayout=fanLayout;scene.setBuild(build);scene.onFanSelect=fanUI.select;scene.onFanDrop=fanUI.move;fanUI.render();scene.setOptions({running,hideGlass:$('glass-toggle').getAttribute('aria-pressed')==='true',hideCooler:$('cooler-toggle').getAttribute('aria-pressed')==='true',airflow:$('airflow-toggle').getAttribute('aria-pressed')==='true'});renderLighting();renderWiring();scene.onContextLost=()=>toast('3D-контекст потерян. Сохрани сборку и обнови страницу.');updateSliders();}catch(error){console.error('3D initialization failed',error);$('viewport').innerHTML=`<div class="fallback">${icon('case')}<strong>3D не удалось запустить</strong><p>Попробуй современный браузер с аппаратным ускорением.<br>Каталог, совместимость и симуляция остаются доступны.</p></div>`;$('scene-hint').hidden=true;}
+try{const Scene=workplace?(await import('./workplace-assembly.js')).WorkplaceScene:(await import('./scene.js?v=workplace-integration')).PCScene;scene=new Scene($('viewport'));scene.setShadows(shadowsToggle.checked);applyFlightPreference();peripheralUI?.attach();scene.onInspect=openInspector;scene.onCableDrop=completeCableDrag;scene.onCablePick=id=>{selectedCable=id;setTab('wiring',{reveal:false});};scene.fanLayout=fanLayout;scene.setBuild(build);scene.onFanSelect=fanUI.select;scene.onFanDrop=fanUI.move;fanUI.render();scene.setOptions({running,hideGlass:$('glass-toggle').getAttribute('aria-pressed')==='true',hideCooler:$('cooler-toggle').getAttribute('aria-pressed')==='true',airflow:$('airflow-toggle').getAttribute('aria-pressed')==='true'});renderLighting();renderWiring();scene.onContextLost=()=>toast('3D-контекст потерян. Сохрани сборку и обнови страницу.');updateSliders();}catch(error){console.error('3D initialization failed',error);$('viewport').innerHTML=`<div class="fallback">${icon('case')}<strong>3D не удалось запустить</strong><p>Попробуй современный браузер с аппаратным ускорением.<br>Каталог, совместимость и симуляция остаются доступны.</p></div>`;$('scene-hint').hidden=true;}
 
 
 window.addEventListener('pagehide',event=>{if(!event.persisted)scene?.dispose();});

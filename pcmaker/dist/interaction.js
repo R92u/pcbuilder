@@ -84,7 +84,12 @@ export const interactionMethods={
   this.syncDraggedWires();this.drawLooseCable();this.updateMarkers();
  },
  syncDraggedWires(){
-  for(const group of this.wires?.children||[])if(group.userData.cableId)group.visible=group.userData.cableId!==this.dragging?.cableId;
+  for(const group of this.wires?.children||[]){
+   if(!group.userData.cableId)continue;
+   const visible=group.userData.cableId!==this.dragging?.cableId;
+   if(group.visible!==visible){group.visible=visible;this.invalidateShadows();}
+  }
+  this.projectionDirty=true;
  },
  moveCableDrag(ev){
   const drag=this.dragging;if(!drag||drag.id!==ev.pointerId)return;ev.preventDefault();

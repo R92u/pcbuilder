@@ -41,7 +41,7 @@ export const lightingSceneMethods={
   });
   this.lightMaterials=[...materials];this.updateLighting(this.last||0);
  },
- setLighting(value){this.caseOnlyRainbow=value?.caseOnly===true;this.lighting=sanitizeLighting(value);this.updateLighting(this.last||0);},
+ setLighting(value){this.frameDirty=true;this.caseOnlyRainbow=value?.caseOnly===true;this.lighting=sanitizeLighting(value);this.updateLighting(this.last||0);},
  updateLighting(time){
   const {mode,color}=this.lighting||sanitizeLighting(),tint=new THREE.Color(color);
   for(const material of this.lightMaterials||[]){

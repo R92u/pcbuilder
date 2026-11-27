@@ -20,7 +20,7 @@ export class PCScene {
   this.container=container;this.parts={};this.fans=[];this.flowParticles=[];this.transitions=[];this.hideGlass=false;this.hideRearPanel=false;this.hideCooler=false;this.airflow=false;this.running=false;this.settings={front:60,rear:60,cpuFan:60};this.last=0;
   this.renderer=new THREE.WebGLRenderer({antialias:true,alpha:true,powerPreference:'high-performance'});
   this.renderer.setPixelRatio(Math.min(devicePixelRatio,1.35));this.renderer.setClearColor(0,0);this.renderer.outputColorSpace=THREE.SRGBColorSpace;this.renderer.toneMapping=THREE.ACESFilmicToneMapping;this.renderer.toneMappingExposure=1.08;
-  this.renderer.shadowMap.enabled=true;this.renderer.shadowMap.type=THREE.PCFShadowMap;
+  this.renderer.shadowMap.enabled=true;this.renderer.shadowMap.autoUpdate=false;this.renderer.shadowMap.needsUpdate=true;this.renderer.shadowMap.type=THREE.PCFShadowMap;
   container.replaceChildren(this.renderer.domElement);this.scene=new THREE.Scene();
   // Neutral studio reflections give metal and matte plastic distinct surfaces.
   const room=new THREE.Scene();room.background=new THREE.Color(0x30383e);
@@ -29,6 +29,7 @@ export class PCScene {
   const pmrem=new THREE.PMREMGenerator(this.renderer);this.environment=pmrem.fromScene(room,.08);this.scene.environment=this.environment.texture;this.scene.environmentIntensity=.65;pmrem.dispose();room.traverse(o=>{o.geometry?.dispose();o.material?.dispose();});
   this.camera=new THREE.PerspectiveCamera(36,1,.1,70);this.camera.position.set(8.4,5.7,8.2);
   this.controls=new OrbitControls(this.camera,this.renderer.domElement);this.controls.target.set(0,2.3,0);this.controls.enableDamping=true;this.controls.dampingFactor=.08;this.controls.minDistance=4.2;this.controls.maxDistance=19;this.controls.maxPolarAngle=Math.PI*.61;this.controls.minPolarAngle=.32;this.controls.enablePan=false;this.controls.autoRotateSpeed=.55;
+  this.controls.addEventListener('change',()=>{this.projectionDirty=true;});
   this.cableFlight=new CableFlight(this.scene,this.camera,this.controls);
   this.cancelFlight=()=>this.cableFlight.cancel();
   this.flightEvents=new AbortController();
@@ -38,7 +39,7 @@ export class PCScene {
   this.reduceMotion=matchMedia('(prefers-reduced-motion: reduce)');
   this.reduceMotion.addEventListener('change',this.cancelFlight,inputOptions);
   this.scene.add(new THREE.HemisphereLight(0xf2f6f8,0x1b2225,2.4));
-  const key=new THREE.DirectionalLight(0xf9fcff,3.6);key.position.set(4,7,5);key.castShadow=true;key.shadow.mapSize.set(1024,1024);Object.assign(key.shadow.camera,{left:-5,right:5,top:7,bottom:-5});key.shadow.radius=3;key.shadow.bias=-.0005;this.scene.add(key);
+  const key=new THREE.DirectionalLight(0xf9fcff,3.6);key.position.set(4,7,5);this.shadowLight=key;key.castShadow=true;key.shadow.mapSize.set(1024,1024);Object.assign(key.shadow.camera,{left:-5,right:5,top:7,bottom:-5});key.shadow.radius=3;key.shadow.bias=-.0005;this.scene.add(key);
   const fill=new THREE.DirectionalLight(0xa6b8c8,1.4);fill.position.set(-4,4,-3);this.scene.add(fill);
   const rim=new THREE.DirectionalLight(0xa9f2f1,3.2);rim.position.set(-2,5,-4);this.scene.add(rim);
   const interior=new THREE.PointLight(0xe4edf4,.65,7,1.5);interior.position.set(.9,3,1);this.scene.add(interior);
@@ -53,7 +54,17 @@ export class PCScene {
   this.makeCase();this.makeFlows();this.initInteraction();
   this.resizeObserver=new ResizeObserver(()=>this.resize());this.resizeObserver.observe(container);this.resize();this.applyResize();this.reset();
   this.renderer.domElement.addEventListener('webglcontextlost',e=>{e.preventDefault();this.onContextLost?.();});
-  this.frame=this.frame.bind(this);this.raf=requestAnimationFrame(this.frame);
+  this.frame=this.frame.bind(this);
+  const catalog=document.getElementById('catalog-dialog');
+  const syncVisibility=()=>{
+   cancelAnimationFrame(this.raf);
+   if(document.hidden||catalog?.open)return;
+   this.projectionDirty=true;this.last=0;this.raf=requestAnimationFrame(this.frame);
+  };
+  this.shopObserver=new MutationObserver(syncVisibility);
+  if(catalog)this.shopObserver.observe(catalog,{attributes:true,attributeFilter:['open']});
+  document.addEventListener('visibilitychange',syncVisibility,{signal:this.flightEvents.signal});
+  syncVisibility();
  }
  box(g,w,h,d,x,y,z,color=C.metal,rough=.5){const mesh=new THREE.Mesh(new THREE.BoxGeometry(w,h,d),mat(color,rough,.4));mesh.position.set(x,y,z);mesh.castShadow=true;mesh.receiveShadow=true;g.add(mesh);return mesh;}
  cylinder(g,r,h,x,y,z,color=C.edge){const m=new THREE.Mesh(new THREE.CylinderGeometry(r,r,h,24),mat(color,.38,.4));m.position.set(x,y,z);m.castShadow=true;g.add(m);return m;}
@@ -119,7 +130,15 @@ export class PCScene {
   const curve=cableCurve(cable.points);
   this.playCableFlight(curve.getSpacedPoints(64).map(point=>this.root.localToWorld(point)));
  }
+ invalidateShadows(){this.renderer.shadowMap.needsUpdate=true;this.frameDirty=true;}
+ setShadows(enabled){
+  this.shadowLight.castShadow=enabled;
+  this.renderer.shadowMap.enabled=enabled;
+  this.contact.visible=enabled;
+  this.invalidateShadows();
+ }
  setBuild(build){
+  if(!this.currentBuild||categories.some(([key])=>this.currentBuild[key]!==build[key]))this.invalidateShadows();
   if(this.cableFlight.active && categories.some(([key])=>this.currentBuild?.[key]!==build[key]))this.cableFlight.cancel();
   const changedCase=this.currentBuild?.case!==build.case;this.currentBuild={...build};const p=resolve(build);
   const caseSignature=(p.case?.id||'cc560')+':'+(p.cooler?.type==='aio'?p.cooler.id:'air');
@@ -143,7 +162,7 @@ export class PCScene {
   const targets=portsFor(this.currentBuild||{}),available=cablesFor(this.currentBuild||{},this.fanLayout),active=mode==='auto'?available.map(c=>c.id):connected;
   const key=JSON.stringify([this.currentBuild,this.fanLayout,active,selected,showPorts]);
   if(this.wireKey!==key){
-   this.wireKey=key;
+   this.invalidateShadows();this.wireKey=key;
    if(this.wires){this.wires.removeFromParent();this.wires.traverse(o=>{o.geometry?.dispose();o.material?.dispose();});}
    this.wires=new THREE.Group();this.root.add(this.wires);
    for(const cable of available.filter(c=>active.includes(c.id))){
@@ -221,7 +240,7 @@ export class PCScene {
  }
  makeCaseFlows(p){if(this.flowGroup){this.flowGroup.removeFromParent();this.flowGroup.traverse(o=>{o.geometry?.dispose();o.material?.dispose();});}this.flowParticles=[];this.makeFlows(p.frontFanCount??3);this.flowGroup.visible=this.airflow;}
  makeFlows(){this.makeFanFlows();}
- setOptions(options){Object.assign(this,options);this.updateSideGuards();this.glass.visible=!this.hideGlass;this.rearPanel.visible=!this.hideRearPanel;if(this.parts.cooler)this.parts.cooler.visible=!this.hideCooler;this.flowGroup.visible=this.airflow;this.updateMarkers();}
+ setOptions(options){if(['hideGlass','hideCooler','hideRearPanel'].some(key=>key in options&&this[key]!==options[key]))this.invalidateShadows();this.frameDirty=true;Object.assign(this,options);this.updateSideGuards();this.glass.visible=!this.hideGlass;this.rearPanel.visible=!this.hideRearPanel;if(this.parts.cooler)this.parts.cooler.visible=!this.hideCooler;this.flowGroup.visible=this.airflow;this.updateMarkers();}
  reset(){this.view('assembly');}
  zoom(factor){const offset=this.camera.position.clone().sub(this.controls.target);offset.multiplyScalar(factor);offset.setLength(THREE.MathUtils.clamp(offset.length(),4.2,19));this.camera.position.copy(this.controls.target).add(offset);this.controls.update();}
  resize(){
@@ -236,7 +255,7 @@ export class PCScene {
   if(!this.pendingResize)return;
   this.cableFlight.cancel();
   const {width,height}=this.pendingResize;this.pendingResize=null;
-  this.viewportWidth=width;this.viewportHeight=height;
+  this.projectionDirty=true;this.viewportWidth=width;this.viewportHeight=height;
   this.camera.aspect=width/height;this.camera.updateProjectionMatrix();
   this.renderer.setSize(width,height,false);this.fitCaseView();
  }
@@ -245,14 +264,24 @@ export class PCScene {
   // even between the normally throttled frames during a panel transition.
   if(time-this.last<1000/45&&!this.pendingResize){this.raf=requestAnimationFrame(this.frame);return;}
   this.applyResize();
-  const dt=Math.min((time-this.last)/1000||0,.05);this.last=time;if(!this.cableFlight.update(time)&&!this.dragging&&!this.externalCables?.drag)this.controls.update();
-  for(const f of this.fans){const fraction=f.mountId?(f.direction==='in'?this.settings.front:this.settings.rear)/100:f.kind==='front'?this.settings.front/100:f.kind==='rear'?this.settings.rear/100:f.kind==='cpu'?this.settings.cpuFan/100:(this.settings.gpuFan??60)/100;f.rotor.rotation.z-=dt*(this.running?fraction*12:0);}
+  const dt=Math.min((time-this.last)/1000||0,.05);this.last=time;const flying=this.cableFlight.update(time);if(!flying&&!this.dragging&&!this.externalCables?.drag)this.controls.update();
+  const project=this.projectionDirty||flying;
+  this.projectionDirty=false;
+  const rainbowKeys=this.keyboardModel&&this.keyboardLighting?.mode==='rainbow';
+  const animated=this.running||this.transitions.length||this.dragging||this.fanDrag||this.externalCables?.drag||rainbowKeys||this.lighting?.mode==='rainbow';
+  if(!project&&!animated&&!this.frameDirty&&time-this.lastDraw<(this.guides?.pulsing?1000/24:1000)){this.raf=requestAnimationFrame(this.frame);return;}
+  // An occasional idle draw also picks up asynchronously loaded product textures.
+  this.frameDirty=false;this.lastDraw=time;
+  if(this.transitions.length)this.invalidateShadows();
+  if(this.running)for(const f of this.fans){const fraction=f.mountId?(f.direction==='in'?this.settings.front:this.settings.rear)/100:f.kind==='front'?this.settings.front/100:f.kind==='rear'?this.settings.rear/100:f.kind==='cpu'?this.settings.cpuFan/100:(this.settings.gpuFan??60)/100;f.rotor.rotation.z-=dt*fraction*12;}
   this.transitions=this.transitions.filter(t=>{const p=Math.min((time-t.start)/650,1);t.group.position.x=.65*(1-p)**3;return p<1;});
   if(this.airflow)this.updateFanFlows(dt);
-  this.updateFanMarkers();if(this.lighting?.mode==='rainbow')this.updateLighting(time);
-  this.guides?.frame(time,this.camera);this.updateMarkers();this.renderer.render(this.scene,this.camera);this.guides?.drawOutline(this.renderer,this.scene,this.camera);this.raf=requestAnimationFrame(this.frame);
+  if(project){this.camera.updateMatrixWorld();this.updateFanMarkers();this.updateMarkers();this.externalCables?.update();}
+  if(rainbowKeys)this.keyboardModel.userData.updateLighting(this.keyboardLighting,time);
+  if(this.lighting?.mode==='rainbow')this.updateLighting(time);
+  this.guides?.frame(time,this.camera);this.renderer.render(this.scene,this.camera);this.guides?.drawOutline(this.renderer,this.scene,this.camera);this.raf=requestAnimationFrame(this.frame);
  }
- dispose(){this.flightEvents.abort();this.cableFlight.cancel();this.guides.dispose();this.contact.material.map.dispose();this.contact.material.dispose();this.contact.geometry.dispose();cancelAnimationFrame(this.raf);this.resizeObserver.disconnect();this.controls.dispose();this.environment?.dispose();this.clearLooseCable();this.endFanDrag(null,true);window.removeEventListener('blur',this.cancelHeldPlug);window.removeEventListener('keydown',this.cancelOnEscape);this.renderer.dispose();}
+ dispose(){this.shopObserver.disconnect();this.flightEvents.abort();this.cableFlight.cancel();this.guides.dispose();this.contact.material.map.dispose();this.contact.material.dispose();this.contact.geometry.dispose();cancelAnimationFrame(this.raf);this.resizeObserver.disconnect();this.controls.dispose();this.environment?.dispose();this.clearLooseCable();this.endFanDrag(null,true);window.removeEventListener('blur',this.cancelHeldPlug);window.removeEventListener('keydown',this.cancelOnEscape);this.renderer.dispose();}
 }
 
 Object.assign(PCScene.prototype,modelMethods,interactionMethods,fanSceneMethods,lightingSceneMethods);

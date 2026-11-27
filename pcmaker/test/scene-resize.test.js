@@ -15,7 +15,7 @@ function harness(Scene=PCScene){
  let rect={width:800,height:600},pixels='computer';const events=[];
  const scene=Object.assign(Object.create(Scene.prototype),{
   container:{getBoundingClientRect:()=>rect},viewportWidth:800,viewportHeight:600,
-  camera:{aspect:4/3,updateProjectionMatrix(){events.push('projection');}},
+  camera:{aspect:4/3,updateMatrixWorld(){},updateProjectionMatrix(){events.push('projection');}},
   renderer:{setSize(w,h){pixels=null;events.push(['resize',w,h]);},render(){pixels='computer';events.push('render');}},
   controls:{update(){}},cableFlight:{cancel(){},update(){return false;}},fitCaseView(){events.push('fit');},updateFanMarkers(){},updateMarkers(){},
   fans:[],transitions:[],last:100,scene:{},frame(){},
@@ -50,4 +50,24 @@ test('unchanged, subpixel and hidden viewport sizes do not erase the canvas',()=
  h.setRect({width:1000,height:600});h.scene.resize();
  h.setRect({width:800,height:600});h.scene.resize();frame(h.scene,110);
  assert.deepEqual(h.events,[]);assert.equal(h.pixels,'computer');
+});
+
+test('idle scenes reuse the frame and marker positions until the camera changes',()=>{
+ const h=harness(WorkplaceScene);
+ let projections=0;
+ h.scene.externalCables={update(){projections++;}};
+ h.scene.projectionDirty=true;
+ frame(h.scene,140);frame(h.scene,200);frame(h.scene,250);
+ assert.deepEqual(h.events,['render']);assert.equal(projections,1);
+ h.scene.running=true;frame(h.scene,300);
+ assert.equal(h.events.length,2);assert.equal(projections,1);
+ h.scene.projectionDirty=true;frame(h.scene,350);
+ assert.equal(h.events.length,3);assert.equal(projections,2);
+});
+
+test('turning shadows back on requests a fresh map and restores contact shadow',()=>{
+ const {scene}=harness();scene.contact={visible:true};scene.shadowLight={castShadow:true};scene.renderer.shadowMap={enabled:true};
+ scene.setShadows(false);assert.equal(scene.shadowLight.castShadow,false);assert.equal(scene.contact.visible,false);assert.equal(scene.renderer.shadowMap.enabled,false);
+ scene.renderer.shadowMap.needsUpdate=false;scene.setShadows(true);
+ assert.equal(scene.contact.visible,true);assert.equal(scene.renderer.shadowMap.enabled,true);assert.equal(scene.renderer.shadowMap.needsUpdate,true);
 });

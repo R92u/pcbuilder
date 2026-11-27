@@ -55,8 +55,7 @@ function monitor(p){
 }
 
 export class WorkplaceScene extends PCScene{
- frame(time){super.frame(time);this.externalCables?.update();if(this.keyboardModel&&this.keyboardLighting?.mode==='rainbow')this.keyboardModel.userData.updateLighting(this.keyboardLighting,time);}
- setKeyboardLighting(value){this.keyboardLighting=sanitizeKeyboardLighting(value);this.keyboardModel?.userData.updateLighting(this.keyboardLighting,this.last||0);}
+ setKeyboardLighting(value){this.frameDirty=true;this.keyboardLighting=sanitizeKeyboardLighting(value);this.keyboardModel?.userData.updateLighting(this.keyboardLighting,this.last||0);}
 
 
  initInteraction(){super.initInteraction();}
@@ -94,6 +93,7 @@ export class WorkplaceScene extends PCScene{
   this.renderer.domElement.addEventListener('pointerup',e=>{const s=this.workplaceDown;this.workplaceDown=null;if(!s||s.button!==0||this.fanEditing||this.dragging||Math.hypot(e.clientX-s.x,e.clientY-s.y)>5)return;const r=container.getBoundingClientRect(),ray=new THREE.Raycaster();ray.setFromCamera(new THREE.Vector2((e.clientX-r.left)/r.width*2-1,-(e.clientY-r.top)/r.height*2+1),this.camera);for(const hit of ray.intersectObject(this.peripheralRoot,true)){let node=hit.object;while(node&&!node.userData.productId)node=node.parent;if(node){this.onProduct?.(node.userData.productId);break;}}});
  }
  setPeripherals(value){
+  this.invalidateShadows();
   for(const child of [...this.peripheralRoot.children])dispose(child);
   this.keyboardModel=null;const selected=sanitizeWorkplace(value);
   const product=peripheralById[selected.mat];

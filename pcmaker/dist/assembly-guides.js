@@ -46,6 +46,7 @@ export function createAssemblyGuides(root,container){
   outline?.select(object||null);
  }
  return {
+  get pulsing(){return !motion.matches&&[...always].some(key=>!build[key]&&key!==selected);},
   setBuild(value,parts,groups){
    build=value;componentGroups=groups;updateOutline();
    const frame=caseLayout(parts.case,parts.gpu,parts.cooler);
