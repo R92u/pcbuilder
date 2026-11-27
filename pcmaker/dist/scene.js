@@ -1,7 +1,7 @@
 import {CableFlight} from './cable-flight.js';
 import {createAssemblyGuides,contactShadow} from './assembly-guides.js';
 import * as THREE from 'three';
-import {OrbitControls} from './vendor/OrbitControls.js';
+import {CameraControls} from './camera-controls.js';
 import {categories,resolve} from './catalog.js';
 import {modelMethods} from './model.js';
 import {portsFor,cablesFor} from './wiring.js';
@@ -28,7 +28,7 @@ export class PCScene {
   for(const [position,target,w,h,intensity] of softboxes){const light=new THREE.Mesh(new THREE.PlaneGeometry(w,h),new THREE.MeshBasicMaterial({color:new THREE.Color(0xdfe8ed).multiplyScalar(intensity),side:THREE.DoubleSide}));light.position.set(...position);light.lookAt(...target);room.add(light);}
   const pmrem=new THREE.PMREMGenerator(this.renderer);this.environment=pmrem.fromScene(room,.08);this.scene.environment=this.environment.texture;this.scene.environmentIntensity=.65;pmrem.dispose();room.traverse(o=>{o.geometry?.dispose();o.material?.dispose();});
   this.camera=new THREE.PerspectiveCamera(36,1,.1,70);this.camera.position.set(8.4,5.7,8.2);
-  this.controls=new OrbitControls(this.camera,this.renderer.domElement);this.controls.target.set(0,2.3,0);this.controls.enableDamping=true;this.controls.dampingFactor=.08;this.controls.minDistance=4.2;this.controls.maxDistance=19;this.controls.maxPolarAngle=Math.PI*.61;this.controls.minPolarAngle=.32;this.controls.enablePan=false;this.controls.autoRotateSpeed=.55;
+  this.controls=new CameraControls(this.camera,this.renderer.domElement);this.controls.target.set(0,2.3,0);this.controls.minDistance=4.2;this.controls.maxDistance=19;this.controls.maxPolarAngle=Math.PI*.61;this.controls.minPolarAngle=.32;this.controls.enablePan=false;this.controls.autoRotateSpeed=.55;
   this.controls.addEventListener('change',()=>{this.projectionDirty=true;});
   this.cableFlight=new CableFlight(this.scene,this.camera,this.controls);
   this.cancelFlight=()=>this.cableFlight.cancel();
@@ -58,7 +58,7 @@ export class PCScene {
   const catalog=document.getElementById('catalog-dialog');
   const syncVisibility=()=>{
    cancelAnimationFrame(this.raf);
-   if(document.hidden||catalog?.open)return;
+   if(document.hidden||catalog?.open){this.controls.stopMotion();return;}
    this.projectionDirty=true;this.last=0;this.raf=requestAnimationFrame(this.frame);
   };
   this.shopObserver=new MutationObserver(syncVisibility);
@@ -122,6 +122,7 @@ export class PCScene {
   this.fans.push({rotor,kind,parent});return fan;
  }
  playCableFlight(worldPoints){
+  this.controls.stopMotion();
   if(!this.reduceMotion.matches)this.cableFlight.start(worldPoints,performance.now());
  }
  showConnectedCable(id){
@@ -219,6 +220,7 @@ export class PCScene {
   this.camera.position.set(...(views[name]||views.assembly));this.controls.target.set(0,2.35,0);this.fitCaseView();this.controls.update();this.endCableDrag(null,true);this.rearPanel.visible=!this.hideRearPanel;this.updateMarkers();
  }
  fitCaseView(){
+  this.controls.stopMotion();
   const p=resolve(this.currentBuild||{}),f=caseLayout(p.case||{},p.gpu,p.cooler),center=new THREE.Vector3((f.side+f.back)/2,2.38,f.centerZ),offset=this.camera.position.clone().sub(this.controls.target),back=offset.clone().normalize();
   const right=new THREE.Vector3().crossVectors(this.camera.up,back).normalize(),up=new THREE.Vector3().crossVectors(back,right),tanV=Math.tan(THREE.MathUtils.degToRad(this.camera.fov/2)),tanH=tanV*this.camera.aspect;
   const corners=[];
@@ -242,7 +244,10 @@ export class PCScene {
  makeFlows(){this.makeFanFlows();}
  setOptions(options){if(['hideGlass','hideCooler','hideRearPanel'].some(key=>key in options&&this[key]!==options[key]))this.invalidateShadows();this.frameDirty=true;Object.assign(this,options);this.updateSideGuards();this.glass.visible=!this.hideGlass;this.rearPanel.visible=!this.hideRearPanel;if(this.parts.cooler)this.parts.cooler.visible=!this.hideCooler;this.flowGroup.visible=this.airflow;this.updateMarkers();}
  reset(){this.view('assembly');}
- zoom(factor){const offset=this.camera.position.clone().sub(this.controls.target);offset.multiplyScalar(factor);offset.setLength(THREE.MathUtils.clamp(offset.length(),4.2,19));this.camera.position.copy(this.controls.target).add(offset);this.controls.update();}
+ zoom(factor){
+  this.cableFlight.cancel();
+  this.controls.dollyIn(factor ** this.controls.zoomSpeed);
+ }
  resize(){
   const rect=this.container.getBoundingClientRect();if(!Number.isFinite(rect.width)||!Number.isFinite(rect.height)||rect.width<=0||rect.height<=0)return;
   const width=Math.max(1,Math.round(rect.width)),height=Math.max(1,Math.round(rect.height));
@@ -264,7 +269,11 @@ export class PCScene {
   // even between the normally throttled frames during a panel transition.
   if(time-this.last<1000/45&&!this.pendingResize){this.raf=requestAnimationFrame(this.frame);return;}
   this.applyResize();
-  const dt=Math.min((time-this.last)/1000||0,.05);this.last=time;const flying=this.cableFlight.update(time);if(!flying&&!this.dragging&&!this.externalCables?.drag)this.controls.update();
+  const elapsed=this.last ? Math.min((time-this.last)/1000,.15) : 1/45;
+  const dt=Math.min(elapsed,.05);this.last=time;
+  const flying=this.cableFlight.update(time);
+  if(!this.controls.enabled)this.controls.stopMotion();
+  else if(!flying)this.controls.update(elapsed,this.reduceMotion.matches);
   const project=this.projectionDirty||flying;
   this.projectionDirty=false;
   const rainbowKeys=this.keyboardModel&&this.keyboardLighting?.mode==='rainbow';
