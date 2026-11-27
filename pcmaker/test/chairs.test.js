@@ -1,7 +1,7 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
 import fs from 'node:fs';
-import {Box3,Vector3} from '../dist/vendor/three.module.js';
+import {Box3,Vector3,Matrix4} from '../dist/vendor/three.module.js';
 import {createChairModel,chairPlacement} from '../dist/chair-model.js';
 import {peripheralById,peripheralCategories,defaultWorkplace,sanitizeWorkplace,peripheralQuote} from '../dist/peripherals.js';
 import {connectionModes,sanitizeConnections} from '../dist/peripheral-connections.js';
@@ -40,10 +40,21 @@ test('Chair has five twin casters, two armrests and finite floor-standing geomet
  assert.ok(model.getObjectByName('armrest-left'));assert.ok(model.getObjectByName('armrest-right'));
  assert.ok(model.getObjectByName('headrest-pillow'));assert.ok(model.getObjectByName('lumbar-support'));
  let wheels=0,triangles=0;
- model.traverse(o=>{if(o.name==='wheel')wheels++;if(o.isMesh){assert.ok([...o.geometry.attributes.position.array,...o.geometry.attributes.normal.array].every(Number.isFinite));triangles+=(o.geometry.index?.count||o.geometry.attributes.position.count)/3;}});
+ model.traverse(o=>{if(o.name==='wheel')wheels+=o.count||1;if(o.isMesh){assert.ok([...o.geometry.attributes.position.array,...o.geometry.attributes.normal.array].every(Number.isFinite));triangles+=(o.geometry.index?.count||o.geometry.attributes.position.count)*(o.count||1)/3;}});
  assert.equal(wheels,10);assert.ok(triangles<50000);
  const placement=chairPlacement();model.position.set(...placement.position);model.position.y+=model.userData.floorOffset;model.rotation.y=placement.rotation;
- const bounds=new Box3().setFromObject(model);
+ // Check each instance after rotation, excluding empty space between casters.
+ model.updateMatrixWorld(true);
+ const bounds=new Box3(),matrix=new Matrix4();
+ model.traverse(o=>{
+  if(!o.geometry)return;
+  o.geometry.computeBoundingBox();
+  if(!o.isInstancedMesh){bounds.union(o.geometry.boundingBox.clone().applyMatrix4(o.matrixWorld));return;}
+  for(let i=0;i<o.count;i++){
+   o.getMatrixAt(i,matrix);matrix.premultiply(o.matrixWorld);
+   bounds.union(o.geometry.boundingBox.clone().applyMatrix4(matrix));
+  }
+ });
  assert.ok(Math.abs(bounds.min.y)<1e-6,'wheels touch the floor');
  assert.ok(bounds.min.z>4.1,'chair clears the front of the tabletop');
 });

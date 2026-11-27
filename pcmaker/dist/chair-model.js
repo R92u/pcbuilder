@@ -122,14 +122,26 @@ export function createChairModel(p,{withTexture=true}={}){
  const metal=new THREE.MeshStandardMaterial({color:style.hardware||'#353a3c',roughness:.44,metalness:.55});
  const seam=new THREE.MeshStandardMaterial({color:style.accent||'#9a9d9d',roughness:1});
  // Five independent twin-wheel casters and swept steel spokes, all on the floor.
+ const wheelParts=[
+  ['wheel',new THREE.CylinderGeometry(.375,.375,.15,32),black,.14,'z'],
+  ['wheel-hub',new THREE.CylinderGeometry(.21,.21,.016,24),metal,.223,'z'],
+  ['rubber-sidewall',new THREE.TorusGeometry(.29,.024,6,28),black,.232,'y'],
+  ['axle-cap',new THREE.CylinderGeometry(.092,.092,.026,8),black,.24,'z']
+ ].map(([name,geometry,material,x,axis])=>{
+  const batch=new THREE.InstancedMesh(geometry,material,10);
+  batch.name=name;batch.castShadow=batch.receiveShadow=true;g.add(batch);
+  return {batch,x,axis};
+ });
+ const wheelTransform=new THREE.Object3D();
  for(let i=0;i<5;i++){
   const angle=i*Math.PI*2/5+Math.PI/2,x=Math.cos(angle)*3.15,z=Math.sin(angle)*3.15;
   const caster=new THREE.Group();caster.name='caster-'+i;caster.position.set(x,0,z);caster.rotation.y=-angle;g.add(caster);
-  for(const side of [-1,1]){
-   const wheel=mesh(caster,'wheel',new THREE.CylinderGeometry(.375,.375,.15,32),black,[side*.14,.375,0]);wheel.rotation.z=Math.PI/2;
-   const hub=mesh(caster,'wheel-hub',new THREE.CylinderGeometry(.21,.21,.016,24),metal,[side*.223,.375,0]);hub.rotation.z=Math.PI/2;
-   const rim=mesh(caster,'rubber-sidewall',new THREE.TorusGeometry(.29,.024,6,28),black,[side*.232,.375,0]);rim.rotation.y=Math.PI/2;
-   const axle=mesh(caster,'axle-cap',new THREE.CylinderGeometry(.092,.092,.026,8),black,[side*.24,.375,0]);axle.rotation.z=Math.PI/2;
+  caster.updateMatrix();
+  for(const side of [-1,1])for(const {batch,x,axis} of wheelParts){
+   wheelTransform.position.set(side*x,.375,0);
+   wheelTransform.rotation.set(0,0,0);wheelTransform.rotation[axis]=Math.PI/2;
+   wheelTransform.updateMatrix();wheelTransform.matrix.premultiply(caster.matrix);
+   batch.setMatrixAt(i*2+(side>0?1:0),wheelTransform.matrix);
   }
   rod(caster,'caster-stem',[0,.50,0],[0,.85,0],.10,metal);
   const spoke=rod(g,'base-spoke',[0,1.05,0],[x,.78,z],.14,metal);spoke.scale.x=1.3;

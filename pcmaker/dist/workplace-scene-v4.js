@@ -13,7 +13,7 @@ import {createKeyboardModel as keyboard,sanitizeKeyboardLighting} from './keyboa
 const plastic=color=>new THREE.MeshStandardMaterial({color,roughness:.62,metalness:.08});
 
 function box(g,w,h,d,x,y,z,material){const m=new THREE.Mesh(new THREE.BoxGeometry(w,h,d),material);m.position.set(x,y,z);m.castShadow=true;m.receiveShadow=true;g.add(m);return m;}
-function dispose(group){const geometries=new Set(),materials=new Set(),textures=new Set();group.traverse(o=>{if(o.geometry)geometries.add(o.geometry);for(const m of [o.material].flat().filter(Boolean)){materials.add(m);if(m.map)textures.add(m.map);}});textures.forEach(t=>t.dispose());geometries.forEach(g=>g.dispose());materials.forEach(m=>m.dispose());group.removeFromParent();}
+function dispose(group){const geometries=new Set(),materials=new Set(),textures=new Set();group.traverse(o=>{if(o.isInstancedMesh)o.dispose();if(o.geometry)geometries.add(o.geometry);for(const m of [o.material].flat().filter(Boolean)){materials.add(m);if(m.map)textures.add(m.map);}});textures.forEach(t=>t.dispose());geometries.forEach(g=>g.dispose());materials.forEach(m=>m.dispose());group.removeFromParent();}
 function label(g,text,w,h,x,y,z,rotation=[0,0,0],color='#b6bdc1'){
  const c=document.createElement('canvas');c.width=512;c.height=128;const ctx=c.getContext('2d');ctx.fillStyle=color;ctx.font='500 70px Arial';ctx.textAlign='center';ctx.textBaseline='middle';ctx.fillText(text,256,64,490);
  const map=new THREE.CanvasTexture(c);map.colorSpace=THREE.SRGBColorSpace;
@@ -42,7 +42,19 @@ function monitor(p){
  const display=new THREE.Mesh(surface,new THREE.MeshBasicMaterial({map:texture}));display.userData.monitorDisplay=true;display.position.z=.105;screen.add(display);
  // Match the bent panel with a segmented rear shell and flush edge strips.
  const segments=p.curved?32:1;
- for(let i=0;i<segments;i++){const x=-w/2+w/segments*(i+.5),z=p.curved?x*x/30:0,angle=p.curved?-Math.atan(x/15):0;const b=box(screen,w/segments+.006,bodyH,.16,x,0,z-.01,body);b.rotation.y=angle;for(const sign of [-1,1]){const edge=box(screen,w/segments+.008,.05,.19,x,sign*bodyH/2,z,bezel);edge.rotation.y=angle;}}
+ const shell=new THREE.InstancedMesh(new THREE.BoxGeometry(w/segments+.006,bodyH,.16),body,segments);
+ const rails=new THREE.InstancedMesh(new THREE.BoxGeometry(w/segments+.008,.05,.19),bezel,2*segments);
+ const segment=new THREE.Object3D();
+ for(let i=0;i<segments;i++){
+  const x=-w/2+w/segments*(i+.5),z=p.curved?x*x/30:0;
+  segment.rotation.y=p.curved?-Math.atan(x/15):0;
+  segment.position.set(x,0,z-.01);segment.updateMatrix();shell.setMatrixAt(i,segment.matrix);
+  for(const side of [-1,1]){
+   segment.position.set(x,side*bodyH/2,z);segment.updateMatrix();
+   rails.setMatrixAt(2*i+(side>0?1:0),segment.matrix);
+  }
+ }
+ for(const batch of [shell,rails]){batch.castShadow=batch.receiveShadow=true;screen.add(batch);}
  for(const sign of [-1,1])box(screen,.045,bodyH,.19,sign*w/2,0,p.curved?w*w/120:0,bezel);
  label(screen,p.brand||'xiaomi',.48,.065,0,-bodyH/2+.04,.11,[0,0,0],p.colors.includes('white')&&p.id!=='mpg321w'?'#68767b':'#b6bdc1');
  g.userData.cableStarts={};let index=0;
@@ -93,19 +105,36 @@ export class WorkplaceScene extends PCScene{
   this.renderer.domElement.addEventListener('pointerup',e=>{const s=this.workplaceDown;this.workplaceDown=null;if(!s||s.button!==0||this.fanEditing||this.dragging||Math.hypot(e.clientX-s.x,e.clientY-s.y)>5)return;const r=container.getBoundingClientRect(),ray=new THREE.Raycaster();ray.setFromCamera(new THREE.Vector2((e.clientX-r.left)/r.width*2-1,-(e.clientY-r.top)/r.height*2+1),this.camera);for(const hit of ray.intersectObject(this.peripheralRoot,true)){let node=hit.object;while(node&&!node.userData.productId)node=node.parent;if(node){this.onProduct?.(node.userData.productId);break;}}});
  }
  setPeripherals(value){
+  const selected=sanitizeWorkplace(value),previous=this.deskSelection;
+  if(previous&&['monitor','keyboard','mouse','mat','chair'].every(key=>previous[key]===selected[key]))return;
   this.invalidateShadows();
-  for(const child of [...this.peripheralRoot.children])dispose(child);
-  this.keyboardModel=null;const selected=sanitizeWorkplace(value);
-  const product=peripheralById[selected.mat];
-  this.matLayout=deskMatLayout(product);
-  const texture=product?new THREE.TextureLoader().load('./assets/peripherals/'+product.id+'.webp'):null;
-  if(texture){texture.colorSpace=THREE.SRGBColorSpace;texture.anisotropy=Math.min(8,this.renderer.capabilities.getMaxAnisotropy());}
-  const mat=createDeskMat(product,this.matLayout,texture);
-  mat.position.set(this.matLayout.x,deskY,this.matLayout.z);this.peripheralRoot.add(mat);
+  const matChanged=!previous||previous.mat!==selected.mat;
+  this.deskSelection=selected;
+  for(const child of [...this.peripheralRoot.children]){
+   const key=child.userData.deskCategory;
+   if(key==='mat'?matChanged:child.userData.productId!==selected[key])dispose(child);
+  }
+  if(matChanged){
+   const product=peripheralById[selected.mat];
+   this.matLayout=deskMatLayout(product);
+   const texture=product?new THREE.TextureLoader().load('./assets/peripherals/'+product.id+'.webp'):null;
+   if(texture){texture.colorSpace=THREE.SRGBColorSpace;texture.anisotropy=Math.min(8,this.renderer.capabilities.getMaxAnisotropy());}
+   const mat=createDeskMat(product,this.matLayout,texture);
+   mat.position.set(this.matLayout.x,deskY,this.matLayout.z);this.peripheralRoot.add(mat);
+   mat.userData.deskCategory='mat';
+  }
   for(const [key,id] of Object.entries(selected)){
    if(key==='mat')continue;
+   if(previous?.[key]===id){
+    if(matChanged&&(key==='mouse'||key==='keyboard')){
+     const group=this.peripheralRoot.children.find(item=>item.userData.productId===id);
+     group.position.y=surfaceHeight(group.position.x,group.position.z,this.matLayout)-group.userData.bottom;
+    }
+    continue;
+   }
    const p=peripheralById[id],group=key==='monitor'?monitor(p):key==='keyboard'?keyboard(p):key==='chair'?createChairModel(p):mouse(p);if(key==='mouse'&&!group.userData.cableStart&&connectionModes(p).includes('usb')){const pos=[0,.10,-p.dimensions[1]/200];box(group,.09,.04,.025,...pos,plastic('#080d10'));group.userData.cableStart=pos;}group.userData.productId=id;const support=key==='monitor'?deskY:surfaceHeight(key==='mouse'?1.8:-1.9,2,this.matLayout);
-   group.position.set(key==='mouse'?1.8:-1.9,support-new THREE.Box3().setFromObject(group).min.y,key==='monitor'?-1.45:2.0);if(key==='chair'){const placement=chairPlacement();group.position.set(...placement.position);group.position.y+=group.userData.floorOffset;group.rotation.y=placement.rotation;}this.peripheralRoot.add(group);if(key==='keyboard'){this.keyboardModel=group;group.userData.updateLighting(this.keyboardLighting||sanitizeKeyboardLighting(),this.last||0);document.dispatchEvent(new CustomEvent('pcmaker:keyboard-selected',{detail:id}));}}
+   group.userData.deskCategory=key;group.userData.bottom=new THREE.Box3().setFromObject(group).min.y;
+   group.position.set(key==='mouse'?1.8:-1.9,support-group.userData.bottom,key==='monitor'?-1.45:2.0);if(key==='chair'){const placement=chairPlacement();group.position.set(...placement.position);group.position.y+=group.userData.floorOffset;group.rotation.y=placement.rotation;}this.peripheralRoot.add(group);if(key==='keyboard'){this.keyboardModel=group;group.userData.updateLighting(this.keyboardLighting||sanitizeKeyboardLighting(),this.last||0);document.dispatchEvent(new CustomEvent('pcmaker:keyboard-selected',{detail:id}));}}
   this.connectPeripherals();
  }
  connectPeripherals(){this.externalCables?.refresh();}

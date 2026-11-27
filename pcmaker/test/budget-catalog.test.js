@@ -1,3 +1,4 @@
+import {createConflictCache} from '../dist/shop-catalog-brands.js';
 import test from 'node:test';
 import assert from 'node:assert/strict';
 import fs from 'node:fs';
@@ -74,4 +75,16 @@ test('Autobuild can use the new verified budget platform without exceeding its b
 test('New chassis support only the verified AIO sizes',()=>{
  assert.equal(aioMount({case:byId.matrexx40,cooler:{type:'aio',radiator:360,radiatorDimensions:[402,120,27],fanThickness:25}}),null);
  assert.equal(aioMount({case:byId['matrexx55-mesh'],cooler:{type:'aio',radiator:360,radiatorDimensions:[402,120,27],fanThickness:25}}).wall,'front');
+});
+
+test('catalog conflicts are shared until the hardware changes',()=>{
+ let calls=0;
+ const conflicts=createConflictCache(build=>{calls++;return {errors:build.cpu==='a'?[{parts:['cpu','motherboard']}]:[]};});
+ const part={id:'board',category:'motherboard'},build={cpu:'a'};
+ assert.equal(conflicts(build)(part).length,1);
+ assert.equal(conflicts({...build})(part).length,1);
+ assert.equal(calls,1);
+ build.cpu='b';
+ assert.equal(conflicts(build)(part).length,0);
+ assert.equal(calls,2);
 });

@@ -14,3 +14,5 @@ dialog.shop-dialog{width:min(1640px,calc(100vw - 40px));height:calc(100dvh - 40p
 @media(max-width:380px){.workshop-header nav.workshop-toolbar{gap:5px}.workshop-header .round-button{width:30px;height:30px}.workshop-header{gap:10px;padding:0 10px}}
 
 .shop-build-summary>div{display:grid;grid-template-columns:30px minmax(0,1fr) 49px;gap:7px}.shop-build-summary b{font-size:11px;white-space:nowrap}.shop-categories button{padding-top:7px;padding-bottom:7px}.shop-offer .shop-offer-note{font-size:9px;color:#c1ab86}.shop-field select:focus-visible,.shop-field input:focus-visible,.shop-sort select:focus-visible{outline:2px solid #b2b2b2;outline-offset:2px}
+
+.shop-window-row{grid-column:1/-1;display:grid;grid-template-columns:inherit;gap:inherit;min-width:0}

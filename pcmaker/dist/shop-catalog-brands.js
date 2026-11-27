@@ -1,3 +1,4 @@
+import {createCatalogWindow} from './catalog-window.js';
 import {regionFromCurrency} from './regions.js';
 import {storePickerMarkup,mountStorePickers} from './store-picker.js';
 import {catalog,categories} from './catalog.js';
@@ -14,7 +15,19 @@ export const shopProducts=categories.flatMap(([category])=>catalog[category].map
 export const manufacturer=p=>p.manufacturer||p.brand||p.name.split(' ')[0];
 
 // Unknown prices always remain at the end, including in descending order.
-export function filterProducts(products,filters,build,prices){
+export function createConflictCache(check=compatibility){
+ let signature, cache=new Map();
+ return build=>{
+  const next=JSON.stringify(categories.map(([key])=>build[key]??null));
+  if(next!==signature){signature=next;cache=new Map();}
+  const current=cache;
+  return p=>{
+   if(!current.has(p.id))current.set(p.id,check({...build,[p.category]:p.id}).errors.filter(err=>err.parts.includes(p.category)));
+   return current.get(p.id);
+  };
+ };
+}
+export function filterProducts(products,filters,build,prices,conflictsFor=createConflictCache()(build)){
  const {min='',max=''}=filters;
  const query=(filters.query||'').trim().toLocaleLowerCase('ru');
  const list=products.filter(p=>{
@@ -28,7 +41,7 @@ export function filterProducts(products,filters,build,prices){
    (!filters.priced||priceQuality(prices[p.id]).status==='fresh')&&(!filters.verified||(p.kind==='peripheral'?p.specsVerified:isVerified(p)))&&
    (min===''||(Number.isFinite(price)&&price>=Number(min)))&&
    (max===''||(Number.isFinite(price)&&price<=Number(max)))&&
-   (!filters.compatible||p.kind==='peripheral'||!compatibility({...build,[p.category]:p.id}).errors.some(err=>err.parts.includes(p.category)));
+   (!filters.compatible||p.kind==='peripheral'||!conflictsFor(p).length);
  });
  return list.sort((a,b)=>{
   if(filters.sort==='brand')return manufacturer(a).localeCompare(manufacturer(b),'ru')||a.name.localeCompare(b.name,'ru');
@@ -94,6 +107,8 @@ function mountHoverPreview(dialog,grid){
 
 export function createShop({getBuild,getPrices,getSource,onChoose,beforeOpen,icon}){
  const $=id=>document.getElementById(id),dialog=$('catalog-dialog');
+ const cards=createCatalogWindow($('catalog-options')),conflictsForBuild=createConflictCache();
+ dialog.addEventListener('close',()=>{if(!dialog.open)cards.clear();});
  mountStorePickers(dialog);
  const clearPreview=mountHoverPreview(dialog,$('catalog-options'));
  let category='all',peripheral=null;
@@ -113,7 +128,7 @@ export function createShop({getBuild,getPrices,getSource,onChoose,beforeOpen,ico
  function render(){
   clearPreview();
   if($('shop-currency')){const opt=$('shop-currency').querySelector('[data-local-currency]'),current=regionFromCurrency(getPrices().currency);opt.value=current.currency;opt.textContent=current.symbol;}
-  const build=getBuild(),data=getPrices(),region=regionFromCurrency(data.currency),all=products(),offers={...data.items,...peripheral?.offers()},list=filterProducts(all,filters(),build,offers),summary=summarizePrices(build,data.items),check=compatibility(build);
+  const build=getBuild(),data=getPrices(),region=regionFromCurrency(data.currency),all=products(),offers={...data.items,...peripheral?.offers()},conflictsFor=conflictsForBuild(build),list=filterProducts(all,filters(),build,offers,conflictsFor),summary=summarizePrices(build,data.items),check=compatibility(build);
   document.querySelector('.shop-region').textContent=region.city+' · '+region.symbol;
   const priced=list.filter(p=>Number.isFinite(offers[p.id]?.price)),fresh=priced.filter(p=>{const q=priceQuality(offers[p.id]);return q.status!=='invalid'&&q.age<=7;});
   if($('shop-price-coverage'))$('shop-price-coverage').textContent=`Цены: ${priced.length} из ${list.length} показанных товаров · не старше 7 дней: ${fresh.length}. Дата и наличие — в каждой карточке.`;
@@ -122,12 +137,11 @@ export function createShop({getBuild,getPrices,getSource,onChoose,beforeOpen,ico
   $('shop-build-price').textContent=summary.known?formatTotals(summary.totals):'—';
   $('shop-build-price-label').textContent=summary.stale+summary.unavailable+summary.invalid?'Сумма по снимкам цен':summary.complete?'Стоимость по предложениям':'Известная часть стоимости';
   $('shop-power').textContent=check.peak?check.peak+' Вт':'—';
-  $('catalog-options').innerHTML=list.map(p=>{
+  cards.draw(list,p=>{
    if(p.kind==='peripheral')return peripheral.card(p);
-   const selected=build[p.category]===p.id,offer=price(p),conflicts=compatibility({...build,[p.category]:p.id}).errors.filter(err=>err.parts.includes(p.category));
+   const selected=build[p.category]===p.id,offer=price(p),conflicts=conflictsFor(p);
    return `<article class="shop-card ${selected?'is-selected':''}" data-product="${p.id}">${photo(p)}<div class="shop-card-body"><span class="shop-card-kind">${escape(title(p.category))}</span><h3 title="${escape(p.name)}">${escape(p.name)}</h3><p class="shop-specs">${escape(p.detail)}</p>${verificationMarkup(p,false)}${p.sku?`<span class="shop-sku">${escape(p.sku)}</span>`:''}<div class="shop-offer"><strong>${p.concept?'Учебный корпус':offer?formatMoney(offer.price,offer.currency||region.currency):'Нет цены'}</strong>${offer?offerMarkup(offer,{compact:true}):(p.concept?'<span>Авторская модель · не продаётся</span>':'<span>Не включена в сумму сборки</span>')}</div>${conflicts.length?`<p class="shop-conflict">${icon('alert')}${escape(conflicts.map(err=>err.text).join(' '))}</p>`:'<p class="shop-compatible">'+icon('check')+' Нет выявленных конфликтов</p>'}<div class="shop-card-actions"><button class="button ${selected?'':'primary'}" data-shop-add="${p.id}" aria-label="${selected?'Выбрано:':'Добавить:'} ${escape(p.name)}" ${selected?'disabled':''}>${icon(selected?'check':'plus')}${selected?'В сборке':'Добавить'}</button>${selected&&p.category!=='case'?`<button class="shop-remove" data-shop-remove="${p.category}" aria-label="Убрать: ${escape(p.name)}">${icon('trash')}</button>`:''}</div>${p.concept?'':storePickerMarkup(p,p.category,data,getSource(p.id))}</div></article>`;
-  }).join('')||'<div class="shop-empty">'+icon('search')+'<h3>Ничего не найдено</h3><p>Измени запрос или сбрось фильтры.</p><button class="button" data-shop-reset>Сбросить фильтры</button></div>';
-  for(const image of $('catalog-options').querySelectorAll('img'))image.addEventListener('error',()=>{image.hidden=true;if(image.nextElementSibling)image.nextElementSibling.hidden=false;},{once:true});
+  },'<div class="shop-empty">'+icon('search')+'<h3>Ничего не найдено</h3><p>Измени запрос или сбрось фильтры.</p><button class="button" data-shop-reset>Сбросить фильтры</button></div>');
  }
  function populateFilters(){
   const base=products().filter(p=>category==='all'||p.category===category);
@@ -159,5 +173,5 @@ export function createShop({getBuild,getPrices,getSource,onChoose,beforeOpen,ico
  $('catalog-search').addEventListener('input',render);
  for(const id of ['shop-currency','shop-brand','shop-socket','shop-memory','compatible-only','shop-sort'])$(id).addEventListener('change',render);
  $('shop-color')?.addEventListener('change',render);
- return {registerPeripherals(adapter){peripheral=adapter;renderCategories();},open(key='all'){beforeOpen();selectCategory(key);$('shop-announcement').textContent='';if(innerWidth<=640)dialog.querySelector('.shop-filter-group').open=false;dialog.showModal();},refresh(){if(dialog.open)render();}};
+ return {registerPeripherals(adapter){peripheral=adapter;renderCategories();},open(key='all'){beforeOpen();dialog.showModal();selectCategory(key);$('shop-announcement').textContent='';if(innerWidth<=640)dialog.querySelector('.shop-filter-group').open=false;},refresh(){if(dialog.open)render();}};
 }
