@@ -87,9 +87,9 @@ export function makeRetailFront(g,p){
  }else if(p.family==='view-270'){
   // A pillarless glazed corner rests on a continuous painted plinth.
   box(2.20,.15,.23,0,4.575,2.19);
-  box(2.20,.87,.19,0,.795,2.19,new THREE.Color(paint).multiplyScalar(.44));
+  box(2.16,.83,.17,0,.795,2.19,new THREE.Color(paint).multiplyScalar(.44));
   for(const y of [.445,1.145])box(2.20,.17,.215,0,y,2.195);
-  for(const x of [-1.025,1.025])box(.15,.54,.215,x,.795,2.195);
+  for(const x of [-1.025,1.025])box(.15,.53,.215,x,.795,2.195);
   const pane=new THREE.Mesh(new THREE.PlaneGeometry(2.19,3.27),caseGlass());
   pane.position.set(0,2.865,2.302);g.add(pane);
   box(2.19,.028,.022,0,1.245,2.30,0x1b2425);

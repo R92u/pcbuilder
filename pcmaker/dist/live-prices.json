@@ -1,6 +1,6 @@
 {
   "schemaVersion": 1,
-  "checkedAt": "2026-11-27T14:00:23.972Z",
+  "checkedAt": "2026-11-27T15:48:14.189Z",
   "items": {
     "ru": {
       "980": {
@@ -2775,6 +2775,1057 @@
         "verification": "structured-data",
         "currency": "RUB",
         "sourceTitle": "Блок питания 750W MSI MAG A750GL PCIE5"
+      },
+      "a1250gl": {
+        "price": 13590,
+        "currency": "RUB",
+        "date": "2026-11-27",
+        "store": "mixpcshop.ru",
+        "kind": "store",
+        "availability": "unknown",
+        "url": "https://mixpcshop.ru/catalog/bloki-pitaniya/20106/",
+        "verification": "reviewed-source"
+      },
+      "a650gl": {
+        "price": 12889,
+        "currency": "RUB",
+        "date": "2026-11-27",
+        "store": "Apltech",
+        "kind": "store",
+        "availability": "out-of-stock",
+        "url": "https://www.apltech.ru/tovar/599598/msi-mag-a650gl-mag-a650gl",
+        "verification": "reviewed-source"
+      },
+      "a750g": {
+        "price": 16194,
+        "currency": "RUB",
+        "date": "2026-11-27",
+        "store": "torg-pc.ru",
+        "kind": "store",
+        "availability": "in-stock",
+        "url": "https://torg-pc.ru/catalog/600-vatt-vklyuchitelno/blok-pitaniya-msi-mpg-a750g-pcie5-306-7zp7a11-ce0/",
+        "verification": "reviewed-source"
+      },
+      "a850g": {
+        "price": 16105,
+        "currency": "RUB",
+        "date": "2026-11-27",
+        "store": "network-it.ru",
+        "kind": "store",
+        "availability": "out-of-stock",
+        "url": "https://network-it.ru/products/msi-mpg-a850g-pcie5",
+        "verification": "reviewed-source"
+      },
+      "ag500": {
+        "price": 2494,
+        "currency": "RUB",
+        "date": "2026-11-27",
+        "store": "torg-pc.ru",
+        "kind": "store",
+        "availability": "in-stock",
+        "url": "https://torg-pc.ru/catalog/sistema-vozdushnogo-okhlazhdeniya/kuler-dlya-protsessora-deepcool-ag500-pwm-r-ag500-bknnmn-g/",
+        "verification": "reviewed-source"
+      },
+      "aio-lt240-bk-argb": {
+        "price": 13250,
+        "currency": "RUB",
+        "date": "2026-11-27",
+        "store": "77up.ru",
+        "kind": "store",
+        "availability": "out-of-stock",
+        "url": "https://77up.ru/sistema-vodyanogo-okhlazhdeniya-deepcool-lt240-argb-soc-am5-am4-1200-1700-1851-chernyy-4-pin-38-71db-al-1504gr-ret-r-lt240-bkamnc-g-1-r-lt240-bkamnc-g-1",
+        "verification": "reviewed-source"
+      },
+      "aio-lt240-wh-argb": {
+        "price": 11260,
+        "currency": "RUB",
+        "date": "2026-11-27",
+        "store": "77up.ru",
+        "kind": "store",
+        "availability": "out-of-stock",
+        "url": "https://77up.ru/sistema-vodyanogo-okhlazhdeniya-deepcool-lt240-argb-soc-am5-am4-1200-1700-1851-belyy-4-pin-38-71db-al-1504gr-ret-r-lt240-whamnc-g-1-r-lt240-whamnc-g-1",
+        "verification": "reviewed-source"
+      },
+      "aio-lt520-wh": {
+        "price": 7570,
+        "currency": "RUB",
+        "date": "2026-11-27",
+        "store": "CorePC",
+        "kind": "store",
+        "availability": "unknown",
+        "url": "https://corepc.ru/product/sistema-zhidkostnogo-okhlazhdeniya-dlya-protsessora-deepcool-lt520-wh-argb-pwm/",
+        "verification": "reviewed-source"
+      },
+      "akko-3068b-plus": {
+        "price": 8990,
+        "currency": "RUB",
+        "date": "2026-11-27",
+        "store": "Geekboards",
+        "kind": "store",
+        "availability": "out-of-stock",
+        "url": "https://geekboards.ru/product/akko-blackgold-3068b-plus?variant_id=553585539",
+        "note": "Предлагается предзаказ.",
+        "verification": "reviewed-source"
+      },
+      "akko-5075b-plus": {
+        "price": 8990,
+        "currency": "RUB",
+        "date": "2026-11-27",
+        "store": "GIGASPOT",
+        "kind": "store",
+        "availability": "unknown",
+        "url": "https://gigaspot.ru/periphery/keyboards/151052",
+        "note": "Предзаказ, срок поставки уточняется в магазине.",
+        "verification": "reviewed-source"
+      },
+      "atlantis-og-v2-blue": {
+        "price": 11050,
+        "currency": "RUB",
+        "date": "2026-11-27",
+        "store": "AloMart",
+        "kind": "store",
+        "availability": "out-of-stock",
+        "url": "https://alomart.ru/product/533469?c=lamzu-lamzu-atlantis-og-v2-pro-gaming-mouse-elegant-blue",
+        "note": "Последняя указанная цена. Товар распродан.",
+        "verification": "reviewed-source"
+      },
+      "atlantis-og-v2-green": {
+        "price": 12072,
+        "currency": "RUB",
+        "date": "2026-11-27",
+        "store": "Apltech",
+        "kind": "store",
+        "availability": "out-of-stock",
+        "url": "https://www.apltech.ru/tovar/717656/lamzu-atlantis-og-v2-pro-728683116770",
+        "verification": "reviewed-source"
+      },
+      "atlantis-og-v2-miami": {
+        "price": 11050,
+        "currency": "RUB",
+        "date": "2026-11-27",
+        "store": "AloMart",
+        "kind": "store",
+        "availability": "out-of-stock",
+        "url": "https://alomart.ru/product/533469?c=lamzu-lamzu-atlantis-og-v2-pro-gaming-mouse-miami-blue",
+        "note": "Последняя указанная цена. Товар распродан.",
+        "verification": "reviewed-source"
+      },
+      "ch560-white": {
+        "price": 11428,
+        "currency": "RUB",
+        "date": "2026-11-27",
+        "store": "Apltech",
+        "kind": "store",
+        "availability": "in-stock",
+        "url": "https://www.apltech.ru/tovar/520787/deepcool-ch560-wh-r-ch560-whape4-g-1",
+        "verification": "reviewed-source"
+      },
+      "focus-g-blue": {
+        "price": 5690,
+        "currency": "RUB",
+        "date": "2026-11-27",
+        "store": "PC-Arena",
+        "kind": "store",
+        "availability": "out-of-stock",
+        "url": "https://pc-arena.ru/catalog/korpus_fractal_design_focus_g_siniy_s_oknom_fd_ca_focus_bu_w.html",
+        "verification": "reviewed-source"
+      },
+      "logitech-g213-rgb-gaming-keyboard": {
+        "price": 7440,
+        "currency": "RUB",
+        "date": "2026-11-27",
+        "store": "AloMart",
+        "kind": "store",
+        "availability": "in-stock",
+        "url": "https://alomart.ru/product/533643?c=logitechg-920-008083",
+        "note": "Доставка из США оплачивается отдельно.",
+        "verification": "reviewed-source"
+      },
+      "logitech-g309-lightspeed-gaming-mouse": {
+        "price": 8830,
+        "currency": "RUB",
+        "date": "2026-11-27",
+        "store": "AloMart",
+        "kind": "store",
+        "availability": "in-stock",
+        "url": "https://alomart.ru/product/533619?c=logitechg-910-007205",
+        "note": "Доставка из США оплачивается отдельно.",
+        "verification": "reviewed-source"
+      },
+      "logitech-g413-se-gaming-keyboard": {
+        "price": 9620,
+        "currency": "RUB",
+        "date": "2026-11-27",
+        "store": "AloMart",
+        "kind": "store",
+        "availability": "in-stock",
+        "url": "https://alomart.ru/product/533639?c=logitechg-920-010433",
+        "note": "Доставка из США оплачивается отдельно.",
+        "verification": "reviewed-source"
+      },
+      "logitech-g413-tkl-se-gaming-keyboard": {
+        "price": 9040,
+        "currency": "RUB",
+        "date": "2026-11-27",
+        "store": "AloMart",
+        "kind": "store",
+        "availability": "in-stock",
+        "url": "https://alomart.ru/product/533642?c=logitechg-920-010442",
+        "note": "Доставка из США оплачивается отдельно.",
+        "verification": "reviewed-source"
+      },
+      "logitech-g502-lightspeed-wireless-gaming-mouse": {
+        "price": 13550,
+        "currency": "RUB",
+        "date": "2026-11-27",
+        "store": "AloMart",
+        "kind": "store",
+        "availability": "in-stock",
+        "url": "https://alomart.ru/product/533621?c=logitechg-910-005565",
+        "note": "Доставка из США оплачивается отдельно.",
+        "verification": "reviewed-source"
+      },
+      "logitech-g502-x-wired-lightforce": {
+        "price": 9320,
+        "currency": "RUB",
+        "date": "2026-11-27",
+        "store": "AloMart",
+        "kind": "store",
+        "availability": "in-stock",
+        "url": "https://alomart.ru/product/533618?c=logitechg-910-006144",
+        "note": "Доставка из США оплачивается отдельно.",
+        "verification": "reviewed-source"
+      },
+      "logitech-g502-x-wireless-lightforce": {
+        "price": 18060,
+        "currency": "RUB",
+        "date": "2026-11-27",
+        "store": "AloMart",
+        "kind": "store",
+        "availability": "in-stock",
+        "url": "https://alomart.ru/product/533617?c=logitechg-910-006187",
+        "note": "Доставка из США оплачивается отдельно.",
+        "verification": "reviewed-source"
+      },
+      "logitech-g512-mechanical-gaming-keyboard": {
+        "price": 9410,
+        "currency": "RUB",
+        "date": "2026-11-27",
+        "store": "AloMart",
+        "kind": "store",
+        "availability": "out-of-stock",
+        "url": "https://alomart.ru/product/533640?c=logitechg-920-008936",
+        "note": "Последняя указанная цена. Товар распродан.",
+        "verification": "reviewed-source"
+      },
+      "logitech-g515-tkl-wireless-keyboard": {
+        "price": 14321,
+        "currency": "RUB",
+        "date": "2026-11-27",
+        "store": "Apltech",
+        "kind": "store",
+        "availability": "in-stock",
+        "url": "https://www.apltech.ru/tovar/586808/logitech-g515-lightspeed-tkl-black-920-012538",
+        "verification": "reviewed-source"
+      },
+      "logitech-g903-hero-wireless-gaming-mouse": {
+        "price": 20390,
+        "currency": "RUB",
+        "date": "2026-11-27",
+        "store": "AloMart",
+        "kind": "store",
+        "availability": "in-stock",
+        "url": "https://alomart.ru/product/533623?c=logitechg-910-005670",
+        "note": "Доставка из США оплачивается отдельно.",
+        "verification": "reviewed-source"
+      },
+      "logitech-g915-x-mechanical-gaming-keyboard": {
+        "price": 24760,
+        "currency": "RUB",
+        "date": "2026-11-27",
+        "store": "AloMart",
+        "kind": "store",
+        "availability": "in-stock",
+        "url": "https://alomart.ru/product/533635",
+        "note": "Доставка из США оплачивается отдельно.",
+        "verification": "reviewed-source"
+      },
+      "logitech-g915-x-tkl-wireless": {
+        "price": 28139,
+        "currency": "RUB",
+        "date": "2026-11-27",
+        "store": "CDEK.Shopping",
+        "kind": "store",
+        "availability": "in-stock",
+        "url": "https://cdek.shopping/p/25642308/igrovaya-klaviatura-logitech-g915-x-lightspeed-tkl-linear-besprovodnaya-cyornyi",
+        "verification": "reviewed-source"
+      },
+      "logitech-pro-2-lightspeed": {
+        "price": 21850,
+        "currency": "RUB",
+        "date": "2026-11-27",
+        "store": "AloMart",
+        "kind": "store",
+        "availability": "in-stock",
+        "url": "https://alomart.ru/product/533620?c=logitechg-910-007246",
+        "note": "Доставка из США оплачивается отдельно.",
+        "verification": "reviewed-source"
+      },
+      "logitech-pro-x-60-wireless-keyboard": {
+        "price": 18799,
+        "currency": "RUB",
+        "date": "2026-11-27",
+        "store": "itvse.ru",
+        "kind": "store",
+        "availability": "in-stock",
+        "url": "https://itvse.ru/product/logitech-g-pro-x-60/",
+        "verification": "reviewed-source"
+      },
+      "logitech-pro-x-superlight-2-dex": {
+        "price": 23310,
+        "currency": "RUB",
+        "date": "2026-11-27",
+        "store": "AloMart",
+        "kind": "store",
+        "availability": "in-stock",
+        "url": "https://alomart.ru/product/533615?c=logitechg-910-007328",
+        "note": "Доставка из США оплачивается отдельно.",
+        "verification": "reviewed-source"
+      },
+      "logitech-pro-x-superlight-2-se": {
+        "price": 20390,
+        "currency": "RUB",
+        "date": "2026-11-27",
+        "store": "AloMart",
+        "kind": "store",
+        "availability": "in-stock",
+        "url": "https://alomart.ru/product/533614?c=logitechg-910-007646",
+        "note": "Доставка из США оплачивается отдельно.",
+        "verification": "reviewed-source"
+      },
+      "logitech-pro-x-tkl-wireless-keyboard": {
+        "price": 23750,
+        "currency": "RUB",
+        "date": "2026-11-27",
+        "store": "AloMart",
+        "kind": "store",
+        "availability": "in-stock",
+        "url": "https://alomart.ru/product/533638?c=logitechg-920-012127",
+        "note": "Доставка из США оплачивается отдельно.",
+        "verification": "reviewed-source"
+      },
+      "logitech-pro-x2-superlight-wireless-mouse": {
+        "price": 23310,
+        "currency": "RUB",
+        "date": "2026-11-27",
+        "store": "AloMart",
+        "kind": "store",
+        "availability": "in-stock",
+        "url": "https://alomart.ru/product/533616?c=logitechg-910-006636",
+        "note": "Доставка из США оплачивается отдельно.",
+        "verification": "reviewed-source"
+      },
+      "mem-au08ggb32csybgh": {
+        "price": 6695,
+        "currency": "RUB",
+        "date": "2026-11-27",
+        "store": "holding-trade.ru",
+        "kind": "store",
+        "availability": "in-stock",
+        "url": "https://www.holding-trade.ru/product/operativnaya-pamyat-apacer-ddr4-8gb-3200mhz-dimm-pc4-25600-cl22-1-2v-retail-1024-8-3-years-au08ggb32csybgh-el-08g21-gsh-ntrn56883715/",
+        "verification": "reviewed-source"
+      },
+      "mem-ax4u32008g16a-dtwhd35": {
+        "price": 15637,
+        "currency": "RUB",
+        "date": "2026-11-27",
+        "store": "ANDPRO",
+        "kind": "store",
+        "availability": "in-stock",
+        "url": "https://andpro.ru/catalog/computer_hardware/memory_ram/komplekt_pamyati_adata_xpg_gammix_d35_2kh8_gb_dimm_ddr4_3200_mgts_ax4u32008g16a_dtwhd35/",
+        "verification": "reviewed-source"
+      },
+      "mem-ax4u32008g16a-dtwhd35g": {
+        "price": 15921,
+        "currency": "RUB",
+        "date": "2026-11-27",
+        "store": "ANDPRO",
+        "kind": "store",
+        "availability": "in-stock",
+        "url": "https://andpro.ru/catalog/computer_hardware/memory_ram/komplekt_pamyati_adata_xpg_gammix_d35g_2kh8_gb_dimm_ddr4_3200_mgts_ax4u32008g16a_dtwhd35g/",
+        "verification": "reviewed-source"
+      },
+      "mem-ax4u32008g16a-sbkd35": {
+        "price": 8530,
+        "currency": "RUB",
+        "date": "2026-11-27",
+        "store": "Регард",
+        "kind": "store",
+        "availability": "in-stock",
+        "url": "https://www.regard.ru/product/9683/operativnaia-pamiat-8gb-ddr4-3200mhz-adata-xpg-gammix-d35-ax4u32008g16a-sbkd35",
+        "verification": "reviewed-source"
+      },
+      "mem-ax5u5600c4616g-dtlabwh": {
+        "price": 58990,
+        "currency": "RUB",
+        "date": "2026-11-27",
+        "store": "Регард",
+        "kind": "store",
+        "availability": "in-stock",
+        "url": "https://www.regard.ru/product/79259/operativnaia-pamiat-32gb-ddr5-5600mhz-adata-xpg-lancer-blade-white-ax5u5600c4616g-dtlabwh-2x16gb-kit",
+        "verification": "reviewed-source"
+      },
+      "mem-ax5u5600c468g-dtlabbk": {
+        "price": 30990,
+        "currency": "RUB",
+        "date": "2026-11-27",
+        "store": "Регард",
+        "kind": "store",
+        "availability": "in-stock",
+        "url": "https://www.regard.ru/product/756514/operativnaia-pamiat-16gb-ddr5-5600mhz-adata-xpg-lancer-blade-ax5u5600c468g-dtlabbk-2x8gb-kit/description",
+        "verification": "reviewed-source"
+      },
+      "mem-ax5u6000c3016g-dclabk": {
+        "price": 65306,
+        "currency": "RUB",
+        "date": "2026-11-27",
+        "store": "ANDPRO",
+        "kind": "store",
+        "availability": "in-stock",
+        "url": "https://andpro.ru/catalog/computer_hardware/memory_ram/komplekt_pamyati_adata_xpg_lancer_black_32gb_dimm_ddr5_6000mhz_2kh16gb_ax5u6000c3016g_dclabk/",
+        "verification": "reviewed-source"
+      },
+      "mem-ax5u6000c3016g-dtlabbk": {
+        "price": 74612,
+        "currency": "RUB",
+        "date": "2026-11-27",
+        "store": "Softline",
+        "kind": "store",
+        "availability": "in-stock",
+        "url": "https://store.softline.ru/a-data/ax5u6000c3016g-dtlabbk-467819/",
+        "verification": "reviewed-source"
+      },
+      "mem-ax5u6000c3016g-dtlabrbk": {
+        "price": 11905,
+        "currency": "RUB",
+        "date": "2026-11-27",
+        "store": "goldbyte.ru",
+        "kind": "store",
+        "availability": "in-stock",
+        "url": "https://goldbyte.ru/operativnaa-pamat-ddr5/19736-operativnaa-pamat-ddr5-32gb-216gb-adata-ax5u6000c3016g-dtlabrbk.html",
+        "verification": "reviewed-source"
+      },
+      "mem-ax5u6000c3616g-dtlabrbk": {
+        "price": 73671,
+        "currency": "RUB",
+        "date": "2026-11-27",
+        "store": "16bit-tech.ru",
+        "kind": "store",
+        "availability": "in-stock",
+        "url": "https://16bit-tech.ru/hardware/ram/32-gb-6000-mhz-adata-xpg-lancer-blade-rgb-black/",
+        "verification": "reviewed-source"
+      },
+      "mem-ax5u6400c3216g-dclarwh": {
+        "price": 80401,
+        "currency": "RUB",
+        "date": "2026-11-27",
+        "store": "Apltech",
+        "kind": "store",
+        "availability": "unknown",
+        "url": "https://www.apltech.ru/tovar/497221/adata-ax5u6400c3216g-dclarwh-ax5u6400c3216g-dclarwh",
+        "note": "Предзаказ, срок поставки уточняется в магазине.",
+        "verification": "reviewed-source"
+      },
+      "mem-ax5u6400c3216g-dtlabbk": {
+        "price": 11771,
+        "currency": "RUB",
+        "date": "2026-11-27",
+        "store": "goldbyte.ru",
+        "kind": "store",
+        "availability": "in-stock",
+        "url": "https://goldbyte.ru/operativnaa-pamat-ddr5/18936-operativnaa-pamat-ddr5-32gb-216gb-adata-ax5u6400c3216g-dtlabbk.html",
+        "verification": "reviewed-source"
+      },
+      "mem-ax5u6400c3216g-dtlabrwh": {
+        "price": 65307,
+        "currency": "RUB",
+        "date": "2026-11-27",
+        "store": "wite.ru",
+        "kind": "store",
+        "availability": "unknown",
+        "url": "https://wite.ru/index.php/product/adata-xpg-lancer-blade-rgb-32gb-2x16gb-ddr5-6400-white-ax5u6400c3216g-dtlabrwh/",
+        "verification": "reviewed-source"
+      },
+      "mem-dgmad42666004s": {
+        "price": 4590,
+        "currency": "RUB",
+        "date": "2026-11-27",
+        "store": "comp-ru.ru",
+        "kind": "store",
+        "availability": "in-stock",
+        "url": "https://comp-ru.ru/product/848474-dgmad42666004s-digma-pamyat-ddr4-4gb-2666mhz-digma-dgmad42666004s-rtl-pc4-21300-cl19-dimm-udimm-288-pin-1-2v-single-rank",
+        "verification": "reviewed-source"
+      },
+      "mem-dgmad43200016d": {
+        "price": 11975,
+        "currency": "RUB",
+        "date": "2026-11-27",
+        "store": "ANDPRO",
+        "kind": "store",
+        "availability": "in-stock",
+        "url": "https://andpro.ru/catalog/computer_hardware/memory_ram/modul_pamyati_digma_16gb_dimm_ddr4_3200mhz_dgmad43200016d/",
+        "verification": "reviewed-source"
+      },
+      "mem-kf556c36bbek2-16": {
+        "price": 37573,
+        "currency": "RUB",
+        "date": "2026-11-27",
+        "store": "ANDPRO",
+        "kind": "store",
+        "availability": "in-stock",
+        "url": "https://andpro.ru/catalog/computer_hardware/memory_ram/komplekt_pamyati_kingston_fury_beast_black_16gb_dimm_ddr5_5600mhz_2kh8gb_kf556c36bbek2_16/",
+        "verification": "reviewed-source"
+      },
+      "mem-kf560c30bbe-32": {
+        "price": 77142,
+        "currency": "RUB",
+        "date": "2026-11-27",
+        "store": "ANDPRO",
+        "kind": "store",
+        "availability": "out-of-stock",
+        "url": "https://andpro.ru/catalog/computer_hardware/memory_ram/modul_pamyati_kingston_fury_beast_black_expo_32_gb_dimm_ddr5_6000_mgts_kf560c30bbe_32/",
+        "verification": "reviewed-source"
+      },
+      "mem-kf560c30bbek2-64": {
+        "price": 139291,
+        "currency": "RUB",
+        "date": "2026-11-27",
+        "store": "XCOM-SHOP",
+        "kind": "store",
+        "availability": "unknown",
+        "url": "https://www.xcom-shop.ru/kingston_fury_kf560c30bbek2-64_1126964.html",
+        "verification": "reviewed-source"
+      },
+      "mem-kf568c34bbeak2-32": {
+        "price": 54120,
+        "currency": "RUB",
+        "date": "2026-11-27",
+        "store": "king-russia.ru",
+        "kind": "store",
+        "availability": "unknown",
+        "url": "https://king-russia.ru/operativnaja-pamjat-32gb-ddr5-6800mhz-kingston-fury-beast-kf568c34bbeak2-32-2x16gb-kit",
+        "verification": "reviewed-source"
+      },
+      "mem-ks2666d4p12016g": {
+        "price": 14272,
+        "currency": "RUB",
+        "date": "2026-11-27",
+        "store": "Apltech",
+        "kind": "store",
+        "availability": "out-of-stock",
+        "url": "https://www.apltech.ru/tovar/376781/kingspec-ks2666d4p12016g-ks2666d4p12016g",
+        "verification": "reviewed-source"
+      },
+      "mem-ks3200d4p13516g": {
+        "price": 12151,
+        "currency": "RUB",
+        "date": "2026-11-27",
+        "store": "unicomps.ru",
+        "kind": "store",
+        "availability": "in-stock",
+        "url": "https://unicomps.ru/product/pamyat-kingspec-16-gb-ddr4-25600-mb-s-cl17-1-35-v-3200mhz-ks3200d4p13516g/",
+        "verification": "reviewed-source"
+      },
+      "mem-ntbsd4p26sp-08": {
+        "price": 6682,
+        "currency": "RUB",
+        "date": "2026-11-27",
+        "store": "ANDPRO",
+        "kind": "store",
+        "availability": "in-stock",
+        "url": "https://andpro.ru/catalog/computer_hardware/memory_ram/modul_pamyati_netac_basic_8gb_dimm_ddr4_2666mhz_ntbsd4p26sp_08/",
+        "verification": "reviewed-source"
+      },
+      "mem-ntbsd4p26sp-16": {
+        "price": 11990,
+        "currency": "RUB",
+        "date": "2026-11-27",
+        "store": "Регард",
+        "kind": "store",
+        "availability": "in-stock",
+        "url": "https://www.regard.ru/product/8077/operativnaia-pamiat-16gb-ddr4-2666mhz-netac-ntbsd4p26sp-16/description",
+        "verification": "reviewed-source"
+      },
+      "mem-ntbsd4p32sp-16": {
+        "price": 13033,
+        "currency": "RUB",
+        "date": "2026-11-27",
+        "store": "Apltech",
+        "kind": "store",
+        "availability": "in-stock",
+        "url": "https://www.apltech.ru/tovar/313534/netac-basic-ntbsd4p32sp-16",
+        "verification": "reviewed-source"
+      },
+      "mem-ntbsd5p48sp-16": {
+        "price": 23978,
+        "currency": "RUB",
+        "date": "2026-11-27",
+        "store": "XCOM-SHOP",
+        "kind": "store",
+        "availability": "unknown",
+        "url": "https://www.xcom-shop.ru/netac_ntbsd5p48sp-16_907456.html",
+        "verification": "reviewed-source"
+      },
+      "mem-psd416g26662": {
+        "price": 13089,
+        "currency": "RUB",
+        "date": "2026-11-27",
+        "store": "Apltech",
+        "kind": "store",
+        "availability": "in-stock",
+        "url": "https://www.apltech.ru/tovar/94101/patriot-psd416g26662-psd416g26662",
+        "verification": "reviewed-source"
+      },
+      "mem-psd432g32002": {
+        "price": 24840,
+        "currency": "RUB",
+        "date": "2026-11-27",
+        "store": "ANDPRO",
+        "kind": "store",
+        "availability": "out-of-stock",
+        "url": "https://andpro.ru/catalog/computer_hardware/memory_ram/modul_pamyati_patriot_signature_line_32gb_dimm_ddr4_3200mhz_psd432g32002/",
+        "verification": "reviewed-source"
+      },
+      "mem-psd44g266681": {
+        "price": 3781,
+        "currency": "RUB",
+        "date": "2026-11-27",
+        "store": "Apltech",
+        "kind": "store",
+        "availability": "in-stock",
+        "url": "https://www.apltech.ru/tovar/74652/patriot-signature-line-psd44g266681",
+        "verification": "reviewed-source"
+      },
+      "mem-psd48g266681": {
+        "price": 7151,
+        "currency": "RUB",
+        "date": "2026-11-27",
+        "store": "Apltech",
+        "kind": "store",
+        "availability": "in-stock",
+        "url": "https://www.apltech.ru/tovar/74661/patriot-psd48g266681-psd48g266681",
+        "verification": "reviewed-source"
+      },
+      "mem-psp416g3200h1": {
+        "price": 17528,
+        "currency": "RUB",
+        "date": "2026-11-27",
+        "store": "Apltech",
+        "kind": "store",
+        "availability": "in-stock",
+        "url": "https://www.apltech.ru/tovar/615775/patriot-signature-premium-psp416g3200h1",
+        "verification": "reviewed-source"
+      },
+      "mem-psp48g3200h1": {
+        "price": 7440,
+        "currency": "RUB",
+        "date": "2026-11-27",
+        "store": "Регард",
+        "kind": "store",
+        "availability": "out-of-stock",
+        "url": "https://www.regard.ru/product/745496/operativnaia-pamiat-8gb-ddr4-3200mhz-patriot-signature-premium-psp48g3200h1",
+        "verification": "reviewed-source"
+      },
+      "mem-psp516g560081h1": {
+        "price": 32300,
+        "currency": "RUB",
+        "date": "2026-11-27",
+        "store": "moscow.e2e4online.ru",
+        "kind": "store",
+        "availability": "unknown",
+        "url": "https://moscow.e2e4online.ru/catalog/item/pamyat-ddr5-dimm-16gb-5600mhz-patriot-memory-psp-1281541/",
+        "note": "Предзаказ, срок поставки уточняется в магазине.",
+        "verification": "reviewed-source"
+      },
+      "mem-pvs416g373c7k": {
+        "price": 57990,
+        "currency": "RUB",
+        "date": "2026-11-27",
+        "store": "audiohead.ru",
+        "kind": "store",
+        "availability": "unknown",
+        "url": "https://audiohead.ru/catalog/komplektuyushchie_pk/patriot_memory_viper_steel_ddr4_dimm_3733mhz_pc4_29800_cl17_16gb_kit_2x8gb_pvs416g373c7k/",
+        "verification": "reviewed-source"
+      },
+      "mem-pvv516g56c36": {
+        "price": 29189,
+        "currency": "RUB",
+        "date": "2026-11-27",
+        "store": "Яндекс Маркет",
+        "kind": "store",
+        "availability": "in-stock",
+        "url": "https://market.ya.ru/card/operativnaya-pamyat-patriot-memory-patriot-viper-venom-16gb-ddr5-56400-pvv516g56c36/5139898333",
+        "verification": "reviewed-source"
+      },
+      "nh-d15-g2": {
+        "price": 23900,
+        "currency": "RUB",
+        "date": "2026-11-27",
+        "store": "ServerFlow",
+        "kind": "store",
+        "availability": "in-stock",
+        "url": "https://serverflow.ru/catalog/komplektuyushchie/sistemy-okhlazhdeniya/noctua-nh-d15-g2/",
+        "verification": "reviewed-source"
+      },
+      "nh-u12a": {
+        "price": 15111,
+        "currency": "RUB",
+        "date": "2026-11-27",
+        "store": "Apltech",
+        "kind": "store",
+        "availability": "in-stock",
+        "url": "https://www.apltech.ru/tovar/724951/noctua-nh-u12a-nh-u12a",
+        "verification": "reviewed-source"
+      },
+      "pk700d": {
+        "price": 6730,
+        "currency": "RUB",
+        "date": "2026-11-27",
+        "store": "Apltech",
+        "kind": "store",
+        "availability": "in-stock",
+        "url": "https://www.apltech.ru/tovar/379262/deepcool-r-pk700d-fa0b-eu-r-pk700d-fa0b-eu",
+        "verification": "reviewed-source"
+      },
+      "pop-air-white": {
+        "price": 11050,
+        "currency": "RUB",
+        "date": "2026-11-27",
+        "store": "28bit",
+        "kind": "store",
+        "availability": "out-of-stock",
+        "url": "https://28bit.ru/kompyuternyy-korpus-fractal-design-pop-air-white-tg-fd-c-poa1a-03/",
+        "verification": "reviewed-source"
+      },
+      "rtx3050": {
+        "price": 44000,
+        "currency": "RUB",
+        "date": "2026-11-27",
+        "store": "tech1and.ru",
+        "kind": "store",
+        "availability": "in-stock",
+        "url": "https://tech1and.ru/p/videokarta-msi-geforce-rtx-3050-ventus-2x-8g-oc/",
+        "verification": "reviewed-source"
+      },
+      "rtx4070": {
+        "price": 65000,
+        "currency": "RUB",
+        "date": "2026-11-27",
+        "store": "CorePC",
+        "kind": "store",
+        "availability": "unknown",
+        "url": "https://corepc.ru/product/videokarta-msi-rtx-4070-ventus-3x-12g-oc-geforce-rtx-4070-12gb-ventus-3x-oc/",
+        "verification": "reviewed-source"
+      },
+      "rtx5070-ventus2x-oc-white": {
+        "price": 136189,
+        "currency": "RUB",
+        "date": "2026-11-27",
+        "store": "Apltech",
+        "kind": "store",
+        "availability": "out-of-stock",
+        "url": "https://www.apltech.ru/tovar/598944/msi-rtx-5070-12g-ventus-2x-oc-white-rtx-5070-12g-ventus-2x-oc-white",
+        "verification": "reviewed-source"
+      },
+      "ssd-agammixs60-512g-cs": {
+        "price": 11068,
+        "currency": "RUB",
+        "date": "2026-11-27",
+        "store": "ANDPRO",
+        "kind": "store",
+        "availability": "in-stock",
+        "url": "https://andpro.ru/catalog/computer_hardware/ssd/disk_ssd_adata_xpg_gammix_s60_m_2_2280_512_gb_pcie_4_0_nvme_agammixs60_512g_cs/",
+        "verification": "reviewed-source"
+      },
+      "ssd-aleg-710-256gcs": {
+        "price": 7793,
+        "currency": "RUB",
+        "date": "2026-11-27",
+        "store": "ANDPRO",
+        "kind": "store",
+        "availability": "in-stock",
+        "url": "https://andpro.ru/catalog/computer_hardware/ssd/disk_ssd_adata_legend_710_m_2_2280_256gb_pcie_nvme_3_0_x4_aleg_710_256gcs/",
+        "verification": "reviewed-source"
+      },
+      "ssd-aleg-710-2tcs": {
+        "price": 32101,
+        "currency": "RUB",
+        "date": "2026-11-27",
+        "store": "Apltech",
+        "kind": "store",
+        "availability": "in-stock",
+        "url": "https://www.apltech.ru/tovar/453693/a-data-legend-710-aleg-710-2tcs-aleg-710-2tcs",
+        "verification": "reviewed-source"
+      },
+      "ssd-aleg-960m-1tcs": {
+        "price": 19582,
+        "currency": "RUB",
+        "date": "2026-11-27",
+        "store": "XCOM-SHOP",
+        "kind": "store",
+        "availability": "unknown",
+        "url": "https://www.xcom-shop.ru/adata_aleg-960m-1tcs_1035759.html",
+        "verification": "reviewed-source"
+      },
+      "ssd-ap256gas2280p4x-1": {
+        "price": 5044,
+        "currency": "RUB",
+        "date": "2026-11-27",
+        "store": "holding-trade.ru",
+        "kind": "store",
+        "availability": "in-stock",
+        "url": "https://www.holding-trade.ru/product/apacer-ssd-m-2-256gb-as2280-ap256gas2280p4x-1-nnlb11087186/",
+        "verification": "reviewed-source"
+      },
+      "ssd-ap512gas2280p4x-1": {
+        "price": 9255,
+        "currency": "RUB",
+        "date": "2026-11-27",
+        "store": "Apltech",
+        "kind": "store",
+        "availability": "in-stock",
+        "url": "https://www.apltech.ru/tovar/435281/apacer-ast280-ap512gas2280p4x-1",
+        "verification": "reviewed-source"
+      },
+      "ssd-ct500t500ssd8": {
+        "price": 17840,
+        "currency": "RUB",
+        "date": "2026-11-27",
+        "store": "Регард",
+        "kind": "store",
+        "availability": "out-of-stock",
+        "url": "https://www.regard.ru/product/691711/nakopitel-ssd-500gb-crucial-t500-ct500t500ssd8",
+        "verification": "reviewed-source"
+      },
+      "ssd-mz-v9s1t0bw": {
+        "price": 25044,
+        "currency": "RUB",
+        "date": "2026-11-27",
+        "store": "ANDPRO",
+        "kind": "store",
+        "availability": "in-stock",
+        "url": "https://andpro.ru/catalog/computer_hardware/ssd/disk_ssd_samsung_990_plus_m_2_2280_1_tb_pcie_4_0_nvme_x4_mz_v9s1t0bw/",
+        "verification": "reviewed-source"
+      },
+      "ssd-nt01nv2000-1t0-e4x": {
+        "price": 14520,
+        "currency": "RUB",
+        "date": "2026-11-27",
+        "store": "relise.ru",
+        "kind": "store",
+        "availability": "unknown",
+        "url": "https://relise.ru/komplektyushcie-dlya-pk/ssd-nakopiteli/ssd-nakopitel-netac-nt01nv2000-1t0-e4x-38400-02",
+        "verification": "reviewed-source"
+      },
+      "ssd-nt01nv2000-256-e4x": {
+        "price": 5383,
+        "currency": "RUB",
+        "date": "2026-11-27",
+        "store": "ANDPRO",
+        "kind": "store",
+        "availability": "in-stock",
+        "url": "https://andpro.ru/catalog/computer_hardware/ssd/disk_ssd_netac_nv2000_m_2_2280_256gb_pcie_nvme_3_0_x4_nt01nv2000_256_e4x/",
+        "verification": "reviewed-source"
+      },
+      "ssd-nt01nv3000-1t0-e4x": {
+        "price": 15513,
+        "currency": "RUB",
+        "date": "2026-11-27",
+        "store": "ANDPRO",
+        "kind": "store",
+        "availability": "in-stock",
+        "url": "https://andpro.ru/catalog/computer_hardware/ssd/disk_ssd_netac_nv3000_m_2_2280_1tb_pcie_nvme_3_0_x4_nt01nv3000_1t0_e4x/",
+        "verification": "reviewed-source"
+      },
+      "ssd-nt01nv3000-250-e4x": {
+        "price": 5690,
+        "currency": "RUB",
+        "date": "2026-11-27",
+        "store": "ANDPRO",
+        "kind": "store",
+        "availability": "in-stock",
+        "url": "https://andpro.ru/catalog/computer_hardware/ssd/disk_ssd_netac_nv3000_m_2_2280_250gb_pcie_nvme_3_0_x4_nt01nv3000_250_e4x/",
+        "verification": "reviewed-source"
+      },
+      "ssd-nt01nv3000-500-e4x": {
+        "price": 8862,
+        "currency": "RUB",
+        "date": "2026-11-27",
+        "store": "XCOM-SHOP",
+        "kind": "store",
+        "availability": "unknown",
+        "url": "https://www.xcom-shop.ru/netac_nt01nv3000-500-e4x_927395.html",
+        "verification": "reviewed-source"
+      },
+      "ssd-nt01nv7000q-1t0-e4x": {
+        "price": 18094,
+        "currency": "RUB",
+        "date": "2026-11-27",
+        "store": "ANDPRO",
+        "kind": "store",
+        "availability": "in-stock",
+        "url": "https://andpro.ru/catalog/computer_hardware/ssd/disk_ssd_netac_nv7000q_m_2_2280_1_tb_pcie_4_0_x4_nt01nv7000q_1t0_e4x/",
+        "verification": "reviewed-source"
+      },
+      "ssd-nx-1tb": {
+        "price": 14458,
+        "currency": "RUB",
+        "date": "2026-11-27",
+        "store": "ANDPRO",
+        "kind": "store",
+        "availability": "in-stock",
+        "url": "https://andpro.ru/catalog/computer_hardware/ssd/disk_ssd_kingspec_nx_1tb_2280_m_2_2280_1_tb_pcie_3_0_nvme_x4_nx_1tb_2280/",
+        "verification": "reviewed-source"
+      },
+      "ssd-p320p1tbm28": {
+        "price": 15876,
+        "currency": "RUB",
+        "date": "2026-11-27",
+        "store": "ANDPRO",
+        "kind": "store",
+        "availability": "in-stock",
+        "url": "https://andpro.ru/catalog/computer_hardware/ssd/disk_ssd_patriot_p320_m_2_2280_1_tb_pcie_3_0_nvme_x4_p320p1tbm28/",
+        "verification": "reviewed-source"
+      },
+      "ssd-p320p512gm28": {
+        "price": 12825,
+        "currency": "RUB",
+        "date": "2026-11-27",
+        "store": "ofsi.ru",
+        "kind": "store",
+        "availability": "in-stock",
+        "url": "https://www.ofsi.ru/product/ssd_nakopitel_patriot_memory_p320p512gm28_512_gb.html",
+        "verification": "reviewed-source"
+      },
+      "ssd-p400lp1kgm28h": {
+        "price": 15522,
+        "currency": "RUB",
+        "date": "2026-11-27",
+        "store": "XCOM-SHOP",
+        "kind": "store",
+        "availability": "unknown",
+        "url": "https://www.xcom-shop.ru/patriot_memory_p400_lite_1249803.html",
+        "verification": "reviewed-source"
+      },
+      "ssd-p400lp2kgm28h": {
+        "price": 27160,
+        "currency": "RUB",
+        "date": "2026-11-27",
+        "store": "relise.ru",
+        "kind": "store",
+        "availability": "unknown",
+        "url": "https://relise.ru/komplektyushcie-dlya-pk/ssd-nakopiteli/ssd-nakopitel-patriot-p400lp2kgm28h-38451-02",
+        "verification": "reviewed-source"
+      },
+      "ssd-p400vp1tbm28h": {
+        "price": 19990,
+        "currency": "RUB",
+        "date": "2026-11-27",
+        "store": "Регард",
+        "kind": "store",
+        "availability": "in-stock",
+        "url": "https://www.regard.ru/product/735736/nakopitel-ssd-1tb-patriot-p400-v4-p400vp1tbm28h",
+        "verification": "reviewed-source"
+      },
+      "ssd-p400vp500gm28h": {
+        "price": 11126,
+        "currency": "RUB",
+        "date": "2026-11-27",
+        "store": "Softline",
+        "kind": "store",
+        "availability": "in-stock",
+        "url": "https://store.softline.ru/patriotmemory/p400vp500gm28h-490963/",
+        "verification": "reviewed-source"
+      },
+      "ssd-r3mp30128g8": {
+        "price": 3009,
+        "currency": "RUB",
+        "date": "2026-11-27",
+        "store": "remo-shop.ru",
+        "kind": "store",
+        "availability": "in-stock",
+        "url": "https://remo-shop.ru/products/nakopitel-ssd-amd-pcie-3-0-x4-128gb-r3mp30128g8-radeon-m-2-2280-2068222/",
+        "verification": "reviewed-source"
+      },
+      "ssd-sleg-900-512gcs": {
+        "price": 11222,
+        "currency": "RUB",
+        "date": "2026-11-27",
+        "store": "Softline",
+        "kind": "store",
+        "availability": "in-stock",
+        "url": "https://store.softline.ru/a-data/sleg-900-512gcs-430004/",
+        "verification": "reviewed-source"
+      },
+      "ssd-sleg-900p-1tcs": {
+        "price": 19040,
+        "currency": "RUB",
+        "date": "2026-11-27",
+        "store": "Apltech",
+        "kind": "store",
+        "availability": "in-stock",
+        "url": "https://www.apltech.ru/tovar/604558/adata-legend-900-pro-sleg-900p-1tcs",
+        "verification": "reviewed-source"
+      },
+      "ssd-sp512gbp34a60m28": {
+        "price": 9061,
+        "currency": "RUB",
+        "date": "2026-11-27",
+        "store": "ANDPRO",
+        "kind": "store",
+        "availability": "out-of-stock",
+        "url": "https://andpro.ru/catalog/computer_hardware/ssd/disk_ssd_silicon_power_p34a60_m_2_2280_512gb_pcie_nvme_3_0_x4_sp512gbp34a60m28/",
+        "verification": "reviewed-source"
+      },
+      "ssd-vp4300l1tbm28h": {
+        "price": 18709,
+        "currency": "RUB",
+        "date": "2026-11-27",
+        "store": "holding-trade.ru",
+        "kind": "store",
+        "availability": "in-stock",
+        "url": "https://www.holding-trade.ru/product/tverdotelnyy-nakopitel-patriot-viper-vp4300-lite-1tb-m-2-2280-nvme-pcie-4-0-x4-r7400-w6400-tbw-800tb-3d-nand-ntrn56952909/",
+        "verification": "reviewed-source"
+      },
+      "view-270-green": {
+        "price": 10756,
+        "currency": "RUB",
+        "date": "2026-11-27",
+        "store": "Apltech",
+        "kind": "store",
+        "availability": "in-stock",
+        "url": "https://www.apltech.ru/tovar/718499/thermaltake-view-270-plus-tg-argb-matcha-green-ca-1y7-00mewn-01",
+        "verification": "reviewed-source"
+      },
+      "view-270-pink": {
+        "price": 10671,
+        "currency": "RUB",
+        "date": "2026-11-27",
+        "store": "Apltech",
+        "kind": "store",
+        "availability": "out-of-stock",
+        "url": "https://www.apltech.ru/tovar/718501/thermaltake-view-270-plus-tg-argb-bubble-pink-ca-1y7-00mawn-00",
+        "verification": "reviewed-source"
+      },
+      "viper-steel-16-3200": {
+        "price": 15120,
+        "currency": "RUB",
+        "date": "2026-11-27",
+        "store": "Регард",
+        "kind": "store",
+        "availability": "in-stock",
+        "url": "https://www.regard.ru/product/313194/operativnaia-pamiat-16gb-ddr4-3200mhz-patriot-viper-steel-pvs416g320c6k-2x8gb-kit",
+        "verification": "reviewed-source"
       }
     },
     "by": {
@@ -8578,6 +9629,624 @@
             "requestAttempts": 1
           }
         ]
+      },
+      "a1250gl": {
+        "attemptedAt": "2026-11-27T15:48:14.187Z",
+        "status": "updated",
+        "reason": null,
+        "url": "https://mixpcshop.ru/catalog/bloki-pitaniya/20106/"
+      },
+      "a650gl": {
+        "attemptedAt": "2026-11-27T15:48:14.187Z",
+        "status": "updated",
+        "reason": null,
+        "url": "https://www.apltech.ru/tovar/599598/msi-mag-a650gl-mag-a650gl"
+      },
+      "a750g": {
+        "attemptedAt": "2026-11-27T15:48:14.187Z",
+        "status": "updated",
+        "reason": null,
+        "url": "https://torg-pc.ru/catalog/600-vatt-vklyuchitelno/blok-pitaniya-msi-mpg-a750g-pcie5-306-7zp7a11-ce0/"
+      },
+      "a850g": {
+        "attemptedAt": "2026-11-27T15:48:14.187Z",
+        "status": "updated",
+        "reason": null,
+        "url": "https://network-it.ru/products/msi-mpg-a850g-pcie5"
+      },
+      "ag500": {
+        "attemptedAt": "2026-11-27T15:48:14.187Z",
+        "status": "updated",
+        "reason": null,
+        "url": "https://torg-pc.ru/catalog/sistema-vozdushnogo-okhlazhdeniya/kuler-dlya-protsessora-deepcool-ag500-pwm-r-ag500-bknnmn-g/"
+      },
+      "aio-lt240-bk-argb": {
+        "attemptedAt": "2026-11-27T15:48:14.187Z",
+        "status": "updated",
+        "reason": null,
+        "url": "https://77up.ru/sistema-vodyanogo-okhlazhdeniya-deepcool-lt240-argb-soc-am5-am4-1200-1700-1851-chernyy-4-pin-38-71db-al-1504gr-ret-r-lt240-bkamnc-g-1-r-lt240-bkamnc-g-1"
+      },
+      "aio-lt240-wh-argb": {
+        "attemptedAt": "2026-11-27T15:48:14.187Z",
+        "status": "updated",
+        "reason": null,
+        "url": "https://77up.ru/sistema-vodyanogo-okhlazhdeniya-deepcool-lt240-argb-soc-am5-am4-1200-1700-1851-belyy-4-pin-38-71db-al-1504gr-ret-r-lt240-whamnc-g-1-r-lt240-whamnc-g-1"
+      },
+      "aio-lt520-wh": {
+        "attemptedAt": "2026-11-27T15:48:14.187Z",
+        "status": "updated",
+        "reason": null,
+        "url": "https://corepc.ru/product/sistema-zhidkostnogo-okhlazhdeniya-dlya-protsessora-deepcool-lt520-wh-argb-pwm/"
+      },
+      "akko-3068b-plus": {
+        "attemptedAt": "2026-11-27T15:48:14.187Z",
+        "status": "updated",
+        "reason": null,
+        "url": "https://geekboards.ru/product/akko-blackgold-3068b-plus?variant_id=553585539"
+      },
+      "akko-5075b-plus": {
+        "attemptedAt": "2026-11-27T15:48:14.187Z",
+        "status": "updated",
+        "reason": null,
+        "url": "https://gigaspot.ru/periphery/keyboards/151052"
+      },
+      "atlantis-og-v2-blue": {
+        "attemptedAt": "2026-11-27T15:48:14.187Z",
+        "status": "updated",
+        "reason": null,
+        "url": "https://alomart.ru/product/533469?c=lamzu-lamzu-atlantis-og-v2-pro-gaming-mouse-elegant-blue"
+      },
+      "atlantis-og-v2-green": {
+        "attemptedAt": "2026-11-27T15:48:14.187Z",
+        "status": "updated",
+        "reason": null,
+        "url": "https://www.apltech.ru/tovar/717656/lamzu-atlantis-og-v2-pro-728683116770"
+      },
+      "atlantis-og-v2-miami": {
+        "attemptedAt": "2026-11-27T15:48:14.187Z",
+        "status": "updated",
+        "reason": null,
+        "url": "https://alomart.ru/product/533469?c=lamzu-lamzu-atlantis-og-v2-pro-gaming-mouse-miami-blue"
+      },
+      "ch560-white": {
+        "attemptedAt": "2026-11-27T15:48:14.187Z",
+        "status": "updated",
+        "reason": null,
+        "url": "https://www.apltech.ru/tovar/520787/deepcool-ch560-wh-r-ch560-whape4-g-1"
+      },
+      "focus-g-blue": {
+        "attemptedAt": "2026-11-27T15:48:14.187Z",
+        "status": "updated",
+        "reason": null,
+        "url": "https://pc-arena.ru/catalog/korpus_fractal_design_focus_g_siniy_s_oknom_fd_ca_focus_bu_w.html"
+      },
+      "logitech-g213-rgb-gaming-keyboard": {
+        "attemptedAt": "2026-11-27T15:48:14.187Z",
+        "status": "updated",
+        "reason": null,
+        "url": "https://alomart.ru/product/533643?c=logitechg-920-008083"
+      },
+      "logitech-g309-lightspeed-gaming-mouse": {
+        "attemptedAt": "2026-11-27T15:48:14.187Z",
+        "status": "updated",
+        "reason": null,
+        "url": "https://alomart.ru/product/533619?c=logitechg-910-007205"
+      },
+      "logitech-g413-se-gaming-keyboard": {
+        "attemptedAt": "2026-11-27T15:48:14.187Z",
+        "status": "updated",
+        "reason": null,
+        "url": "https://alomart.ru/product/533639?c=logitechg-920-010433"
+      },
+      "logitech-g413-tkl-se-gaming-keyboard": {
+        "attemptedAt": "2026-11-27T15:48:14.187Z",
+        "status": "updated",
+        "reason": null,
+        "url": "https://alomart.ru/product/533642?c=logitechg-920-010442"
+      },
+      "logitech-g502-lightspeed-wireless-gaming-mouse": {
+        "attemptedAt": "2026-11-27T15:48:14.187Z",
+        "status": "updated",
+        "reason": null,
+        "url": "https://alomart.ru/product/533621?c=logitechg-910-005565"
+      },
+      "logitech-g502-x-wired-lightforce": {
+        "attemptedAt": "2026-11-27T15:48:14.187Z",
+        "status": "updated",
+        "reason": null,
+        "url": "https://alomart.ru/product/533618?c=logitechg-910-006144"
+      },
+      "logitech-g502-x-wireless-lightforce": {
+        "attemptedAt": "2026-11-27T15:48:14.187Z",
+        "status": "updated",
+        "reason": null,
+        "url": "https://alomart.ru/product/533617?c=logitechg-910-006187"
+      },
+      "logitech-g512-mechanical-gaming-keyboard": {
+        "attemptedAt": "2026-11-27T15:48:14.187Z",
+        "status": "updated",
+        "reason": null,
+        "url": "https://alomart.ru/product/533640?c=logitechg-920-008936"
+      },
+      "logitech-g515-tkl-wireless-keyboard": {
+        "attemptedAt": "2026-11-27T15:48:14.187Z",
+        "status": "updated",
+        "reason": null,
+        "url": "https://www.apltech.ru/tovar/586808/logitech-g515-lightspeed-tkl-black-920-012538"
+      },
+      "logitech-g903-hero-wireless-gaming-mouse": {
+        "attemptedAt": "2026-11-27T15:48:14.187Z",
+        "status": "updated",
+        "reason": null,
+        "url": "https://alomart.ru/product/533623?c=logitechg-910-005670"
+      },
+      "logitech-g915-x-mechanical-gaming-keyboard": {
+        "attemptedAt": "2026-11-27T15:48:14.187Z",
+        "status": "updated",
+        "reason": null,
+        "url": "https://alomart.ru/product/533635"
+      },
+      "logitech-g915-x-tkl-wireless": {
+        "attemptedAt": "2026-11-27T15:48:14.187Z",
+        "status": "updated",
+        "reason": null,
+        "url": "https://cdek.shopping/p/25642308/igrovaya-klaviatura-logitech-g915-x-lightspeed-tkl-linear-besprovodnaya-cyornyi"
+      },
+      "logitech-pro-2-lightspeed": {
+        "attemptedAt": "2026-11-27T15:48:14.187Z",
+        "status": "updated",
+        "reason": null,
+        "url": "https://alomart.ru/product/533620?c=logitechg-910-007246"
+      },
+      "logitech-pro-x-60-wireless-keyboard": {
+        "attemptedAt": "2026-11-27T15:48:14.187Z",
+        "status": "updated",
+        "reason": null,
+        "url": "https://itvse.ru/product/logitech-g-pro-x-60/"
+      },
+      "logitech-pro-x-superlight-2-dex": {
+        "attemptedAt": "2026-11-27T15:48:14.188Z",
+        "status": "updated",
+        "reason": null,
+        "url": "https://alomart.ru/product/533615?c=logitechg-910-007328"
+      },
+      "logitech-pro-x-superlight-2-se": {
+        "attemptedAt": "2026-11-27T15:48:14.188Z",
+        "status": "updated",
+        "reason": null,
+        "url": "https://alomart.ru/product/533614?c=logitechg-910-007646"
+      },
+      "logitech-pro-x-tkl-wireless-keyboard": {
+        "attemptedAt": "2026-11-27T15:48:14.188Z",
+        "status": "updated",
+        "reason": null,
+        "url": "https://alomart.ru/product/533638?c=logitechg-920-012127"
+      },
+      "logitech-pro-x2-superlight-wireless-mouse": {
+        "attemptedAt": "2026-11-27T15:48:14.188Z",
+        "status": "updated",
+        "reason": null,
+        "url": "https://alomart.ru/product/533616?c=logitechg-910-006636"
+      },
+      "mem-au08ggb32csybgh": {
+        "attemptedAt": "2026-11-27T15:48:14.188Z",
+        "status": "updated",
+        "reason": null,
+        "url": "https://www.holding-trade.ru/product/operativnaya-pamyat-apacer-ddr4-8gb-3200mhz-dimm-pc4-25600-cl22-1-2v-retail-1024-8-3-years-au08ggb32csybgh-el-08g21-gsh-ntrn56883715/"
+      },
+      "mem-ax4u32008g16a-dtwhd35": {
+        "attemptedAt": "2026-11-27T15:48:14.188Z",
+        "status": "updated",
+        "reason": null,
+        "url": "https://andpro.ru/catalog/computer_hardware/memory_ram/komplekt_pamyati_adata_xpg_gammix_d35_2kh8_gb_dimm_ddr4_3200_mgts_ax4u32008g16a_dtwhd35/"
+      },
+      "mem-ax4u32008g16a-dtwhd35g": {
+        "attemptedAt": "2026-11-27T15:48:14.188Z",
+        "status": "updated",
+        "reason": null,
+        "url": "https://andpro.ru/catalog/computer_hardware/memory_ram/komplekt_pamyati_adata_xpg_gammix_d35g_2kh8_gb_dimm_ddr4_3200_mgts_ax4u32008g16a_dtwhd35g/"
+      },
+      "mem-ax4u32008g16a-sbkd35": {
+        "attemptedAt": "2026-11-27T15:48:14.188Z",
+        "status": "updated",
+        "reason": null,
+        "url": "https://www.regard.ru/product/9683/operativnaia-pamiat-8gb-ddr4-3200mhz-adata-xpg-gammix-d35-ax4u32008g16a-sbkd35"
+      },
+      "mem-ax5u5600c4616g-dtlabwh": {
+        "attemptedAt": "2026-11-27T15:48:14.188Z",
+        "status": "updated",
+        "reason": null,
+        "url": "https://www.regard.ru/product/79259/operativnaia-pamiat-32gb-ddr5-5600mhz-adata-xpg-lancer-blade-white-ax5u5600c4616g-dtlabwh-2x16gb-kit"
+      },
+      "mem-ax5u5600c468g-dtlabbk": {
+        "attemptedAt": "2026-11-27T15:48:14.188Z",
+        "status": "updated",
+        "reason": null,
+        "url": "https://www.regard.ru/product/756514/operativnaia-pamiat-16gb-ddr5-5600mhz-adata-xpg-lancer-blade-ax5u5600c468g-dtlabbk-2x8gb-kit/description"
+      },
+      "mem-ax5u6000c3016g-dclabk": {
+        "attemptedAt": "2026-11-27T15:48:14.188Z",
+        "status": "updated",
+        "reason": null,
+        "url": "https://andpro.ru/catalog/computer_hardware/memory_ram/komplekt_pamyati_adata_xpg_lancer_black_32gb_dimm_ddr5_6000mhz_2kh16gb_ax5u6000c3016g_dclabk/"
+      },
+      "mem-ax5u6000c3016g-dtlabbk": {
+        "attemptedAt": "2026-11-27T15:48:14.188Z",
+        "status": "updated",
+        "reason": null,
+        "url": "https://store.softline.ru/a-data/ax5u6000c3016g-dtlabbk-467819/"
+      },
+      "mem-ax5u6000c3016g-dtlabrbk": {
+        "attemptedAt": "2026-11-27T15:48:14.188Z",
+        "status": "updated",
+        "reason": null,
+        "url": "https://goldbyte.ru/operativnaa-pamat-ddr5/19736-operativnaa-pamat-ddr5-32gb-216gb-adata-ax5u6000c3016g-dtlabrbk.html"
+      },
+      "mem-ax5u6000c3616g-dtlabrbk": {
+        "attemptedAt": "2026-11-27T15:48:14.188Z",
+        "status": "updated",
+        "reason": null,
+        "url": "https://16bit-tech.ru/hardware/ram/32-gb-6000-mhz-adata-xpg-lancer-blade-rgb-black/"
+      },
+      "mem-ax5u6400c3216g-dclarwh": {
+        "attemptedAt": "2026-11-27T15:48:14.188Z",
+        "status": "updated",
+        "reason": null,
+        "url": "https://www.apltech.ru/tovar/497221/adata-ax5u6400c3216g-dclarwh-ax5u6400c3216g-dclarwh"
+      },
+      "mem-ax5u6400c3216g-dtlabbk": {
+        "attemptedAt": "2026-11-27T15:48:14.188Z",
+        "status": "updated",
+        "reason": null,
+        "url": "https://goldbyte.ru/operativnaa-pamat-ddr5/18936-operativnaa-pamat-ddr5-32gb-216gb-adata-ax5u6400c3216g-dtlabbk.html"
+      },
+      "mem-ax5u6400c3216g-dtlabrwh": {
+        "attemptedAt": "2026-11-27T15:48:14.188Z",
+        "status": "updated",
+        "reason": null,
+        "url": "https://wite.ru/index.php/product/adata-xpg-lancer-blade-rgb-32gb-2x16gb-ddr5-6400-white-ax5u6400c3216g-dtlabrwh/"
+      },
+      "mem-dgmad42666004s": {
+        "attemptedAt": "2026-11-27T15:48:14.188Z",
+        "status": "updated",
+        "reason": null,
+        "url": "https://comp-ru.ru/product/848474-dgmad42666004s-digma-pamyat-ddr4-4gb-2666mhz-digma-dgmad42666004s-rtl-pc4-21300-cl19-dimm-udimm-288-pin-1-2v-single-rank"
+      },
+      "mem-dgmad43200016d": {
+        "attemptedAt": "2026-11-27T15:48:14.188Z",
+        "status": "updated",
+        "reason": null,
+        "url": "https://andpro.ru/catalog/computer_hardware/memory_ram/modul_pamyati_digma_16gb_dimm_ddr4_3200mhz_dgmad43200016d/"
+      },
+      "mem-kf556c36bbek2-16": {
+        "attemptedAt": "2026-11-27T15:48:14.188Z",
+        "status": "updated",
+        "reason": null,
+        "url": "https://andpro.ru/catalog/computer_hardware/memory_ram/komplekt_pamyati_kingston_fury_beast_black_16gb_dimm_ddr5_5600mhz_2kh8gb_kf556c36bbek2_16/"
+      },
+      "mem-kf560c30bbe-32": {
+        "attemptedAt": "2026-11-27T15:48:14.188Z",
+        "status": "updated",
+        "reason": null,
+        "url": "https://andpro.ru/catalog/computer_hardware/memory_ram/modul_pamyati_kingston_fury_beast_black_expo_32_gb_dimm_ddr5_6000_mgts_kf560c30bbe_32/"
+      },
+      "mem-kf560c30bbek2-64": {
+        "attemptedAt": "2026-11-27T15:48:14.188Z",
+        "status": "updated",
+        "reason": null,
+        "url": "https://www.xcom-shop.ru/kingston_fury_kf560c30bbek2-64_1126964.html"
+      },
+      "mem-kf568c34bbeak2-32": {
+        "attemptedAt": "2026-11-27T15:48:14.188Z",
+        "status": "updated",
+        "reason": null,
+        "url": "https://king-russia.ru/operativnaja-pamjat-32gb-ddr5-6800mhz-kingston-fury-beast-kf568c34bbeak2-32-2x16gb-kit"
+      },
+      "mem-ks2666d4p12016g": {
+        "attemptedAt": "2026-11-27T15:48:14.188Z",
+        "status": "updated",
+        "reason": null,
+        "url": "https://www.apltech.ru/tovar/376781/kingspec-ks2666d4p12016g-ks2666d4p12016g"
+      },
+      "mem-ks3200d4p13516g": {
+        "attemptedAt": "2026-11-27T15:48:14.188Z",
+        "status": "updated",
+        "reason": null,
+        "url": "https://unicomps.ru/product/pamyat-kingspec-16-gb-ddr4-25600-mb-s-cl17-1-35-v-3200mhz-ks3200d4p13516g/"
+      },
+      "mem-ntbsd4p26sp-08": {
+        "attemptedAt": "2026-11-27T15:48:14.188Z",
+        "status": "updated",
+        "reason": null,
+        "url": "https://andpro.ru/catalog/computer_hardware/memory_ram/modul_pamyati_netac_basic_8gb_dimm_ddr4_2666mhz_ntbsd4p26sp_08/"
+      },
+      "mem-ntbsd4p26sp-16": {
+        "attemptedAt": "2026-11-27T15:48:14.188Z",
+        "status": "updated",
+        "reason": null,
+        "url": "https://www.regard.ru/product/8077/operativnaia-pamiat-16gb-ddr4-2666mhz-netac-ntbsd4p26sp-16/description"
+      },
+      "mem-ntbsd4p32sp-16": {
+        "attemptedAt": "2026-11-27T15:48:14.188Z",
+        "status": "updated",
+        "reason": null,
+        "url": "https://www.apltech.ru/tovar/313534/netac-basic-ntbsd4p32sp-16"
+      },
+      "mem-ntbsd5p48sp-16": {
+        "attemptedAt": "2026-11-27T15:48:14.188Z",
+        "status": "updated",
+        "reason": null,
+        "url": "https://www.xcom-shop.ru/netac_ntbsd5p48sp-16_907456.html"
+      },
+      "mem-psd416g26662": {
+        "attemptedAt": "2026-11-27T15:48:14.188Z",
+        "status": "updated",
+        "reason": null,
+        "url": "https://www.apltech.ru/tovar/94101/patriot-psd416g26662-psd416g26662"
+      },
+      "mem-psd432g32002": {
+        "attemptedAt": "2026-11-27T15:48:14.188Z",
+        "status": "updated",
+        "reason": null,
+        "url": "https://andpro.ru/catalog/computer_hardware/memory_ram/modul_pamyati_patriot_signature_line_32gb_dimm_ddr4_3200mhz_psd432g32002/"
+      },
+      "mem-psd44g266681": {
+        "attemptedAt": "2026-11-27T15:48:14.189Z",
+        "status": "updated",
+        "reason": null,
+        "url": "https://www.apltech.ru/tovar/74652/patriot-signature-line-psd44g266681"
+      },
+      "mem-psd48g266681": {
+        "attemptedAt": "2026-11-27T15:48:14.189Z",
+        "status": "updated",
+        "reason": null,
+        "url": "https://www.apltech.ru/tovar/74661/patriot-psd48g266681-psd48g266681"
+      },
+      "mem-psp416g3200h1": {
+        "attemptedAt": "2026-11-27T15:48:14.189Z",
+        "status": "updated",
+        "reason": null,
+        "url": "https://www.apltech.ru/tovar/615775/patriot-signature-premium-psp416g3200h1"
+      },
+      "mem-psp48g3200h1": {
+        "attemptedAt": "2026-11-27T15:48:14.189Z",
+        "status": "updated",
+        "reason": null,
+        "url": "https://www.regard.ru/product/745496/operativnaia-pamiat-8gb-ddr4-3200mhz-patriot-signature-premium-psp48g3200h1"
+      },
+      "mem-psp516g560081h1": {
+        "attemptedAt": "2026-11-27T15:48:14.189Z",
+        "status": "updated",
+        "reason": null,
+        "url": "https://moscow.e2e4online.ru/catalog/item/pamyat-ddr5-dimm-16gb-5600mhz-patriot-memory-psp-1281541/"
+      },
+      "mem-pvs416g373c7k": {
+        "attemptedAt": "2026-11-27T15:48:14.189Z",
+        "status": "updated",
+        "reason": null,
+        "url": "https://audiohead.ru/catalog/komplektuyushchie_pk/patriot_memory_viper_steel_ddr4_dimm_3733mhz_pc4_29800_cl17_16gb_kit_2x8gb_pvs416g373c7k/"
+      },
+      "mem-pvv516g56c36": {
+        "attemptedAt": "2026-11-27T15:48:14.189Z",
+        "status": "updated",
+        "reason": null,
+        "url": "https://market.ya.ru/card/operativnaya-pamyat-patriot-memory-patriot-viper-venom-16gb-ddr5-56400-pvv516g56c36/5139898333"
+      },
+      "nh-d15-g2": {
+        "attemptedAt": "2026-11-27T15:48:14.189Z",
+        "status": "updated",
+        "reason": null,
+        "url": "https://serverflow.ru/catalog/komplektuyushchie/sistemy-okhlazhdeniya/noctua-nh-d15-g2/"
+      },
+      "nh-u12a": {
+        "attemptedAt": "2026-11-27T15:48:14.189Z",
+        "status": "updated",
+        "reason": null,
+        "url": "https://www.apltech.ru/tovar/724951/noctua-nh-u12a-nh-u12a"
+      },
+      "pk700d": {
+        "attemptedAt": "2026-11-27T15:48:14.189Z",
+        "status": "updated",
+        "reason": null,
+        "url": "https://www.apltech.ru/tovar/379262/deepcool-r-pk700d-fa0b-eu-r-pk700d-fa0b-eu"
+      },
+      "pop-air-white": {
+        "attemptedAt": "2026-11-27T15:48:14.189Z",
+        "status": "updated",
+        "reason": null,
+        "url": "https://28bit.ru/kompyuternyy-korpus-fractal-design-pop-air-white-tg-fd-c-poa1a-03/"
+      },
+      "rtx3050": {
+        "attemptedAt": "2026-11-27T15:48:14.189Z",
+        "status": "updated",
+        "reason": null,
+        "url": "https://tech1and.ru/p/videokarta-msi-geforce-rtx-3050-ventus-2x-8g-oc/"
+      },
+      "rtx4070": {
+        "attemptedAt": "2026-11-27T15:48:14.189Z",
+        "status": "updated",
+        "reason": null,
+        "url": "https://corepc.ru/product/videokarta-msi-rtx-4070-ventus-3x-12g-oc-geforce-rtx-4070-12gb-ventus-3x-oc/"
+      },
+      "rtx5070-ventus2x-oc-white": {
+        "attemptedAt": "2026-11-27T15:48:14.189Z",
+        "status": "updated",
+        "reason": null,
+        "url": "https://www.apltech.ru/tovar/598944/msi-rtx-5070-12g-ventus-2x-oc-white-rtx-5070-12g-ventus-2x-oc-white"
+      },
+      "ssd-agammixs60-512g-cs": {
+        "attemptedAt": "2026-11-27T15:48:14.189Z",
+        "status": "updated",
+        "reason": null,
+        "url": "https://andpro.ru/catalog/computer_hardware/ssd/disk_ssd_adata_xpg_gammix_s60_m_2_2280_512_gb_pcie_4_0_nvme_agammixs60_512g_cs/"
+      },
+      "ssd-aleg-710-256gcs": {
+        "attemptedAt": "2026-11-27T15:48:14.189Z",
+        "status": "updated",
+        "reason": null,
+        "url": "https://andpro.ru/catalog/computer_hardware/ssd/disk_ssd_adata_legend_710_m_2_2280_256gb_pcie_nvme_3_0_x4_aleg_710_256gcs/"
+      },
+      "ssd-aleg-710-2tcs": {
+        "attemptedAt": "2026-11-27T15:48:14.189Z",
+        "status": "updated",
+        "reason": null,
+        "url": "https://www.apltech.ru/tovar/453693/a-data-legend-710-aleg-710-2tcs-aleg-710-2tcs"
+      },
+      "ssd-aleg-960m-1tcs": {
+        "attemptedAt": "2026-11-27T15:48:14.189Z",
+        "status": "updated",
+        "reason": null,
+        "url": "https://www.xcom-shop.ru/adata_aleg-960m-1tcs_1035759.html"
+      },
+      "ssd-ap256gas2280p4x-1": {
+        "attemptedAt": "2026-11-27T15:48:14.189Z",
+        "status": "updated",
+        "reason": null,
+        "url": "https://www.holding-trade.ru/product/apacer-ssd-m-2-256gb-as2280-ap256gas2280p4x-1-nnlb11087186/"
+      },
+      "ssd-ap512gas2280p4x-1": {
+        "attemptedAt": "2026-11-27T15:48:14.189Z",
+        "status": "updated",
+        "reason": null,
+        "url": "https://www.apltech.ru/tovar/435281/apacer-ast280-ap512gas2280p4x-1"
+      },
+      "ssd-ct500t500ssd8": {
+        "attemptedAt": "2026-11-27T15:48:14.189Z",
+        "status": "updated",
+        "reason": null,
+        "url": "https://www.regard.ru/product/691711/nakopitel-ssd-500gb-crucial-t500-ct500t500ssd8"
+      },
+      "ssd-mz-v9s1t0bw": {
+        "attemptedAt": "2026-11-27T15:48:14.189Z",
+        "status": "updated",
+        "reason": null,
+        "url": "https://andpro.ru/catalog/computer_hardware/ssd/disk_ssd_samsung_990_plus_m_2_2280_1_tb_pcie_4_0_nvme_x4_mz_v9s1t0bw/"
+      },
+      "ssd-nt01nv2000-1t0-e4x": {
+        "attemptedAt": "2026-11-27T15:48:14.189Z",
+        "status": "updated",
+        "reason": null,
+        "url": "https://relise.ru/komplektyushcie-dlya-pk/ssd-nakopiteli/ssd-nakopitel-netac-nt01nv2000-1t0-e4x-38400-02"
+      },
+      "ssd-nt01nv2000-256-e4x": {
+        "attemptedAt": "2026-11-27T15:48:14.189Z",
+        "status": "updated",
+        "reason": null,
+        "url": "https://andpro.ru/catalog/computer_hardware/ssd/disk_ssd_netac_nv2000_m_2_2280_256gb_pcie_nvme_3_0_x4_nt01nv2000_256_e4x/"
+      },
+      "ssd-nt01nv3000-1t0-e4x": {
+        "attemptedAt": "2026-11-27T15:48:14.189Z",
+        "status": "updated",
+        "reason": null,
+        "url": "https://andpro.ru/catalog/computer_hardware/ssd/disk_ssd_netac_nv3000_m_2_2280_1tb_pcie_nvme_3_0_x4_nt01nv3000_1t0_e4x/"
+      },
+      "ssd-nt01nv3000-250-e4x": {
+        "attemptedAt": "2026-11-27T15:48:14.189Z",
+        "status": "updated",
+        "reason": null,
+        "url": "https://andpro.ru/catalog/computer_hardware/ssd/disk_ssd_netac_nv3000_m_2_2280_250gb_pcie_nvme_3_0_x4_nt01nv3000_250_e4x/"
+      },
+      "ssd-nt01nv3000-500-e4x": {
+        "attemptedAt": "2026-11-27T15:48:14.189Z",
+        "status": "updated",
+        "reason": null,
+        "url": "https://www.xcom-shop.ru/netac_nt01nv3000-500-e4x_927395.html"
+      },
+      "ssd-nt01nv7000q-1t0-e4x": {
+        "attemptedAt": "2026-11-27T15:48:14.189Z",
+        "status": "updated",
+        "reason": null,
+        "url": "https://andpro.ru/catalog/computer_hardware/ssd/disk_ssd_netac_nv7000q_m_2_2280_1_tb_pcie_4_0_x4_nt01nv7000q_1t0_e4x/"
+      },
+      "ssd-nx-1tb": {
+        "attemptedAt": "2026-11-27T15:48:14.189Z",
+        "status": "updated",
+        "reason": null,
+        "url": "https://andpro.ru/catalog/computer_hardware/ssd/disk_ssd_kingspec_nx_1tb_2280_m_2_2280_1_tb_pcie_3_0_nvme_x4_nx_1tb_2280/"
+      },
+      "ssd-p320p1tbm28": {
+        "attemptedAt": "2026-11-27T15:48:14.189Z",
+        "status": "updated",
+        "reason": null,
+        "url": "https://andpro.ru/catalog/computer_hardware/ssd/disk_ssd_patriot_p320_m_2_2280_1_tb_pcie_3_0_nvme_x4_p320p1tbm28/"
+      },
+      "ssd-p320p512gm28": {
+        "attemptedAt": "2026-11-27T15:48:14.189Z",
+        "status": "updated",
+        "reason": null,
+        "url": "https://www.ofsi.ru/product/ssd_nakopitel_patriot_memory_p320p512gm28_512_gb.html"
+      },
+      "ssd-p400lp1kgm28h": {
+        "attemptedAt": "2026-11-27T15:48:14.189Z",
+        "status": "updated",
+        "reason": null,
+        "url": "https://www.xcom-shop.ru/patriot_memory_p400_lite_1249803.html"
+      },
+      "ssd-p400lp2kgm28h": {
+        "attemptedAt": "2026-11-27T15:48:14.189Z",
+        "status": "updated",
+        "reason": null,
+        "url": "https://relise.ru/komplektyushcie-dlya-pk/ssd-nakopiteli/ssd-nakopitel-patriot-p400lp2kgm28h-38451-02"
+      },
+      "ssd-p400vp1tbm28h": {
+        "attemptedAt": "2026-11-27T15:48:14.189Z",
+        "status": "updated",
+        "reason": null,
+        "url": "https://www.regard.ru/product/735736/nakopitel-ssd-1tb-patriot-p400-v4-p400vp1tbm28h"
+      },
+      "ssd-p400vp500gm28h": {
+        "attemptedAt": "2026-11-27T15:48:14.189Z",
+        "status": "updated",
+        "reason": null,
+        "url": "https://store.softline.ru/patriotmemory/p400vp500gm28h-490963/"
+      },
+      "ssd-r3mp30128g8": {
+        "attemptedAt": "2026-11-27T15:48:14.189Z",
+        "status": "updated",
+        "reason": null,
+        "url": "https://remo-shop.ru/products/nakopitel-ssd-amd-pcie-3-0-x4-128gb-r3mp30128g8-radeon-m-2-2280-2068222/"
+      },
+      "ssd-sleg-900-512gcs": {
+        "attemptedAt": "2026-11-27T15:48:14.189Z",
+        "status": "updated",
+        "reason": null,
+        "url": "https://store.softline.ru/a-data/sleg-900-512gcs-430004/"
+      },
+      "ssd-sleg-900p-1tcs": {
+        "attemptedAt": "2026-11-27T15:48:14.189Z",
+        "status": "updated",
+        "reason": null,
+        "url": "https://www.apltech.ru/tovar/604558/adata-legend-900-pro-sleg-900p-1tcs"
+      },
+      "ssd-sp512gbp34a60m28": {
+        "attemptedAt": "2026-11-27T15:48:14.189Z",
+        "status": "updated",
+        "reason": null,
+        "url": "https://andpro.ru/catalog/computer_hardware/ssd/disk_ssd_silicon_power_p34a60_m_2_2280_512gb_pcie_nvme_3_0_x4_sp512gbp34a60m28/"
+      },
+      "ssd-vp4300l1tbm28h": {
+        "attemptedAt": "2026-11-27T15:48:14.189Z",
+        "status": "updated",
+        "reason": null,
+        "url": "https://www.holding-trade.ru/product/tverdotelnyy-nakopitel-patriot-viper-vp4300-lite-1tb-m-2-2280-nvme-pcie-4-0-x4-r7400-w6400-tbw-800tb-3d-nand-ntrn56952909/"
+      },
+      "view-270-green": {
+        "attemptedAt": "2026-11-27T15:48:14.189Z",
+        "status": "updated",
+        "reason": null,
+        "url": "https://www.apltech.ru/tovar/718499/thermaltake-view-270-plus-tg-argb-matcha-green-ca-1y7-00mewn-01"
+      },
+      "view-270-pink": {
+        "attemptedAt": "2026-11-27T15:48:14.189Z",
+        "status": "updated",
+        "reason": null,
+        "url": "https://www.apltech.ru/tovar/718501/thermaltake-view-270-plus-tg-argb-bubble-pink-ca-1y7-00mawn-00"
+      },
+      "viper-steel-16-3200": {
+        "attemptedAt": "2026-11-27T15:48:14.189Z",
+        "status": "updated",
+        "reason": null,
+        "url": "https://www.regard.ru/product/313194/operativnaia-pamiat-16gb-ddr4-3200mhz-patriot-viper-steel-pvs416g320c6k-2x8gb-kit"
       }
     },
     "by": {

@@ -21,7 +21,9 @@ test('Every case fan screw is supported by a rail attached to the chassis, in bo
     assert.ok(supports.length,`${p.id}/${slot.id}/${direction} screw ${x},${y} floats`);
     for(const r of supports){
      const outer=r.position[axis]+slot.normal[axis]*r.size[axis]/2;
-     const wall={front:frame.front,rear:frame.rear-.04,top:4.63,bottom:.36,left:frame.back,right:frame.side}[slot.wall];
+     const wall={front:frame.front,rear:frame.rear-.005,top:4.63,bottom:.36,left:slot.railSeat??frame.back,right:frame.side}[slot.wall];
+     if(slot.wall==='left')assert.ok(outer>=frame.back+.003,p.id+' side bracket protrudes through cover');
+     if(slot.wall==='rear')assert.ok(outer>frame.rear-.035,p.id+' rear bracket shows through rear plate');
      assert.ok((outer-wall)*slot.normal[axis]>=-1e-8,`${p.id}/${slot.id} rail detached from chassis`);
     }
    }

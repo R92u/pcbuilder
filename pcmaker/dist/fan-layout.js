@@ -8,19 +8,20 @@ export const CASE_FAN_DEPTH=.23;
 // Rails reach the structural panels; their inner faces touch the fan housing.
 // Deriving them from the slots keeps every case size and manual mount aligned.
 export function fanMountRails(frame,slots){
- const outer={front:frame.front+.10,rear:frame.rear-.045,top:4.64,bottom:.33,left:frame.back-.017,right:frame.side+.065};
+ const outer={front:frame.front+.10,rear:frame.rear-.022,top:4.64,bottom:.33,left:frame.back,right:frame.side+.032};
  const rails=new Map();
  for(const slot of slots){
   const axis=slot.normal.findIndex(Boolean),sign=slot.normal[axis];
   const inner=slot.position[axis]+sign*CASE_FAN_DEPTH/2;
-  const end=sign>0?Math.max(outer[slot.wall],inner+.04):Math.min(outer[slot.wall],inner-.04);
+  const end=slot.railSeat??outer[slot.wall];
   const cross=axis===0?1:0,along=axis===2?1:2;
+  const localBracket=slot.wall==='left'||slot.wall==='rear';
   for(const side of [-1,1]){
    const position=[...slot.position],size=[.08,.08,.08];
    position[axis]=(inner+end)/2;size[axis]=Math.abs(end-inner);
    position[cross]+=side*slot.size*.447;
-   position[along]=slot.wall==='left'?slot.position[along]:along===1?2.48:frame.centerZ;
-   size[along]=slot.wall==='left'?slot.size:along===1?4.24:frame.depth+.10;
+   position[along]=localBracket?slot.position[along]:along===1?2.48:frame.centerZ;
+   size[along]=localBracket?slot.size:along===1?4.24:frame.depth+.10;
    const key=[slot.wall,...position,...size].join(':');rails.set(key,{wall:slot.wall,position,size});
   }
  }
@@ -33,9 +34,9 @@ export function fanGeometryKey(build,layout){
 export function fanMounts(build){
  const p=resolve(build),f=caseLayout(p.case||{},p.gpu,p.cooler),slots=[];
  const a=aioPlacement(p,f);
- const add=(wall,position,size,i)=>{const slot={id:wall+'-'+(i+1),wall,position,size,normal:normals[wall],label:fanWalls[wall]+' · '+(i+1)};if(!radiatorConflict(slot,a))slots.push(slot);};
+ const add=(wall,position,size,i,railSeat)=>{const slot={id:wall+'-'+(i+1),wall,position,size,normal:normals[wall],label:fanWalls[wall]+' · '+(i+1)};if(railSeat!==undefined)slot.railSeat=railSeat;if(!radiatorConflict(slot,a))slots.push(slot);};
  if(!p.case?.concept){
-  for(let i=0;i<(p.case?.leftFanCount||0);i++)add('left',[TRAY_X+.145,2.10+i*1.22,f.front-.77],1.20,i);
+  for(let i=0;i<(p.case?.leftFanCount||0);i++)add('left',[TRAY_X+.145,2.10+i*1.22,f.front-.77],1.20,i,TRAY_X);
   f.fanYs.forEach((y,i)=>add('front',[0,y,f.fanZ],f.fanSize,i));add('rear',[.31,3.93,-1.99],1.03,0);return slots;
  }
  const size=f.fanSize,x=f.side-size/2-.07,ys=f.fanYs;

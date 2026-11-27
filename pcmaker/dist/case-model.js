@@ -21,8 +21,8 @@ export function makeChassis(p={id:'cc560',short:'CC560 V2',frontFanCount:3,usbA:
  const centerX=(side+back)/2,width=side-back,mounts=fanMounts({...this.currentBuild,case:p.id});
  const holes=(shape,wall,axes)=>{for(const m of mounts.filter(s=>s.wall===wall))circle(shape,m.position[axes[0]],m.position[axes[1]],m.size*.41);};
  if(p.concept){const bottom=new THREE.Shape();bottom.moveTo(back+.04,rear+.04);bottom.lineTo(side-.04,rear+.04);bottom.lineTo(side-.04,front-.04);bottom.lineTo(back+.04,front-.04);bottom.closePath();holes(bottom,'bottom',[0,2]);const plate=sheet(bottom,black);plate.rotation.x=Math.PI/2;plate.position.y=.36;g.add(plate);}else this.box(g,width,.10,depth+.12,centerX,.31,centerZ,black);
- for(const z of [rear,front])this.box(g,width,.10,.18,centerX,4.63,z,steel);
- for(const x of [back,side])this.box(g,.10,.10,depth,x,4.63,centerZ,steel);
+ for(const z of [rear,front])this.box(g,width+.10,.10,.18,centerX,4.63,z,steel);
+ for(const x of [back,side])this.box(g,.10,.10,depth-.18,x,4.63,centerZ,steel);
  const gridFront=front-.63,gridLength=gridFront-rear-.19;
  const roof=caseVent(g,width-.16,gridLength,p.id==='ch560-white'?'square':'round',steel,.092);
  roof.rotation.x=-Math.PI/2;roof.position.set(centerX,4.635,rear+.16+gridLength/2);
@@ -77,9 +77,9 @@ export function makeChassis(p={id:'cc560',short:'CC560 V2',frontFanCount:3,usbA:
   if(view){
    const frontEdge=viewFront+.001,sideLength=frontEdge-rear+.03;
    const midZ=(frontEdge+rear-.03)/2;
-   this.box(g,.035,.87,sideLength,sideX-.012,.795,midZ,new THREE.Color(steel).multiplyScalar(.44));
+   this.box(g,.035,.83,sideLength-.04,sideX-.012,.795,midZ,new THREE.Color(steel).multiplyScalar(.44));
    for(const y of [.445,1.145])this.box(g,.046,.17,sideLength,sideX,y,midZ,steel);
-   for(const z of [rear+.033,frontEdge-.06])this.box(g,.046,.54,.13,sideX,.795,z,steel);
+   for(const z of [rear+.035,frontEdge-.065])this.box(g,.046,.53,.13,sideX,.795,z,steel);
    const grille=caseVent(g,sideLength-.25,.54,'round',steel,.052);
    grille.rotation.y=Math.PI/2;grille.position.set(sideX+.024,.795,midZ);
    this.box(g,.06,.032,sideLength,sideX,1.242,midZ,black);
@@ -87,7 +87,7 @@ export function makeChassis(p={id:'cc560',short:'CC560 V2',frontFanCount:3,usbA:
    this.box(g,.012,.16,.73,sideX+.031,.70,labelZ,steel);
    this.text(g,'TT  Thermaltake',.65,.085,sideX+.041,.70,labelZ,[0,Math.PI/2,0],'#263032');
   }else if(p.id==='cc560'){
-   for(const z of [rear+.22,front-.22])this.box(g,.035,.76,.39,side-.07,.73,z,shroudColor);
+   for(const z of [rear+.22,front-.22])this.box(g,.035,.535,.39,side-.07,.7475,z,shroudColor);
    for(const y of [.42,1.075])this.box(g,.035,.12,depth-.40,side-.07,y,centerZ,shroudColor);
   }else if(p.id==='ch560-white'){
    const sideMesh=caseVent(g,depth-.16,1.08,'square',0xd3d8da,.065);
@@ -132,9 +132,9 @@ export function makeChassis(p={id:'cc560',short:'CC560 V2',frontFanCount:3,usbA:
  if(view){
   // A stamped perforated exhaust replaces the concentric wire grille.
   const exhaust=caseVent(g,1.08,1.08,'round',black,.079);
-  exhaust.position.set(.31,3.93,rear-.046);
+  exhaust.position.set(.31,3.93,rear-.012);
   const capDepth=viewFront-rear+.06;
-  this.box(g,.07,.15,capDepth,sideX,4.575,(viewFront+rear-.06)/2,steel);
+  this.box(g,.07,.15,capDepth-.23,sideX,4.575,(viewFront+rear-.06-.23)/2,steel);
  }
  const ioApron=new THREE.Shape();ioApron.moveTo(back+.05,front-.70);ioApron.lineTo(side-.05,front-.70);ioApron.lineTo(side-.05,front-.06);ioApron.lineTo(back+.05,front-.06);ioApron.closePath();
  const fasciaIO=p.id==='matrexx55-mesh';
@@ -193,7 +193,7 @@ export function makeChassis(p={id:'cc560',short:'CC560 V2',frontFanCount:3,usbA:
   const radius=slot.size*.41;
   if(slot.wall==='right'){guard.userData.animated=true;this.sideFanGuards.push(guard);}
   for(let i=-5;i<=5;i++){const y=i*radius/6,length=2*Math.sqrt(radius*radius-y*y);this.box(guard,length,.009,.009,0,y,0,steel);}
-  for(const x of [-radius*.55,0,radius*.55])this.box(guard,.009,Math.sqrt(radius*radius-x*x)*2,.009,x,0,0,steel);
+  for(const x of [-radius*.55,0,radius*.55])this.box(guard,.009,Math.sqrt(radius*radius-x*x)*2,.009,x,0,.009,steel);
   if(slot.wall==='bottom'){const shroudGuard=guard.clone();shroudGuard.position.y=1.17;g.add(shroudGuard);}
  }
  for(const y of [1.45,2.4,3.4,4.2])for(const z of [.96,-.84])this.box(g,.023,.04,.18,-1.065,y,z,steel);
