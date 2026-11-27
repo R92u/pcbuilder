@@ -1,4 +1,4 @@
-import {caseVent} from './case-fascia.js';
+import {caseVent,caseGlass} from './case-fascia.js';
 import {hardwareFinish} from './surfaces.js';
 import {aioPlacement} from './aio.js';
 import * as THREE from 'three';
@@ -11,8 +11,12 @@ function circle(shape,x,y,r){const hole=new THREE.Path();hole.absarc(x,y,r,0,Mat
 function sheet(shape,color){return new THREE.Mesh(new THREE.ExtrudeGeometry(shape,{depth:.035,bevelEnabled:false}),new THREE.MeshStandardMaterial({color,metalness:.5,roughness:.55}));}
 
 export function makeChassis(p={id:'cc560',short:'CC560 V2',frontFanCount:3,usbA:1,usb2:1}){
- const g=new THREE.Group(),frame=caseLayout(p,resolve(this.currentBuild||{}).gpu,resolve(this.currentBuild||{}).cooler),{front,rear,depth,centerZ,side,back}=frame;
- const white=p.color==='white',steel=p.paint||(white?0xc4c9cb:0x353e44),black=white?0xb8bec1:0x151b1e;
+ const g=new THREE.Group(),frame=caseLayout(p),{front,rear,depth,centerZ,side,back}=frame;
+ const white=p.color==='white',view=p.family==='view-270',focus=p.family==='focus-g';
+ const steel=p.paint||(white?0xd5dadd:0x353e44);
+ const black=p.id==='view-270-pink'?0x94cede:white?0xc5cdd1:0x151b1e;
+ const viewFront=front+.202,sideX=side+.035;
+ const innerSteel=view?black:steel;
  this.root.add(g);this.caseGroup=g;g.userData.id=p.id;g.userData.componentKey='case';
  const centerX=(side+back)/2,width=side-back,mounts=fanMounts({...this.currentBuild,case:p.id});
  const holes=(shape,wall,axes)=>{for(const m of mounts.filter(s=>s.wall===wall))circle(shape,m.position[axes[0]],m.position[axes[1]],m.size*.41);};
@@ -22,9 +26,24 @@ export function makeChassis(p={id:'cc560',short:'CC560 V2',frontFanCount:3,usbA:
  const gridFront=front-.63,gridLength=gridFront-rear-.19;
  const roof=caseVent(g,width-.16,gridLength,p.id==='ch560-white'?'square':'round',steel,.092);
  roof.rotation.x=-Math.PI/2;roof.position.set(centerX,4.635,rear+.16+gridLength/2);
- if(p.concept||p.leftFanCount){const panel=new THREE.Shape();panel.moveTo(rear,.38);panel.lineTo(front,.38);panel.lineTo(front,4.58);panel.lineTo(rear,4.58);panel.closePath();holes(panel,'left',[2,1]);this.rearPanel=sheet(panel,p.paint||black);this.rearPanel.rotation.y=-Math.PI/2;this.rearPanel.position.x=back+.018;g.add(this.rearPanel);}else this.rearPanel=this.box(g,.035,4.20,depth,back,2.48,centerZ,p.paint||black);this.rearPanel.userData.animated=true;
+ if(p.concept||p.leftFanCount){
+  const panel=new THREE.Shape();
+  panel.moveTo(rear,.38);panel.lineTo(front,.38);panel.lineTo(front,4.58);panel.lineTo(rear,4.58);panel.closePath();
+  holes(panel,'left',[2,1]);this.rearPanel=sheet(panel,p.paint||black);
+  this.rearPanel.rotation.y=-Math.PI/2;this.rearPanel.position.x=back+.018;g.add(this.rearPanel);
+  if(view){
+   const lining=new THREE.Mesh(new THREE.ShapeGeometry(panel),new THREE.MeshStandardMaterial({color:black,roughness:.77,side:THREE.DoubleSide}));
+   lining.position.z=-.001;this.rearPanel.add(lining);
+   for(const mount of mounts.filter(m=>m.wall==='left')){
+    const filter=caseVent(this.rearPanel,mount.size,mount.size,'round',black,.055);
+    filter.position.set(mount.position[2],mount.position[1],.017);
+   }
+  }
+ }else this.rearPanel=this.box(g,.035,4.20,depth,back,2.48,centerZ,p.paint||black);
+ this.rearPanel.userData.animated=true;
  // Continuous tray with real service apertures and rubber-edged cable slots.
- const trayShape=new THREE.Shape();trayShape.moveTo(rear+.10,p.concept?.42:1.30);trayShape.lineTo(front-.27,p.concept?.42:1.30);trayShape.lineTo(front-.27,4.55);trayShape.lineTo(rear+.10,4.55);trayShape.closePath();
+ const trayFront=front-(view?.14:.27);
+ const trayShape=new THREE.Shape();trayShape.moveTo(rear+.10,p.concept?.42:1.30);trayShape.lineTo(trayFront,p.concept?.42:1.30);trayShape.lineTo(trayFront,4.55);trayShape.lineTo(rear+.10,4.55);trayShape.closePath();
  const openings=[...TRAY_HOLES,{y:4.44,z:frame.ioZ,h:.18,w:.20}];
  if(p.concept||p.leftFanCount)holes(trayShape,'left',[2,1]);
  for(const hole of openings)rectangle(trayShape,hole.z,hole.y,hole.w,hole.h);
@@ -43,19 +62,31 @@ export function makeChassis(p={id:'cc560',short:'CC560 V2',frontFanCount:3,usbA:
   for(const offset of [-.56,.56])this.box(g,.08,.03,depth,radiator.position[0]+offset,4.635,centerZ,steel);
  }
  if(p.family!=='focus-g'){
-  const shroudFront=front-(radiator?.wall==='front'?.74:.35);
+  const shroudFront=view?viewFront-.025:front-(radiator?.wall==='front'?.74:.35);
   const shape=new THREE.Shape();shape.moveTo(-.91,rear+.04);shape.lineTo(side-.05,rear+.04);shape.lineTo(side-.05,shroudFront);shape.lineTo(-.91,shroudFront);shape.closePath();
   for(const [x,z,w,d] of [[.62,.55,.61,.70],[-.15,shroudFront-.20,.62,.30]]){
    const hole=new THREE.Path();hole.moveTo(x-w/2,z-d/2);hole.lineTo(x-w/2,z+d/2);hole.lineTo(x+w/2,z+d/2);hole.lineTo(x+w/2,z-d/2);hole.closePath();shape.holes.push(hole);
   }
   if(p.concept)holes(shape,'bottom',[0,2]);
-  const shroudColor=p.family==='view-270'?p.paint:white?0x626a6f:0x1d2529;
-  const tunnel=new THREE.Mesh(new THREE.ExtrudeGeometry(shape,{depth:.045,bevelEnabled:false}),hardwareFinish(new THREE.MeshStandardMaterial({color:white?0x475054:0x131b1e,metalness:.20,roughness:.91})));tunnel.rotation.x=Math.PI/2;tunnel.position.y=1.155;tunnel.castShadow=true;tunnel.receiveShadow=true;g.add(tunnel);
+  const shroudColor=view?steel:white?0xc5cdd1:0x1d2529;
+  const tunnel=new THREE.Mesh(new THREE.ExtrudeGeometry(shape,{depth:.045,bevelEnabled:false}),hardwareFinish(new THREE.MeshStandardMaterial({color:black,metalness:.20,roughness:.91})));tunnel.rotation.x=Math.PI/2;tunnel.position.y=1.155;tunnel.castShadow=true;tunnel.receiveShadow=true;g.add(tunnel);
   // Low-profile rubber edging borders the open cable pass-through.
   for(const x of [.30,.94])this.box(g,.025,.020,.72,x,1.166,.55,0x242c2e);
   for(const z of [.19,.91])this.box(g,.66,.020,.025,.62,1.166,z,0x242c2e);
   this.box(g,side+.86,.78,.045,(side-.96)/2,.73,shroudFront,shroudColor);
-  if(p.id==='cc560'){
+  if(view){
+   const frontEdge=viewFront+.001,sideLength=frontEdge-rear+.03;
+   const midZ=(frontEdge+rear-.03)/2;
+   this.box(g,.035,.87,sideLength,sideX-.012,.795,midZ,new THREE.Color(steel).multiplyScalar(.44));
+   for(const y of [.445,1.145])this.box(g,.046,.17,sideLength,sideX,y,midZ,steel);
+   for(const z of [rear+.033,frontEdge-.06])this.box(g,.046,.54,.13,sideX,.795,z,steel);
+   const grille=caseVent(g,sideLength-.25,.54,'round',steel,.052);
+   grille.rotation.y=Math.PI/2;grille.position.set(sideX+.024,.795,midZ);
+   this.box(g,.06,.032,sideLength,sideX,1.242,midZ,black);
+   const labelZ=front-.48;
+   this.box(g,.012,.16,.73,sideX+.031,.70,labelZ,steel);
+   this.text(g,'TT  Thermaltake',.65,.085,sideX+.041,.70,labelZ,[0,Math.PI/2,0],'#263032');
+  }else if(p.id==='cc560'){
    for(const z of [rear+.22,front-.22])this.box(g,.035,.76,.39,side-.07,.73,z,shroudColor);
    for(const y of [.42,1.075])this.box(g,.035,.12,depth-.40,side-.07,y,centerZ,shroudColor);
   }else if(p.id==='ch560-white'){
@@ -64,25 +95,30 @@ export function makeChassis(p={id:'cc560',short:'CC560 V2',frontFanCount:3,usbA:
    for(const y of [.40,1.46])this.box(g,.06,.07,depth,side+.004,y,centerZ,steel);
   }else this.box(g,.035,.76,depth-.20,side-.07,.73,centerZ,shroudColor);
  }
- for(const x of [back,side])for(const z of [rear,front]){this.box(g,.10,4.25,.10,x,2.48,z,steel);for(const y of [.48,1.28,4.48])this.screw(g,x+(x>0?.06:-.06),y,z,'x');}
+ for(const x of [back,side])for(const z of [rear,front]){
+  if(view){
+   if(x===side&&z===front)continue;
+   this.box(g,.065,4.24,.075,x,2.48,z,innerSteel);continue;
+  }
+  this.box(g,.10,4.25,.10,x,2.48,z,steel);for(const y of [.48,1.28,4.48])this.screw(g,x+(x>0?.06:-.06),y,z,'x');}
  for(const x of [back+.28,side-.28])for(const z of [rear+.30,front-.30]){this.box(g,.30,.19,.46,x,.16,z,black);this.box(g,.28,.04,.43,x,.065,z,0x101416);}
  // One stamped rear panel. Only the fan, I/O shield, PCI brackets and PSU
  // are open; fitted parts cover their respective openings without side gaps.
  const rearShape=new THREE.Shape();rearShape.moveTo(back+.04,.36);rearShape.lineTo(side-.04,.36);rearShape.lineTo(side-.04,4.58);rearShape.lineTo(back+.04,4.58);rearShape.closePath();
  for(const key of ['io','slots','psu']){const h=REAR_OPENINGS[key];rectangle(rearShape,h.x,h.y,h.w,h.h);}
  if(p.concept)holes(rearShape,'rear',[0,1]);else {const fh=REAR_OPENINGS.fan;circle(rearShape,fh.x,fh.y,fh.r);}
- const rearSheet=sheet(rearShape,steel);rearSheet.position.z=rear-.04;g.add(rearSheet);
+ const rearSheet=sheet(rearShape,innerSteel);rearSheet.position.z=rear-.04;g.add(rearSheet);
  this.slotCovers=[];
  for(let i=0;i<7;i++){
   const cover=new THREE.Group(),y=2.38-i*.18;cover.userData.slotCenter=y;cover.userData.animated=true;g.add(cover);this.slotCovers.push(cover);
-  this.box(cover,1.64,.18,.04,.07,y,rear-.045,white?0xabb3b7:0x41494b);
+  this.box(cover,1.64,.18,.04,.07,y,rear-.045,view?black:white?0xc8ced0:0x41494b);
   if(i<(p.expansionSlots||7)){
    for(let j=0;j<10;j++)this.box(cover,.045,.045,.009,-.46+j*.11,y,rear-.072,0x11181b);
    this.screw(cover,.84,y,rear-.085,'z',.022);
   }
  }
 
- const fascia=new THREE.Group();g.add(fascia);if(p.concept)this.makeConceptFront(fascia,p);else this.makeCaseFront(fascia,p);fascia.position.z=front-2.1;fascia.scale.x=(width-.10)/2.20;fascia.position.x=centerX;
+ const fascia=new THREE.Group();g.add(fascia);if(p.concept)this.makeConceptFront(fascia,p);else this.makeCaseFront(fascia,p);fascia.position.z=front-2.1;fascia.scale.x=(width+(view?.115:-.10))/2.20;fascia.position.x=centerX;
  if(white&&p.concept)fascia.traverse(o=>{if(o.isMesh&&o.material&&!o.material.map&&o.material.color.getHex()!==0x06090a)o.material.color.set(0xc0c6c9);});
  if(p.concept==='panorama'){
   const window=new THREE.Shape();window.moveTo(back+.08,.44);window.lineTo(side-.08,.44);window.lineTo(side-.08,4.54);window.lineTo(back+.08,4.54);window.closePath();holes(window,'front',[0,1]);
@@ -91,8 +127,15 @@ export function makeChassis(p={id:'cc560',short:'CC560 V2',frontFanCount:3,usbA:
  // Front intake faces the fascia (+Z); rear intake faces the interior (+Z).
  // Both exhaust through their motor struts toward -Z.
 
- if(!p.concept)for(const r of [.16,.24,.32,.40,.48]){const ring=new THREE.Mesh(new THREE.TorusGeometry(r,.010,6,40),new THREE.MeshStandardMaterial({color:steel,metalness:.5,roughness:.5}));ring.position.set(.31,3.93,-2.16);g.add(ring);}
- if(!p.concept)for(const x of [-.05,.66])this.rod(g,[x,3.49,-2.165],[x,4.37,-2.165],.012,steel);
+ if(!p.concept&&!view)for(const r of [.16,.24,.32,.40,.48]){const ring=new THREE.Mesh(new THREE.TorusGeometry(r,.010,6,40),new THREE.MeshStandardMaterial({color:steel,metalness:.5,roughness:.5}));ring.position.set(.31,3.93,-2.16);g.add(ring);}
+ if(!p.concept&&!view)for(const x of [-.05,.66])this.rod(g,[x,3.49,-2.165],[x,4.37,-2.165],.012,steel);
+ if(view){
+  // A stamped perforated exhaust replaces the concentric wire grille.
+  const exhaust=caseVent(g,1.08,1.08,'round',black,.079);
+  exhaust.position.set(.31,3.93,rear-.046);
+  const capDepth=viewFront-rear+.06;
+  this.box(g,.07,.15,capDepth,sideX,4.575,(viewFront+rear-.06)/2,steel);
+ }
  const ioApron=new THREE.Shape();ioApron.moveTo(back+.05,front-.70);ioApron.lineTo(side-.05,front-.70);ioApron.lineTo(side-.05,front-.06);ioApron.lineTo(back+.05,front-.06);ioApron.closePath();
  const fasciaIO=p.id==='matrexx55-mesh';
  if(!fasciaIO)rectangle(ioApron,0,frame.ioZ,1.88,.43);
@@ -117,14 +160,32 @@ export function makeChassis(p={id:'cc560',short:'CC560 V2',frontFanCount:3,usbA:
  const audioX=p.audio?.startsWith('2')?[usbCount>2?.14:.08,.34]:[.34];
  for(const x of audioX){this.cylinder(io,.047,.014,x,4.71,frame.ioZ,0x8d9a9c);this.cylinder(io,.031,.016,x,4.718,frame.ioZ,0x050a0c);}
  this.cylinder(io,.082,.022,.72,4.714,frame.ioZ,white?0x838e93:0x50585b);this.text(io,'⏻',.09,.09,.72,4.728,frame.ioZ,[-Math.PI/2,0,0],'#c0c4c6');
- this.text(g,p.short,.83,.06,side-.049,.46,centerZ,[0,Math.PI/2,0],white?'#343e44':'#929ca2');
- const glassBottom=p.id==='ch560-white'?1.50:.435,glassTop=4.565;
- let glassGeo=new THREE.PlaneGeometry(depth-.17,glassTop-glassBottom);
- if(p.concept){const shape=new THREE.Shape();shape.moveTo(rear+.1,.44);shape.lineTo(front-.1,.44);shape.lineTo(front-.1,4.55);shape.lineTo(rear+.1,4.55);shape.closePath();holes(shape,'right',[2,1]);glassGeo=new THREE.ShapeGeometry(shape);}
- this.glass=new THREE.Mesh(glassGeo,new THREE.MeshPhysicalMaterial({color:0x9faeb7,roughness:.09,metalness:.14,clearcoat:.85,clearcoatRoughness:.15,envMapIntensity:1.15,transparent:true,opacity:.15,side:THREE.DoubleSide,depthWrite:false}));this.glass.rotation.y=Math.PI/2;this.glass.position.set(side+.06,p.concept?0:(glassTop+glassBottom)/2,p.concept?0:centerZ);if(p.concept)this.glass.rotation.y=-Math.PI/2;this.glass.visible=!this.hideGlass;this.glass.userData.ignoreInspect=true;g.add(this.glass);
- // A mounted window has a visible perimeter and fasteners, even with a clear pane.
- const windowEdges=new THREE.LineSegments(new THREE.EdgesGeometry(glassGeo),new THREE.LineBasicMaterial({color:white?0xc6d8e1:0x849aa8,transparent:true,opacity:.72}));
- this.glass.add(windowEdges);
+ if(!view&&!focus)this.text(g,p.short,.83,.06,side-.049,.46,centerZ,[0,Math.PI/2,0],white?'#343e44':'#929ca2');
+ const glassBottom=view?1.255:p.id==='ch560-white'?1.50:.435,glassTop=view?4.50:4.565;
+ const frontEdge=view?viewFront:front-.085,backEdge=rear+.085;
+ let insetFrame;
+ let glassGeo=new THREE.PlaneGeometry(frontEdge-backEdge,glassTop-glassBottom);
+ if(focus){
+  // The Focus G uses an inset acrylic window in a coloured stamped side cover.
+  const visibleWidth=depth-.58,visibleHeight=3.52,corner=.10;
+  const window=new THREE.Shape(),x=visibleWidth/2,y=visibleHeight/2;
+  window.moveTo(-x+corner,-y);window.lineTo(x-corner,-y);window.quadraticCurveTo(x,-y,x,-y+corner);
+  window.lineTo(x,y-corner);window.quadraticCurveTo(x,y,x-corner,y);window.lineTo(-x+corner,y);
+  window.quadraticCurveTo(-x,y,-x,y-corner);window.lineTo(-x,-y+corner);window.quadraticCurveTo(-x,-y,-x+corner,-y);
+  const surround=new THREE.Shape();
+  const w=(frontEdge-backEdge)/2,h=(glassTop-glassBottom)/2;
+  surround.moveTo(-w,-h);surround.lineTo(w,-h);surround.lineTo(w,h);surround.lineTo(-w,h);surround.closePath();
+  surround.holes.push(new THREE.Path(window.getPoints(4)));
+  glassGeo.dispose();glassGeo=new THREE.ShapeGeometry(window);
+  const uv=glassGeo.attributes.uv;
+  for(let i=0;i<uv.count;i++)uv.setXY(i,uv.getX(i)/visibleWidth+.5,uv.getY(i)/visibleHeight+.5);
+  insetFrame=sheet(surround,steel);insetFrame.position.z=-.034;
+ }else if(p.concept){const shape=new THREE.Shape();shape.moveTo(rear+.1,.44);shape.lineTo(front-.1,.44);shape.lineTo(front-.1,4.55);shape.lineTo(rear+.1,4.55);shape.closePath();holes(shape,'right',[2,1]);glassGeo.dispose();glassGeo=new THREE.ShapeGeometry(shape);}
+ this.glass=new THREE.Mesh(glassGeo,caseGlass(!view&&!white));
+ this.glass.rotation.y=p.concept?-Math.PI/2:Math.PI/2;this.glass.position.set(sideX+(view?.022:.035),p.concept?0:(glassTop+glassBottom)/2,p.concept?0:(backEdge+frontEdge)/2);
+ this.glass.visible=!this.hideGlass;this.glass.userData.ignoreInspect=true;g.add(this.glass);
+ const windowEdges=new THREE.LineSegments(new THREE.EdgesGeometry(glassGeo),new THREE.LineBasicMaterial({color:focus?0x14191b:view?0x87a49f:white?0xc6d8e1:0x849aa8,transparent:true,opacity:.75}));
+ this.glass.add(windowEdges);if(insetFrame)this.glass.add(insetFrame);
  // Perforated guards cover the mounting apertures, including vacant ones.
  this.sideFanGuards=[];
  if(p.concept||p.leftFanCount)for(const slot of mounts.filter(s=>p.concept||s.wall==='left')){

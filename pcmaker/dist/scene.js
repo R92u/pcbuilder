@@ -81,25 +81,27 @@ export class PCScene {
  }
  lightStrip(g,w,h,d,x,y,z,color=C.light){const mesh=new THREE.Mesh(new THREE.BoxGeometry(w,h,d),new THREE.MeshStandardMaterial({color,emissive:color,emissiveIntensity:1.5,roughness:.35}));mesh.position.set(x,y,z);g.add(mesh);this.tagLight(mesh,{type:'rgb'});return mesh;}
  fan(parent,size,x,y,z,rotation,kind,lighting=null){
-  const rgb=!!lighting;
+  const rgb=!!lighting,chassis=kind==='case'?resolve(this.currentBuild||{}).case:null;
+  const lightHousing=chassis?.id==='view-270-pink'?0x94cede:chassis?.color==='white'?0xd1d8dc:null;
+  const housing=lightHousing??C.black;
   const fan=new THREE.Group();fan.position.set(x,y,z);fan.rotation.set(...rotation);parent.add(fan);
   const depth=kind==='gpu'?.17:CASE_FAN_DEPTH;
   // A continuous square housing, rotor between its faces, and motor braces on
   // the exhaust side (-Z). The intake is +Z for case and CPU fans.
-  for(const sign of [-1,1]){this.box(fan,size,size*.075,depth,0,sign*size*.4625,0,C.black);this.box(fan,size*.075,size,depth,sign*size*.4625,0,0,C.black);}
+  for(const sign of [-1,1]){this.box(fan,size,size*.075,depth,0,sign*size*.4625,0,housing);this.box(fan,size*.075,size,depth,sign*size*.4625,0,0,housing);}
   const ductShape=new THREE.Shape();ductShape.absarc(0,0,size*.455,0,Math.PI*2,false);const opening=new THREE.Path();opening.absarc(0,0,size*.408,0,Math.PI*2,true);ductShape.holes.push(opening);
-  const duct=new THREE.Mesh(new THREE.ExtrudeGeometry(ductShape,{depth,bevelEnabled:false,curveSegments:24}),mat(C.black,.7,.1));duct.position.z=-depth/2;fan.add(duct);
+  const duct=new THREE.Mesh(new THREE.ExtrudeGeometry(ductShape,{depth,bevelEnabled:false,curveSegments:24}),mat(housing,.7,.1));duct.position.z=-depth/2;fan.add(duct);
   const ring=new THREE.Mesh(new THREE.TorusGeometry(size*.425,size*.015,6,40),new THREE.MeshStandardMaterial({color:rgb?C.light:0x454e52,emissive:rgb?0xe4edff:0,emissiveIntensity:rgb?.9:0,metalness:.25,roughness:.5}));ring.position.z=depth/2+.003;fan.add(ring);
   if(lighting?.zones==='ring'){this.tagLight(ring,lighting);const backRing=ring.clone();backRing.position.z=-depth/2-.003;fan.add(backRing);}
-  else {ring.material.emissiveIntensity=0;ring.material.color.set(0x454e52);}
+  else {ring.material.emissiveIntensity=0;ring.material.color.set(lightHousing??0x454e52);}
   const rotor=new THREE.Group();rotor.userData.animated=true;rotor.position.z=.025;fan.add(rotor);
   const bladeShape=new THREE.Shape();bladeShape.moveTo(.09,-.025);bladeShape.quadraticCurveTo(.24,-.14,.38,-.08);bladeShape.quadraticCurveTo(.415,-.02,.365,.042);bladeShape.quadraticCurveTo(.23,.025,.10,.065);bladeShape.closePath();
   const bladeGeometry=new THREE.ExtrudeGeometry(bladeShape,{depth:.018,bevelEnabled:false,curveSegments:6});
-  const blades=new THREE.InstancedMesh(bladeGeometry,mat(rgb?0x657178:0x303a3e,.65,.15),7),transform=new THREE.Object3D();
+  const blades=new THREE.InstancedMesh(bladeGeometry,mat(rgb?0x657178:(lightHousing??0x303a3e),.65,.15),7),transform=new THREE.Object3D();
   for(let i=0;i<7;i++){transform.scale.setScalar(size);transform.rotation.z=i/7*Math.PI*2;transform.rotation.x=.16;transform.updateMatrix();blades.setMatrixAt(i,transform.matrix);}rotor.add(blades);if(lighting?.zones==='blades')this.tagLight(blades,{...lighting,intensity:.65});
   const hub=this.cylinder(rotor,size*.115,.085,0,0,.015,0x252d32);hub.rotation.x=Math.PI/2;if(lighting?.zones==='blades')this.tagLight(hub,{...lighting,intensity:.5});
   const rearHub=this.cylinder(fan,size*.13,.10,0,0,-depth/2+.05,0x414c52);rearHub.rotation.x=Math.PI/2;
-  for(const angle of [Math.PI/4,-Math.PI/4]){const support=this.box(fan,size*1.22,size*.040,.035,0,0,-depth/2+.018,0x343f45);support.rotation.z=angle;}
+  for(const angle of [Math.PI/4,-Math.PI/4]){const support=this.box(fan,size*1.22,size*.040,.035,0,0,-depth/2+.018,lightHousing??0x343f45);support.rotation.z=angle;}
   const sticker=new THREE.Mesh(new THREE.CircleGeometry(size*.108,24),mat(0x6c7679,.85,.05));sticker.position.z=-depth/2-.004;sticker.rotation.y=Math.PI;fan.add(sticker);
   for(const sx of [-1,1])for(const sy of [-1,1])for(const face of [-1,1]){const screw=new THREE.Mesh(new THREE.CircleGeometry(size*.026,8),mat(0x788387));screw.position.set(sx*size*.447,sy*size*.447,face*(depth/2+.004));if(face<0)screw.rotation.y=Math.PI;fan.add(screw);}
   // Moulded airflow arrow on the top edge, visibly pointing through the struts.
@@ -120,7 +122,7 @@ export class PCScene {
  setBuild(build){
   if(this.cableFlight.active && categories.some(([key])=>this.currentBuild?.[key]!==build[key]))this.cableFlight.cancel();
   const changedCase=this.currentBuild?.case!==build.case;this.currentBuild={...build};const p=resolve(build);
-  const caseSignature=(p.case?.id||'cc560')+':'+(p.gpu?.length||'empty')+':'+(p.cooler?.type==='aio'?p.cooler.id:'air');
+  const caseSignature=(p.case?.id||'cc560')+':'+(p.cooler?.type==='aio'?p.cooler.id:'air');
   if(p.case&&this.caseGroup.userData.signature!==caseSignature){this.caseGroup.removeFromParent();this.fans=this.fans.filter(f=>f.parent!==this.caseGroup);this.caseGroup.traverse(o=>{o.geometry?.dispose();o.material?.map?.dispose();o.material?.dispose();});this.makeCase(p.case);this.caseGroup.userData.signature=caseSignature;this.glass.visible=!this.hideGlass;this.makeCaseFlows(p.case);}
   for(const key of ['motherboard','cpu','ram','gpu','cooler','storage','psu']){
    const signature=p[key]?.id+(key==='cooler'?':'+p.ram?.id+':'+p.cpu?.socket+':'+caseSignature:'');if(this.parts[key]?.userData.signature===signature)continue;

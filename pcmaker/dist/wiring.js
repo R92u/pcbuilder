@@ -73,7 +73,7 @@ export function cablesFor(build,fanLayout){
  }
  if(p.motherboard){
   const fans=sanitizeFanLayout(build,fanLayout),intake=fanHub(build,'in'),exhaust=fanHub(build,'out');
-  if(fans.some(f=>f.direction==='in'))add('frontFan','Вдув · разветвитель PWM','Разветвитель вентиляторов на вдув',true,[intake,[-.80,2.75,intake[2]],[-.80,2.75,.89],[-.44,2.75,.89],[-.44,2.75,.64]],4,.007);
+  if(fans.some(f=>f.direction==='in'))add('frontFan','Вдув · разветвитель PWM','Разветвитель вентиляторов на вдув',true,[intake,[-.80,intake[1],intake[2]],[-.80,intake[1],.89],[-.44,2.75,.89],[-.44,2.75,.64]],4,.007);
   if(fans.some(f=>f.direction==='out'))add('rearFan','Выдув · разветвитель PWM','Разветвитель вентиляторов на выдув',true,[exhaust,[-.44,4.34,-1.77],[-.44,4.25,-1.58],[-.44,3.85,-1.58]],4,.007);
   const panelName=p.case?.id==='matrexx55-mesh'?'Передняя панель корпуса':'Верхняя панель корпуса';
   const io=(id,y,z)=>{

@@ -4,9 +4,9 @@ import {demoBuild,byId,catalog} from '../dist/catalog.js';
 import {coolingAnalysis} from '../dist/cooling.js';
 import {thermalTargets} from '../dist/engine.js';
 import {defaultFanLayout} from '../dist/fan-layout.js';
-import {caseLighting,gpuLighting,sanitizeLighting,lightingSources} from '../dist/lighting.js';
+import {caseLighting,gpuLighting,sanitizeLighting,lightingForCase,lightingSources} from '../dist/lighting.js';
 import {lightingSceneMethods} from '../dist/lighting-scene.js';
-import {Group,Mesh,BoxGeometry,MeshStandardMaterial,Texture} from '../dist/vendor/three.module.js';
+import {Group,Mesh,InstancedMesh,Color,BoxGeometry,MeshStandardMaterial,Texture} from '../dist/vendor/three.module.js';
 const build={...demoBuild,case:'cc560'},settings={load:'game',ambient:22,front:60,rear:60,cpuFan:60};
 const pair=(a,b)=>[{id:'fan1',slot:a,direction:'in'},{id:'fan2',slot:b,direction:'out'}];
 const codes=analysis=>analysis.warnings.map(w=>w.code);
@@ -49,4 +49,29 @@ test('Lighted surfaces switch off, animate, restore color and drop removed mater
  scene.setLighting({mode:'off'});assert.equal(rgb.material.emissiveIntensity,0);assert.equal(fixed.material.emissiveIntensity,0);
  scene.setLighting({mode:'rainbow'});scene.updateLighting(100);const before=rgb.material.emissive.getHex();scene.updateLighting(3000);assert.notEqual(before,rgb.material.emissive.getHex());assert.equal(fixed.material.emissive.getHexString(),'39c4c4');
  rgb.removeFromParent();scene.collectLights();assert.equal(scene.lightMaterials.length,1);
+});
+
+test('View 270 starts with multicolor blades and respects explicit RGB settings',()=>{
+ const matcha=byId['view-270-green'],pink=byId['view-270-pink'];
+ const scene={...lightingSceneMethods,root:new Group()};
+ const blades=new InstancedMesh(new BoxGeometry(),new MeshStandardMaterial(),7);
+ const logo=new Mesh(new BoxGeometry(),new MeshStandardMaterial());
+ scene.root.add(blades,logo);scene.tagLight(blades,caseLighting(matcha));scene.tagLight(logo,{type:'rgb'});scene.collectLights();
+ const fanColors=()=>Array.from({length:blades.count},(_,index)=>{
+  const color=new Color();blades.getColorAt(index,color);return color.getHexString();
+ });
+ for(const variant of [matcha,pink]){
+  scene.setLighting(lightingForCase(null,variant));
+  assert.equal(new Set(fanColors()).size,7);
+  assert.equal(logo.material.emissive.getHexString(),'e4edff');
+ }
+ const before=fanColors();scene.updateLighting(3500);assert.notDeepEqual(fanColors(),before);
+ for(const preference of [{mode:'color',color:'#672134'},{mode:'off',color:'#672134'}]){
+  assert.deepEqual(lightingForCase(preference,pink),preference);
+  scene.setLighting(lightingForCase(preference,pink));
+  assert.deepEqual(new Set(fanColors()),new Set(['ffffff']));
+  if(preference.mode==='off')assert.equal(blades.material.emissiveIntensity,0);
+  else assert.equal(blades.material.emissive.getHexString(),'672134');
+ }
+ assert.equal(lightingForCase(null,byId['ch560-white']).mode,'color');
 });

@@ -5,12 +5,15 @@
 .workplace-integrated #computer-panel{display:flex;flex-direction:column;min-height:0;flex:1;overflow:hidden}
 .workplace-integrated #computer-panel>section{flex:1;overflow:auto;min-height:0;padding-left:18px;padding-right:18px;overscroll-behavior:contain;scrollbar-width:thin;scrollbar-color:#ffffff40 transparent}
 .workplace-integrated .workplace-panel{border:0;border-radius:0;background:none;box-shadow:none;backdrop-filter:none;flex:1;min-height:0;overflow:auto}
-.workplace-integrated .workplace-overview{position:absolute;z-index:4;left:16px;bottom:16px;display:flex;gap:8px;padding:8px;border-radius:28px;background:#ffffff0a;backdrop-filter:blur(16px);border:1px solid #ffffff25}
+.workplace-integrated .workplace-overview{position:absolute;z-index:4;left:50%;bottom:16px;transform:translateX(-50%);display:flex;width:max-content;max-width:calc(100% - 20px);box-sizing:border-box;overflow-x:auto;gap:8px;padding:8px;border-radius:28px;background:#ffffff0a;backdrop-filter:blur(16px);border:1px solid #ffffff25}
+.workplace-overview .round-button{display:grid;place-items:center;padding:0;line-height:1}
+.workplace-overview .round-button svg{display:block;width:20px;height:20px}
+.workplace-integrated #studio .scene-hint{bottom:84px}
 .workplace-integrated .workplace-selection{grid-template-columns:1fr}
 .workplace-integrated .workplace-selected strong{font-size:11px}
 .workplace-integrated .workplace-product-picture{height:140px}
 .workplace-integrated #peripheral-dialog{overflow:auto}
 .workplace-integrated .round-button.build-panel-toggle{width:28px;height:96px;border-radius:18px 0 0 18px}
-@media(max-width:839px){.workplace-integrated #computer-panel{overflow:visible}.workplace-integrated .workplace-overview{gap:5px;left:10px;bottom:10px}.workplace-integrated .workplace-overview .round-button{width:34px;height:34px}}
+@media(max-width:839px){.workplace-integrated #computer-panel{overflow:visible}.workplace-integrated .workplace-overview{gap:5px;bottom:10px}.workplace-integrated .workplace-overview .round-button{width:34px;height:34px}.workplace-integrated #studio .scene-hint{bottom:70px}.workplace-integrated .workbench .airflow-legend{bottom:70px}}
 
 .shop-peripheral .shop-card-actions{flex-wrap:wrap}.shop-peripheral .shop-card-actions .button{width:100%;font-size:11px}.shop-peripheral .price-source{font-size:10px;line-height:1.5;color:#acb9c1}

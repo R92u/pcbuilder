@@ -35,7 +35,7 @@ export function fanMounts(build){
  const a=aioPlacement(p,f);
  const add=(wall,position,size,i)=>{const slot={id:wall+'-'+(i+1),wall,position,size,normal:normals[wall],label:fanWalls[wall]+' · '+(i+1)};if(!radiatorConflict(slot,a))slots.push(slot);};
  if(!p.case?.concept){
-  for(let i=0;i<(p.case?.leftFanCount||0);i++)add('left',[TRAY_X+.145,2.09+i*1.22,f.front-.91],1.20,i);
+  for(let i=0;i<(p.case?.leftFanCount||0);i++)add('left',[TRAY_X+.145,2.10+i*1.22,f.front-.77],1.20,i);
   f.fanYs.forEach((y,i)=>add('front',[0,y,f.fanZ],f.fanSize,i));add('rear',[.31,3.93,-1.99],1.03,0);return slots;
  }
  const size=f.fanSize,x=f.side-size/2-.07,ys=f.fanYs;
@@ -90,7 +90,9 @@ export function fanHub(build,direction){
  const x=TRAY_X+.065;
  // Two splitter blocks sit flush with the steel tray, including on cases
  // whose only case fan has been reversed to act as an intake.
- return direction==='in'?[x,2.75,f.front-.31]:[x,4.34,-1.77];
+ // On a panoramic chassis the side intake occupies the usual splitter position.
+ const intakeY=p.case?.leftFanCount?4.17:2.75;
+ return direction==='in'?[x,intakeY,f.front-.31]:[x,4.34,-1.77];
 }
 export function fanBranchRoute(build,fan){
  const p=resolve(build),frame=caseLayout(p.case||{},p.gpu,p.cooler),slot=fanMounts(build).find(s=>s.id===fan.slot);

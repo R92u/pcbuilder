@@ -10,7 +10,7 @@ registerHooks({resolve(name,context,next){return next(name==='three'?threeURL:na
 const {PCScene}=await import('../dist/scene.js');
 const {Box3,Group,Vector3}=await import(threeURL);
 // Rendering materials use canvas for decals; transforms, geometry and batching are real.
-const canvasContext=new Proxy({createImageData:(w,h)=>({data:new Uint8ClampedArray(w*h*4)})},{
+const canvasContext=new Proxy({createLinearGradient:()=>({addColorStop(){}}),createImageData:(w,h)=>({data:new Uint8ClampedArray(w*h*4)})},{
  get(state,key){return state[key]??(()=>{});}
 });
 globalThis.document={createElement:()=>({getContext:()=>canvasContext})};
@@ -47,6 +47,23 @@ test('Physical geometry is finite for every catalog component',()=>{
   const group=scene[method](part)||scene.caseGroup,bounds=new Box3().setFromObject(group);
   assert.ok(!bounds.isEmpty()&&[...bounds.min.toArray(),...bounds.max.toArray()].every(Number.isFinite),part.id);
   group.traverse(node=>{node.geometry?.dispose();node.material?.map?.dispose();node.material?.dispose();});
+ }
+});
+
+test('View 270 front and side glazing meet above the wrapped plinth',()=>{
+ for(const chassis of catalog.case.filter(c=>c.family==='view-270')){
+  const scene=fixture({...demoBuild,case:chassis.id});
+  scene.makeCase(chassis);
+  const panes=[];
+  scene.caseGroup.traverse(node=>{
+   if(node.isMesh&&node.material.isMeshPhysicalMaterial&&node.material.transparent)panes.push(node);
+  });
+  assert.equal(panes.length,2,chassis.id);
+  const side=new Box3().setFromObject(scene.glass);
+  const front=new Box3().setFromObject(panes.find(node=>node!==scene.glass));
+  assert.ok(Math.abs(side.max.z-front.max.z)<.012,chassis.id+' open front seam');
+  assert.ok(Math.abs(side.max.x-front.max.x)<.025,chassis.id+' detached front window');
+  assert.ok(side.min.y>1.20&&front.min.y>1.20,chassis.id+' pane overlaps plinth');
  }
 });
 

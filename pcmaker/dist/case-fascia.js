@@ -32,6 +32,20 @@ export function caseVent(parent,width,height,pattern,color,pitch){
  parent.add(vent);return vent;
 }
 
+export function caseGlass(smoked=false){
+ // A faint softbox reflection remains visible even against a transparent floor.
+ const canvas=document.createElement('canvas');canvas.width=canvas.height=64;
+ const ctx=canvas.getContext('2d'),gradient=ctx.createLinearGradient(0,0,64,45);
+ const tint=smoked?'rgba(21,30,34,.32)':'rgba(37,52,55,.16)';
+ gradient.addColorStop(0,tint);gradient.addColorStop(.31,tint);
+ gradient.addColorStop(.43,smoked?'rgba(120,141,148,.27)':'rgba(170,195,200,.14)');
+ gradient.addColorStop(.63,tint);gradient.addColorStop(1,tint);
+ ctx.fillStyle=gradient;ctx.fillRect(0,0,64,64);
+ const map=new THREE.CanvasTexture(canvas);map.colorSpace=THREE.SRGBColorSpace;
+ return new THREE.MeshPhysicalMaterial({map,roughness:.14,metalness:.04,clearcoat:1,clearcoatRoughness:.1,
+  transparent:true,side:THREE.DoubleSide,depthWrite:false,forceSinglePass:true});
+}
+
 function popMesh(parent,color){
  const width=2.04,bottom=1.30,top=4.60,rows=9,cols=6,positions=[],uv=[];
  function point(i,j){
@@ -71,12 +85,18 @@ export function makeRetailFront(g,p){
   }
   word('fractal design',0,.71,2.27,.55);
  }else if(p.family==='view-270'){
-  rim(.06,.10,.10);
-  const pane=new THREE.Mesh(new THREE.PlaneGeometry(2.10,3.29),new THREE.MeshPhysicalMaterial({color:0xb8c7cd,roughness:.09,clearcoat:1,transparent:true,opacity:.16,depthWrite:false,side:THREE.DoubleSide}));
-  pane.position.set(0,2.91,2.25);g.add(pane);
-  box(2.17,.87,.12,0,.82,2.19);
-  vent(1.97,.59,'round',paint,.08,0,.84,2.266);
-  word('Thermaltake',.42,.46,2.274,.46);
+  // A pillarless glazed corner rests on a continuous painted plinth.
+  box(2.20,.15,.23,0,4.575,2.19);
+  box(2.20,.87,.19,0,.795,2.19,new THREE.Color(paint).multiplyScalar(.44));
+  for(const y of [.445,1.145])box(2.20,.17,.215,0,y,2.195);
+  for(const x of [-1.025,1.025])box(.15,.54,.215,x,.795,2.195);
+  const pane=new THREE.Mesh(new THREE.PlaneGeometry(2.19,3.27),caseGlass());
+  pane.position.set(0,2.865,2.302);g.add(pane);
+  box(2.19,.028,.022,0,1.245,2.30,0x1b2425);
+  box(2.19,.044,.022,0,4.48,2.30,0x1b2425);
+  box(.028,3.25,.024,-1.08,2.865,2.30,0x222b2e);
+  box(.015,3.25,.016,1.092,2.865,2.30,0x7c9995);
+  vent(1.90,.54,'round',paint,.052,0,.795,2.305);
  }else if(p.id==='cc560'){
   rim(.05,.06,.06);
   vent(2.10,4.16,'round',0x161f22,.088,0,2.50,2.20);

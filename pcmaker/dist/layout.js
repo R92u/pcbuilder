@@ -1,4 +1,3 @@
-import {aioMount} from './aio.js';
 // Shared assembly dimensions in scene units (100 mm per unit). Port, cable and
 // mesh placement use the same anchors so changing a part cannot leave loose I/O.
 export const CPU_CENTER={x:-.694,y:3.44,z:-.55};
@@ -6,20 +5,18 @@ export const CPU_CENTER={x:-.694,y:3.44,z:-.55};
 export const M2_MOUNT={x:-.797,y:2.62,connectorZ:-1.30,screwZ:-.50};
 export const GPU_TOP=2.43;
 export const PSU_REAR=-2.12;
-export function caseLayout(p={},gpu,cooler){
+export function caseLayout(p={}){
  if(p.concept){
   const [front,side,back,size]={panorama:[2.90,2.45,-1.19,1.20],dual:[2.65,2.85,-1.75,1.20],compact:[2.20,2.17,-1.19,.92]}[p.concept];
   return {front,side,back,rear:-2.1,centerZ:(front-2.1)/2,depth:front+2.1,fanZ:front-.15,fanYs:[1.38,2.65,3.92],fanSize:size,ioZ:front-.38};
  }
- // Compact exhibition cutaway: leave clearance for the installed card instead
- // of an empty drive cage. The catalog's physical compatibility stays separate.
- const capacity=-1.86+(p.gpuLimit||350)/100+.42;
- let front=gpu?Math.min(capacity,Math.max(1.40,gpuLayout(gpu).end+.42)):capacity;
- const mount=aioMount({case:p,cooler});
- if(mount?.wall==='top')front=Math.max(front,-2.1+mount.length+.90);
- if(mount?.wall==='front')front=Math.max(front,gpuLayout(gpu||{}).end+.74);
- if(p.leftFanCount)front=Math.max(front,3.12);
- const side=Math.max(1.12,CPU_CENTER.x+(p.coolerLimit||165)/100+.13);
+ // The shared motherboard/rear-I/O mounting jig is 4.66 units high. Scale
+ // catalogued exterior proportions to this jig and subtract the front fascia.
+ const dimensions=p.dimensions;
+ const [length,width,height]=Array.isArray(dimensions)?dimensions:[dimensions?.length,dimensions?.width,dimensions?.height];
+ const shellScale=4.66/(height||483);
+ const front=-2.1+(length||432)*shellScale-.21;
+ const side=Math.max(-1.19+(width||215)*shellScale-.08,CPU_CENTER.x+(p.coolerLimit||165)/100+.05);
  const fanSize=(p.fanSizeMm||120)/100;
  const frontMounts=p.frontFanMounts??p.frontFanCount??3;
  const fanYs=p.family==='focus-g'?[1.37,2.59]:frontMounts===0?[]:frontMounts===1?[2.83]:frontMounts===2?[2.2,3.4]:fanSize>1.2?[1.05,2.45,3.85]:[1.4,2.65,3.9];

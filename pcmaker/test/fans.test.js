@@ -28,10 +28,16 @@ test('Every case fan screw is supported by a rail attached to the chassis, in bo
   }
  }
 });
-test('Changing to a top radiator invalidates case fans when the chassis grows',()=>{
- const before={...demoBuild,case:'cc560'},after={...before,cooler:catalog.cooler.find(p=>p.type==='aio'&&p.radiator===240).id};
+test('Retail shells keep their photographed proportions through part changes',()=>{
+ for(const chassis of catalog.case){
+  const dimensions=chassis.dimensions;
+  const [length,,height]=Array.isArray(dimensions)?dimensions:[dimensions.length,dimensions.width,dimensions.height];
+  const frame=caseLayout(chassis);
+  assert.ok(Math.abs((frame.depth+.21)/4.66-length/height)<.001,chassis.id);
+  assert.deepEqual(caseLayout(chassis,byId[demoBuild.gpu],byId[demoBuild.cooler]),frame);
+ }
+ const before={...demoBuild,case:'cc560'},after={...before,cooler:'aio-le360-v2'};
  const layout=[{id:'fan1',slot:'front-1',direction:'in'}];
- assert.notEqual(caseLayout(byId[before.case],byId[before.gpu],byId[before.cooler]).front,caseLayout(byId[after.case],byId[after.gpu],byId[after.cooler]).front);
  assert.notEqual(fanGeometryKey(before,layout),fanGeometryKey(after,layout));
  assert.equal(fanGeometryKey(before,layout),fanGeometryKey({...before,ram:'ddr5-32'},layout));
 });

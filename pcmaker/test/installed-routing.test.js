@@ -25,6 +25,19 @@ test('Both orientations of every retail fan carry their cable outside the rotor 
  }
 });
 
+test('Panoramic side fans leave clearance for the splitter and its motherboard lead',()=>{
+ for(const chassis of catalog.case.filter(part=>part.leftFanCount)){
+  const build={...demoBuild,case:chassis.id};
+  const lead=cablesFor(build).find(cable=>cable.id==='frontFan');
+  assert.deepEqual(lead.points[0],fanHub(build,'in'));
+  const points=cableCurve(lead.points).getSpacedPoints(160);
+  for(const slot of fanMounts(build).filter(slot=>slot.wall==='left')){
+   assert.ok(lead.points[0][1]-.095>slot.position[1]+slot.size/2);
+   assert.ok(points.every(point=>clearsFan(point,slot.position,0,slot.size*.40,.03)),chassis.id);
+  }
+ }
+});
+
 test('Right-angle USB harnesses enter along the board edge and clear the graphics card',()=>{
  for(const gpu of catalog.gpu){
   const build={...demoBuild,gpu:gpu.id,case:'ch560-white'},layout=gpuLayout(gpu);

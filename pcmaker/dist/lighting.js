@@ -6,7 +6,7 @@ export const lightingSources={
  'ch560-white':'https://pl.deepcool.com/products/Cases/CH560-WH-New-Generation-of-Airflow-Case/2023/17124.shtml'
 };
 export function caseLighting(part){
- if(part?.family==='view-270')return {type:'rgb',zones:'blades'};
+ if(part?.family==='view-270')return {type:'rgb',zones:'blades',factoryRainbow:true};
  if(part?.family==='focus-g')return {type:'fixed',color:'#f5f5f0',zones:'blades'};
  if(part?.concept)return {type:'rgb',zones:'ring'};
  if(part?.id==='ch560-white')return {type:'rgb',zones:'blades'};
@@ -15,3 +15,9 @@ export function caseLighting(part){
 }
 export function gpuLighting(part){return part?.id==='rtx3090'?{type:'rgb',zones:['side-logo','backplate-logo']}:null;}
 export function sanitizeLighting(value){return {mode:['color','rainbow','off'].includes(value?.mode)?value.mode:'color',color:/^#[0-9a-f]{6}$/i.test(value?.color)?value.color:'#e4edff'};}
+
+export function lightingForCase(preference,part){
+ const lighting=sanitizeLighting(preference);
+ if(!preference&&caseLighting(part)?.factoryRainbow)return {...lighting,mode:'rainbow',caseOnly:true};
+ return lighting;
+}

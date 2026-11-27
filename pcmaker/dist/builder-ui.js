@@ -18,7 +18,7 @@ import {createAutoBuilder} from './autobuild-ui.js';
 import {createPriceHistory} from './price-history-ui.js';
 import {quoteBuild} from './autobuild.js';
 import {coolingAnalysis} from './cooling.js';
-import {caseLighting,gpuLighting,sanitizeLighting} from './lighting.js';
+import {caseLighting,gpuLighting,sanitizeLighting,lightingForCase} from './lighting.js';
 import {createFanEditor} from './fan-ui.js';
 import {sanitizeFanLayout,defaultFanLayout,fanStats,encodeFans,decodeFans} from './fan-layout.js';
 import {componentSpecs,heatLabels} from './inspector.js';
@@ -34,6 +34,12 @@ const paths={cpu:'M7 7h10v10H7z M9 1v3m6-3v3M9 20v3m6-3v3M1 9h3m-3 6h3m16-6h3m-3
 paths.wand='m4 20 12-12 4 4L8 24z M14 10l4 4 M6 3v4M4 5h4M17 1v4m-2-2h4M21 18v4m-2-2h4';
 paths.shop='M3 9h18l-2-6H5z M4 9v12h16V9 M8 21v-7h5v7 M3 9c0 4 5 4 5 0 0 4 4 4 4 0 0 4 4 4 4 0 0 4 5 4 5 0';
 paths.chart='M4 3v17h17 M7 14l4-4 4 2 6-7';
+paths.light='M8.5 15c0-1.8-2.5-2.8-2.5-6a6 6 0 0 1 12 0c0 3.2-2.5 4.2-2.5 6v1h-7z M9 19h6 M10.5 21h3';
+paths.desk='M5 3.5h11v8H5z M10.5 11.5V15 M2 15h20 M4 15v5.5 M20 15v5.5 M18.5 8.5h2V15';
+paths.monitor='M3.5 3.5h17a1 1 0 0 1 1 1v11a1 1 0 0 1-1 1h-17a1 1 0 0 1-1-1v-11a1 1 0 0 1 1-1z M12 16.5v4 M7.5 20.5h9';
+paths.keyboard='M3.5 5.5h17a2 2 0 0 1 2 2v9a2 2 0 0 1-2 2h-17a2 2 0 0 1-2-2v-9a2 2 0 0 1 2-2z M5.5 9h.1m4.2 0h.1m4.2 0h.1m4.2 0h.1 M5.5 12h.1m4.2 0h.1m4.2 0h.1m4.2 0h.1 M8 15.5h8';
+paths.deskMouse='M5 9a7 7 0 0 1 14 0v6a7 7 0 0 1-14 0z M12 2v6 M5 10.5h14';
+paths.chair='M8 10.5 7 5a2 2 0 0 1 2-2.5h6A2 2 0 0 1 17 5l-1 5.5 M4 10.5v3.7a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2v-3.7 M7.5 12.5h9 M12 16.2v4 M6 21.5l6-1.5 6 1.5';
 const icon=n=>`<svg viewBox="0 0 24 24" aria-hidden="true"><path d="${paths[n]||paths.cpu}"/></svg>`;
 function icons(root=document){root.querySelectorAll('[data-icon]').forEach(el=>el.innerHTML=icon(el.dataset.icon));}icons();
 let saved;try{saved=JSON.parse(localStorage.getItem('pcmaker-build'));}catch{}
@@ -53,7 +59,8 @@ window.addEventListener('storage',event=>{
 });
 let lastTarget=null;
 let autoPlan=null;try{autoPlan=JSON.parse(localStorage.getItem('pcmaker-autobuild'));}catch{}
-let lighting=sanitizeLighting();try{lighting=sanitizeLighting(JSON.parse(localStorage.getItem('pcmaker-lighting')));}catch{}
+let lightingPreference=null;
+try{const saved=JSON.parse(localStorage.getItem('pcmaker-lighting'));if(['color','rainbow','off'].includes(saved?.mode))lightingPreference=sanitizeLighting(saved);}catch{}
 const initialThermals=ambient=>Object.fromEntries(categories.map(([key])=>[key,ambient]));
 let running=false,hasRun=false,elapsed=0,thermals=initialThermals(22),inspectedKey=null,inspectOrigin=null;
 const thermalPanel=createThermalPanel($('studio'));
@@ -125,15 +132,15 @@ function renderCooling(){
  for(const id of ['cooling-parts','cooling-fans','cooling-simulation'])if($(id).innerHTML!==html)$(id).innerHTML=html;
 }
 function renderLighting(){
- const p=resolve(build),caseLED=caseLighting(p.case),gpuLED=gpuLighting(p.gpu);
- $('rgb-devices').innerHTML=[caseLED?'<p><b>'+e(p.case.short)+'</b><span>'+ (caseLED.type==='fixed'?'Бирюзовые LED · фиксированный цвет':'Вентиляторы · RGB')+'</span></p>':'',p.cooler?.pumpRGB?'<p><b>'+e(p.cooler.short)+'</b><span>RGB · помпа'+(p.cooler.fanRGB?' и вентиляторы':'')+'</span></p>':'',gpuLED?'<p><b>'+e(p.gpu.short)+'</b><span>RGB · боковой логотип и метка на спинке</span></p>':''].join('')||'<p>В выбранных деталях нет подсветки.</p>';
+ const p=resolve(build),caseLED=caseLighting(p.case),gpuLED=gpuLighting(p.gpu),lighting=lightingForCase(lightingPreference,p.case);
+ $('rgb-devices').innerHTML=[caseLED?'<p><b>'+e(p.case.short)+'</b><span>'+ (caseLED.type==='fixed'?'LED · фиксированный цвет':'Вентиляторы · RGB')+'</span></p>':'',p.cooler?.pumpRGB?'<p><b>'+e(p.cooler.short)+'</b><span>RGB · помпа'+(p.cooler.fanRGB?' и вентиляторы':'')+'</span></p>':'',gpuLED?'<p><b>'+e(p.gpu.short)+'</b><span>RGB · боковой логотип и метка на спинке</span></p>':''].join('')||'<p>В выбранных деталях нет подсветки.</p>';
  const colorAvailable=caseLED?.type==='rgb'||!!gpuLED||!!p.cooler?.pumpRGB;
  for(const b of document.querySelectorAll('[data-rgb-mode]'))b.setAttribute('aria-pressed',String(lighting.mode===b.dataset.rgbMode));
  $('rgb-color').value=lighting.color;$('rgb-color').disabled=!colorAvailable;
  for(const b of document.querySelectorAll('[data-rgb-color]'))b.disabled=!colorAvailable;
  scene?.setLighting(lighting);
 }
-function changeLighting(value){lighting=sanitizeLighting({...lighting,...value});try{localStorage.setItem('pcmaker-lighting',JSON.stringify(lighting));}catch{}renderLighting();}
+function changeLighting(value){lightingPreference=sanitizeLighting({...lightingPreference,...value});try{localStorage.setItem('pcmaker-lighting',JSON.stringify(lightingPreference));}catch{}renderLighting();}
 document.querySelectorAll('[data-rgb-mode]').forEach(b=>b.onclick=()=>changeLighting({mode:b.dataset.rgbMode}));
 document.querySelectorAll('[data-rgb-color]').forEach(b=>b.onclick=()=>changeLighting({mode:'color',color:b.dataset.rgbColor}));
 $('rgb-color').oninput=()=>changeLighting({mode:'color',color:$('rgb-color').value});
