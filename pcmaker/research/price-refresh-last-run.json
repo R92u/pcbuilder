@@ -1,36 +1,28 @@
 {
-  "checkedAt": "2026-11-26T14:02:03.866Z",
+  "checkedAt": "2026-11-27T14:00:23.972Z",
   "scope": {
     "region": "all",
     "host": "all",
     "limit": 500
   },
   "attempted": 448,
-  "updated": 215,
-  "failed": 233,
+  "updated": 321,
+  "failed": 127,
   "manualRetained": 0,
-  "offerAttempts": 467,
-  "fallbackUpdated": 1,
-  "withBackup": 25,
+  "offerAttempts": 463,
+  "fallbackUpdated": 0,
+  "withBackup": 24,
   "sources": {
     "regard.ru": {
       "attempted": 22,
       "updated": 18,
       "failed": 4,
       "reasons": {
-        "product-not-confirmed": 4
-      },
-      "causes": {}
-    },
-    "kns.ru": {
-      "attempted": 183,
-      "updated": 0,
-      "failed": 183,
-      "reasons": {
-        "robots-unavailable": 183
+        "http-429": 1,
+        "source-rate-limited": 3
       },
       "causes": {
-        "http-403": 183
+        "http-429": 3
       }
     },
     "lifebook-shop.ru": {
@@ -38,6 +30,15 @@
       "updated": 26,
       "failed": 0,
       "reasons": {},
+      "causes": {}
+    },
+    "kns.ru": {
+      "attempted": 183,
+      "updated": 106,
+      "failed": 77,
+      "reasons": {
+        "product-not-confirmed": 77
+      },
       "causes": {}
     },
     "andpro.ru": {
@@ -57,11 +58,11 @@
       "causes": {}
     },
     "ozon.ru": {
-      "attempted": 9,
+      "attempted": 8,
       "updated": 0,
-      "failed": 9,
+      "failed": 8,
       "reasons": {
-        "unsupported-source": 9
+        "unsupported-source": 8
       },
       "causes": {}
     },
@@ -130,11 +131,11 @@
       "causes": {}
     },
     "dns-shop.ru": {
-      "attempted": 9,
+      "attempted": 6,
       "updated": 0,
-      "failed": 9,
+      "failed": 6,
       "reasons": {
-        "unsupported-source": 9
+        "unsupported-source": 6
       },
       "causes": {}
     },
